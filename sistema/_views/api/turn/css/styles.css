@@ -1,0 +1,64 @@
+
+#magazine{
+	margin:0 auto;
+	position:relative;
+	left:0;	
+	opacity:0;	
+	-moz-transition:0.3s left;
+	-webkit-transition:0.3s left;
+	transition:0.3s left;
+}
+
+#magazine .page{
+	overflow:hidden;
+}
+
+
+/* Center the magazine when the cover is shown */
+#magazine.centerStart{
+
+}
+
+/* Center the magazine when the last page is shown */
+#magazine.centerEnd{
+
+}
+
+.page img{
+	display:block;
+}
+
+.centerStart .turn-page-wrapper:first-child{
+	box-shadow:0 0 10px #040404;
+}
+
+/* Page Numbers */
+
+span.pageNum{
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 25px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+    font-size: 11px;
+    height: 24px;
+    line-height: 22px;
+    opacity: 0.9;
+    position: absolute;
+    text-align: center;
+    width: 55px;
+}
+
+span.pageNum.left{
+	left:0;
+	right:auto;
+}
+
+span.pageNum.right{
+	left:auto;
+	right:0;
+}
+
+/* Hide the page number on the cover */
+#page1 .pageNum{
+	display:none;
+}

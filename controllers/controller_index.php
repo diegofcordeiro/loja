@@ -6420,11 +6420,11 @@ class index extends controller {
 						"dados_arte"=>"$dados_arte",
 						"arquivo_arte"=>"$arquivo_arte",
 						"arte_acabamento"=>"$arte_acabamento",
-						"tipo_envio"=>3,
+						"tipo_envio"=> 3,
 						"tam_largura"=>"$tam_largura",
 						"tam_altura"=>"$tam_altura"
 					));
-					
+
 					// echo'<pre>';print_r($conexao);exit;
 				}
 				// echo'<pre>';print_r($data_produto);exit;

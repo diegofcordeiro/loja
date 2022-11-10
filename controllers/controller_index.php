@@ -6420,7 +6420,7 @@ class index extends controller {
 						"dados_arte"=>"$dados_arte",
 						"arquivo_arte"=>"$arquivo_arte",
 						"arte_acabamento"=>"$arte_acabamento",
-						"tipo_envio"=>"$tipo_envio",
+						"tipo_envio"=>3,
 						"tam_largura"=>"$tam_largura",
 						"tam_altura"=>"$tam_altura"
 					));

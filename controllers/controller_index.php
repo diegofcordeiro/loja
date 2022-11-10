@@ -6424,6 +6424,7 @@ class index extends controller {
 						"tam_largura"=>"$tam_largura",
 						"tam_altura"=>"$tam_altura"
 					));
+					
 					// echo'<pre>';print_r($conexao);exit;
 				}
 				// echo'<pre>';print_r($data_produto);exit;

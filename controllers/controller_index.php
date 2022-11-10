@@ -8310,6 +8310,15 @@ class index extends controller {
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 	}
 
+	/////////  ESTORNO /////////
+
+	public function estorno(){
+		print_r('aqui');exit;
+	}
+	/////////////////////////////
+
+	///////// PAGAMENTOS /////////
+
 	public function vindi_flow(){
 
 		$dados = array();
@@ -10096,6 +10105,8 @@ class index extends controller {
 
 		$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
 	}
+
+	/////////  END PAGAMENTO /////////
 
 	public function entrar(){
 

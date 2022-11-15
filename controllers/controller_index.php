@@ -8569,6 +8569,24 @@ class index extends controller {
 			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
 
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
+			$id_charge = $bill[0]->charges[0]->id;
+			$id_trans = $bill[0]->id;
+
+			if($bill[0]->id){
+				if($bill[0]->status == 'paid'){ 
+					$status = 2;
+				}else{
+					$status = 1;
+				}
+				$db = new mysql();
+				$db->alterar("pedido_loja", array(
+						"comprovante"=>"$nome_arquivo",
+						"id_transacao"=>"$id_charge",
+						"id_transacao_vindi"=>"$id_trans",
+						"status"=>"$status",
+						
+					), " codigo='$cod' ");
+			}
 			print_r($bill);
 		}
 		exit;

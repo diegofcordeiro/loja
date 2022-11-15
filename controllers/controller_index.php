@@ -8570,8 +8570,7 @@ class index extends controller {
 
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
 			echo 'aqui';
-			$bill = json_encode($bill);
-			print_r($bill['id']);exit;
+			print_r($bill);
 			$id_charge = $bill->charges[0]->id;
 			$id_trans = $bill->id;
 			echo "<br>";

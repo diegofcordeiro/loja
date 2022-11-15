@@ -8572,11 +8572,11 @@ class index extends controller {
 			echo 'aqui';
 			$id_charge = $bill->charges[0]->id;
 			$id_trans = $bill->id;
-			exit;
 			print_r($id_charge);
 			echo "<br>";
 			print_r($id_trans);
 			echo "<br>";
+			exit;
 
 			if($bill[0]->id){
 				if($bill[0]->status == 'paid'){ 

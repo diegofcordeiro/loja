@@ -1271,7 +1271,7 @@
 													<option selected value="0">0</option>
 													<option value="1">Mensal</option>
 												</select> -->
-												<input type="hidden" name="carrinho_coisas[]" value=<?$produtos['lista']?>>
+												<input type="hidden" name="carrinho_coisas[]" value=<?$produtos['lista']?>
 												<input type="hidden" name="installmentValue">
 										</div>                            
 									</div>

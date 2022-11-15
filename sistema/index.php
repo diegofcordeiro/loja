@@ -10,15 +10,15 @@ define("USUARIO", $config['USUARIO']);
 define("SENHA", $config['SENHA']);
 define("BANCO", $config['BANCO']);
 
-$config_dominio = (isset($_SERVER['HTTPS']) ? "https" : "http")."://" .$_SERVER['HTTP_HOST']."/loja"."/";
+$config_dominio = (isset($_SERVER['HTTPS']) ? "https" : "http")."://" .$_SERVER['HTTP_HOST'].""."/";
 if($config['PASTA']){
-	$config_dominio = $config_dominio.$config['PASTA']."/loja"."/";
+	$config_dominio = $config_dominio.$config['PASTA'].""."/";
 }
 
 if($config['SSL']){	
-	$config_dominio = "https://".$_SERVER['HTTP_HOST']."/loja"."/";
+	$config_dominio = "https://".$_SERVER['HTTP_HOST'].""."/";
 	if($config['PASTA']){
-		$config_dominio = $config_dominio.$config['PASTA']."/loja"."/";
+		$config_dominio = $config_dominio.$config['PASTA'].""."/";
 	}
 	// if(!isset($_SERVER['HTTPS'])){
 	// 	print_r('aqui2');exit;

@@ -8569,6 +8569,7 @@ class index extends controller {
 			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
 
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
+			echo 'aqui';
 			$id_charge = $bill[0]->charges[0]->id;
 			$id_trans = $bill[0]->id;
 			

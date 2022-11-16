@@ -8306,7 +8306,7 @@ class index extends controller {
 			}
 		}
 
-		print_r('acabou');exit;
+		print_r('Cliente adicionado');exit;
 
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 	}
@@ -8354,7 +8354,6 @@ class index extends controller {
 		$dados['pagina_cores'] = $cores;
 		
 		////////////////////////////////////////////////////////////////////////
-		
 		
 		$lista_blocos = array();
 		$n_bloc = 0; 
@@ -8478,8 +8477,6 @@ class index extends controller {
 		$last4 = substr($card_number,12,16);
 
 		echo'<pre>';
-		// print_r($this->_sessao);echo'<br>';
-		// echo'<pre>';print_r($_POST);exit;
 
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
@@ -8534,7 +8531,6 @@ class index extends controller {
 		// print_r($payment_met);exit;
 		//////////////////////////////////////////////////////////////
 
-		
 		$cod = $_POST['codigo'];
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$cod."' ");

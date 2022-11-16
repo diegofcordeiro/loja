@@ -8265,14 +8265,14 @@ class index extends controller {
 		echo '<br>';
 		echo 'Prod_ref - ID TRILHA';
 
-		echo $data_carrinho->produto_ref;
-		echo '<br>';
+		
 
 		if($linha_carrinho != 0){
 
 			$data_array = array();
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
-
+echo $data_carrinho->produto_ref;
+		echo '<br>';
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
 				if ($result2 = $mysqli->query($sql2)) {
 

@@ -8572,7 +8572,8 @@ class index extends controller {
 			$point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
 			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
 
-			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
+			// $bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
+			$this->integrar_trilha_lms($cod, $cpf);exit;
 
 			if($bill['bill']['id']){
 				echo 'Vindi Charge<br>';

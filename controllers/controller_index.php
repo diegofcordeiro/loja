@@ -8239,9 +8239,9 @@ class index extends controller {
 	public function integrar_trilha_lms($sessao_loja, $cpf){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
-		$cpf = $_POST['cpf'];
+
 		$conexao = new mysql();
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$_POST['codigo']."' ");
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$sessao_loja."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
 		echo'<pre>';
@@ -8573,7 +8573,7 @@ class index extends controller {
 			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
 
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
-			
+
 			if($bill['bill']['id']){
 				echo 'Vindi Charge<br>';
 				echo $id_charge;

@@ -8577,9 +8577,9 @@ class index extends controller {
 				$id_trans = $bill['bill']['id'];
 
 				if($bill['bill']['status'] == 'paid'){ 
-					$status = 1;
-				}else{
 					$status = 2;
+				}else{
+					$status = 1;
 				}
 				$db = new mysql();
 				$db->alterar("pedido_loja", array(

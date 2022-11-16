@@ -2400,8 +2400,8 @@ class index extends controller {
 				";
 
 				// envia o email
-				$envio = new model_envio();
-				$retorno = $envio->enviar("Cadastro concluído com sucesso!", $msg, array("0"=>"$email"));
+				// $envio = new model_envio();
+				// $retorno = $envio->enviar("Cadastro concluído com sucesso!", $msg, array("0"=>"$email"));
 
 				// echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>".$textos->conteudo('159649081566934')."</div>";
 				echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>Você receberá um e-mail para ativação da conta.</div>";
@@ -2413,7 +2413,7 @@ class index extends controller {
 					"status" => 0
 				), " codigo='".$codigo."' AND etapa='4' ");
 				
-
+				print_r($db);
 				$add_data_gerado		= date("Y-m-d H:i:s");
 				$senha_md5 = $this->post('senha');
 				$senha_md5 = md5($senha_md5);
@@ -8314,7 +8314,14 @@ class index extends controller {
 	/////////  ESTORNO /////////
 
 	public function estorno(){
-		print_r('aqui');exit;
+		require('conexao.php');
+
+		$conexao = new mysql();
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$_POST['codigo']."' ");
+
+		$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+		$mysqli->query($sql_update);
+
 	}
 	/////////////////////////////
 
@@ -8566,8 +8573,6 @@ class index extends controller {
 
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
 
-			
-
 			if($bill['bill']['id']){
 				$id_charge = $bill['bill']['charges'][0]['id'];
 				$id_trans = $bill['bill']['id'];
@@ -8580,12 +8585,12 @@ class index extends controller {
 				}
 				$db = new mysql();
 				$db->alterar("pedido_loja", array(
-						"comprovante"=>"$nome_arquivo",
-						"id_transacao"=>"$id_charge",
-						"id_transacao_vindi"=>"$id_trans",
-						"status"=>"$status",
-						
-					), " codigo='$cod' ");
+					"comprovante"=>"$nome_arquivo",
+					"id_transacao"=>"$id_charge",
+					"id_transacao_vindi"=>"$id_trans",
+					"status"=>"$status",
+					
+				), " codigo='$cod' ");
 			}
 			print_r($bill);
 		}

@@ -8569,16 +8569,16 @@ class index extends controller {
 			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
 
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
-			echo 'aqui';
-			print_r($bill['bill']['id']);exit;
+
+			print_r($bill['bill']['charges'][0]['id']);exit;
 			$id_charge = $bill->charges[0]->id;
-			$id_trans = $bill->id;
+			$id_trans = $bill['bill']['id'];
 			echo "<br>";
 			print_r($id_trans);
 			echo "<br>";
 			exit;
 
-			if($bill[0]->id){
+			if($bill['bill']['id']){
 				if($bill[0]->status == 'paid'){ 
 					$status = 2;
 				}else{

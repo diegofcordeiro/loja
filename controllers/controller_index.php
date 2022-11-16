@@ -8304,9 +8304,10 @@ class index extends controller {
 				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 				$mysqli->query($sql_update);
 			}
+			print_r($mysqli);
 		}
 
-		print_r('Cliente adicionado');exit;
+		print_r('Cliente adicionado');echo'<br>';
 
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 	}

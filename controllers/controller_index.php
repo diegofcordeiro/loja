@@ -8574,6 +8574,8 @@ class index extends controller {
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
 
 			if($bill['bill']['id']){
+				echo 'aqui<br>';
+				echo $id_charge;
 				$id_charge = $bill['bill']['charges'][0]['id'];
 				$id_trans = $bill['bill']['id'];
 

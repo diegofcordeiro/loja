@@ -8263,9 +8263,11 @@ class index extends controller {
 
 		echo $id_usuario;
 		echo '<br>';
-		echo 'ID PERFIL';
+		echo 'Prod_ref - ID TRILHA';
 
-		echo $id_perfil;
+		echo $data_carrinho->produto_ref;
+		echo '<br>';
+
 		if($linha_carrinho != 0){
 
 			$data_array = array();

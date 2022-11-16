@@ -8574,15 +8574,22 @@ class index extends controller {
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
 
 			if($bill['bill']['id']){
-				echo 'aqui<br>';
+				echo 'Vindi Charge<br>';
 				echo $id_charge;
+				echo 'Vindi Bill Id<br>';
+				echo $id_trans;
+				echo 'Codigo<br>';
+				echo $cod;
+
 				$id_charge = $bill['bill']['charges'][0]['id'];
 				$id_trans = $bill['bill']['id'];
 
 				if($bill['bill']['status'] == 'paid'){ 
+					echo 'STATUS 2<br>';
 					$status = 2;
 					$this->integrar_trilha_lms($cod, $cpf);
 				}else{
+					echo 'STATUS 1<br>';
 					$status = 1;
 				}
 				$db = new mysql();
@@ -8593,6 +8600,7 @@ class index extends controller {
 					"status"=>"$status",
 					
 				), " codigo='$cod' ");
+				print_r($db);
 			}
 			print_r($bill);
 		}

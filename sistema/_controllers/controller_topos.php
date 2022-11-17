@@ -242,7 +242,7 @@ class topos extends controller {
 	}
 
 	public function alterar_grv(){
-		
+
 		$codigo = $this->post('codigo');
 		$titulo = $this->post('titulo');
 		$modelo = $this->post('modelo');  
@@ -759,7 +759,7 @@ class topos extends controller {
 
 			} else {
 
-				$this->msg('Não foi possível copiar o arquivo!1');
+				$this->msg('Não foi possível copiar o arquivo!');
 				$this->volta(1);
 
 			}
@@ -831,7 +831,7 @@ class topos extends controller {
 
 			} else {
 
-				$this->msg('Não foi possível copiar o arquivo!2');
+				$this->msg('Não foi possível copiar o arquivo!');
 				$this->volta(1);
 
 			}
@@ -914,7 +914,7 @@ class topos extends controller {
 
 			} else {
 
-				$this->msg('Não foi possível copiar o arquivo!3');
+				$this->msg('Não foi possível copiar o arquivo!');
 				$this->volta(1);
 
 			}

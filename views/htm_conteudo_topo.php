@@ -289,7 +289,7 @@ $url = $_GET['url'];
 							</div>
 							<?php }else{ ?>
 								<div class="col-xs-2 col-sm-2 col-md-2" style="margin-top: 25px;">
-									<div class="dropdown">
+									<div class="dropdown" style="float:left">
 										<button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><?=$_nome_usuario?>
 										<span class="caret"></span></button>
 										<ul class="dropdown-menu">

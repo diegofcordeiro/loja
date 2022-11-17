@@ -351,10 +351,9 @@
 
                   </form>
                 </div>
-
                 <div id="fundo" class="tab-pane <?php if($aba_selecionada == "fundo"){ echo "active"; } ?>" >
                   <?php if(!$data->fundo){ ?>
-                    <form action="<?=$_base['objeto']?>fundo/codigo/<?=$data->codigo?>" method="post" enctype="multipart/form-data">
+                    <form action="<?=$_base['objeto']?>fundo/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
                         <label>Arquivo</label> 
@@ -383,7 +382,7 @@
 
                     </form>
                   <?php } else { ?>
-                  <form action="<?=$_base['objeto']?>link_banner/codigo/<?=$data->codigo?>" method="post" enctype="multipart/form-data">
+                  <form action="<?=$_base['objeto']?>link_banner/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
                     <div style="text-align:left;">
                       <img src="<?=PASTA_CLIENTE?>imagens/<?=$data->fundo?>" style="max-width:300px;" >
                     </div>

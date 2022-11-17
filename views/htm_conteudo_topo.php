@@ -298,6 +298,9 @@ $url = $_GET['url'];
 											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
 										</ul>
 									</div>
+									<a class="botao_conta_topo" href="<?=DOMINIO?>index/carrinho">
+										<i class="fas fa-shopping-cart"></i>
+									</a>
 									<div style="clear: both;"></div>
 								</div>
 							<?php } ?>

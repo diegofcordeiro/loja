@@ -1623,7 +1623,7 @@
 			$.post('<?=DOMINIO?><?=$controller?>/login', dados,function(data){
 				console.log(data.length);
 				console.log(data);
-				if(data.length != 83){
+				if(data.length != 88){
 					$('#modal_load').modal('hide');
 					$('#modal_janela').modal('show');
 					$('#modal_conteudo').html(data);

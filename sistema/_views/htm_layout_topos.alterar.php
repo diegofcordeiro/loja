@@ -248,8 +248,8 @@
 
                     <div>
                       <button type="submit" class="btn btn-primary">Salvar</button>
-                      <input type="hidden" name="codigo" value="<?=$data->codigo?>" >
-                      <button type="button" class="btn btn-danger" onClick="confirma('<?=$_base['objeto']?>apagar_topo/codigo/<?=$data->codigo?>');">Remover</button>
+                      <input type="hidden" name="codigo" value="<?=$codigo?>" >
+                      <button type="button" class="btn btn-danger" onClick="confirma('<?=$_base['objeto']?>apagar_topo/codigo/<?=$codigo?>');">Remover</button>
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
 
@@ -259,7 +259,7 @@
                 <div id="menu" class="tab-pane <?php if($aba_selecionada == "menu"){ echo "active"; } ?>" >
 
                   <div>
-                    <button type="button" class="btn btn-primary" onClick="modal('<?=$_base['objeto']?>menu_novo/codigo/<?=$data->codigo?>', 'Novo Menu');" >Novo Menu</button>
+                    <button type="button" class="btn btn-primary" onClick="modal('<?=$_base['objeto']?>menu_novo/codigo/<?=$codigo?>', 'Novo Menu');" >Novo Menu</button>
                   </div>
 
                   <hr>
@@ -273,7 +273,7 @@
                   <div style="clear:both; padding-top:15px;">
                     <form action="<?=$_base['objeto']?>menu_salvar_ordem" method="post" >
                       <input type="hidden" name="ordem" id="nestable-output" >
-                      <input type="hidden" name="topo_codigo" value="<?=$data->codigo?>" >
+                      <input type="hidden" name="topo_codigo" value="<?=$codigo?>" >
                       <button type="submit" class="btn btn-primary" >Salvar Ordem</button>          
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </form>
@@ -294,7 +294,7 @@
 
                     <div>
                       <button type="submit" class="btn btn-primary">Salvar</button>
-                      <input type="hidden" name="codigo" value="<?=$data->codigo?>" >
+                      <input type="hidden" name="codigo" value="<?=$codigo?>" >
                       <input type="hidden" name="modelo" value="<?=$data->modelo?>" >
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
@@ -344,7 +344,7 @@
 
                     <div>
                       <button type="submit" class="btn btn-primary">Salvar</button>
-                      <input type="hidden" name="codigo" value="<?=$data->codigo?>" >
+                      <input type="hidden" name="codigo" value="<?=$codigo?>" >
                       <input type="hidden" name="modelo" value="<?=$data->modelo?>" >
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
@@ -392,7 +392,7 @@
 
                     <div style="text-align:left; padding-top:10px;">
                       <button type="submit" class="btn btn-primary">Enviar</button>
-                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>fundo_apagar/codigo/<?=$data->codigo?>');" >Apagar Imagem</button>
+                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>fundo_apagar/codigo/<?=$codigo?>');" >Apagar Imagem</button>
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
                   </form>
@@ -401,7 +401,7 @@
 
                 <div id="logo" class="tab-pane <?php if($aba_selecionada == "logo"){ echo "active"; } ?>" >
                   <?php if(!$data->logo){ ?>
-                    <form action="<?=$_base['objeto']?>logo/codigo/<?=$data->codigo?>" method="post" enctype="multipart/form-data">
+                    <form action="<?=$_base['objeto']?>logo/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
                         <label>Arquivo</label> 
@@ -434,7 +434,7 @@
                     </div>
 
                     <div style="text-align:left; padding-top:10px;">
-                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>logo_apagar/codigo/<?=$data->codigo?>');" >Apagar Imagem</button>
+                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>logo_apagar/codigo/<?=$codigo?>');" >Apagar Imagem</button>
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
 
@@ -443,7 +443,7 @@
 
                 <div id="banner" class="tab-pane <?php if($aba_selecionada == "banner"){ echo "active"; } ?>" >
                   <?php if(!$data->logo){ ?>
-                    <form action="<?=$_base['objeto']?>logo/codigo/<?=$data->codigo?>" method="post" enctype="multipart/form-data">
+                    <form action="<?=$_base['objeto']?>logo/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
                         <label>Arquivo</label> 
@@ -476,7 +476,7 @@
                     </div>
 
                     <div style="text-align:left; padding-top:10px;">
-                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>logo_apagar/codigo/<?=$data->codigo?>');" >Apagar Imagem</button>
+                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>logo_apagar/codigo/<?=$codigo?>');" >Apagar Imagem</button>
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
 
@@ -486,7 +486,7 @@
                 <div id="icones" class="tab-pane <?php if($aba_selecionada == "icones"){ echo "active"; } ?>" >
 
                   <div>
-                    <button type="button" class="btn btn-primary" onClick="modal('<?=$_base['objeto']?>icone_novo/codigo/<?=$data->codigo?>', 'Novo Icone');" >Novo Icone</button>
+                    <button type="button" class="btn btn-primary" onClick="modal('<?=$_base['objeto']?>icone_novo/codigo/<?=$codigo?>', 'Novo Icone');" >Novo Icone</button>
                   </div>
 
                   <hr>                   
@@ -509,8 +509,8 @@
                         </div>
 
                         <div style='padding-top:5px; text-align:center;'>
-                        <button class='btn btn-default' onClick=\"modal('".$_base['objeto']."icone_alterar/codigo/".$value['codigo']."/codigo_topo/$data->codigo', 'Alterar Legenda');\" title='Editar' ><i class='fas fa-edit'></i></button>
-                        <button class='btn btn-default' onClick=\"confirma_apagar('".$_base['objeto']."icone_apagar/topo_codigo/$data->codigo/codigo/".$value['codigo']."');\" title='Remover' ><i class='fas fa-trash-alt'></i></button>
+                        <button class='btn btn-default' onClick=\"modal('".$_base['objeto']."icone_alterar/codigo/".$value['codigo']."/codigo_topo/$codigo', 'Alterar Legenda');\" title='Editar' ><i class='fas fa-edit'></i></button>
+                        <button class='btn btn-default' onClick=\"confirma_apagar('".$_base['objeto']."icone_apagar/topo_codigo/$codigo/codigo/".$value['codigo']."');\" title='Remover' ><i class='fas fa-trash-alt'></i></button>
                         </div>
 
                         </li>
@@ -539,7 +539,7 @@
                 <div id="botoes" class="tab-pane <?php if($aba_selecionada == "botoes"){ echo "active"; } ?>" >
 
                   <div>
-                    <button type="button" class="btn btn-primary" onClick="modal('<?=$_base['objeto']?>botao_novo/codigo/<?=$data->codigo?>', 'Novo Botão');" >Novo Botão</button>
+                    <button type="button" class="btn btn-primary" onClick="modal('<?=$_base['objeto']?>botao_novo/codigo/<?=$codigo?>', 'Novo Botão');" >Novo Botão</button>
                   </div>
 
                   <hr>                   
@@ -561,8 +561,8 @@
                         </div>
 
                         <div style='padding-top:5px; text-align:center;'>
-                        <button class='btn btn-default' onClick=\"modal('".$_base['objeto']."botao_alterar/codigo/".$value['codigo']."/codigo_topo/$data->codigo', 'Alterar Botão');\" title='Editar' ><i class='fas fa-edit'></i></button>
-                        <button class='btn btn-default' onClick=\"confirma_apagar('".$_base['objeto']."botao_apagar/topo_codigo/$data->codigo/codigo/".$value['codigo']."');\" title='Remover' ><i class='fas fa-trash-alt'></i></button>
+                        <button class='btn btn-default' onClick=\"modal('".$_base['objeto']."botao_alterar/codigo/".$value['codigo']."/codigo_topo/$codigo', 'Alterar Botão');\" title='Editar' ><i class='fas fa-edit'></i></button>
+                        <button class='btn btn-default' onClick=\"confirma_apagar('".$_base['objeto']."botao_apagar/topo_codigo/$codigo/codigo/".$value['codigo']."');\" title='Remover' ><i class='fas fa-trash-alt'></i></button>
                         </div>
 
                         </li>
@@ -627,7 +627,7 @@
             var postData = $(this).sortable('serialize');
             console.log(postData);
 
-            $.post('<?=$_base['objeto']?>icone_ordem', {list: postData, codigo: '<?=$data->codigo?>'}, function(o){
+            $.post('<?=$_base['objeto']?>icone_ordem', {list: postData, codigo: '<?=$codigo?>'}, function(o){
               console.log(o);
             }, 'json');
           }
@@ -638,7 +638,7 @@
             var postData = $(this).sortable('serialize');
             console.log(postData);
 
-            $.post('<?=$_base['objeto']?>botao_ordem', {list: postData, codigo: '<?=$data->codigo?>'}, function(o){
+            $.post('<?=$_base['objeto']?>botao_ordem', {list: postData, codigo: '<?=$codigo?>'}, function(o){
               console.log(o);
             }, 'json');
           }

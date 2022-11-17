@@ -24,6 +24,7 @@
 	<link href="<?=LAYOUT?>css/responsiveslides.css" rel="stylesheet" type="text/css" />
 	<link href="<?=LAYOUT?>api/bxslider/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 	<link href="<?=LAYOUT?>api/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.11.0.css" type="text/css" media="all">
 
 	<?php include_once('htm_css.php'); ?>
 	<?php include_once('htm_css_resp.php'); ?>
@@ -854,15 +855,26 @@
 									<label>Nome Completo</label>
 									<input type="text" class="form-control cadastro_form" name='fisica_nome' id='fisica_nome' placeholder="Nome Completo" >
 								</div>
-
 								<div class="div_form" >
+									<label>País</label><br>
+									<input type="radio" id="Brasil" name="country_document" checked value="1">
+									<label for="Brasil">Brasil</label><br>
+									<input type="radio" id="Outros" name="country_document" value="0">
+									<label for="Outros">Outros</label><br>
+								</div>
+								<div class="div_form" id="brasil_div">
 									<label>CPF</label>
-									<input type="text" class="form-control cadastro_form" name='fisica_cpf' id='fisica_cpf' placeholder="Digite seu cpf" >
+									<input type="text" class="form-control cadastro_form" name='fisica_cpf' data-mask="00000000000" id='fisica_cpf' placeholder="Digite seu cpf" >
+								</div>
+								<div class="div_form" id="outros_div" style="display:none">
+									<label>Documento</label>
+									<input type="text" class="form-control cadastro_form" name='fisica_documento' id='fisica_documento' placeholder="Digite seu documento" >
 								</div>
 
-								<div class="div_form" >
+								<div class="div_form">
 									<label>Telefone</label>
-									<input type="text" class="form-control cadastro_form" name="cadastro_telefone" id="cadastro_telefone" placeholder="Telefone" onKeyPress="Mascara(this,telefone)" onKeyDown="Mascara(this,telefone)" maxlength="15" >
+									<input type="text" class="form-control cadastro_form" name="cadastro_telefone_brasil" id="cadastro_telefone_brasil" data-mask="(00) 00000-0000" placeholder="Telefone"  >
+									<input type="text" class="form-control cadastro_form" name="cadastro_telefone" id="cadastro_telefone_outros" placeholder="Telefone"  style="display:none">
 								</div>
 
 								<div class="div_form" style="text-align: right;" >
@@ -905,55 +917,93 @@
 					<div class='col-xs-12 col-sm-6 col-md-6'>
 						<form id="cadastro_form" name="cadastro_form" >
 							<div class="cadastro_div" > 
-
-								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_cep" name="cadastro_cep" placeholder="Digite seu Cep" onkeypress="Mascara(this,ceppp)" onKeyDown="Mascara(this,ceppp)" size="9" maxlength="9"  onblur="buscar_endereco()" ></div> 
 								<div class="div_form" >
-									<div style="text-align:left;">
-										<div><a href="http://www.buscacep.correios.com.br/sistemas/buscacep/default.cfm" target="_blank" style="font-size:13px;" >Não sei meu CEP</a></div>
-									</div>
+									<label>País</label><br>
+									<input type="radio" id="Brasil" name="country_document" checked value="1">
+									<label for="Brasil">Brasil</label><br>
+									<input type="radio" id="Outros" name="country_document" value="0">
+									<label for="Outros">Outros</label><br>
 								</div>
+								
+								<div class="div_correio_brasil" style="">
 
-								<div id="endereco_div_load" ></div>
-
-								<div id="endereco_div" style="display: none;">
-
-									<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_endereco" name="endereco" placeholder="Endereço" value="<?=$endereco?>" ></div>
-
-									<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_numero" name="numero" placeholder="Número" ></div>
-
-									<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_complemento" name="complemento" placeholder="Complemento" ></div>
-
-									<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_bairro" name="bairro" placeholder="Bairro" value="<?=$bairro?>" ></div>
-
+									<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_cep" name="cadastro_cep" placeholder="Digite seu Cep" onkeypress="Mascara(this,ceppp)" onKeyDown="Mascara(this,ceppp)" size="9" maxlength="9"  onblur="buscar_endereco()" ></div> 
 									<div class="div_form" >
-										<select name="estado" id="cadastro_estado" class="form-control select2 cadastro_select" onChange="cadastro_cidades(this.value)" >
-											<option value="" selected="" >Selecione seu estado</option>
-											<?php
-
-											foreach ($estados as $key => $value) {
-
-												if($value['selected']){ $select = "selected"; } else { $select = ""; }
-												echo "<option value='".$value['uf']."' $select >".$value['nome']."</option>";
-
-											}
-
-											?>
-										</select>
-									</div> 
-
-									<div class="div_form" id="cadastro_cidade_div">
-										<select id="cidade" name="cidade" class="form-control select2 cadastro_form" >
-											<option value='' >Selecione</option>
-										</select>
+										<div style="text-align:left;">
+											<div><a href="http://www.buscacep.correios.com.br/sistemas/buscacep/default.cfm" target="_blank" style="font-size:13px;" >Não sei meu CEP</a></div>
+										</div>
 									</div>
 
-									<div class="div_form" style="text-align: right;" >
-										<?=$botao_padrao?>
-										<input type="hidden" name="etapa" value="2">
-										<input type="hidden" name="codigo" value="<?=$codigo_cadastro?>">
-									</div>
+									<div id="endereco_div_load" ></div>
 
+									<div id="endereco_div" style="display: none;">
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_endereco" name="endereco" placeholder="Endereço" value="<?=$endereco?>" ></div>
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_numero" name="numero" placeholder="Número" ></div>
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_complemento" name="complemento" placeholder="Complemento" ></div>
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_bairro" name="bairro" placeholder="Bairro" value="<?=$bairro?>" ></div>
+
+										<div class="div_form" >
+											<select name="estado" id="cadastro_estado" class="form-control select2 cadastro_select" onChange="cadastro_cidades(this.value)" >
+												<option value="" selected="" >Selecione seu estado</option>
+												<?php
+
+												foreach ($estados as $key => $value) {
+
+													if($value['selected']){ $select = "selected"; } else { $select = ""; }
+													echo "<option value='".$value['uf']."' $select >".$value['nome']."</option>";
+
+												}
+
+												?>
+											</select>
+										</div> 
+
+										<div class="div_form" id="cadastro_cidade_div">
+											<select id="cidade" name="cidade" class="form-control select2 cadastro_form" >
+												<option value='' >Selecione</option>
+											</select>
+										</div>
+
+										<div class="div_form" style="text-align: right;" >
+											<?=$botao_padrao?>
+											<input type="hidden" name="etapa" value="2">
+											<input type="hidden" name="codigo" value="<?=$codigo_cadastro?>">
+										</div>
+
+									</div>
+								
 								</div>
+
+								<div class="div_correio_outros" style="display:none">
+
+									<div id="endereco_div">
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_endereco" name="endereco" placeholder="Endereço" value="<?=$endereco?>" ></div>
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_numero" name="numero" placeholder="Número" value="<?=$numero?>"></div>
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_complemento" name="complemento" placeholder="Complemento" value="<?=$complemento?>"></div>
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_bairro" name="bairro" placeholder="Bairro" value="<?=$bairro?>" ></div>
+
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_cidade" name="cidade" placeholder="Cidade" value="<?=$cidade?>" ></div>
+										
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="postcode" name="postcode" placeholder="Postcode/Zipcode" value="<?=$cep?>" ></div>
+
+										<div class="div_form" style="text-align: right;" >
+											<?=$botao_padrao?>
+											<input type="hidden" name="etapa" value="2">
+											<input type="hidden" name="codigo" value="<?=$codigo_cadastro?>">
+										</div>
+
+									</div>
+								
+								</div>				
+
 
 							</div>
 						</form>
@@ -1662,6 +1712,10 @@
 	<script type="text/javascript" src="<?=LAYOUT?>js/animation.js"></script>
 	<script type="text/javascript" src="<?=LAYOUT?>js/responsiveslides.min.js"></script>
 
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+  	<script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	<?php
 	
 	foreach ($layout_lista as $key_layout => $value_blocos) {
@@ -1821,6 +1875,28 @@
 	<?php } ?>
 
 	<script type="text/javascript">
+
+		$("#Brasil").click(function(){
+			$("#brasil_div").show();
+			$("#outros_div").hide();
+
+			$(".div_correio_brasil").show();
+			$(".div_correio_outros").hide();
+
+			$("#cadastro_telefone_brasil").show();
+			$("#cadastro_telefone_outros").hide();
+			
+		});
+		$("#Outros").click(function(){
+			$("#brasil_div").hide();
+			$("#outros_div").show();
+
+			$(".div_correio_brasil").hide();
+			$(".div_correio_outros").show();
+
+			$("#cadastro_telefone_brasil").hide();
+			$("#cadastro_telefone_outros").show();
+		});
 		
 		function finalizar_cadastro(){
 
@@ -1836,7 +1912,7 @@
 				// }
 				console.log(data.length);
 				console.log(data);
-				if(data.length != 88){
+				if(data.length != 127){
 					$('#modal_load').modal('hide');
 					$('#modal_janela').modal('show');
 					$('#modal_conteudo').html(data);

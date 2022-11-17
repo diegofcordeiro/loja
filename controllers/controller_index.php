@@ -2249,15 +2249,23 @@ class index extends controller {
 			}
 
 			$fisica_nome = $this->post('fisica_nome');
-			$telefone = $this->post('cadastro_telefone');
-			$fisica_cpf = $this->post('fisica_cpf');
+			$country_document = $this->post('country_document');
+			
+			if($country_document == 0){
+				$fisica_cpf = $this->post('fisica_documento');
+				$telefone = $this->post('cadastro_telefone');
+			}else{
+				$fisica_cpf = $this->post('fisica_cpf');
+				$telefone = $this->post('cadastro_telefone_brasil');
+
+			}
 
 			if(!$fisica_cpf){
 
 				retorno_erro("Digite corretamente seu CPF.");
 				exit;
 
-			} else {
+			} elseif($country_document == 1) {
 
 				require_once("api/cpf_cnpj/cpf_cnpj.php");
 
@@ -2274,6 +2282,7 @@ class index extends controller {
 				"fisica_nome"=>"$fisica_nome",
 				"fisica_cpf"=>"$fisica_cpf",
 				"telefone"=>"$telefone",
+				"is_brasil"=>"$country_document",
 				"etapa"=>2
 			), " codigo='".$codigo."' AND etapa='1' ");
 
@@ -2292,23 +2301,34 @@ class index extends controller {
 				exit;				
 			}
 
-			$cep = $this->post('cadastro_cep');
-			$endereco = $this->post('endereco');
-			$numero = $this->post('numero');
-			$complemento = $this->post('complemento');
-			$bairro = $this->post('bairro');
-			$estado = $this->post('estado');
-			$cidade = $this->post('cidade');
+			$country_document = $this->post('country_document');
+			// print_r($country_document);exit;
+			if($country_document == 1){
+				$cep = $this->post('cadastro_cep');
+				$endereco = $this->post('endereco');
+				$numero = $this->post('numero');
+				$complemento = $this->post('complemento');
+				$bairro = $this->post('bairro');
+				$estado = $this->post('estado');
+				$cidade = $this->post('cidade');
+				if(!$cep){
+					retorno_erro("CEP inválido");	 
+					exit;
+				}
+				if($endereco AND $numero AND $bairro AND $estado AND $cidade){ } else {
+					retorno_erro("Preencha corretamente seus dados de endereço!");	 
+					exit;
+				}
+			}else{
+				$cep = $this->post('postcode');
+				$endereco = $this->post('endereco');
+				$numero = $this->post('numero');
+				$complemento = $this->post('complemento');
+				$bairro = $this->post('bairro');
+				$cidade = $this->post('cidade');
+				$estado = '';
 
-			if(!$cep){
-				retorno_erro("CEP inválido");	 
-				exit;
 			}
-			if($endereco AND $numero AND $bairro AND $estado AND $cidade){ } else {
-				retorno_erro("Preencha corretamente seus dados de endereço!");	 
-				exit;
-			}
-
 
 			$db = new mysql();
 			$db->alterar("cadastro", array(
@@ -2319,6 +2339,7 @@ class index extends controller {
 				"bairro"=>"$bairro",
 				"estado"=>"$estado",
 				"cidade"=>"$cidade",
+				"is_brasil_address"=>"$country_document",
 				"etapa"=>3
 			), " codigo='".$codigo."' AND etapa='2'  ");
 

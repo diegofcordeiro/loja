@@ -306,8 +306,8 @@ class topos extends controller {
 
 		$codigo = $this->post('codigo');
 		$modelo = $this->post('modelo');
-
-		$this->valida($codigo);
+		print_r($codigo);exit;
+		// $this->valida($codigo);
 		$this->valida($modelo);
 
 		$db = new mysql();

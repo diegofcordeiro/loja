@@ -237,6 +237,7 @@ class topos extends controller {
 		$config = new model_config();
 		$dados['data'] = $config->carrega_config();
 		$dados['codigo'] = $codigo;
+		$dados['modelo'] = 6;
 
 		$this->view('layout_topos.alterar', $dados);
 	}

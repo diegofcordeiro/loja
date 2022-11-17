@@ -108,7 +108,7 @@
                             <?php
                             foreach ($modelos as $key => $value) {
 
-                              if($value['codigo'] == $data->modelo){
+                              if($value['codigo'] == $modelo){
                                 $selected = "selected=''";
                               } else {
                                 $selected = "";
@@ -295,7 +295,7 @@
                     <div>
                       <button type="submit" class="btn btn-primary">Salvar</button>
                       <input type="hidden" name="codigo" value="<?=$codigo?>" >
-                      <input type="hidden" name="modelo" value="<?=$data->modelo?>" >
+                      <input type="hidden" name="modelo" value="<?=$modelo?>" >
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
 
@@ -345,7 +345,7 @@
                     <div>
                       <button type="submit" class="btn btn-primary">Salvar</button>
                       <input type="hidden" name="codigo" value="<?=$codigo?>" >
-                      <input type="hidden" name="modelo" value="<?=$data->modelo?>" >
+                      <input type="hidden" name="modelo" value="<?=$modelo?>" >
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
 

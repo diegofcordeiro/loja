@@ -1824,14 +1824,24 @@
 		
 		function finalizar_cadastro(){
 
-			$('#modal_janela').modal('show');
-			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
+			// $('#modal_janela').modal('show');
+			// $('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
+			$('#modal_load').modal('show');
 
 			var dados = $("#cadastro_form").serialize();
 
 			$.post('<?=DOMINIO?><?=$controller?>/cadastro_basico_grv', dados,function(data){
-				if(data){
+				// if(data){
+				// 	$('#modal_conteudo').html(data);
+				// }
+				console.log(data.length);
+				console.log(data);
+				if(data.length != 88){
+					$('#modal_load').modal('hide');
+					$('#modal_janela').modal('show');
 					$('#modal_conteudo').html(data);
+				}else{
+					$('#modal_conteudo_loading').html(data);
 				}
 			});
 			

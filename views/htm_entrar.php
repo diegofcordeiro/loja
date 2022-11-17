@@ -1611,17 +1611,24 @@
 	<?php } ?>
 
 	<script type="text/javascript">
-		
+
 		function login(){
 
 			var dados = $('#formlogin').serialize();
 
-			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
-			$('#modal_janela').modal('show');
+			// $('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
+			// $('#modal_janela').modal('show');
+			$('#modal_load').modal('show');
 
 			$.post('<?=DOMINIO?><?=$controller?>/login', dados,function(data){
-				if(data){
+				console.log(data.length);
+				console.log(data);
+				if(data.length != 83){
+					$('#modal_load').modal('hide');
+					$('#modal_janela').modal('show');
 					$('#modal_conteudo').html(data);
+				}else{
+					$('#modal_conteudo_loading').html(data);
 				}
 			});
 

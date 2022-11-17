@@ -1478,6 +1478,7 @@
 			$('#modal_janela').modal('show');
 
 			$.post('<?=DOMINIO?><?=$controller?>/login', dados,function(data){
+				console.log(data);
 				if(data){
 					$('#modal_conteudo').html(data);
 				}

@@ -306,9 +306,9 @@ class topos extends controller {
 
 		$codigo = $this->post('codigo');
 		$modelo = $this->post('modelo');
-		print_r($codigo);exit;
+
 		// $this->valida($codigo);
-		$this->valida($modelo);
+		// $this->valida($modelo);
 
 		$db = new mysql();
 		$exec_cores = $db->executar("SELECT * FROM layout_topos_cores WHERE topo_modelo='$modelo' ");

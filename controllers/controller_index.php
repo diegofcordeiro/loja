@@ -17,7 +17,7 @@ class index extends controller {
 		$dados['_sessao'] = $this->_sessao;
 		$dados['_acesso'] = $this->_acesso;
 		$dados['_nome_usuario'] = $this->_nome_usuario;
-		
+
 		// lista_produto_comprado
 		if($dados['_nome_usuario'] != 'Visitante'){ 
 			$pedidos = new model_pedidos();
@@ -25,26 +25,13 @@ class index extends controller {
 			// $this->p($lista_minhas_compras);
 			$in_ids = '';
 			foreach($lista_minhas_compras as $key => $curso){
-				$point = (count($lista_minhas_compras)==1 && $key == 0) ? '' : ',';
+				$point = (count($lista_minhas_compras)>1 && $key == 0) ? '' : ',';
 				$in_ids .= $point.$curso['produto_codigo'];
 				
 			}
 			
-			
 			$conexao = new mysql();
 			$result_comprados = $conexao->query("SELECT distinct 
-									autor.nome as autor_nome,
-									produto.*,
-									t1.imagem
-									FROM loja.produto 
-									inner join loja.autor on produto.autor = autor.id
-									inner join loja.produto_canal ON produto.codigo=produto_canal.id_produto 
-									inner join (select max(id) id, codigo, imagem from loja.produto_imagem group by codigo) t1 on produto.codigo=t1.codigo
-									AND produto.status = 1
-									WHERE produto.codigo in ($in_ids)
-									order by produto.id desc;");
-									print_r($result_comprados);
-									print_r("SELECT distinct 
 									autor.nome as autor_nome,
 									produto.*,
 									t1.imagem
@@ -66,9 +53,8 @@ class index extends controller {
 				// }
 
 			}
-			$this->p($new_comprados);
+			// $this->p($new_comprados);
 		}
-		
 		// itens da inicial
 		$chave = $this->_layout;
 		$conexao = new mysql();

@@ -23,13 +23,13 @@ class index extends controller {
 			$pedidos = new model_pedidos();
 			$lista_minhas_compras = $pedidos->lista_produto_comprado($dados['_cod_usuario']);
 			// $this->p($lista_minhas_compras);
-			print_r($dados['_cod_usuario']);
 			$in_ids = '';
 			foreach($lista_minhas_compras as $key => $curso){
 				$point = (count($lista_minhas_compras)>1 && $key == 0) ? '' : ',';
 				$in_ids .= $point.$curso['produto_codigo'];
 				
 			}
+			print_r($lista_minhas_compras);
 			
 			$conexao = new mysql();
 			$result_comprados = $conexao->query("SELECT distinct 

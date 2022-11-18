@@ -18,11 +18,45 @@ class index extends controller {
 		$dados['_acesso'] = $this->_acesso;
 		$dados['_nome_usuario'] = $this->_nome_usuario;
 
+		// lista_produto_comprado
+		if($dados['_nome_usuario'] != 'Visitante'){ 
+			$pedidos = new model_pedidos();
+			$lista_minhas_compras = $pedidos->lista_produto_comprado($dados['_cod_usuario']);
+			// $this->p($lista_minhas_compras);
+			$in_ids = '';
+			foreach($lista_minhas_compras as $key => $curso){
+				$point = (count($lista_minhas_compras)>1 && $key == 0) ? '' : ',';
+				$in_ids .= $point.$curso['produto_codigo'];
+				
+			}
+			
+			$conexao = new mysql();
+			$result_comprados = $conexao->query("SELECT distinct 
+									autor.nome as autor_nome,
+									produto.*,
+									t1.imagem
+									FROM loja.produto 
+									inner join loja.autor on produto.autor = autor.id
+									inner join loja.produto_canal ON produto.codigo=produto_canal.id_produto 
+									inner join (select max(id) id, codigo, imagem from loja.produto_imagem group by codigo) t1 on produto.codigo=t1.codigo
+									AND produto.status = 1
+									WHERE produto.codigo in ($in_ids)
+									order by produto.id desc;");
+			$new_comprados = array();
+			while ($obj_novidades = $result_comprados->fetch_object()) {
+				$new_comprados = array_merge($new_comprados,array($obj_novidades));
+				// $nm_produto = $obj_novidades->titulo;
+				// if (!empty($new_comprados[$nm_produto])){
+				// 	$new_comprados[$nm_produto] = array_merge($new_comprados[$nm_produto], array($obj_novidades));
+				// }else{
+				// 	$new_comprados[$nm_produto] = array($obj_novidades);
+				// }
 
+			}
+			// $this->p($new_comprados);
+		}
 		// itens da inicial
-
 		$chave = $this->_layout;
-
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' AND status='1' ");
 		if($coisas->num_rows != 1){
@@ -52,23 +86,15 @@ class index extends controller {
 			$dados['banner_popup'] = $banners->lista_simples('148713351986017'); 
 		}
 
-
 		// banners laterais
-
 		$banners = new model_banners();
 		$dados['banners_esquerda'] = $banners->lista_simples('148713350186607');
 		$dados['banners_direita'] = $banners->lista_simples('148841831030374');
 
-
 		////////////////////////////////////////////////////////////////////////
-
 		//busca para todos
-
 		$busca_padrao = $this->get('busca');
-
 		////////////////////////////////////////////////////////////////////////
-
-
 		$lista_blocos = array();
 		$n_bloc = 0; 
 
@@ -542,7 +568,6 @@ class index extends controller {
 		}
 		
 		$conexao = new mysql();
-
 		$combo = $conexao->query("SELECT
 									combos.id as combo_id,
 									combos.titulo as combo_titulo,
@@ -573,7 +598,6 @@ class index extends controller {
 				$new_cmb[$combo_id]['produtos'] = array($obj_cmb);
 			}
 		}
-
 		$result = $conexao->query("SELECT distinct 
 									$campo
 									autor.nome as autor_nome,
@@ -688,18 +712,17 @@ class index extends controller {
 		$dados['canais'] = $produtos->lista_canal();
 		$dados['lista_canal'] = $new;
 		$dados['combos'] = $new_cmb;
-		// echo'<pre>';print_r($dados['combos']);exit;
+		
+		$dados['lista_comprados'] = $new_comprados;
+
 		$dados['lista_canal_novidades'] = $new_novidades;
 		$dados['lista_canal_mais_vendidos'] = $new_vendidos;
 		$dados['lista_canal_melhor_qualificado'] = $new_melhor_qualificado;
 
-		// $dados['banner'] = 'banner_home.png';
 		$dados['layout_lista'] = $lista_blocos;
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];
-
-		// echo'<pre>';print_r($dados);exit;
 		$this->view('index', $dados);
 	}
 

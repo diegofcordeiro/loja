@@ -493,7 +493,7 @@ class index extends controller {
 
 		$dados['layout_lista'] = $lista_blocos;
 
-		// echo '<pre>'; print_r($lista_blocos); echo '</pre>'; exit;
+		echo '<pre>'; print_r($dados); echo '</pre>'; exit;
 
 
 		$this->view('index', $dados);

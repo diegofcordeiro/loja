@@ -355,6 +355,8 @@ class cursos extends controller {
                 $duracao = $_POST['duracao'][$key];
                 $perguntas = $_POST['perguntas'][$key];
 
+				print_r($_POST);echo'<br>';
+				print_r($perguntas);exit;
                 $db->inserir('curso_conteudo', array(
                     "nome"=>"$value",
                     "icon"=>"$icon",

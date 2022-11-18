@@ -333,11 +333,8 @@ class cursos extends controller {
                     "id_curso_conteudo_topico"=>"$id_topico",
                     "status"=>1
                 ));
-				echo '1';
-				print_r($db);exit;
-				
             }
-            // $this->irpara(DOMINIO.$this->_controller."/alterar_curso/codigo/".$id_produto."/aba/conteudo_curso");
+            $this->irpara(DOMINIO.$this->_controller."/alterar_curso/codigo/".$id_produto."/aba/conteudo_curso");
 
         }else{
             $db = new mysql();
@@ -362,8 +359,6 @@ class cursos extends controller {
                     "id_curso_conteudo_topico"=>"$ultid",
                     "status"=>1
                 ));
-				echo '2';
-				print_r($db);exit;
             }
             echo 'Items adicionados!';
         }

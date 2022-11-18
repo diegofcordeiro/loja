@@ -2310,7 +2310,7 @@ class index extends controller {
 				$complemento = $this->post('complemento_');
 				$bairro = $this->post('bairro_');
 				$estado = $this->post('estado_');
-				$cidade = $this->post('cidade_');
+				$cidade = $this->post('cidade');
 				if(!$cep){
 					retorno_erro("CEP inválido");	 
 					exit;

@@ -364,7 +364,7 @@ class cursos extends controller {
                     "id_curso_conteudo_topico"=>"$ultid",
                     "status"=>1
                 ));
-				echo '2 <pre>';
+				echo '2';
 				print_r($db);exit;
             }
             echo 'Items adicionados!';

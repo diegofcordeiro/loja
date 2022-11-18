@@ -118,6 +118,15 @@ class system {
         echo "<script> window.open('".$endereco."', target='$destino');</script>";
         exit;
     }
+    protected function p($p, $exit = 1){
+        echo '<pre>';
+        print_r($p);
+        echo '</pre>';
+        if ($exit == 1)
+        {
+            exit;
+        }
+    }
 
     protected function volta($n){
         echo "<script> history.go(-".$n."); </script>";

@@ -2316,17 +2316,6 @@ class index extends controller {
 					exit;
 				}
 				if($endereco AND $numero AND $bairro AND $estado AND $cidade){ echo 'aqui';exit;} else {
-					echo'<pre>';print_r($_POST);
-					echo '<br>';
-					print_r($endereco);
-					echo '<br>';
-					print_r($numero);
-					echo '<br>';
-					print_r($bairro);
-					echo '<br>';
-					print_r($estado);
-					echo '<br>';
-					print_r($cidade);exit;
 					retorno_erro("Preencha corretamente seus dados de endereço!");	 
 					exit;
 				}

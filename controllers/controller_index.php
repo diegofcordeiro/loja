@@ -2425,7 +2425,9 @@ class index extends controller {
 				// $retorno = $envio->enviar("Cadastro concluído com sucesso!", $msg, array("0"=>"$email"));
 
 				// echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>".$textos->conteudo('159649081566934')."</div>";
+
 				echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>Você receberá um e-mail para ativação da conta.</div>";
+				
 				// echo "<div style='padding-top:20px; padding-bottom:20px; text-align:center;'><a href='".DOMINIO.$this->_controller."/entrar' class='botao_padrao' >FAÇA SEU LOGIN</a></div>";
 
 				$db = new mysql();
@@ -2434,7 +2436,6 @@ class index extends controller {
 					"status" => 0
 				), " codigo='".$codigo."' AND etapa='4' ");
 				
-				print_r($db);
 				$add_data_gerado		= date("Y-m-d H:i:s");
 				$senha_md5 = $this->post('senha');
 				$senha_md5 = md5($senha_md5);

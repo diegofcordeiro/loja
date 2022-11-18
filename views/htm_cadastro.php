@@ -938,16 +938,16 @@
 
 									<div id="endereco_div" style="display: none;">
 
-										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_endereco" name="endereco" placeholder="Endereço" value="<?=$endereco?>" ></div>
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_endereco" name="endereco_" placeholder="Endereço" value="<?=$endereco?>" ></div>
 
-										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_numero" name="numero" placeholder="Número" ></div>
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_numero" name="numero_" placeholder="Número" ></div>
 
-										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_complemento" name="complemento" placeholder="Complemento" ></div>
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_complemento" name="complemento_" placeholder="Complemento" ></div>
 
-										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_bairro" name="bairro" placeholder="Bairro" value="<?=$bairro?>" ></div>
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_bairro" name="bairro_" placeholder="Bairro" value="<?=$bairro?>" ></div>
 
 										<div class="div_form" >
-											<select name="estado" id="cadastro_estado" class="form-control select2 cadastro_select" onChange="cadastro_cidades(this.value)" >
+											<select name="estado_" id="cadastro_estado" class="form-control select2 cadastro_select" onChange="cadastro_cidades(this.value)" >
 												<option value="" selected="" >Selecione seu estado</option>
 												<?php
 
@@ -963,7 +963,7 @@
 										</div> 
 
 										<div class="div_form" id="cadastro_cidade_div">
-											<select id="cidade" name="cidade" class="form-control select2 cadastro_form" >
+											<select id="cidade" name="cidade_" class="form-control select2 cadastro_form" >
 												<option value='' >Selecione</option>
 											</select>
 										</div>

@@ -2305,12 +2305,12 @@ class index extends controller {
 			// print_r($country_document);exit;
 			if($country_document == 1){
 				$cep = $this->post('cadastro_cep');
-				$endereco = $this->post('endereco');
-				$numero = $this->post('numero');
-				$complemento = $this->post('complemento');
-				$bairro = $this->post('bairro');
-				$estado = $this->post('estado');
-				$cidade = $this->post('cidade');
+				$endereco = $this->post('endereco_');
+				$numero = $this->post('numero_');
+				$complemento = $this->post('complemento_');
+				$bairro = $this->post('bairro_');
+				$estado = $this->post('estado_');
+				$cidade = $this->post('cidade_');
 				if(!$cep){
 					retorno_erro("CEP inválido");	 
 					exit;

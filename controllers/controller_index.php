@@ -2316,6 +2316,8 @@ class index extends controller {
 					exit;
 				}
 				if($endereco AND $numero AND $bairro AND $estado AND $cidade){ echo 'aqui';exit;} else {
+					print_r($_POST);
+					echo '<br>';
 					print_r($endereco);
 					echo '<br>';
 					print_r($numero);

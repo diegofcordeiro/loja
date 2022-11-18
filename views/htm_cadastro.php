@@ -990,7 +990,7 @@
 
 										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_bairro" name="bairro" placeholder="Bairro" value="<?=$bairro?>" ></div>
 
-										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_cidade" name="cidade" placeholder="Cidade" value="<?=$cidade?>" ></div>
+										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_cidade" name="cidade_outros" placeholder="Cidade" value="<?=$cidade?>" ></div>
 										
 										<div class="div_form" ><input type="text" class="form-control cadastro_form" id="postcode" name="postcode" placeholder="Postcode/Zipcode" value="<?=$cep?>" ></div>
 

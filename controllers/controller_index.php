@@ -2336,7 +2336,7 @@ class index extends controller {
 				$numero = $this->post('numero');
 				$complemento = $this->post('complemento');
 				$bairro = $this->post('bairro');
-				$cidade = $this->post('cidade');
+				$cidade = $this->post('cidade_outros');
 				$estado = '';
 
 			}

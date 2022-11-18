@@ -2315,7 +2315,7 @@ class index extends controller {
 					retorno_erro("CEP inválido");	 
 					exit;
 				}
-				if($endereco AND $numero AND $bairro AND $estado AND $cidade){ echo 'aqui';exit;} else {
+				if($endereco AND $numero AND $bairro AND $estado AND $cidade){} else {
 					retorno_erro("Preencha corretamente seus dados de endereço!");	 
 					exit;
 				}

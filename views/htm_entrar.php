@@ -788,7 +788,7 @@
 							
 							<div style="font-size:15px; text-align:left;" >JÁ SOU CLIENTE</div>
 
-							<div class="div_form" ><input type="text" class="form-control login_form" name="login_usuario" id="login_usuario" placeholder="Digite seu E-mail" ></div>
+							<div class="div_form" ><input type="text" class="form-control login_form" name="login_usuario" id="login_usuario" placeholder="Digite seu CPF/Documento" ></div>
 							<div class="div_form" ><input type="password" class="form-control login_form" name="login_senha" id="login_senha" placeholder="Digite sua Senha" ></div>
 							<div class="div_form" >
 								<div style="float:left; text-align:left;">

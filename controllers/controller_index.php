@@ -10333,7 +10333,7 @@ echo $data_carrinho->produto_ref;
 		if($email AND $senha) {
 
 			$conexao = new mysql();
-			$coisas_dados = $conexao->Executar("SELECT * FROM cadastro WHERE email='$email' ");
+			$coisas_dados = $conexao->Executar("SELECT * FROM cadastro WHERE fisica_cpf='$email' ");
 			$data_dados = $coisas_dados->fetch_object();
 
 			if($coisas_dados->num_rows == 1){

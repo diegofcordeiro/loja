@@ -1150,10 +1150,26 @@
 							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/vindi_flow">
 								<input type="hidden"  id="brand_" name="brand_">
 								<input type="hidden"  name="vindi_key" value="<?=$forma_pagamento->vindi_key?>">
+
+								<input type="hidden"  name="is_brasil" value="<?=$is_brasil?>">
+								<input type="hidden"  name="is_brasil_address" value="<?=$is_brasil_address?>">
+								
 								<input type="hidden"  name="vindi_url" value="<?=$forma_pagamento->vindi_url?>">
 								<input type="hidden" name="forma_pagamento" value="<?=$forma_pagamento->id?>">
 								<input type="hidden" name="codigo" value="<?=$data_pedido->codigo?>">
 								<input type="hidden" name="amount_" value="<?=$data_pedido->valor_total?>">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="div_form" >
+											<label>País</label><br>
+											<input type="radio" id="Brasil_doc" name="country_document" <?= $is_brasil == 1 ? 'checked':'' ?>  value="1">
+											<label for="Brasil">Brasil </label>
+											<input type="radio" id="Outros_doc" name="country_document" <?= $is_brasil == 0 ? 'checked':'' ?>  value="0">
+											<label for="Outros">Outros</label><br>
+										</div>
+									</div>
+								</div>
+								<br>	
 								<div class="row">
 									<div class="col-xs-8 col-md-8">
 										<div class="form-group">
@@ -1182,64 +1198,130 @@
 										</div>
 									</div>
 									<div class="col-xs-4 col-md-4">
-										<div class="form-group">
-											<label for="tel">CPF</label>
-											<input type="text" class="form-control" name="cpf" id="cpf"  placeholder="CPF" value="<?=$cpf?>" required/>
+										<div class="form-group">												
+												<label for="tel" id="label_cpf"><?= $is_brasil == 1 ? 'CPF':'Documento' ?></label>
+												<input type="text" style="<?= $is_brasil == 1 ? '':'display: none' ?>" class="form-control" name="cpf" id="cpf"  placeholder="CPF" value="<?=$cpf?>" required/>
+												<input type="text" style="<?= $is_brasil == 0 ? '':'display: none' ?>" class="form-control" name="cpf_outros" id="documento_cpf"  placeholder="Documento" value="<?=$cpf?>" required/>
 										</div>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-xs-10">
-										<div class="form-group">
-											<label for="cardNumber">Endereço</label>
-											<input type="text" class="form-control" name="endereco" placeholder="Endereco" autocomplete="endereco" value="<?=$endereco?>" required/>
-										</div>                            
-									</div>
-									<div class="col-xs-2">
-										<div class="form-group">
-											<label for="cardNumber">Número</label>
-											<input type="text" class="form-control" name="numero" placeholder="Número" autocomplete="Número" value="<?=$numero?>" required/>
-										</div>                            
+									<div class="col-xs-12">
+										<div class="div_form" >
+											<label>País</label><br>
+											<input type="radio" id="Brasil_end" name="country_endereco" <?= $is_brasil_address == 1 ? 'checked':'' ?> value="1">
+											<label for="Brasil">Brasil </label>
+											<input type="radio" id="Outros_end" name="country_endereco" <?= $is_brasil_address == 0 ? 'checked':'' ?> value="0">
+											<label for="Outros">Outros</label><br>
+										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-xs-3 col-md-3">
-										<div class="form-group">
-											<label for="bairro">Bairro</label>
-											<input type="text" class="form-control" name="bairro" placeholder="Bairro" autocomplete="Bairro" value="<?=$bairro?>" required/>
+								<br>				
+								<div class="endereco_brasil" style="<?= $is_brasil_address == 1 ? '':'display: none' ?>">
+									<div class="row">
+										<div class="col-xs-10">
+											<div class="form-group">
+												<label for="cardNumber">Endereço</label>
+												<input type="text" class="form-control" name="endereco" placeholder="Endereco" autocomplete="endereco" value="<?=$endereco?>" required/>
+											</div>                            
+										</div>
+										<div class="col-xs-2">
+											<div class="form-group">
+												<label for="cardNumber">Número</label>
+												<input type="text" class="form-control" name="numero" placeholder="Número" autocomplete="Número" value="<?=$numero?>" required/>
+											</div>                            
 										</div>
 									</div>
-									<div class="col-xs-3 col-md-3">
-										<div class="form-group">
-											<label for="cep">CEP</label>
-											<input type="text" class="form-control cep" name="cep" id="cep" placeholder="00000-000" value="<?=$cep?>" required/>
+									<div class="row">
+										<div class="col-xs-3 col-md-3">
+											<div class="form-group">
+												<label for="bairro">Bairro</label>
+												<input type="text" class="form-control" name="bairro" placeholder="Bairro" autocomplete="Bairro" value="<?=$bairro?>" required/>
+											</div>
 										</div>
-									</div>
-									<div class="col-xs-3 col-md-3">
-										<div class="form-group">
-											<label for="cidade">Estado</label>
-											<select id="estado" class="form-control" name="estado">
-												<?php
-													foreach ($estados as $key => $value) {
-														if($value['selected']){ $select = "selected"; } else { $select = ""; }
-														echo "<option value='".$value['uf']."' $select >".$value['nome']."</option>";
-													}
-												?>
-											</select>
+										<div class="col-xs-3 col-md-3">
+											<div class="form-group">
+												<label for="cep">CEP</label>
+												<input type="text" class="form-control cep" name="cep" id="cep" placeholder="00000-000" value="<?=$cep?>" required/>
+											</div>
 										</div>
-									</div>
-									<div class="col-xs-3 col-md-3">
-										<div class="form-group">
-											<label for="cidade">Cidade</label>
-											<div class="div_form" id="cadastro_cidade_div">
-												<select id="cidade" name="cidade" class="form-control select2 cadastro_form" >
-													<option value='' >Selecione</option>
+										<div class="col-xs-3 col-md-3">
+											<div class="form-group">
+												<label for="cidade">Estado</label>
+												<select id="estado" class="form-control" name="estado">
+													<?php
+														foreach ($estados as $key => $value) {
+															if($value['selected']){ $select = "selected"; } else { $select = ""; }
+															echo "<option value='".$value['uf']."' $select >".$value['nome']."</option>";
+														}
+													?>
 												</select>
+											</div>
+										</div>
+										<div class="col-xs-3 col-md-3">
+											<div class="form-group">
+												<label for="cidade">Cidade</label>
+												<div class="div_form" id="cadastro_cidade_div">
+													<select id="cidade" name="cidade" class="form-control select2 cadastro_form" >
+														<option value=''>Selecione</option>
+													</select>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+
+
+								
+			
+								<div class="endereco_outros" style="<?= $is_brasil_address == 0 ? '':'display: none' ?>">
+									<div class="row">
+										<div class="col-xs-10">
+											<div class="form-group">
+												<label for="cardNumber">Endereço</label>
+												<input type="text" class="form-control" name="endereco_outros" placeholder="Endereco" autocomplete="endereco" value="<?=$endereco?>" required/>
+											</div>                            
+										</div>
+										<div class="col-xs-2">
+											<div class="form-group">
+												<label for="cardNumber">Número</label>
+												<input type="text" class="form-control" name="numero_outros" placeholder="Número" autocomplete="Número" value="<?=$numero?>" required/>
+											</div>                            
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-3 col-md-3">
+											<div class="form-group">
+												<label for="bairro">Bairro</label>
+												<input type="text" class="form-control" name="bairro_outros" placeholder="Bairro" autocomplete="Bairro" value="<?=$bairro?>" />
+											</div>
+										</div>
+										<div class="col-xs-3 col-md-3">
+											<div class="form-group">
+												<label for="cep">CEP</label>
+												<input type="text" class="form-control cep_outros" name="cep_outros" id="cep_outros" value="<?=$cep?>" required/>
+											</div>
+										</div>
+										<div class="col-xs-3 col-md-3">
+											<div class="form-group">
+												<label for="cidade">Estado</label>
+												<input type="text" class="form-control estado_outros" name="estado_outros" id="estado_outros" value="<?=$estado?>" />
+											</div>
+										</div>
+										<div class="col-xs-3 col-md-3">
+											<div class="form-group">
+												<label for="cidade">Cidade</label>
+												<input type="text" class="form-control cidade_outros" name="cidade_outros" id="cidade_outros" value="<?=$cidade?>" />
+											</div>
+										</div>
+									</div>
+								</div>
+
+
+
+
+
 								<hr>
 								<div class="row">
 									<div class="col-xs-12">
@@ -2254,6 +2336,27 @@ window.onload = function(){
 }
 </script>
 <script>
+	// label_cpf
+
+		$("#Brasil_doc").click(function(){
+			$("#label_cpf").html('CPF');
+			$("#cpf").show();
+			$("#documento_cpf").hide();
+		});
+		$("#Outros_doc").click(function(){
+			$("#label_cpf").html('Document');
+			$("#cpf").hide();
+			$("#documento_cpf").show();
+		});
+
+		$("#Brasil_end").click(function(){
+			$(".endereco_brasil").show();
+			$(".endereco_outros").hide();
+		});
+		$("#Outros_end").click(function(){
+			$(".endereco_brasil").hide();
+			$(".endereco_outros").show();
+		});
 	$('#formulario_').submit(function(){
 
 		$(this).find(':input[type=submit]').html('enviando...').prop('disabled', true);

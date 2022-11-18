@@ -55,6 +55,7 @@ class index extends controller {
 			}
 			// $this->p($new_comprados);
 		}
+		$this->p('aqu');
 		// itens da inicial
 		$chave = $this->_layout;
 		$conexao = new mysql();

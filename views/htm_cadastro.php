@@ -963,7 +963,7 @@
 										</div> 
 
 										<div class="div_form" id="cadastro_cidade_div">
-											<select id="cidade" name="cidade_" class="form-control select2 cadastro_form" >
+											<select id="cidade" name="cidade_" class="form-control select2 cadastro_select" >
 												<option value='' >Selecione</option>
 											</select>
 										</div>

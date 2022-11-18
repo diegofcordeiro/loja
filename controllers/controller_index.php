@@ -17,7 +17,7 @@ class index extends controller {
 		$dados['_sessao'] = $this->_sessao;
 		$dados['_acesso'] = $this->_acesso;
 		$dados['_nome_usuario'] = $this->_nome_usuario;
-
+		$this->p('aqu');
 		// lista_produto_comprado
 		if($dados['_nome_usuario'] != 'Visitante'){ 
 			$pedidos = new model_pedidos();
@@ -55,7 +55,7 @@ class index extends controller {
 			}
 			// $this->p($new_comprados);
 		}
-		$this->p('aqu');
+		
 		// itens da inicial
 		$chave = $this->_layout;
 		$conexao = new mysql();

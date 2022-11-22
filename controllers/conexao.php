@@ -1,10 +1,11 @@
 <?php
-$mysqli = new mysqli("tasdev.vpshost5501.mysql.dbaas.com.br","tasdev","TasDEV495051@","tasdev");
+$mysqli = new mysqli("dbdentalguru.cgxcqb2rk2kb.us-east-1.rds.amazonaws.com","dtguru","DtGURU495051","dentalguru");
 
 if ($mysqli->connect_errno) {
   echo "Failed to connect to MySQL: " . $mysqli->connect_error;
   exit();
 }
+ $mysqli->set_charset("utf8");
 
 // $sql = "SELECT * FROM usuario ";
 // echo'<pre>';

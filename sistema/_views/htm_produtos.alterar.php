@@ -33,6 +33,8 @@ $curl = curl_init();
 //     print_r($plan['name']);
 //   }
 //   exit;
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -147,19 +149,16 @@ $curl = curl_init();
                   <?php //print_r($data->banner); ?>						
                     <fieldset>
                       <div class="row">
-                        <div class="col-md-1">
+                        <div class="col-md-6">
                           <div class="form-group">
-                            <label class="col-md-12" >Ref.</label>
+                            <label class="col-md-12" >Trilha.</label>
                             <div class="col-md-12">
-                              <input name="ref" type="text" class="form-control" value="<?=$data->ref?>" >
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-5">
-                          <div class="form-group">
-                            <label class="col-md-12" >*Titulo</label>
-                            <div class="col-md-12">
-                              <input name="titulo" type="text" class="form-control" value="<?=$data->titulo?>" >
+                              <select class="form-control" id="ref" name="ref">
+                                <?php foreach($lista_trilha_lms as $trilha){ ?>
+                                  <option data-title="<?=$trilha['nome_trilha']?>" value='<?=$trilha['id_trilha']?>' <?php if($trilha['checked'] == 1){ echo "selected"; } ?>><?=$trilha['nome_trilha']?></option>
+                                <?php }?>
+                              </select>
+                              <input name="titulo" type="hidden" id="titulo" class="form-control" value="<?=$data->titulo?>" >
                             </div>
                           </div>
                         </div>
@@ -962,6 +961,14 @@ $curl = curl_init();
           });
 
         $(document).ready(function() {
+
+          var title = $("select#ref option:selected").text();
+            $('#titulo').val(title);
+
+          $("#ref").change(function(){
+            var title = $("select#ref option:selected").text();
+            $('#titulo').val(title);
+          });
 
           $(".select2").select2();
 

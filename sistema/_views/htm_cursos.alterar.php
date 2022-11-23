@@ -319,10 +319,9 @@
 
                   <?php 
                     // echo'<pre>';print_r($curso_conteudo);
-                    if($curso_conteudo[0]['nome'] != ''){
+                    if($curso_conteudo[0]['id'] != ''){
                       echo '<h3>Lista de Etapas</h3>';
                     foreach($curso_conteudo as $value){
-                      echo'<pre>';print_r($value);
                   ?>
                     <form action="<?=$_base['objeto']?>alterar_produto_conteudo_curso" id="add_form2" class="form-horizontal" method="post">   
                         <div class="conteudo_lista">

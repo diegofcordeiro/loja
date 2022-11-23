@@ -273,7 +273,7 @@
                         <div class="row ">
                             <div class="col-md-12 mb-12">
                                 <input type="hidden" name="codigo" value="<?=$data->id?>">
-                                <input type="text" name="nome_topico" class="form-control" placeholder="Nome do Topico">
+                                <input type="text" name="nome_topico" class="form-control" placeholder="Nome do Topico" required>
                             </div>
                         </div>
                         <div id="show_conteudo">

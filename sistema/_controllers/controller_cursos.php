@@ -83,7 +83,7 @@ class cursos extends controller {
 		$dados['lista_feedback'] = $lista;
 		$dados['link'] = DOMINIO.$this->_controller.'/alterar_curso/codigo/'.$codigo.'/aba/conteudo_curso';
 		$dados['link_feedback'] = DOMINIO.$this->_controller.'/alterar_curso/codigo/'.$codigo.'/aba/feedback';
-		echo'<pre>';print_r($dados['curso_conteudo']);exit;
+		// echo'<pre>';print_r($dados['curso_conteudo']);exit;
 		$this->view('cursos.alterar', $dados);
 	}
     public function alterar_curso_dados(){

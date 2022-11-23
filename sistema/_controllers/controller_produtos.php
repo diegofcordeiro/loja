@@ -49,7 +49,7 @@ class produtos extends controller {
 	}
 	
 	public function alterar_produto(){
-		
+		echo '<pre>'; print_r('aui');exit;
 		$dados['_base'] = $this->base();
 		$dados['_titulo'] = $this->_modulo_nome;
 		$dados['_subtitulo'] = "Alterar";

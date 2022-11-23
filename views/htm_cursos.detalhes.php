@@ -818,7 +818,7 @@
                                                             <td class="list_conteudo_curso"><?=$row['nome']?></td>
 															<td class="td_list_conteudo_curso">
 																<?php 
-																	if($row['icon'] == 1 || $row['icon'] == 2){ ?>
+																	if(($row['icon'] == 1 || $row['icon'] == 2) && $row['visualizar'] != ''){ ?>
 																		<a style="z-index:99999 !important" data-toggle="modal" data-target="#exampleModal" data-video="<?=$row['visualizar']?>" id="youtubelink">Visualizar</a>
 																<?php
 																	}

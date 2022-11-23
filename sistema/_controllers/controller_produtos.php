@@ -49,11 +49,11 @@ class produtos extends controller {
 	}
 	
 	public function alterar_produto(){
+		
 		$dados['_base'] = $this->base();
 		$dados['_titulo'] = $this->_modulo_nome;
 		$dados['_subtitulo'] = "Alterar";
 		require('../controllers/conexao.php');
-		echo '<pre>'; print_r('aui');exit;
 
 		$codigo = $this->get('codigo');
 		$aba = $this->get('aba');
@@ -199,7 +199,7 @@ class produtos extends controller {
 		}
 
 		$dados['autor'] = $autor;
-		echo '<pre>'; print_r('aui');exit;
+		
 		$data_array = array();
 		$data_ref =$dados['data']->ref;
 		$sql2 = "SELECT * FROM `trilha`";

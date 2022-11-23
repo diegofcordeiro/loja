@@ -199,7 +199,7 @@ class produtos extends controller {
 		}
 
 		$dados['autor'] = $autor;
-		
+		echo '<pre>'; print_r('aui');exit;
 		$data_array = array();
 		$data_ref =$dados['data']->ref;
 		$sql2 = "SELECT * FROM `trilha`";

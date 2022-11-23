@@ -216,7 +216,7 @@ class produtos extends controller {
 			}
 		}
 		
-		echo '<pre>'; print_r($data_array);exit;
+		// echo '<pre>'; print_r($data_array);exit;
 
 		$dados['lista_trilha_lms'] = $data_array;
 

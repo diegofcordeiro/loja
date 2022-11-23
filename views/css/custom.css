@@ -2687,7 +2687,7 @@ body{font-family: 'Roboto' !important;}
 /* --------- END 4 CARDS  ---------  */
 
 .list_conteudo_curso{border:none !important;font-size: 15px;width: 70%;}
-.td_list_conteudo_curso{border:none !important;width: 10%;font-size: 15px}
+.td_list_conteudo_curso{border:none !important;width: 5%;font-size: 15px}
 .estrela_amarela{}
 .estrela_cinza{color:#efefef;}
 .prog{ float: left;width: 60%;}
@@ -2735,7 +2735,7 @@ body{font-family: 'Roboto' !important;}
         line-height: 70px;
     }
     .list_conteudo_curso{border:none !important;font-size: 12px;width: 70%;}
-    .td_list_conteudo_curso{border:none !important;width: 10%;font-size: 12px;}
+    .td_list_conteudo_curso{border:none !important;width: 5%;font-size: 12px;}
     .estrela_amarela{font-size: 12px;}
     .estrela_cinza{color:#efefef;font-size: 12px;}
     .prog{ float: left;width: 50%;}
@@ -2830,7 +2830,7 @@ body{font-family: 'Roboto' !important;}
         line-height: 60px;
     }
     .list_conteudo_curso{border:none !important;font-size: 12px;width: 70%;}
-    .td_list_conteudo_curso{border:none !important;width: 10%;font-size: 12px;}
+    .td_list_conteudo_curso{border:none !important;width: 5%;font-size: 12px;}
     .estrela_amarela{font-size: 12px;}
     .estrela_cinza{color:#efefef;font-size: 12px;}
     .prog{ float: left;width: 50%;}
@@ -2864,7 +2864,7 @@ body{font-family: 'Roboto' !important;}
         line-height: 46px;  
     }
     .list_conteudo_curso{border:none !important;font-size: 12px;width: 70%;}
-    .td_list_conteudo_curso{border:none !important;width: 10%;font-size: 12px;}
+    .td_list_conteudo_curso{border:none !important;width: 5%;font-size: 12px;}
     .estrela_amarela{font-size: 12px;}
     .estrela_cinza{color:#efefef;font-size: 12px;}
     .prog{ float: left;width: 50%;}

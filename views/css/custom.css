@@ -605,7 +605,7 @@ body{font-family: 'Roboto' !important;}
     border-radius: 9px 9px 0px 0px;
     }
     .item{
-        
+        max-width: 400px;
     }
     .banner_index{
         min-height: 450px;
@@ -673,7 +673,7 @@ body{font-family: 'Roboto' !important;}
     border-radius: 9px 9px 0px 0px;
     }
     .item{
-        
+        max-width: 400px;
     }
     .banner_index{
         min-height: 450px;
@@ -799,7 +799,7 @@ body{font-family: 'Roboto' !important;}
     border-radius: 9px 9px 0px 0px;
     }
     .item{
-        
+        max-width: 400px;
     }
     .banner_index{
         min-height: 450px;
@@ -867,7 +867,7 @@ body{font-family: 'Roboto' !important;}
     border-radius: 9px 9px 0px 0px;
     }
     .item{
-        
+        max-width: 400px;
     }
     .banner_index{
         min-height: 450px;
@@ -935,7 +935,7 @@ body{font-family: 'Roboto' !important;}
     border-radius: 9px 9px 0px 0px;
     }
     .item{
-        
+        max-width: 400px;    
     }
     .banner_index{
         min-height: 450px;
@@ -1003,7 +1003,7 @@ body{font-family: 'Roboto' !important;}
     border-radius: 9px 9px 0px 0px;
     }
     .item{
-        
+        max-width: 400px;   
     }
     .banner_index{
         min-height: 450px;

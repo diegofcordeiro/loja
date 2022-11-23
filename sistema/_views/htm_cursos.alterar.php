@@ -318,7 +318,7 @@
                   
 
                   <?php 
-                    // echo'<pre>';print_r($curso_conteudo);
+                    echo'<pre>';print_r($curso_conteudo);exit;
                     if($curso_conteudo[0]['id'] != ''){
                       echo '<h3>Lista de Etapas</h3>';
                     foreach($curso_conteudo as $value){

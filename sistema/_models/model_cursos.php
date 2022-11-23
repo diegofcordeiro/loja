@@ -90,6 +90,7 @@ Class model_cursos extends model{
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM conteudo_curso_topico WHERE id_produto = '$codigo' order by id asc");
 		$i = 0;
+		print_r("SELECT * FROM conteudo_curso_topico WHERE id_produto = '$codigo' order by id asc");exit;
 		while($data = $exec->fetch_object()) {
 			
 			$lista[$i]['id'] = $data->id;

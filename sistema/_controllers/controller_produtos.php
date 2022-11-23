@@ -47,6 +47,7 @@ class produtos extends controller {
 				array_push($data_array,$array);
 			}
 		}
+		$dados['lista_trilha_lms'] = $data_array;
 
 		$this->view('produtos.novo', $dados);
 	}

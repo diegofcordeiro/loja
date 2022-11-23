@@ -112,7 +112,6 @@ Class model_cursos extends model{
             }
 			$i++;
 		}
-		print_r($lista);exit;
 		return $lista;
 	} 
     public function carrega_curso($codigo){

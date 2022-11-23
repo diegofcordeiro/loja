@@ -8,6 +8,12 @@
 			<label class="col-md-12" >Titulo do produto</label>
 			<div class="col-md-12">
 				<input name="titulo" type="text" class="form-control" >
+				<select class="form-control" id="ref" name="ref">
+					<?php foreach($lista_trilha_lms as $trilha){ ?>
+						<option data-title="<?=$trilha['nome_trilha']?>" value='<?=$trilha['id_trilha']?>' <?php if($trilha['checked'] == 1){ echo "selected"; } ?>><?=$trilha['nome_trilha']?></option>
+					<?php }?>
+				</select>
+				<input name="titulo" type="hidden" id="titulo" class="form-control" value="<?=$data->titulo?>" >
 			</div>
 		</div>
 

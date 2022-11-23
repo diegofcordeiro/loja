@@ -29,8 +29,24 @@ class produtos extends controller {
 		$dados['_base'] = $this->base();
 		$dados['_titulo'] = $this->_modulo_nome;
 		$dados['_subtitulo'] = "Novo";
-
+		require('../controllers/conexao.php');
 		$dados['aba_selecionada'] = "dados";
+		
+		$data_array = array();
+		$data_ref =$dados['data']->ref;
+		$sql2 = "SELECT * FROM `trilha`";
+		if ($result2 = $mysqli->query($sql2)) {
+
+			while ($obj2 = $result2->fetch_object()) {
+				$array = array(
+					'id_trilha'  	=> $obj2->id,
+					'nome_trilha'   => $obj2->nome,
+					'checked'		=> ($obj2->id == $data_ref ? 1 : 0)
+
+				);
+				array_push($data_array,$array);
+			}
+		}
 
 		$this->view('produtos.novo', $dados);
 	}

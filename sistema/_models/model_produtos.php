@@ -99,11 +99,12 @@ Class model_produtos extends model{
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//
 
-	public function novo_produto($codigo, $titulo){ 
+	public function novo_produto($codigo, $titulo, $ref){ 
 		
 		$db = new mysql();
 		$db->inserir($this->tab_produtos, array(
 			"codigo"	=>$codigo,
+			"ref"	    =>$ref,
 			"titulo"	=>$titulo,
 			"status"	=>0
 		));

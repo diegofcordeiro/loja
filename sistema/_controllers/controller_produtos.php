@@ -55,12 +55,13 @@ class produtos extends controller {
 	public function novo_produto(){
 		
 		$titulo = $this->post('titulo');
+		$ref = $_POST['ref'];;
 		
 		// instancia
 		$produtos = new model_produtos();
 		
 		$codigo = $this->gera_codigo();
-		$produtos->novo_produto($codigo, $titulo);
+		$produtos->novo_produto($codigo, $titulo, $ref);
 
 		$this->irpara(DOMINIO.$this->_controller.'/alterar_produto/codigo/'.$codigo.'/aba/dados');
 	}

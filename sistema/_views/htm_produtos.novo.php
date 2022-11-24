@@ -1,4 +1,7 @@
 <?php include_once('base.php'); ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
 <form action="<?=$_base['objeto']?>novo_produto" class="form-horizontal" method="post" enctype="multipart/form-data" >
 	
@@ -24,6 +27,7 @@
 
 <script>
 	$(document).ready(function() {
+		$("select").select2();
 
           var title = $("select#ref option:selected").text();
             $('#titulo').val(title);

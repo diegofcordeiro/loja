@@ -27,7 +27,7 @@
 
 <script>
 	$(document).ready(function() {
-		$("select").select2();
+		$("#ref").select2();
 
           var title = $("select#ref option:selected").text();
             $('#titulo').val(title);

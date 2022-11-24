@@ -7,7 +7,7 @@
 	<fieldset>
 
 		<div class="form-group">
-			<label class="col-md-12" >Titulo do produto</label>
+			<label class="col-md-12" >Titulo da Trilha</label>
 			<div class="col-md-12">
 				<select class="form-control select2" id="ref" name="ref">
 					<?php foreach($lista_trilha_lms as $trilha){ ?>

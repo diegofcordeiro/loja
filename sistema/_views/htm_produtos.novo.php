@@ -10,7 +10,7 @@
 		<div class="form-group">
 			<label class="col-md-12" >Titulo do produto</label>
 			<div class="col-md-12">
-				<select class="form-control" id="ref" name="ref">
+				<select class="form-control select2" id="ref" name="ref">
 					<?php foreach($lista_trilha_lms as $trilha){ ?>
 						<option data-title="<?=$trilha['nome_trilha']?>" value='<?=$trilha['id_trilha']?>'><?=$trilha['nome_trilha']?></option>
 					<?php }?>
@@ -27,7 +27,7 @@
 
 <script>
 	$(document).ready(function() {
-		$("#ref").select2();
+		$(".select2").select2();
 
           var title = $("select#ref option:selected").text();
             $('#titulo').val(title);

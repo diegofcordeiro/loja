@@ -153,7 +153,7 @@ $curl = curl_init();
                           <div class="form-group">
                             <label class="col-md-12" >Trilha.</label>
                             <div class="col-md-12">
-                              <select class="form-control" id="ref" name="ref">
+                              <select class="form-control select2" id="ref" name="ref">
                                 <?php foreach($lista_trilha_lms as $trilha){ ?>
                                   <option data-title="<?=$trilha['nome_trilha']?>" value='<?=$trilha['id_trilha']?>' <?php if($trilha['checked'] == 1){ echo "selected"; } ?>><?=$trilha['nome_trilha']?></option>
                                 <?php }?>

@@ -8588,11 +8588,11 @@ echo $data_carrinho->produto_ref;
 				"payment_company_code" => $payment_company_name,
 				"customer_id" => $id_client
 			];
+			print_r($card);exit;
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
 			$payment_met =  $add_card->payment_method->code;
 		}
 
-		print_r($payment_met);exit;
 		//////////////////////////////////////////////////////////////
 
 		$cod = $_POST['codigo'];

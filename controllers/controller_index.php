@@ -8738,7 +8738,7 @@ echo $data_carrinho->produto_ref;
 		try{
 			$paymentProfile = $paymentProfileData->create($data);
 		} catch(Vindi\Exceptions\ValidationException $e){
-			var_dump($e->getErrors());
+			echo '<pre>';var_dump($e->getErrors());
 		}
 		exit;
 		$result = $paymentProfile->create($data);

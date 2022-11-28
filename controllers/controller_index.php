@@ -8590,7 +8590,8 @@ echo $data_carrinho->produto_ref;
 			];
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
 			$payment_met =  $add_card->payment_method->code;
-		}
+		}	
+		print_r($add_card);exit;
 
 		//////////////////////////////////////////////////////////////
 
@@ -8738,11 +8739,9 @@ echo $data_carrinho->produto_ref;
 		try{
 			$paymentProfile = $paymentProfileData->create($data);
 		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());
+			echo '<pre>';var_dump($e->getErrors());exit;
 		}
-		exit;
-		$result = $paymentProfile->create($data);
-		return $result;
+		return $paymentProfile;
 	}
 
 	public function pay_bill_vindi($id, $payment,$value){

@@ -8736,8 +8736,8 @@ echo $data_carrinho->produto_ref;
 
 	public function vindi_add_card_to_client($arguments,$data){
 		$paymentProfile = new Vindi\PaymentProfile($arguments);
+		print_r($paymentProfile);exit;
 		$result = $paymentProfile->create($data);
-		print_r($result);exit;
 		return $result;
 	}
 

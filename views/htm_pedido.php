@@ -1338,7 +1338,7 @@
 									<div class="col-xs-6 col-md-6">
 										<div class="form-group">
 											<label for="cardExpiry">Validade</label>
-											<input type="tel" class="form-control"  data-mask="00/00" name="cardExpiry" placeholder="MM/YY" autocomplete="cc-exp" required />
+											<input type="tel" class="form-control"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
 										</div>
 									</div>
 									<div class="col-xs-6 col-md-6">

@@ -8625,8 +8625,7 @@ echo $data_carrinho->produto_ref;
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
 			$value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
 			// $prod_item .= '{"product_id": "1040228","amount": "'.$recorrencia->produto_valor.'"}'.$point_sub.'';
-
-			// $bill = $this->pay_bill_vindi($id_client,$payment_met,1092081,$total_amount);
+			$bill = $this->vindi_add_subscription($id_client,$payment_met,$recorrencia->produto_assinatura,296700);
 		}
 		
 		echo '<pre>';
@@ -8639,10 +8638,8 @@ echo $data_carrinho->produto_ref;
 		foreach($nao_recorrentes as $key => $recorrencia){
 			$point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
 			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
-
 			// $bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
 			$this->integrar_trilha_lms($cod, $cpf);
-			
 			exit;
 
 			if($bill['bill']['id']){
@@ -8677,54 +8674,28 @@ echo $data_carrinho->produto_ref;
 			print_r($bill);
 		}
 		
-
-		
-
-		// if($recorrencia == 1){
-		// 	$bill = $this->vindi_add_subscription($id_client,$payment_met,1040228,296700);
-		// }else{
-		// 	$bill = $this->pay_bill_vindi($id_client,$payment_met,1092081,$total_amount);
-		// }
-		// if($bill['bill']['status'] != null){
-
 		// 	$this->view('finalizada', $dados);
-		// }else{
-		// 	echo 'Algum erro aconteceu. Tente novamente mais tarde!';
-		// }
+
 	}
 
-	public function vindi_add_subscription($id_client,$payment_met,$product_ir,$plan_id){
+	public function vindi_add_subscription($id_client,$payment_met,$plano,$prod_id){
 		
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-		CURLOPT_URL => 'https://app.vindi.com.br/api/v1/subscriptions',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS =>'{
-			"plan_id": "'.$plan_id.'",
-			"customer_id": "'.$id_client.'",
-			"payment_method_code": "'.$payment_met.'",
-			"product_items": [
-				{"product_id": "'.$product_ir.'"}
-			]
-		}',
-		CURLOPT_HTTPHEADER => array(
-				'accept: application/json',
-				'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
-				'Content-Type: application/json'
-			),
-		));
-
-		$response = curl_exec($curl);
-		$response = json_decode($response, true);
-		curl_close($curl);
-		return $response;
-
+		$subscriptionService = new Vindi\Subscription;
+		try{
+			$subscription = $subscriptionService->create([
+				'plan_id' => $plano,
+				'customer_id' => $id_client,
+				'payment_method_code' => "credit_card",
+				'product_items' => [
+					[
+						'product_id' => $prod_id
+					]
+				]
+			]);
+		} catch(Vindi\Exceptions\ValidationException $e){
+			echo '<pre>';var_dump($e->getErrors());exit;
+		}
+		return $subscription;
 	}
 
 	public function vindi_add_new_client($arguments,$data){

@@ -8591,7 +8591,6 @@ echo $data_carrinho->produto_ref;
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
 			$payment_met =  $add_card->payment_method->code;
 		}	
-		print_r($add_card);exit;
 
 		//////////////////////////////////////////////////////////////
 

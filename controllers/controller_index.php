@@ -8540,7 +8540,6 @@ echo $data_carrinho->produto_ref;
 		$card_number = str_replace("-","",$card_number);
 		$last4 = substr($card_number,12,16);
 
-		echo'<pre>';
 
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
@@ -8620,7 +8619,7 @@ echo $data_carrinho->produto_ref;
 		
 		$recorrentes = $lista_de_produto[1];
 		$nao_recorrentes = $lista_de_produto[0];
-		
+		print_r('aqui');
 		$value_sub = '';
 		foreach($recorrentes as $key => $recorrencia){
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
@@ -8629,7 +8628,7 @@ echo $data_carrinho->produto_ref;
 
 			// $bill = $this->pay_bill_vindi($id_client,$payment_met,1092081,$total_amount);
 		}
-	
+		
 		echo '<pre>';
 		// print_r($value);
 		echo '<br>';

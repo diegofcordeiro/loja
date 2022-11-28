@@ -8573,7 +8573,7 @@ echo $data_carrinho->produto_ref;
 				$pay_met = $res->payment_method->code;
 			}
 		}
-				print_r('aqui');exit;
+				
 		// Adicionando cartao na VINDI se nao tiver nenhum cartao cadastrado ou se o cartao usado é diferente
 		if($last_four == $last4){
 			$payment_met = $pay_met;
@@ -8591,7 +8591,8 @@ echo $data_carrinho->produto_ref;
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
 			$payment_met =  $add_card->payment_method->code;
 		}
-		// print_r($payment_met);exit;
+
+		print_r($payment_met);exit;
 		//////////////////////////////////////////////////////////////
 
 		$cod = $_POST['codigo'];

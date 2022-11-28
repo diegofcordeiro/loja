@@ -8573,7 +8573,7 @@ echo $data_carrinho->produto_ref;
 				$pay_met = $res->payment_method->code;
 			}
 		}
-				
+				print_r('aqui');exit;
 		// Adicionando cartao na VINDI se nao tiver nenhum cartao cadastrado ou se o cartao usado é diferente
 		if($last_four == $last4){
 			$payment_met = $pay_met;
@@ -8619,7 +8619,7 @@ echo $data_carrinho->produto_ref;
 		
 		$recorrentes = $lista_de_produto[1];
 		$nao_recorrentes = $lista_de_produto[0];
-		print_r('aqui');
+		
 		$value_sub = '';
 		foreach($recorrentes as $key => $recorrencia){
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';

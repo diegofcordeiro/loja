@@ -8621,9 +8621,22 @@ echo $data_carrinho->produto_ref;
 		$recorrentes = $lista_de_produto[1];
 		$nao_recorrentes = $lista_de_produto[0];
 		
-		
-		$value = '';
+		$value_sub = '';
+		foreach($recorrentes as $key => $recorrencia){
+			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
+			$value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
+			// $prod_item .= '{"product_id": "1040228","amount": "'.$recorrencia->produto_valor.'"}'.$point_sub.'';
 
+			// $bill = $this->pay_bill_vindi($id_client,$payment_met,1092081,$total_amount);
+		}
+	
+		echo '<pre>';
+		// print_r($value);
+		echo '<br>';
+		print_r($value_sub);
+		exit;
+
+		$value = '';
 		foreach($nao_recorrentes as $key => $recorrencia){
 			$point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
 			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
@@ -8664,23 +8677,9 @@ echo $data_carrinho->produto_ref;
 			}
 			print_r($bill);
 		}
-		exit;
-		$value_sub = '';
-		foreach($recorrentes as $key => $recorrencia){
-			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
-			$value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
-			// $prod_item .= '{"product_id": "1040228","amount": "'.$recorrencia->produto_valor.'"}'.$point_sub.'';
+		
 
-			// $bill = $this->pay_bill_vindi($id_client,$payment_met,1092081,$total_amount);
-		}
-
-		echo '<pre>';
-		// print_r($value);
-		echo '<br>';
-		print_r($value_sub);
-
-
-		exit;
+		
 
 		// if($recorrencia == 1){
 		// 	$bill = $this->vindi_add_subscription($id_client,$payment_met,1040228,296700);

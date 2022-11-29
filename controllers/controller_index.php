@@ -8597,19 +8597,24 @@ echo $data_carrinho->produto_ref;
 		
 		if($linha_carrinho != 0){
 
-			$lista_de_produto = array();
+			$recorrentes = array();
+			$nao_recorrentes = array();
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
-				
-				$id_combo = ($data_carrinho->id_combo > 0 ? 1 : 0);
-				
-				if (!empty($lista_de_produto[$id_combo]))
-				{
-					$lista_de_produto[$id_combo] = array_merge($lista_de_produto[$id_combo], array($data_carrinho));
+				if($data_carrinho->id_combo > 0){
+
+					$id_combo = $data_carrinho->id_combo;
+					if (!empty($recorrentes[$id_combo]))
+					{
+						$recorrentes[$id_combo] = array_merge($recorrentes[$id_combo], array($data_carrinho));
+					}
+					else
+					{
+						$recorrentes[$id_combo] = array($data_carrinho);
+					}
+				}else{
+					array_merge($nao_recorrentes, array($data_carrinho));
 				}
-				else
-				{
-					$lista_de_produto[$id_combo] = array($data_carrinho);
-				}
+				
 			}
 		}	
 		

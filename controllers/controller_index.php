@@ -8643,7 +8643,7 @@ class index extends controller {
 
 		foreach($nao_recorrentes as $key => $recorrencia){
 			echo '<pre>';
-			print_r($recorrencia);
+			print_r($recorrencia->valor_total);
 			exit;
 			// $point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
 			// $value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';

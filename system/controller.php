@@ -60,7 +60,6 @@ class controller extends system {
 		// carrinho
 		$carrinho = new model_carrinho();
 		$this->_carrinho_itens = $carrinho->itens_carrinho($this->_sessao);
-		echo'<pre>';print_r('asasdasd');exit;	
 	}
 	
 	protected function finaliza_sessao(){

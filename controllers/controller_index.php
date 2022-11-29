@@ -4,6 +4,7 @@ class index extends controller {
 	
 	public function init(){
 		$this->inicializacao();
+		echo'<pre>';print_r('asasdasd');exit;	
 	}
 	
 	public function inicial(){

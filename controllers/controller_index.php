@@ -8600,7 +8600,7 @@ echo $data_carrinho->produto_ref;
 			$lista_de_produto = array();
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
 				
-				$id_combo = $data_carrinho->id_combo;
+				$id_combo = ($data_carrinho->id_combo > 0 ? $data_carrinho->id_combo : 0);
 
 				if (!empty($lista_de_produto[$id_combo]))
 				{

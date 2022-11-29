@@ -8625,7 +8625,7 @@ echo $data_carrinho->produto_ref;
 		foreach($recorrentes as $key => $recorrencia){
 			$amout = 0;
 			foreach($recorrencia as $rec){
-				echo '<pre>';print_r($rec);exit;
+				echo '<pre>';print_r($rec->valor_total);exit;
 			}
 
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';

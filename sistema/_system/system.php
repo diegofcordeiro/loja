@@ -138,9 +138,9 @@ class system {
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //teste de url
-        // echo "Controller: $this->_controller <br> Action = $this->_action <br></br> Parametros: "; print_r($this->_params); exit;
-        // echo $controllers_path; exit;
-        // echo $this->_controller; exit;
+        echo "Controller: $this->_controller <br> Action = $this->_action <br></br> Parametros: "; print_r($this->_params); exit;
+        echo $controllers_path; exit;
+        echo $this->_controller; exit;
 
 
         //aciona gerenciador ou blog

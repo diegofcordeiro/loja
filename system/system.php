@@ -9,7 +9,6 @@ class system {
     protected $_layout;
     
     public function __construct() { 
-         echo'<pre>';print_r('aq');exit;
         $this->setUrl();
         $this->setExplode();
         $this->setController();
@@ -144,9 +143,9 @@ class system {
     }
     
     public function run(){
-         echo'<pre>';print_r('aq');exit;
-
+        
         $controllers_path = CONTROLLERS.'controller_'.$this->_controller.'.php';
+        echo'<pre>';print_r('aq');exit;
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //teste de url

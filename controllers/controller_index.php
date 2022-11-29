@@ -8615,7 +8615,10 @@ echo $data_carrinho->produto_ref;
 		
 		$recorrentes = $lista_de_produto[1];
 		$nao_recorrentes = $lista_de_produto[0];
-		echo '<pre>';print_r($recorrentes);exit;	
+		echo '<pre>';print_r($recorrentes);
+		echo '<br>';print_r($nao_recorrentes);
+		
+		exit;	
 		$value_sub = '';
 		foreach($recorrentes as $key => $recorrencia){
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';

@@ -8,7 +8,6 @@ class system {
     protected $_params; 
     
     public function __construct() { 
-         echo'<pre>';print_r('aq');exit;
         $this->setUrl();
         $this->setExplode();
         $this->setController();

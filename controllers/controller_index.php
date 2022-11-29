@@ -8613,15 +8613,6 @@ echo $data_carrinho->produto_ref;
 					}
 				}else{
 					$nao_recorrentes[] = $data_carrinho;
-					// $produto = $data_carrinho->produto;
-					// if (!empty($nao_recorrentes[$produto]))
-					// {
-					// 	$nao_recorrentes[$produto] = array_merge($nao_recorrentes[$produto], array($data_carrinho));
-					// }
-					// else
-					// {
-					// 	$nao_recorrentes[$produto] = array($data_carrinho);
-					// }
 				}
 				
 			}
@@ -8633,6 +8624,8 @@ echo $data_carrinho->produto_ref;
 		exit;	
 		$value_sub = '';
 		foreach($recorrentes as $key => $recorrencia){
+			echo '<pre>';print_r($recorrentes);exit;
+			
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
 			$value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
 			// $prod_item .= '{"product_id": "1040228","amount": "'.$recorrencia->produto_valor.'"}'.$point_sub.'';

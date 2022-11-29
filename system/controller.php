@@ -48,7 +48,7 @@ class controller extends system {
 				$this->msg('E6662 - A sessão expirou!');
 				$this->irpara(DOMINIO);
 			}
-			echo'<pre>';print_r('asasdasd');exit;	
+			
 		} else {
 
 			if(!isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao'])){
@@ -56,7 +56,7 @@ class controller extends system {
 			}
 
 		}
-		
+		echo'<pre>';print_r('asasdasd');exit;	
 		// carrinho
 		$carrinho = new model_carrinho();
 		$this->_carrinho_itens = $carrinho->itens_carrinho($this->_sessao);

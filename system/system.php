@@ -157,13 +157,13 @@ class system {
             $this->irpara(DOMINIO.'sistema/index.php');
             exit;
         }
-        echo'<pre>';print_r('aq');exit;
         // sitemap
         if($this->_controller == 'sitemap'){            
             $this->_controller = "index";
             $this->_action = "sitemap";
             $controllers_path = CONTROLLERS.'controller_'.$this->_controller.'.php';
         }
+        echo'<pre>';print_r('aq');exit;
         
         if(!file_exists($controllers_path)){
             

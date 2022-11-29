@@ -61,5 +61,5 @@ if($config['SSL']){
 		//exit;
 	}} spl_autoload_register("auto_carregador");
 	$start = new system();
-	echo'<pre>';print_r('aq');exit;
 	$start->run();
+	echo'<pre>';print_r('aq');exit;

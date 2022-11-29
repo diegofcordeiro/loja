@@ -185,11 +185,11 @@ class system {
             require_once($controllers_path);
             $app = new $this->_controller();
             $app->init();
-            echo'<pre>';print_r('aq2');exit;
             $action = $this->_action;
             if(!method_exists($app, $action) ){
-               $this->erro();
-           } else {
+                $this->erro();
+            } else {
+               echo'<pre>';print_r('aq2');exit;
             $app->$action();
         }
     }

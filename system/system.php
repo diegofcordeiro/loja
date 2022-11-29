@@ -189,8 +189,8 @@ class system {
             if(!method_exists($app, $action) ){
                 $this->erro();
             } else {
-               echo'<pre>';print_r('aq2');exit;
-            $app->$action();
+                $app->$action();
+                echo'<pre>';print_r('aq2');exit;
         }
     }
 }

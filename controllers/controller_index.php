@@ -30,7 +30,7 @@ class index extends controller {
 				$in_ids .= $point.$curso['produto_codigo'];
 				
 			}
-			echo'<pre>';print_r('asasdasd');exit;
+			
 			$conexao = new mysql();
 			$result_comprados = $conexao->query("SELECT distinct 
 									autor.nome as autor_nome,
@@ -44,6 +44,7 @@ class index extends controller {
 									WHERE produto.codigo in ($in_ids)
 									order by produto.id desc;");
 			$new_comprados = array();
+			echo'<pre>';print_r('asasdasd');exit;
 			while ($obj_novidades = $result_comprados->fetch_object()) {
 				$new_comprados = array_merge($new_comprados,array($obj_novidades));
 				// $nm_produto = $obj_novidades->titulo;

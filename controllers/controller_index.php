@@ -6078,7 +6078,7 @@ class index extends controller {
 					"produto_titulo"=>"$data_produto->titulo",
 					"produto_subtitulo"=>"$titulodoproduto",
 					"produto_valor"=>"$data_produto->valor",
-					"produto_assinatura"=>"",
+					"produto_assinatura"=>0,
 					"data_vencimento"=>"$date_vencimento",
 					"data_compra"=>"$data_compra",
 					"tamanho"=>"$tamanho",

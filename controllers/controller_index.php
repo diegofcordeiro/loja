@@ -8600,15 +8600,15 @@ echo $data_carrinho->produto_ref;
 			$lista_de_produto = array();
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
 				
-				$produto_assinatura = ($data_carrinho->produto_assinatura > 0 ? 1 : 0);
+				$id_combo = $data_carrinho->id_combo;
 
-				if (!empty($lista_de_produto[$produto_assinatura]))
+				if (!empty($lista_de_produto[$id_combo]))
 				{
-					$lista_de_produto[$produto_assinatura] = array_merge($lista_de_produto[$produto_assinatura], array($data_carrinho));
+					$lista_de_produto[$id_combo] = array_merge($lista_de_produto[$id_combo], array($data_carrinho));
 				}
 				else
 				{
-					$lista_de_produto[$produto_assinatura] = array($data_carrinho);
+					$lista_de_produto[$id_combo] = array($data_carrinho);
 				}
 			}
 		}	

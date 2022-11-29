@@ -23,7 +23,8 @@ class index extends controller {
 			
 			$pedidos = new model_pedidos();
 			$lista_minhas_compras = $pedidos->lista_produto_comprado($dados['_cod_usuario']);
-			$this->p($lista_minhas_compras);
+			$this->p(count($lista_minhas_compras));
+			if($lista_minhas_compras)
 			$in_ids = '';
 			foreach($lista_minhas_compras as $key => $curso){
 				$point = (count($lista_minhas_compras)==1 || $key == 0) ? '' : ',';

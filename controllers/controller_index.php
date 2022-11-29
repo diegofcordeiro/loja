@@ -44,7 +44,17 @@ class index extends controller {
 									WHERE produto.codigo in ($in_ids)
 									order by produto.id desc;");
 			$new_comprados = array();
-			
+			echo'<pre>';print_r("SELECT distinct 
+									autor.nome as autor_nome,
+									produto.*,
+									t1.imagem
+									FROM loja.produto 
+									inner join loja.autor on produto.autor = autor.id
+									inner join loja.produto_canal ON produto.codigo=produto_canal.id_produto 
+									inner join (select max(id) id, codigo, imagem from loja.produto_imagem group by codigo) t1 on produto.codigo=t1.codigo
+									AND produto.status = 1
+									WHERE produto.codigo in ($in_ids)
+									order by produto.id desc;");exit;
 			while ($obj_novidades = $result_comprados->fetch_object()) {
 				$new_comprados = array_merge($new_comprados,array($obj_novidades));
 				// $nm_produto = $obj_novidades->titulo;
@@ -55,7 +65,7 @@ class index extends controller {
 				// }
 
 			}
-			echo'<pre>';print_r('asasdasd');exit;
+			
 			// $this->p($new_comprados);
 		}
 		

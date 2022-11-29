@@ -8627,14 +8627,16 @@ class index extends controller {
 		$value_sub = '';
 		foreach($recorrentes as $key => $recorrencia){
 			$amout = 0;
+			$produto_assinatura = '';
 			foreach($recorrencia as $rec){
 				$amout = $amout + $rec->valor_total;
+				$produto_assinatura = $rec->produto_assinatura;
 			}
-
-			echo '<pre>';print_r($recorrentes);exit;
+			echo '<pre>';print_r($produto_assinatura);echo '<br>';
+			echo '<pre>';print_r($amout);echo '<br>';
 			// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
-			// $value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
-			// $bill = $this->vindi_add_subscription($id_client,$payment_met,$recorrencia->produto_assinatura,1040228);
+			// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
+			// $bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
 		}
 		exit;
 		
@@ -8689,7 +8691,7 @@ class index extends controller {
 
 	}
 
-	public function vindi_add_subscription($id_client,$payment_met,$plano,$prod_id){
+	public function vindi_add_subscription($id_client,$payment_met,$plano,$prod_id,$amout){
 		
 		$subscriptionService = new Vindi\Subscription;
 		try{
@@ -8701,7 +8703,7 @@ class index extends controller {
 					[
 						'product_id' => 451606,
 						'pricing_schema' => [
-							"price" => 12,
+							"price" => $amout,
 						]
 					]
 				]

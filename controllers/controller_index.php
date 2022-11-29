@@ -8612,15 +8612,16 @@ echo $data_carrinho->produto_ref;
 						$recorrentes[$id_combo] = array($data_carrinho);
 					}
 				}else{
-					$produto = $data_carrinho->produto;
-					if (!empty($nao_recorrentes[$produto]))
-					{
-						$nao_recorrentes[$produto] = array_merge($nao_recorrentes[$produto], array($data_carrinho));
-					}
-					else
-					{
-						$nao_recorrentes[$produto] = array($data_carrinho);
-					}
+					array_merge($nao_recorrentes,$data_carrinho);
+					// $produto = $data_carrinho->produto;
+					// if (!empty($nao_recorrentes[$produto]))
+					// {
+					// 	$nao_recorrentes[$produto] = array_merge($nao_recorrentes[$produto], array($data_carrinho));
+					// }
+					// else
+					// {
+					// 	$nao_recorrentes[$produto] = array($data_carrinho);
+					// }
 				}
 				
 			}

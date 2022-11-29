@@ -33,6 +33,11 @@
 		body {
 			background-color:<?=$pagina_cores[1]?>;
 		}
+		@media (min-width: 1200px){
+        .container {
+            width: 97%;
+        }
+    }
 	</style>
 
 	<?=$botao_style?>

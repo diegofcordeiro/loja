@@ -8620,78 +8620,75 @@ class index extends controller {
 				
 			}
 		}	
-		
-		// echo '<pre>';print_r($recorrentes);
-		// echo '<br>';print_r($nao_recorrentes);
-		
-		$value_sub = '';
-		foreach($recorrentes as $key => $recorrencia){
-			$amout = 0;
-			$produto_assinatura = '';
-			foreach($recorrencia as $rec){
-				$amout = $amout + $rec->valor_total;
-				$produto_assinatura = $rec->produto_assinatura;
-			}
-			echo '<pre>';print_r($produto_assinatura);echo '<br>';
-			echo '<pre>';print_r($amout);echo '<br>';
-			// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
-			// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
-			// $bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
-		}
-		exit;
-		
-		echo '<pre>';
-		print_r($bill);
-		echo '<br>';
-		print_r($value_sub);
-		exit;
+		/////////////     RECCORENTE    /////////////
+		// foreach($recorrentes as $key => $recorrencia){
+		// 	$amout = 0;
+		// 	$produto_assinatura = '';
+		// 	foreach($recorrencia as $rec){
+		// 		$amout = $amout + $rec->valor_total;
+		// 		$produto_assinatura = $rec->produto_assinatura;
+		// 	}
+		// 	// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
+		// 	// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
+		// 	$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
+		// }
+		// echo '<pre>';
+		// print_r($bill);
+		// echo '<br>';
+		// print_r($value_sub);
+		// exit;
+		/////////////  /////////////  /////////////
 
-		$value = '';
+		/////////////   NAO  RECCORENTE    /////////////
+
 		foreach($nao_recorrentes as $key => $recorrencia){
-			$point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
-			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
+			echo '<pre>';
+			print_r($recorrencia);
+			exit;
+			// $point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
+			// $value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
 
-			// $bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
-			$this->integrar_trilha_lms($cod, $cpf);
+			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
+			// $this->integrar_trilha_lms($cod, $cpf);
 			exit;
 
-			if($bill['bill']['id']){
-				echo 'Vindi Charge<br>';
-				echo $id_charge;
-				echo 'Vindi Bill Id<br>';
-				echo $id_trans;
-				echo 'Codigo<br>';
-				echo $cod;
+			// if($bill['bill']['id']){
+			// 	echo 'Vindi Charge<br>';
+			// 	echo $id_charge;
+			// 	echo 'Vindi Bill Id<br>';
+			// 	echo $id_trans;
+			// 	echo 'Codigo<br>';
+			// 	echo $cod;
 
-				$id_charge = $bill['bill']['charges'][0]['id'];
-				$id_trans = $bill['bill']['id'];
+			// 	$id_charge = $bill['bill']['charges'][0]['id'];
+			// 	$id_trans = $bill['bill']['id'];
 
-				if($bill['bill']['status'] == 'paid'){ 
-					echo 'STATUS 2<br>';
-					$status = 2;
-					$this->integrar_trilha_lms($cod, $cpf);
-				}else{
-					echo 'STATUS 1<br>';
-					$status = 1;
-				}
-				$db = new mysql();
-				$db->alterar("pedido_loja", array(
-					"comprovante"=>"$nome_arquivo",
-					"id_transacao"=>"$id_charge",
-					"id_transacao_vindi"=>"$id_trans",
-					"status"=>"$status",
+			// 	if($bill['bill']['status'] == 'paid'){ 
+			// 		echo 'STATUS 2<br>';
+			// 		$status = 2;
+			// 		$this->integrar_trilha_lms($cod, $cpf);
+			// 	}else{
+			// 		echo 'STATUS 1<br>';
+			// 		$status = 1;
+			// 	}
+			// 	$db = new mysql();
+			// 	$db->alterar("pedido_loja", array(
+			// 		"comprovante"=>"$nome_arquivo",
+			// 		"id_transacao"=>"$id_charge",
+			// 		"id_transacao_vindi"=>"$id_trans",
+			// 		"status"=>"$status",
 					
-				), " codigo='$cod' ");
-				print_r($db);
-			}
-			print_r($bill);
+			// 	), " codigo='$cod' ");
+			// 	print_r($db);
+			// }
+			// print_r($bill);
 		}
-		
+		/////////////  /////////////  /////////////
 		// 	$this->view('finalizada', $dados);
 
 	}
 
-	public function vindi_add_subscription($id_client,$payment_met,$plano,$prod_id,$amout){
+	public function vindi_add_subscription($id_client,$payment_met,$prod_id,$amout){
 		
 		$subscriptionService = new Vindi\Subscription;
 		try{
@@ -8731,6 +8728,21 @@ class index extends controller {
 	}
 
 	public function pay_bill_vindi($id, $payment,$value){
+
+		$billService = new Vindi\Bill;
+		$bill = $billService->create( [
+				'customer_id' => $id_client,
+				'payment_method_code' => "credit_card",
+				'product_items' => [
+					[
+						'product_id' => 451606,
+						'pricing_schema' => [
+							"price" => $amout,
+						]
+					]
+				]
+
+		]);
 		// print_r('
 		// {
 		// 	"customer_id": "'.$id.'",
@@ -8740,34 +8752,34 @@ class index extends controller {
 		// 		]
 		// 	}
 		// 	');exit;
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/bills',
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS =>'{
-			"customer_id": "'.$id.'",
-			"payment_method_code": "'.$payment.'",
-			"bill_items": [
-					'.$value.'
-				]
-			}',
-			CURLOPT_HTTPHEADER => array(
-				'accept: application/json',
-				'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
-				'Content-Type: application/json'
-			),
-		));
+		// $curl = curl_init();
+		// curl_setopt_array($curl, array(
+		// 	CURLOPT_URL => 'https://app.vindi.com.br/api/v1/bills',
+		// 	CURLOPT_RETURNTRANSFER => true,
+		// 	CURLOPT_ENCODING => '',
+		// 	CURLOPT_MAXREDIRS => 10,
+		// 	CURLOPT_TIMEOUT => 0,
+		// 	CURLOPT_FOLLOWLOCATION => true,
+		// 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		// 	CURLOPT_CUSTOMREQUEST => 'POST',
+		// 	CURLOPT_POSTFIELDS =>'{
+		// 	"customer_id": "'.$id.'",
+		// 	"payment_method_code": "'.$payment.'",
+		// 	"bill_items": [
+		// 			'.$value.'
+		// 		]
+		// 	}',
+		// 	CURLOPT_HTTPHEADER => array(
+		// 		'accept: application/json',
+		// 		'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
+		// 		'Content-Type: application/json'
+		// 	),
+		// ));
 
-		$response = curl_exec($curl);
-		$response = json_decode($response, true);
-		curl_close($curl);
-		return $response;
+		// $response = curl_exec($curl);
+		// $response = json_decode($response, true);
+		// curl_close($curl);
+		// return $response;
 	}
 
 	public function pay2(){

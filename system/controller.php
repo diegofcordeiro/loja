@@ -18,14 +18,14 @@ class controller extends system {
 			$this->_sessao_principal = 'seso_'.$this->gera_codigo();
 			$_SESSION['sessaouserloja'] = $this->_sessao_principal;
 		}
-echo'<pre>';print_r('asasdasd');exit;
+
 
 		// se ta tudo certo verifica se existe uma sessao de pedido
 		if(!isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao'])){
 			$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $this->gera_codigo();
 		}
 		$this->_sessao = $_SESSION[$this->_sessao_principal]['loja_cod_sessao'];
-
+		echo'<pre>';print_r('asasdasd');exit;
 		// sessao de login - qui verifica através da merda de sessão se o boneco ta logado ou não
 		if( isset($_SESSION[$this->_sessao_principal]) AND isset($_SESSION[$this->_sessao_principal]['loja_cod_usuario']) AND isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao']) ) {
 			

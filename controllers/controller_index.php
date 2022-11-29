@@ -6232,6 +6232,8 @@ class index extends controller {
 					}
 					// valor base
 					$combo_titulo = $_POST['combo_titulo'];
+					$plano_id = $_POST['plano_id'];
+					
 					$combo_disconto = 0;
 					if($_POST['combo_disconto'] > 0){
 						$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
@@ -6438,7 +6440,7 @@ class index extends controller {
 						"id_combo"=>"$combo_id",
 						"combo_titulo"=>"$combo_titulo",
 						"data_vencimento"=>"$date_vencimento",
-						"produto_assinatura"=>"$data_produto->assinatura",
+						"produto_assinatura"=>"$plano_id",
 						"data_compra"=>"$data_compra",
 						"produto_titulo"=>"$data_produto->titulo",
 						"produto_subtitulo"=>"$titulodoproduto",
@@ -8312,7 +8314,7 @@ class index extends controller {
 
 			$data_array = array();
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
-echo $data_carrinho->produto_ref;
+		echo $data_carrinho->produto_ref;
 		echo '<br>';
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
 				if ($result2 = $mysqli->query($sql2)) {

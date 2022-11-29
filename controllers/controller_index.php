@@ -20,6 +20,7 @@ class index extends controller {
 	
 		// lista_produto_comprado
 		if($dados['_nome_usuario'] != 'Visitante'){ 
+			echo'<pre>';print_r('asasdasd');exit;
 			$pedidos = new model_pedidos();
 			$lista_minhas_compras = $pedidos->lista_produto_comprado($dados['_cod_usuario']);
 			// $this->p($lista_minhas_compras);
@@ -55,7 +56,7 @@ class index extends controller {
 			}
 			// $this->p($new_comprados);
 		}
-		echo'<pre>';print_r('asasdasd');exit;
+		
 		// itens da inicial
 		$chave = $this->_layout;
 		$conexao = new mysql();

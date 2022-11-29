@@ -25,13 +25,13 @@ class controller extends system {
 			$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $this->gera_codigo();
 		}
 		$this->_sessao = $_SESSION[$this->_sessao_principal]['loja_cod_sessao'];
-		echo'<pre>';print_r('asasdasd');exit;
+		
 		// sessao de login - qui verifica através da merda de sessão se o boneco ta logado ou não
 		if( isset($_SESSION[$this->_sessao_principal]) AND isset($_SESSION[$this->_sessao_principal]['loja_cod_usuario']) AND isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao']) ) {
 			
 			$this->_acesso = $_SESSION[$this->_sessao_principal]['loja_acesso'];			
 			$this->_cod_usuario = $_SESSION[$this->_sessao_principal]['loja_cod_usuario'];
-			
+			echo'<pre>';print_r('asasdasd');exit;	
 			// model_cadastro
 			$cadastro = new model_cadastro();
 			if(	$data = $cadastro->dados_usuario($_SESSION[$this->_sessao_principal]['loja_cod_usuario']) ){

@@ -31,7 +31,7 @@ class controller extends system {
 			
 			$this->_acesso = $_SESSION[$this->_sessao_principal]['loja_acesso'];			
 			$this->_cod_usuario = $_SESSION[$this->_sessao_principal]['loja_cod_usuario'];
-			echo'<pre>';print_r('asasdasd');exit;	
+			
 			// model_cadastro
 			$cadastro = new model_cadastro();
 			if(	$data = $cadastro->dados_usuario($_SESSION[$this->_sessao_principal]['loja_cod_usuario']) ){
@@ -48,7 +48,7 @@ class controller extends system {
 				$this->msg('E6662 - A sessão expirou!');
 				$this->irpara(DOMINIO);
 			}
-			
+			echo'<pre>';print_r('asasdasd');exit;	
 		} else {
 
 			if(!isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao'])){

@@ -8629,7 +8629,7 @@ echo $data_carrinho->produto_ref;
 		}
 		
 		echo '<pre>';
-		// print_r($value);
+		print_r($bill);
 		echo '<br>';
 		print_r($value_sub);
 		exit;

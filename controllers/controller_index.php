@@ -55,6 +55,7 @@ class index extends controller {
 			}
 			// $this->p($new_comprados);
 		}
+		echo'<pre>';print_r('asasdasd');exit;
 		// itens da inicial
 		$chave = $this->_layout;
 		$conexao = new mysql();
@@ -517,7 +518,7 @@ class index extends controller {
 			}
 
 		}
-echo'<pre>';print_r('123');exit;
+
 		$query = null;
 		$inner = null;
 		$campo = null;

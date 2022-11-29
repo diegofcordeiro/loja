@@ -8625,7 +8625,7 @@ echo $data_carrinho->produto_ref;
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
 			$value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
 			// $prod_item .= '{"product_id": "1040228","amount": "'.$recorrencia->produto_valor.'"}'.$point_sub.'';
-			$bill = $this->vindi_add_subscription($id_client,$payment_met,$recorrencia->produto_assinatura,296700);
+			$bill = $this->vindi_add_subscription($id_client,$payment_met,$recorrencia->produto_assinatura,1040228);
 		}
 		
 		echo '<pre>';
@@ -8638,6 +8638,7 @@ echo $data_carrinho->produto_ref;
 		foreach($nao_recorrentes as $key => $recorrencia){
 			$point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
 			$value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
+
 			// $bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
 			$this->integrar_trilha_lms($cod, $cpf);
 			exit;

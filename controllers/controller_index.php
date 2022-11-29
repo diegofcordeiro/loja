@@ -8612,7 +8612,7 @@ echo $data_carrinho->produto_ref;
 						$recorrentes[$id_combo] = array($data_carrinho);
 					}
 				}else{
-					array_merge($nao_recorrentes,$data_carrinho);
+					array_merge($nao_recorrentes,array($data_carrinho));
 					// $produto = $data_carrinho->produto;
 					// if (!empty($nao_recorrentes[$produto]))
 					// {

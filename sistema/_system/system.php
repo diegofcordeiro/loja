@@ -133,14 +133,14 @@ class system {
     }
 
     public function run(){
-
+        echo'<pre>';print_r('aq');exit;
         $controllers_path = CONTROLLERS.'controller_'.$this->_controller.'.php';
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //teste de url
-        echo "Controller: $this->_controller <br> Action = $this->_action <br></br> Parametros: "; print_r($this->_params); exit;
-        echo $controllers_path; exit;
-        echo $this->_controller; exit;
+        // echo "Controller: $this->_controller <br> Action = $this->_action <br></br> Parametros: "; print_r($this->_params); exit;
+        // echo $controllers_path; exit;
+        // echo $this->_controller; exit;
 
 
         //aciona gerenciador ou blog

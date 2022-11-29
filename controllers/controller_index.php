@@ -8618,8 +8618,6 @@ echo $data_carrinho->produto_ref;
 			}
 		}	
 		
-		$recorrentes = $lista_de_produto[1];
-		$nao_recorrentes = $lista_de_produto[0];
 		echo '<pre>';print_r($recorrentes);
 		echo '<br>';print_r($nao_recorrentes);
 		

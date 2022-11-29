@@ -44,7 +44,7 @@ class index extends controller {
 									WHERE produto.codigo in ($in_ids)
 									order by produto.id desc;");
 			$new_comprados = array();
-			echo'<pre>';print_r('asasdasd');exit;
+			
 			while ($obj_novidades = $result_comprados->fetch_object()) {
 				$new_comprados = array_merge($new_comprados,array($obj_novidades));
 				// $nm_produto = $obj_novidades->titulo;
@@ -55,6 +55,7 @@ class index extends controller {
 				// }
 
 			}
+			echo'<pre>';print_r('asasdasd');exit;
 			// $this->p($new_comprados);
 		}
 		

@@ -8625,12 +8625,14 @@ echo $data_carrinho->produto_ref;
 		foreach($recorrentes as $key => $recorrencia){
 			$amout = 0;
 			foreach($recorrencia as $rec){
-				echo '<pre>';print_r($rec->valor_total);exit;
+				$amout = $amout + $rec->valor_total;
+				
 			}
 
-			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
-			$value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
-			$bill = $this->vindi_add_subscription($id_client,$payment_met,$recorrencia->produto_assinatura,1040228);
+			echo '<pre>';print_r($amout);exit;
+			// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
+			// $value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
+			// $bill = $this->vindi_add_subscription($id_client,$payment_met,$recorrencia->produto_assinatura,1040228);
 		}
 		
 		echo '<pre>';

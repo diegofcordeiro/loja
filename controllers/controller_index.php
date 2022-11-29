@@ -4,7 +4,7 @@ class index extends controller {
 	
 	public function init(){
 		$this->inicializacao();
-		echo'<pre>';print_r('asasdasd');exit;	
+		
 	}
 	
 	public function inicial(){
@@ -17,7 +17,7 @@ class index extends controller {
 		$dados['_sessao'] = $this->_sessao;
 		$dados['_acesso'] = $this->_acesso;
 		$dados['_nome_usuario'] = $this->_nome_usuario;
-
+echo'<pre>';print_r('asasdasd');exit;	
 		// lista_produto_comprado
 		if($dados['_nome_usuario'] != 'Visitante'){ 
 			$pedidos = new model_pedidos();

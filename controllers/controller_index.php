@@ -568,6 +568,7 @@ class index extends controller {
 									combos.id as combo_id,
 									combos.titulo as combo_titulo,
 									combos.banner as combo_banner,
+									combos.plano_id as plano_id,
 									combos.status as combo_status,
 									combos.desconto as combo_desconto,
 									produto.id as produto_id,

@@ -17,7 +17,7 @@ class index extends controller {
 		$dados['_sessao'] = $this->_sessao;
 		$dados['_acesso'] = $this->_acesso;
 		$dados['_nome_usuario'] = $this->_nome_usuario;
-echo'<pre>';print_r('asasdasd');exit;	
+	
 		// lista_produto_comprado
 		if($dados['_nome_usuario'] != 'Visitante'){ 
 			$pedidos = new model_pedidos();
@@ -701,7 +701,7 @@ echo'<pre>';print_r('asasdasd');exit;
 				$new_melhor_qualificado[$nm_canal_melhor_qualificado] = array($obj_melhor_qualificado);
 			}
 		}
-
+echo'<pre>';print_r('asasdasd');exit;
 		$dados['cat_selecionada'] = ($_POST['categoria'] > 0 ? $_POST['categoria'] : 0);
 		$dados['autor_selecionado'] = ($_POST['autor'] > 0 ? $_POST['autor'] : 0);
 		$dados['buscar_campo'] = $_POST['buscar1'];

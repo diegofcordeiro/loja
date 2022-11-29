@@ -20,7 +20,7 @@ class index extends controller {
 	
 		// lista_produto_comprado
 		if($dados['_nome_usuario'] != 'Visitante'){ 
-			echo'<pre>';print_r('asasdasd');exit;
+			
 			$pedidos = new model_pedidos();
 			$lista_minhas_compras = $pedidos->lista_produto_comprado($dados['_cod_usuario']);
 			// $this->p($lista_minhas_compras);
@@ -30,7 +30,7 @@ class index extends controller {
 				$in_ids .= $point.$curso['produto_codigo'];
 				
 			}
-			
+			echo'<pre>';print_r('asasdasd');exit;
 			$conexao = new mysql();
 			$result_comprados = $conexao->query("SELECT distinct 
 									autor.nome as autor_nome,

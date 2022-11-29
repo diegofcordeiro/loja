@@ -8689,7 +8689,7 @@ echo $data_carrinho->produto_ref;
 				'payment_method_code' => "credit_card",
 				'product_items' => [
 					[
-						'product_id' => $prod_id
+						'product_id' => 451606
 					]
 				]
 			]);

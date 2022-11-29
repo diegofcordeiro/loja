@@ -617,7 +617,7 @@ $ordem = $conteudo_sessao['ordem'];
 														<input type="hidden" name="combo_disconto" value="<?=$value->combo_desconto?>">
 														<input type="hidden" name="combo_id" value="<?=$value->combo_id?>">
 														<input type="hidden" name="combo_titulo" value="<?=$value->combo_titulo?>">
-														<input type="hidden" name="plano_id" value="<?=$value->plano_id?>">
+														<input type="text" name="plano_id" value="<?=$value->plano_id?>">
 												</span>
 											</form>
 										</div>

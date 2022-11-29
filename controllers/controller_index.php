@@ -8618,14 +8618,13 @@ echo $data_carrinho->produto_ref;
 			}
 		}	
 		
-		echo '<pre>';print_r($recorrentes);
-		echo '<br>';print_r($nao_recorrentes);
+		// echo '<pre>';print_r($recorrentes);
+		// echo '<br>';print_r($nao_recorrentes);
 		
-		exit;	
 		$value_sub = '';
 		foreach($recorrentes as $key => $recorrencia){
 			echo '<pre>';print_r($recorrentes);exit;
-			
+
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
 			$value_sub .= '{"plan_id": "'.$recorrencia->produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
 			// $prod_item .= '{"product_id": "1040228","amount": "'.$recorrencia->produto_valor.'"}'.$point_sub.'';

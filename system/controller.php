@@ -18,6 +18,7 @@ class controller extends system {
 			$this->_sessao_principal = 'seso_'.$this->gera_codigo();
 			$_SESSION['sessaouserloja'] = $this->_sessao_principal;
 		}
+echo'<pre>';print_r('asasdasd');exit;
 
 		// se ta tudo certo verifica se existe uma sessao de pedido
 		if(!isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao'])){

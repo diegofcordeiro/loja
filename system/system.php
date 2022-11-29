@@ -9,6 +9,7 @@ class system {
     protected $_layout;
     
     public function __construct() { 
+         echo'<pre>';print_r('aq');exit;
         $this->setUrl();
         $this->setExplode();
         $this->setController();

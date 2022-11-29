@@ -163,13 +163,13 @@ class system {
             $this->_action = "sitemap";
             $controllers_path = CONTROLLERS.'controller_'.$this->_controller.'.php';
         }
-        echo'<pre>';print_r('aq');exit;
+        
         
         if(!file_exists($controllers_path)){
             
             $this->_controller = "index";
             $controllers_path = CONTROLLERS.'controller_'.$this->_controller.'.php';
-            
+            echo'<pre>';print_r('aq1');exit;
             require_once($controllers_path);
             $app = new $this->_controller();
             $app->init();
@@ -183,7 +183,7 @@ class system {
         } else {
 
             $this->_layout = 'index';
-
+echo'<pre>';print_r('aq2');exit;
             require_once($controllers_path);
             $app = new $this->_controller();
             $app->init();

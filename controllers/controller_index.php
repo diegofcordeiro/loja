@@ -23,46 +23,32 @@ class index extends controller {
 			
 			$pedidos = new model_pedidos();
 			$lista_minhas_compras = $pedidos->lista_produto_comprado($dados['_cod_usuario']);
-			$this->p(count($lista_minhas_compras));
-			if($lista_minhas_compras)
-			$in_ids = '';
-			foreach($lista_minhas_compras as $key => $curso){
-				$point = (count($lista_minhas_compras)==1 || $key == 0) ? '' : ',';
-				$in_ids .= $point.$curso['produto_codigo'];
+
+			if(count($lista_minhas_compras) > 0){
+				$in_ids = '';
+				foreach($lista_minhas_compras as $key => $curso){
+					$point = (count($lista_minhas_compras)==1 || $key == 0) ? '' : ',';
+					$in_ids .= $point.$curso['produto_codigo'];
+					
+				}
 				
+				$conexao = new mysql();
+				$result_comprados = $conexao->query("SELECT distinct 
+										autor.nome as autor_nome,
+										produto.*,
+										t1.imagem
+										FROM loja.produto 
+										inner join loja.autor on produto.autor = autor.id
+										inner join loja.produto_canal ON produto.codigo=produto_canal.id_produto 
+										inner join (select max(id) id, codigo, imagem from loja.produto_imagem group by codigo) t1 on produto.codigo=t1.codigo
+										AND produto.status = 1
+										WHERE produto.codigo in ($in_ids)
+										order by produto.id desc;");
+				$new_comprados = array();
+				while ($obj_novidades = $result_comprados->fetch_object()) {
+					$new_comprados = array_merge($new_comprados,array($obj_novidades));
+				}
 			}
-			
-			$conexao = new mysql();
-			$result_comprados = $conexao->query("SELECT distinct 
-									autor.nome as autor_nome,
-									produto.*,
-									t1.imagem
-									FROM loja.produto 
-									inner join loja.autor on produto.autor = autor.id
-									inner join loja.produto_canal ON produto.codigo=produto_canal.id_produto 
-									inner join (select max(id) id, codigo, imagem from loja.produto_imagem group by codigo) t1 on produto.codigo=t1.codigo
-									AND produto.status = 1
-									WHERE produto.codigo in ($in_ids)
-									order by produto.id desc;");
-			$new_comprados = array();
-			// echo'<pre>';print_r("SELECT distinct 
-			// 						autor.nome as autor_nome,
-			// 						produto.*,
-			// 						t1.imagem
-			// 						FROM loja.produto 
-			// 						inner join loja.autor on produto.autor = autor.id
-			// 						inner join loja.produto_canal ON produto.codigo=produto_canal.id_produto 
-			// 						inner join (select max(id) id, codigo, imagem from loja.produto_imagem group by codigo) t1 on produto.codigo=t1.codigo
-			// 						AND produto.status = 1
-			// 						WHERE produto.codigo in ($in_ids)
-			// 						order by produto.id desc;");exit;
-
-			while ($obj_novidades = $result_comprados->fetch_object()) {
-				$new_comprados = array_merge($new_comprados,array($obj_novidades));
-
-			}
-			
-			// $this->p($new_comprados);
 		}
 		
 		// itens da inicial

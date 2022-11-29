@@ -145,19 +145,19 @@ class system {
     public function run(){
         
         $controllers_path = CONTROLLERS.'controller_'.$this->_controller.'.php';
-        echo'<pre>';print_r('aq');exit;
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //teste de url
         // echo "Controller: $this->_controller <br> Action = $this->_action <br></br> Parametros: "; print_r($this->_params); exit;
         // echo $controllers_path; exit;
         
-
+        
         //aciona gerenciador ou blog
         if($this->_controller == 'sistema'){
             $this->irpara(DOMINIO.'sistema/index.php');
             exit;
         }
+        echo'<pre>';print_r('aq');exit;
         // sitemap
         if($this->_controller == 'sitemap'){            
             $this->_controller = "index";

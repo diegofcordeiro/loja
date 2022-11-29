@@ -8536,7 +8536,7 @@ echo $data_carrinho->produto_ref;
 		$card_number = str_replace("-","",$card_number);
 		$last4 = substr($card_number,12,16);
 
-		echo '<pre>';print_r($_POST);exit;
+		
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([
@@ -8615,7 +8615,7 @@ echo $data_carrinho->produto_ref;
 		
 		$recorrentes = $lista_de_produto[1];
 		$nao_recorrentes = $lista_de_produto[0];
-		
+		echo '<pre>';print_r($recorrentes);exit;	
 		$value_sub = '';
 		foreach($recorrentes as $key => $recorrencia){
 			$point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';

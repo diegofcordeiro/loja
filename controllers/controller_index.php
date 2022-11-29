@@ -3,7 +3,6 @@
 class index extends controller {
 	
 	public function init(){
-echo'<pre>';print_r('asasdasd');exit;
 		$this->inicializacao();
 	}
 	

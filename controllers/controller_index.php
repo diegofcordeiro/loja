@@ -8536,7 +8536,7 @@ echo $data_carrinho->produto_ref;
 		$card_number = str_replace("-","",$card_number);
 		$last4 = substr($card_number,12,16);
 
-
+		echo '<pre>';print_r($_POST);exit;
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([

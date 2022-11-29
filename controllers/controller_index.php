@@ -8642,14 +8642,15 @@ class index extends controller {
 		/////////////   NAO  RECCORENTE    /////////////
 
 		foreach($nao_recorrentes as $key => $recorrencia){
-			echo '<pre>';
-			print_r($recorrencia->valor_total);
-			exit;
+			
 			// $point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
 			// $value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
 
-			$bill = $this->pay_bill_vindi($id_client,$payment_met,$value);
+			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
 			// $this->integrar_trilha_lms($cod, $cpf);
+			echo '<pre>';
+			print_r($bill);
+
 			exit;
 
 			// if($bill['bill']['id']){
@@ -8688,7 +8689,7 @@ class index extends controller {
 
 	}
 
-	public function vindi_add_subscription($id_client,$payment_met,$prod_id,$amout){
+	public function vindi_add_subscription($id_client,$payment_met,$plano,$prodId,$amout){
 		
 		$subscriptionService = new Vindi\Subscription;
 		try{
@@ -8727,22 +8728,25 @@ class index extends controller {
 		return $paymentProfile;
 	}
 
-	public function pay_bill_vindi($id, $payment,$value){
+	public function pay_bill_vindi($id_client,$payment_met,$amout){
 
 		$billService = new Vindi\Bill;
+		try{
 		$bill = $billService->create( [
 				'customer_id' => $id_client,
-				'payment_method_code' => "credit_card",
-				'product_items' => [
+				'payment_method_code' => $payment_met,
+				'bill_items' => [
 					[
 						'product_id' => 451606,
-						'pricing_schema' => [
-							"price" => $amout,
-						]
+						'amount' => $amout
 					]
 				]
-
 		]);
+		} catch(Vindi\Exceptions\ValidationException $e){
+			echo '<pre>';var_dump($e->getErrors());exit;
+		}
+		return $bill;
+
 		// print_r('
 		// {
 		// 	"customer_id": "'.$id.'",

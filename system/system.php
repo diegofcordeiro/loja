@@ -184,8 +184,8 @@ class system {
             $this->_layout = 'index';
             require_once($controllers_path);
             $app = new $this->_controller();
-            echo'<pre>';print_r($this->_controller);exit;
             $app->init();
+            echo'<pre>';print_r($app->$action);exit;
             $action = $this->_action;
             if(!method_exists($app, $action) ){
                 $this->erro();

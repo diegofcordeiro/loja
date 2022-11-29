@@ -517,7 +517,7 @@ class index extends controller {
 			}
 
 		}
-
+echo'<pre>';print_r('123');exit;
 		$query = null;
 		$inner = null;
 		$campo = null;
@@ -701,7 +701,7 @@ class index extends controller {
 				$new_melhor_qualificado[$nm_canal_melhor_qualificado] = array($obj_melhor_qualificado);
 			}
 		}
-echo'<pre>';print_r('asasdasd');exit;
+
 		$dados['cat_selecionada'] = ($_POST['categoria'] > 0 ? $_POST['categoria'] : 0);
 		$dados['autor_selecionado'] = ($_POST['autor'] > 0 ? $_POST['autor'] : 0);
 		$dados['buscar_campo'] = $_POST['buscar1'];

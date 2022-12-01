@@ -8620,24 +8620,24 @@ class index extends controller {
 				
 			}
 		}	
-		/////////////     RECCORENTE    /////////////
-		// foreach($recorrentes as $key => $recorrencia){
-		// 	$amout = 0;
-		// 	$produto_assinatura = '';
-		// 	foreach($recorrencia as $rec){
-		// 		$amout = $amout + $rec->valor_total;
-		// 		$produto_assinatura = $rec->produto_assinatura;
-		// 	}
-		// 	// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
-		// 	// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
-		// 	$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
-		// }
-		// echo '<pre>';
-		// print_r($bill);
-		// echo '<br>';
-		// print_r($value_sub);
-		// exit;
-		/////////////  /////////////  /////////////
+		///////////     RECCORENTE    /////////////
+		foreach($recorrentes as $key => $recorrencia){
+			$amout = 0;
+			$produto_assinatura = '';
+			foreach($recorrencia as $rec){
+				$amout = $amout + $rec->valor_total;
+				$produto_assinatura = $rec->produto_assinatura;
+			}
+			// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
+			// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
+			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
+		}
+		echo '<pre>';
+		print_r($bill);
+		echo '<br>';
+		print_r($value_sub);
+		exit;
+		///////////  /////////////  /////////////
 
 		/////////////   NAO  RECCORENTE    /////////////
 
@@ -8653,36 +8653,36 @@ class index extends controller {
 
 			exit;
 
-			// if($bill['bill']['id']){
-			// 	echo 'Vindi Charge<br>';
-			// 	echo $id_charge;
-			// 	echo 'Vindi Bill Id<br>';
-			// 	echo $id_trans;
-			// 	echo 'Codigo<br>';
-			// 	echo $cod;
+			if($bill['bill']['id']){
+				echo 'Vindi Charge<br>';
+				echo $id_charge;
+				echo 'Vindi Bill Id<br>';
+				echo $id_trans;
+				echo 'Codigo<br>';
+				echo $cod;
 
-			// 	$id_charge = $bill['bill']['charges'][0]['id'];
-			// 	$id_trans = $bill['bill']['id'];
+				$id_charge = $bill['bill']['charges'][0]['id'];
+				$id_trans = $bill['bill']['id'];
 
-			// 	if($bill['bill']['status'] == 'paid'){ 
-			// 		echo 'STATUS 2<br>';
-			// 		$status = 2;
-			// 		$this->integrar_trilha_lms($cod, $cpf);
-			// 	}else{
-			// 		echo 'STATUS 1<br>';
-			// 		$status = 1;
-			// 	}
-			// 	$db = new mysql();
-			// 	$db->alterar("pedido_loja", array(
-			// 		"comprovante"=>"$nome_arquivo",
-			// 		"id_transacao"=>"$id_charge",
-			// 		"id_transacao_vindi"=>"$id_trans",
-			// 		"status"=>"$status",
+				if($bill['bill']['status'] == 'paid'){ 
+					echo 'STATUS 2<br>';
+					$status = 2;
+					$this->integrar_trilha_lms($cod, $cpf);
+				}else{
+					echo 'STATUS 1<br>';
+					$status = 1;
+				}
+				$db = new mysql();
+				$db->alterar("pedido_loja", array(
+					"comprovante"=>"$nome_arquivo",
+					"id_transacao"=>"$id_charge",
+					"id_transacao_vindi"=>"$id_trans",
+					"status"=>"$status",
 					
-			// 	), " codigo='$cod' ");
-			// 	print_r($db);
-			// }
-			// print_r($bill);
+				), " codigo='$cod' ");
+				print_r($db);
+			}
+			print_r($bill);
 		}
 		/////////////  /////////////  /////////////
 		// 	$this->view('finalizada', $dados);

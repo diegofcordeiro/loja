@@ -8635,7 +8635,6 @@ class index extends controller {
 		echo '<pre>';
 		print_r($bill);
 		echo '<br>';
-		print_r($value_sub);
 		exit;
 		///////////  /////////////  /////////////
 

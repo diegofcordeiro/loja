@@ -8662,6 +8662,10 @@ class index extends controller {
 					"status"=>"$status",
 					
 				), " id='$recorrencia->id' ");
+				$db->alterar("pedido_loja", array(
+					"status"=>"$status",
+					
+				), " codigo='$cod' ");
 			}
 		}
 		/////////////  /////////////  /////////////
@@ -8686,6 +8690,10 @@ class index extends controller {
 					]
 				]
 			]);
+			$lastResponse = $subscriptionService->getLastResponse()->getBody();
+			$encoded_body = json_encode($lastResponse);
+			$decoded_body = json_decode($lastResponse, true);
+			print_r($decoded_body);exit;
 		} catch(Vindi\Exceptions\ValidationException $e){
 			echo '<pre>';var_dump($e->getErrors());exit;
 		}

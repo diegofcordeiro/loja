@@ -8819,7 +8819,7 @@ class index extends controller {
 		curl_close($curl);
 		// return $response;
 
-		print_r($estorno);exit;
+		print_r($response);exit;
 
 	}
 

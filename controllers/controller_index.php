@@ -7217,7 +7217,7 @@ class index extends controller {
 							"valor_total"=>$valor_total_pedido,
 							"forma_pagamento"=>$formadepagamento,
 							"id_transacao"=>$codigo_transacao,
-							"status"=>1
+							"status"=>0
 						), " codigo='".$this->_sessao."' ");
 
 							// baixa estoque
@@ -7441,7 +7441,7 @@ class index extends controller {
 					"valor_total"=>$valor_total_pedido,
 					"forma_pagamento"=>$formadepagamento,
 					"id_transacao"=>$codigo_transacao,
-					"status"=>1
+					"status"=>0
 				), " codigo='".$this->_sessao."' ");
 
 				// baixa estoque
@@ -7624,7 +7624,7 @@ class index extends controller {
 						"id_transacao"=>$codigo_transacao,
 						"pix_qrcode"=>$qrcode,
 						"pix_chave"=>$pix_chave,
-						"status"=>1
+						"status"=>0
 					), " codigo='".$this->_sessao."' ");
 
 					// baixa estoque
@@ -7769,7 +7769,7 @@ class index extends controller {
 					"valor_produtos_desc"=>$total_descontos,
 					"valor_total"=>$valor_total_pedido,
 					"forma_pagamento"=>$formadepagamento,
-					"status"=>1
+					"status"=>0
 				), " codigo='".$this->_sessao."' ");
 
 				// baixa estoque

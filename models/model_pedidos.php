@@ -11,7 +11,7 @@ Class model_pedidos extends model{
 		
 		//informaçoes do pedido
 		$conexao = new mysql();
-		$coisas_pedidos = $conexao->Executar("SELECT * FROM pedido_loja WHERE cadastro='$cod_usuario' AND status > '0' order by data desc");
+		$coisas_pedidos = $conexao->Executar("SELECT * FROM pedido_loja WHERE cadastro='$cod_usuario' AND status = '0' order by data desc");
 		while($data_pedidos = $coisas_pedidos->fetch_object()){
 			
 			$lista[$n]['id'] = $data_pedidos->id;

@@ -8640,7 +8640,9 @@ class index extends controller {
 		/////////////   NAO  RECCORENTE    /////////////
 
 		foreach($nao_recorrentes as $key => $recorrencia){
-			
+			ini_set('display_errors', 1);
+			ini_set('display_startup_errors', 1);
+			error_reporting(E_ALL);
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
 
 			if($bill['bill']['id']){

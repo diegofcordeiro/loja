@@ -8802,10 +8802,15 @@ class index extends controller {
 			ini_set('display_errors', 1);
 			ini_set('display_startup_errors', 1);
 			error_reporting(E_ALL);
-			print_r(error_get_last());
+		$fileName = 'test.txt';
+		$contents = 'hello ';
+		$currentPath = dirname(__FILE__);
+		if ( ! is_writable($currentPath.'/'.$fileName)){
 
+			echo 'Not writable!!!'.$currentPath.'/'.$fileName;
+		}
 		$arquivo = "default.txt";
-		$fp = fopen($arquivo, "r");
+		$fp = fopen($arquivo, "a+");
 		fwrite($fp,'asdjasod');
 		fclose($fp);
 		

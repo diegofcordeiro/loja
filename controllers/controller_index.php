@@ -8713,6 +8713,9 @@ class index extends controller {
 			$paymentProfile = $paymentProfileData->create($data);
 		} catch(Vindi\Exceptions\ValidationException $e){
 			echo '<pre>';print_r($e->getErrors());
+			foreach ($e->getErrors() as $error){
+				print_r($error);
+			}
 		}
 		return $paymentProfile;
 	}

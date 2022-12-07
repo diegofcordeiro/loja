@@ -8631,7 +8631,9 @@ class index extends controller {
 			// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
 			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
 			echo '<pre>';
-			print_r($bill);
+			print_r($bill['bill']['charges'][0]['status']);
+			print_r($bill['bill']['charges'][0]['id']);
+			print_r($bill['bill']['id']);
 			echo '<br>';
 			exit;
 		}

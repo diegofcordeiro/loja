@@ -8725,44 +8725,6 @@ class index extends controller {
 			echo '<pre>';var_dump($e->getErrors());exit;
 		}
 		return $bill;
-
-		// print_r('
-		// {
-		// 	"customer_id": "'.$id.'",
-		// 	"payment_method_code": "'.$payment.'",
-		// 	"bill_items": [
-		// 			'.$value.'
-		// 		]
-		// 	}
-		// 	');exit;
-		// $curl = curl_init();
-		// curl_setopt_array($curl, array(
-		// 	CURLOPT_URL => 'https://app.vindi.com.br/api/v1/bills',
-		// 	CURLOPT_RETURNTRANSFER => true,
-		// 	CURLOPT_ENCODING => '',
-		// 	CURLOPT_MAXREDIRS => 10,
-		// 	CURLOPT_TIMEOUT => 0,
-		// 	CURLOPT_FOLLOWLOCATION => true,
-		// 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		// 	CURLOPT_CUSTOMREQUEST => 'POST',
-		// 	CURLOPT_POSTFIELDS =>'{
-		// 	"customer_id": "'.$id.'",
-		// 	"payment_method_code": "'.$payment.'",
-		// 	"bill_items": [
-		// 			'.$value.'
-		// 		]
-		// 	}',
-		// 	CURLOPT_HTTPHEADER => array(
-		// 		'accept: application/json',
-		// 		'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
-		// 		'Content-Type: application/json'
-		// 	),
-		// ));
-
-		// $response = curl_exec($curl);
-		// $response = json_decode($response, true);
-		// curl_close($curl);
-		// return $response;
 	}
 
 	public function vindi_estorno($bill_id){

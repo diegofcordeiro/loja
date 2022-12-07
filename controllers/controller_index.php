@@ -8539,6 +8539,11 @@ class index extends controller {
 		$last4 = substr($card_number,12,16);
 
 		$cod = $_POST['codigo'];
+
+			ini_set('display_errors', 1);
+			ini_set('display_startup_errors', 1);
+			error_reporting(E_ALL);
+
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([
@@ -8595,10 +8600,8 @@ class index extends controller {
 				$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$cod);
 			}
 		}	
-		exit;
 		//////////////////////////////////////////////////////////////
 
-		
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$cod."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;

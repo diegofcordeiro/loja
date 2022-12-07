@@ -8795,11 +8795,16 @@ class index extends controller {
 			'VINDI_API_KEY' => '7aF1y-Mmn_cyHMwAXNhHitNi6MMhae6ONvQaJX9LbBc',
 			'VINDI_API_URI' => 'https://app.vindi.com.br/api/v1/'
 		);
-		$estornoService = new Vindi\Charge;
-		$estorno = $estornoService->create($bill_id,[
+		$estornoService = new Vindi\PaymentProfile($arguments);
+		try{
+			$estorno = $estornoService->create($bill_id,[
 				'cancel_bill' => true,
 				'comments' => "Estorno pelo site"
 			]);
+		} catch(Vindi\Exceptions\ValidationException $e){
+			echo '<pre>';var_dump($e->getErrors());exit;
+		}
+
 		print_r($estorno);exit;
 
 		// return $customer;

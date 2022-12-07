@@ -9538,7 +9538,6 @@ class index extends controller {
 
 		$pedidos = new model_pedidos();
 		$dados['lista_pedidos'] = $pedidos->lista($this->_cod_usuario);
-		echo'<pre>';print_r($dados['lista_pedidos']);exit;
 		$dados['lista_produto_comprado'] = $pedidos->lista_produto_comprado($this->_cod_usuario);
 
 		// echo'<pre>'; print_r($dados['lista_produto_comprado']);exit;

@@ -8655,6 +8655,7 @@ class index extends controller {
 				}else{
 					$status = 1;
 				}
+				print_r($status);
 				$db = new mysql();
 				$db->alterar("pedido_loja_carrinho", array(
 					"transacao_charger_id"=>"$id_charge",

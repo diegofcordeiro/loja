@@ -8573,6 +8573,12 @@ class index extends controller {
 		}
 				
 		// Adicionando cartao na VINDI se nao tiver nenhum cartao cadastrado ou se o cartao usado é diferente
+		echo $last4;
+		echo '<br>';
+		echo $last_four;
+		echo '<br>';
+		echo $pay_met;
+
 		if($last_four == $last4){
 			$payment_met = $pay_met;
 		}else{
@@ -8589,7 +8595,7 @@ class index extends controller {
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
 			$payment_met =  $add_card->payment_method->code;
 		}	
-		print_r($payment_met);
+		print_r($payment_met);exit;
 		//////////////////////////////////////////////////////////////
 
 		$cod = $_POST['codigo'];

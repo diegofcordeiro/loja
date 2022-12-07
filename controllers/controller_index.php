@@ -8788,8 +8788,8 @@ class index extends controller {
 	public function vindi_estorno(){
 		$bill_id = array('id' => 185650798);
 		$arguments = array(
-			'VINDI_API_KEY' => $_POST['vindi_key'],
-			'VINDI_API_URI' => $_POST['vindi_url']
+			'VINDI_API_KEY' => '7aF1y-Mmn_cyHMwAXNhHitNi6MMhae6ONvQaJX9LbBc',
+			'VINDI_API_URI' => 'https://app.vindi.com.br/api/v1/'
 		);
 		$estornoService = new Vindi\Charge($arguments);
 		$estorno = $estornoService->create($bill_id,[

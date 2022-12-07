@@ -8790,7 +8790,7 @@ class index extends controller {
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
+		$customer_id = 42675329;
 		$bill_id = 185650798;
 		echo $bill_id;
 		echo '<pre>';
@@ -8800,7 +8800,7 @@ class index extends controller {
 			}');
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/bills',
+			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$customer_id.'/refound',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,

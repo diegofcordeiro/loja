@@ -8589,7 +8589,7 @@ class index extends controller {
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
 			$payment_met =  $add_card->payment_method->code;
 		}	
-
+		print_r($payment_met);
 		//////////////////////////////////////////////////////////////
 
 		$cod = $_POST['codigo'];

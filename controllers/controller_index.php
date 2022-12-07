@@ -8696,7 +8696,7 @@ class index extends controller {
 			$lastResponse = $subscriptionService->getLastResponse()->getBody();
 			$decoded_body = json_decode($lastResponse, true);
 		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());exit;
+			echo '<pre>';var_dump($e->getErrors());
 		}
 		return $decoded_body;
 	}
@@ -8712,7 +8712,7 @@ class index extends controller {
 		try{
 			$paymentProfile = $paymentProfileData->create($data);
 		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre> aqui:';var_dump($e->getErrors());exit;
+			echo '<pre> aqui:';var_dump($e->getErrors());
 		}
 		return $paymentProfile;
 	}
@@ -8732,7 +8732,7 @@ class index extends controller {
 				]
 		]);
 		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());exit;
+			echo '<pre>';var_dump($e->getErrors());
 		}
 		return $bill;
 	}

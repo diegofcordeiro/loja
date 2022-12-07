@@ -8660,8 +8660,9 @@ class index extends controller {
 					"status"=>"$status",
 					
 				), " id='$recorrencia->id' ");
+				print_r($db);
 			}
-			print_r($bill);
+			print_r($bill);exit;
 		}
 		/////////////  /////////////  /////////////
 		// 	$this->view('finalizada', $dados);

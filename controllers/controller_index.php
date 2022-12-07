@@ -8794,10 +8794,10 @@ class index extends controller {
 		$bill_id = 185650798;
 		echo $bill_id;
 		echo '<pre>';
-		print_r('https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refound');
+		print_r('https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refund');
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refound',
+			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refund',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,

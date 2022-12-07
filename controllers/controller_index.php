@@ -8795,7 +8795,7 @@ class index extends controller {
 			'VINDI_API_KEY' => '7aF1y-Mmn_cyHMwAXNhHitNi6MMhae6ONvQaJX9LbBc',
 			'VINDI_API_URI' => 'https://app.vindi.com.br/api/v1/'
 		);
-		$estornoService = new Vindi\Charge($arguments);
+		$estornoService = new Vindi\Charge;
 		$estorno = $estornoService->create($bill_id,[
 				'cancel_bill' => true,
 				'comments' => "Estorno pelo site"

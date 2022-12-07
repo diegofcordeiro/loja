@@ -8791,7 +8791,7 @@ class index extends controller {
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		$bill_id = 185650798;
+		$bill_id = 204975408;
 		echo $bill_id;
 		echo '<pre>';
 		print_r('https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refund');

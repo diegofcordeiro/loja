@@ -8644,7 +8644,7 @@ class index extends controller {
 			ini_set('display_startup_errors', 1);
 			error_reporting(E_ALL);
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
-
+			echo'<pre>';print_r($bill);
 			if($bill['bill']['id']){
 				$id_charge = $bill['bill']['charges'][0]['id'];
 				$id_trans = $bill['bill']['id'];

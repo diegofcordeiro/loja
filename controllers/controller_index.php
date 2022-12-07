@@ -8799,11 +8799,14 @@ class index extends controller {
 	}
 
 	public function WebhookHandler(){
-		
+			ini_set('display_errors', 1);
+			ini_set('display_startup_errors', 1);
+			error_reporting(E_ALL);
 		$arquivo = "default.txt";
 		$fp = fopen($arquivo, "a+");
 		fwrite($fp,'asdjasod');
 		fclose($fp);
+		
 		// require_once('vendor/autoload.php');	
 		// $webhookHandler = new Vindi\WebhookHandler();
 		// $event = $webhookHandler->handle();

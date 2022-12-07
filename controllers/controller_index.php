@@ -8649,7 +8649,7 @@ class index extends controller {
 
 				if($bill['bill']['status'] == 'paid'){ 
 					$status = 2;
-					$this->integrar_trilha_lms($cod, $cpf);
+					// $this->integrar_trilha_lms($cod, $cpf);
 				}else{
 					$status = 1;
 				}

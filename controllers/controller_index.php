@@ -8802,6 +8802,43 @@ class index extends controller {
 		return $response;
 	}
 
+	public function WebhookHandler(){
+		require_once('vendor/autoload.php');
+		$webhookHandler = new Vindi\WebhookHandler();
+
+		// Pega o evento interpretado pelo objeto.
+		$event = $webhookHandler->handle();
+
+		// Decide a ação com base no evento
+		switch ($event->type) {
+			case 'subscription_canceled':
+				// Lidar com o evento de Assinatura cancelada.
+				break;
+			case 'subscription_created':
+				// Lidar com o evento de Assinatura efetuada
+				break;
+			case 'charge_rejected':
+				// Lidar com o evento de Cobrança rejeitada
+				break;
+			case 'bill_created':
+				// Lidar com o evento de Fatura emitida
+				break;
+			case 'bill_paid':
+				// Lidar com o evento de Fatura paga
+				break;
+			case 'period_created':
+				// Lidar com o evento de Período criado
+				break;
+			case 'test':
+				// Lidar com o evento de Teste da URL
+				break;
+			default:
+				// Lidar com falhas e eventos novos ou desconhecidos
+				break;
+		}
+		echo 'aqui';
+	}
+
 	public function pay2(){
 		
 		// ------------------------------------------------------------------

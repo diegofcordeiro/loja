@@ -8708,13 +8708,9 @@ class index extends controller {
 	}
 
 	public function vindi_add_card_to_client($arguments,$data){
-		$paymentProfile = 0;
 		$paymentProfileData = new Vindi\PaymentProfile($arguments);
-		try{
-			$paymentProfile = $paymentProfileData->create($data);
-		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());
-		}
+		$paymentProfile = $paymentProfileData->create($data);
+
 		return $paymentProfile;
 	}
 

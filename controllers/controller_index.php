@@ -8790,14 +8790,14 @@ class index extends controller {
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-		$customer_id = 42675329;
+
 		$bill_id = 185650798;
 		echo $bill_id;
 		echo '<pre>';
-		print_r('https://app.vindi.com.br/api/v1/charges/'.$customer_id.'/refound');
+		print_r('https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refound');
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$customer_id.'/refound',
+			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refound',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -8806,7 +8806,7 @@ class index extends controller {
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'POST',
 			CURLOPT_POSTFIELDS =>'{
-				"cancel_bill": "'.$bill_id.'",
+				"cancel_bill": "true",
 				"comments": "Estorno pelo site"
 			}',
 			CURLOPT_HTTPHEADER => array(

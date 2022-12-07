@@ -8792,7 +8792,12 @@ class index extends controller {
 		error_reporting(E_ALL);
 
 		$bill_id = array('id' => 185650798);
-
+		echo $bill_id;
+		echo '<pre>';
+		print_r('{
+				"cancel_bill": "'.$bill_id.'",
+				"comments": "Estorno pelo site"
+			}');
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/bills',
@@ -8804,7 +8809,7 @@ class index extends controller {
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'POST',
 			CURLOPT_POSTFIELDS =>'{
-				"cancel_bill": '.$bill_id.',
+				"cancel_bill": "'.$bill_id.'",
 				"comments": "Estorno pelo site"
 			}',
 			CURLOPT_HTTPHEADER => array(

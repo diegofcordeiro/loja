@@ -8540,10 +8540,6 @@ class index extends controller {
 
 		$cod = $_POST['codigo'];
 
-			ini_set('display_errors', 1);
-			ini_set('display_startup_errors', 1);
-			error_reporting(E_ALL);
-
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([
@@ -8666,35 +8662,35 @@ class index extends controller {
 
 		/////////////   NAO  RECCORENTE    /////////////
 
-		// foreach($nao_recorrentes as $key => $recorrencia){
-		// 	ini_set('display_errors', 1);
-		// 	ini_set('display_startup_errors', 1);
-		// 	error_reporting(E_ALL);
-		// 	$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
+		foreach($nao_recorrentes as $key => $recorrencia){
+			ini_set('display_errors', 1);
+			ini_set('display_startup_errors', 1);
+			error_reporting(E_ALL);
+			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
 
-		// 	if(isset($bill->id)){
-		// 		$id_charge = $bill->charges[0]->id;
-		// 		$id_trans = $bill->id;
+			if(isset($bill->id)){
+				$id_charge = $bill->charges[0]->id;
+				$id_trans = $bill->id;
 
-		// 		if($bill->status == 'paid'){ 
-		// 			$status = 2;
-		// 			// $this->integrar_trilha_lms($cod, $cpf);
-		// 		}else{
-		// 			$status = 1;
-		// 		}
-		// 		$db = new mysql();
-		// 		$db->alterar("pedido_loja_carrinho", array(
-		// 			"transacao_charger_id"=>"$id_charge",
-		// 			"transacao_bill_id"=>"$id_trans",
-		// 			"status"=>"$status",
+				if($bill->status == 'paid'){ 
+					$status = 2;
+					// $this->integrar_trilha_lms($cod, $cpf);
+				}else{
+					$status = 1;
+				}
+				$db = new mysql();
+				$db->alterar("pedido_loja_carrinho", array(
+					"transacao_charger_id"=>"$id_charge",
+					"transacao_bill_id"=>"$id_trans",
+					"status"=>"$status",
 					
-		// 		), " id='$recorrencia->id' ");
-		// 		$db->alterar("pedido_loja", array(
-		// 			"status"=>"$status",
+				), " id='$recorrencia->id' ");
+				$db->alterar("pedido_loja", array(
+					"status"=>"$status",
 					
-		// 		), " codigo='$cod' ");
-		// 	}
-		// }
+				), " codigo='$cod' ");
+			}
+		}
 		/////////////  /////////////  /////////////
 			$this->view('finalizada', $dados);
 		
@@ -8803,7 +8799,12 @@ class index extends controller {
 	}
 
 	public function WebhookHandler(){
-		require_once('vendor/autoload.php');
+		
+		require_once('vendor/autoload.php');	
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+
 		$webhookHandler = new Vindi\WebhookHandler();
 
 		// Pega o evento interpretado pelo objeto.

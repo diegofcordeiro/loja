@@ -8587,10 +8587,15 @@ class index extends controller {
 				"customer_id" => $id_client
 			];
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
-			print_r($add_card);exit;
-			$payment_met =  $add_card->payment_method->code;
+
+			if(isset($add_card->payment_method->code)){
+				$payment_met =  $add_card->payment_method->code;
+			}else{
+				$dados['msg_erro_pagamento'] = $add_card;
+				$this->view('pedido', $dados);
+			}
 		}	
-		print_r($payment_met);exit;
+		exit;
 		//////////////////////////////////////////////////////////////
 
 		$cod = $_POST['codigo'];

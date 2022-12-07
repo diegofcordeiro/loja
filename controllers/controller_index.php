@@ -8786,7 +8786,7 @@ class index extends controller {
 	}
 
 	public function vindi_estorno(){
-		$bill_id = array('id' => 123);
+		$bill_id = array('id' => 185650798);
 		$arguments = array(
 			'VINDI_API_KEY' => $_POST['vindi_key'],
 			'VINDI_API_URI' => $_POST['vindi_url']

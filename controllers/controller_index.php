@@ -8711,7 +8711,6 @@ class index extends controller {
 	}
 
 	public function vindi_add_card_to_client($arguments,$data){
-		$paymentProfile = 0;
 		$paymentProfileData = new Vindi\PaymentProfile($arguments);
 		$paymentProfile = $paymentProfileData->create($data);
 

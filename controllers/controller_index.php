@@ -8587,6 +8587,7 @@ class index extends controller {
 				"customer_id" => $id_client
 			];
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
+			print_r($add_card);exit;
 			$payment_met =  $add_card->payment_method->code;
 		}	
 		print_r($payment_met);exit;

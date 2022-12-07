@@ -8692,16 +8692,11 @@ class index extends controller {
 				]
 			]);
 			$lastResponse = $subscriptionService->getLastResponse()->getBody();
-			$encoded_body = json_encode($lastResponse);
 			$decoded_body = json_decode($lastResponse, true);
-			echo '<pre>';
-			print_r($encoded_body);
-			echo '<br>';
-			print_r($decoded_body);
 		} catch(Vindi\Exceptions\ValidationException $e){
 			echo '<pre>';var_dump($e->getErrors());exit;
 		}
-		return $subscription;
+		return $decoded_body;
 	}
 
 	public function vindi_add_new_client($arguments,$data){

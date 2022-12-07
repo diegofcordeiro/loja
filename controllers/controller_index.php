@@ -8792,24 +8792,35 @@ class index extends controller {
 		error_reporting(E_ALL);
 
 		$bill_id = array('id' => 185650798);
-		$arguments = array(
-			'VINDI_API_KEY' => '7aF1y-Mmn_cyHMwAXNhHitNi6MMhae6ONvQaJX9LbBc',
-			'VINDI_API_URI' => 'https://app.vindi.com.br/api/v1/'
-		);
-		$estornoService = new Vindi\PaymentProfile($arguments);
-		try{
-			$estorno = $estornoService->create($bill_id,[
-				'cancel_bill' => true,
-				'comments' => "Estorno pelo site",
-				'holder_name' => 'ANDRE KEHRER'
-			]);
-		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());exit;
-		}
+
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/bills',
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'POST',
+			CURLOPT_POSTFIELDS =>'{
+			"cancel_bill": "'.$bill_id.'",
+			"comments": "Estorno pelo site"
+			}',
+			CURLOPT_HTTPHEADER => array(
+				'accept: application/json',
+				'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
+				'Content-Type: application/json'
+			),
+		));
+
+		$response = curl_exec($curl);
+		$response = json_decode($response, true);
+		curl_close($curl);
+		// return $response;
 
 		print_r($estorno);exit;
 
-		// return $customer;
 	}
 
 	public function pay2(){

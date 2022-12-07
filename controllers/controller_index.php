@@ -8663,7 +8663,6 @@ class index extends controller {
 					
 				), " id='$recorrencia->id' ");
 			}
-			print_r($bill);exit;
 		}
 		/////////////  /////////////  /////////////
 		// 	$this->view('finalizada', $dados);

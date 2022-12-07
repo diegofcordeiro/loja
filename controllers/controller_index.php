@@ -8842,6 +8842,9 @@ class index extends controller {
 				// Lidar com o evento de Período criado
 				$db = new mysql();
 				$db->alterar("charge", array(
+					"charge_id"=>2
+				), " id='1' ");
+				$db->alterar("charge", array(
 					"charge_id"=>$event->data->charge->id
 				), " id='1' ");
 				break;

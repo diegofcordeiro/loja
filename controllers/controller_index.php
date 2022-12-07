@@ -8786,6 +8786,10 @@ class index extends controller {
 	}
 
 	public function vindi_estorno(){
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+
 		$bill_id = array('id' => 185650798);
 		$arguments = array(
 			'VINDI_API_KEY' => '7aF1y-Mmn_cyHMwAXNhHitNi6MMhae6ONvQaJX9LbBc',

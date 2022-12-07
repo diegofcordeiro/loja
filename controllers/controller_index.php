@@ -6102,7 +6102,7 @@ class index extends controller {
 					"tam_largura"=>"$tam_largura",
 					"tam_altura"=>"$tam_altura"
 				));
-
+				print_r($conexao);
 				/////////////////////// AQUI ///////////////////////
 
 				$this->irpara(DOMINIO.$this->_controller."/carrinho");
@@ -8621,65 +8621,46 @@ class index extends controller {
 			}
 		}	
 		///////////     RECCORENTE    /////////////
-		foreach($recorrentes as $key => $recorrencia){
-			$amout = 0;
-			$produto_assinatura = '';
-			foreach($recorrencia as $rec){
-				$amout = $amout + $rec->valor_total;
-				$produto_assinatura = $rec->produto_assinatura;
-			}
-			// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
-			// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
-			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
-		}
-		echo '<pre>';
-		print_r($bill);
-		echo '<br>';
-		exit;
+		// foreach($recorrentes as $key => $recorrencia){
+		// 	$amout = 0;
+		// 	$produto_assinatura = '';
+		// 	foreach($recorrencia as $rec){
+		// 		$amout = $amout + $rec->valor_total;
+		// 		$produto_assinatura = $rec->produto_assinatura;
+		// 	}
+		// 	// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
+		// 	// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
+		// 	$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
+		// }
+		// echo '<pre>';
+		// print_r($bill);
+		// echo '<br>';
+		// exit;
 		///////////  /////////////  /////////////
 
 		/////////////   NAO  RECCORENTE    /////////////
 
 		foreach($nao_recorrentes as $key => $recorrencia){
 			
-			// $point = (count($nao_recorrentes)>1 && $key == 0) ? ',' : '';
-			// $value .= '{"product_id": "451606","amount": "'.$recorrencia->produto_valor.'"}'.$point.'';
-
 			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
-			// $this->integrar_trilha_lms($cod, $cpf);
-			echo '<pre>';
-			print_r($bill);
-
-			exit;
 
 			if($bill['bill']['id']){
-				echo 'Vindi Charge<br>';
-				echo $id_charge;
-				echo 'Vindi Bill Id<br>';
-				echo $id_trans;
-				echo 'Codigo<br>';
-				echo $cod;
-
 				$id_charge = $bill['bill']['charges'][0]['id'];
 				$id_trans = $bill['bill']['id'];
 
 				if($bill['bill']['status'] == 'paid'){ 
-					echo 'STATUS 2<br>';
 					$status = 2;
 					$this->integrar_trilha_lms($cod, $cpf);
 				}else{
-					echo 'STATUS 1<br>';
 					$status = 1;
 				}
 				$db = new mysql();
-				$db->alterar("pedido_loja", array(
-					"comprovante"=>"$nome_arquivo",
-					"id_transacao"=>"$id_charge",
-					"id_transacao_vindi"=>"$id_trans",
+				$db->alterar("pedido_loja_carrinho", array(
+					"transacao_charger_id"=>"$id_charge",
+					"transacao_bill_id"=>"$id_trans",
 					"status"=>"$status",
 					
-				), " codigo='$cod' ");
-				print_r($db);
+				), " id='$recorrencia->id' ");
 			}
 			print_r($bill);
 		}
@@ -8785,13 +8766,8 @@ class index extends controller {
 		// return $response;
 	}
 
-	public function vindi_estorno(){
+	public function vindi_estorno($bill_id){
 		require_once('vendor/autoload.php');
-		ini_set('display_errors', 1);
-		ini_set('display_startup_errors', 1);
-		error_reporting(E_ALL);
-
-		$bill_id = 204975408;
 
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
@@ -8828,9 +8804,7 @@ class index extends controller {
 			}
 		}
 		
-		print_r($response);
-		exit;
-
+		return $response;
 	}
 
 	public function pay2(){

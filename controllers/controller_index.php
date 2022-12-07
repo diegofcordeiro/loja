@@ -8836,7 +8836,7 @@ class index extends controller {
 				// Lidar com falhas e eventos novos ou desconhecidos
 				break;
 		}
-		echo 'aqui';
+		echo 'aqui';exit;
 	}
 
 	public function pay2(){

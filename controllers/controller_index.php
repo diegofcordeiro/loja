@@ -8802,6 +8802,7 @@ class index extends controller {
 			ini_set('display_errors', 1);
 			ini_set('display_startup_errors', 1);
 			error_reporting(E_ALL);
+			print_r(error_get_last());
 		$fileName = 'test.txt';
 		$contents = 'hello ';
 		$currentPath = dirname(__FILE__);

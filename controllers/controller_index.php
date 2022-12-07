@@ -8821,7 +8821,7 @@ class index extends controller {
 		curl_close($curl);
 		// return $response;
 		if($response['errors']){
-			echo'nao cancelou';
+			echo'nao cancelou';exit;
 		}else{
 			if($response['charge']['status'] == 'canceled'){
 				echo'cancelou';

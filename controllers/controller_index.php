@@ -8573,19 +8573,9 @@ class index extends controller {
 		}
 				
 		// Adicionando cartao na VINDI se nao tiver nenhum cartao cadastrado ou se o cartao usado é diferente
-		echo $last4;
-		echo '<br>';
-		echo $last_four;
-		echo '<br>';
-		echo $pay_met;
-		echo '<br>';
-		echo '<br>';
-
 		if($last_four == $last4){
 			$payment_met = $pay_met;
-			echo 'IGUAL';
 		}else{
-			echo 'DIFERENTE';
 			$card = [
 				'name' => $name_on_card,
 				"holder_name" => $name_on_card,
@@ -8596,12 +8586,10 @@ class index extends controller {
 				"payment_company_code" => $payment_company_name,
 				"customer_id" => $id_client
 			];
-			echo '<pre>';print_r($card);exit;
-
-			// $add_card = $this->vindi_add_card_to_client($arguments,$card);
-			// $payment_met =  $add_card->payment_method->code;
+			$add_card = $this->vindi_add_card_to_client($arguments,$card);
+			$payment_met =  $add_card->payment_method->code;
 		}	
-		exit;
+		print_r($payment_met);exit;
 		//////////////////////////////////////////////////////////////
 
 		$cod = $_POST['codigo'];
@@ -8708,7 +8696,7 @@ class index extends controller {
 			$lastResponse = $subscriptionService->getLastResponse()->getBody();
 			$decoded_body = json_decode($lastResponse, true);
 		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());
+			echo '<pre>';var_dump($e->getErrors());exit;
 		}
 		return $decoded_body;
 	}
@@ -8724,8 +8712,7 @@ class index extends controller {
 		try{
 			$paymentProfile = $paymentProfileData->create($data);
 		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre> aqui:';var_dump($e->getErrors());
-			echo '2';
+			echo '<pre>';var_dump($e->getErrors());
 		}
 		return $paymentProfile;
 	}
@@ -8745,7 +8732,7 @@ class index extends controller {
 				]
 		]);
 		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());
+			echo '<pre>';var_dump($e->getErrors());exit;
 		}
 		return $bill;
 	}

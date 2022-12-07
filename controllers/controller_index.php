@@ -8591,8 +8591,8 @@ class index extends controller {
 			if(isset($add_card->payment_method->code)){
 				$payment_met =  $add_card->payment_method->code;
 			}else{
-				$dados['msg_erro_pagamento'] = $add_card;
-				$this->view('pedido', $dados);
+				$this->msg($add_card);
+				$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$cod);
 			}
 		}	
 		exit;

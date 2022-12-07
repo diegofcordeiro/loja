@@ -8826,8 +8826,9 @@ class index extends controller {
 		}
 		else{
 			echo'nao cancelou';
-			print_r($response);
+			// print_r($response);
 		}
+		print_r($response['errors'][0]);
 		exit;
 
 	}

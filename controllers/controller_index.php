@@ -8793,8 +8793,7 @@ class index extends controller {
 
 		$bill_id = 204975408;
 		echo $bill_id;
-		echo '<pre>';
-		print_r('https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refund');
+		
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refund',
@@ -8821,7 +8820,7 @@ class index extends controller {
 		curl_close($curl);
 		// return $response;
 		if($response['errors']){
-			echo'nao cancelou';exit;
+			echo'nao cancelou';
 		}else{
 			if($response['charge']['status'] == 'canceled'){
 				echo'cancelou';

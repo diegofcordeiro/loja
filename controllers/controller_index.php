@@ -8785,6 +8785,13 @@ class index extends controller {
 		// return $response;
 	}
 
+	public function vindi_estorno($arguments,$data){
+		print_r('aqui');exit;
+		$customerService = new Vindi\Customer($arguments);
+		$customer = $customerService->create($data);
+		return $customer;
+	}
+
 	public function pay2(){
 		
 		// ------------------------------------------------------------------

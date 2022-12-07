@@ -8801,40 +8801,64 @@ class index extends controller {
 	public function WebhookHandler(){
 		
 		require_once('vendor/autoload.php');	
-		ini_set('display_errors', 1);
-		ini_set('display_startup_errors', 1);
-		error_reporting(E_ALL);
-
 		$webhookHandler = new Vindi\WebhookHandler();
-
-		// Pega o evento interpretado pelo objeto.
 		$event = $webhookHandler->handle();
 
-		// Decide a ação com base no evento
 		switch ($event->type) {
 			case 'subscription_canceled':
-				// Lidar com o evento de Assinatura cancelada.
+					$arquivo = "subscription_canceled.txt";
+					$fp = fopen($arquivo, "a+");
+					fwrite($fp, $event);
+					fclose($fp);
 				break;
 			case 'subscription_created':
 				// Lidar com o evento de Assinatura efetuada
+					$arquivo = "subscription_created.txt";
+					$fp = fopen($arquivo, "a+");
+					fwrite($fp, $event);
+					fclose($fp);
 				break;
 			case 'charge_rejected':
 				// Lidar com o evento de Cobrança rejeitada
+					$arquivo = "charge_rejected.txt";
+					$fp = fopen($arquivo, "a+");
+					fwrite($fp, $event);
+					fclose($fp);
 				break;
 			case 'bill_created':
 				// Lidar com o evento de Fatura emitida
+					$arquivo = "bill_created.txt";
+					$fp = fopen($arquivo, "a+");
+					fwrite($fp, $event);
+					fclose($fp);
 				break;
 			case 'bill_paid':
 				// Lidar com o evento de Fatura paga
+					$arquivo = "bill_paid.txt";
+					$fp = fopen($arquivo, "a+");
+					fwrite($fp, $event);
+					fclose($fp);
 				break;
 			case 'period_created':
 				// Lidar com o evento de Período criado
+					$arquivo = "period_created.txt";
+					$fp = fopen($arquivo, "a+");
+					fwrite($fp, $event);
+					fclose($fp);
 				break;
 			case 'test':
 				// Lidar com o evento de Teste da URL
+					$arquivo = "test.txt";
+					$fp = fopen($arquivo, "a+");
+					fwrite($fp, $event);
+					fclose($fp);
 				break;
 			default:
 				// Lidar com falhas e eventos novos ou desconhecidos
+					$arquivo = "default.txt";
+					$fp = fopen($arquivo, "a+");
+					fwrite($fp, $event);
+					fclose($fp);
 				break;
 		}
 	}

@@ -8818,16 +8818,17 @@ class index extends controller {
 		$response = json_decode($response, true);
 		curl_close($curl);
 		// return $response;
-		if($response['errors']){
-			echo'nao cancelou';
+		if(isset($response['errors'])){
+			$response = 0;
 		}else{
 			if($response['charge']['status'] == 'canceled'){
-				echo'cancelou';
-				print_r($response['charge']);
+				$response = 1;
+			}else{
+				$response = 0;
 			}
 		}
 		
-		print_r($response['errors']);
+		print_r($response);
 		exit;
 
 	}

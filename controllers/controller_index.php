@@ -8805,7 +8805,7 @@ class index extends controller {
 			print_r(error_get_last());
 
 		$arquivo = "default.txt";
-		$fp = fopen($arquivo, "w");
+		$fp = fopen($arquivo, "r");
 		fwrite($fp,'asdjasod');
 		fclose($fp);
 		

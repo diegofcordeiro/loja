@@ -8822,11 +8822,13 @@ class index extends controller {
 		// return $response;
 		if($response['errors']){
 			echo'nao cancelou';
+		}else{
+			if($response['charge']['status'] == 'canceled'){
+				echo'cancelou';
+				print_r($response['charge']);
+			}
 		}
-		if($response['charge']['status'] == 'canceled'){
-			echo'cancelou';
-			print_r($response['charge']);
-		}
+		
 		print_r($response['errors']);
 		exit;
 

@@ -8619,55 +8619,56 @@ class index extends controller {
 				
 			}
 		}	
-		///////////     RECCORENTE    /////////////
-		// foreach($recorrentes as $key => $recorrencia){
-		// 	$amout = 0;
-		// 	$produto_assinatura = '';
-		// 	foreach($recorrencia as $rec){
-		// 		$amout = $amout + $rec->valor_total;
-		// 		$produto_assinatura = $rec->produto_assinatura;
-		// 	}
-		// 	// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
-		// 	// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
-		// 	$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
-		// }
-		// echo '<pre>';
-		// print_r($bill);
-		// echo '<br>';
-		// exit;
-		///////////  /////////////  /////////////
+		/////////     RECCORENTE    /////////////
+		foreach($recorrentes as $key => $recorrencia){
+			$amout = 0;
+			$produto_assinatura = '';
+			foreach($recorrencia as $rec){
+				$amout = $amout + $rec->valor_total;
+				$produto_assinatura = $rec->produto_assinatura;
+			}
+			// $point_sub = (count($recorrentes)>1 && $key == 0) ? ',' : '';
+			// $value_sub .= '{"plan_id": "'.$produto_assinatura.'","customer_id": "'.$id_client.'","payment_method_code": "'.$payment_met.'","product_items": [{"product_id": "1040228"}]}'.$point_sub.'';
+			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
+			echo '<pre>';
+			print_r($bill);
+			echo '<br>';
+			exit;
+		}
+		
+		/////////  /////////////  /////////////
 
 		/////////////   NAO  RECCORENTE    /////////////
 
-		foreach($nao_recorrentes as $key => $recorrencia){
-			ini_set('display_errors', 1);
-			ini_set('display_startup_errors', 1);
-			error_reporting(E_ALL);
-			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
+		// foreach($nao_recorrentes as $key => $recorrencia){
+		// 	ini_set('display_errors', 1);
+		// 	ini_set('display_startup_errors', 1);
+		// 	error_reporting(E_ALL);
+		// 	$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
 
-			if(isset($bill->id)){
-				$id_charge = $bill->charges[0]->id;
-				$id_trans = $bill->id;
+		// 	if(isset($bill->id)){
+		// 		$id_charge = $bill->charges[0]->id;
+		// 		$id_trans = $bill->id;
 
-				if($bill->status == 'paid'){ 
-					$status = 2;
-					// $this->integrar_trilha_lms($cod, $cpf);
-				}else{
-					$status = 1;
-				}
-				$db = new mysql();
-				$db->alterar("pedido_loja_carrinho", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
-					"status"=>"$status",
+		// 		if($bill->status == 'paid'){ 
+		// 			$status = 2;
+		// 			// $this->integrar_trilha_lms($cod, $cpf);
+		// 		}else{
+		// 			$status = 1;
+		// 		}
+		// 		$db = new mysql();
+		// 		$db->alterar("pedido_loja_carrinho", array(
+		// 			"transacao_charger_id"=>"$id_charge",
+		// 			"transacao_bill_id"=>"$id_trans",
+		// 			"status"=>"$status",
 					
-				), " id='$recorrencia->id' ");
-				$db->alterar("pedido_loja", array(
-					"status"=>"$status",
+		// 		), " id='$recorrencia->id' ");
+		// 		$db->alterar("pedido_loja", array(
+		// 			"status"=>"$status",
 					
-				), " codigo='$cod' ");
-			}
-		}
+		// 		), " codigo='$cod' ");
+		// 	}
+		// }
 		/////////////  /////////////  /////////////
 		// 	$this->view('finalizada', $dados);
 
@@ -8693,7 +8694,10 @@ class index extends controller {
 			$lastResponse = $subscriptionService->getLastResponse()->getBody();
 			$encoded_body = json_encode($lastResponse);
 			$decoded_body = json_decode($lastResponse, true);
-			print_r($decoded_body);exit;
+			echo '<pre>';
+			print_r($encoded_body);
+			echo '<br>';
+			print_r($decoded_body);
 		} catch(Vindi\Exceptions\ValidationException $e){
 			echo '<pre>';var_dump($e->getErrors());exit;
 		}

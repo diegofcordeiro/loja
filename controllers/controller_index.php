@@ -8804,7 +8804,7 @@ class index extends controller {
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-
+echo 'aqui';exit;
 		$webhookHandler = new Vindi\WebhookHandler();
 
 		// Pega o evento interpretado pelo objeto.
@@ -8837,7 +8837,6 @@ class index extends controller {
 				// Lidar com falhas e eventos novos ou desconhecidos
 				break;
 		}
-		echo 'aqui';exit;
 	}
 
 	public function pay2(){

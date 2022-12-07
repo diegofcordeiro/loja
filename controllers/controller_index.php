@@ -8571,9 +8571,7 @@ class index extends controller {
 				$pay_met = $res->payment_method->code;
 			}
 		}
-			ini_set('display_errors', 1);
-			ini_set('display_startup_errors', 1);
-			error_reporting(E_ALL);
+				
 		// Adicionando cartao na VINDI se nao tiver nenhum cartao cadastrado ou se o cartao usado é diferente
 		if($last_four == $last4){
 			$payment_met = $pay_met;
@@ -8589,10 +8587,9 @@ class index extends controller {
 				"customer_id" => $id_client
 			];
 			$add_card = $this->vindi_add_card_to_client($arguments,$card);
-			echo '<pre>';print_r($add_card);exit;
 			$payment_met =  $add_card->payment_method->code;
 		}	
-
+		print_r($payment_met);exit;
 		//////////////////////////////////////////////////////////////
 
 		$cod = $_POST['codigo'];
@@ -8712,8 +8709,11 @@ class index extends controller {
 
 	public function vindi_add_card_to_client($arguments,$data){
 		$paymentProfileData = new Vindi\PaymentProfile($arguments);
-		$paymentProfile = $paymentProfileData->create($data);
-
+		try{
+			$paymentProfile = $paymentProfileData->create($data);
+		} catch(Vindi\Exceptions\ValidationException $e){
+			echo '<pre>';print_r($e->getErrors());
+		}
 		return $paymentProfile;
 	}
 

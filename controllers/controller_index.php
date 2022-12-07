@@ -8791,7 +8791,7 @@ class index extends controller {
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 
-		$bill_id = array('id' => 185650798);
+		$bill_id = 185650798;
 		echo $bill_id;
 		echo '<pre>';
 		print_r('{

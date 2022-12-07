@@ -8804,8 +8804,8 @@ class index extends controller {
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'POST',
 			CURLOPT_POSTFIELDS =>'{
-			"cancel_bill": "'.$bill_id.'",
-			"comments": "Estorno pelo site"
+				"cancel_bill": '.$bill_id.',
+				"comments": "Estorno pelo site"
 			}',
 			CURLOPT_HTTPHEADER => array(
 				'accept: application/json',

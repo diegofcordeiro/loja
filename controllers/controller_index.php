@@ -8786,10 +8786,19 @@ class index extends controller {
 	}
 
 	public function vindi_estorno(){
-		print_r('aqui');exit;
-		$customerService = new Vindi\Customer($arguments);
-		$customer = $customerService->create($data);
-		return $customer;
+		$bill_id = array('id' => 123);
+		$arguments = array(
+			'VINDI_API_KEY' => $_POST['vindi_key'],
+			'VINDI_API_URI' => $_POST['vindi_url']
+		);
+		$estornoService = new Vindi\Charge($arguments);
+		$estorno = $estornoService->create($bill_id,[
+				'cancel_bill' => true,
+				'comments' => "Estorno pelo site"
+			]);
+		print_r($estorno);exit;
+
+		// return $customer;
 	}
 
 	public function pay2(){

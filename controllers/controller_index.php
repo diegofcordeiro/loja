@@ -8571,7 +8571,9 @@ class index extends controller {
 				$pay_met = $res->payment_method->code;
 			}
 		}
-				
+			ini_set('display_errors', 1);
+			ini_set('display_startup_errors', 1);
+			error_reporting(E_ALL);
 		// Adicionando cartao na VINDI se nao tiver nenhum cartao cadastrado ou se o cartao usado é diferente
 		if($last_four == $last4){
 			$payment_met = $pay_met;

@@ -8820,15 +8820,14 @@ class index extends controller {
 		$response = json_decode($response, true);
 		curl_close($curl);
 		// return $response;
+		if($response['errors']){
+			echo'nao cancelou';
+		}
 		if($response['charge']['status'] == 'canceled'){
 			echo'cancelou';
 			print_r($response['charge']);
 		}
-		else{
-			echo'nao cancelou';
-			// print_r($response);
-		}
-		print_r($response['errors'][0]);
+		print_r($response['errors']);
 		exit;
 
 	}

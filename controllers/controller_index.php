@@ -8794,10 +8794,7 @@ class index extends controller {
 		$bill_id = 185650798;
 		echo $bill_id;
 		echo '<pre>';
-		print_r('{
-				"cancel_bill": "'.$bill_id.'",
-				"comments": "Estorno pelo site"
-			}');
+		print_r('https://app.vindi.com.br/api/v1/charges/'.$customer_id.'/refound');
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$customer_id.'/refound',

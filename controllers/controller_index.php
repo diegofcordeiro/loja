@@ -8800,7 +8800,8 @@ class index extends controller {
 		try{
 			$estorno = $estornoService->create($bill_id,[
 				'cancel_bill' => true,
-				'comments' => "Estorno pelo site"
+				'comments' => "Estorno pelo site",
+				'holder_name' => 'ANDRE KEHRER'
 			]);
 		} catch(Vindi\Exceptions\ValidationException $e){
 			echo '<pre>';var_dump($e->getErrors());exit;

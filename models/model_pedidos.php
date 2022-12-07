@@ -32,7 +32,7 @@ Class model_pedidos extends model{
  		$lista = array();
 
 		$conexao = new mysql();
-		$coisas_pedidos = $conexao->Executar("SELECT * FROM pedido_loja WHERE cadastro='$cod_usuario' AND status = '2' order by data desc");
+		$coisas_pedidos = $conexao->Executar("SELECT * FROM pedido_loja WHERE cadastro='$cod_usuario' AND status in( '2', '1') order by data desc");
 		$linha_pedido = $coisas_pedidos->num_rows;
 		
         $i = 0;

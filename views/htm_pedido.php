@@ -1338,7 +1338,7 @@
 									<div class="col-xs-6 col-md-6">
 										<div class="form-group">
 											<label for="cardExpiry">Validade</label>
-											<input type="tel" class="form-control" id="card_number"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
+											<input type="tel" class="form-control"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
 										</div>
 									</div>
 									<div class="col-xs-6 col-md-6">
@@ -2311,12 +2311,12 @@
     var cardValid = 0;
 
     //card number validation
-    $('#card_number').validateCreditCard(function(result){
+    $('#input-cc').validateCreditCard(function(result){
         if(result.valid){
-            $("#card_number").removeClass('required');
+            $("#input-cc").removeClass('required');
             cardValid = 1;
         }else{
-            $("#card_number").addClass('required');
+            $("#input-cc").addClass('required');
             cardValid = 0;
         }
     });
@@ -2331,29 +2331,29 @@
     var regYear = /^2017|2018|2019|2020|2021|2022|2023|2024|2025|2026|2027|2028|2029|2030|2031$/;
     var regCVV = /^[0-9]{3,3}$/;
     if (cardValid == 0) {
-        $("#card_number").addClass('required');
-        $("#card_number").focus();
+        $("#input-cc").addClass('required');
+        $("#input-cc").focus();
         return false;
     }else if (!regMonth.test(expMonth)) {
-        $("#card_number").removeClass('required');
+        $("#input-cc").removeClass('required');
         $("#expiry_month").addClass('required');
         $("#expiry_month").focus();
         return false;
     }else if (!regYear.test(expYear)) {
-        $("#card_number").removeClass('required');
+        $("#input-cc").removeClass('required');
         $("#expiry_month").removeClass('required');
         $("#expiry_year").addClass('required');
         $("#expiry_year").focus();
         return false;
     }else if (!regCVV.test(cvv)) {
-        $("#card_number").removeClass('required');
+        $("#input-cc").removeClass('required');
         $("#expiry_month").removeClass('required');
         $("#expiry_year").removeClass('required');
         $("#cvv").addClass('required');
         $("#cvv").focus();
         return false;
     }else if (!regName.test(cardName)) {
-        $("#card_number").removeClass('required');
+        $("#input-cc").removeClass('required');
         $("#expiry_month").removeClass('required');
         $("#expiry_year").removeClass('required');
         $("#cvv").removeClass('required');
@@ -2361,7 +2361,7 @@
         $("#name_on_card").focus();
         return false;
     }else{
-        $("#card_number").removeClass('required');
+        $("#input-cc").removeClass('required');
         $("#expiry_month").removeClass('required');
         $("#expiry_year").removeClass('required');
         $("#cvv").removeClass('required');

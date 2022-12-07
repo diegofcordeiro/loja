@@ -8538,7 +8538,7 @@ class index extends controller {
 		$card_number = str_replace("-","",$card_number);
 		$last4 = substr($card_number,12,16);
 
-		
+		$cod = $_POST['codigo'];
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([
@@ -8598,7 +8598,7 @@ class index extends controller {
 		exit;
 		//////////////////////////////////////////////////////////////
 
-		$cod = $_POST['codigo'];
+		
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$cod."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;

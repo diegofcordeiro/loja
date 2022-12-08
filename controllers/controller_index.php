@@ -8674,7 +8674,7 @@ class index extends controller {
 				$id_trans = $bill->id;
 
 				if($bill->status == 'paid'){ 
-					$status = 2;
+					$status = 4;
 					// $this->integrar_trilha_lms($cod, $cpf);
 				}else{
 					$status = 1;
@@ -8800,57 +8800,52 @@ class index extends controller {
 	}
 
 	public function WebhookHandler(){
-		// $id_charge 	= $event->data->charge->id;
-		// $id_bill 	= $event->data->charge->bill->id;
-		// $email 		= $event->data->charge->customer->email;
 
-		$id_charge 	= 206360618;
-		$id_bill 	= 189394188;
-		
-		$db = new mysql();
-		$db->alterar("pedido_loja_carrinho", array(
-			"status"=>12,
-			
-		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
-		
-		$db->alterar("pedido_loja", array(
-			"status"=>12,
-			
-		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
+		require_once('vendor/autoload.php');	
+		$webhookHandler = new Vindi\WebhookHandler();
+		$event = $webhookHandler->handle();
 
-		// require_once('vendor/autoload.php');	
-		// $webhookHandler = new Vindi\WebhookHandler();
-		// $event = $webhookHandler->handle();
+		switch ($event->type) {
+			case 'subscription_canceled':
 
-		// switch ($event->type) {
-		// 	case 'subscription_canceled':
+				break;
+			case 'subscription_created':
 
-		// 		break;
-		// 	case 'subscription_created':
+				break;
+			case 'charge_rejected':
 
-		// 		break;
-		// 	case 'charge_rejected':
+				break;
+			case 'bill_created':
 
-		// 		break;
-		// 	case 'bill_created':
+				break;
+			case 'bill_paid':
 
-		// 		break;
-		// 	case 'bill_paid':
+				break;
+			case 'charge_refunded':
 
-		// 		break;
-		// 	case 'charge_refunded':
-		// 		$db = new mysql();
-		// 		$db->alterar("charge", array(
-		// 			"charge_id"=>$event->data->charge->id
-		// 		), " id='1' ");
-		// 		break;
-		// 	case 'test':
+				$id_charge 	= $event->data->charge->id;
+				$id_bill 	= $event->data->charge->bill->id;
 
-		// 		break;
-		// 	default:
+				// $id_charge 	= 206360618;
+				// $id_bill 	= 189394188;
+				
+				$db = new mysql();
+				$db->alterar("pedido_loja_carrinho", array(
+					"status"=>8,
+				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
+				
+				$db->alterar("pedido_loja", array(
+					"status"=>8,
+				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
-		// 		break;
-		// }
+				break;
+			case 'test':
+
+				break;
+			default:
+
+				break;
+		}
 	}
 
 	public function pay2(){

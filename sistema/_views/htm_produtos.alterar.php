@@ -207,7 +207,7 @@ $curl = curl_init();
                       </div>
                       <!-- ////////////////////////////////////////////////////// -->
                       <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                           <div class="form-group">
                             <label class="col-md-12">Autor</label>
                             <div class="col-md-12">
@@ -234,7 +234,7 @@ $curl = curl_init();
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-2">
+                        <!-- <div class="col-md-2">
                           <div class="form-group">
                             <label class="col-md-12">Tipo de venda</label>
                             <div class="col-md-12">
@@ -252,7 +252,7 @@ $curl = curl_init();
                               </select>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="col-md-12">Última atualização</label>
@@ -261,7 +261,7 @@ $curl = curl_init();
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label class="col-md-12">Vencimento do curso</label>
                             <div class="col-md-12">

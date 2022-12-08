@@ -294,7 +294,7 @@ $curl = curl_init();
                       </div>
                       <hr>
                       <div class="form-group">
-                        <label class="col-md-12">Selecione a secao que o curso vai entrar</label>
+                        <label class="col-md-12">Selecione a seção que a trilha deverá ser exibida</label>
                         <div class="col-md-12">
                           <input type="checkbox" name="mais_vendidos" value="mais_vendidos" <?php if($data->mais_vendidos == 1){ echo "checked"; } ?>>
                           <label for="mais_vendidos"> Mais vendidos</label><br>

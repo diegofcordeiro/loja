@@ -472,7 +472,6 @@ class produtos extends controller {
 			"descricao"=>$descricao,
 			"summary"=>$summary,
 			"only_combo"=>$only_combo,
-			"assinatura"=>'',
 			"aprendera"=>$aprendera,
 			"data_atualizacao"=>$data_atualizacao,
 			"data_vencimento"=>$data_vencimento,

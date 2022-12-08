@@ -8649,11 +8649,12 @@ class index extends controller {
 					"transacao_charger_id"=>"$id_charge",
 					"transacao_bill_id"=>"$id_trans",
 					"status"=>"$status",
-					
 				), " id='$rec->id' ");
+				
 				$db->alterar("pedido_loja", array(
+					"transacao_charger_id"=>"$id_charge",
+					"transacao_bill_id"=>"$id_trans",
 					"status"=>"$status",
-					
 				), " codigo='$cod' ");
 			}
 		}
@@ -8799,64 +8800,58 @@ class index extends controller {
 	}
 
 	public function WebhookHandler(){
-			ini_set('display_errors', 1);
-			ini_set('display_startup_errors', 1);
-			error_reporting(E_ALL);
-		$fileName = 'test.txt';
-		$contents = 'hello ';
-		$currentPath = dirname(__FILE__);
-		if ( ! is_writable($currentPath.'/'.$fileName)){
+		// $id_charge 	= $event->data->charge->id;
+		// $id_bill 	= $event->data->charge->bill->id;
+		// $email 		= $event->data->charge->customer->email;
 
-			echo 'Not writable!!!'.$currentPath.'/'.$fileName;
-		}
-		$arquivo = "default.txt";
-		$fp = fopen($arquivo, "a+");
-		fwrite($fp,'asdjasod');
-		fclose($fp);
+		$id_charge 	= 131231;
+		$id_bill 	= 356353;
+		$email 		= 'drekehrer@gmail.com';
 		
-		require_once('vendor/autoload.php');	
-		$webhookHandler = new Vindi\WebhookHandler();
-		$event = $webhookHandler->handle();
+		$db = new mysql();
+		$db->alterar("pedido_loja_carrinho", array(
+			"status"=>12,
+			
+		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
+		
+		$db->alterar("pedido_loja", array(
+			"status"=>12,
+			
+		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
-		switch ($event->type) {
-			case 'subscription_canceled':
+		// require_once('vendor/autoload.php');	
+		// $webhookHandler = new Vindi\WebhookHandler();
+		// $event = $webhookHandler->handle();
 
-				break;
-			case 'subscription_created':
-				// Lidar com o evento de Assinatura efetuada
+		// switch ($event->type) {
+		// 	case 'subscription_canceled':
 
-				break;
-			case 'charge_rejected':
-				// Lidar com o evento de Cobrança rejeitada
+		// 		break;
+		// 	case 'subscription_created':
 
-				break;
-			case 'bill_created':
-				// Lidar com o evento de Fatura emitida
+		// 		break;
+		// 	case 'charge_rejected':
 
-				break;
-			case 'bill_paid':
-				// Lidar com o evento de Fatura paga
+		// 		break;
+		// 	case 'bill_created':
 
-				break;
-			case 'charge_refunded':
-				// Lidar com o evento de Período criado
-				$db = new mysql();
-				$db->alterar("charge", array(
-					"charge_id"=>2
-				), " id='1' ");
-				$db->alterar("charge", array(
-					"charge_id"=>$event->data->charge->id
-				), " id='1' ");
-				break;
-			case 'test':
-				// Lidar com o evento de Teste da URL
+		// 		break;
+		// 	case 'bill_paid':
 
-				break;
-			default:
-				// Lidar com falhas e eventos novos ou desconhecidos
+		// 		break;
+		// 	case 'charge_refunded':
+		// 		$db = new mysql();
+		// 		$db->alterar("charge", array(
+		// 			"charge_id"=>$event->data->charge->id
+		// 		), " id='1' ");
+		// 		break;
+		// 	case 'test':
 
-				break;
-		}
+		// 		break;
+		// 	default:
+
+		// 		break;
+		// }
 	}
 
 	public function pay2(){

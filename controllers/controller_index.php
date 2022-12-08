@@ -8650,7 +8650,7 @@ class index extends controller {
 					"transacao_bill_id"=>"$id_trans",
 					"status"=>"$status",
 				), " id='$rec->id' ");
-				
+
 				$db->alterar("pedido_loja", array(
 					"transacao_charger_id"=>"$id_charge",
 					"transacao_bill_id"=>"$id_trans",
@@ -8804,9 +8804,8 @@ class index extends controller {
 		// $id_bill 	= $event->data->charge->bill->id;
 		// $email 		= $event->data->charge->customer->email;
 
-		$id_charge 	= 131231;
-		$id_bill 	= 356353;
-		$email 		= 'drekehrer@gmail.com';
+		$id_charge 	= 206360618;
+		$id_bill 	= 189394188;
 		
 		$db = new mysql();
 		$db->alterar("pedido_loja_carrinho", array(

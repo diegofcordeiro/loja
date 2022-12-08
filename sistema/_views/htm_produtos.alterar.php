@@ -164,7 +164,7 @@ $curl = curl_init();
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
-                            <label class="col-md-12">Valor sem desconto</label>
+                            <label class="col-md-12">Valor do produto</label>
                             <div class="col-md-12">
                               <input name="valor_falso" type="text" class="form-control" value="<?=$valor_falso?>" onkeypress="Mascara(this,MaskMonetario)" onKeyDown="Mascara(this,MaskMonetario)" >
                             </div>
@@ -172,7 +172,7 @@ $curl = curl_init();
                         </div>
                         <div class="col-md-3">
                           <div class="form-group">
-                            <label class="col-md-12">Preço Final</label>
+                            <label class="col-md-12">Valor com desconto</label>
                             <div class="col-md-12">
                               <input name="valor" type="text" class="form-control" value="<?=$valor?>" onkeypress="Mascara(this,MaskMonetario)" onKeyDown="Mascara(this,MaskMonetario)" >
                             </div>

@@ -8760,12 +8760,13 @@ class index extends controller {
 		return $bill;
 	}
 
-	public function vindi_estorno($bill_id){
+	public function vindi_estorno(){
+		$codigo = $this->get('codigo');
 		require_once('vendor/autoload.php');
 
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$bill_id.'/refund',
+			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$codigo.'/refund',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -8787,18 +8788,19 @@ class index extends controller {
 		$response = curl_exec($curl);
 		$response = json_decode($response, true);
 		curl_close($curl);
+		$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
 		// return $response;
-		if(isset($response['errors'])){
-			$response = 0;
-		}else{
-			if($response['charge']['status'] == 'canceled'){
-				$response = 1;
-			}else{
-				$response = 0;
-			}
-		}
+		// if(isset($response['errors'])){
+		// 	$response = 0;
+		// }else{
+		// 	if($response['charge']['status'] == 'canceled'){
+		// 		$response = 1;
+		// 	}else{
+		// 		$response = 0;
+		// 	}
+		// }
 		
-		return $response;
+		// return $response;
 	}
 
 	public function WebhookHandler(){

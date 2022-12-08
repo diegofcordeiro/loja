@@ -876,13 +876,14 @@
 											<th>Pedido</th>
 											<th>Valor</th>
 											<th>Status</th>
-											<th></th>
+											<th>Ações</th>
 										</tr>
 									</thead>
 									<?php
 									$n = 0;
 									foreach ($lista_pedidos as $key => $value) {
 										$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
+										$endereco = DOMINIO.$controller."/vindi_estorno/codigo/".$value['charger_id'];
 
 										if($value['msg'] != 0){
 											$mensagens = $value['msg']." Mensagem(s)";
@@ -895,6 +896,7 @@
 										<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
 										<td><a href='$endereco' >R$ ".$value['valor_total']."</a></td>
 										<td><a href='$endereco' >".$value['status']."</a></td>
+										<td><a href='$endereco' style='color:blue;' >".$mensagens."</a></td>
 										<td><a href='$endereco' style='color:blue;' >".$mensagens."</a></td>
 										</tr>
 										";

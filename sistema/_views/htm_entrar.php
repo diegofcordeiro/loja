@@ -23,6 +23,13 @@
     background-position: center center !important;
     background-size: cover !important;
     }
+    .login-box-body, .register-box-body {
+        background: #ffffffa3 !important;
+        padding: 20px;
+        border-top: 0;
+        border-radius: 30px !important;
+        color: #666;
+    }
   </style>
 
 </head>

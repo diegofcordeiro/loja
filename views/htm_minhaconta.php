@@ -891,7 +891,7 @@
 										} else {
 											$mensagens = "";
 										}
-										if($value['status'] == 4){
+										if($value['status_id'] == 4){
 											$est = "<a href='$estorno' style='color:blue;' >Estrornar</a>";
 										}
 										echo "

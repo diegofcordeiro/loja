@@ -19,6 +19,8 @@ Class model_pedidos extends model{
 			$lista[$n]['data'] = date('d/m/y', $data_pedidos->data);			
 			$lista[$n]['valor_total'] = $valores->trata_valor($data_pedidos->valor_total);
 			$lista[$n]['status'] = $this->status($data_pedidos->status);
+			$lista[$n]['charger_id'] = $data_pedidos->transacao_charger_id;
+			$lista[$n]['status_id'] = $data_pedidos->status;
 			$lista[$n]['msg'] = $this->mensagens_n_lidas($data_pedidos->codigo);
 			
         $n++;

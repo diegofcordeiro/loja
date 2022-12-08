@@ -962,11 +962,11 @@ $curl = curl_init();
 
         $(document).ready(function() {
 
-          var title = $("select#ref option:selected").text();
+          var title = $("select#ref option:selected").attr('data-title');
             $('#titulo').val(title);
 
           $("#ref").change(function(){
-            var title = $("select#ref option:selected").text();
+            var title = $("select#ref option:selected").attr('data-title');
             $('#titulo').val(title);
           });
 

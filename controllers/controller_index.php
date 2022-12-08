@@ -8639,7 +8639,7 @@ class index extends controller {
 				$id_trans = $bill['bill']['id'];
 
 				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
-					$status = 2;
+					$status = 4;
 					// $this->integrar_trilha_lms($cod, $cpf);
 				}else{
 					$status = 1;
@@ -8687,6 +8687,8 @@ class index extends controller {
 					
 				), " id='$recorrencia->id' ");
 				$db->alterar("pedido_loja", array(
+					"transacao_charger_id"=>"$id_charge",
+					"transacao_bill_id"=>"$id_trans",
 					"status"=>"$status",
 					
 				), " codigo='$cod' ");
@@ -8826,9 +8828,6 @@ class index extends controller {
 				$id_charge 	= $event->data->charge->id;
 				$id_bill 	= $event->data->charge->bill->id;
 
-				// $id_charge 	= 206360618;
-				// $id_bill 	= 189394188;
-				
 				$db = new mysql();
 				$db->alterar("pedido_loja_carrinho", array(
 					"status"=>8,

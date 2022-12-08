@@ -876,6 +876,7 @@
 											<th>Pedido</th>
 											<th>Valor</th>
 											<th>Status</th>
+											<th>Mensagens</th>
 											<th>Ações</th>
 										</tr>
 									</thead>
@@ -884,11 +885,14 @@
 									foreach ($lista_pedidos as $key => $value) {
 										$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
 										$estorno = DOMINIO.$controller."/vindi_estorno/codigo/".$value['charger_id'];
-
+										$est = '';
 										if($value['msg'] != 0){
 											$mensagens = $value['msg']." Mensagem(s)";
 										} else {
 											$mensagens = "";
+										}
+										if($value['status'] == 4){
+											$est = "<a href='$estorno' style='color:blue;' >Estrornar</a>";
 										}
 										echo "
 										<tr>
@@ -896,8 +900,8 @@
 										<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
 										<td><a href='$endereco' >R$ ".$value['valor_total']."</a></td>
 										<td><a href='$endereco' >".$value['status']."</a></td>
+										<td></td>
 										<td><a href='$endereco' style='color:blue;' >".$mensagens."</a></td>
-										<td><a href='$estorno' style='color:blue;' >Estrornar</a></td>
 										</tr>
 										";
 										$n++;

@@ -484,7 +484,6 @@ class produtos extends controller {
 			"novidades"=>$novidades
 		), " codigo='$codigo' ");
 		
-		echo'<pre>';print_r($db);exit;
 		$this->irpara(DOMINIO.$this->_controller.'/alterar_produto/codigo/'.$codigo.'/aba/dados');
 	}
 

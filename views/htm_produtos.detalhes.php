@@ -767,7 +767,7 @@
 					$valor_principal = explode(",",$valor_principal);
 					if($data->banner != ''){ ?>
 						<div class='col-xs-12 col-sm-5 col-md-5'>
-							<img src="/arquivos/banner_img_produto_g/<?=$data->codigo?>/<?=$data->banner?>" alt="">
+							<img src="<?=DOMINIO?>/arquivos/banner_img_produto_g/<?=$data->codigo?>/<?=$data->banner?>" alt="">
 						</div>
 						<div class='col-xs-12 col-sm-4 col-md-4'>
 							<div class="desc_bloc">

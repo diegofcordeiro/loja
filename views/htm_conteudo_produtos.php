@@ -485,8 +485,6 @@ $ordem = $conteudo_sessao['ordem'];
 								$valor_descontado = $valor_principal_full - ($valor_principal_full / 100 * $value->combo_desconto);
 							}
 							$valor_descontado = round($valor_descontado, 2);
-							print_r($valor_descontado);
-							$valor_descontado = number_format($valor_descontado,2,",",".");
 							$valor_descontado = explode(".",$valor_descontado);
 							if(strlen($valor_descontado[1]) == 1){
 								$valor_descontado[1] = $valor_descontado[1].'0';

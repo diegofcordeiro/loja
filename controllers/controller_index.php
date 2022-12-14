@@ -2215,6 +2215,7 @@ class index extends controller {
 				retorno_erro("E-mails são diferentes!");
 				exit;
 			}
+
 			$fisica_nome = $this->post('fisica_nome');
 			$country_document = $this->post('country_document');
 			
@@ -2239,6 +2240,7 @@ class index extends controller {
 			}
 
 			$email_lms = $this->check_email_lms($email, $fisica_cpf);
+			print_r($email_lms);exit;
 			if($email_lms == 1){
 				retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
 				exit;

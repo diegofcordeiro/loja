@@ -802,7 +802,21 @@
 					<div class='col-xs-12 col-sm-6 col-md-6'>
 						<form id="cadastro_form" name="cadastro_form" >
 							<div class="cadastro_div" > 
-								
+								<div class="div_form" >
+									<label>País</label><br>
+									<input type="radio" id="Brasil" name="country_document" checked value="1">
+									<label for="Brasil">Brasil</label><br>
+									<input type="radio" id="Outros" name="country_document" value="0">
+									<label for="Outros">Outros</label><br>
+								</div>
+								<div class="div_form" id="brasil_div">
+									<label>CPF</label>
+									<input type="text" class="form-control cadastro_form" name='fisica_cpf' data-mask="00000000000" id='fisica_cpf' placeholder="Digite seu cpf" >
+								</div>
+								<div class="div_form" id="outros_div" style="display:none">
+									<label>Documento</label>
+									<input type="text" class="form-control cadastro_form" name='fisica_documento' id='fisica_documento' placeholder="Digite seu documento" >
+								</div>
 								<div class="div_form" >
 									<label>Digite seu E-mail</label>
 									<input type="text" class="form-control cadastro_form" name="email" autocomplete="off" placeholder="Digite seu E-mail"  >
@@ -855,21 +869,7 @@
 									<label>Nome Completo</label>
 									<input type="text" class="form-control cadastro_form" name='fisica_nome' id='fisica_nome' placeholder="Nome Completo" >
 								</div>
-								<div class="div_form" >
-									<label>País</label><br>
-									<input type="radio" id="Brasil" name="country_document" checked value="1">
-									<label for="Brasil">Brasil</label><br>
-									<input type="radio" id="Outros" name="country_document" value="0">
-									<label for="Outros">Outros</label><br>
-								</div>
-								<div class="div_form" id="brasil_div">
-									<label>CPF</label>
-									<input type="text" class="form-control cadastro_form" name='fisica_cpf' data-mask="00000000000" id='fisica_cpf' placeholder="Digite seu cpf" >
-								</div>
-								<div class="div_form" id="outros_div" style="display:none">
-									<label>Documento</label>
-									<input type="text" class="form-control cadastro_form" name='fisica_documento' id='fisica_documento' placeholder="Digite seu documento" >
-								</div>
+								
 
 								<div class="div_form">
 									<label>Telefone</label>

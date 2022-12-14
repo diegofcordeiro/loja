@@ -2532,10 +2532,7 @@ class index extends controller {
 		$sql = "UPDATE usuario
 				SET id_ocupacao = 29, id_perfil = 22, id_pais = 1, id_empresa = 1, nome = '$fisica_nome', email = '$email', cpf = '$fisica_cpf', telefone = '$telefone', endereco = '$endereco', numero = '$numero', bairro = '$bairro', cidade = '$cidade', ativo =1, senha = '$senha', pontos = 0, acessibilidade = 0, avisoemail = 0, instrutor =0, id_loja = 3, performance = '0'
 				WHERE id = '$lms_usuario_id'";
-		print_r("UPDATE usuario
-				SET id_ocupacao = 29, id_perfil = 22, id_pais = 1, id_empresa = 1, nome = '$fisica_nome', email = '$email', cpf = '$fisica_cpf', telefone = '$telefone', endereco = '$endereco', numero = '$numero', bairro = '$bairro', cidade = '$cidade', ativo =1, senha = '$senha', pontos = 0, acessibilidade = 0, avisoemail = 0, instrutor =0, id_loja = 3, performance = '0'
-				WHERE id = '$lms_usuario_id'");
-		print_r($mysqli->query($sql));
+		$mysqli->query($sql);
 		
 		$mysqli->close();
 	}

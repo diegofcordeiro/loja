@@ -2288,7 +2288,7 @@ class index extends controller {
 				"fisica_cpf"=>"$fisica_cpf",
 				"email"=>"$email",
 				"senha"=>"000",
-				"etapa"=>0
+				"etapa"=>1
 			));
 
 			$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$codigo);
@@ -2496,7 +2496,7 @@ class index extends controller {
 				$add_data_gerado		= date("Y-m-d H:i:s");
 				$senha_md5 = $this->post('senha');
 				$senha_md5 = md5($senha_md5);
-				$this->salvar_usuario_lms($data_confere->fisica_nome,$data_confere->email,$data_confere->fisica_cpf,$data_confere->telefone,$data_confere->endereco,$data_confere->numero,$data_confere->bairro,$data_confere->cidade,$data_confere->estado,$add_data_gerado,$data_confere->fisica_nascimento,$data_confere->fisica_sexo,$senha_md5);
+				$this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome,$data_confere->email,$data_confere->fisica_cpf,$data_confere->telefone,$data_confere->endereco,$data_confere->numero,$data_confere->bairro,$data_confere->cidade,$data_confere->estado,$add_data_gerado,$data_confere->fisica_nascimento,$data_confere->fisica_sexo,$senha_md5);
 
 			} else {
 				
@@ -2526,12 +2526,12 @@ class index extends controller {
 		}
 	}
 
-	public function salvar_usuario_lms($fisica_nome = NULL ,$email = NULL ,$fisica_cpf = NULL ,$telefone = NULL ,$endereco = NULL ,$numero = NULL ,$bairro = NULL ,$cidade = NULL ,$estado = NULL ,$add_data_gerado = NULL ,$fisica_nascimento = NULL ,$fisica_sexo = NULL ,$senha = NULL ){
+	public function salvar_usuario_lms($lms_usuario_id, $fisica_nome = NULL ,$email = NULL ,$fisica_cpf = NULL ,$telefone = NULL ,$endereco = NULL ,$numero = NULL ,$bairro = NULL ,$cidade = NULL ,$estado = NULL ,$add_data_gerado = NULL ,$fisica_nascimento = NULL ,$fisica_sexo = NULL ,$senha = NULL ){
 
 		require('conexao.php');
-		$sql = "INSERT INTO usuario
-				(id_ocupacao, id_perfil, id_pais, id_empresa, nome, email, cpf, telefone, endereco, numero, bairro, cidade, uf, ativo, data_gerado, data_alterado, senha, pontos, imagem, aviso_curso, aviso_biblioteca, id_idioma, acessibilidade, token_fcm, hora_entrada, hora_saida, avisoemail, id_publico, instrutor, bio_user, complemento, id_loja, id_cidade, id_estado, cod_postal, ultimo_acesso, moedas, nivel, ultimo_status, ultimo_badge, performance, ultimo_termo)
-				VALUES(29, 22, 1, 1, '$fisica_nome', '$email', '$fisica_cpf', '$telefone', '$endereco', '$numero', '$bairro', '$cidade', '$estado', 1, '$add_data_gerado', NULL, '$senha', 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', NULL);";
+		$sql = "UPDATE usuario
+				SET (id_ocupacao = 29, id_perfil = 22, id_pais = 1, id_empresa = 1, nome = $fisica_nome', email = '$email', cpf = '$fisica_cpf', telefone = '$telefone', endereco = '$endereco', numero = '$numero', bairro = '$bairro', cidade = '$cidade', uf, = '$telefone' , ativo =1, senha = '$senha', pontos = 0, acessibilidade = 0, token_fcm, hora_entrada, hora_saida, avisoemail = 0, id_publico, instrutor =0, bio_user, complemento, id_loja = 3, performance = '0')
+				WHERE id = '$lms_usuario_id;";
 		$mysqli->query($sql);
 		$mysqli->close();
 	}

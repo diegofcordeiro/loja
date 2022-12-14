@@ -2474,8 +2474,8 @@ class index extends controller {
 	public function check_email_lms($email = NULL){
 		require('conexao.php');
 		$sql = "SELECT email FROM usuario WHERE email = '$email' ;";
-		$mysqli->query($sql);
-		$mysqli->close();
+		$result = $mysqli->query($sql);
+		return $result;
 	}
 
 	public function salvar_usuario_lms($fisica_nome = NULL ,$email = NULL ,$fisica_cpf = NULL ,$telefone = NULL ,$endereco = NULL ,$numero = NULL ,$bairro = NULL ,$cidade = NULL ,$estado = NULL ,$add_data_gerado = NULL ,$fisica_nascimento = NULL ,$fisica_sexo = NULL ,$senha = NULL ){

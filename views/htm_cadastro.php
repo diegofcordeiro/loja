@@ -925,7 +925,7 @@
 
 										<div class="div_form" style="text-align: right;" >
 											<?=$botao_padrao?>
-											<input type="hidden" name="etapa" value="2">
+											<input type="hidden" name="etapa" value="1">
 											<input type="hidden" name="codigo" value="<?=$codigo_cadastro?>">
 										</div>
 
@@ -951,7 +951,7 @@
 
 										<div class="div_form" style="text-align: right;" >
 											<?=$botao_padrao?>
-											<input type="hidden" name="etapa" value="2">
+											<input type="hidden" name="etapa" value="1">
 											<input type="hidden" name="codigo" value="<?=$codigo_cadastro?>">
 										</div>
 
@@ -1006,7 +1006,7 @@
 								
 								<div class="div_form" style="text-align: right;" >
 									<?=$botao_padrao?>
-									<input type="hidden" name="etapa" value="3">
+									<input type="hidden" name="etapa" value="2">
 									<input type="hidden" name="codigo" value="<?=$codigo_cadastro?>">
 								</div>
 								

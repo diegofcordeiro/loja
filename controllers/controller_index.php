@@ -2216,8 +2216,10 @@ class index extends controller {
 				exit;
 			}
 			$email_lms = $this->check_email_lms($email);
-			
-			print_r($email_lms ); exit;
+			if($email_lms == 1){
+				retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
+				exit;
+			}
 
 			$validaemail = new model_valida();	
 			if(!$validaemail->email($email)){

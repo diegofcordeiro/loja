@@ -2219,6 +2219,9 @@ class index extends controller {
 			if($email_lms == 1){
 				retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
 				exit;
+			}else{
+				$last_id = $this->adiciona_email_lms($email);
+				print_r($last_id);exit;
 			}
 
 			$validaemail = new model_valida();	
@@ -2473,7 +2476,15 @@ class index extends controller {
 			}
 		}
 	}
-
+	public function adiciona_email_lms($email = NULL  ){
+		require('conexao.php');
+		$sql = "INSERT INTO usuario (nome) VALUES('$email');";
+		$mysqli->query($sql);
+		$last_id = $mysqli->insert_id;
+		$mysqli->close();
+		return $last_id;
+	}
+	 
 	public function check_email_lms($email = NULL){
 		require('conexao.php');
 		$sql = "SELECT email FROM usuario WHERE email = '$email' ;";

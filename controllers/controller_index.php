@@ -2215,13 +2215,33 @@ class index extends controller {
 				retorno_erro("E-mails são diferentes!");
 				exit;
 			}
-			$email_lms = $this->check_email_lms($email);
+			$fisica_nome = $this->post('fisica_nome');
+			$country_document = $this->post('country_document');
+			
+			if($country_document == 0){
+				$fisica_cpf = $this->post('fisica_documento');
+				$telefone = $this->post('cadastro_telefone');
+			}else{
+				$fisica_cpf = $this->post('fisica_cpf');
+				$telefone = $this->post('cadastro_telefone_brasil');
+			}
+			if(!$fisica_cpf){
+				retorno_erro("Digite corretamente seu CPF.");
+				exit;
+
+			} elseif($country_document == 1) {
+				require_once("api/cpf_cnpj/cpf_cnpj.php");
+				$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
+				if(!$cpf_cnpj->valida()){
+					retorno_erro("Digite corretamente seu CPF.");
+					exit;
+				}
+			}
+
+			$email_lms = $this->check_email_lms($email, $fisica_cpf);
 			if($email_lms == 1){
 				retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
 				exit;
-			}else{
-				$last_id = $this->adiciona_email_lms($email);
-				print_r($last_id);exit;
 			}
 
 			$validaemail = new model_valida();	
@@ -2252,10 +2272,16 @@ class index extends controller {
 			$codigo = substr(time().rand(10000,99999),-15);
 			$tipo = "F";
 
+
+
 			$db = new mysql();
 			$db->inserir("cadastro", array(
+				"fisica_nome"=>"$fisica_nome",
+				"telefone"=>"$telefone",
+				"is_brasil"=>"$country_document",
 				"codigo"=>"$codigo",
 				"tipo"=>"$tipo",
+				"fisica_cpf"=>"$fisica_cpf",
 				"email"=>"$email",
 				"senha"=>"000",
 				"etapa"=>1
@@ -2308,7 +2334,6 @@ class index extends controller {
 			$db = new mysql();
 			$db->alterar("cadastro", array(
 				"fisica_nome"=>"$fisica_nome",
-				"fisica_cpf"=>"$fisica_cpf",
 				"telefone"=>"$telefone",
 				"is_brasil"=>"$country_document",
 				"etapa"=>2
@@ -2476,7 +2501,7 @@ class index extends controller {
 			}
 		}
 	}
-	public function adiciona_email_lms($email = NULL  ){
+	public function adiciona_email_lms($email = NULL){
 		require('conexao.php');
 		$sql = "INSERT INTO usuario (nome) VALUES('$email');";
 		$mysqli->query($sql);
@@ -2485,9 +2510,9 @@ class index extends controller {
 		return $last_id;
 	}
 	 
-	public function check_email_lms($email = NULL){
+	public function check_email_lms($email = NULL, $fisica_cpf){
 		require('conexao.php');
-		$sql = "SELECT email FROM usuario WHERE email = '$email' ;";
+		$sql = "SELECT email FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';";
 		if ($result = $mysqli->query($sql)) {
 			if($result->num_rows == 1){
 				return 1;

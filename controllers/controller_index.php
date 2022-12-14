@@ -2357,7 +2357,7 @@ class index extends controller {
 				retorno_erro("Ocorreu um erro!");
 				exit;				
 			}
-
+			print_r('aquiioooo');
 			$country_document = $this->post('country_document');
 			// print_r($country_document);exit;
 			if($country_document == 1){
@@ -2421,11 +2421,11 @@ class index extends controller {
 			//validar senha
 			if($senha AND $senha_confirma){
 				if($senha != $senha_confirma){
-					retorno_erro("Digite uma senha válida e confirme.");
+					retorno_erro("Digite uma senha válida e confirme1.");
 					exit;
 				}
 			} else {
-				retorno_erro("Digite uma senha válida e confirme.");
+				retorno_erro("Digite uma senha válida e confirme2.");
 				exit;
 			}
 

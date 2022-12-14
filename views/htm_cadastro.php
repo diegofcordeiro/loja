@@ -818,6 +818,10 @@
 									<input type="text" class="form-control cadastro_form" name='fisica_documento' id='fisica_documento' placeholder="Digite seu documento" >
 								</div>
 								<div class="div_form">
+									<label>Nome Completo</label>
+									<input type="text" class="form-control cadastro_form" name='fisica_nome' id='fisica_nome' placeholder="Nome Completo" >
+								</div>
+								<div class="div_form">
 									<label>Telefone</label>
 									<input type="text" class="form-control cadastro_form" name="cadastro_telefone_brasil" id="cadastro_telefone_brasil" data-mask="(00) 00000-0000" placeholder="Telefone"  >
 									<input type="text" class="form-control cadastro_form" name="cadastro_telefone" id="cadastro_telefone_outros" placeholder="Telefone"  style="display:none">

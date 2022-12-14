@@ -2397,7 +2397,7 @@ class index extends controller {
 				"estado"=>"$estado",
 				"cidade"=>"$cidade",
 				"is_brasil_address"=>"$country_document",
-				"etapa"=>1
+				"etapa"=>2
 			), " codigo='".$codigo."' AND etapa='1'  ");
 
 

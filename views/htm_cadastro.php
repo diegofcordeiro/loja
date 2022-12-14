@@ -851,53 +851,11 @@
 			?>
 
 
+
+
 			<?php
 
 			if($etapa == 1){
-
-				?>
-				<!-- <div class="row">
-					<div class="col-sm-12">
-						<h2 class="titulo_padrao" >Complete seus dados</span></h2>
-						<div class="titulo_padrao_linha" ></div>
-					</div>
-				</div> -->
-
-				<div class="row">
-
-					<div class='col-xs-12 col-sm-3 col-md-3'></div>
-					<div class='col-xs-12 col-sm-6 col-md-6'>
-						<form id="cadastro_form" name="cadastro_form" >
-							<div class="cadastro_div" > 
-
-								<div class="div_form" >
-									<label>Nome Completo</label>
-									<input type="text" class="form-control cadastro_form" name='fisica_nome' id='fisica_nome' placeholder="Nome Completo" >
-								</div>
-								<div class="div_form" style="text-align: right;" >
-									<?=$botao_padrao?>
-									<input type="hidden" name="etapa" value="1">
-									<input type="hidden" name="codigo" value="<?=$codigo_cadastro?>">
-								</div>
-
-							</div>
-						</form>
-					</div>
-					<div class='col-xs-12 col-sm-3 col-md-3'></div>
-
-				</div>
-
-				<?php
-
-			}
-
-			?>
-
-
-
-			<?php
-
-			if($etapa == 2){
 
 				?>
 				<!-- <div class="row">
@@ -1018,7 +976,7 @@
 
 			<?php
 
-			if($etapa == 3){
+			if($etapa == 2){
 
 				?>
 				<!-- <div class="row">

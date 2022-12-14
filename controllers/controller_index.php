@@ -2239,13 +2239,6 @@ class index extends controller {
 				}
 			}
 
-			$email_lms = $this->check_email_lms($email, $fisica_cpf);
-			print_r($email_lms);exit;
-			if($email_lms == 1){
-				retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
-				exit;
-			}
-
 			$validaemail = new model_valida();	
 			if(!$validaemail->email($email)){
 				retorno_erro("E-mail inválido!");
@@ -2270,6 +2263,14 @@ class index extends controller {
 				}
 			}
 
+			$email_lms = $this->check_email_lms($email, $fisica_cpf);
+			if($email_lms == 1){
+				retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
+				exit;
+			}else{
+				$last_id = $this->adiciona_email_lms($email);
+			}
+
 			//gravar no banco de dados
 			$codigo = substr(time().rand(10000,99999),-15);
 			$tipo = "F";
@@ -2279,6 +2280,7 @@ class index extends controller {
 			$db = new mysql();
 			$db->inserir("cadastro", array(
 				"fisica_nome"=>"$fisica_nome",
+				"lms_usuario_id"=>"$last_id",
 				"telefone"=>"$telefone",
 				"is_brasil"=>"$country_document",
 				"codigo"=>"$codigo",
@@ -2286,7 +2288,7 @@ class index extends controller {
 				"fisica_cpf"=>"$fisica_cpf",
 				"email"=>"$email",
 				"senha"=>"000",
-				"etapa"=>1
+				"etapa"=>0
 			));
 
 			$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$codigo);
@@ -2295,59 +2297,59 @@ class index extends controller {
 
 
 
+		// if($etapa == 1){
+
+		// 	$codigo = $this->post('codigo');
+
+		// 	if(!$codigo){
+		// 		retorno_erro("Ocorreu um erro!");
+		// 		exit;				
+		// 	}
+
+		// 	$fisica_nome = $this->post('fisica_nome');
+		// 	$country_document = $this->post('country_document');
+			
+		// 	if($country_document == 0){
+		// 		$fisica_cpf = $this->post('fisica_documento');
+		// 		$telefone = $this->post('cadastro_telefone');
+		// 	}else{
+		// 		$fisica_cpf = $this->post('fisica_cpf');
+		// 		$telefone = $this->post('cadastro_telefone_brasil');
+
+		// 	}
+
+		// 	if(!$fisica_cpf){
+
+		// 		retorno_erro("Digite corretamente seu CPF.");
+		// 		exit;
+
+		// 	} elseif($country_document == 1) {
+
+		// 		require_once("api/cpf_cnpj/cpf_cnpj.php");
+
+		// 		$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
+		// 		if(!$cpf_cnpj->valida()){
+		// 			retorno_erro("Digite corretamente seu CPF.");
+		// 			exit;
+		// 		}
+
+		// 	}
+			
+		// 	$db = new mysql();
+		// 	$db->alterar("cadastro", array(
+		// 		"fisica_nome"=>"$fisica_nome",
+		// 		"telefone"=>"$telefone",
+		// 		"is_brasil"=>"$country_document",
+		// 		"etapa"=>2
+		// 	), " codigo='".$codigo."' AND etapa='1' ");
+
+
+		// 	$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$codigo);
+		// 	exit;
+		// }
+
+
 		if($etapa == 1){
-
-			$codigo = $this->post('codigo');
-
-			if(!$codigo){
-				retorno_erro("Ocorreu um erro!");
-				exit;				
-			}
-
-			$fisica_nome = $this->post('fisica_nome');
-			$country_document = $this->post('country_document');
-			
-			if($country_document == 0){
-				$fisica_cpf = $this->post('fisica_documento');
-				$telefone = $this->post('cadastro_telefone');
-			}else{
-				$fisica_cpf = $this->post('fisica_cpf');
-				$telefone = $this->post('cadastro_telefone_brasil');
-
-			}
-
-			if(!$fisica_cpf){
-
-				retorno_erro("Digite corretamente seu CPF.");
-				exit;
-
-			} elseif($country_document == 1) {
-
-				require_once("api/cpf_cnpj/cpf_cnpj.php");
-
-				$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
-				if(!$cpf_cnpj->valida()){
-					retorno_erro("Digite corretamente seu CPF.");
-					exit;
-				}
-
-			}
-			
-			$db = new mysql();
-			$db->alterar("cadastro", array(
-				"fisica_nome"=>"$fisica_nome",
-				"telefone"=>"$telefone",
-				"is_brasil"=>"$country_document",
-				"etapa"=>2
-			), " codigo='".$codigo."' AND etapa='1' ");
-
-
-			$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$codigo);
-			exit;
-		}
-
-
-		if($etapa == 2){
 
 			$codigo = $this->post('codigo');
 
@@ -2395,8 +2397,8 @@ class index extends controller {
 				"estado"=>"$estado",
 				"cidade"=>"$cidade",
 				"is_brasil_address"=>"$country_document",
-				"etapa"=>3
-			), " codigo='".$codigo."' AND etapa='2'  ");
+				"etapa"=>1
+			), " codigo='".$codigo."' AND etapa='1'  ");
 
 
 			$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$codigo);
@@ -2404,7 +2406,7 @@ class index extends controller {
 		}
 
 
-		if($etapa == 3){
+		if($etapa == 2){
 
 			$codigo = $this->post('codigo');
 
@@ -2435,12 +2437,12 @@ class index extends controller {
 			$db->alterar("cadastro", array( 
 				"senha"=>"$senha_tratada",
 				"senha_md5"=>"$senha_md5",
-				"etapa"=>4
-			), " codigo='".$codigo."' AND etapa='3' ");
+				"etapa"=>3
+			), " codigo='".$codigo."' AND etapa='2' ");
 
 
 			$conexao = new mysql();
-			$coisas_confere = $conexao->Executar("select * from cadastro where codigo='$codigo' AND etapa='4' ");
+			$coisas_confere = $conexao->Executar("select * from cadastro where codigo='$codigo' AND etapa='3' ");
 			if($coisas_confere->num_rows == 1){
 
 				$data_confere = $coisas_confere->fetch_object();
@@ -2489,7 +2491,7 @@ class index extends controller {
 				$db->alterar("cadastro", array(
 					"etapa"=>0,
 					"status" => 0
-				), " codigo='".$codigo."' AND etapa='4' ");
+				), " codigo='".$codigo."' AND etapa='3' ");
 				
 				$add_data_gerado		= date("Y-m-d H:i:s");
 				$senha_md5 = $this->post('senha');

@@ -87,7 +87,7 @@ class combos extends controller {
         $dados['trilha_curso'] = $trilha_curso;
 		$dados['link'] = DOMINIO.$this->_controller.'/alterar_combo/codigo/'.$codigo.'/aba/conteudo_curso';
 		$dados['link_feedback'] = DOMINIO.$this->_controller.'/alterar_combo/codigo/'.$codigo.'/aba/feedback';
-		echo '<pre>';print_r($dados);exit
+		echo '<pre>';print_r($dados);exit;
 		$this->view('combos.alterar', $dados);
 	}
     public function alterar_combo_dados(){

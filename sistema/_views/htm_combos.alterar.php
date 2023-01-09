@@ -35,6 +35,7 @@
       echo '<pre>';print_r($all_planos);
       // return $all_planos;
   }
+  get_plans()
 // echo '<pre>';
 // $plans = get_plans();
 // print_r($plans);exit;

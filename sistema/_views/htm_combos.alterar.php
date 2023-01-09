@@ -1,28 +1,38 @@
 <?php include_once('base.php'); 
   function get_plans(){
-    $curl = curl_init();
-      curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://app.vindi.com.br/api/v1/plans?page=1&per_page=200&sort_by=created_at&sort_order=asc',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        CURLOPT_POSTFIELDS =>'',
-        CURLOPT_HTTPHEADER => array(
-          'accept: application/json',
-          'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
-          'Content-Type: application/json'
-        ),
-      ));
+    $i=1;
+			$all_planos = array();
+			while ($i != 0) {
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+					CURLOPT_URL => 'https://app.vindi.com.br/api/v1/plans?page='.$i.'&per_page=50&sort_by=created_at&sort_order=DESC',
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_ENCODING => '',
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 0,
+					CURLOPT_FOLLOWLOCATION => true,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_CUSTOMREQUEST => 'GET',
+					CURLOPT_POSTFIELDS =>'',
+					CURLOPT_HTTPHEADER => array(
+					'accept: application/json',
+					'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
+					'Content-Type: application/json'
+					),
+				));
 
-      $response = curl_exec($curl);
-      $response = json_decode($response, true);
-      curl_close($curl);
-      // echo '<pre>';print_r($response);exit;
-      return $response;
+				$response = curl_exec($curl);
+				$response = json_decode($response, true);
+				curl_close($curl);
+				// echo '<pre>';print_r(count($response['plans']));
+				array_push($all_planos,$response['plans']);
+				if(count($response['plans']) < 50){
+					$i = 0;
+				}else{
+					$i++;
+				}
+			}
+      return $all_planos;
   }
 // echo '<pre>';
 // $plans = get_plans();

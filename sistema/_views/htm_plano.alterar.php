@@ -161,7 +161,7 @@
                                   $price = 0;
                                 } 
                                 ?>
-                                <input name="description" type="text" class="form-control" value="<?=$data->description?>" >
+                                <input name="description" type="text" class="form-control" value="<?=$price?>" >
                               </div>
                             </div>
                           </div>

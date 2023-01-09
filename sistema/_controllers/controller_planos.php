@@ -74,7 +74,7 @@ class planos extends controller {
 					$status = $cada['status'] == 'active' ? 1 : 0;
 
 					$db = new mysql();
-					$db->executar("DELETE * FROM planos");
+					$db->executar("DELETE FROM planos");
 
 					$db->inserir('planos', array(
 						"id"=>"$id",

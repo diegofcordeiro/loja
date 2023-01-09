@@ -156,7 +156,7 @@
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
                                 <?php 
-                                print_r($data->description['plan_items']);exit;
+                                print_r($data->description);exit;
                                 if(isset($data->description['plan_items'][0]->product->pricing_schema->price)){
                                   $price = $data->description['plan_items'][0]->product->pricing_schema->price;
                                 }else{

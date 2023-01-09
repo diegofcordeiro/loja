@@ -5,7 +5,7 @@
 			while ($i != 0) {
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-					CURLOPT_URL => 'https://app.vindi.com.br/api/v1/plans?page='.$i.'&per_page=50&sort_by=created_at&sort_order=DESC',
+          CURLOPT_URL => 'https://app.vindi.com.br/api/v1/plans?page='.$i.'&per_page=200&sort_by=created_at&sort_order=desc',
 					CURLOPT_RETURNTRANSFER => true,
 					CURLOPT_ENCODING => '',
 					CURLOPT_MAXREDIRS => 10,

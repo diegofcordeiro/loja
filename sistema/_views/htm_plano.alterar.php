@@ -162,7 +162,7 @@
                                   $price = 0;
                                 } 
                                 ?>
-                                <input name="description" type="text" class="form-control" value="<?=$price?>" >
+                                <input name="description" type="text" class="form-control" value="<?=number_format($price, 2, '.', '')?>" >
                               </div>
                             </div>
                           </div>

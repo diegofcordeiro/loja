@@ -24,7 +24,7 @@
 				$response = curl_exec($curl);
 				$response = json_decode($response, true);
 				curl_close($curl);
-				// echo '<pre>';print_r(count($response['plans']));
+				echo '<pre>';print_r(count($response['plans']));exit;
 				array_push($all_planos,$response['plans']);
 				if(count($response['plans']) < 50){
 					$i = 0;

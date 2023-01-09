@@ -188,7 +188,7 @@ class planos extends controller {
 		);
 		$plano_service = new Vindi\Plan($arguments);
 		$dados['data'] = $plano_service->get($clone_id);
-		// echo'<pre>';print_r($customerService->get($clone_id));exit;
+		echo'<pre>';print_r($dados['data']);exit;
 
 		$this->view('plano.alterar', $dados);
 

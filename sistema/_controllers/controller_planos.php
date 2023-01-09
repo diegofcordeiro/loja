@@ -61,7 +61,7 @@ class planos extends controller {
 			echo '<pre>';	
 
 			foreach($all_planos[0] as $cada){
-				echo '<pre>';print_r($all_planos[0][2]['plan_items'][0]['product']['pricing_schema']['price']);exit;
+
 					if(isset($cada['plan_items'][0]['product']['pricing_schema']['price'])){
 						$price = $cada['plan_items'][0]['product']['pricing_schema']['price'];
 					}else{

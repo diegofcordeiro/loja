@@ -56,24 +56,23 @@ class planos extends controller {
 					$i++;
 				}
 			}
-				echo '<pre>';print_r($all_planos);exit;
+				
 
 			echo '<pre>';	
 
-			// foreach($all_planos as $linha){
-			// 	foreach($linha as $cada){
-			// 		$id 	= $cada['id'];
-			// 		$titulo = $cada['name'];
-			// 		$status = $cada['status'] == 'active' ? 1 : 0;
+			foreach($all_planos[0] as $cada){
+				echo '<pre>';print_r($cada);exit;
+					$id 	= $cada['id'];
+					$titulo = $cada['name'];
+					$status = $cada['status'] == 'active' ? 1 : 0;
 
-			// 		$db = new mysql();
-			// 		$db->inserir('planos', array(
-			// 			"id"=>"$id",
-			// 			"titulo"=>"$titulo",
-			// 			"status"=>"$status"
-			// 		));
-			// 	}
-			// }
+					$db = new mysql();
+					$db->inserir('planos', array(
+						"id"=>"$id",
+						"titulo"=>"$titulo",
+						"status"=>"$status"
+					));
+			}
 			
 
 			

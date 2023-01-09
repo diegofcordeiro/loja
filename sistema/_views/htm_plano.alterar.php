@@ -124,7 +124,7 @@
                         <div class="row">
 
 
-                          <div class="col-md-6">                   
+                          <div class="col-md-3">                   
                             <div class="form-group">
                               <label class="col-md-12">Ativar/Desativar</label>
                               <div class="col-md-12">
@@ -135,7 +135,6 @@
                               </div>
                             </div>                   
                           </div>
-
                           <div class="col-md-3">
                             <div class="form-group">
                               <label class="col-md-12" >Intervalo</label>
@@ -144,11 +143,25 @@
                               </div>
                             </div>
                           </div>
-                           <div class="col-md-3">
+                          <div class="col-md-3">
                             <div class="form-group">
                               <label class="col-md-12" >Descricao</label>
                               <div class="col-md-12">
-                                  <input name="description" type="text" class="form-control" value="<?=$data->description?>" >
+                                <input name="description" type="text" class="form-control" value="<?=$data->description?>" >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label class="col-md-12" >Preço</label>
+                              <div class="col-md-12">
+                                <?php if(isset($data->description['plan_items'][0]->product->pricing_schema->price)){
+                                  $price = $data->description['plan_items'][0]->product->pricing_schema->price;
+                                }else{
+                                  $price = 0;
+                                } 
+                                ?>
+                                <input name="description" type="text" class="form-control" value="<?=$data->description?>" >
                               </div>
                             </div>
                           </div>

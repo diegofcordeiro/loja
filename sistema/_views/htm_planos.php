@@ -124,7 +124,13 @@
 	<script src="<?=LAYOUT?>dist/js/demo.js"></script><!-- page script -->
 	<script>
 		function sync(){
-			alert('aqui');
+			$.ajax({
+                    url:'<?=$_base['objeto']?>lista_planos_vindi',
+                    method: 'post',
+                    success: function(response){
+                      location.reload();
+                    }
+                  });
 		}
 		$(function () {
 

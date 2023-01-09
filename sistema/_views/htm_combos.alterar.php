@@ -33,9 +33,9 @@
 			}
       return $all_planos;
   }
-echo '<pre>';
-$plans = get_plans();
-print_r($plans);exit;
+// echo '<pre>';
+// $plans = get_plans();
+// print_r($plans);exit;
 
   // foreach($plans['plans'] as $plan){
   //   print_r($plan['id']);
@@ -183,7 +183,7 @@ print_r($plans);exit;
                                 <select class="form-control select2" name="assinatura" >
                                   <?php 
                                   $plans = get_plans();
-                                    foreach($plans['plans'] as $plan){
+                                    foreach($plans['plans'][0] as $plan){
                                   ?>
                                     <option value='<?=$plan['id']?>' <?php if($data->assinatura == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
                                   

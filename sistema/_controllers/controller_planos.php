@@ -61,7 +61,7 @@ class planos extends controller {
 			echo '<pre>';	
 
 			foreach($all_planos[0] as $cada){
-				echo '<pre>';print_r($all_planos[0][2]);exit;
+				echo '<pre>';print_r($all_planos[0][2]['plan_items'][0]);exit;
 					$id 	= $cada['id'];
 					$titulo = $cada['name'];
 					$status = $cada['status'] == 'active' ? 1 : 0;

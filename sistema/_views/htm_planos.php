@@ -64,8 +64,8 @@
 							<div class="box">
 								<div class="box-body">
 									<div>
-										<button type="button" class="btn btn-primary" onClick="modal('<?=$_base['objeto']?>novo/', 'Novo');">Cadastrar</button>
-										<button type="button" class="btn btn-default" onClick="apagar_varios('form_apagar');" >Apagar Selecionados</button>
+										<button type="button" class="btn btn-primary" onClick="sync()">Sincronizar</button>
+										<!-- <button type="button" class="btn btn-default" onClick="apagar_varios('form_apagar');" >Apagar Selecionados</button> -->
 
 										<!-- <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>exportar';">Exportar</button>
 
@@ -123,6 +123,9 @@
 	<script src="<?=LAYOUT?>dist/js/app.min.js"></script>
 	<script src="<?=LAYOUT?>dist/js/demo.js"></script><!-- page script -->
 	<script>
+		function sync(){
+			alert('aqui');
+		}
 		$(function () {
 
 			$(".select2").select2();

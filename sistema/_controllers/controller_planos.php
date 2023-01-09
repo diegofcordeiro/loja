@@ -67,18 +67,21 @@ class planos extends controller {
 					}else{
 						$price = 0;
 					}
-					echo $price.'<br><br>';
+					// echo $price.'<br><br>';
 					$id 	= $cada['id'];
 					$titulo = $cada['name'];
 					$price  = $price;
 					$status = $cada['status'] == 'active' ? 1 : 0;
 
-					// $db = new mysql();
-					// $db->inserir('planos', array(
-					// 	"id"=>"$id",
-					// 	"titulo"=>"$titulo",
-					// 	"status"=>"$status"
-					// ));
+					$db = new mysql();
+					$db->executar("DELETE * FROM planos");
+
+					$db->inserir('planos', array(
+						"id"=>"$id",
+						"titulo"=>"$titulo",
+						"price"=>"$price",
+						"status"=>"$status"
+					));
 				}
 			}
 			

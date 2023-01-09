@@ -1,7 +1,7 @@
 <?php include_once('base.php'); 
   function get_plans(){
       $i=1;
-			$all_planos = array();
+			$all_planos=[];
 			while ($i != 0) {
 				$curl = curl_init();
 				curl_setopt_array($curl, array(

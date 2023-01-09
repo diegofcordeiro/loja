@@ -56,9 +56,9 @@ class planos extends controller {
 					$i++;
 				}
 			}
-				
-
-			echo '<pre>';	
+					
+			$db = new mysql();
+			$db->executar("DELETE FROM planos");
 
 			foreach($all_planos as $planos){
 				foreach($planos as $cada){
@@ -72,10 +72,6 @@ class planos extends controller {
 					$titulo = $cada['name'];
 					$price  = $price;
 					$status = $cada['status'] == 'active' ? 1 : 0;
-
-					$db = new mysql();
-					$db->executar("DELETE FROM planos");
-
 					$db->inserir('planos', array(
 						"id"=>"$id",
 						"titulo"=>"$titulo",

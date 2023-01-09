@@ -62,16 +62,23 @@ class planos extends controller {
 
 			foreach($all_planos[0] as $cada){
 				echo '<pre>';print_r($all_planos[0][2]['plan_items'][0]['product']['pricing_schema']['price']);exit;
+					if(isset($cada['plan_items'][0]['product']['pricing_schema']['price'])){
+						$price = $cada['plan_items'][0]['product']['pricing_schema']['price'];
+					}else{
+						$price = 0;
+					}
+					echo $price.'<br><br>';
 					$id 	= $cada['id'];
 					$titulo = $cada['name'];
+					$price  = $price;
 					$status = $cada['status'] == 'active' ? 1 : 0;
 
-					$db = new mysql();
-					$db->inserir('planos', array(
-						"id"=>"$id",
-						"titulo"=>"$titulo",
-						"status"=>"$status"
-					));
+					// $db = new mysql();
+					// $db->inserir('planos', array(
+					// 	"id"=>"$id",
+					// 	"titulo"=>"$titulo",
+					// 	"status"=>"$status"
+					// ));
 			}
 			
 

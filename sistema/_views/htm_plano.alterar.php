@@ -155,7 +155,9 @@
                             <div class="form-group">
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
-                                <?php if(isset($data->description['plan_items'][0]->product->pricing_schema->price)){
+                                <?php 
+                                print_r($data->description['plan_items']);exit;
+                                if(isset($data->description['plan_items'][0]->product->pricing_schema->price)){
                                   $price = $data->description['plan_items'][0]->product->pricing_schema->price;
                                 }else{
                                   $price = 0;

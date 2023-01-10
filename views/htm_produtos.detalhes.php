@@ -772,7 +772,7 @@
 						<?php if($data->$only_combo == 1){?>
 							<div class='col-xs-12 col-sm-7 col-md-7'>
 						<?php }else{?>
-							<div class='col-xs-12 col-sm-7 col-md-7'>
+							<div class='col-xs-12 col-sm-4 col-md-4'>
 						<?php }?>
 							<div class="desc_bloc">
 								<div class="style1" style="margin-top: 20px;"><?=$data->summary?></div>

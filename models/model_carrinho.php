@@ -124,14 +124,7 @@ Class model_carrinho extends model{
 			$new = array();
 			foreach ($lista as $list) {
 				
-				$total_total = 0;
-				if($list['usar_valor_vindi'] == 1){
-					$total_total = $list['combo_valor'];
-				}else{
-					foreach($lista as $list){
-						$total_total += $list['total_unitario'];
-					}
-				}
+
 
 				$combo = ($list['id_combo'] > 0 ? $list['id_combo'] : 0);
 				if (!empty($new[$combo])){
@@ -141,6 +134,25 @@ Class model_carrinho extends model{
 				}
 				$new[$combo]['subtotal'] = $total_total;
 			}
+
+			foreach($new as $key => $linha){
+				echo'<pre>';print_r($linha);exit;
+				$total_total = 0;
+					foreach($linha as $list){
+						$total_total += $list['total_unitario'];
+					}
+			}
+
+
+
+				// 			$total_total = 0;
+				// if($linha['usar_valor_vindi'] == 1){
+				// 	$total_total = $linha['combo_valor'];
+				// }else{
+				// 	foreach($lista as $list){
+				// 		$total_total += $list['total_unitario'];
+				// 	}
+				// }
 			
 			echo'<pre>';print_r($new);exit;
 			// $retorno['combo_list'] = $new;

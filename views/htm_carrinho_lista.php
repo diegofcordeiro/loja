@@ -43,7 +43,7 @@
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = "R$ ".$value['total_quantidade'];
-				$subtotal_ = ($subtotal_ + $value['total_unitario']);
+				$subtotal_ = ($subtotal_ + floatval($value['total_unitario']));
 
 			}
 			// echo '<pre>';print_r(count($values));exit;

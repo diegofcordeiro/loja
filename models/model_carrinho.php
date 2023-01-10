@@ -135,12 +135,12 @@ Class model_carrinho extends model{
 				$total_total = 0;
 				foreach($linha as $list){
 					if($list['usar_valor_vindi'] == 1){
-						$total_total = $list['combo_valor'];
+						$total_total = number_format($list['combo_valor'],2);
 					}else{
 						$total_total = ($total_total + number_format($list['total_unitario'], 2));
 					}
 				}
-				$new[$key]['subtotal'] = $total_total;
+				$new[$key]['subtotal'] = number_format($total_total, 2);
 			}
 			
 			echo'<pre>';print_r($new);exit;

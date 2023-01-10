@@ -137,7 +137,7 @@ Class model_carrinho extends model{
 					if($list['usar_valor_vindi'] == 1){
 						$total_total = $list['combo_valor'];
 					}else{
-						$total_total = ($total_total + $list['total_unitario']);
+						$total_total = ($total_total + number_format($list['total_unitario'], 2));
 					}
 				}
 				$new[$key]['subtotal'] = $total_total;

@@ -101,6 +101,7 @@ class combos extends controller {
 		$produtos = $_POST['produtos'];
 		$assinatura = $_POST['assinatura'];
 		$price = $_POST['price'];
+		$usar_desconto = $_POST['usar_desconto'];
 		
 		// echo'<pre>';print_r($_POST);exit;
 
@@ -119,6 +120,7 @@ class combos extends controller {
 			"titulo"=>$titulo,
 			"plano_id"=> $assinatura,
 			"desconto"=> $desconto,
+			"usar_desconto"=> $usar_desconto,
 			"valor"=> $price,
 			"status"=>$status
 		), " id='$codigo' ");

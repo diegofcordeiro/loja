@@ -102,7 +102,7 @@ class combos extends controller {
 		$assinatura = $_POST['assinatura'];
 		$price = $_POST['price'];
 		
-		echo'<pre>';print_r($price);exit;
+		echo'<pre>';print_r($_POST);exit;
 		
 
         $db = new mysql();

@@ -151,27 +151,27 @@
                   <form action="<?=$_base['objeto']?>alterar_combo_dados" class="form-horizontal" method="post">  						
                     <fieldset>
                         <div class="row">
+                          
                           <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="col-md-12">Link para checkout</label>
-                                    <div class="col-md-12">
-                                       <!-- <p><?=URL?>index/combo/<?=$data->id?></p> -->
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Link para checkout</label>
+                                <div class="col-md-12">
+                                    <p><?=URL?>index/combo/<?=$data->id?></p>
                                 </div>
                             </div>
-                        </div>
+                          </div>
                           <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="col-md-12">Trilhas</label>
-                                    <div class="col-md-12">
-                                        <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="produtos[]">
-                                            <?php foreach($trilha_curso as $produto){ ?>
-                                            <option value='<?=$produto['id']?>' <?php if($produto['checked'] == 1){ echo "selected"; } ?>><?=$produto['titulo']?></option>
-                                            <?php }?>
-                                        </select> 
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Trilhas</label>
+                                <div class="col-md-12">
+                                    <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="produtos[]">
+                                        <?php foreach($trilha_curso as $produto){ ?>
+                                        <option value='<?=$produto['id']?>' <?php if($produto['checked'] == 1){ echo "selected"; } ?>><?=$produto['titulo']?></option>
+                                        <?php }?>
+                                    </select> 
                                 </div>
                             </div>
+                          </div>
                         </div>
                         <div class="row">
                           <div class="col-md-12">

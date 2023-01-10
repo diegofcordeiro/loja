@@ -102,6 +102,7 @@ class combos extends controller {
 		$assinatura = $_POST['assinatura'];
 		$price = $_POST['price'];
 		
+		echo'<pre>';print_r($price);exit;
 		
 
         $db = new mysql();
@@ -123,7 +124,7 @@ class combos extends controller {
 			"status"=>$status
 		), " id='$codigo' ");
 
-		echo'<pre>';print_r($db);exit;
+		// echo'<pre>';print_r($db);exit;
 
 		$this->irpara(DOMINIO.$this->_controller.'/alterar_combo/codigo/'.$codigo.'/aba/dados');
 	}

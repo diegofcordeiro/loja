@@ -5788,10 +5788,6 @@ class index extends controller {
 		$this->view('carrinho_lista', $dados);
 	}
 
-	public function test(){
-		print_r($this->get('id'));exit;
-	}
-
 	public function carrinho_adicionar(){	
 
 		$dados = array();
@@ -5801,8 +5797,6 @@ class index extends controller {
 		$produtos = new model_produtos();
 
 		$cod_sessao = $this->_sessao;
-		print_r($this->get('id'));exit;
-		
 		if($_POST['produto']){
 			$produto = $_POST['produto'];
 		}

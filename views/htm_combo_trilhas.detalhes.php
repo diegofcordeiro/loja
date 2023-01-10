@@ -943,7 +943,7 @@
                                                                     <div class="bottom_card">
                                                                         <div><a href="<?=$endereco?>" onclick="acessando(this);"><p class="saibamais_btn">SAIBA MAIS</p></a></div>
                                                                         <!-- <div><a href="<?=$endereco?>" onclick="acessando(this);" class="botao_comprar"><?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?></a></div> -->
-																		<div id="div_comprar">
+																		<!-- <div id="div_comprar">
 																			<form name="add_carrinho" id="add_carrinho" action="<?=DOMINIO?><?=$controller?>/carrinho_adicionar" method="post" enctype="multipart/form-data" >
 																				<span>                                     
 																					<button type="button" class="botao_comprar" onclick="submit('add_carrinho')">
@@ -952,7 +952,7 @@
 																					<input type="hidden" name="produto" value="<?=$value->codigo?>">
 																				</span>
 																			</form>
-																		</div>
+																		</div> -->
                                                                     </div>
                                                                 </div>
                                                             </div>

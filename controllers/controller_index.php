@@ -5817,7 +5817,6 @@ class index extends controller {
 		}
 		// print_r($produto);exit;
 		if(!is_array($produto)){	
-			print_r('nao array');exit;
 			$conexao = new mysql();
 			$coisas_carrinho = $conexao->Executar("SELECT id FROM pedido_loja_carrinho where sessao='".$this->_sessao."' and produto='".$produto."' ");
 			$data_carrinho = $coisas_carrinho->fetch_object();
@@ -6190,7 +6189,7 @@ class index extends controller {
 				$this->volta(1);
 			}
 		}else{
-			print_r('array');exit;
+			echo '<pre>';print_r($produto);exit;
 			//confere se ja existe o pedido senão cria um novo pedido
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");

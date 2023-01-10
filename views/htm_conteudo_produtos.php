@@ -589,6 +589,7 @@ $ordem = $conteudo_sessao['ordem'];
 									</div>
 									<?php if($value->usar_desconto != 1){ ?>
 										<div class="price_container">
+											<p class="preco_desc">R$ <?=number_format($valor_principal_full,2,",",".")?></p>
 											<p class="preco_list_indi">
 												<span class="real">R$ </span>
 												<span class="price_card"> <?=$valor_descontado[0]?> </span>
@@ -597,7 +598,6 @@ $ordem = $conteudo_sessao['ordem'];
 										</div>
 									<?php }else{ ?>
 										<div class="price_container">
-											<p class="preco_desc">R$ <?=number_format($valor_principal_full,2,",",".")?></p>
 											<p class="preco_list_indi">
 												<span class="real">R$ </span>
 												<span class="price_card"> <?=$valor_descontado[0]?> </span>

@@ -130,7 +130,7 @@
 			$n++;
 		}
 
-		echo '<pre>';print_r($values);exit;
+		echo '<pre>';print_r($values[0]['combo_valor']);exit;
 
 		echo "
 			<tr>

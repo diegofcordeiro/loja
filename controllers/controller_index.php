@@ -5784,7 +5784,7 @@ class index extends controller {
 
 		$dados['botao_css'] = $botao_css;
 		$dados['botao_style'] = $botao_style;
-
+		echo '<pre>';print_r($dados);exit;
 		$this->view('carrinho_lista', $dados);
 	}
 

@@ -144,7 +144,10 @@
 			<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal_."</td> 
 			</tr>
 		";
+		echo '<pre>';print_r(($total_pedidos_));
+
 		$total_pedidos_ = ($total_pedidos_ + $subtotal_);
+		echo '<pre>';print_r(($total_pedidos_));
 	}
 
 

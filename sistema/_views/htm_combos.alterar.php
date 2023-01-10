@@ -607,7 +607,7 @@
             console.log(this);
             var name = $(this).find('option:selected').attr('data-preco');
             $('#price_').val(name);
-            $('#price_valor').html(`R$ ${name}`);
+            $('#price_valor').val(`R$ ${name}`);
           });
           $(document).on('click', '.limited', function(){
             console.log('aqui');

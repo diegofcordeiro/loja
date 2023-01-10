@@ -605,7 +605,10 @@
           
           $(document).on('change', '#planos_list', function(){
             console.log(this);
-
+            var e = document.getElementById("planos_list");
+            var value = e.value;
+            var text = e.options[e.selectedIndex].text;
+            console.log(text);
           });
           $(document).on('click', '.limited', function(){
             console.log('aqui');

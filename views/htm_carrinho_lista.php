@@ -33,7 +33,7 @@
 	foreach ($carrinho['lista'] as $key => $values) { 
 		// echo '<pre>';print_r(($values));exit;
 		$subtotal_ = 0;
-		$total_pedidos_ += $subtotal_;
+		$total_pedidos_ =+ $subtotal_;
 		foreach ($values as $key2 => $value) { 
 
 			if($value['usar_valor_vindi'] == 1){

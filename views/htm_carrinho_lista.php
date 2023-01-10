@@ -32,7 +32,7 @@
 
 	foreach ($carrinho['lista'] as $key => $values) { 
 		foreach ($values as $key2 => $value) { 
-			echo '<pre>';print_r($values);exit;
+			echo '<pre>';print_r(count($values));exit;
 			if($key != 0){
 				if($key2 == 0){
 					echo "

@@ -35,7 +35,7 @@
 		// echo '<pre>';print_r(($values));exit;
 		$subtotal = 0;
 		foreach ($values as $key2 => $value) { 
-		echo '<pre>';print_r(($values));exit;
+		echo '<pre>';print_r(($value));exit;
 
 			if($value['usar_valor_vindi'] == 1){
 				$valor_unitario = '-';

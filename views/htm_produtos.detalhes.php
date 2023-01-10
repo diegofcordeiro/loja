@@ -769,7 +769,7 @@
 						<div class='col-xs-12 col-sm-5 col-md-5'>
 							<img src="<?=DOMINIO?>/arquivos/banner_img_produto_g/<?=$data->codigo?>/<?=$data->banner?>" alt="">
 						</div>
-						<?php if($data->$only_combo != 0){?>
+						<?php if($data->only_combo != 0){?>
 							<div class='col-xs-12 col-sm-7 col-md-7'>
 						<?php }else{?>
 							<div class='col-xs-12 col-sm-4 col-md-4'>
@@ -778,7 +778,7 @@
 								<div class="style1" style="margin-top: 20px;"><?=$data->summary?></div>
 							</div>
 						</div>
-						<?php if($data->$only_combo != 1){?>
+						<?php if($data->only_combo != 1){?>
 							<div class='col-xs-12 col-sm-3 col-md-3'  id="<?=$data->only_combo?>">
 								<div class="produto_detalhes_valor" style="text-align: center;">
 									<div class="produtos_detalhes_valortotal" style="text-decoration: line-through;"></div>
@@ -803,7 +803,7 @@
 								<div class="style1" style="margin-top: 20px;"><?=$data->summary?></div>
 							</div>
 						</div>
-						<?php if($data->$only_combo != 1){?>
+						<?php if($data->only_combo != 1){?>
 							<div class='col-xs-12 col-sm-6 col-md-6' id="<?=$data->only_combo?>">
 								<div class="produto_detalhes_valor" style="text-align: center;">
 									<div class="produtos_detalhes_valortotal" style="text-decoration: line-through;"></div>

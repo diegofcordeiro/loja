@@ -39,7 +39,7 @@
 			if($value['usar_valor_vindi'] == 1){
 				$valor_unitario = '-';
 				$total_geral = '-';
-				$subtotal_ = number_format($value['combo_valor'],2);
+				$subtotal_ = $value['combo_valor'];
 				
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];

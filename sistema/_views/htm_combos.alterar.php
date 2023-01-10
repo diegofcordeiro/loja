@@ -230,7 +230,7 @@
                               <label class="col-md-12">Usar desconto?</label>
                               <div class="col-md-12">
                                 <!-- <input name="usar_desconto" type="text" class="form-control" value="<?=$data->usar_desconto?>" > -->
-                                <input type="checkbox" name="usar_desc" checked data-toggle="toggle" data-size="sm">
+                                <input type="checkbox" class="custom-control-input" name="usar_desc" id="customSwitches">
                               </div>
                             </div>
                           </div>

@@ -31,6 +31,7 @@
 	$n = 0;
 
 	foreach ($carrinho['lista'] as $key => $values) { 
+
 		echo '<pre>';print_r(($values));exit;
 		foreach ($values as $key2 => $value) { 
 			if($value['usar_valor_vindi'] == 1){

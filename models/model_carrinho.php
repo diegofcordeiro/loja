@@ -143,21 +143,8 @@ Class model_carrinho extends model{
 				$new[$key]['subtotal'] = $total_total;
 			}
 			
-			echo'<pre>';print_r($new);exit;
-
-
-				// 			$total_total = 0;
-				// if($linha['usar_valor_vindi'] == 1){
-				// 	$total_total = $linha['combo_valor'];
-				// }else{
-				// 	foreach($lista as $list){
-				// 		$total_total += $list['total_unitario'];
-				// 	}
-				// }
-			
-			echo'<pre>';print_r($new);exit;
+			// echo'<pre>';print_r($new);exit;
 			// $retorno['combo_list'] = $new;
-
 			
 			echo'<pre>';print_r($new);exit; 
 			$retorno['lista'] = $new;

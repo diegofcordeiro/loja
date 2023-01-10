@@ -2,7 +2,7 @@
 // ini_set('display_errors', 1);
 // error_reporting(E_ALL);
 function get_plans(){
-$curl = curl_init();
+  $curl = curl_init();
   curl_setopt_array($curl, array(
     CURLOPT_URL => 'https://app.vindi.com.br/api/v1/plans?page=1&per_page=200&sort_by=created_at&sort_order=asc',
     CURLOPT_RETURNTRANSFER => true,
@@ -149,6 +149,14 @@ $curl = curl_init();
                   <?php //print_r($data->banner); ?>						
                     <fieldset>
                       <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <label class="col-md-12">Link para checkout</label>
+                              <div class="col-md-12">
+                                  <p><?=URL?>index/carrinho_adicionar/protudo/<?=$data->codigo?></p>
+                              </div>
+                          </div>
+                        </div>
                         <div class="col-md-6">
                           <div class="form-group">
                             <label class="col-md-12" >Trilha</label>

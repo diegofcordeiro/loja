@@ -88,6 +88,11 @@ Class model_combos extends model{
 		$exec = $db->executar("SELECT * FROM ".$this->tab_combo." WHERE id='$codigo' ");
 		return $exec->fetch_object();
     }
+	public function get_plano_price($codigo){
+		$db = new mysql();
+		$exec = $db->executar("SELECT * FROM planos WHERE id='$codigo' ");
+		return $exec->fetch_object();
+	}
     public function adiciona_imagem($vars){ 
 
 		$db = new mysql();

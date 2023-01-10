@@ -209,7 +209,7 @@
                             <div class="form-group">
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
-                                  <input name="desconto" type="text" class="form-control" value="<?=$data->price?>" >
+                                  <input name="desconto" type="text" class="form-control" value="<?=$price?>" >
                               </div>
                             </div>
                           </div>

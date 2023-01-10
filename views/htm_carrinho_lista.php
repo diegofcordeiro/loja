@@ -169,8 +169,8 @@
 <table class="table tabela_boa" > -->
 	
 	<tr>
-		<td style='text-align:right; border-top:0px;' >Total do Pedidos</td>
-		<td style='text-align:center; width:120px; font-weight:bold; border-top:0px;' >R$ <?=$total_pedidos?></td>
+		<td style='text-align:right; border-top:0px;' >Total do Pedido</td>
+		<td style='text-align:center; width:120px; font-weight:bold; border-top:0px;' >R$ <?=$total_pedidos_?></td>
 	</tr> 
 
 </table>

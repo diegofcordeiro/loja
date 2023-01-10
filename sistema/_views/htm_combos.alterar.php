@@ -184,8 +184,10 @@
                                   <?php 
                                   $plans = get_plans();
                                     foreach($plans['plans'] as $pla){
-                                      foreach($pla as $plan){?>
-                                      <option data-preco="<?=$plan['plan_items'][0]['product']['pricing_schema']['price']?>" value='<?=$plan['id']?>' <?php if($data->plano_id == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
+                                      foreach($pla as $plan){
+                                       $preco_v = $plan['plan_items'][0]['product']['pricing_schema']['price']; 
+                                      ?>
+                                      <option data-preco="<?=($preco_v > 0 ? $preco_v : 0) ?>" value='<?=$plan['id']?>' <?php if($data->plano_id == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
                                   
                                   <?php }} ?>
 

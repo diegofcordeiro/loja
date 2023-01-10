@@ -194,7 +194,7 @@
                             </div>
                           </div>
                            
-                          <div class="col-md-2">                   
+                          <div class="col-md-3">                   
                             <div class="form-group">
                               <label class="col-md-12">Ativar/Desativar</label>
                               <div class="col-md-12">
@@ -205,7 +205,7 @@
                               </div>
                             </div>                   
                           </div>
-                          <div class="col-md-2">
+                          <div class="col-md-3">
                             <div class="form-group">
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">

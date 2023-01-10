@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 header('Content-Type: text/html; charset=UTF-8');
 date_default_timezone_set("Brazil/East");
@@ -32,8 +31,10 @@ if($config['SSL']){
 		$config_dominio = $config_dominio.$config['PASTA']."/";
 	}
 }
+
+
 define("DOMINIO", $config_dominio."sistema/");
-define("URL", $config_dominio);
+define("URL", $config_dominio."/");
 define("PASTA_CLIENTE", $config_dominio."arquivos/");
 define("AUTOR", "https://zoom.com.br");
 define("TITULO_VIEW", "");

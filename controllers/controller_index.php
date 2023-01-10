@@ -5861,7 +5861,6 @@ class index extends controller {
 				}			
 			}
 
-
 			// produto
 			$data_produto = $produtos->carrega_produto_codigo($produto);
 
@@ -6297,6 +6296,14 @@ class index extends controller {
 					$combo_titulo = $_POST['combo_titulo'];
 					$plano_id = $_POST['plano_id'];
 					
+					$conexao = new mysql();
+					$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
+					
+					while($data_det = $coisas_det->fetch_object()){
+						echo '<pre>';print_r($data_det);
+					}
+					exit;
+
 					$combo_disconto = 0;
 					if($_POST['combo_disconto'] > 0){
 						$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
@@ -6304,28 +6311,7 @@ class index extends controller {
 					}else{
 						$valor_total = $data_produto->valor;
 					}
-					// $valores = new model_valores();
-					// $variacao = $this->post('variacao');
-					// if($variacao){
 
-					// 	$conexao = new mysql();
-					// 	$coisas = $conexao->Executar("SELECT * FROM produto_variacao where codigo='$variacao' ");
-					// 	$data = $coisas->fetch_object();
-
-					// 	$conexao = new mysql();
-					// 	$coisas2 = $conexao->Executar("SELECT * FROM produto_variacao_sel where variacao_codigo='$variacao' AND produto_codigo='$produto' ");
-					// 	$data2 = $coisas2->fetch_object();
-
-					// 	$variacao_valor = $data2->valor;
-					// 	$variacao_titulo = $data->titulo;
-
-					// 	$valor_total = $data2->valor;
-
-					// } else {
-					// 	$variacao = '-';
-					// 	$variacao_valor = 0;
-					// 	$variacao_titulo = "";
-					// }
 
 					$tam_altura = '';
 					$tam_largura = '';

@@ -211,7 +211,7 @@
                             <div class="form-group">
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
-                                  <input name="pricess" type="text" class="form-control" disabled value="R$ <?=number_format($price, 2, '.', '')?>" >
+                                  <input name="pricess" id="price_valor" type="text" class="form-control" disabled value="R$ <?=number_format($price, 2, '.', '')?>" >
                                   <input name="price" id="price_" style="display:none" type="text" class="form-control" value="<?=$price?>" >
                               </div>
                             </div>
@@ -607,6 +607,7 @@
             console.log(this);
             var name = $(this).find('option:selected').attr('data-preco');
             $('#price_').val(name);
+            $('#price_valor').html(`R$ ${name}`);
           });
           $(document).on('click', '.limited', function(){
             console.log('aqui');

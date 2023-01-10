@@ -62,6 +62,9 @@ class combos extends controller {
         $produtos = new model_produtos();
 
 		$dados['data'] = $combos->carrega_combo($codigo);
+		echo '<pre>';print_r($dados['data']['assinatura']);exit;
+
+		$dados['price'] = $combos->carrega_combo($dados['data']['assinatura']);
 
         $trilha_curso = array();
 		$n = 0;
@@ -87,7 +90,6 @@ class combos extends controller {
         $dados['trilha_curso'] = $trilha_curso;
 		$dados['link'] = DOMINIO.$this->_controller.'/alterar_combo/codigo/'.$codigo.'/aba/conteudo_curso';
 		$dados['link_feedback'] = DOMINIO.$this->_controller.'/alterar_combo/codigo/'.$codigo.'/aba/feedback';
-		// echo '<pre>';print_r($dados['data']);exit;
 		$this->view('combos.alterar', $dados);
 	}
     public function alterar_combo_dados(){

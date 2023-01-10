@@ -176,7 +176,7 @@
                         </div>
                         <div class="row">
 
-                          <div class="col-md-10">
+                          <div class="col-md-8">
                             <div class="form-group">
                               <label class="col-md-12">Plano</label>
                               <div class="col-md-12">
@@ -204,6 +204,14 @@
                                   </select>
                               </div>
                             </div>                   
+                          </div>
+                          <div class="col-md-2">
+                            <div class="form-group">
+                              <label class="col-md-12" >Preço</label>
+                              <div class="col-md-12">
+                                  <input name="desconto" type="text" class="form-control" value="<?=$data->price?>" >
+                              </div>
+                            </div>
                           </div>
 
                           <!-- <div class="col-md-2">

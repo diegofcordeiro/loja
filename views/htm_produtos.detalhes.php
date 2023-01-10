@@ -769,28 +769,34 @@
 						<div class='col-xs-12 col-sm-5 col-md-5'>
 							<img src="<?=DOMINIO?>/arquivos/banner_img_produto_g/<?=$data->codigo?>/<?=$data->banner?>" alt="">
 						</div>
-						<div class='col-xs-12 col-sm-4 col-md-4'>
+						<?php if($only_combo == 1){?>
+							<div class='col-xs-12 col-sm-7 col-md-7'>
+						<?php }else{?>
+							<div class='col-xs-12 col-sm-7 col-md-7'>
+						<?php }?>
 							<div class="desc_bloc">
 								<div class="style1" style="margin-top: 20px;"><?=$data->summary?></div>
 							</div>
 						</div>
-						<div class='col-xs-12 col-sm-3 col-md-3'>
-							<div class="produto_detalhes_valor" style="text-align: center;">
-								<div class="produtos_detalhes_valortotal" style="text-decoration: line-through;"></div>
-								<div class="produtos_detalhes_valortotal" style="margin-top: 0px; font-weight:500;color:#2C3E50">Investimento:</div>
-								<?php if($valor_de != '0,00'){ ?>
-								<div style="color: #9C9C9C;font-size: 24px;font-weight: 300;text-decoration: line-through;">R$ <?=$valor_de?></div>
-								<?php } ?>
-								<span id="produto_valor_unitario" style="color:#2C3E50">
-									<span style="color:#2C3E50;font-size: 30px;">R$</span>
-									<span style="color:#2C3E50;margin-left: -5px;font-size: 50px;"><?=$valor_principal[0]?></span>
-									<span style="color:#2C3E50;font-size: 30px;margin-left: -10px;">,<?=$valor_principal[1]?>
-								</span>
-								<input type='hidden' id='produto_valor_unitario_inicial' name='produto_valor_unitario_inicial' value='<?=$valor_banco?>' >
-								<div id="valorartevisual" ></div>
-								<div id="div_comprar"></div>
+						<?php if($only_combo == 0){?>
+							<div class='col-xs-12 col-sm-3 col-md-3'>
+								<div class="produto_detalhes_valor" style="text-align: center;">
+									<div class="produtos_detalhes_valortotal" style="text-decoration: line-through;"></div>
+									<div class="produtos_detalhes_valortotal" style="margin-top: 0px; font-weight:500;color:#2C3E50">Investimento:</div>
+									<?php if($valor_de != '0,00'){ ?>
+									<div style="color: #9C9C9C;font-size: 24px;font-weight: 300;text-decoration: line-through;">R$ <?=$valor_de?></div>
+									<?php } ?>
+									<span id="produto_valor_unitario" style="color:#2C3E50">
+										<span style="color:#2C3E50;font-size: 30px;">R$</span>
+										<span style="color:#2C3E50;margin-left: -5px;font-size: 50px;"><?=$valor_principal[0]?></span>
+										<span style="color:#2C3E50;font-size: 30px;margin-left: -10px;">,<?=$valor_principal[1]?>
+									</span>
+									<input type='hidden' id='produto_valor_unitario_inicial' name='produto_valor_unitario_inicial' value='<?=$valor_banco?>' >
+									<div id="valorartevisual" ></div>
+									<div id="div_comprar"></div>
+								</div>
 							</div>
-						</div>
+						<?php }?>
 					<?php }else{ ?>
 							<div class='col-xs-12 col-sm-6 col-md-6'>
 							<div class="desc_bloc">

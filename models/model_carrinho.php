@@ -44,6 +44,8 @@ Class model_carrinho extends model{
 				$lista[$i]['tipo_envio'] = $data_carrinho->tipo_envio;
 				$lista[$i]['id_combo'] = $data_carrinho->id_combo;
 				$lista[$i]['combo_titulo'] = $data_carrinho->combo_titulo;
+				$lista[$i]['combo_valor'] = $data_carrinho->valor_total_combo_vindi;
+				$lista[$i]['usar_valor_vindi'] = $data_carrinho->usar_valor_vindi;
 				
 				if($data_carrinho->plano == 0){
 

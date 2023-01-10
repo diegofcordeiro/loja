@@ -5812,7 +5812,7 @@ class index extends controller {
 													inner join combo_produto on combo_produto.id_produto = produto.id
 													where id_combo='$combo' ");
 			while($data_det = $coisas_det->fetch_object()){
-				array_push($produto,$data_det);
+				array_push($produto,$data_det->codigo);
 			}
 
 		}

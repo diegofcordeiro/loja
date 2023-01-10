@@ -5800,7 +5800,7 @@ class index extends controller {
 		if($_POST['produto']){
 			$produto = $_POST['produto'];
 		}
-		if($_GET['produto']){
+		if($this->get('id')){
 			$produto = $this->get('id'); 
 		}
 		print_r($produto);exit;

@@ -62,7 +62,7 @@ class combos extends controller {
         $produtos = new model_produtos();
 
 		$dados['data'] = $combos->carrega_combo($codigo);
-		echo '<pre>';print_r($dados['data']['assinatura']);exit;
+		echo '<pre>';print_r($dados['data']);exit;
 
 		$dados['price'] = $combos->carrega_combo($dados['data']['assinatura']);
 

@@ -480,7 +480,7 @@ $ordem = $conteudo_sessao['ordem'];
 								$i_combo++;
 							}
 
-							print_r($value->usar_desconto);exit;
+							print_r($value->usar_desconto);
 							echo '<pre>'; print_r($value);exit;
 
 							if($value->usar_desconto != 1){

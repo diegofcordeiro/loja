@@ -5829,7 +5829,7 @@ class index extends controller {
 
 			$quantidade = $this->post('quantidade');
 			if(!$produto){
-				$this->msg('Produto não indentificado!');
+				$this->msg('Produto não indentificado!1');
 				$this->volta(1);
 			}
 			if(!$quantidade){

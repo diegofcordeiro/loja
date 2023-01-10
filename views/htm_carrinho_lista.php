@@ -33,7 +33,7 @@
 	foreach ($carrinho['lista'] as $key => $values) { 
 		// echo '<pre>';print_r(($values));exit;
 		$subtotal_ = 0;
-		$total_pedidos_ =+ $subtotal_;
+		
 		foreach ($values as $key2 => $value) { 
 
 			if($value['usar_valor_vindi'] == 1){
@@ -141,6 +141,7 @@
 			<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal_."</td> 
 			</tr>
 		";
+		$total_pedidos_ =+ $subtotal_;
 	}
 
 
@@ -166,7 +167,7 @@
 	?>
 
 </table>
-<table class="table tabela_boa" > -->
+<table class="table tabela_boa">
 	
 	<tr>
 		<td style='text-align:right; border-top:0px;' >Total do Pedido</td>

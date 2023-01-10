@@ -43,8 +43,10 @@
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = "R$ ".$value['total_quantidade'];
-				$subtotal_ = ($subtotal_ + floatval($value['total_unitario']));
-
+				
+				$resultado = str_replace('.', '', $value['total_unitario']); // remove o ponto
+    			$resultado = str_replace(',', '.', $resultado); // substitui a vírgula por ponto
+				$subtotal_ = ($subtotal_ + floatval($resultado));
 			}
 			// echo '<pre>';print_r(count($values));exit;
 			if($key != 0){

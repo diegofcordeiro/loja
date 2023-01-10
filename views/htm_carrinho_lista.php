@@ -129,11 +129,24 @@
 
 			$n++;
 		}
+		$subtotal_ = '';
+		foreach ($values as $key2 => $value) {
+			if($value['usar_valor_vindi'] == 1){
+				$valor_unitario = '-';
+				$total_geral = '-';
+				$subtotal_ = $value['valor_total_combo_vindi'];
+			}else{
+				$valor_unitario = "R$ ".$value['total_unitario'];
+				$total_geral = "R$ ".$value['total_quantidade'];
+				$subtotal_ = $value['produto_valor'];
+			}
+		}
+
 		echo "
-		<tr>
-		<td colspan='4' style='text-align:right; ' >Sub-total</td>
-		<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal."</td> 
-		</tr>
+			<tr>
+			<td colspan='4' style='text-align:right; ' >Sub-total</td>
+			<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal_."</td> 
+			</tr>
 		";
 	}
 

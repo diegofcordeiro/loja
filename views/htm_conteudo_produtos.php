@@ -419,6 +419,7 @@ $ordem = $conteudo_sessao['ordem'];
 				if(isset($combos) and (count($combos) > 0)){
 					echo '<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile"><div class="content flex-row-fluid" id="kt_content"><div class="row gy-5 g-xl-8"><div class="col-xl-12"><h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Combos</h3><div class="card card-xl-stretch mb-5 mb-xl-8"><div class="container_flex snaps-inline owl-carousel owl-theme">';
 						foreach($combos as $key => $value){
+							echo '<pre>';print_r($value);exit;
 							$i_combo = 0;$valor_principal_=0;$qtd_cursos_ = null;$media_estrelas_ = null;$hours_ = null;$minutes_ = null;$seconds_ = null;$data_atualizacao_ = null;$tags_cat_ = array();
 							
 							$codigo_produtos_carrinho = array();
@@ -479,16 +480,22 @@ $ordem = $conteudo_sessao['ordem'];
 
 								$i_combo++;
 							}
-							$valor_principal_full = $valor_principal_;
 
-							if($value->combo_desconto > 0){
-								$valor_descontado = $valor_principal_full - ($valor_principal_full / 100 * $value->combo_desconto);
+
+							if(){
+								$valor_principal_full = $valor_principal_;
+
+								if($value->combo_desconto > 0){
+									$valor_descontado = $valor_principal_full - ($valor_principal_full / 100 * $value->combo_desconto);
+								}
+								$valor_descontado = round($valor_descontado, 2);
+								$valor_descontado = explode(".",$valor_descontado);
+								if(strlen($valor_descontado[1]) == 1){
+									$valor_descontado[1] = $valor_descontado[1].'0';
+								}
 							}
-							$valor_descontado = round($valor_descontado, 2);
-							$valor_descontado = explode(".",$valor_descontado);
-							if(strlen($valor_descontado[1]) == 1){
-								$valor_descontado[1] = $valor_descontado[1].'0';
-							}
+
+
 							if($hours_ > 0 ){$hours_ = $hours_.'hrs ';}else{$hours_ = '';};
 							if($minutes_ > 0 ){$minutes_ = $minutes_.'min ';}else{$minutes_ = '';};
 							if($seconds_ > 0 ){$seconds_ = $seconds_.'seg ';}else{$seconds_ = '';};
@@ -586,6 +593,8 @@ $ordem = $conteudo_sessao['ordem'];
 											<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
 										</p>
 									</div>
+
+
 									<!-- <?php if($value->valor_falso > 0){ ?>
 											<div class="price_container">
 												<p class="preco_desc">R$ <?=number_format($valor_descontado[1],2,",",".")?></p>

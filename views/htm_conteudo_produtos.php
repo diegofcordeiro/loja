@@ -597,7 +597,7 @@ $ordem = $conteudo_sessao['ordem'];
 											</p>
 										</div>
 									<?php }else{ ?>
-										<div class="price_container">
+										<div class="price_container" style="grid-template-columns: 1fr !important;">
 											<p class="preco_list_indi">
 												<span class="real">R$ </span>
 												<span class="price_card"> <?=$valor_descontado[0]?> </span>

@@ -5800,8 +5800,22 @@ class index extends controller {
 		if($_POST['produto']){
 			$produto = $_POST['produto'];
 		}
-		if($this->get('id')){
-			$produto = $this->get('id'); 
+		if($this->get('produto')){
+			$produto = $this->get('produto'); 
+		}
+		if($this->get('combo')){
+			$combo = $this->get('combo'); 
+			$produto = array();
+			$conexao = new mysql();
+			$coisas_det = $conexao->Executar("SELECT produto.codigo 
+													FROM produto 
+													inner join combo_produto on combo_produto.id_produto = produto.id
+													where id_combo='$combo' ");
+			$i = 0;
+			while($data_det = $coisas_det->fetch_object()){
+				print_r($data_det);exit;
+			}
+
 		}
 		print_r($produto);exit;
 		if(!is_array($produto)){	

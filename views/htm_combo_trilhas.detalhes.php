@@ -99,6 +99,14 @@
 	ul li{
 		padding-bottom: 8px;
 	}
+	.bottom_card {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    /* margin-top: 10px; */
+    margin-bottom: 10px;
+    align-items: center;
+    padding-right: 8px !important;
+}
     </style>
 </head>
 <body>

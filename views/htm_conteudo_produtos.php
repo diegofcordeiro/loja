@@ -481,7 +481,7 @@ $ordem = $conteudo_sessao['ordem'];
 							}
 
 							print_r($value->usar_desconto);
-							echo '<pre>'; print_r($value);exit;
+							echo '<pre>'; print_r($value);
 
 							if($value->usar_desconto != 1){
 								$valor_principal_full = $valor_principal_;

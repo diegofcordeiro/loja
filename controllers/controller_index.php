@@ -5788,6 +5788,10 @@ class index extends controller {
 		$this->view('carrinho_lista', $dados);
 	}
 
+	public function test(){
+		print_r($this->get('id'));exit;
+	}
+
 	public function carrinho_adicionar(){	
 
 		$dados = array();

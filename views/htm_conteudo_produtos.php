@@ -481,7 +481,6 @@ $ordem = $conteudo_sessao['ordem'];
 							}
 
 							print_r("usar_desconto: ".$value->usar_desconto);
-							echo '<pre>'; print_r($value);
 
 							if($value->usar_desconto != 1){
 								$valor_principal_full = $valor_principal_;
@@ -498,6 +497,7 @@ $ordem = $conteudo_sessao['ordem'];
 								$valor_principal_full = $value->plano_valor;
 							}
 
+							print_r("valor plano: ".$valor_principal_full);
 
 							if($hours_ > 0 ){$hours_ = $hours_.'hrs ';}else{$hours_ = '';};
 							if($minutes_ > 0 ){$minutes_ = $minutes_.'min ';}else{$minutes_ = '';};

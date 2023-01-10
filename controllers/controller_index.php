@@ -5797,8 +5797,13 @@ class index extends controller {
 		$produtos = new model_produtos();
 
 		$cod_sessao = $this->_sessao;
-		$produto = $_POST['produto'];
-	
+		if($_POST['produto']){
+			$produto = $_POST['produto'];
+		}
+		if($_GET['produto']){
+			$produto = $this->get('id'); 
+		}
+		print_r($produto);exit;
 		if(!is_array($produto)){	
 
 			$conexao = new mysql();

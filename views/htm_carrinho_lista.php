@@ -40,6 +40,7 @@
 				$valor_unitario = '-';
 				$total_geral = '-';
 				$subtotal = $value['valor_total_combo_vindi'];
+				print_r($value['valor_total_combo_vindi']);
 				print_r("aqui1: ".$subtotal."..");
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];

@@ -212,7 +212,7 @@
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
                                   <input name="pricess" type="text" class="form-control" disabled value="R$ <?=number_format($price, 2, '.', '')?>" >
-                                  <input name="price" style="display:none" type="text" class="form-control" value="<?=$price?>" >
+                                  <input name="price" id="price_" style="display:none" type="text" class="form-control" value="<?=$price?>" >
                               </div>
                             </div>
                           </div>
@@ -606,7 +606,7 @@
           $(document).on('change', '#planos_list', function(){
             console.log(this);
             var name = $(this).find('option:selected').attr('data-preco');
-            console.log(name);
+            $('#price_').val(name);
           });
           $(document).on('click', '.limited', function(){
             console.log('aqui');

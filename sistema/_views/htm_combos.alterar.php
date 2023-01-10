@@ -180,7 +180,7 @@
                             <div class="form-group">
                               <label class="col-md-12">Plano</label>
                               <div class="col-md-12">
-                                <select class="form-control select2" name="assinaturas" data_id="<?=$data->plano_id?>">
+                                <select class="form-control select2" name="assinatura" data_id="<?=$data->plano_id?>">
                                   <?php 
                                   $plans = get_plans();
                                     foreach($plans['plans'] as $pla){
@@ -209,7 +209,7 @@
                             <div class="form-group">
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
-                                  <input name="prices" type="text" class="form-control" disabled value="R$ <?=number_format($price, 2, '.', '')?>" >
+                                  <input name="price" type="text" class="form-control" value="R$ <?=number_format($price, 2, '.', '')?>" >
                               </div>
                             </div>
                           </div>

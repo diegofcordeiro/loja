@@ -209,7 +209,7 @@
                             <div class="form-group">
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
-                                  <input name="desconto" type="text" class="form-control" value="<?=$price?>" >
+                                  <input name="desconto" type="text" class="form-control" disabled value="R$ <?=number_format($price, 2, '.', '')?>" >
                               </div>
                             </div>
                           </div>

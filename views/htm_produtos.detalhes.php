@@ -803,23 +803,25 @@
 								<div class="style1" style="margin-top: 20px;"><?=$data->summary?></div>
 							</div>
 						</div>
-						<div class='col-xs-12 col-sm-6 col-md-6'>
-							<div class="produto_detalhes_valor" style="text-align: center;">
-								<div class="produtos_detalhes_valortotal" style="text-decoration: line-through;"></div>
-								<div class="produtos_detalhes_valortotal" style="margin-top: 0px; font-weight:500;color:#2C3E50">Investimento:</div>
-								<?php if($valor_de != '0,00'){ ?>
-								<div style="color: #9C9C9C;font-size: 24px;font-weight: 300;text-decoration: line-through;">R$ <?=$valor_de?></div>
-								<?php } ?>
-								<span id="produto_valor_unitario" style="color:#2C3E50">
-									<span style="color:#2C3E50;font-size: 30px;">R$</span>
-									<span style="color:#2C3E50;margin-left: -5px;font-size: 50px;"><?=$valor_principal[0]?></span>
-									<span style="color:#2C3E50;font-size: 30px;margin-left: -10px;">,<?=$valor_principal[1]?>
-								</span>
-								<input type='hidden' id='produto_valor_unitario_inicial' name='produto_valor_unitario_inicial' value='<?=$valor_banco?>' >
-								<div id="valorartevisual" ></div>
-								<div id="div_comprar"></div>
+						<?php if($only_combo == 0){?>
+							<div class='col-xs-12 col-sm-6 col-md-6'>
+								<div class="produto_detalhes_valor" style="text-align: center;">
+									<div class="produtos_detalhes_valortotal" style="text-decoration: line-through;"></div>
+									<div class="produtos_detalhes_valortotal" style="margin-top: 0px; font-weight:500;color:#2C3E50">Investimento:</div>
+									<?php if($valor_de != '0,00'){ ?>
+									<div style="color: #9C9C9C;font-size: 24px;font-weight: 300;text-decoration: line-through;">R$ <?=$valor_de?></div>
+									<?php } ?>
+									<span id="produto_valor_unitario" style="color:#2C3E50">
+										<span style="color:#2C3E50;font-size: 30px;">R$</span>
+										<span style="color:#2C3E50;margin-left: -5px;font-size: 50px;"><?=$valor_principal[0]?></span>
+										<span style="color:#2C3E50;font-size: 30px;margin-left: -10px;">,<?=$valor_principal[1]?>
+									</span>
+									<input type='hidden' id='produto_valor_unitario_inicial' name='produto_valor_unitario_inicial' value='<?=$valor_banco?>' >
+									<div id="valorartevisual" ></div>
+									<div id="div_comprar"></div>
+								</div>
 							</div>
-						</div>
+						<?php } ?>
 					<?php } ?>
 				</div>
 				<div class="row ak" style="padding-top: 50px;padding-bottom: 50px;">

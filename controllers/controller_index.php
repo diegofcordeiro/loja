@@ -5799,11 +5799,10 @@ class index extends controller {
 		$cod_sessao = $this->_sessao;
 		if($_POST['produto']){
 			$produto = $_POST['produto'];
-		}
-		if($this->get('produto')){
+		}else if($this->get('produto')){
 			$produto = $this->get('produto'); 
 		}
-		if($this->get('combo')){
+		else if($this->get('combo')){
 			$combo = $this->get('combo'); 
 			$produto = array();
 			$conexao = new mysql();
@@ -5816,7 +5815,7 @@ class index extends controller {
 			}
 
 		}
-		// print_r($produto);exit;
+		print_r($produto);exit;
 		if(!is_array($produto)){	
 
 			$conexao = new mysql();

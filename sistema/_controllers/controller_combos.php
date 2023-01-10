@@ -102,7 +102,7 @@ class combos extends controller {
 		$assinatura = $_POST['assinatura'];
 		$price = $_POST['price'];
 		
-
+		
 
         $db = new mysql();
 		$db->executar("DELETE FROM combo_produto WHERE id_combo = '$codigo' ");
@@ -123,7 +123,7 @@ class combos extends controller {
 			"status"=>$status
 		), " id='$codigo' ");
 
-		// echo'<pre>';print_r($db);exit;
+		echo'<pre>';print_r($db);exit;
 
 		$this->irpara(DOMINIO.$this->_controller.'/alterar_combo/codigo/'.$codigo.'/aba/dados');
 	}

@@ -151,7 +151,16 @@
                   <form action="<?=$_base['objeto']?>alterar_combo_dados" class="form-horizontal" method="post">  						
                     <fieldset>
                         <div class="row">
-                            <div class="col-md-12">
+                          <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-12">Link para checkout</label>
+                                    <div class="col-md-12">
+                                       <p><?=LAYOUT.'/combo'.'/'.$data->id?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="col-md-12">Trilhas</label>
                                     <div class="col-md-12">

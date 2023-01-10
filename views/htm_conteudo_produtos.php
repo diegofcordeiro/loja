@@ -480,8 +480,6 @@ $ordem = $conteudo_sessao['ordem'];
 								$i_combo++;
 							}
 
-							print_r("usar_desconto: ".$value->usar_desconto);
-
 							if($value->usar_desconto != 1){
 								$valor_principal_full = $valor_principal_;
 
@@ -494,10 +492,12 @@ $ordem = $conteudo_sessao['ordem'];
 									$valor_descontado[1] = $valor_descontado[1].'0';
 								}
 							}else{
-								$valor_principal_full = $value->plano_valor;
+								$valor_descontado = round($value->plano_valor, 2);
+								$valor_descontado = explode(".",$valor_descontado);
+								if(strlen($valor_descontado[1]) == 1){
+									$valor_descontado[1] = $valor_descontado[1].'0';
+								}
 							}
-
-							print_r("valor plano: ".$valor_principal_full);
 
 							if($hours_ > 0 ){$hours_ = $hours_.'hrs ';}else{$hours_ = '';};
 							if($minutes_ > 0 ){$minutes_ = $minutes_.'min ';}else{$minutes_ = '';};
@@ -587,16 +587,24 @@ $ordem = $conteudo_sessao['ordem'];
 										}
 										?>
 									</div>
-
-									<div class="price_container">
-										<p class="preco_desc">R$ <?=number_format($valor_principal_full,2,",",".")?></p>
-										<p class="preco_list_indi">
-											<span class="real">R$ </span>
-											<span class="price_card"> <?=$valor_descontado[0]?> </span>
-											<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
-										</p>
-									</div>
-
+									<?php if($value->usar_desconto != 1){ ?>
+										<div class="price_container">
+											<p class="preco_list_indi">
+												<span class="real">R$ </span>
+												<span class="price_card"> <?=$valor_descontado[0]?> </span>
+												<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
+											</p>
+										</div>
+									<?php }else{ ?>
+										<div class="price_container">
+											<p class="preco_desc">R$ <?=number_format($valor_principal_full,2,",",".")?></p>
+											<p class="preco_list_indi">
+												<span class="real">R$ </span>
+												<span class="price_card"> <?=$valor_descontado[0]?> </span>
+												<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
+											</p>
+										</div>
+									<?php } ?>
 
 									<!-- <?php if($value->valor_falso > 0){ ?>
 											<div class="price_container">

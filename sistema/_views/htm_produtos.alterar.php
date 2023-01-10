@@ -153,7 +153,7 @@ function get_plans(){
                           <div class="form-group">
                               <label class="col-md-12">Link para checkout</label>
                               <div class="col-md-12">
-                                  <p><?=URL?>index/carrinho_adicionar/produto/<?=$data->codigo?></p>
+                                  <p><?=URL?>index/carrinho_adicionar/combo/<?=$data->id?></p>
                               </div>
                           </div>
                         </div>

@@ -40,7 +40,7 @@
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = "R$ ".$value['total_quantidade'];
-				$subtotal = $carrinho['subtotal_tratado'];
+				$subtotal = $value['valor_total_combo_vindi'];
 			}
 			// echo '<pre>';print_r(count($values));exit;
 			if($key != 0){

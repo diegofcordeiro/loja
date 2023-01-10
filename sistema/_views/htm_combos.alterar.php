@@ -183,11 +183,11 @@
                                 <select class="form-control select2" name="assinatura" >
                                   <?php 
                                   $plans = get_plans();
-                                    foreach($plans['plans'][0] as $plan){
-                                  ?>
+                                    foreach($plans['plans'] as $pla){
+                                      foreach($pla as $plan){?>
                                     <option value='<?=$plan['id']?>' <?php if($data->assinatura == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
                                   
-                                  <?php } ?>
+                                  <?php }} ?>
 
                                 </select>
                               </div>
@@ -209,7 +209,7 @@
                             <div class="form-group">
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
-                                  <input name="desconto" type="text" class="form-control" disabled value="R$ <?=number_format($price, 2, '.', '')?>" >
+                                  <input name="price" type="text" class="form-control" disabled value="R$ <?=number_format($price, 2, '.', '')?>" >
                               </div>
                             </div>
                           </div>

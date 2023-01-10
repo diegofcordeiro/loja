@@ -99,6 +99,7 @@ class combos extends controller {
 		$codigo = $_POST['codigo'];
 		$produtos = $_POST['produtos'];
 		$assinatura = $_POST['assinatura'];
+		$price = $_POST['price'];
 		
 
 

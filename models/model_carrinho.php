@@ -123,7 +123,7 @@ Class model_carrinho extends model{
 
 			$new = array();
 			foreach ($lista as $list) {
-				// echo'<pre>';print_r($list['id_combo']);exit;
+				echo'<pre>';print_r($list);exit;
 				
 				$combo = ($list['id_combo'] > 0 ? $list['id_combo'] : 0);
 

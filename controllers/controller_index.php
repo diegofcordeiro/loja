@@ -5815,7 +5815,7 @@ class index extends controller {
 			}
 
 		}
-		print_r($produto);exit;
+		// print_r($produto);exit;
 		if(!is_array($produto)){	
 
 			$conexao = new mysql();

@@ -5803,7 +5803,7 @@ class index extends controller {
 			$produto = $this->get('produto'); 
 		}
 		else if($this->get('combo')){
-			$combo_id_ = $this->get('combo'); 
+			$combo = $this->get('combo'); 
 			$produto = array();
 			$conexao = new mysql();
 			$coisas_det = $conexao->Executar("SELECT produto.codigo 
@@ -5814,8 +5814,6 @@ class index extends controller {
 				array_push($produto,$data_det->codigo);
 			}
 
-		}else if($_POST['combo_id']){
-			$combo_id_ = $_POST['combo_id'];
 		}
 		// print_r($produto);exit;
 		if(!is_array($produto)){	
@@ -6191,7 +6189,7 @@ class index extends controller {
 				$this->volta(1);
 			}
 		}else{
-			// echo '<pre>';print_r($produto);exit;
+			echo '<pre>';print_r($produto);exit;
 			//confere se ja existe o pedido senão cria um novo pedido
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");
@@ -6235,8 +6233,8 @@ class index extends controller {
 					$tipo_envio = 3;
 					// echo'<pre>';print_r($data_produto);exit;
 					$combo_id = null;
-					if($combo_id_ > 0){
-						$combo_id = $combo_id_;
+					if($_POST['combo_id'] > 0){
+						$combo_id = $_POST['combo_id'];
 						$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$cod_sessao' AND produto = '$prod' AND id_combo = $combo_id ");
 						$linha_carrinho = $coisas_carrinho->num_rows;
 						if($linha_carrinho != 0){			
@@ -6308,33 +6306,26 @@ class index extends controller {
 						}
 					}
 					// valor base
-					// if($_POST['combo_titulo']){
-					// 	$combo_titulo = $_POST['combo_titulo'];
-					// }
-					// $plano_id = $_POST['plano_id'];
+					$combo_titulo = $_POST['combo_titulo'];
+					$plano_id = $_POST['plano_id'];
 
 					$conexao = new mysql();
-					$coisas_det = $conexao->Executar("SELECT * FROM combos where id='$combo_id_' ");
+					$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
 					$usar_valor_vindi = 0;
 					$valor_combo_vindi = 0;
-					$combo_disconto_ = 0;
-					$combo_titulo = '';
 					while($data_det = $coisas_det->fetch_object()){
 						$usar_discount = $data_det->usar_desconto;
 						$valor_combo_vindi = $data_det->valor;
-						$combo_disconto_ = $data_det->desconto;
-						$combo_titulo = $data_det->titulo;
 					}
 					$usar_valor_vindi = $usar_discount;
-				
 					if($usar_discount == 1){
 						$valor_total = 0;
 						$valor_total_combo_vindi = $valor_combo_vindi;
 					}else{
 						$combo_disconto = 0;
-						if($combo_disconto_ > 0){
-							$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $combo_disconto_);
-							$combo_disconto = $combo_disconto_;
+						if($_POST['combo_disconto'] > 0){
+							$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
+							$combo_disconto = $_POST['combo_disconto'];
 						}else{
 							$valor_total = $data_produto->valor;
 						}

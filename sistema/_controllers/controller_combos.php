@@ -119,6 +119,7 @@ class combos extends controller {
 			"titulo"=>$titulo,
 			"plano_id"=> $assinatura,
 			"desconto"=> $desconto,
+			"valor"=> $price,
 			"status"=>$status
 		), " id='$codigo' ");
 

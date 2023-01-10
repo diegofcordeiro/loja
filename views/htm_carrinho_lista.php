@@ -31,8 +31,9 @@
 	$n = 0;
 
 	foreach ($carrinho['lista'] as $key => $values) { 
-
-		echo '<pre>';print_r(($values));exit;
+		
+		// echo '<pre>';print_r(($values));exit;
+		$subtotal = 0;
 		foreach ($values as $key2 => $value) { 
 			if($value['usar_valor_vindi'] == 1){
 				$valor_unitario = '-';
@@ -41,7 +42,7 @@
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = "R$ ".$value['total_quantidade'];
-				$subtotal = $value['produto_valor'];
+				$subtotal = ($subtotal + $value['produto_valor']);
 			}
 			// echo '<pre>';print_r(count($values));exit;
 			if($key != 0){
@@ -131,8 +132,6 @@
 
 			$n++;
 		}
-
-
 
 		echo "
 			<tr>

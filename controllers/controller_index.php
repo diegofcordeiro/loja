@@ -5797,6 +5797,8 @@ class index extends controller {
 		$produtos = new model_produtos();
 
 		$cod_sessao = $this->_sessao;
+		print_r($this->get('id'));exit;
+		
 		if($_POST['produto']){
 			$produto = $_POST['produto'];
 		}

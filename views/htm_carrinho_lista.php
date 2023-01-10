@@ -141,13 +141,10 @@
 		echo "
 			<tr>
 			<td colspan='4' style='text-align:right; ' >Sub-total</td>
-			<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal_."</td> 
+			<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".number_format($subtotal_,2)."</td> 
 			</tr>
 		";
-		echo '<pre>';print_r(($total_pedidos_));
-
 		$total_pedidos_ = ($total_pedidos_ + $subtotal_);
-		echo '<pre>';print_r(($total_pedidos_));
 	}
 
 

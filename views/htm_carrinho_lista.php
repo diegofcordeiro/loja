@@ -127,27 +127,18 @@
 			}
 
 			$n++;
-			echo "</table>";
-			// echo "
-			// <table>
-			// 	<tr>
-			// 	<td colspan='4' style='text-align:right; ' >Sub-total</td>
-			// 	<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal."</td> 
-			// 	</tr>
-			// </table>
-			// ";
 		}
 	}
 
 
 	if($n != 0){
 
-		// echo "
-		// <tr>
-		// <td colspan='4' style='text-align:right; ' >Sub-total</td>
-		// <td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$carrinho['subtotal_tratado']."</td> 
-		// </tr>
-		// ";
+		echo "
+		<tr>
+		<td colspan='4' style='text-align:right; ' >Sub-total</td>
+		<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal."</td> 
+		</tr>
+		";
 
 	} else {
 
@@ -161,3 +152,4 @@
 
 	?>
 
+</table>

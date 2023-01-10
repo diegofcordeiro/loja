@@ -155,7 +155,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Link para checkout</label>
                                     <div class="col-md-12">
-                                       <p><?=DOMINIO.'/combo'.'/'.$data->id?></p>
+                                       <p><?=URL?>/combo/<?=$data->id?></p>
                                     </div>
                                 </div>
                             </div>

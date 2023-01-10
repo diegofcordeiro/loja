@@ -941,7 +941,7 @@
                                                                             <p class="preco_list">Gratuito</p>
                                                                     <?php } ?> -->
                                                                     <div class="bottom_card">
-                                                                        <div><a href="<?=$endereco?>" onclick="acessando(this);"><p class="saibamais_btn">SAIBA MAIS</p></a></div>
+                                                                        <div><a href="<?=$endereco?>" onclick="acessando(this);"><p class="saibamais_btn botao_comprar">SAIBA MAIS</p></a></div>
                                                                         <!-- <div><a href="<?=$endereco?>" onclick="acessando(this);" class="botao_comprar"><?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?></a></div> -->
 																		<!-- <div id="div_comprar">
 																			<form name="add_carrinho" id="add_carrinho" action="<?=DOMINIO?><?=$controller?>/carrinho_adicionar" method="post" enctype="multipart/form-data" >

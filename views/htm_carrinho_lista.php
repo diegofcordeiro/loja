@@ -32,6 +32,11 @@
 
 	foreach ($carrinho['lista'] as $key => $values) { 
 		foreach ($values as $key2 => $value) { 
+			if($value['usar_valor_vindi'] == 1){
+				$valor_unitario = $value['total_unitario'];
+			}else{
+				$valor_unitario = $value['total_unitario'];
+			}
 			echo '<pre>';print_r(count($values));exit;
 			if($key != 0){
 				if($key2 == 0){

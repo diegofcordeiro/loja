@@ -141,7 +141,7 @@
 			<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal_."</td> 
 			</tr>
 		";
-		$total_pedidos_ =+ $subtotal_;
+		$total_pedidos_ = ($total_pedidos_ + $subtotal_);
 	}
 
 

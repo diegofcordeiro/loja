@@ -36,7 +36,7 @@
 				$valor_unitario = '-';
 				$total_geral = $value['combo_valor'];
 			}else{
-				$valor_unitario = $value['total_unitario'];
+				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = $value['total_quantidade'];
 			}
 			// echo '<pre>';print_r(count($values));exit;
@@ -63,7 +63,7 @@
 					</td>
 
 					<td style='text-align:center;' >
-					<div class='carrinho_lista_valor' >R$ ".$valor_unitario."</div>
+					<div class='carrinho_lista_valor' >".$valor_unitario."</div>
 					</td>";
 					// <td style='width:200px;' ><div style='margin-top:30px; text-align:center;'>
 					// <input class='carrinho_quantidade_input' name='quantidade_".$value['id']."' id='quantidade_".$value['id']."' value='".$value['quantidade']."' onkeypress='Mascara(this,Integer)' onKeyDown='Mascara(this,Integer)' >
@@ -72,7 +72,7 @@
 					echo "</td>
 
 					<td style='text-align:center; width:120px;' >
-					<div class='carrinho_lista_valor' >R$ ".$value['total_quantidade']."</div>
+					<div class='carrinho_lista_valor' >R$ ".$total_geral."</div>
 					</td>
 
 					</tr>
@@ -107,7 +107,7 @@
 					</td>
 
 					<td style='text-align:center;' >
-					<div class='carrinho_lista_valor' >R$ ".$valor_unitario."</div>
+					<div class='carrinho_lista_valor'>".$valor_unitario."</div>
 					</td>";
 
 					// <td style='width:200px;' >
@@ -118,7 +118,7 @@
 					// </td>
 
 					echo "<td style='text-align:center; width:120px;' >
-					<div class='carrinho_lista_valor' >R$ ".$value['total_quantidade']."</div>
+					<div class='carrinho_lista_valor' >R$ ".$total_geral."</div>
 					</td>
 
 					</tr>

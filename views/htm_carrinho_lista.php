@@ -39,11 +39,13 @@
 			if($value['usar_valor_vindi'] == 1){
 				$valor_unitario = '-';
 				$total_geral = '-';
-				$subtotal_ = $value['combo_valor'];
+				$resultado = str_replace('.', '', $value['combo_valor']); // remove o ponto
+    			$resultado = str_replace(',', '.', $resultado); // substitui a vírgula por ponto
+				$subtotal_ = ($subtotal_ + floatval($resultado));
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = "R$ ".$value['total_quantidade'];
-				
+
 				$resultado = str_replace('.', '', $value['total_unitario']); // remove o ponto
     			$resultado = str_replace(',', '.', $resultado); // substitui a vírgula por ponto
 				$subtotal_ = ($subtotal_ + floatval($resultado));

@@ -185,7 +185,7 @@
                                   $plans = get_plans();
                                     foreach($plans['plans'] as $pla){
                                       foreach($pla as $plan){?>
-                                    <option value='<?=$plan['id']?>' <?php if($data->assinatura == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
+                                      <option value='<?=$plan['id']?>' <?php if($data->assinatura == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
                                   
                                   <?php }} ?>
 

@@ -5784,7 +5784,7 @@ class index extends controller {
 
 		$dados['botao_css'] = $botao_css;
 		$dados['botao_style'] = $botao_style;
-		echo '<pre>';print_r($dados);exit;
+		echo '<pre>';print_r($dados['carrinho']);exit;
 		$this->view('carrinho_lista', $dados);
 	}
 
@@ -6302,7 +6302,8 @@ class index extends controller {
 					}
 					$usar_valor_vindi = $usar_discount;
 					if($usar_discount == 1){
-						$valor_total = $valor_combo_vindi;
+						$valor_total = 0;
+						$valor_total_combo_vindi = $valor_combo_vindi;
 					}else{
 						$combo_disconto = 0;
 						if($_POST['combo_disconto'] > 0){
@@ -6506,6 +6507,7 @@ class index extends controller {
 						"quantidade"=> 1,
 						"valor_arte"=>"$valor_arte",
 						"valor_total"=>"$valor_total",
+						"valor_total_combo_vindi"=>"$valor_total_combo_vindi",
 						"usar_valor_vindi"=>"$usar_valor_vindi",
 						"combo_desconto"=>"$combo_disconto",
 						"tipoarte"=>"$tipoarte",

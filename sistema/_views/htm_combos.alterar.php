@@ -176,7 +176,7 @@
                         </div>
                         <div class="row">
 
-                          <div class="col-md-8">
+                          <div class="col-md-6">
                             <div class="form-group">
                               <label class="col-md-12">Plano</label>
                               <div class="col-md-12">
@@ -215,15 +215,24 @@
                             </div>
                           </div>
 
-                          <!-- <div class="col-md-2">
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
                             <div class="form-group">
                               <label class="col-md-12" >% de Desconto</label>
                               <div class="col-md-12">
-                                  <input name="desconto" type="text" class="form-control" value="<?=$data->desconto?>" >
+                                <input name="desconto" type="text" class="form-control" value="<?=$data->desconto?>" >
                               </div>
                             </div>
-                          </div> -->
-
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="col-md-12">Usar desconto?</label>
+                              <div class="col-md-12">
+                                <input name="usar_desconto" type="text" class="form-control" value="<?=$data->usar_desconto?>" >
+                              </div>
+                            </div>
+                          </div>
                         </div>
                     </fieldset>
                     <div>

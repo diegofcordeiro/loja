@@ -33,12 +33,12 @@
 			}
       return $all_planos;
   }
-echo '<pre>';
-$plans = get_plans();
-print_r($plans);exit;
+// echo '<pre>';
+// $plans = get_plans();
+// print_r($plans);exit;
 
   // foreach($plans['plans'] as $plan){
-  //   print_r($plan['id']);
+    // print_r($plan['plan_items'][0]['product']['pricing_schema']['price']);
   //   print_r($plan['name']);
   // }
   // exit;
@@ -185,7 +185,7 @@ print_r($plans);exit;
                                   $plans = get_plans();
                                     foreach($plans['plans'] as $pla){
                                       foreach($pla as $plan){?>
-                                      <option data-preco="<?=$plan['id']?>" value='<?=$plan['id']?>' <?php if($data->plano_id == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
+                                      <option data-preco="<?=$plan['plan_items'][0]['product']['pricing_schema']['price']?>" value='<?=$plan['id']?>' <?php if($data->plano_id == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
                                   
                                   <?php }} ?>
 

@@ -31,6 +31,7 @@
 	$n = 0;
 
 	foreach ($carrinho['lista'] as $key => $values) { 
+		echo '<pre>';print_r(count($values));exit;
 		foreach ($values as $key2 => $value) { 
 			if($value['usar_valor_vindi'] == 1){
 				$valor_unitario = '-';
@@ -130,7 +131,7 @@
 			$n++;
 		}
 
-		echo '<pre>';print_r($values[0]['combo_valor']);exit;
+
 
 		echo "
 			<tr>

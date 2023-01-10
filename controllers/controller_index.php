@@ -569,6 +569,7 @@ class index extends controller {
 									combos.titulo as combo_titulo,
 									combos.banner as combo_banner,
 									combos.plano_id as plano_id,
+									combos.valor as plano_valor,
 									combos.status as combo_status,
 									combos.desconto as combo_desconto,
 									produto.id as produto_id,
@@ -595,6 +596,7 @@ class index extends controller {
 				$new_cmb[$combo_id]['produtos'] = array($obj_cmb);
 			}
 		}
+
 		$result = $conexao->query("SELECT distinct 
 									$campo
 									autor.nome as autor_nome,

@@ -40,6 +40,7 @@
 				$valor_unitario = '-';
 				$total_geral = '-';
 				$subtotal = $value['combo_valor'];
+				echo '<pre>';print_r(($subtotal));exit;
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = "R$ ".$value['total_quantidade'];

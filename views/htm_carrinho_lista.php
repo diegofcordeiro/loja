@@ -35,17 +35,15 @@
 		// echo '<pre>';print_r(($values));exit;
 		$subtotal = 0;
 		foreach ($values as $key2 => $value) { 
-		echo '<pre>';print_r(($value));exit;
 
 			if($value['usar_valor_vindi'] == 1){
 				$valor_unitario = '-';
 				$total_geral = '-';
-				$subtotal = $value['valor_total_combo_vindi'];
-				print_r($value['valor_total_combo_vindi']);
+				$subtotal = $value['combo_valor'];
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = "R$ ".$value['total_quantidade'];
-				$subtotal = ($subtotal + $value['produto_valor']);
+				$subtotal = ($subtotal + $value['total_unitario']);
 
 			}
 			// echo '<pre>';print_r(count($values));exit;

@@ -132,16 +132,14 @@ Class model_carrinho extends model{
 						$total_total += $list['total_unitario'];
 					}
 				}
-				
-				$combo = ($list['id_combo'] > 0 ? $list['id_combo'] : 0);
 
+				$combo = ($list['id_combo'] > 0 ? $list['id_combo'] : 0);
 				if (!empty($new[$combo])){
 					$new[$combo] = array_merge($new[$combo], array($list));
-					$new[$combo]['subtotal'] = $total_total;
 				}else{
 					$new[$combo] = array($list);
-					$new[$combo]['subtotal'] = $total_total;
 				}
+				$new[$combo]['subtotal'] = $total_total;
 			}
 			
 			echo'<pre>';print_r($new);exit;

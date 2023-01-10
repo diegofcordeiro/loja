@@ -174,7 +174,7 @@
 	
 	<tr>
 		<td style='text-align:right; border-top:0px;' >Total do Pedido</td>
-		<td style='text-align:center; width:120px; font-weight:bold; border-top:0px;' >R$ <?=$total_pedidos_?></td>
+		<td style='text-align:center; width:120px; font-weight:bold; border-top:0px;' >R$ <?=number_format($total_pedidos_,2)?></td>
 	</tr> 
 
 </table>

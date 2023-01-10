@@ -123,26 +123,27 @@ Class model_carrinho extends model{
 
 			$new = array();
 			foreach ($lista as $list) {
-				
-
-
 				$combo = ($list['id_combo'] > 0 ? $list['id_combo'] : 0);
 				if (!empty($new[$combo])){
 					$new[$combo] = array_merge($new[$combo], array($list));
 				}else{
 					$new[$combo] = array($list);
 				}
-				$new[$combo]['subtotal'] = $total_total;
 			}
 
 			foreach($new as $key => $linha){
-				echo'<pre>';print_r($linha);exit;
 				$total_total = 0;
-					foreach($linha as $list){
+				foreach($linha as $list){
+					if($list['usar_valor_vindi'] == 1){
+						$total_total = $list['combo_valor'];
+					}else{
 						$total_total += $list['total_unitario'];
 					}
+				}
+				$new[$key]['subtotal'] = $total_total;
 			}
-
+			
+			echo'<pre>';print_r($new);exit;
 
 
 				// 			$total_total = 0;

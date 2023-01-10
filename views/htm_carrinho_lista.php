@@ -34,10 +34,10 @@
 		foreach ($values as $key2 => $value) { 
 			if($value['usar_valor_vindi'] == 1){
 				$valor_unitario = '-';
-				$total_geral = $value['combo_valor'];
+				$total_geral = '-';
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
-				$total_geral = $value['total_quantidade'];
+				$total_geral = "R$ ".$value['total_quantidade'];
 			}
 			// echo '<pre>';print_r(count($values));exit;
 			if($key != 0){
@@ -72,7 +72,7 @@
 					echo "</td>
 
 					<td style='text-align:center; width:120px;' >
-					<div class='carrinho_lista_valor' >R$ ".$total_geral."</div>
+					<div class='carrinho_lista_valor' >".$total_geral."</div>
 					</td>
 
 					</tr>
@@ -118,7 +118,7 @@
 					// </td>
 
 					echo "<td style='text-align:center; width:120px;' >
-					<div class='carrinho_lista_valor' >R$ ".$total_geral."</div>
+					<div class='carrinho_lista_valor' >".$total_geral."</div>
 					</td>
 
 					</tr>

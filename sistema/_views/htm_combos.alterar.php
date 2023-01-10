@@ -180,12 +180,12 @@
                             <div class="form-group">
                               <label class="col-md-12">Plano</label>
                               <div class="col-md-12">
-                                <select class="form-control select2" name="assinatura" data_id="<?=$data->assinatura?>">
+                                <select class="form-control select2" name="assinatura" data_id="<?=$data->plano_id?>">
                                   <?php 
                                   $plans = get_plans();
                                     foreach($plans['plans'] as $pla){
                                       foreach($pla as $plan){?>
-                                      <option value='<?=$plan['id']?>' <?php if($data->assinatura == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
+                                      <option value='<?=$plan['id']?>' <?php if($data->plano_id == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
                                   
                                   <?php }} ?>
 

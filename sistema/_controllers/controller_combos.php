@@ -102,8 +102,7 @@ class combos extends controller {
 		$assinatura = $_POST['assinatura'];
 		$price = $_POST['price'];
 		
-		echo'<pre>';print_r($_POST);exit;
-		
+		// echo'<pre>';print_r($_POST);exit;
 
         $db = new mysql();
 		$db->executar("DELETE FROM combo_produto WHERE id_combo = '$codigo' ");

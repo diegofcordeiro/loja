@@ -34,7 +34,7 @@ if($config['SSL']){
 
 
 define("DOMINIO", $config_dominio."sistema/");
-define("URL", $config_dominio."");
+define("URL", $config_dominio);
 define("PASTA_CLIENTE", $config_dominio."arquivos/");
 define("AUTOR", "https://zoom.com.br");
 define("TITULO_VIEW", "");

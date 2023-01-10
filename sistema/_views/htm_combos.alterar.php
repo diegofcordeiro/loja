@@ -180,7 +180,7 @@
                             <div class="form-group">
                               <label class="col-md-12">Plano</label>
                               <div class="col-md-12">
-                                <select class="form-control select2" name="assinatura" data_id="<?=$data->plano_id?>">
+                                <select class="form-control select2" id="planos_list" name="assinatura" data_id="<?=$data->plano_id?>">
                                   <?php 
                                   $plans = get_plans();
                                     foreach($plans['plans'] as $pla){
@@ -602,6 +602,11 @@
       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
         <script>
+          
+          $(document).on('change', '#planos_list', function(){
+            console.log(this);
+
+          });
           $(document).on('click', '.limited', function(){
             console.log('aqui');
             var limit = 3;

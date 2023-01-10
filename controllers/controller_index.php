@@ -6294,20 +6294,24 @@ class index extends controller {
 
 					$conexao = new mysql();
 					$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
-					
+					$usar_valor_vindi = 0;
+					$valor_combo_vindi = 0;
 					while($data_det = $coisas_det->fetch_object()){
-						echo '<pre>';print_r($data_det);
+						$usar_discount = $data_det->usar_desconto;
+						$valor_combo_vindi = $data_det->valor;
 					}
-					exit;
-					
-					$combo_disconto = 0;
-					if($_POST['combo_disconto'] > 0){
-						$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
-						$combo_disconto = $_POST['combo_disconto'];
+					$usar_valor_vindi = $usar_discount;
+					if($usar_discount == 1){
+						$valor_total = $valor_combo_vindi;
 					}else{
-						$valor_total = $data_produto->valor;
+						$combo_disconto = 0;
+						if($_POST['combo_disconto'] > 0){
+							$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
+							$combo_disconto = $_POST['combo_disconto'];
+						}else{
+							$valor_total = $data_produto->valor;
+						}
 					}
-
 
 					$tam_altura = '';
 					$tam_largura = '';
@@ -6502,6 +6506,7 @@ class index extends controller {
 						"quantidade"=> 1,
 						"valor_arte"=>"$valor_arte",
 						"valor_total"=>"$valor_total",
+						"usar_valor_vindi"=>"$usar_valor_vindi",
 						"combo_desconto"=>"$combo_disconto",
 						"tipoarte"=>"$tipoarte",
 						"modelo_codigo"=>"$modelo_codigo",

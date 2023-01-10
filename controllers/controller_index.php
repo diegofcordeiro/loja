@@ -5811,9 +5811,8 @@ class index extends controller {
 													FROM produto 
 													inner join combo_produto on combo_produto.id_produto = produto.id
 													where id_combo='$combo' ");
-			$i = 0;
 			while($data_det = $coisas_det->fetch_object()){
-				print_r($data_det);exit;
+				array_push($produto,$data_det);
 			}
 
 		}

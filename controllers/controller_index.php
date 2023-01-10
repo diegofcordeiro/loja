@@ -6191,7 +6191,6 @@ class index extends controller {
 				));
 
 			} else {
-
 				//confere se o pedido foi finalizado
 				if($data->status != 0){
 					$this->irpara(DOMINIO.$this->_controller."/carrinho");
@@ -6226,9 +6225,6 @@ class index extends controller {
 							$this->volta(1);
 						}
 					}
-					
-					
-
 					//verifica obrigaçao do campo Tamanho
 					$tamanho = $this->post('tamanho');
 					if(!$tamanho){
@@ -6295,7 +6291,7 @@ class index extends controller {
 					// valor base
 					$combo_titulo = $_POST['combo_titulo'];
 					$plano_id = $_POST['plano_id'];
-					
+
 					$conexao = new mysql();
 					$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
 					
@@ -6303,7 +6299,7 @@ class index extends controller {
 						echo '<pre>';print_r($data_det);
 					}
 					exit;
-
+					
 					$combo_disconto = 0;
 					if($_POST['combo_disconto'] > 0){
 						$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);

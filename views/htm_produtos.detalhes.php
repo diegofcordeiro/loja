@@ -798,7 +798,11 @@
 							</div>
 						<?php }?>
 					<?php }else{ ?>
-							<div class='col-xs-12 col-sm-6 col-md-6'>
+							<?php if($data->only_combo != 0){?>
+								<div class='col-xs-12 col-sm-12 col-md-12'>
+							<?php }else{?>
+								<div class='col-xs-12 col-sm-6 col-md-6'>
+							<?php }?>
 							<div class="desc_bloc">
 								<div class="style1" style="margin-top: 20px;"><?=$data->summary?></div>
 							</div>

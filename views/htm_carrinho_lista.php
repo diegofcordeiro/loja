@@ -33,18 +33,17 @@
 	foreach ($carrinho['lista'] as $key => $values) { 
 		
 		// echo '<pre>';print_r(($values));exit;
-		$subtotal = 0;
+		$subtotal_ = 0;
 		foreach ($values as $key2 => $value) { 
 
 			if($value['usar_valor_vindi'] == 1){
 				$valor_unitario = '-';
 				$total_geral = '-';
-				$subtotal = $value['combo_valor'];
-				echo '<pre>';print_r(($subtotal));exit;
+				$subtotal_ = $value['combo_valor'];
 			}else{
 				$valor_unitario = "R$ ".$value['total_unitario'];
 				$total_geral = "R$ ".$value['total_quantidade'];
-				$subtotal = ($subtotal + $value['total_unitario']);
+				$subtotal_ = ($subtotal_ + $value['total_unitario']);
 
 			}
 			// echo '<pre>';print_r(count($values));exit;

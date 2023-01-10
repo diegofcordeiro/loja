@@ -180,7 +180,7 @@
                             <div class="form-group">
                               <label class="col-md-12">Plano</label>
                               <div class="col-md-12">
-                                <select class="form-control select2" name="assinatura" >
+                                <select class="form-control select2" name="assinatura" data_id="<?=$data->assinatura?>">
                                   <?php 
                                   $plans = get_plans();
                                     foreach($plans['plans'] as $pla){

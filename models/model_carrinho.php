@@ -46,6 +46,8 @@ Class model_carrinho extends model{
 				$lista[$i]['combo_titulo'] = $data_carrinho->combo_titulo;
 				$lista[$i]['combo_valor'] = $data_carrinho->valor_total_combo_vindi;
 				$lista[$i]['usar_valor_vindi'] = $data_carrinho->usar_valor_vindi;
+
+
 				
 				if($data_carrinho->plano == 0){
 
@@ -131,22 +133,22 @@ Class model_carrinho extends model{
 				}
 			}
 
-			foreach($new as $key => $linha){
-				$total_total = 0;
-				foreach($linha as $list){
-					if($list['usar_valor_vindi'] == 1){
-						$total_total = $list['combo_valor'];
-					}else{
-						$total_total = ($total_total + $list['total_unitario']);
-					}
-				}
-				$new[$key]['subtotal'] = $total_total;
-			}
+			// foreach($new as $key => $linha){
+			// 	$total_total = 0;
+			// 	foreach($linha as $list){
+			// 		if($list['usar_valor_vindi'] == 1){
+			// 			$total_total = $list['combo_valor'];
+			// 		}else{
+			// 			$total_total = ($total_total + $list['total_unitario']);
+			// 		}
+			// 	}
+			// 	$new[$key]['subtotal'] = $total_total;
+			// }
 			
 			// echo'<pre>';print_r($new);exit;
 			// $retorno['combo_list'] = $new;
 			
-			echo'<pre>';print_r($new);exit; 
+			// echo'<pre>';print_r($new);exit; 
 			$retorno['lista'] = $new;
 			$retorno['subtotal_tratado'] = $valores->trata_valor($valor_subtotal);
 			$retorno['subtotal'] = $valor_subtotal;

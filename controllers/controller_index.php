@@ -5463,7 +5463,7 @@ class index extends controller {
 		$formas_pg = new model_formas_pg();
 
 		$dados['carrinho'] = $carrinho->carrinho($this->_sessao); 
-		echo'<pre>';print_r($dados['carrinho']);exit;
+		// echo'<pre>';print_r($dados['carrinho']);exit;
 		$dados['itens_n'] = 0;
 
 		$dados['tipo_envio'] = 0;

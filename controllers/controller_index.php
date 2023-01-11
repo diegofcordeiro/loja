@@ -6234,7 +6234,7 @@ class index extends controller {
 							$linha_carrinho = $coisas_carrinho->num_rows;
 							if($linha_carrinho != 0){			
 								$this->msg('Você não pode adicionar 2 combos iguais.');
-								$this->volta(1);
+								$this->irpara(DOMINIO.$this->_controller."/carrinho");
 							}
 						}
 						$tamanho = $this->post('tamanho');

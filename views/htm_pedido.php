@@ -1586,34 +1586,35 @@
 							<?php
 							echo '<pre>'; print_r($produtos);exit;
 							$n = 0;
-							foreach ($produtos['lista'] as $key => $value) {
+							foreach ($produtos['lista'] as $key => $valu) {
+								foreach ($valu as $value) {
+									echo "
+									<tr>
 
-								echo "
-								<tr>
+									<td colspan='2' >
+									<div class='carrinho_lista_imagem' style='background-image:url(".$value['imagem'].");' ></div>
+									<div class='carrinho_lista_texto' ><div style='padding-left:15px; padding-right:15px;'>".$value['titulo']."</div></div>
+									</td>
 
-								<td colspan='2' >
-								<div class='carrinho_lista_imagem' style='background-image:url(".$value['imagem'].");' ></div>
-								<div class='carrinho_lista_texto' ><div style='padding-left:15px; padding-right:15px;'>".$value['titulo']."</div></div>
-								</td>
+									<td style='text-align:center;' >
+									<div class='carrinho_lista_valor' >R$ ".$value['total_unitario']."</div>
+									</td>
 
-								<td style='text-align:center;' >
-								<div class='carrinho_lista_valor' >R$ ".$value['total_unitario']."</div>
-								</td>
+									<td style='text-align:center;' >
+									<div class='carrinho_lista_valor' >
+									".$value['quantidade']."
+									</div>
+									</td>
 
-								<td style='text-align:center;' >
-								<div class='carrinho_lista_valor' >
-								".$value['quantidade']."
-								</div>
-								</td>
+									<td style='text-align:center; ' >
+									<div class='carrinho_lista_valor' >R$ ".$value['total_quantidade']."</div>
+									</td>                                    
 
-								<td style='text-align:center; ' >
-								<div class='carrinho_lista_valor' >R$ ".$value['total_quantidade']."</div>
-								</td>                                    
+									</tr>
+									";
 
-								</tr>
-								";
-
-								$n++;
+									$n++;
+								}
 							}
 
 

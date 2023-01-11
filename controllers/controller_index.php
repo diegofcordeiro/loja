@@ -6308,15 +6308,14 @@ class index extends controller {
 
 						$combo_titulo = '';
 						$plano_id = '';
-						print_r("SELECT * FROM combos where id_combo='$combo_id'");
+
 						
-						$coisas_combo = $conexao->Executar("SELECT * FROM combos where id_combo='$combo_id' ");
+						$coisas_combo = $conexao->Executar("SELECT * FROM combos where id='$combo_id' ");
 						while($data_det = $coisas_combo->fetch_object()){
 							array_push($produto,$data_det->codigo);
 							$combo_titulo = $data_det->titulo;
 							$plano_id = $data_det->plano_id;
 						}
-						print_r("SELECT * FROM combos where id_combo='$combo_id'");
 						echo 'Aqui <br>';
 						print_r($combo_titulo);
 						echo '<br>';

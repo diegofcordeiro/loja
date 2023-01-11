@@ -6230,11 +6230,9 @@ class index extends controller {
 				foreach($produto as $prod){
 					$combo_id_get = $this->get('combo');
 					$data_produto = $produtos->carrega_produto_codigo($prod);
-					//verifica se o produto existe
 					if(isset($data_produto->id)){
 						$conexao = new mysql();
 						$tipo_envio = 3;
-						// echo'<pre>';print_r($data_produto);exit;
 						$combo_id = null;
 						$combo_id = $combo_id_get;
 						if($combo_id_get > 0){
@@ -6308,19 +6306,14 @@ class index extends controller {
 
 						$combo_titulo = '';
 						$plano_id = '';
-
+						$combo_disconto_get = '';
 						
 						$coisas_combo = $conexao->Executar("SELECT * FROM combos where id='$combo_id' ");
 						while($data_det = $coisas_combo->fetch_object()){
-							array_push($produto,$data_det->codigo);
 							$combo_titulo = $data_det->titulo;
 							$plano_id = $data_det->plano_id;
+							$combo_disconto = $data_det->desconto;
 						}
-						echo 'Aqui <br>';
-						print_r($combo_titulo);
-						echo '<br>';
-						print_r($plano_id);exit;
-						
 
 						$conexao = new mysql();
 						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
@@ -6336,9 +6329,9 @@ class index extends controller {
 							$valor_total_combo_vindi = $valor_combo_vindi;
 						}else{
 							$combo_disconto = 0;
-							if($_POST['combo_disconto'] > 0){
-								$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
-								$combo_disconto = $_POST['combo_disconto'];
+							if($combo_disconto_get > 0){
+								$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $combo_disconto_get);
+								$combo_disconto = $combo_disconto_get;
 							}else{
 								$valor_total = $data_produto->valor;
 							}
@@ -6364,7 +6357,6 @@ class index extends controller {
 							$valor_total = $tamanho_altura * $tamanho_largura * $valor_total;
 
 						} 
-						//tamanho
 						if($tamanho){
 
 							$conexao = new mysql();
@@ -6385,7 +6377,6 @@ class index extends controller {
 							$tamanho_valor = 0;
 							$tamanho_titulo = "";
 						}
-						//Cor
 						if($cor){
 
 							$conexao = new mysql();
@@ -6406,7 +6397,6 @@ class index extends controller {
 							$cor_valor = 0;
 							$cor_titulo = "";
 						}
-						// confere estoque se tiver menos do que o selecionado substitui pela quantidade disponivel
 						if($data_produto->semestoque == 0){
 
 							$quantidade_disponivel = $produtos->estoque_quantidade($produto, $tamanho, $cor, $variacao);
@@ -6423,7 +6413,6 @@ class index extends controller {
 							}
 
 						}
-
 						if($data_produto->impresso == 1){
 
 							$tipoarte = $this->post('tipoarte');
@@ -6481,9 +6470,7 @@ class index extends controller {
 							$arquivo_arte = '';
 							$arte_acabamento = '';
 						}
-
 						$titulodoproduto = "";
-
 						if($data_produto->material){
 							$titulodoproduto .= $data_produto->material.' ';
 						}
@@ -6550,9 +6537,8 @@ class index extends controller {
 							"tam_altura"=>"$tam_altura"
 						));
 
-						// echo'<pre>';print_r($conexao);exit;
+						echo'<pre>';print_r($conexao);exit;
 					}
-					// echo'<pre>';print_r($data_produto);exit;
 				}
 				$this->irpara(DOMINIO.$this->_controller."/carrinho");
 			}else{

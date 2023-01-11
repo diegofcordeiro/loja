@@ -5792,7 +5792,7 @@ class index extends controller {
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-		
+
 		$dados = array();
 		$dados['_base'] = $this->_base();
 
@@ -6236,6 +6236,7 @@ class index extends controller {
 						$tipo_envio = 3;
 						// echo'<pre>';print_r($data_produto);exit;
 						$combo_id = null;
+						$combo_id = $combo_id_get;
 						if($combo_id_get > 0){
 							$combo_id = $combo_id_get;
 							$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$cod_sessao' AND produto = '$prod' AND id_combo = $combo_id ");

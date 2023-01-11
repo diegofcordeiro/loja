@@ -6190,7 +6190,366 @@ class index extends controller {
 			}
 		}else{
 			if($this->get('combo')){
-				echo 'Bateu aqui';
+				$conexao = new mysql();
+				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");
+				$data = $coisas->fetch_object();
+
+				if(!isset($data->id)){
+					$time = time();
+					$ip = $_SERVER["REMOTE_ADDR"];
+					//grava no banco
+					$conexao = new mysql();
+					$conexao->inserir("pedido_loja", array(
+						"codigo"=>"$cod_sessao",
+						"data"=>"$time",
+						"ip"=>"$ip",
+						"status"=>"0"
+					));
+
+				} else {
+					//confere se o pedido foi finalizado
+					if($data->status != 0){
+						$this->irpara(DOMINIO.$this->_controller."/carrinho");
+					} else {
+						//zera dados de frete
+						$conexao = new mysql();
+						$conexao->alterar("pedido_loja", array(
+							"frete"=>"",
+							"frete_titulo"=>"",
+							"frete_valor"=>"",
+							"valor_produtos"=>"0",
+							"valor_produtos_desc"=>"0",
+							"valor_total"=>"0",
+							"status"=>"0"
+						), " sessao='$cod_sessao' ");
+					}			
+				}
+				foreach($produto as $prod){
+					$combo_id_get = $this->get('combo');
+					$data_produto = $produtos->carrega_produto_codigo($prod);
+					//verifica se o produto existe
+					if(isset($data_produto->id)){
+						$conexao = new mysql();
+						$tipo_envio = 3;
+						// echo'<pre>';print_r($data_produto);exit;
+						$combo_id = null;
+						if($combo_id_get > 0){
+							$combo_id = $combo_id_get;
+							$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$cod_sessao' AND produto = '$prod' AND id_combo = $combo_id ");
+							$linha_carrinho = $coisas_carrinho->num_rows;
+							if($linha_carrinho != 0){			
+								$this->msg('Você não pode adicionar 2 combos iguais.');
+								$this->volta(1);
+							}
+						}
+						$tamanho = $this->post('tamanho');
+						if(!$tamanho){
+
+							$conexao = new mysql();
+							$coisas_det = $conexao->Executar("SELECT * FROM produto_tamanho_sel where produto_codigo='$produto' ");
+							$i = 0;
+							while($data_det = $coisas_det->fetch_object()){
+
+								$conexao = new mysql();
+								$data_det2 = $conexao->Executar("SELECT id FROM produto_tamanho where codigo='$data_det->tamanho_codigo' ")->fetch_object();
+
+								if(isset($data_det2->id)){
+									$i++;
+								}
+							}
+							if($i != 0){
+								$this->msg('Selecione o tamanho!');
+								$this->volta(1);
+							}
+						}		
+						$cor = $this->post('cor');
+						if(!$cor){
+
+							$conexao = new mysql();
+							$coisas_det = $conexao->Executar("SELECT * FROM produto_cor_sel where produto_codigo='$produto' ");
+							$i = 0;
+							while($data_det = $coisas_det->fetch_object()){
+
+								$conexao = new mysql();
+								$data_det2 = $conexao->Executar("SELECT id FROM produto_cor where codigo='$data_det->cor_codigo' ")->fetch_object();
+
+								if(isset($data_det2->id)){
+									$i++;
+								}
+							}
+							if($i != 0){
+								$this->msg('Selecione uma cor!');
+								$this->volta(1);
+							}
+						}
+						$variacao = $this->post('variacao');
+						if(!$variacao){
+							$conexao = new mysql();
+							$coisas_det = $conexao->Executar("SELECT * FROM produto_variacao_sel where produto_codigo='$produto' ");
+							$i = 0;
+							while($data_det = $coisas_det->fetch_object()){
+
+								$conexao = new mysql();
+								$data_det2 = $conexao->Executar("SELECT id FROM produto_variacao where codigo='$data_det->variacao_codigo' ")->fetch_object();
+
+								if(isset($data_det2->id)){
+									$i++;
+								}
+							}
+							if($i != 0){
+								$this->msg('Selecione uma variação!');
+								$this->volta(1);
+							}
+						}
+
+						$combo_titulo = '';
+						$plano_id = '';
+
+						$coisas_combo = $conexao->Executar("SELECT * FROM combos where id_combo='$combo_id' ");
+						while($data_det = $coisas_combo->fetch_object()){
+							array_push($produto,$data_det->codigo);
+							$combo_titulo = $data_det->titulo;
+							$plano_id = $data_det->plano_id;
+						}
+
+						print_r($combo_titulo);
+						echo '<br>';
+						print_r($plano_id);
+						
+
+						$conexao = new mysql();
+						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
+						$usar_valor_vindi = 0;
+						$valor_combo_vindi = 0;
+						while($data_det = $coisas_det->fetch_object()){
+							$usar_discount = $data_det->usar_desconto;
+							$valor_combo_vindi = $data_det->valor;
+						}
+						$usar_valor_vindi = $usar_discount;
+						if($usar_discount == 1){
+							$valor_total = 0;
+							$valor_total_combo_vindi = $valor_combo_vindi;
+						}else{
+							$combo_disconto = 0;
+							if($_POST['combo_disconto'] > 0){
+								$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
+								$combo_disconto = $_POST['combo_disconto'];
+							}else{
+								$valor_total = $data_produto->valor;
+							}
+						}
+
+						$tam_altura = '';
+						$tam_largura = '';
+						if($data_produto->tipo != 0){
+
+							$tamanho_largura = $valores->trata_valor_banco($this->post('tamanho_largura'));
+							$tamanho_altura = $valores->trata_valor_banco($this->post('tamanho_altura'));
+
+							if($data_produto->tipo == 1){
+								$tipounidade = 'm';
+							}
+							if($data_produto->tipo == 2){
+								$tipounidade = 'cm';
+							}
+
+							$tam_altura = $tamanho_altura.' '.$tipounidade;
+							$tam_largura = $tamanho_largura.' '.$tipounidade;
+
+							$valor_total = $tamanho_altura * $tamanho_largura * $valor_total;
+
+						} 
+						//tamanho
+						if($tamanho){
+
+							$conexao = new mysql();
+							$coisas = $conexao->Executar("SELECT * FROM produto_tamanho where codigo='$tamanho' ");
+							$data = $coisas->fetch_object();
+
+							$conexao = new mysql();
+							$coisas2 = $conexao->Executar("SELECT * FROM produto_tamanho_sel where tamanho_codigo='$tamanho' AND produto_codigo='$produto' ");
+							$data2 = $coisas2->fetch_object();
+
+							$tamanho_valor = $data2->valor;
+							$tamanho_titulo = $data->titulo;
+
+							$valor_total = $valor_total + $data2->valor;
+
+						} else {
+							$tamanho = '-';
+							$tamanho_valor = 0;
+							$tamanho_titulo = "";
+						}
+						//Cor
+						if($cor){
+
+							$conexao = new mysql();
+							$coisas = $conexao->Executar("SELECT * FROM produto_cor where codigo='$cor' ");
+							$data = $coisas->fetch_object();
+
+							$conexao = new mysql();
+							$coisas2 = $conexao->Executar("SELECT * FROM produto_cor_sel where cor_codigo='$cor' AND produto_codigo='$produto' ");
+							$data2 = $coisas2->fetch_object();
+
+							$cor_valor = $data2->valor;
+							$cor_titulo = $data->titulo;
+
+							$valor_total = $valor_total + $data2->valor;
+
+						} else {
+							$cor = '-';
+							$cor_valor = 0;
+							$cor_titulo = "";
+						}
+						// confere estoque se tiver menos do que o selecionado substitui pela quantidade disponivel
+						if($data_produto->semestoque == 0){
+
+							$quantidade_disponivel = $produtos->estoque_quantidade($produto, $tamanho, $cor, $variacao);
+
+							if($quantidade_disponivel <= 0){
+
+								$this->msg('Produto indisponível em estoque!');
+								$this->volta(1);
+
+							} else {
+								if($quantidade > $quantidade_disponivel){
+									$quantidade = $quantidade_disponivel;
+								}
+							}
+
+						}
+
+						if($data_produto->impresso == 1){
+
+							$tipoarte = $this->post('tipoarte');
+							if(!$tipoarte){
+								$this->msg('Preencha todos os campos obrigatórios');
+								$this->volta(1);
+							}
+
+							$modelo_codigo = '';
+							$dados_arte = '';
+							$valor_arte = 0;
+
+							if($tipoarte == 1){
+
+								$modelo_codigo = $this->post('modelo_selecionado_codigo');
+								if(!$modelo_codigo){
+									$this->msg('Preencha todos os campos obrigatórios');
+									$this->volta(1);
+								}
+
+								$dados_arte = $this->post('dados_arte');
+
+							}
+
+							if($tipoarte == 2){
+
+								$dados_arte = $this->post('dados_arte');
+
+							// valor arte
+								$valor_arte = $data_produto->valor_arte;
+								$valor_total = $valor_total + $valor_arte;
+
+							}
+
+
+							$arte_acabamento = $this->post('arte_acabamento');
+							$arquivo_arte = $this->post('arquivo_arte'); 
+
+
+							if($data_produto->obrigacaodoanexo == 1){
+								if($tipoarte == 3){
+
+									if(!$arquivo_arte){
+										$this->msg('Favor anexar sua arte para continuar.');
+										$this->volta(1);
+									}
+
+								}
+							}
+						} else {
+							$tipoarte = 0;
+							$modelo_codigo = '';
+							$dados_arte = '';
+							$valor_arte = 0;
+							$arquivo_arte = '';
+							$arte_acabamento = '';
+						}
+
+						$titulodoproduto = "";
+
+						if($data_produto->material){
+							$titulodoproduto .= $data_produto->material.' ';
+						}
+						if($data_produto->formato){
+							$titulodoproduto .= $data_produto->formato.' ';
+						}
+						if($data_produto->cores){
+							$titulodoproduto .= $data_produto->cores.' ';
+						}
+						if($data_produto->revestimento){
+							$titulodoproduto .= $data_produto->revestimento.' ';
+						}
+						if($data_produto->acabamento){
+							$titulodoproduto .= $data_produto->acabamento.' ';
+						}
+
+						$data_compra = new DateTime('now');
+						$data_compra = $data_compra->format('Y-m-d');
+						$data_compra = strtotime($data_compra);
+
+						$date_vencimento = new DateTime('now');
+						$period = '+'.$data_produto->data_vencimento. ' month';
+						$date_vencimento->modify($period); 
+						$date_vencimento = $date_vencimento->format('Y-m-d');
+						$date_vencimento = strtotime($date_vencimento);
+							
+						//grava no banco
+						$conexao = new mysql();
+						$conexao->inserir("pedido_loja_carrinho", array(
+							"sessao"=>"$cod_sessao",
+							"produto"=>"$prod",
+							"produto_id"=>"$data_produto->id",
+							"produto_ref"=>"$data_produto->ref",
+							"id_combo"=>"$combo_id",
+							"combo_titulo"=>"$combo_titulo",
+							"data_vencimento"=>"$date_vencimento",
+							"produto_assinatura"=>"$plano_id",
+							"data_compra"=>"$data_compra",
+							"produto_titulo"=>"$data_produto->titulo",
+							"produto_subtitulo"=>"$titulodoproduto",
+							"produto_valor"=>"$data_produto->valor",
+							"tamanho"=>"$tamanho",
+							"tamanho_titulo"=>"$tamanho_titulo",
+							"tamanho_valor"=>"$tamanho_valor",
+							"cor"=>"$cor",
+							"cor_titulo"=>"$cor_titulo",
+							"cor_valor"=>"$cor_valor",
+							"variacao"=>"$variacao",
+							"variacao_titulo"=>"",
+							"variacao_valor"=>0,
+							"quantidade"=> 1,
+							"valor_arte"=>"$valor_arte",
+							"valor_total"=>"$valor_total",
+							"valor_total_combo_vindi"=>"$valor_total_combo_vindi",
+							"usar_valor_vindi"=>"$usar_valor_vindi",
+							"combo_desconto"=>"$combo_disconto",
+							"tipoarte"=>"$tipoarte",
+							"modelo_codigo"=>"$modelo_codigo",
+							"dados_arte"=>"$dados_arte",
+							"arquivo_arte"=>"$arquivo_arte",
+							"arte_acabamento"=>"$arte_acabamento",
+							"tipo_envio"=> 3,
+							"tam_largura"=>"$tam_largura",
+							"tam_altura"=>"$tam_altura"
+						));
+
+						// echo'<pre>';print_r($conexao);exit;
+					}
+					// echo'<pre>';print_r($data_produto);exit;
+				}
+				$this->irpara(DOMINIO.$this->_controller."/carrinho");
 			}else{
 				// echo '<pre>';print_r($produto);exit;
 				//confere se ja existe o pedido senão cria um novo pedido

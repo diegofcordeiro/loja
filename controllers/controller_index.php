@@ -5463,7 +5463,7 @@ class index extends controller {
 		$formas_pg = new model_formas_pg();
 
 		$dados['carrinho'] = $carrinho->carrinho($this->_sessao); 
-		// echo'<pre>';print_r($dados['carrinho']);exit;
+		echo'<pre>';print_r($dados['carrinho']);exit;
 		$dados['itens_n'] = 0;
 
 		$dados['tipo_envio'] = 0;
@@ -5489,7 +5489,6 @@ class index extends controller {
 	       	// frete
 
 			$dados['balcoes_lista'] = $fretes->lista_balcoes();
-
 
 			///////////////////////////
 			// cupom
@@ -10286,14 +10285,9 @@ class index extends controller {
 				}
 
 			}
-
-
 			// paypal
 			if($dados['data_pedido']->forma_pagamento == 4){
-
-
 			}
-
 			// botao e detalhes 
 
 			$conexao = new mysql();

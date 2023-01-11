@@ -6314,7 +6314,7 @@ class index extends controller {
 
 						print_r($combo_titulo);
 						echo '<br>';
-						print_r($plano_id);
+						print_r($plano_id);exit;
 						
 
 						$conexao = new mysql();

@@ -6315,6 +6315,7 @@ class index extends controller {
 							$combo_titulo = $data_det->titulo;
 							$plano_id = $data_det->plano_id;
 						}
+						print_r("SELECT * FROM combos where id_combo='$combo_id'");
 						echo 'Aqui <br>';
 						print_r($combo_titulo);
 						echo '<br>';

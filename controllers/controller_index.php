@@ -6537,7 +6537,7 @@ class index extends controller {
 							"tam_altura"=>"$tam_altura"
 						));
 
-						echo'<pre>';print_r($conexao);exit;
+						// echo'<pre>';print_r($conexao);exit;
 					}
 				}
 				$this->irpara(DOMINIO.$this->_controller."/carrinho");

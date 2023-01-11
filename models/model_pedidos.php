@@ -290,7 +290,7 @@ Class model_pedidos extends model{
 			// echo'<pre>';print_r($new);exit;
 			// $retorno['combo_list'] = $new;
 			
-			echo'<pre>';print_r($new);exit; 
+			// echo'<pre>';print_r($new);exit; 
 			$retorno['lista'] = $new;
 			$retorno['subtotal_tratado'] = $valores->trata_valor($valor_subtotal);
  			$retorno['subtotal'] = $valor_subtotal;

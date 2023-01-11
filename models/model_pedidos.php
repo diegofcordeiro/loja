@@ -257,7 +257,7 @@ Class model_pedidos extends model{
 
 		}
 			 
- 		
+ 		echo'<pre>';print_r($retorno);exit;
  		return $retorno;
 	}
  	

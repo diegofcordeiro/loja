@@ -190,6 +190,10 @@ Class model_pedidos extends model{
 				$lista[$i]['id_produto'] = $id_produto->id;
         		$lista[$i]['id'] = $data_carrinho->id;
 
+        		$lista[$i]['usar_valor_vindi'] = $data_carrinho->usar_valor_vindi;
+        		$lista[$i]['valor_total_combo_vindi'] = $data_carrinho->valor_total_combo_vindi;
+
+
         		$imagem = $produtos->imagens($data_carrinho->produto);
 				if(!isset($imagem['imagem_principal'])){
 					$lista[$i]['imagem'] = LAYOUT."img/semimagem.png";

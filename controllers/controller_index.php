@@ -5792,7 +5792,6 @@ class index extends controller {
 		$dados = array();
 		$dados['_base'] = $this->_base();
 
-		// instancia
 		$produtos = new model_produtos();
 
 		$cod_sessao = $this->_sessao;
@@ -5812,9 +5811,7 @@ class index extends controller {
 			while($data_det = $coisas_det->fetch_object()){
 				array_push($produto,$data_det->codigo);
 			}
-
 		}
-		// print_r($produto);exit;
 		if(!is_array($produto)){	
 			$conexao = new mysql();
 			$coisas_carrinho = $conexao->Executar("SELECT id FROM pedido_loja_carrinho where sessao='".$this->_sessao."' and produto='".$produto."' ");

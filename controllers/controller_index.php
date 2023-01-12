@@ -6225,6 +6225,7 @@ class index extends controller {
 					if(isset($data_produto->id)){
 						$conexao = new mysql();
 						$tipo_envio = 3;
+						$combo_id = null;
 						$combo_id = $combo_id_get;
 						if($combo_id_get > 0){
 							$combo_id = $combo_id_get;
@@ -6856,7 +6857,6 @@ class index extends controller {
 							"combo_titulo"=>"$combo_titulo",
 							"data_vencimento"=>"$date_vencimento",
 							"produto_assinatura"=>"$plano_id",
-							"plano"=>"$plano_id",
 							"data_compra"=>"$data_compra",
 							"produto_titulo"=>"$data_produto->titulo",
 							"produto_subtitulo"=>"$titulodoproduto",

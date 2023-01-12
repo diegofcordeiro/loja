@@ -1620,29 +1620,41 @@
 
 
 							if($n != 0){
-
-
 								echo "
-								<tr>
-								<td colspan='4' style='text-align:right; ' >Sub-total</td>
-								<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$produtos['subtotal_tratado']."</td>                           
-								</tr>
-
-								<tr>
-								<td colspan='4' style='text-align:right; ' >Total de Descontos</td>
-								<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$valor_desconto_cupom_tratado."</td>
-								</tr>
-
-								<tr>
-								<td colspan='4' style='text-align:right; ' >Total de Frete</td>
-								<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$valor_frete_tratado."</td>
-								</tr>
-
-								<tr>
-								<td colspan='4' style='text-align:right; ' >Total do Pedido</td>
-								<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$valor_total_pedido_tratado."</td>
-								</tr>
+									<tr>
+										<td colspan='4' style='text-align:right; ' >Sub-total</td>
+										<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$produtos['subtotal_tratado']."</td>                           
+									</tr>
+									<tr>
+										<td colspan='4' style='text-align:right; ' >Total de Descontos</td>
+										<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$valor_desconto_cupom_tratado."</td>
+									</tr>
+									<tr>
+										<td colspan='4' style='text-align:right; ' >Total do Pedido</td>
+										<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$valor_total_pedido_tratado."</td>
+									</tr>
 								"; 
+								// echo "
+								// <tr>
+								// <td colspan='4' style='text-align:right; ' >Sub-total</td>
+								// <td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$produtos['subtotal_tratado']."</td>                           
+								// </tr>
+
+								// <tr>
+								// <td colspan='4' style='text-align:right; ' >Total de Descontos</td>
+								// <td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$valor_desconto_cupom_tratado."</td>
+								// </tr>
+
+								// <tr>
+								// <td colspan='4' style='text-align:right; ' >Total de Frete</td>
+								// <td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$valor_frete_tratado."</td>
+								// </tr>
+
+								// <tr>
+								// <td colspan='4' style='text-align:right; ' >Total do Pedido</td>
+								// <td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$valor_total_pedido_tratado."</td>
+								// </tr>
+								// "; 
 
 
 							} else {

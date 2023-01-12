@@ -6663,13 +6663,13 @@ class index extends controller {
 						while($data_det = $coisas_det->fetch_object()){
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
-							echo'<pre>';print_r($data_det);exit;
+							// echo'<pre>';print_r($data_det);exit;
 						}
 						$usar_valor_vindi = $usar_discount;
 						if($usar_discount == 1){
-							
 							$valor_total = 0;
 							$valor_total_combo_vindi = $valor_combo_vindi;
+							$valor_total = $valor_total_combo_vindi;
 						}else{
 							$combo_disconto = 0;
 							if($_POST['combo_disconto'] > 0){

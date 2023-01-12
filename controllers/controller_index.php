@@ -6319,7 +6319,7 @@ class index extends controller {
 						if($usar_discount == 1){
 							$valor_total = 0;
 							$valor_total_combo_vindi = $valor_combo_vindi;
-
+							$valor_total = $valor_total_combo_vindi;
 						}else{
 							$combo_disconto = 0;
 							if($combo_disconto_get > 0){

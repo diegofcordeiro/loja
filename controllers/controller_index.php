@@ -7506,8 +7506,7 @@ class index extends controller {
 						$conexao = new mysql();
 						$count_prod = $conexao->Executar("SELECT * FROM combo_produto WHERE id_combo='".$data_carrinho->id_combo."' ");
 						$count_prod = $count_prod->num_rows;
-						$total_vindi_combo_half = ($data_carrinho->valor_total);
-						print_r($count_prod);
+						$total_vindi_combo_half = ($data_carrinho->valor_total/$count_prod);
 						echo'<pre>';print_r($total_vindi_combo_half);exit;
 					}
 				}

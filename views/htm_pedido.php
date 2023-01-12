@@ -1587,8 +1587,9 @@
 							// echo '<pre>'; print_r($produtos);exit;
 							$n = 0;
 							foreach ($produtos['lista'] as $key => $valu) {
+								echo'<pre>';print_r($valu);
 								foreach ($valu as $value) {
-									echo'<pre>';print_r($value);
+									
 									echo "
 									<tr>
 

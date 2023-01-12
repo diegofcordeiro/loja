@@ -7501,7 +7501,7 @@ class index extends controller {
 					$data_produto = $coisas_produto->fetch_object();
 
 				}
-				echo('aqui');print_r($data_carrinho);exit;
+				echo'<pre>';print_r($data_carrinho);exit;
 				$total_unitario = $data_carrinho->valor_total;
 				$total_quantidade = $valores->trata_valor_calculo($total_unitario * $data_carrinho->quantidade);
 				$valor_subtotal = $valores->trata_valor_calculo($valor_subtotal + $total_quantidade);

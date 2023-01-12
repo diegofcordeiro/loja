@@ -7467,7 +7467,8 @@ class index extends controller {
 
 	
 		if($linha_carrinho != 0){
-
+			$combo_id = 0;
+			
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
 				if($data_carrinho->plano == 0){
 				
@@ -7501,7 +7502,11 @@ class index extends controller {
 					$data_produto = $coisas_produto->fetch_object();
 
 				}
-				echo'<pre>';print_r($data_carrinho);exit;
+				if($data_carrinho->usar_valor_vindi == 1){
+					$combo_id = $data_carrinho->id_combo;
+				}
+				
+				
 				$total_unitario = $data_carrinho->valor_total;
 				$total_quantidade = $valores->trata_valor_calculo($total_unitario * $data_carrinho->quantidade);
 				$valor_subtotal = $valores->trata_valor_calculo($valor_subtotal + $total_quantidade);
@@ -7553,7 +7558,7 @@ class index extends controller {
 				$itens_para_email .= "<br><br>";
 				
 			}
-
+			echo'<pre>';print_r($combo_id);exit;
 			$valor_desconto_cupom = 0;
 			
 			$valor_desconto_forma_pag = 0;

@@ -7507,11 +7507,12 @@ class index extends controller {
 						$count_prod = $conexao->Executar("SELECT * FROM combo_produto WHERE id_combo='".$data_carrinho->id_combo."' ");
 						$count_prod = $count_prod->num_rows;
 						$total_vindi_combo_half = ($data_carrinho->valor_total/$count_prod);
-						echo'<pre>';print_r($total_vindi_combo_half);exit;
+						$total_unitario = $total_vindi_combo_half;
 					}
+				}else{
+					$total_unitario = $data_carrinho->valor_total;
 				}
-				
-				$total_unitario = $data_carrinho->valor_total;
+			
 				$total_quantidade = $valores->trata_valor_calculo($total_unitario * $data_carrinho->quantidade);
 				$valor_subtotal = $valores->trata_valor_calculo($valor_subtotal + $total_quantidade);
 				

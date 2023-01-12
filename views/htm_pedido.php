@@ -1587,6 +1587,7 @@
 							// echo '<pre>'; print_r($produtos);exit;
 							$n = 0;
 							foreach ($produtos['lista'] as $key => $valu) {
+								$subtotal_ = 0;
 
 								foreach ($valu as $key1 => $value) {
 									if($value['usar_valor_vindi'] == 1){
@@ -1651,6 +1652,12 @@
 
 									$n++;
 								}
+								echo "
+									<tr>
+									<td colspan='4' style='text-align:right; ' >Sub-total</td>
+									<td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".number_format($subtotal_,2)."</td> 
+									</tr>
+								";
 							}
 
 

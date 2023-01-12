@@ -7560,7 +7560,7 @@ class index extends controller {
 			$valor_total_pedido = $valor_total_produtos + $data_pedido->frete_valor;
 			$total_descontos = $valor_desconto_cupom + $valor_desconto_forma_pag;
 
-
+			print_r($valor_total_pedid);exit;
 			$cadastro = $this->_cod_usuario;
 			$codigo_pedido = $this->_sessao;
 
@@ -7836,9 +7836,6 @@ class index extends controller {
 				$conexao = new mysql();
 				$coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='4' ");
 				$data_pagamento = $coisas_pagamento->fetch_object();
-
-
-
 
 				$codigo_transacao = '';
 

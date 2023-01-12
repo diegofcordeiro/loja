@@ -1588,9 +1588,9 @@
 							$n = 0;
 							foreach ($produtos['lista'] as $key => $valu) {
 
-								foreach ($valu as $value) {
-									echo $key;
-									if($key==0){
+								foreach ($valu as $key1 => $value) {
+
+									if($key1==0){
 										if($value['combo_titulo']){
 											echo $value['combo_titulo'];
 										}

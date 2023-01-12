@@ -7470,6 +7470,7 @@ class index extends controller {
 
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
 				if($data_carrinho->plano == 0){
+					echo('aqui1');exit;
 					
 					$total_estoque = $produtos->estoque_quantidade($data_carrinho->produto, $data_carrinho->tamanho, $data_carrinho->cor, $data_carrinho->variacao);
 
@@ -7495,7 +7496,7 @@ class index extends controller {
 
 				} else {
 					$total_estoque = 0;
-
+					echo('aqui');print_r($data_carrinho);exit;
 					$conexao = new mysql();
 					$coisas_produto = $conexao->Executar("SELECT * FROM planos WHERE codigo='$data_carrinho->produto' ");
 					$data_produto = $coisas_produto->fetch_object();

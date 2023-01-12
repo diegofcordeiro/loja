@@ -7563,7 +7563,8 @@ class index extends controller {
 				$conexao = new mysql();
 				$count_prod = $conexao->Executar("SELECT * FROM combo_produto WHERE id_combo='".$combo_id."' ");
 				$count_prod = $count_prod->num_rows;
-				$total_vindi_combo_half = ($valor_subtotal/$count_prod);
+				$total_vindi_combo_half = ($valor_subtotal);
+				print_r($count_prod);
 				echo'<pre>';print_r($total_vindi_combo_half);exit;
 			}
 			$valor_desconto_forma_pag = 0;

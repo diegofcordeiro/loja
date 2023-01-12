@@ -7467,7 +7467,6 @@ class index extends controller {
 
 	
 		if($linha_carrinho != 0){
-			$combo_id = 0;
 			
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
 				if($data_carrinho->plano == 0){
@@ -7503,9 +7502,15 @@ class index extends controller {
 
 				}
 				if($data_carrinho->usar_valor_vindi == 1){
-					$combo_id = $data_carrinho->id_combo;
+					if($data_carrinho->id_combo != 0){
+						$conexao = new mysql();
+						$count_prod = $conexao->Executar("SELECT * FROM combo_produto WHERE id_combo='".$data_carrinho->id_combo."' ");
+						$count_prod = $count_prod->num_rows;
+						$total_vindi_combo_half = ($valor_subtotal);
+						print_r($count_prod);
+						echo'<pre>';print_r($total_vindi_combo_half);exit;
+					}
 				}
-				
 				
 				$total_unitario = $data_carrinho->valor_total;
 				$total_quantidade = $valores->trata_valor_calculo($total_unitario * $data_carrinho->quantidade);
@@ -7558,15 +7563,9 @@ class index extends controller {
 				$itens_para_email .= "<br><br>";
 				
 			}
+
 			$valor_desconto_cupom = 0;
-			if($combo_id != 0){
-				$conexao = new mysql();
-				$count_prod = $conexao->Executar("SELECT * FROM combo_produto WHERE id_combo='".$combo_id."' ");
-				$count_prod = $count_prod->num_rows;
-				$total_vindi_combo_half = ($valor_subtotal);
-				print_r($count_prod);
-				echo'<pre>';print_r($total_vindi_combo_half);exit;
-			}
+			
 			$valor_desconto_forma_pag = 0;
 
 			//calcula o total

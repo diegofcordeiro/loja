@@ -1588,11 +1588,12 @@
 							$n = 0;
 							foreach ($produtos['lista'] as $key => $valu) {
 
-								if($valu[0]['combo_titulo']){
-									echo $valu[0]['combo_titulo'];
-								}
 								foreach ($valu as $value) {
-									
+									if($key==0){
+										if($valu[0]['combo_titulo']){
+											echo $valu[0]['combo_titulo'];
+										}
+									}
 									echo "
 									<tr>
 

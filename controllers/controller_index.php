@@ -7470,8 +7470,7 @@ class index extends controller {
 
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
 				if($data_carrinho->plano == 0){
-					echo('aqui1');exit;
-					
+				
 					$total_estoque = $produtos->estoque_quantidade($data_carrinho->produto, $data_carrinho->tamanho, $data_carrinho->cor, $data_carrinho->variacao);
 
 					$conexao = new mysql();

@@ -1589,6 +1589,19 @@
 							foreach ($produtos['lista'] as $key => $valu) {
 
 								foreach ($valu as $key1 => $value) {
+									if($value['usar_valor_vindi'] == 1){
+										$valor_unitario = '-';
+										$total_geral = '-';
+										$subtotal_ = $value['combo_valor'];
+										
+									}else{
+										$valor_unitario = "R$ ".$value['total_unitario'];
+										$total_geral = "R$ ".$value['total_quantidade'];
+
+										$resultado = str_replace('.', '', $value['total_unitario']); // remove o ponto
+										$resultado = str_replace(',', '.', $resultado); // substitui a vírgula por ponto
+										$subtotal_ = ($subtotal_ + floatval($resultado));
+									}
 
 									if($key1==0){
 										if($value['combo_titulo']){
@@ -1620,7 +1633,7 @@
 									</td>
 
 									<td style='text-align:center;' >
-									<div class='carrinho_lista_valor' >R$ ".$value['total_unitario']."</div>
+									<div class='carrinho_lista_valor' >".$valor_unitario."</div>
 									</td>
 
 									<td style='text-align:center;' >

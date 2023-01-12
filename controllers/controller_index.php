@@ -6319,6 +6319,7 @@ class index extends controller {
 						if($usar_discount == 1){
 							$valor_total = 0;
 							$valor_total_combo_vindi = $valor_combo_vindi;
+
 						}else{
 							$combo_disconto = 0;
 							if($combo_disconto_get > 0){
@@ -6329,6 +6330,8 @@ class index extends controller {
 							}
 						}
 
+
+						
 						$tam_altura = '';
 						$tam_largura = '';
 						if($data_produto->tipo != 0){
@@ -6572,11 +6575,9 @@ class index extends controller {
 				}
 				foreach($produto as $prod){
 					$data_produto = $produtos->carrega_produto_codigo($prod);
-					//verifica se o produto existe
 					if(isset($data_produto->id)){
 						$conexao = new mysql();
 						$tipo_envio = 3;
-						// echo'<pre>';print_r($data_produto);exit;
 						$combo_id = null;
 						if($_POST['combo_id'] > 0){
 							$combo_id = $_POST['combo_id'];
@@ -6658,12 +6659,14 @@ class index extends controller {
 						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
+						
 						while($data_det = $coisas_det->fetch_object()){
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
 						}
 						$usar_valor_vindi = $usar_discount;
 						if($usar_discount == 1){
+							echo'<pre>';print_r($data_produto);exit;
 							$valor_total = 0;
 							$valor_total_combo_vindi = $valor_combo_vindi;
 						}else{

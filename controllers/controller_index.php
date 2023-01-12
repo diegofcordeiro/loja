@@ -6856,7 +6856,6 @@ class index extends controller {
 							"combo_titulo"=>"$combo_titulo",
 							"data_vencimento"=>"$date_vencimento",
 							"produto_assinatura"=>"$plano_id",
-							"plano"=>"$plano_id",
 							"data_compra"=>"$data_compra",
 							"produto_titulo"=>"$data_produto->titulo",
 							"produto_subtitulo"=>"$titulodoproduto",

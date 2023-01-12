@@ -1644,7 +1644,7 @@
 									</td>
 
 									<td style='text-align:center; ' >
-									<div class='carrinho_lista_valor' >R$ ".$value['total_quantidade']."</div>
+									<div class='carrinho_lista_valor' >".$total_geral."</div>
 									</td>                                    
 
 									</tr>

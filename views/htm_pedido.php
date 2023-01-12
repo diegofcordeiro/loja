@@ -1589,9 +1589,10 @@
 							foreach ($produtos['lista'] as $key => $valu) {
 
 								foreach ($valu as $value) {
+									echo $key;
 									if($key==0){
-										if($valu[0]['combo_titulo']){
-											echo $valu[0]['combo_titulo'];
+										if($value['combo_titulo']){
+											echo $value['combo_titulo'];
 										}
 									}
 									echo "

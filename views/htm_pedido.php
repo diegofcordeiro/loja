@@ -1592,9 +1592,16 @@
 
 									if($key1==0){
 										if($value['combo_titulo']){
-											echo $value['combo_titulo'];
+											echo "
+												<tr>
+													<td colspan='5' style='border-bottom: 1px white solid;'>
+														".$value['combo_titulo']."
+													</td>
+												</tr>
+											";
 										}
 									}
+									
 									echo "
 									<tr>
 

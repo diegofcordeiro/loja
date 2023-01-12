@@ -7558,9 +7558,13 @@ class index extends controller {
 				$itens_para_email .= "<br><br>";
 				
 			}
-			echo'<pre>';print_r($combo_id);exit;
 			$valor_desconto_cupom = 0;
 			
+			$conexao = new mysql();
+			$count_prod = $conexao->Executar("SELECT * FROM combo_produto WHERE id_combo='".$combo_id."' ");
+			$count_prod = $count_prod->num_rows;
+			echo'<pre>';print_r($count_prod);exit;
+
 			$valor_desconto_forma_pag = 0;
 
 			//calcula o total

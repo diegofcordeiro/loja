@@ -6666,7 +6666,7 @@ class index extends controller {
 						}
 						$usar_valor_vindi = $usar_discount;
 						if($usar_discount == 1){
-							echo'<pre>';print_r($data_produto);exit;
+							echo'<pre>';print_r($produto);exit;
 							$valor_total = 0;
 							$valor_total_combo_vindi = $valor_combo_vindi;
 						}else{

@@ -7497,7 +7497,7 @@ class index extends controller {
 					$data_produto = $coisas_produto->fetch_object();
 
 				}
-				echo'<pre>';print_r($data_carrinho);exit;
+
 				$total_unitario = $data_carrinho->valor_total;
 				$total_quantidade = $valores->trata_valor_calculo($total_unitario * $data_carrinho->quantidade);
 				$valor_subtotal = $valores->trata_valor_calculo($valor_subtotal + $total_quantidade);
@@ -7560,7 +7560,7 @@ class index extends controller {
 			$valor_total_pedido = $valor_total_produtos + $data_pedido->frete_valor;
 			$total_descontos = $valor_desconto_cupom + $valor_desconto_forma_pag;
 
-			echo 'qasd';print_r($valor_total_pedido);exit;
+
 			$cadastro = $this->_cod_usuario;
 			$codigo_pedido = $this->_sessao;
 
@@ -7836,6 +7836,7 @@ class index extends controller {
 				$conexao = new mysql();
 				$coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='4' ");
 				$data_pagamento = $coisas_pagamento->fetch_object();
+
 
 				$codigo_transacao = '';
 

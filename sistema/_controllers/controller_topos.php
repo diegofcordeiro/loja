@@ -924,7 +924,7 @@ class topos extends controller {
 			$nome_original = $arquivo_original['name'];
 			$extensao = $arquivos_imagens->extensao($nome_original);
 			$nome_arquivo = $arquivos_imagens->trata_nome($nome_original);
-			print_r(copy($tmp_name, $diretorio.$nome_arquivo));exit;
+			
 			if(copy($tmp_name, $diretorio.$nome_arquivo)){
 
 				$db = new mysql();

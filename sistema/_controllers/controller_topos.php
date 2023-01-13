@@ -930,7 +930,7 @@ class topos extends controller {
 				$db = new mysql();
 				$db->alterar("adm_config", array(
 					"logo"=>$nome_arquivo
-				), " 1=1 ");
+				), " id=4 ");
 
 				$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/logo_admin');
 

@@ -9246,9 +9246,9 @@ class index extends controller {
 					"status"=>8,
 				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 				
-				$db->alterar("pedido_loja", array(
-					"status"=>8,
-				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
+				// $db->alterar("pedido_loja", array(
+				// 	"status"=>8,
+				// ), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 				break;
 			case 'test':

@@ -8715,6 +8715,7 @@ class index extends controller {
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$sessao_loja."' AND protudo_ref = '".$produto_ref."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
+		print_r('linha_carrinho: ');print_r($linha_carrinho);
 		echo'<pre>';
 
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
@@ -9058,7 +9059,7 @@ class index extends controller {
 			
 			// $this->integrar_trilha_lms($cod, $cpf);
 			foreach($recorrencia as $rec){
-				print_r($rec->produto_ref.' - '.$cod.''.$cpf);exit;
+				// print_r($rec->produto_ref.' - '.$cod.''.$cpf);exit;
 				$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
 			}
 			exit;

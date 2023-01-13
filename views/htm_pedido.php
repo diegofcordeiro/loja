@@ -1565,7 +1565,7 @@
 				</div>
 			</div>
 			</div>
-				<div class="container">
+				<div class="container new_cont">
 			<div class="row">
 				<br><br><br><br>
 				<div class="col-sm-12">

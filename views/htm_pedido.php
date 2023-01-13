@@ -1565,9 +1565,8 @@
 				</div>
 			</div>
 			</div>
-				<div class="container new_cont">
+				<div class="container new_cont" style="margin-top:30px">
 			<div class="row">
-				<br><br><br><br>
 				<div class="col-sm-12">
 
 					<div class="table-responsive" style="min-height: 250px; padding-bottom:50px; margin-top:10px;">

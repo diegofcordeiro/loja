@@ -23,9 +23,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<?php 
-   print_r($banner_admin);exit;
-include_once('css.php'); ?>
+<?php include_once('css.php'); ?>
 
 </head>
 <body class="hold-transition skin-blue <?php if($_base['menu_fechado'] == 1){ echo "sidebar-collapse"; } ?> sidebar-mini">
@@ -450,8 +448,50 @@ include_once('css.php'); ?>
                 </div>
 
                 <div id="banner_admin" class="tab-pane <?php if($aba_selecionada == "banner_admin"){ echo "active"; } ?>" >
-                  <?php if(!$data->logo){ ?>
+                  <?php //if(!$data->logo){ ?>
                     <form action="<?=$_base['objeto']?>banner_admin/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
+
+                      <fieldset> 
+                        <label>Arquivo</label> 
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                          <div class="input-append">
+                            <div class="uneditable-input">
+                              <i class="fa fa-file fileupload-exists"></i>
+                              <span class="fileupload-preview"></span>
+                            </div>
+                            <span class="btn btn-default btn-file">
+                              <span class="fileupload-exists">Alterar</span>
+                              <span class="fileupload-new">Procurar arquivo</span>
+                              <input type="file" name="arquivo" />
+                            </span>
+                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remover</a>
+                          </div>
+                        </div>
+                      </fieldset>
+
+                      <div style="text-align:left; padding-top:10px;">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>';" >Voltar</button>
+                      </div>
+
+                    </form>
+                  <?php //} else { ?>
+
+                    <div style="text-align:left;">
+                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$banner_admin->banner_admin?>" style="max-width:300px;" >
+                    </div>
+
+                    <div style="text-align:left; padding-top:10px;">
+                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>logo_apagar/codigo/<?=$codigo?>');" >Apagar Imagem</button>
+                      <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
+                    </div>
+
+                  <?php //} ?>
+                </div>
+
+                <div id="logo_admin" class="tab-pane <?php if($aba_selecionada == "logo_admin"){ echo "active"; } ?>" >
+                  <?php if(!$data->logo){ ?>
+                    <form action="<?=$_base['objeto']?>logo_admin/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
                         <label>Arquivo</label> 
@@ -489,49 +529,6 @@ include_once('css.php'); ?>
                     </div>
 
                   <?php } ?>
-                </div>
-
-                <div id="logo_admin" class="tab-pane <?php if($aba_selecionada == "logo_admin"){ echo "active"; } ?>" >
-                  <?php 
-                  //if(!$banner_admin->banner_admin){ ?>
-                    <form action="<?=$_base['objeto']?>logo_admin/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
-
-                      <fieldset> 
-                        <label>Arquivo</label> 
-                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                          <div class="input-append">
-                            <div class="uneditable-input">
-                              <i class="fa fa-file fileupload-exists"></i>
-                              <span class="fileupload-preview"></span>
-                            </div>
-                            <span class="btn btn-default btn-file">
-                              <span class="fileupload-exists">Alterar</span>
-                              <span class="fileupload-new">Procurar arquivo</span>
-                              <input type="file" name="arquivo" />
-                            </span>
-                            <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remover</a>
-                          </div>
-                        </div>
-                      </fieldset>
-
-                      <div style="text-align:left; padding-top:10px;">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                        <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>';" >Voltar</button>
-                      </div>
-
-                    </form>
-                  <?php //} else { ?>
-
-                    <div style="text-align:left;">
-                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$banner_admin?>" style="max-width:300px;" >
-                    </div>
-
-                    <div style="text-align:left; padding-top:10px;">
-                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>logo_apagar/codigo/<?=$codigo?>');" >Apagar Imagem</button>
-                      <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
-                    </div>
-
-                  <?php //} ?>
                 </div>
 
                 <div id="banner" class="tab-pane <?php if($aba_selecionada == "banner"){ echo "active"; } ?>" >

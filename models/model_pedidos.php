@@ -65,9 +65,10 @@ Class model_pedidos extends model{
 					$final_lista[$id_combo] = array($obj_lista);
 				}
 			}
+			echo '<pre>';print_r($obj_list);exit;
+			
 			array_push($final_lista_full,$final_lista);
 		}	
-		echo '<pre>';print_r($final_lista_full);exit;
 		// while($data_pedidos = $coisas_pedidos->fetch_object()){
 			
 		// 	$lista[$n]['id'] = $data_pedidos->id;

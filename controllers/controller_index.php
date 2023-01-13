@@ -8712,10 +8712,11 @@ class index extends controller {
 		$cpf = str_replace(".","",$cpf);
 		echo $cpf;
 
+		print_r("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$sessao_loja."' AND protudo_ref = '".$produto_ref."' ");exit;
+		
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$sessao_loja."' AND protudo_ref = '".$produto_ref."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
-
 		echo'<pre>';
 
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";

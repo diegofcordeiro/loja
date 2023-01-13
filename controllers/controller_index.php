@@ -9075,11 +9075,9 @@ class index extends controller {
 					"transacao_charger_id"=>"$id_charge",
 					"transacao_bill_id"=>"$id_trans",
 					"status"=>"$status",
-				), " id='$rec->id' ");
+				), " sessao='$cod' and id_combo='$rec->id_combo' ");
 
 				$db->alterar("pedido_loja", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
 					"status"=>"$status",
 				), " codigo='$cod' ");
 			}
@@ -9113,8 +9111,6 @@ class index extends controller {
 					
 				), " id='$recorrencia->id' ");
 				$db->alterar("pedido_loja", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
 					"status"=>"$status",
 					
 				), " codigo='$cod' ");

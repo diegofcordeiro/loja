@@ -57,7 +57,6 @@ Class model_pedidos extends model{
 		foreach ($new_lista as $obj_list) {
 			$final_lista = array();
 			foreach($obj_list as $obj_lista){
-				echo '<pre>';print_r($obj_lista);exit;
 				$id_combo = $obj_lista['combo_id'];
 				$id_combo = $id_combo == '' ? $obj_lista['id'] : $obj_lista['combo_id'];
 				$sessao = $obj_lista['sessao'];

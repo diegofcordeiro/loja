@@ -9057,7 +9057,7 @@ class index extends controller {
 			
 			// echo'<pre>';print_r($recorrencia);exit;
 			foreach($recorrencia as $rec){
-				print_r($produto_ref);
+				print_r($rec->produto_ref);
 			}
 			exit;
 			$this->integrar_trilha_lms($cod, $cpf);

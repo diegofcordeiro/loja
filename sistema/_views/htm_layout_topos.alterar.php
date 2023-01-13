@@ -23,7 +23,9 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<?php include_once('css.php'); ?>
+<?php 
+   print_r($banner_admin);exit;
+include_once('css.php'); ?>
 
 </head>
 <body class="hold-transition skin-blue <?php if($_base['menu_fechado'] == 1){ echo "sidebar-collapse"; } ?> sidebar-mini">
@@ -491,8 +493,7 @@
 
                 <div id="logo_admin" class="tab-pane <?php if($aba_selecionada == "logo_admin"){ echo "active"; } ?>" >
                   <?php 
-                    print_r($banner_admin);exit;
-                  if(!$banner_admin->banner_admin){ ?>
+                  //if(!$banner_admin->banner_admin){ ?>
                     <form action="<?=$_base['objeto']?>logo_admin/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
@@ -519,7 +520,7 @@
                       </div>
 
                     </form>
-                  <?php } else { ?>
+                  <?php //} else { ?>
 
                     <div style="text-align:left;">
                       <img src="<?=PASTA_CLIENTE?>imagens/<?=$banner_admin?>" style="max-width:300px;" >
@@ -530,7 +531,7 @@
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
 
-                  <?php } ?>
+                  <?php //} ?>
                 </div>
 
                 <div id="banner" class="tab-pane <?php if($aba_selecionada == "banner"){ echo "active"; } ?>" >

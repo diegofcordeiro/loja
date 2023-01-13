@@ -54,7 +54,7 @@ Class model_pedidos extends model{
 		}
 
 		$final_lista_full = array();
-		foreach ($new_lista as $obj_list) {
+		foreach ($new_lista as $key => $obj_list) {
 			$final_lista = array();
 			foreach($obj_list as $obj_lista){
 				$id_combo = $obj_lista['combo_id'];
@@ -65,10 +65,11 @@ Class model_pedidos extends model{
 					$final_lista[$id_combo] = array($obj_lista);
 				}
 			}
-			echo '<pre>';print_r($obj_list);exit;
+			$final_lista_full[$key] = $final_lista;
 			
-			array_push($final_lista_full,$final_lista);
+			// array_push($final_lista_full,$final_lista);
 		}	
+		echo '<pre>';print_r($final_lista_full);exit;
 		// while($data_pedidos = $coisas_pedidos->fetch_object()){
 			
 		// 	$lista[$n]['id'] = $data_pedidos->id;

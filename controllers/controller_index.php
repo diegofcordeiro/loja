@@ -9049,7 +9049,7 @@ class index extends controller {
 				
 			}
 		}	
-		
+		print_r($nao_recorrentes);exit;
 		
 		/////////     RECCORENTE    /////////////
 		// foreach($recorrentes as $key => $recorrencia){

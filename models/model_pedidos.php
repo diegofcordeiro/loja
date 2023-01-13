@@ -52,18 +52,18 @@ Class model_pedidos extends model{
 				$new_lista[$sessao] = array($obj_lista);
 			}
 		}
-		
 		$final_lista = array();
-		foreach ($new_lista as $obj_lista) {
-			echo '<pre>';print_r($obj_lista);exit;
-			$id_combo = $obj_lista['combo_id'];
-			$id_combo = $id_combo == '' ? $obj_lista['id'] : $obj_lista['combo_id'];
-			$sessao = $obj_lista['sessao'];
+		foreach ($new_lista as $obj_list) {
+			foreach($obj_list as $obj_lista){
+				$id_combo = $obj_lista['combo_id'];
+				$id_combo = $id_combo == '' ? $obj_lista['id'] : $obj_lista['combo_id'];
+				$sessao = $obj_lista['sessao'];
 
-			if (!empty($final_lista[$sessao])){
-				$final_lista[$sessao] = array_merge($final_lista[$sessao], array($obj_lista));
-			}else{
-				$final_lista[$sessao] = array($obj_lista);
+				if (!empty($final_lista[$sessao])){
+					$final_lista[$sessao] = array_merge($final_lista[$sessao], array($obj_lista));
+				}else{
+					$final_lista[$sessao] = array($obj_lista);
+				}
 			}
 		}	
 		// while($data_pedidos = $coisas_pedidos->fetch_object()){
@@ -79,7 +79,7 @@ Class model_pedidos extends model{
 			
         // $n++;
 		// }
-		echo '<pre>';print_r($new_lista);exit;
+		echo '<pre>';print_r($final_lista);exit;
 		return $lista;
 	}	
 

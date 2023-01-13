@@ -76,7 +76,7 @@ Class model_pedidos extends model{
 			$final_lista_full[$key] = $final_lista;
 			
 		}	
-
+echo '<pre>';print_r($final_lista);exit;
 		return $final_lista;
 	}	
 

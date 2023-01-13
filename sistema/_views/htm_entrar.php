@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="<?=LAYOUT?>dist/iCheck/square/blue.css">
   
   <?php include_once('css.php'); ?>
-  <?php $banner_admin = URL.'arquivos/imagens'.$banner_admin;?>
+  <?php $banner_admin = URL.'arquivos/imagens/'.$banner_admin;?>
   <style>
     body{
     background-image: url(<?= $banner_admin ?>) !important;

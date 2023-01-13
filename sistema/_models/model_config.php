@@ -14,6 +14,12 @@ Class model_config extends model{
 		return $exec->fetch_object();
 	}
 
+	public function carrega_logo_site(){
+		$db = new mysql();
+		$exec = $db->executar("SELECT logo FROM layout_topos");
+		return $exec->fetch_object();
+	}
+
 	///////////////////////////////////////////////////////////////////////////
 	//
 

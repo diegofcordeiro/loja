@@ -406,7 +406,7 @@
                 </div>
 
                 <div id="logo" class="tab-pane <?php if($aba_selecionada == "logo"){ echo "active"; } ?>" >
-                  <?php if(!$data->logo){ ?>
+                  <?php if(!$logo_site->logo){ ?>
                     <form action="<?=$_base['objeto']?>logo/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
@@ -436,7 +436,7 @@
                   <?php } else { ?>
 
                     <div style="text-align:left;">
-                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$data->logo?>" style="max-width:300px;" >
+                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$logo_site->logo?>" style="max-width:300px;" >
                     </div>
 
                     <div style="text-align:left; padding-top:10px;">

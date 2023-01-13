@@ -237,6 +237,8 @@ class topos extends controller {
 		$config = new model_config();
 		$dados['data'] = $config->carrega_config();
 		$dados['banner_admin'] = $config->carrega_banner_admin();
+		$dados['logo_site'] = $config->carrega_logo_site();
+		
 		$dados['codigo'] = $codigo;
 		$dados['modelo'] = 6;
 
@@ -924,7 +926,7 @@ class topos extends controller {
 			$nome_original = $arquivo_original['name'];
 			$extensao = $arquivos_imagens->extensao($nome_original);
 			$nome_arquivo = $arquivos_imagens->trata_nome($nome_original);
-			
+
 			if(copy($tmp_name, $diretorio.$nome_arquivo)){
 
 				$db = new mysql();

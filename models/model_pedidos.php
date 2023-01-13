@@ -44,10 +44,12 @@ Class model_pedidos extends model{
 		foreach ($lista as $obj_lista) {
 			$id_combo = $obj_lista['combo_id'];
 			$id_combo = $id_combo == '' ? $obj_lista['id'] : $obj_lista['combo_id'];
-			if (!empty($new_lista[$id_combo])){
-				$new_lista[$id_combo] = array_merge($new_lista[$id_combo], array($obj_lista));
+			$sessao = $obj_lista['sessao'];
+
+			if (!empty($new_lista[$sessao])){
+				$new_lista[$sessao] = array_merge($new_lista[$sessao], array($obj_lista));
 			}else{
-				$new_lista[$id_combo] = array($obj_lista);
+				$new_lista[$sessao] = array($obj_lista);
 			}
 		}		
 		// while($data_pedidos = $coisas_pedidos->fetch_object()){

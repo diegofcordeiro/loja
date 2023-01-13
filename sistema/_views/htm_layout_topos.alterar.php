@@ -23,7 +23,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<?php include_once('css.php'); ?>
+<?php print_r($aba_selecionada); include_once('css.php'); ?>
 
 </head>
 <body class="hold-transition skin-blue <?php if($_base['menu_fechado'] == 1){ echo "sidebar-collapse"; } ?> sidebar-mini">

@@ -8756,6 +8756,7 @@ class index extends controller {
 							'progresso' => 0,
 							'ativo_matricula' => 1
 						);
+						print_r($array);exit;
 						array_push($data_array,$array);
 					}
 				}	

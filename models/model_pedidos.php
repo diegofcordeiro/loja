@@ -73,7 +73,7 @@ Class model_pedidos extends model{
 				$new_lista[$id_combo] = array($obj_lista);
 			}
 		}		
-		echo '<pre>';print_r($new_lista);exit;
+		// echo '<pre>';print_r($new_lista);exit;
 		
  		
  		return $lista;

@@ -18,7 +18,7 @@
   <?php include_once('css.php'); ?>
   <style>
     body{
-    background-image: url(https://traininganalyticsstore.com.br/loja/arquivos/back_admin.jpg) !important;
+    background-image: url('<?php $banner_admin ?>') !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
     background-size: cover !important;

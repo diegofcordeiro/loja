@@ -8,7 +8,11 @@ class autenticacao extends controller {
 		
 		$dados = array();
 		$dados['_base'] = $this->base();
-		
+		$db = new mysql();
+		$res = $db->Executar("SELECT banner_admin FROM layout_topos");
+		$dat = $res->fetch_object();
+
+		$dados['banner_admin'] = $dat->banner_admin;
 		$this->view('entrar', $dados);
 	}
 	

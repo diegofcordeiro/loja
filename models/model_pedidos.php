@@ -26,7 +26,7 @@ Class model_pedidos extends model{
 			
         $n++;
 		}
-		print_r()
+
 		return $lista;
 	}	
 

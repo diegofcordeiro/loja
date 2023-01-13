@@ -853,6 +853,21 @@ class topos extends controller {
 		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/fundo');
 	}
 
+	public function banner_admin(){
+
+		$codigo = $this->get('codigo'); 
+		print_r($codigo);exit;
+		$this->valida($codigo); 
+		$banner_admin = $_POST['banner_admin'];
+
+		$db = new mysql();
+		$db->alterar("layout_topos", array(
+			"link_banner" => $banner_admin
+		), " codigo='$codigo' ");
+
+		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/fundo');
+	}
+
 	public function fundo_apagar(){
 
 		$codigo = $this->get('codigo');

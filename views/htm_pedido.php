@@ -1568,7 +1568,7 @@
 				<div class="container new_cont" style="margin-top:30px">
 			<div class="row">
 				<div class="col-sm-12">
-					<h4>Detalhe da compra</h4>								
+					<h4>Detalhe da compra</h4> <br>								
 					<div class="table-responsive" style="min-height: 250px; margin-top:10px;">
 						<table class="table tabela_pedidos">
 

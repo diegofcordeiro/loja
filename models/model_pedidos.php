@@ -59,12 +59,10 @@ Class model_pedidos extends model{
 			foreach($obj_list as $obj_lista){
 				$id_combo = $obj_lista['combo_id'];
 				$id_combo = $id_combo == '' ? $obj_lista['id'] : $obj_lista['combo_id'];
-				$sessao = $obj_lista['sessao'];
-
-				if (!empty($final_lista[$sessao])){
-					$final_lista[$sessao] = array_merge($final_lista[$sessao], array($obj_lista));
+				if (!empty($final_lista[$id_combo])){
+					$final_lista[$id_combo] = array_merge($final_lista[$id_combo], array($obj_lista));
 				}else{
-					$final_lista[$sessao] = array($obj_lista);
+					$final_lista[$id_combo] = array($obj_lista);
 				}
 			}
 			echo '<pre>';print_r($final_lista);exit;

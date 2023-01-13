@@ -819,39 +819,40 @@
 									</thead>
 									<?php
 									$n = 0;
-									echo '<pre>';print_r($lista_produto_comprado);exit;
-									foreach ($lista_produto_comprado as $key => $value) {
-										$endereco = DOMINIO.$controller."/produto/id/".$value['produto_id'];
+									foreach ($lista_produto_comprado as $key => $valu) {
+										foreach($valu as $value){
+											$endereco = DOMINIO.$controller."/produto/id/".$value['produto_id'];
 
-										$valor_descontado = explode(".",$value['valor_total']);
-										if(strlen($valor_descontado[1]) == 1){
-											$valor_descontado[1] = $valor_descontado[1].'0';
+											$valor_descontado = explode(".",$value['valor_total']);
+											if(strlen($valor_descontado[1]) == 1){
+												$valor_descontado[1] = $valor_descontado[1].'0';
+											}
+											$depois_virgula = $valor_descontado[1]>0 ? $valor_descontado[1]:'00';
+
+											$hoje = new DateTime('now');
+											$hoje = $hoje->format('Y-m-d');
+											$hoje = strtotime($hoje);
+											if($hoje <= $value['data_vencimento']){
+												$botao_ = '<i class="fas fa-play btn_play"></i> ASSISTIR';
+												$link = "#";
+												$styl = "style='color:#363a45'";
+											}else{
+												$botao_ = '<i class="fas fa-dollar-sign btn_renovar"></i> RENOVAR';
+												$link = "#";
+												$styl = "style='color:#e35864'";
+
+											}
+											echo "
+												<tr>
+												<td><a href='$endereco' ><span class='prod_title'>".$value['produto_titulo']."</span></a><br><span class='prod_assina'>".($value['produto_assinatura']==1?'Assinatura':'Compra')."<span></td>
+												<td><a href='$endereco' >".date('d/m/Y', $value['data_compra'])."</a></td>
+												<td><a href='$endereco' >".date('d/m/Y', $value['data_vencimento'])."</a></td>
+												<td><a href='$endereco' >R$ ".$valor_descontado[0].','.$depois_virgula."</a></td>
+												<td><a href='$link' ><span ".$styl.">".$botao_."</span></a></td>
+												</tr>
+											";
+											$n++;
 										}
-										$depois_virgula = $valor_descontado[1]>0 ? $valor_descontado[1]:'00';
-
-										$hoje = new DateTime('now');
-										$hoje = $hoje->format('Y-m-d');
-										$hoje = strtotime($hoje);
-										if($hoje <= $value['data_vencimento']){
-											$botao_ = '<i class="fas fa-play btn_play"></i> ASSISTIR';
-											$link = "#";
-											$styl = "style='color:#363a45'";
-										}else{
-											$botao_ = '<i class="fas fa-dollar-sign btn_renovar"></i> RENOVAR';
-											$link = "#";
-											$styl = "style='color:#e35864'";
-
-										}
-										echo "
-											<tr>
-											<td><a href='$endereco' ><span class='prod_title'>".$value['produto_titulo']."</span></a><br><span class='prod_assina'>".($value['produto_assinatura']==1?'Assinatura':'Compra')."<span></td>
-											<td><a href='$endereco' >".date('d/m/Y', $value['data_compra'])."</a></td>
-											<td><a href='$endereco' >".date('d/m/Y', $value['data_vencimento'])."</a></td>
-											<td><a href='$endereco' >R$ ".$valor_descontado[0].','.$depois_virgula."</a></td>
-											<td><a href='$link' ><span ".$styl.">".$botao_."</span></a></td>
-											</tr>
-										";
-										$n++;
 									}
 									if($n == 0){
 										echo "

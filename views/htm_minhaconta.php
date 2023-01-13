@@ -882,7 +882,7 @@
 									</thead>
 									<?php
 									$n = 0;
-									echo '<pre>';print_r($lista_pedidos);exit;
+									echo '<pre>';print_r($lista_pedidos);
 									foreach ($lista_pedidos as $key => $valu) {
 										foreach ($valu as $value) {
 

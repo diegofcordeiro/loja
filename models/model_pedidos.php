@@ -28,7 +28,7 @@ Class model_pedidos extends model{
 				 	$lista[$i]['valor_total'] = $valores->trata_valor($data_pedido->valor_total);
 				 	$lista[$i]['status'] = $this->status($data_carrinho->status);
 				 	$lista[$i]['charger_id'] = $data_pedido->transacao_charger_id;
-				 	$lista[$i]['status_id'] = $data_pedido->status;
+				 	$lista[$i]['status_id'] = $data_carrinho->status;
 				 	$lista[$i]['msg'] = $this->mensagens_n_lidas($data_pedido->codigo);
 
 					$lista[$i]['sessao'] = $data_carrinho->sessao;

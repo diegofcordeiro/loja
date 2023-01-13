@@ -917,7 +917,8 @@ class topos extends controller {
 			$tmp_name = $_FILES['arquivo']['tmp_name'];
 
 			//// Definicao de Diretorios / 
-			$diretorio = "../arquivos/img_logo/";
+			// $diretorio = "../arquivos/img_logo/";
+			$diretorio = "../arquivos/imagens/";
 			//pega a exteção
 			$nome_original = $arquivo_original['name'];
 			$extensao = $arquivos_imagens->extensao($nome_original);

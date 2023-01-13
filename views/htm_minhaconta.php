@@ -882,32 +882,29 @@
 									</thead>
 									<?php
 									$n = 0;
-									foreach ($lista_pedidos as $key => $valu) {
-										foreach ($valu as $value) {
-											echo '<pre>';print_r($value);
-											$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
-											$estorno = DOMINIO.$controller."/vindi_estorno/codigo/".$value['charger_id'];
-											$est = '';
-											if($value['msg'] != 0){
-												$mensagens = $value['msg']." Mensagem(s)";
-											} else {
-												$mensagens = "";
-											}
-											if($value['status_id'] == 4){
-												$est = "<a href='$estorno' style='color:blue;' >Estrornar</a>";
-											}
-											echo "
-											<tr>
-											<td><a href='$endereco' >".$value['data']."</a></td>
-											<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
-											<td><a href='$endereco' >R$ ".$value['valor_total']."</a></td>
-											<td><a href='$endereco' >".$value['status']."</a></td>
-											<td><a href='$endereco' style='color:blue;' >".$mensagens."</a></td>
-											<td>$est</td>
-											</tr>
-											";
-											$n++;
+									foreach ($lista_pedidos as $key => $value) {
+										$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
+										$estorno = DOMINIO.$controller."/vindi_estorno/codigo/".$value['charger_id'];
+										$est = '';
+										if($value['msg'] != 0){
+											$mensagens = $value['msg']." Mensagem(s)";
+										} else {
+											$mensagens = "";
 										}
+										if($value['status_id'] == 4){
+											$est = "<a href='$estorno' style='color:blue;' >Estrornar</a>";
+										}
+										echo "
+										<tr>
+										<td><a href='$endereco' >".$value['data']."</a></td>
+										<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
+										<td><a href='$endereco' >R$ ".$value['valor_total']."</a></td>
+										<td><a href='$endereco' >".$value['status']."</a></td>
+										<td><a href='$endereco' style='color:blue;' >".$mensagens."</a></td>
+										<td>$est</td>
+										</tr>
+										";
+										$n++;
 									}
 									if($n == 0){
 										echo "

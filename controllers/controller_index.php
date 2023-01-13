@@ -8715,7 +8715,6 @@ class index extends controller {
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("select * from pedido_loja_carrinho WHERE sessao = '".$sessao_loja."' and produto_ref = '".$produto_ref."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
-		print_r('linha_carrinho:');print_r("select * from pedido_loja_carrinho WHERE sessao = '".$sessao_loja."' and produto_ref = '".$produto_ref."' ");
 		echo'<pre>';
 
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
@@ -8733,8 +8732,6 @@ class index extends controller {
 		echo 'ID USUARIO: '.$id_usuario;
 		echo '<br>';
 		echo 'Prod_ref - ID TRILHA';
-
-		
 
 		if($linha_carrinho != 0){
 
@@ -9055,73 +9052,38 @@ class index extends controller {
 		
 		
 		/////////     RECCORENTE    /////////////
-		foreach($recorrentes as $key => $recorrencia){
+		// foreach($recorrentes as $key => $recorrencia){
 			
-			// $this->integrar_trilha_lms($cod, $cpf);
-			foreach($recorrencia as $rec){
-				// print_r($rec->produto_ref.' - '.$cod.''.$cpf);exit;
-				$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
-			}
-			exit;
+		// 	// $this->integrar_trilha_lms($cod, $cpf);
+		// 	foreach($recorrencia as $rec){
+		// 		// print_r($rec->produto_ref.' - '.$cod.''.$cpf);exit;
+		// 		$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+		// 	}
+		// 	exit;
 		
-			$amout = 0;
-			$produto_assinatura = '';
-			foreach($recorrencia as $rec){
-				if($rec->usar_valor_vindi == 1){
-					$amout = $rec->valor_total;
-				}else{
-					$amout = $amout + $rec->valor_total;
-				}
-				$produto_assinatura = $rec->produto_assinatura;
-			}
-			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
-			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
+		// 	$amout = 0;
+		// 	$produto_assinatura = '';
+		// 	foreach($recorrencia as $rec){
+		// 		if($rec->usar_valor_vindi == 1){
+		// 			$amout = $rec->valor_total;
+		// 		}else{
+		// 			$amout = $amout + $rec->valor_total;
+		// 		}
+		// 		$produto_assinatura = $rec->produto_assinatura;
+		// 	}
+		// 	// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
+		// 	$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
 
-			if(isset($bill['bill']['id'])){
-				$id_charge = $bill['bill']['charges'][0]['id'];
-				$id_trans = $bill['bill']['id'];
+		// 	if(isset($bill['bill']['id'])){
+		// 		$id_charge = $bill['bill']['charges'][0]['id'];
+		// 		$id_trans = $bill['bill']['id'];
 
-				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
-					$status = 4;
-					foreach($recorrencia as $rec){
-						$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
-					}
-					
-				}else{
-					$status = 1;
-				}
-				$db = new mysql();
-				$db->alterar("pedido_loja_carrinho", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
-					"status"=>"$status",
-				), " id='$rec->id' ");
-
-				$db->alterar("pedido_loja", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
-					"status"=>"$status",
-				), " codigo='$cod' ");
-			}
-		}
-		
-		/////////  /////////////  /////////////
-
-		/////////////   NAO  RECCORENTE    /////////////
-
-		// foreach($nao_recorrentes as $key => $recorrencia){
-		// 	ini_set('display_errors', 1);
-		// 	ini_set('display_startup_errors', 1);
-		// 	error_reporting(E_ALL);
-		// 	$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
-
-		// 	if(isset($bill->id)){
-		// 		$id_charge = $bill->charges[0]->id;
-		// 		$id_trans = $bill->id;
-
-		// 		if($bill->status == 'paid'){ 
+		// 		if($bill['bill']['charges'][0]['status'] == 'paid'){ 
 		// 			$status = 4;
-		// 			$this->integrar_trilha_lms($cod, $cpf);
+		// 			foreach($recorrencia as $rec){
+		// 				$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+		// 			}
+					
 		// 		}else{
 		// 			$status = 1;
 		// 		}
@@ -9130,16 +9092,54 @@ class index extends controller {
 		// 			"transacao_charger_id"=>"$id_charge",
 		// 			"transacao_bill_id"=>"$id_trans",
 		// 			"status"=>"$status",
-					
-		// 		), " id='$recorrencia->id' ");
+		// 		), " id='$rec->id' ");
+
 		// 		$db->alterar("pedido_loja", array(
 		// 			"transacao_charger_id"=>"$id_charge",
 		// 			"transacao_bill_id"=>"$id_trans",
 		// 			"status"=>"$status",
-					
 		// 		), " codigo='$cod' ");
 		// 	}
 		// }
+		
+		/////////  /////////////  /////////////
+
+		/////////////   NAO  RECCORENTE    /////////////
+
+		foreach($nao_recorrentes as $key => $recorrencia){
+			ini_set('display_errors', 1);
+			ini_set('display_startup_errors', 1);
+			error_reporting(E_ALL);
+			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
+
+			if(isset($bill->id)){
+				$id_charge = $bill->charges[0]->id;
+				$id_trans = $bill->id;
+
+				if($bill->status == 'paid'){ 
+					$status = 4;
+					foreach($recorrencia as $rec){
+						print_r($rec->produto_ref);exit;
+						$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+					}
+				}else{
+					$status = 1;
+				}
+				$db = new mysql();
+				$db->alterar("pedido_loja_carrinho", array(
+					"transacao_charger_id"=>"$id_charge",
+					"transacao_bill_id"=>"$id_trans",
+					"status"=>"$status",
+					
+				), " id='$recorrencia->id' ");
+				$db->alterar("pedido_loja", array(
+					"transacao_charger_id"=>"$id_charge",
+					"transacao_bill_id"=>"$id_trans",
+					"status"=>"$status",
+					
+				), " codigo='$cod' ");
+			}
+		}
 		/////////////  /////////////  /////////////
 			$this->view('finalizada', $dados);
 		

@@ -12,21 +12,46 @@ Class model_pedidos extends model{
 		//informaçoes do pedido
 		$conexao = new mysql();
 		$coisas_pedidos = $conexao->Executar("SELECT * FROM pedido_loja WHERE cadastro='$cod_usuario' AND status >= '0' order by data desc");
-		while($data_pedidos = $coisas_pedidos->fetch_object()){
+		$linha_pedido = $coisas_pedidos->num_rows;
+
+
+		$i = 0;
+        if($linha_pedido != 0){
+        	while($data_pedido = $coisas_pedidos->fetch_object()){
+				$conexao = new mysql();
+				$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' ");
+				
+				while($data_carrinho = $coisas_carrinho->fetch_object()){
+					$lista[$i]['id'] = $data_carrinho->id;
+					$lista[$i]['sessao'] = $data_carrinho->sessao;
+					$lista[$i]['combo_id'] = $data_carrinho->id_combo;
+					$lista[$i]['produto_id'] = $data_carrinho->produto_id;
+					$lista[$i]['produto_codigo'] = $data_carrinho->produto;
+					$lista[$i]['produto_assinatura'] = $data_carrinho->produto_assinatura;
+					$lista[$i]['produto_titulo'] = $data_carrinho->produto_titulo;
+					$lista[$i]['produto_valor'] = $data_carrinho->produto_valor;
+					$lista[$i]['valor_total'] = $data_carrinho->valor_total;
+					$lista[$i]['charger_id'] = $data_carrinho->transacao_charger_id;
+					$lista[$i]['data_vencimento'] = $data_carrinho->data_vencimento;
+					$lista[$i]['data_compra'] = $data_carrinho->data_compra;
+					
+				$n++;
+				}
+			}
 			
-			$lista[$n]['id'] = $data_pedidos->id;
-			$lista[$n]['codigo'] = $data_pedidos->codigo;
-			$lista[$n]['data'] = date('d/m/y', $data_pedidos->data);			
-			$lista[$n]['valor_total'] = $valores->trata_valor($data_pedidos->valor_total);
-			$lista[$n]['status'] = $this->status($data_pedidos->status);
-			$lista[$n]['charger_id'] = $data_pedidos->transacao_charger_id;
-			$lista[$n]['status_id'] = $data_pedidos->status;
-			$lista[$n]['msg'] = $this->mensagens_n_lidas($data_pedidos->codigo);
-			
-        $n++;
-		}
+		}	
+		$new_lista = array();
+		foreach ($lista as $obj_lista) {
+			$id_combo = $obj_lista['combo_id'];
+			$id_combo = $id_combo == '' ? $obj_lista['id'] : $obj_lista['combo_id'];
+			if (!empty($new_lista[$id_combo])){
+				$new_lista[$id_combo] = array_merge($new_lista[$id_combo], array($obj_lista));
+			}else{
+				$new_lista[$id_combo] = array($obj_lista);
+			}
+		}	
 		
-		return $lista;
+		return $new_lista;
 	}	
 
 	public function lista_produto_comprado($cod_usuario){

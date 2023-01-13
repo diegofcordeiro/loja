@@ -8750,7 +8750,7 @@ class index extends controller {
 							'id_curso'  => $obj2->id,
 							'status_curso'  => 0,
 							'data_matricula' => date('Y-m-d', $data_carrinho->data_compra),
-							'dt_vencimento_matricula' => date('Y-m-d', $data_carrinho->data_vencimento),
+							// 'dt_vencimento_matricula' => date('Y-m-d', $data_carrinho->data_vencimento),
 							'progresso' => 0,
 							'ativo_matricula' => 1
 						);
@@ -8769,15 +8769,15 @@ class index extends controller {
 			$id_curso 					= $data['id_curso'];
 			$status_curso 				= $data['status_curso'];
 			$data_matricula 			= $data['data_matricula'];
-			$dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
+			// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
 			$progresso 					= $data['progresso'];
 			$ativo_matricula 			= $data['ativo_matricula'];
 			
 			$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
 
 			if($exit_line == 0){
-				$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso, dt_vencimento_matricula)
-					VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso', '$dt_vencimento_matricula');";
+				$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
+					VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
 				$mysqli->query($sql_insert);
 			}else{
 				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
@@ -9053,13 +9053,11 @@ class index extends controller {
 		
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
-			
-			// $this->integrar_trilha_lms($cod, $cpf);
+		
 			foreach($recorrencia as $rec){
 				// print_r($rec->produto_ref.' - '.$cod.''.$cpf);exit;
 				$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
 			}
-			exit;
 		
 			$amout = 0;
 			$produto_assinatura = '';

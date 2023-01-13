@@ -8708,6 +8708,8 @@ class index extends controller {
 		require('conexao.php');
 		echo $sessao_loja;
 		echo '<br>';
+		$cpf = str_replace("-","",$cpf);
+		$cpf = str_replace(".","",$cpf);
 		echo $cpf;
 
 		$conexao = new mysql();
@@ -8728,7 +8730,7 @@ class index extends controller {
 		}
 		echo 'ID USUARIO';
 
-		echo $id_usuario;
+		echo 'ID USUARIO: '.$id_usuario;
 		echo '<br>';
 		echo 'Prod_ref - ID TRILHA';
 
@@ -8751,7 +8753,7 @@ class index extends controller {
 							'id_curso'  => $obj2->id,
 							'status_curso'  => 0,
 							'data_matricula' => date('Y-m-d', $data_carrinho->data_compra),
-							'dt_vencimento_matricula' => date('Y-m-d', $data_carrinho->data_vencimento),
+							// 'dt_vencimento_matricula' => date('Y-m-d', $data_carrinho->data_vencimento),
 							'progresso' => 0,
 							'ativo_matricula' => 1
 						);

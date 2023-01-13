@@ -60,24 +60,25 @@ Class model_pedidos extends model{
 				$new_lista[$sessao] = array($obj_lista);
 			}
 		}
-echo '<pre>';print_r($new_lista);exit;
-		$final_lista_full = array();
-		foreach ($new_lista as $key => $obj_list) {
-			$final_lista = array();
-			foreach($obj_list as $obj_lista){
-				$id_combo = $obj_lista['combo_id'];
-				$id_combo = $id_combo == '' ? $obj_lista['id'] : $obj_lista['combo_id'];
-				if (!empty($final_lista[$id_combo])){
-					$final_lista[$id_combo] = array_merge($final_lista[$id_combo], array($obj_lista));
-				}else{
-					$final_lista[$id_combo] = array($obj_lista);
-				}
-			}
-			$final_lista_full[$key] = $final_lista;
-			
-		}	
+// echo '<pre>';print_r($new_lista);exit;
 
-		return $final_lista;
+		// $final_lista_full = array();
+		// foreach ($new_lista as $key => $obj_list) {
+		// 	$final_lista = array();
+		// 	foreach($obj_list as $obj_lista){
+		// 		$id_combo = $obj_lista['combo_id'];
+		// 		$id_combo = $id_combo == '' ? $obj_lista['id'] : $obj_lista['combo_id'];
+		// 		if (!empty($final_lista[$id_combo])){
+		// 			$final_lista[$id_combo] = array_merge($final_lista[$id_combo], array($obj_lista));
+		// 		}else{
+		// 			$final_lista[$id_combo] = array($obj_lista);
+		// 		}
+		// 	}
+		// 	$final_lista_full[$key] = $final_lista;
+			
+		// }	
+
+		return $new_lista;
 	}	
 
 	public function lista_produto_comprado($cod_usuario){

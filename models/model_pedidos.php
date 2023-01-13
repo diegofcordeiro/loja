@@ -67,24 +67,9 @@ Class model_pedidos extends model{
 			}
 			$final_lista_full[$key] = $final_lista;
 			
-			// array_push($final_lista_full,$final_lista);
 		}	
-		echo '<pre>';print_r($final_lista_full);exit;
-		// while($data_pedidos = $coisas_pedidos->fetch_object()){
-			
-		// 	$lista[$n]['id'] = $data_pedidos->id;
-		// 	$lista[$n]['codigo'] = $data_pedidos->codigo;
-		// 	$lista[$n]['data'] = date('d/m/y', $data_pedidos->data);			
-		// 	$lista[$n]['valor_total'] = $valores->trata_valor($data_pedidos->valor_total);
-		// 	$lista[$n]['status'] = $this->status($data_pedidos->status);
-		// 	$lista[$n]['charger_id'] = $data_pedidos->transacao_charger_id;
-		// 	$lista[$n]['status_id'] = $data_pedidos->status;
-		// 	$lista[$n]['msg'] = $this->mensagens_n_lidas($data_pedidos->codigo);
-			
-        // $n++;
-		// }
-		echo '<pre>';print_r($final_lista);exit;
-		return $lista;
+
+		return $final_lista;
 	}	
 
 	public function lista_produto_comprado($cod_usuario){

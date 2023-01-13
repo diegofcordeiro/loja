@@ -9107,6 +9107,10 @@ class index extends controller {
 		/////////////   NAO  RECCORENTE    /////////////
 
 		foreach($nao_recorrentes as $key => $recorrencia){
+			foreach($recorrencia as $rec){
+						print_r($rec->produto_ref);
+						// $this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+					}exit;
 			ini_set('display_errors', 1);
 			ini_set('display_startup_errors', 1);
 			error_reporting(E_ALL);

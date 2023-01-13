@@ -9055,7 +9055,7 @@ class index extends controller {
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 			
-			echo'<pre>';print_r($recorrencia);exit;
+			// echo'<pre>';print_r($recorrencia);exit;
 			foreach($recorrencia as $rec){
 				print_r($produto_ref);
 			}

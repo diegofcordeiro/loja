@@ -8706,16 +8706,13 @@ class index extends controller {
 	public function integrar_trilha_lms($produto_ref,$sessao_loja, $cpf){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
-		echo $sessao_loja;
-		echo '<br>';
+
 		$cpf = str_replace("-","",$cpf);
 		$cpf = str_replace(".","",$cpf);
-		echo $cpf;
 
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("select * from pedido_loja_carrinho WHERE sessao = '".$sessao_loja."' and produto_ref = '".$produto_ref."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
-		echo'<pre>';
 
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
 		$id_usuario = null;
@@ -8727,11 +8724,6 @@ class index extends controller {
 		  	}
 		  	$result->free_result();
 		}
-		echo 'ID USUARIO';
-
-		echo 'ID USUARIO: '.$id_usuario;
-		echo '<br>';
-		echo 'Prod_ref - ID TRILHA';
 
 		if($linha_carrinho != 0){
 
@@ -8781,10 +8773,7 @@ class index extends controller {
 				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 				$mysqli->query($sql_update);
 			}
-			print_r($mysqli);
 		}
-
-		print_r('Cliente adicionado');echo'<br>';
 
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 	}

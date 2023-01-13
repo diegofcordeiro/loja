@@ -8753,7 +8753,7 @@ class index extends controller {
 							'id_curso'  => $obj2->id,
 							'status_curso'  => 0,
 							'data_matricula' => date('Y-m-d', $data_carrinho->data_compra),
-							// 'dt_vencimento_matricula' => date('Y-m-d', $data_carrinho->data_vencimento),
+							'dt_vencimento_matricula' => date('Y-m-d', $data_carrinho->data_vencimento),
 							'progresso' => 0,
 							'ativo_matricula' => 1
 						);
@@ -8770,18 +8770,18 @@ class index extends controller {
 			$id_curso 					= $data['id_curso'];
 			$status_curso 				= $data['status_curso'];
 			$data_matricula 			= $data['data_matricula'];
-			// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
+			$dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
 			$progresso 					= $data['progresso'];
 			$ativo_matricula 			= $data['ativo_matricula'];
 			
 			$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
 
 			if($exit_line == 0){
-				$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
-					VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
+				$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso, dt_vencimento_matricula)
+					VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso', '$dt_vencimento_matricula');";
 				$mysqli->query($sql_insert);
 			}else{
-				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 				$mysqli->query($sql_update);
 			}
 			print_r($mysqli);
@@ -9051,11 +9051,13 @@ class index extends controller {
 			}
 		}	
 		
-		$this->integrar_trilha_lms($cod, $cpf);
-		exit;
 		
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
+			print_r($recorrencia);
+			$this->integrar_trilha_lms($cod, $cpf);
+			exit;
+		
 			$amout = 0;
 			$produto_assinatura = '';
 			foreach($recorrencia as $rec){

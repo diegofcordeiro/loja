@@ -8,6 +8,12 @@ Class model_config extends model{
 		return $exec->fetch_object();
 	}
 
+	public function carrega_banner_admin(){
+		$db = new mysql();
+		$exec = $db->executar("SELECT banner_admin FROM layout_topos");
+		return $exec->fetch_object();
+	}
+
 	///////////////////////////////////////////////////////////////////////////
 	//
 

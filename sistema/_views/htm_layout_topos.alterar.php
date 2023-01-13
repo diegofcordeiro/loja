@@ -520,7 +520,7 @@
                   <?php } else { ?>
 
                     <div style="text-align:left;">
-                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$data->logo?>" style="max-width:300px;" >
+                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$banner_admin?>" style="max-width:300px;" >
                     </div>
 
                     <div style="text-align:left; padding-top:10px;">

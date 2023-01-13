@@ -9063,7 +9063,7 @@ class index extends controller {
 				}
 				$produto_assinatura = $rec->produto_assinatura;
 			}
-			echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
+			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
 			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
 
 			if(isset($bill['bill']['id'])){

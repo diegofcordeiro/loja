@@ -9049,16 +9049,21 @@ class index extends controller {
 			}
 		}	
 		
-		echo '<pre>'; print_r($recorrentes);
-		echo '<pre>'; print_r($nao_recorrentes);exit;
+
+		
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 			$amout = 0;
 			$produto_assinatura = '';
 			foreach($recorrencia as $rec){
-				$amout = $amout + $rec->valor_total;
+				if($rec->usar_valor_vindi == 1){
+					$amout = $rec->valor_total;
+				}else{
+					$amout = $amout + $rec->valor_total;
+				}
 				$produto_assinatura = $rec->produto_assinatura;
 			}
+			echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
 			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
 
 			if(isset($bill['bill']['id'])){

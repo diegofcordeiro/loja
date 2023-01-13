@@ -819,6 +819,7 @@
 									</thead>
 									<?php
 									$n = 0;
+									echo '<pre>';print_r($lista_produto_comprado);exit;
 									foreach ($lista_produto_comprado as $key => $value) {
 										$endereco = DOMINIO.$controller."/produto/id/".$value['produto_id'];
 

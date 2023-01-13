@@ -9107,6 +9107,7 @@ class index extends controller {
 		/////////////   NAO  RECCORENTE    /////////////
 
 		foreach($nao_recorrentes as $key => $recorrencia){
+			echo 'aqui';
 			foreach($recorrencia as $rec){
 						print_r($rec->produto_ref);
 						// $this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
@@ -9114,7 +9115,7 @@ class index extends controller {
 			ini_set('display_errors', 1);
 			ini_set('display_startup_errors', 1);
 			error_reporting(E_ALL);
-			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
+			// $bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
 
 			if(isset($bill->id)){
 				$id_charge = $bill->charges[0]->id;

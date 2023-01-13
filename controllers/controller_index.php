@@ -9063,7 +9063,7 @@ class index extends controller {
 				}
 				$produto_assinatura = $rec->produto_assinatura;
 			}
-			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
+			echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
 			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
 
 			if(isset($bill['bill']['id'])){
@@ -9072,7 +9072,7 @@ class index extends controller {
 
 				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
 					$status = 4;
-					$this->integrar_trilha_lms($cod, $cpf);
+					// $this->integrar_trilha_lms($cod, $cpf);
 				}else{
 					$status = 1;
 				}
@@ -9107,7 +9107,7 @@ class index extends controller {
 
 				if($bill->status == 'paid'){ 
 					$status = 4;
-					$this->integrar_trilha_lms($cod, $cpf);
+					// $this->integrar_trilha_lms($cod, $cpf);
 				}else{
 					$status = 1;
 				}

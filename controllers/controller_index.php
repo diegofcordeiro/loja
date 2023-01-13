@@ -10002,7 +10002,7 @@ class index extends controller {
 		$dados['lista_pedidos'] = $pedidos->lista($this->_cod_usuario);
 		$dados['lista_produto_comprado'] = $pedidos->lista_produto_comprado($this->_cod_usuario);
 
-		echo'<pre>'; print_r($dados['lista_pedidos']);exit;
+		// echo'<pre>'; print_r($dados['lista_pedidos']);exit;
 
 
 

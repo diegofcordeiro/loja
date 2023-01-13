@@ -65,7 +65,7 @@
                   <a href="#fundo" data-toggle="tab">Imagem de Fundo</a>
                 </li> -->
                 <li <?php if($aba_selecionada == "logo"){ echo "class='active'"; } ?> >
-                  <a href="#logo" data-toggle="tab">Logo</a>
+                  <a href="#logo" data-toggle="tab">Logo site</a>
                 </li>
                 <li <?php if($aba_selecionada == "fundo"){ echo "class='active'"; } ?> >
                   <a href="#fundo" data-toggle="tab">Banner</a>

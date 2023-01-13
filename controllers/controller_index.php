@@ -9215,18 +9215,7 @@ class index extends controller {
 		$response = json_decode($response, true);
 		curl_close($curl);
 		$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
-		// return $response;
-		// if(isset($response['errors'])){
-		// 	$response = 0;
-		// }else{
-		// 	if($response['charge']['status'] == 'canceled'){
-		// 		$response = 1;
-		// 	}else{
-		// 		$response = 0;
-		// 	}
-		// }
-		
-		// return $response;
+
 	}
 
 	public function WebhookHandler(){
@@ -10072,6 +10061,8 @@ class index extends controller {
 			$botao_css = "";
 			$botao_style = "";
 		}
+
+		echo '<pre>';print_r($dados);exit;
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];

@@ -856,16 +856,46 @@ class topos extends controller {
 	public function banner_admin(){
 
 		$codigo = $this->get('codigo'); 
-		print_r($codigo);exit;
 		$this->valida($codigo); 
-		$banner_admin = $_POST['banner_admin'];
 
-		$db = new mysql();
-		$db->alterar("layout_topos", array(
-			"link_banner" => $banner_admin
-		), " codigo='$codigo' ");
+		// carrega model
+		$arquivos_imagens = new model_arquivos_imagens();
 
-		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/fundo');
+		if(!$arquivos_imagens->filtro($_FILES['arquivo'])){
+
+			$this->msg('Arquivo com formato inválido ou inexistente!');
+			$this->volta(1);
+
+		} else {
+
+			$arquivo_original = $_FILES['arquivo'];
+			$tmp_name = $_FILES['arquivo']['tmp_name'];
+
+			//// Definicao de Diretorios / 
+			$diretorio = "../arquivos/imagens/";
+
+			//pega a exteção
+			$nome_original = $arquivo_original['name'];
+			$extensao = $arquivos_imagens->extensao($nome_original);
+			$nome_arquivo = $arquivos_imagens->trata_nome($nome_original);
+
+			if(copy($tmp_name, $diretorio.$nome_arquivo)){
+
+				$db = new mysql();
+				$db->alterar("layout_topos", array(
+					"banner_admin"=>$nome_arquivo
+				), " codigo='$codigo' ");
+
+				$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/logo');
+
+			} else {
+
+				$this->msg('Não foi possível copiar o arquivo!');
+				$this->volta(1);
+
+			}
+		}
+		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/banner_admin');
 	}
 
 	public function fundo_apagar(){

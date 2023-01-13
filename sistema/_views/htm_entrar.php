@@ -16,9 +16,10 @@
   <link rel="stylesheet" href="<?=LAYOUT?>dist/iCheck/square/blue.css">
   
   <?php include_once('css.php'); ?>
+  <?php $banner_admin = URL.'arquivos/'.$banner_admin;?>
   <style>
     body{
-    background-image: url('<?php $banner_admin ?>') !important;
+    background-image: url(<?= $banner_admin ?>) !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
     background-size: cover !important;

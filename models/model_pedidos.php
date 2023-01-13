@@ -47,6 +47,7 @@ Class model_pedidos extends model{
 					
 					$lista[$i]['id'] = $data_carrinho->id;
 					$lista[$i]['sessao'] = $data_carrinho->sessao;
+					$lista[$i]['combo_id'] = $data_carrinho->id_combo;
 					$lista[$i]['produto_id'] = $data_carrinho->produto_id;
 					$lista[$i]['produto_codigo'] = $data_carrinho->produto;
 					$lista[$i]['produto_assinatura'] = $data_carrinho->produto_assinatura;

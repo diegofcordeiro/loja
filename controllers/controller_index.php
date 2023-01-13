@@ -8703,7 +8703,7 @@ class index extends controller {
 		
 	}
 
-	public function integrar_trilha_lms($sessao_loja, $cpf){
+	public function integrar_trilha_lms($produto_ref,$sessao_loja, $cpf){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
 		echo $sessao_loja;
@@ -8713,7 +8713,7 @@ class index extends controller {
 		echo $cpf;
 
 		$conexao = new mysql();
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$sessao_loja."' ");
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$sessao_loja."' AND protudo_ref = '".$produto_ref."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
 		echo'<pre>';
@@ -8740,8 +8740,8 @@ class index extends controller {
 
 			$data_array = array();
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
-		echo $data_carrinho->produto_ref;
-		echo '<br>';
+
+
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
 				if ($result2 = $mysqli->query($sql2)) {
 
@@ -8762,7 +8762,7 @@ class index extends controller {
 				}	
 			}
 		}
-		print_r($data_array);
+		print_r($data_array);exit;
 		foreach($data_array as $data){
 			$id_usuario 				= $data['id_usuario'];
 			$id_perfil 					= $data['id_perfil'];
@@ -9055,12 +9055,12 @@ class index extends controller {
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 			
-			// echo'<pre>';print_r($recorrencia);exit;
+			exit;
+			// $this->integrar_trilha_lms($cod, $cpf);
 			foreach($recorrencia as $rec){
-				print_r($rec->produto_ref);
+				$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
 			}
 			exit;
-			$this->integrar_trilha_lms($cod, $cpf);
 		
 			$amout = 0;
 			$produto_assinatura = '';
@@ -9081,7 +9081,10 @@ class index extends controller {
 
 				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
 					$status = 4;
-					$this->integrar_trilha_lms($cod, $cpf);
+					foreach($recorrencia as $rec){
+						$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+					}
+					
 				}else{
 					$status = 1;
 				}
@@ -9104,37 +9107,37 @@ class index extends controller {
 
 		/////////////   NAO  RECCORENTE    /////////////
 
-		foreach($nao_recorrentes as $key => $recorrencia){
-			ini_set('display_errors', 1);
-			ini_set('display_startup_errors', 1);
-			error_reporting(E_ALL);
-			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
+		// foreach($nao_recorrentes as $key => $recorrencia){
+		// 	ini_set('display_errors', 1);
+		// 	ini_set('display_startup_errors', 1);
+		// 	error_reporting(E_ALL);
+		// 	$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
 
-			if(isset($bill->id)){
-				$id_charge = $bill->charges[0]->id;
-				$id_trans = $bill->id;
+		// 	if(isset($bill->id)){
+		// 		$id_charge = $bill->charges[0]->id;
+		// 		$id_trans = $bill->id;
 
-				if($bill->status == 'paid'){ 
-					$status = 4;
-					$this->integrar_trilha_lms($cod, $cpf);
-				}else{
-					$status = 1;
-				}
-				$db = new mysql();
-				$db->alterar("pedido_loja_carrinho", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
-					"status"=>"$status",
+		// 		if($bill->status == 'paid'){ 
+		// 			$status = 4;
+		// 			$this->integrar_trilha_lms($cod, $cpf);
+		// 		}else{
+		// 			$status = 1;
+		// 		}
+		// 		$db = new mysql();
+		// 		$db->alterar("pedido_loja_carrinho", array(
+		// 			"transacao_charger_id"=>"$id_charge",
+		// 			"transacao_bill_id"=>"$id_trans",
+		// 			"status"=>"$status",
 					
-				), " id='$recorrencia->id' ");
-				$db->alterar("pedido_loja", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
-					"status"=>"$status",
+		// 		), " id='$recorrencia->id' ");
+		// 		$db->alterar("pedido_loja", array(
+		// 			"transacao_charger_id"=>"$id_charge",
+		// 			"transacao_bill_id"=>"$id_trans",
+		// 			"status"=>"$status",
 					
-				), " codigo='$cod' ");
-			}
-		}
+		// 		), " codigo='$cod' ");
+		// 	}
+		// }
 		/////////////  /////////////  /////////////
 			$this->view('finalizada', $dados);
 		

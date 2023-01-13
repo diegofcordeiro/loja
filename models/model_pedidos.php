@@ -86,14 +86,14 @@ Class model_pedidos extends model{
  		$lista = array();
 
 		$conexao = new mysql();
-		$coisas_pedidos = $conexao->Executar("SELECT * FROM pedido_loja WHERE cadastro='$cod_usuario' AND status = '4' order by data desc");
+		$coisas_pedidos = $conexao->Executar("SELECT * FROM pedido_loja WHERE cadastro='$cod_usuario'  order by data desc");
 		$linha_pedido = $coisas_pedidos->num_rows;
 		
         $i = 0;
         if($linha_pedido != 0){
         	while($data_pedido = $coisas_pedidos->fetch_object()){
 				$conexao = new mysql();
-				$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' ");
+				$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' AND status = '4' ");
 				
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
 					

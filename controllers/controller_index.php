@@ -10062,7 +10062,7 @@ class index extends controller {
 			$botao_style = "";
 		}
 
-		echo '<pre>';print_r($dados);exit;
+		// echo '<pre>';print_r($dados);exit;
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];

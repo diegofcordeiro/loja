@@ -9049,7 +9049,8 @@ class index extends controller {
 			}
 		}	
 		
-
+		$this->integrar_trilha_lms($cod, $cpf);
+		exit;
 		
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){

@@ -65,6 +65,7 @@ Class model_pedidos extends model{
 		}	
 		$new_lista = array();
 		foreach ($lista as $obj_lista) {
+			echo '<pre>';print_r($obj_lista);exit;
 			$id_combo = $obj_lista->combo_id;
 			if (!empty($new_lista[$id_combo])){
 				$new_lista[$id_combo] = array_merge($new_lista[$id_combo], array($obj_lista));

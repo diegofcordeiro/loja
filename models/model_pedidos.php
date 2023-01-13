@@ -18,7 +18,7 @@ Class model_pedidos extends model{
         if($linha_pedido != 0){
         	while($data_pedido = $coisas_pedidos->fetch_object()){
 				$conexao = new mysql();
-				$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' ");
+				$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' group by id_combo ");
 				
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
 					
@@ -60,7 +60,7 @@ Class model_pedidos extends model{
 				$new_lista[$sessao] = array($obj_lista);
 			}
 		}
-echo '<pre>';print_r($new_lista);exit;
+// echo '<pre>';print_r($new_lista);exit;
 
 		// $final_lista_full = array();
 		// foreach ($new_lista as $key => $obj_list) {

@@ -10002,7 +10002,7 @@ class index extends controller {
 		$dados['lista_pedidos'] = $pedidos->lista($this->_cod_usuario);
 		$dados['lista_produto_comprado'] = $pedidos->lista_produto_comprado($this->_cod_usuario);
 
-		// echo'<pre>'; print_r($dados['lista_produto_comprado']);exit;
+		echo'<pre>'; print_r($dados['lista_pedidos']);exit;
 
 
 
@@ -10062,7 +10062,7 @@ class index extends controller {
 			$botao_style = "";
 		}
 
-		// echo '<pre>';print_r($dados);exit;
+		echo '<pre>';print_r($dados);exit;
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];

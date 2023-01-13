@@ -490,7 +490,9 @@
                 </div>
 
                 <div id="logo_admin" class="tab-pane <?php if($aba_selecionada == "logo_admin"){ echo "active"; } ?>" >
-                  <?php if(!$banner_admin->banner_admin){ ?>
+                  <?php 
+                    print_r($banner_admin);exit;
+                  if(!$banner_admin->banner_admin){ ?>
                     <form action="<?=$_base['objeto']?>logo_admin/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 

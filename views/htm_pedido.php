@@ -1617,7 +1617,7 @@
 											echo "
 												<tr>
 													<td colspan='5' style='border-bottom: 1px white solid;'>
-														Curso avulso
+														Trilha avulsa
 													</td>
 												</tr>
 											";

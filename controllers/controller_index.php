@@ -8743,7 +8743,7 @@ class index extends controller {
 
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
 				if ($result2 = $mysqli->query($sql2)) {
-
+				print_r($result2);exit;
 					while ($obj2 = $result2->fetch_object()) {
 						$array = array(
 							'id_usuario' => $id_usuario, 
@@ -8756,7 +8756,7 @@ class index extends controller {
 							'progresso' => 0,
 							'ativo_matricula' => 1
 						);
-						print_r($array);exit;
+						
 						array_push($data_array,$array);
 					}
 				}	

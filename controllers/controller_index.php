@@ -9049,7 +9049,8 @@ class index extends controller {
 			}
 		}	
 		
-		echo '<pre>'; print_r($recorrentes);exit;
+		echo '<pre>'; print_r($recorrentes);
+		echo '<pre>'; print_r($nao_recorrentes);exit;
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 			$amout = 0;

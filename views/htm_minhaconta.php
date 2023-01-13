@@ -883,10 +883,7 @@
 									<?php
 									$n = 0;
 									foreach ($lista_pedidos as $key => $valu) {
-										echo'<pre>';print_r($key);
-										echo'<pre>';print_r($valu);
 										foreach ($valu as $value) {
-										echo'<pre>';print_r($value);
 
 											$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
 											$estorno = DOMINIO.$controller."/vindi_estorno/codigo/".$value['charger_id'];

@@ -8713,9 +8713,9 @@ class index extends controller {
 		echo $cpf;
 
 		$conexao = new mysql();
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$sessao_loja."' AND protudo_ref = '".$produto_ref."' ");
+		$coisas_carrinho = $conexao->Executar("select * from pedido_loja_carrinho WHERE sessao = '".$sessao_loja."' and produto_ref = '".$produto_ref."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
-		print_r('linha_carrinho:');print_r("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$sessao_loja."' AND protudo_ref = '".$produto_ref."' ");
+		print_r('linha_carrinho:');print_r("select * from pedido_loja_carrinho WHERE sessao = '".$sessao_loja."' and produto_ref = '".$produto_ref."' ");
 		echo'<pre>';
 
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";

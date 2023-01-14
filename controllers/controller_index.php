@@ -9184,6 +9184,11 @@ class index extends controller {
 				$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE transacao_charger_id='$codigo' group by id_combo ");
 					echo'<pre>';
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
+					if($data_carrinho->id_combo > 0){
+						echo 'combo';
+					}else{
+						echo 'produto avulso';
+					}
 					print_r($data_carrinho);
 				}
 		exit;

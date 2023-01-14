@@ -9188,10 +9188,10 @@ class index extends controller {
 						$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.id FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
 						while($res_combo = $data_combo->fetch_object()){
 							echo '<pre>';print_r($res_combo);exit;
-							$this->remove_from_lms($id_usuario,$res_combo->id);
+							// $this->remove_from_lms($id_usuario,$res_combo->id);
 						}
 					}else{
-						$this->remove_from_lms($id_usuario,$data_carrinho->produto_ref);
+						// $this->remove_from_lms($id_usuario,$data_carrinho->produto_ref);
 					}
 				}
 		exit;

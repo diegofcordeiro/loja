@@ -18,7 +18,7 @@ Class model_pedidos extends model{
         if($linha_pedido != 0){
         	while($data_pedido = $coisas_pedidos->fetch_object()){
 				$conexao = new mysql();
-				$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' group by id_combo ");
+				$coisas_carrinho = $conexao->Executar("SELECT COUNT(valor_total) as valor_total,* FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' group by id_combo ");
 				
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
 					

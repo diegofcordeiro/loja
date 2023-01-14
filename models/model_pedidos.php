@@ -40,6 +40,8 @@ Class model_pedidos extends model{
 					$lista[$i]['produto_valor'] = $data_carrinho->produto_valor;
 					$lista[$i]['valor_total_carrinho'] = $data_carrinho->valor_total_soma;
 					$lista[$i]['charger_id'] = $data_carrinho->transacao_charger_id;
+					$lista[$i]['valor_total_combo_vindi'] = $data_carrinho->valor_total_combo_vindi;
+					$lista[$i]['usar_valor_vindi'] = $data_carrinho->usar_valor_vindi;
 					$lista[$i]['data_vencimento'] = $data_carrinho->data_vencimento;
 					$lista[$i]['data_compra'] = $data_carrinho->data_compra;
 					

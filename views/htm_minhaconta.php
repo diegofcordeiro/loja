@@ -900,7 +900,7 @@
 											<tr>
 											<td><a href='$endereco' >".$value['data']."</a></td>
 											<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
-											<td><a href='$endereco' >R$ ".$value['valor_total']."</a></td>
+											<td><a href='$endereco' >R$ ".$value['valor_total_carrinho']."</a></td>
 											<td><a href='$endereco' >".$value['status']."</a></td>
 											<td><a href='$endereco' style='color:blue;' >".$mensagens."</a></td>
 											<td>$est</td>

@@ -9180,20 +9180,7 @@ class index extends controller {
 	public function vindi_estorno(){
 		$codigo = $this->get('codigo');
 		$id_usuario =$_SESSION['usuario_id'];
-		$conexao = new mysql();
-				$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE transacao_charger_id='$codigo' group by id_combo ");
-				while($data_carrinho = $coisas_carrinho->fetch_object()){
-					
-					if($data_carrinho->id_combo > 0){
-						$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.ref FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
-						while($res_combo = $data_combo->fetch_object()){
-							echo '<pre>';print_r($res_combo);exit;
-							// $this->remove_from_lms($id_usuario,$res_combo->id);
-						}
-					}else{
-						// $this->remove_from_lms($id_usuario,$data_carrinho->produto_ref);
-					}
-				}
+		
 		exit;
 		require_once('vendor/autoload.php');
 
@@ -9222,6 +9209,19 @@ class index extends controller {
 		$response = json_decode($response, true);
 		curl_close($curl);
 
+		$conexao = new mysql();
+		$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE transacao_charger_id='$codigo' group by id_combo ");
+		while($data_carrinho = $coisas_carrinho->fetch_object()){
+			
+			if($data_carrinho->id_combo > 0){
+				$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.ref FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
+				while($res_combo = $data_combo->fetch_object()){
+					$this->remove_from_lms($id_usuario,$res_combo->id);
+				}
+			}else{
+				$this->remove_from_lms($id_usuario,$data_carrinho->produto_ref);
+			}
+		}
 		
 		$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
 
@@ -9229,9 +9229,9 @@ class index extends controller {
 
 	public function remove_from_lms($id_usuario, $id_trilha){
 		require('conexao.php');
-
-		$sql_insert = "DELETE FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_trilha='$id_trilha'";
-		$mysqli->query($sql_insert);
+		print_r("DELETE FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_trilha='$id_trilha'");exit;
+		// $sql_insert = "DELETE FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_trilha='$id_trilha'";
+		// $mysqli->query($sql_insert);
 	}
 
 	public function WebhookHandler(){

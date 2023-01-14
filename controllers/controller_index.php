@@ -9187,7 +9187,7 @@ echo '<pre>';
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
 					if($data_carrinho->id_combo > 0){
 						
-						$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.*
+						$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.id
 										FROM `combos` 
 										inner join combo_produto on combo_produto.id_combo = combos.id
 										inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");

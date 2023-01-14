@@ -9181,33 +9181,33 @@ class index extends controller {
 		$codigo = $this->get('codigo');
 		$id_usuario =$_SESSION['usuario_id'];
 		
-		exit;
-		require_once('vendor/autoload.php');
+		// exit;
+		// require_once('vendor/autoload.php');
 
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$codigo.'/refund',
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS =>'{
-				"cancel_bill": "true",
-				"comments": "Estorno pelo site"
-			}',
-			CURLOPT_HTTPHEADER => array(
-				'accept: application/json',
-				'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
-				'Content-Type: application/json'
-			),
-		));
+		// $curl = curl_init();
+		// curl_setopt_array($curl, array(
+		// 	CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$codigo.'/refund',
+		// 	CURLOPT_RETURNTRANSFER => true,
+		// 	CURLOPT_ENCODING => '',
+		// 	CURLOPT_MAXREDIRS => 10,
+		// 	CURLOPT_TIMEOUT => 0,
+		// 	CURLOPT_FOLLOWLOCATION => true,
+		// 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		// 	CURLOPT_CUSTOMREQUEST => 'POST',
+		// 	CURLOPT_POSTFIELDS =>'{
+		// 		"cancel_bill": "true",
+		// 		"comments": "Estorno pelo site"
+		// 	}',
+		// 	CURLOPT_HTTPHEADER => array(
+		// 		'accept: application/json',
+		// 		'authorization: Basic N2FGMXktTW1uX2N5SE13QVhOaEhpdE5pNk1NaGFlNk9OdlFhSlg5TGJCYzp1bmRlZmluZWQ=',
+		// 		'Content-Type: application/json'
+		// 	),
+		// ));
 
-		$response = curl_exec($curl);
-		$response = json_decode($response, true);
-		curl_close($curl);
+		// $response = curl_exec($curl);
+		// $response = json_decode($response, true);
+		// curl_close($curl);
 
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE transacao_charger_id='$codigo' group by id_combo ");

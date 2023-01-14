@@ -896,11 +896,16 @@
 											if($value['status_id'] == 4){
 												$est = "<a href='$estorno' style='color:blue;' >Estrornar</a>";
 											}
+											if($value['usar_valor_vindi'] == 1){
+												$value_tot = $value['valor_total_combo_vindi'];
+											}else{
+												$value_tot = $value['valor_total_carrinho'];
+											}
 											echo "
 											<tr>
 											<td><a href='$endereco' >".$value['data']."</a></td>
 											<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
-											<td><a href='$endereco' >R$ ".$value['valor_total_carrinho']."</a></td>
+											<td><a href='$endereco' >R$ ".$value_tot."</a></td>
 											<td><a href='$endereco' >".$value['status']."</a></td>
 											<td><a href='$endereco' style='color:blue;' >".$mensagens."</a></td>
 											<td>$est</td>

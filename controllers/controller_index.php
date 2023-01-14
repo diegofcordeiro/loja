@@ -9179,7 +9179,14 @@ class index extends controller {
 
 	public function vindi_estorno(){
 		$codigo = $this->get('codigo');
-		print_r($codigo);exit;
+
+		$conexao = new mysql();
+				$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE sessao='$codigo' group by id_combo ");
+				
+				while($data_carrinho = $coisas_carrinho->fetch_object()){
+					echo'<pre>';print_r($data_carrinho);
+				}
+		exit;
 		require_once('vendor/autoload.php');
 
 		$curl = curl_init();

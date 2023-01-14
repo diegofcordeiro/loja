@@ -9189,6 +9189,8 @@ class index extends controller {
 					}else{
 						echo 'produto avulso';
 					}
+					print_r($_SESSION);
+					echo '<br>';
 					print_r($data_carrinho);
 				}
 		exit;

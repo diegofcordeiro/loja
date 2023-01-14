@@ -9185,7 +9185,7 @@ class index extends controller {
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
 					
 					if($data_carrinho->id_combo > 0){
-						$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.id FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
+						$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.produto_ref FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
 						while($res_combo = $data_combo->fetch_object()){
 							echo '<pre>';print_r($res_combo);exit;
 							// $this->remove_from_lms($id_usuario,$res_combo->id);

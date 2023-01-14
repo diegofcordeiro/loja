@@ -38,7 +38,7 @@ Class model_pedidos extends model{
 					$lista[$i]['produto_assinatura'] = $data_carrinho->produto_assinatura;
 					$lista[$i]['produto_titulo'] = $data_carrinho->produto_titulo;
 					$lista[$i]['produto_valor'] = $data_carrinho->produto_valor;
-					$lista[$i]['valor_total'] = $data_carrinho->valor_total;
+					$lista[$i]['valor_total_carrinho'] = $data_carrinho->valor_total;
 					$lista[$i]['charger_id'] = $data_carrinho->transacao_charger_id;
 					$lista[$i]['data_vencimento'] = $data_carrinho->data_vencimento;
 					$lista[$i]['data_compra'] = $data_carrinho->data_compra;

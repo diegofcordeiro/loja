@@ -18,7 +18,7 @@ Class model_pedidos extends model{
         if($linha_pedido != 0){
         	while($data_pedido = $coisas_pedidos->fetch_object()){
 				$conexao = new mysql();
-				$coisas_carrinho = $conexao->Executar("SELECT COUNT(valor_total) as valor_total,* FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' group by id_combo ");
+				$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE sessao='$data_pedido->codigo' group by id_combo ");
 				
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
 					
@@ -38,7 +38,7 @@ Class model_pedidos extends model{
 					$lista[$i]['produto_assinatura'] = $data_carrinho->produto_assinatura;
 					$lista[$i]['produto_titulo'] = $data_carrinho->produto_titulo;
 					$lista[$i]['produto_valor'] = $data_carrinho->produto_valor;
-					$lista[$i]['valor_total_carrinho'] = $data_carrinho->valor_total;
+					$lista[$i]['valor_total_carrinho'] = $data_carrinho->valor_total_soma;
 					$lista[$i]['charger_id'] = $data_carrinho->transacao_charger_id;
 					$lista[$i]['data_vencimento'] = $data_carrinho->data_vencimento;
 					$lista[$i]['data_compra'] = $data_carrinho->data_compra;
@@ -60,7 +60,6 @@ Class model_pedidos extends model{
 				$new_lista[$sessao] = array($obj_lista);
 			}
 		}
-echo '<pre>';print_r($new_lista);exit;
 
 		// $final_lista_full = array();
 		// foreach ($new_lista as $key => $obj_list) {

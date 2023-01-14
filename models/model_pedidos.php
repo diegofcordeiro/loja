@@ -60,7 +60,7 @@ Class model_pedidos extends model{
 				$new_lista[$sessao] = array($obj_lista);
 			}
 		}
-// echo '<pre>';print_r($new_lista);exit;
+echo '<pre>';print_r($new_lista);exit;
 
 		// $final_lista_full = array();
 		// foreach ($new_lista as $key => $obj_list) {

@@ -9178,33 +9178,21 @@ class index extends controller {
 	}
 
 	public function vindi_estorno(){
-		require('conexao.php');
 		$codigo = $this->get('codigo');
 		$id_usuario =$_SESSION['usuario_id'];
-echo '<pre>';
 		$conexao = new mysql();
 				$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE transacao_charger_id='$codigo' group by id_combo ");
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
+					print_r($data_carrinho);exit;
 					if($data_carrinho->id_combo > 0){
 						
-						$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.id
-										FROM `combos` 
-										inner join combo_produto on combo_produto.id_combo = combos.id
-										inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
+						$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.id FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
 						while($res_combo = $data_combo->fetch_object()){
-							
-							print_r($res_combo);
+							$this->remove_from_lms($id_usuario,$res_combo->id);
 						}
-
 					}else{
-
-						echo 'produto avulso';
-
+						$this->remove_from_lms($id_usuario,$data_carrinho->id);
 					}
-
-					// print_r($_SESSION['usuario_id']);
-					// echo '<br>';
-					// print_r($data_carrinho);
 				}
 		exit;
 		require_once('vendor/autoload.php');
@@ -9234,10 +9222,16 @@ echo '<pre>';
 		$response = json_decode($response, true);
 		curl_close($curl);
 
-		$sql_insert = "DELETE FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_trilha='$id_trilha'";
-		$mysqli->query($sql_insert);
+		
 		$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
 
+	}
+
+	public function remove_from_lms($id_usuario, $id_trilha){
+		require('conexao.php');
+
+		$sql_insert = "DELETE FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_trilha='$id_trilha'";
+		$mysqli->query($sql_insert);
 	}
 
 	public function WebhookHandler(){

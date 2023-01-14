@@ -9181,8 +9181,7 @@ class index extends controller {
 		$codigo = $this->get('codigo');
 
 		$conexao = new mysql();
-				$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE sessao='$codigo' group by id_combo ");
-					print_r("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE sessao='$codigo' group by id_combo ");
+				$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE transacao_charger_id='$codigo' group by id_combo ");
 					echo'<pre>';
 				while($data_carrinho = $coisas_carrinho->fetch_object()){
 					print_r($data_carrinho);

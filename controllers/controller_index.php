@@ -9041,11 +9041,6 @@ class index extends controller {
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 		
-			foreach($recorrencia as $rec){
-				// print_r($rec->produto_ref.' - '.$cod.''.$cpf);exit;
-				$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
-			}
-		
 			$amout = 0;
 			$produto_assinatura = '';
 			foreach($recorrencia as $rec){
@@ -9184,6 +9179,7 @@ class index extends controller {
 
 	public function vindi_estorno(){
 		$codigo = $this->get('codigo');
+		print_r($codigo);exit;
 		require_once('vendor/autoload.php');
 
 		$curl = curl_init();

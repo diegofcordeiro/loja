@@ -9202,9 +9202,9 @@ echo '<pre>';
 
 					}
 
-					print_r($_SESSION['usuario_id']);
-					echo '<br>';
-					print_r($data_carrinho);
+					// print_r($_SESSION['usuario_id']);
+					// echo '<br>';
+					// print_r($data_carrinho);
 				}
 		exit;
 		require_once('vendor/autoload.php');

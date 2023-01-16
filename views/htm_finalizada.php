@@ -35,12 +35,12 @@
 		.btn_continuar{
 			width: 200px;
 			border: none;
-			background: #9f8ada;
+			background: #9f8ada !important;
 			color: white;
 			padding: 20px 20px;
 		}
 		.btn_continuar:hover{
-			background: #fb9a10;
+			background: #fb9a10 !important;
 			color: white;
 		}
 	</style>

@@ -2488,7 +2488,7 @@ class index extends controller {
 
 				// echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>".$textos->conteudo('159649081566934')."</div>";
 
-				echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>Você receberá um e-mail para ativação da conta.</div>";
+				echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>Bem-vindo! Faça seu login.</div>";
 				
 				// echo "<div style='padding-top:20px; padding-bottom:20px; text-align:center;'><a href='".DOMINIO.$this->_controller."/entrar' class='botao_padrao' >FAÇA SEU LOGIN</a></div>";
 

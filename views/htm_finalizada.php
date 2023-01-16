@@ -47,11 +47,13 @@
 			background: #fb9a10 !important;
 			padding: 10px;
 			color: white;
+			padding: 15px 28px;
 		}
 		.m_c:hover{
 			background: #9f8ada !important;
 			padding: 10px;
 			color: white;
+			padding: 15px 28px;
 		}
 	</style>
 

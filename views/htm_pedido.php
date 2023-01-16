@@ -1264,7 +1264,7 @@
 												<label for="cidade">Cidade</label>
 												<div class="div_form" id="cadastro_cidade_div">
 													<select id="cidade" name="cidade" class="form-control select2 cadastro_form" >
-														<option value=''>Selecione</option>
+														<option value=''>Selecione a Cidade</option>
 													</select>
 												</div>
 											</div>
@@ -1338,7 +1338,7 @@
 									<div class="col-xs-6 col-md-6">
 										<div class="form-group">
 											<label for="cardExpiry">Validade</label>
-											<input type="tel" class="form-control"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YY" autocomplete="cc-exp" required />
+											<input type="tel" class="form-control"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
 										</div>
 									</div>
 									<div class="col-xs-6 col-md-6">
@@ -1526,13 +1526,13 @@
 									<div class="col-xs-7 col-md-5">
 										<div class="form-group">
 											<label for="cardExpiry">Validade</label>
-											<input type="tel" class="form-control" id="validade_cartao" name="cardExpiry" placeholder="MM/YY" autocomplete="cc-exp" required />
+											<input type="tel" class="form-control" id="validade_cartao" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
 										</div>
 									</div>
 									<div class="col-xs-5 col-md-5">
 										<div class="form-group">
 											<label for="cardCVC">CVV</label>
-											<input type="tel" class="form-control" name="cardCVC" placeholder="CVV" autocomplete="cc-csc" required value="123"/>
+											<input type="tel" class="form-control" name="cardCVC" placeholder="CVV" autocomplete="cc-csc" required value="CVV"/>
 										</div>
 									</div>
 									<div class="col-xs-2">

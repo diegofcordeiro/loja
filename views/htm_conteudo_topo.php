@@ -295,7 +295,7 @@ $url = $_GET['url'];
 										<ul class="dropdown-menu">
 											<li><a href="<?=DOMINIO?><?=$controller?>/minhaconta">Minha conta</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/alterar_cadastro">Alterar cadastro</a></li>
-											<li><a href="<?=DOMINIO?>/webapp/curso/trilhas">Meus Cursos</a></li>
+											<li><a href="<?=URL_BASE?>/webapp/curso/trilhas">Meus Cursos</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
 										</ul>
 									</div>
@@ -339,7 +339,7 @@ $url = $_GET['url'];
 										<ul class="dropdown-menu">
 											<li><a href="<?=DOMINIO?><?=$controller?>/minhaconta">Minha conta</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/alterar_cadastro">Alterar cadastro</a></li>
-											<li><a href="<?=DOMINIO?>/webapp/curso/trilhas">Meus Cursos</a></li>
+											<li><a href="<?=URL_BASE?>/webapp/curso/trilhas">Meus Cursos</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
 										</ul>
 									</div>

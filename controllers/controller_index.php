@@ -8729,7 +8729,6 @@ class index extends controller {
 			$result->free_result();
 		}
 		
-		echo '<pre>';print_r($id_perfil);
 		if($linha_carrinho != 0){
 
 			$data_array = array();
@@ -8756,8 +8755,7 @@ class index extends controller {
 				}	
 			}
 		}
-		echo 'aqui';
-		echo '<pre>';print_r($data_array);exit;
+
 		foreach($data_array as $data){
 			$id_usuario 				= $data['id_usuario'];
 			$id_perfil 					= $data['id_perfil'];

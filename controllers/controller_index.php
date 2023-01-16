@@ -8703,13 +8703,9 @@ class index extends controller {
 		
 	}
 
-	public function integrar_trilha_lms(){
+	public function integrar_trilha_lms($produto_ref,$sessao_loja, $cpf){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
-		$produto_ref='7';
-		$sessao_loja='167388725146708';
-		$cpf='RH12345678';
-
 
 		$cpf = str_replace("-","",$cpf);
 		$cpf = str_replace(".","",$cpf);
@@ -8717,7 +8713,7 @@ class index extends controller {
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("select * from pedido_loja_carrinho WHERE sessao = '".$sessao_loja."' and produto_ref = '".$produto_ref."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
-		
+
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
 		$id_usuario = null;
 		$id_perfil  = null;
@@ -8725,10 +8721,10 @@ class index extends controller {
 			while ($obj = $result->fetch_object()) {
 				$id_usuario = $obj->id;
 				$id_perfil  = $obj->id_perfil;
-			}
-			$result->free_result();
+		  	}
+		  	$result->free_result();
 		}
-		
+
 		if($linha_carrinho != 0){
 
 			$data_array = array();

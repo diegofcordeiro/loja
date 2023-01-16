@@ -894,7 +894,7 @@
 												$mensagens = "";
 											}
 											if($value['status_id'] == 4){
-												$est = "<a href='$estorno' style='color:blue;' >Estrornar</a>";
+												$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
 											}
 											if($value['usar_valor_vindi'] == 1){
 												$value_tot = $value['valor_total_combo_vindi'];

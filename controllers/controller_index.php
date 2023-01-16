@@ -9234,7 +9234,7 @@ class index extends controller {
 
 	public function integrar_trilha_lms_pago(){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
-		// require('conexao.php');
+		require('conexao.php');
 		$id_charge = '212620930';
 		$id_bill = '195443357';
 		$conexao = new mysql();

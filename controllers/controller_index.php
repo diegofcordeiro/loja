@@ -8706,7 +8706,7 @@ class index extends controller {
 	public function integrar_trilha_lms(){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
-		$produto_ref='2';
+		$produto_ref='4';
 		$sessao_loja='167388725146708';
 		$cpf='RH12345678';
 

@@ -32,6 +32,17 @@
 		body {
 			background-color:<?=$pagina_cores[1]?>;
 		}
+		.btn_continuar{
+			width: 200px;
+			border: none;
+			background: #9f8ada;
+			color: white;
+			padding: 20px 20px;
+		}
+		.btn_continuar:hover{
+			background: #fb9a10;
+			color: white;
+		}
 	</style>
 
 </head>
@@ -673,6 +684,7 @@
 					<p>COMPRA EFETUADA COM SUCESSO!</p>
                     <br><br>
                     <button type="button" class="botao_padrao botao_padrao botao_160701999128854" style="width: 200px;" onclick="window.location='<?=$objeto?>';">Continuar comprando</button>
+                    <button type="button" class="botao_padrao botao_padrao botao_160701999128854 btn_continuar" style="width: 200px;" onclick="window.location='<?=$objeto?>';">Continuar comprando</button>
 				</div>
 			</div>
 		</div>

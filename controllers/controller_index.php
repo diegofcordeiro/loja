@@ -9118,7 +9118,19 @@ class index extends controller {
 			$this->view('finalizada', $dados);
 		
 	}
-
+	public function fina(){
+		$dados = array();
+		$dados['_base'] = $this->_base();
+		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['controller'] = $this->_controller;
+		$dados['_cod_usuario'] = $this->_cod_usuario;
+		$dados['_sessao'] = $this->_sessao;
+		$dados['_acesso'] = $this->_acesso;
+		$dados['_nome_usuario'] = $this->_nome_usuario;
+		$dados['data_pagina'] = 'Finalizada';
+		$chave = $this->_layout;
+		$this->view('finalizada', $dados);
+	}
 	public function vindi_add_subscription($id_client,$payment_met,$plano,$prodId,$amout){
 		
 		$subscriptionService = new Vindi\Subscription;

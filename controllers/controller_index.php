@@ -9265,7 +9265,7 @@ class index extends controller {
 					while ($obj2 = $result2->fetch_object()) {
 						$array = array(
 							'id_usuario' => $sessao_id->id_lms, 
-							'id_perfil' => 14,
+							'id_perfil' => 22,
 							'id_trilha' => $data_carrinho->produto_ref,
 							'id_curso'  => $obj2->id,
 							'status_curso'  => 0,

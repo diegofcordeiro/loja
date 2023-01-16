@@ -9238,9 +9238,18 @@ class index extends controller {
 		$id_charge = '212620930';
 		$id_bill = '195443357';
 		$conexao = new mysql();
-		$sessao_ = $conexao->Executar("SELECT sessao FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' LIMIT 1 ");
+		$sessao_ = $conexao->Executar("SELECT 
+										c.fisica_cpf  as cpf,
+										c.lms_usuario_id  as id_lms,
+										plc.sessao as sessao
+									FROM pedido_loja_carrinho plc
+									INNER JOIN pedido_loja pl on pl.codigo = plc.sessao 
+									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
+									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");
 		$sessao_id = $sessao_->fetch_object();
-		print_r($sessao_id->sessao);
+		print_r($sessao_id->cpf); echo'<br>';
+		print_r($sessao_id->id_lms); echo'<br>';
+		print_r($sessao_id->sessao); echo'<br>';
 		exit;
 
 		// $coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' ");

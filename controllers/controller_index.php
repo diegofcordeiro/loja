@@ -8703,9 +8703,13 @@ class index extends controller {
 		
 	}
 
-	public function integrar_trilha_lms($produto_ref,$sessao_loja, $cpf){
+	public function integrar_trilha_lms(){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
+		$produto_ref='2';
+		$sessao_loja='167388725146708';
+		$cpf='RH12345678';
+
 
 		$cpf = str_replace("-","",$cpf);
 		$cpf = str_replace(".","",$cpf);
@@ -8751,7 +8755,7 @@ class index extends controller {
 				}	
 			}
 		}
-
+		echo '<pre>';print_r($data_array);exit;
 		foreach($data_array as $data){
 			$id_usuario 				= $data['id_usuario'];
 			$id_perfil 					= $data['id_perfil'];

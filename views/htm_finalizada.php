@@ -43,6 +43,16 @@
 			background: #fb9a10 !important;
 			color: white;
 		}
+		.m_c{
+			font-size: 30px;
+			background: #fb9a10 !important;
+			padding: 10px;
+		}
+		.m_c:hover{
+			font-size: 30px;
+			background: #9f8ada !important;
+			padding: 10px;
+		}
 	</style>
 
 </head>
@@ -683,7 +693,7 @@
 				<div class='col-xs-12 col-sm-12 col-md-12 text-center'>
 					<p>COMPRA EFETUADA COM SUCESSO!</p>
                     <br><br>
-					<a href="<?=URL_BASE?>/webapp/curso/trilhas">Meus Cursos</a>
+					<a class="m_c" href="<?=URL_BASE?>/webapp/curso/trilhas">Meus Cursos</a>
                     <br><br>
                     <button type="button" class="botao_padrao botao_padrao botao_160701999128854 btn_continuar" style="width: 200px;" onclick="window.location='<?=$objeto?>';">Continuar comprando</button>
 				</div>

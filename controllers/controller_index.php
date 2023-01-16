@@ -9232,11 +9232,11 @@ class index extends controller {
 		$mysqli->query($sql_insert);
 	}
 
-	public function integrar_trilha_lms_pago(){
+	public function integrar_trilha_lms_pago($id_charge, $id_bill){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
-		$id_charge = '212620930';
-		$id_bill = '195443357';
+		// $id_charge = '212620930';
+		// $id_bill = '195443357';
 		$conexao = new mysql();
 		$sessao_ = $conexao->Executar("SELECT 
 										c.fisica_cpf  as cpf,
@@ -9247,9 +9247,7 @@ class index extends controller {
 									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
 									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");
 		$sessao_id = $sessao_->fetch_object();
-		// print_r($sessao_id->cpf); echo'<br>';
-		// print_r($sessao_id->id_lms); echo'<br>';
-		// print_r($sessao_id->sessao); echo'<br>';
+
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
@@ -9324,6 +9322,9 @@ class index extends controller {
 
 				break;
 			case 'bill_paid':
+				$fp = fopen('log_refound', "a");
+				fwrite($fp, json_encode($event));
+				fclose($fp);
 				$id_charge 	= $event->data->charge->id;
 				$id_bill 	= $event->data->charge->bill->id;
 

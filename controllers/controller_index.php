@@ -9063,8 +9063,8 @@ class index extends controller {
 
 				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
 					$status = 4;
+						print_r($recorrencia->produto_ref.'-'.$cod.'-'.$cpf);
 						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
-					
 				}else{
 					$status = 1;
 				}

@@ -26,6 +26,7 @@ if($config['SSL']){
 		}
 	}
 	// print_r($config_dominio);exit;
+	define("URL_BASE", "http://".$_SERVER['HTTP_HOST']."/");
 	define("DOMINIO", $config_dominio);
 	define("PASTA_CLIENTE", $config_dominio."arquivos/");
 	define("AUTOR", "");

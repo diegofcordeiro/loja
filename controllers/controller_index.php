@@ -9277,7 +9277,6 @@ class index extends controller {
 				}	
 			}
 		}
-		echo '<pre>'; print_r($data_array);exit;
 		foreach($data_array as $data){
 			$id_usuario 				= $data['id_usuario'];
 			$id_perfil 					= $data['id_perfil'];

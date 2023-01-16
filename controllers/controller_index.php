@@ -8749,9 +8749,7 @@ class index extends controller {
 				}	
 			}
 		}
-		$fp = fopen('integrar2', "a");
-		fwrite($fp, json_encode($data_array));
-		fclose($fp);
+
 		foreach($data_array as $data){
 			$id_usuario 				= $data['id_usuario'];
 			$id_perfil 					= $data['id_perfil'];

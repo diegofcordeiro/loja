@@ -9235,7 +9235,8 @@ class index extends controller {
 	public function integrar_trilha_lms_pago($id_charge, $id_bill){
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
-
+		$id_charge = '212620930';
+		$id_bill = '195443357';
 		$conexao = new mysql();
 		$sessao_ = $conexao->Executar("SELECT sessao FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' LIMIT 1 ");
 		print_r($sessao_->fetch_object());

@@ -8717,7 +8717,7 @@ class index extends controller {
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("select * from pedido_loja_carrinho WHERE sessao = '".$sessao_loja."' and produto_ref = '".$produto_ref."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
-
+		
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
 		$id_usuario = null;
 		$id_perfil  = null;
@@ -8725,10 +8725,11 @@ class index extends controller {
 			while ($obj = $result->fetch_object()) {
 				$id_usuario = $obj->id;
 				$id_perfil  = $obj->id_perfil;
-		  	}
-		  	$result->free_result();
+			}
+			$result->free_result();
 		}
-
+		
+		echo '<pre>';print_r($id_perfil);
 		if($linha_carrinho != 0){
 
 			$data_array = array();
@@ -8755,6 +8756,7 @@ class index extends controller {
 				}	
 			}
 		}
+		echo 'aqui';
 		echo '<pre>';print_r($data_array);exit;
 		foreach($data_array as $data){
 			$id_usuario 				= $data['id_usuario'];

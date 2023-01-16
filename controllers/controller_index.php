@@ -8751,7 +8751,9 @@ class index extends controller {
 				}	
 			}
 		}
-
+		$fp = fopen('integrar2', "a");
+		fwrite($fp, json_encode($data_array));
+		fclose($fp);
 		foreach($data_array as $data){
 			$id_usuario 				= $data['id_usuario'];
 			$id_perfil 					= $data['id_perfil'];
@@ -9097,6 +9099,9 @@ class index extends controller {
 
 				if($bill->status == 'paid'){ 
 					$status = 4;
+					$fp = fopen('integrar1', "a");
+					fwrite($fp, json_encode($event));
+					fclose($fp);
 					$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
 				}else{
 					$status = 1;

@@ -9057,6 +9057,7 @@ class index extends controller {
 			if(isset($bill['bill']['id'])){
 				$id_charge = $bill['bill']['charges'][0]['id'];
 				$id_trans = $bill['bill']['id'];
+				$url = $bill['bill']['url'];
 
 				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
 					$status = 4;
@@ -9069,6 +9070,7 @@ class index extends controller {
 				$db->alterar("pedido_loja_carrinho", array(
 					"transacao_charger_id"=>"$id_charge",
 					"transacao_bill_id"=>"$id_trans",
+					"url_vindi"=>"$url",
 					"status"=>"$status",
 				), " sessao='$cod' and id_combo='$rec->id_combo' ");
 
@@ -9091,6 +9093,7 @@ class index extends controller {
 			if(isset($bill->id)){
 				$id_charge = $bill->charges[0]->id;
 				$id_trans = $bill->id;
+				$url = $bill->url;
 
 				if($bill->status == 'paid'){ 
 					$status = 4;
@@ -9102,6 +9105,7 @@ class index extends controller {
 				$db->alterar("pedido_loja_carrinho", array(
 					"transacao_charger_id"=>"$id_charge",
 					"transacao_bill_id"=>"$id_trans",
+					"url_vindi"=>"$url",
 					"status"=>"$status",
 					
 				), " id='$recorrencia->id' ");
@@ -9310,19 +9314,27 @@ class index extends controller {
 
 		switch ($event->type) {
 			case 'subscription_canceled':
-
+				$fp = fopen('subscription_canceled', "a");
+				fwrite($fp, json_encode($event));
+				fclose($fp);
 				break;
 			case 'subscription_created':
-
+				$fp = fopen('subscription_created', "a");
+				fwrite($fp, json_encode($event));
+				fclose($fp);
 				break;
 			case 'charge_rejected':
-
+				$fp = fopen('charge_rejected', "a");
+				fwrite($fp, json_encode($event));
+				fclose($fp);
 				break;
 			case 'bill_created':
-
+				$fp = fopen('bill_created', "a");
+				fwrite($fp, json_encode($event));
+				fclose($fp);
 				break;
 			case 'bill_paid':
-				$fp = fopen('log_refound', "a");
+				$fp = fopen('bill_paid', "a");
 				fwrite($fp, json_encode($event));
 				fclose($fp);
 				$id_charge 	= $event->data->charge->id;

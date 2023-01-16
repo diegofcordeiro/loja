@@ -2357,14 +2357,12 @@ class index extends controller {
 		if($etapa == 1){
 
 			$codigo = $this->post('codigo');
-
 			if(!$codigo){
 				retorno_erro("Ocorreu um erro!");
 				exit;				
 			}
-			print_r('aquiioooo');
+
 			$country_document = $this->post('country_document');
-			// print_r($country_document);exit;
 			if($country_document == 1){
 				$cep = $this->post('cadastro_cep');
 				$endereco = $this->post('endereco_');

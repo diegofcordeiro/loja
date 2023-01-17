@@ -833,7 +833,7 @@
 										$hoje = strtotime($hoje);
 										if($hoje <= $value['data_vencimento']){
 											$botao_ = '<i class="fas fa-play btn_play"></i> ASSISTIR';
-											$link = "#";
+											$link = URL_BASE.'webapp/integra.php?token='.base64_encode($_SESSION['seso_167397569296876']['usuario_cpf']);
 											$styl = "style='color:#363a45'";
 										}else{
 											$botao_ = '<i class="fas fa-dollar-sign btn_renovar"></i> RENOVAR';

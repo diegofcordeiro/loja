@@ -289,7 +289,7 @@ $usuario_cpf = $_SESSION['usuario_cpf']
 										<ul class="dropdown-menu">
 											<li><a href="<?=DOMINIO?><?=$controller?>/minhaconta">Minha conta</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/alterar_cadastro">Alterar cadastro</a></li>
-											<li><a href="<?=URL_BASE?>/webapp/curso/trilhas" target="_blank">Meus Cursos</a></li>
+											<li><a href="" id="meus_cursos" target="_blank">Meus Cursos</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
 										</ul>
 									</div>
@@ -333,7 +333,7 @@ $usuario_cpf = $_SESSION['usuario_cpf']
 										<ul class="dropdown-menu">
 											<li><a href="<?=DOMINIO?><?=$controller?>/minhaconta">Minha conta</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/alterar_cadastro">Alterar cadastro</a></li>
-											<li><a href="<?=URL_BASE?>/webapp/curso/trilhas" target="_blank">Meus Cursos</a></li>
+											<li><a href="" id="meus_cursos" target="_blank">Meus Cursos</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
 										</ul>
 									</div>
@@ -348,6 +348,12 @@ $usuario_cpf = $_SESSION['usuario_cpf']
 		</div>
 	</header>
 	<script>
-		alert('ere');
+
+		$("#meus_cursos").click(function(e){
+			e.preventDefault();
+			var url_webapp = <?=URL_BASE?>"/webapp/integra.php?token="<?=base64_encode($usuario_cpf)?>;
+			window.location.replace(url_webapp);
+		});
+		
 	</script>
 	<section class="margemtopo"></section>

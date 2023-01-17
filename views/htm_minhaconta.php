@@ -895,19 +895,10 @@
 												$mensagens = "";
 											}
 											if($value['status_id'] == 4){
-												$date = str_replace("/","-",$value['data']);
-												print_r($date);
-												$date =  strtotime($date);
-												$seven_days =  strtotime("+7 day", $date);
+												$seven_days =  strtotime("+7 day", $value['data_compra']);
 
-												$data_compr = $value['data'];
-												echo '7 Dias :<br>';
-												print_r($seven_days);
-												echo ' <br>compra :<br>';
-												print_r($data_compr);
-												echo '<br>';
 												// print_r(!$data_compr < $seven_days);
-												if($data_compr > $seven_days){
+												if($value['data_compra'] > $seven_days){
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
 												}
 											}

@@ -246,6 +246,8 @@ $botao_aviso = $conteudo_sessao['botao_aviso'];
 		<script>
 		$("#meus_cursos").click(function(e){
 			e.preventDefault();
+			var Cp    = <?=base64_encode($_SESSION['usuario_cpf'])?>;
+			var code_ = <?=$_SESSION['usuario_cpf']?>;
 			var url_webapp = "<?=URL_BASE?>webapp/integra.php?token=<?=base64_encode($_SESSION['usuario_cpf'])?>";
 			window.location.replace(url_webapp);
 		});

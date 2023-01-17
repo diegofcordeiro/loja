@@ -62,7 +62,7 @@ class combos extends controller {
         $produtos = new model_produtos();
 
 		$dados['data'] = $combos->carrega_combo($codigo);
-		// print_r($dados['data']);exit;
+		print_r($dados['data']);exit;
 		$pr = $combos->get_plano_price($dados['data']->plano_id);
 		$dados['price'] = $pr->price;
 

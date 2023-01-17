@@ -228,7 +228,7 @@
 
                         </div>
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="form-group">
                               <label class="col-md-12" >% de Desconto</label>
                               <div class="col-md-12">
@@ -236,13 +236,24 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="form-group">
-                              <label class="col-md-12">Usar desconto?</label>
+                              <label class="col-md-12">Usar Plano Vindi?</label>
                               <div class="col-md-12">
                                 <select class="form-control select2" name="usar_desconto" >
                                       <option value='0' <?php if($data->usar_desconto == 0){ echo "selected"; } ?> >Sim</option>
                                       <option value='1' <?php if($data->usar_desconto == 1){ echo "selected"; } ?> >Näo</option>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="col-md-12">Combo privado?</label>
+                              <div class="col-md-12">
+                                  <select class="form-control select2" name="privado" >
+                                      <option value='1' <?php if($data->privado == 0){ echo "selected"; } ?> >Sim</option>
+                                      <option value='0' <?php if($data->privado == 1){ echo "selected"; } ?> >Näo</option>
                                   </select>
                               </div>
                             </div>

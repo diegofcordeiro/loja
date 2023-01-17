@@ -897,8 +897,10 @@
 											if($value['status_id'] == 4){
 												$seven_days =  strtotime("+7 day", $value['data_compra']);
 
-												// print_r(!$data_compr < $seven_days);
-												if($value['data_compra'] > $seven_days){
+												print_r($data_compr);
+												echo '<br>';
+												print_r($seven_days);
+												if($value['data_compra'] < $seven_days){
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
 												}
 											}

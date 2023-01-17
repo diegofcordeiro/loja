@@ -249,6 +249,11 @@ $botao_aviso = $conteudo_sessao['botao_aviso'];
 			var url_webapp = "<?=URL_BASE?>webapp/integra.php?token=<?=base64_encode($_SESSION['seso_167397569296876']['usuario_cpf'])?>";
 			window.location.replace(url_webapp);
 		});
+		$("#meus_cursos_").click(function(e){
+			e.preventDefault();
+			var url_webapp = "<?=URL_BASE?>webapp/integra.php?token=<?=base64_encode($_SESSION['seso_167397569296876']['usuario_cpf'])?>";
+			window.location.replace(url_webapp);
+		});
 		
 	</script>
 	<script>

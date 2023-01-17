@@ -22,10 +22,8 @@ $fonte_topo_menu = $conteudo_sessao['data_topo']->menu_fonte_family;
 $lista_icones = $conteudo_sessao['icones'];
 
 $url = $_GET['url'];
-
+$usuario_cpf = $_SESSION['usuario_cpf']
 // $dados['_nome_usuario'] = $this->_nome_usuario;
-echo'<pre>';print_r($_SESSION);
-
 ?>
 <style type="text/css">
 	

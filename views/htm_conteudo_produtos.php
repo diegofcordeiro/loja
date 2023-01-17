@@ -419,233 +419,235 @@ $ordem = $conteudo_sessao['ordem'];
 				if(isset($combos) and (count($combos) > 0)){
 					echo '<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile"><div class="content flex-row-fluid" id="kt_content"><div class="row gy-5 g-xl-8"><div class="col-xl-12"><h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Combos</h3><div class="card card-xl-stretch mb-5 mb-xl-8"><div class="container_flex snaps-inline owl-carousel owl-theme">';
 						foreach($combos as $key => $value){
-							$i_combo = 0;$valor_principal_=0;$qtd_cursos_ = null;$media_estrelas_ = null;$hours_ = null;$minutes_ = null;$seconds_ = null;$data_atualizacao_ = null;$tags_cat_ = array();
-							
-							$codigo_produtos_carrinho = array();
-							foreach ($value['produtos'] as $key => $value) {
-								array_push($codigo_produtos_carrinho,$value->codigo);
-								$conexao = new mysql();
-								$cursos = new model_cursos();
-								$exec = mysqli_query($conexao,"SELECT cursos.* 
-																	FROM `cursos` 
-																	inner join curso_produto on cursos.id = curso_produto.id_curso
-																	where curso_produto.id_produto = '$value->id' ");
+							if($value->privado == 0){
+								$i_combo = 0;$valor_principal_=0;$qtd_cursos_ = null;$media_estrelas_ = null;$hours_ = null;$minutes_ = null;$seconds_ = null;$data_atualizacao_ = null;$tags_cat_ = array();
+								
+								$codigo_produtos_carrinho = array();
+								foreach ($value['produtos'] as $key => $value) {
+									array_push($codigo_produtos_carrinho,$value->codigo);
+									$conexao = new mysql();
+									$cursos = new model_cursos();
+									$exec = mysqli_query($conexao,"SELECT cursos.* 
+																		FROM `cursos` 
+																		inner join curso_produto on cursos.id = curso_produto.id_curso
+																		where curso_produto.id_produto = '$value->id' ");
 
-								$list_id = null;
-								foreach ($exec->fetch_all(MYSQLI_ASSOC) as $key => $lista_cur){
-									if($key == 0){
-										$list_id = $lista_cur['id'];
-									}else{
-										$list_id = $list_id.','.$lista_cur['id'];
+									$list_id = null;
+									foreach ($exec->fetch_all(MYSQLI_ASSOC) as $key => $lista_cur){
+										if($key == 0){
+											$list_id = $lista_cur['id'];
+										}else{
+											$list_id = $list_id.','.$lista_cur['id'];
+										}
+									}
+									$exec2 = mysqli_query($conexao,"SELECT avg(estrela) estrelas FROM `feedback` inner join curso_feedback on feedback.id = curso_feedback.id_feedback where curso_feedback.id_curso in( $list_id )");
+									$media_estrelas = $exec2->fetch_all(MYSQLI_ASSOC)[0]['estrelas'];
+									
+									$exec3 = mysqli_query($conexao,"SELECT * FROM `feedback` inner join curso_feedback on feedback.id = curso_feedback.id_feedback where curso_feedback.id_curso in( $list_id ) ORDER BY RAND() LIMIT 3");
+									$reviews = $exec3->fetch_all(MYSQLI_ASSOC);
+									
+									$tags = mysqli_query($conexao,"SELECT * FROM produto_categoria inner join produto_categoria_sel on produto_categoria.codigo = produto_categoria_sel.categoria_codigo WHERE produto_categoria_sel.produto_codigo = $value->codigo ORDER BY RAND() LIMIT 3;");
+									$tags_cat = $tags->fetch_all(MYSQLI_ASSOC);
+									
+									$curso_conteudo = $cursos->curso_conteudo_varios($list_id);
+									$total_aulas = 0;
+									$seconds = 0;
+									foreach($curso_conteudo as $row){
+										foreach($row['conteudo'] as $cont){
+											list( $g, $i, $s ) = explode( ':', $cont['duracao'] ); 
+											$seconds += $g * 3600;
+											$seconds += $i * 60;
+											$seconds += $s;
+										}
+										$total_aulas += count($row['conteudo']);
+									}
+									$hours = floor( $seconds / 3600 );
+									$seconds -= $hours * 3600;
+									$minutes = floor( $seconds / 60 );
+									$seconds -= ($minutes * 60);
+									
+									$qtd_cursos = mysqli_num_rows($exec);
+									
+									$qtd_cursos_ 		+= $qtd_cursos;
+									$media_estrelas_ 	+= $media_estrelas;
+									$hours_				+= $hours;
+									$minutes_ 			+= $minutes;
+									$seconds_ 			+= $seconds;
+									if($data_atualizacao_ < $value->data_atualizacao){
+										$data_atualizacao_ = $value->data_atualizacao;
+									}
+									$valor_principal_ += $value->valor;
+
+									$i_combo++;
+								}
+
+								if($value->usar_desconto != 1){
+									$valor_principal_full = $valor_principal_;
+
+									if($value->combo_desconto > 0){
+										$valor_descontado = $valor_principal_full - ($valor_principal_full / 100 * $value->combo_desconto);
+									}
+									$valor_descontado = round($valor_descontado, 2);
+									$valor_descontado = explode(".",$valor_descontado);
+									if(strlen($valor_descontado[1]) == 1){
+										$valor_descontado[1] = $valor_descontado[1].'0';
+									}
+								}else{
+									$valor_descontado = round($value->plano_valor, 2);
+									$valor_descontado = explode(".",$valor_descontado);
+									if(strlen($valor_descontado[1]) == 1){
+										$valor_descontado[1] = $valor_descontado[1].'0';
 									}
 								}
-								$exec2 = mysqli_query($conexao,"SELECT avg(estrela) estrelas FROM `feedback` inner join curso_feedback on feedback.id = curso_feedback.id_feedback where curso_feedback.id_curso in( $list_id )");
-								$media_estrelas = $exec2->fetch_all(MYSQLI_ASSOC)[0]['estrelas'];
-								
-								$exec3 = mysqli_query($conexao,"SELECT * FROM `feedback` inner join curso_feedback on feedback.id = curso_feedback.id_feedback where curso_feedback.id_curso in( $list_id ) ORDER BY RAND() LIMIT 3");
-								$reviews = $exec3->fetch_all(MYSQLI_ASSOC);
-								
-								$tags = mysqli_query($conexao,"SELECT * FROM produto_categoria inner join produto_categoria_sel on produto_categoria.codigo = produto_categoria_sel.categoria_codigo WHERE produto_categoria_sel.produto_codigo = $value->codigo ORDER BY RAND() LIMIT 3;");
-								$tags_cat = $tags->fetch_all(MYSQLI_ASSOC);
-								
-								$curso_conteudo = $cursos->curso_conteudo_varios($list_id);
-								$total_aulas = 0;
-								$seconds = 0;
-								foreach($curso_conteudo as $row){
-									foreach($row['conteudo'] as $cont){
-										list( $g, $i, $s ) = explode( ':', $cont['duracao'] ); 
-										$seconds += $g * 3600;
-										$seconds += $i * 60;
-										$seconds += $s;
-									}
-									$total_aulas += count($row['conteudo']);
-								}
-								$hours = floor( $seconds / 3600 );
-								$seconds -= $hours * 3600;
-								$minutes = floor( $seconds / 60 );
-								$seconds -= ($minutes * 60);
-								
-								$qtd_cursos = mysqli_num_rows($exec);
-								
-								$qtd_cursos_ 		+= $qtd_cursos;
-								$media_estrelas_ 	+= $media_estrelas;
-								$hours_				+= $hours;
-								$minutes_ 			+= $minutes;
-								$seconds_ 			+= $seconds;
-								if($data_atualizacao_ < $value->data_atualizacao){
-									$data_atualizacao_ = $value->data_atualizacao;
-								}
-								$valor_principal_ += $value->valor;
 
-								$i_combo++;
-							}
-
-							if($value->usar_desconto != 1){
-								$valor_principal_full = $valor_principal_;
-
-								if($value->combo_desconto > 0){
-									$valor_descontado = $valor_principal_full - ($valor_principal_full / 100 * $value->combo_desconto);
-								}
-								$valor_descontado = round($valor_descontado, 2);
-								$valor_descontado = explode(".",$valor_descontado);
-								if(strlen($valor_descontado[1]) == 1){
-									$valor_descontado[1] = $valor_descontado[1].'0';
-								}
-							}else{
-								$valor_descontado = round($value->plano_valor, 2);
-								$valor_descontado = explode(".",$valor_descontado);
-								if(strlen($valor_descontado[1]) == 1){
-									$valor_descontado[1] = $valor_descontado[1].'0';
-								}
-							}
-
-							if($hours_ > 0 ){$hours_ = $hours_.'hrs ';}else{$hours_ = '';};
-							if($minutes_ > 0 ){$minutes_ = $minutes_.'min ';}else{$minutes_ = '';};
-							if($seconds_ > 0 ){$seconds_ = $seconds_.'seg ';}else{$seconds_ = '';};
-							
-							$total_minutos = $hours_.' '.$minutes_.' '.$seconds_;
-							$media_estrelas_final = number_format((($media_estrelas_)/$i_combo), 1, '.', '');
-							$saiba_mais = DOMINIO.$controller.'/combo_trilhas/id/'.$value->combo_id;
-							?>
-							<div class="item">
-								<div class="grid1">
-									<div style="position:relative">
-										<a href="<?=$saiba_mais?>">
-											<div class="box_overlay" style="background-image: linear-gradient(#00000000 70%, #000000)"></div>
-											<div class="img_card_" style="background-image: url(<?=DOMINIO?><?="arquivos/img_combos_g/".$value->combo_id."/".$value->combo_banner?>);"></div>
-										</a>                        
-									</div>
-									<div class="tag_porcent">
-										<div>
-											<?php if(isset($tags_cat)){ ?>
-												<?php foreach($tags_cat as $key => $cat){?>
-													<span style="background: <?=$cat['cor_fundo']?> !important;color: <?=$cat['cor_texto']?> !important;"class="<?=$key == 0 ? '': 'tag2'?>"><?=$cat['titulo']?></span>
+								if($hours_ > 0 ){$hours_ = $hours_.'hrs ';}else{$hours_ = '';};
+								if($minutes_ > 0 ){$minutes_ = $minutes_.'min ';}else{$minutes_ = '';};
+								if($seconds_ > 0 ){$seconds_ = $seconds_.'seg ';}else{$seconds_ = '';};
+								
+								$total_minutos = $hours_.' '.$minutes_.' '.$seconds_;
+								$media_estrelas_final = number_format((($media_estrelas_)/$i_combo), 1, '.', '');
+								$saiba_mais = DOMINIO.$controller.'/combo_trilhas/id/'.$value->combo_id;
+								?>
+								<div class="item">
+									<div class="grid1">
+										<div style="position:relative">
+											<a href="<?=$saiba_mais?>">
+												<div class="box_overlay" style="background-image: linear-gradient(#00000000 70%, #000000)"></div>
+												<div class="img_card_" style="background-image: url(<?=DOMINIO?><?="arquivos/img_combos_g/".$value->combo_id."/".$value->combo_banner?>);"></div>
+											</a>                        
+										</div>
+										<div class="tag_porcent">
+											<div>
+												<?php if(isset($tags_cat)){ ?>
+													<?php foreach($tags_cat as $key => $cat){?>
+														<span style="background: <?=$cat['cor_fundo']?> !important;color: <?=$cat['cor_texto']?> !important;"class="<?=$key == 0 ? '': 'tag2'?>"><?=$cat['titulo']?></span>
+													<?php } ?>
 												<?php } ?>
-											<?php } ?>
-											<span class="laranja_points">
-												<i class="fas fa-star" style="color:white"></i>
-												<span class="points" style="color:white"><?=$media_estrelas_final?></span> 
-											</span>
+												<span class="laranja_points">
+													<i class="fas fa-star" style="color:white"></i>
+													<span class="points" style="color:white"><?=$media_estrelas_final?></span> 
+												</span>
+											</div>
+											<div></div>
 										</div>
-										<div></div>
-									</div>
-									<div class="desc_text">
-										<div class="name-author all">
-											<a style="color: #2C3E50;" href="<?=$saiba_mais?>"><?=$value->combo_titulo?></a>
-										</div>
-										<p style="line-height: 16px;font-size:12px">
-											<a style="color: #7F7F7F;" href="<?=$saiba_mais?>">
-												<?php
-													if($value->assinatura ==1 ){
-														echo 'Assinatura';
-													}else{echo 'Conteúdo único';}
-												?>
-											</a>
-										</p>
-										<div class="name-author_ all">
-											<!-- <a style="color: #2C3E50;" href="<?=$endereco?>">Autor: <?=$value->autor_nome?></a> -->
-										</div>
-									</div>
-									<div class="pontuacao">
-										<ul>
-											<li><i class="fas fa-graduation-cap"></i> <?=$qtd_cursos_?> cursos</li>
-											<li><i class="fas fa-clock"></i> <?=$total_minutos?></li>
-											<li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li>
-											<li><i class="fas fa-redo"></i> Última atualização em <?=date('d/m/Y', $data_atualizacao_);?></li>
-										</ul>
-										<?php if($media_estrelas_final == 22){
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-										} elseif($media_estrelas_final == 33){
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-										}elseif($media_estrelas_final == 44){
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-										}elseif($media_estrelas_final == 55){
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="far fa-star i_star"></i>';
-										}
-										elseif($media_estrelas_final == 66){
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-											echo '<i class="fas fa-star i_star"></i>';
-										}
-										?>
-									</div>
-									<?php if($value->usar_desconto != 1){ ?>
-										<div class="price_container">
-											<p class="preco_desc">R$ <?=number_format($valor_principal_full,2,",",".")?></p>
-											<p class="preco_list_indi">
-												<span class="real">R$ </span>
-												<span class="price_card"> <?=$valor_descontado[0]?> </span>
-												<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
+										<div class="desc_text">
+											<div class="name-author all">
+												<a style="color: #2C3E50;" href="<?=$saiba_mais?>"><?=$value->combo_titulo?></a>
+											</div>
+											<p style="line-height: 16px;font-size:12px">
+												<a style="color: #7F7F7F;" href="<?=$saiba_mais?>">
+													<?php
+														if($value->assinatura ==1 ){
+															echo 'Assinatura';
+														}else{echo 'Conteúdo único';}
+													?>
+												</a>
 											</p>
+											<div class="name-author_ all">
+												<!-- <a style="color: #2C3E50;" href="<?=$endereco?>">Autor: <?=$value->autor_nome?></a> -->
+											</div>
 										</div>
-									<?php }else{ ?>
-										<div class="price_container" style="grid-template-columns: 1fr !important;">
-											<p class="preco_list_indi">
-												<span class="real">R$ </span>
-												<span class="price_card"> <?=$valor_descontado[0]?> </span>
-												<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
-											</p>
+										<div class="pontuacao">
+											<ul>
+												<li><i class="fas fa-graduation-cap"></i> <?=$qtd_cursos_?> cursos</li>
+												<li><i class="fas fa-clock"></i> <?=$total_minutos?></li>
+												<li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li>
+												<li><i class="fas fa-redo"></i> Última atualização em <?=date('d/m/Y', $data_atualizacao_);?></li>
+											</ul>
+											<?php if($media_estrelas_final == 22){
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+											} elseif($media_estrelas_final == 33){
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+											}elseif($media_estrelas_final == 44){
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+											}elseif($media_estrelas_final == 55){
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="far fa-star i_star"></i>';
+											}
+											elseif($media_estrelas_final == 66){
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+												echo '<i class="fas fa-star i_star"></i>';
+											}
+											?>
 										</div>
-									<?php } ?>
-
-									<!-- <?php if($value->valor_falso > 0){ ?>
+										<?php if($value->usar_desconto != 1){ ?>
 											<div class="price_container">
-												<p class="preco_desc">R$ <?=number_format($valor_descontado[1],2,",",".")?></p>
+												<p class="preco_desc">R$ <?=number_format($valor_principal_full,2,",",".")?></p>
 												<p class="preco_list_indi">
 													<span class="real">R$ </span>
 													<span class="price_card"> <?=$valor_descontado[0]?> </span>
 													<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
 												</p>
 											</div>
-											<?php }elseif($value->valor > 0){ ?>
-												<p class="preco_list">
+										<?php }else{ ?>
+											<div class="price_container" style="grid-template-columns: 1fr !important;">
+												<p class="preco_list_indi">
 													<span class="real">R$ </span>
 													<span class="price_card"> <?=$valor_descontado[0]?> </span>
 													<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
 												</p>
-											<?php }else{ ?>
-											<p class="preco_list">Gratuito</p>
-									<?php } ?> -->
-									<div class="bottom_card">
-										<div><a href="<?=$saiba_mais?>" onclick="acessando(this);"><p class="saibamais_btn">SAIBA MAIS</p></a></div>
-										<div id="div_comprar">
-											<form name="add_carrinho" id="add_carrinho" action="<?=DOMINIO?><?=$controller?>/carrinho_adicionar" method="post" enctype="multipart/form-data" >
-												<span>                                     
-													<button type="button" class="botao_comprar" onclick="submit('add_carrinho')">
-														<?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?>
-													</button>
-													<?php foreach($codigo_produtos_carrinho as $prod){ ?>
-														<input type="hidden" name="produto[]" value="<?=$prod?>">
-														<?php } ?>
-														<input type="hidden" name="combo_disconto" value="<?=$value->combo_desconto?>">
-														<input type="hidden" name="combo_id" value="<?=$value->combo_id?>">
-														<input type="hidden" name="combo_titulo" value="<?=$value->combo_titulo?>">
-														<input type="hidden" name="plano_id" value="<?=$value->plano_id?>">
-												</span>
-											</form>
+											</div>
+										<?php } ?>
+
+										<!-- <?php if($value->valor_falso > 0){ ?>
+												<div class="price_container">
+													<p class="preco_desc">R$ <?=number_format($valor_descontado[1],2,",",".")?></p>
+													<p class="preco_list_indi">
+														<span class="real">R$ </span>
+														<span class="price_card"> <?=$valor_descontado[0]?> </span>
+														<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
+													</p>
+												</div>
+												<?php }elseif($value->valor > 0){ ?>
+													<p class="preco_list">
+														<span class="real">R$ </span>
+														<span class="price_card"> <?=$valor_descontado[0]?> </span>
+														<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
+													</p>
+												<?php }else{ ?>
+												<p class="preco_list">Gratuito</p>
+										<?php } ?> -->
+										<div class="bottom_card">
+											<div><a href="<?=$saiba_mais?>" onclick="acessando(this);"><p class="saibamais_btn">SAIBA MAIS</p></a></div>
+											<div id="div_comprar">
+												<form name="add_carrinho" id="add_carrinho" action="<?=DOMINIO?><?=$controller?>/carrinho_adicionar" method="post" enctype="multipart/form-data" >
+													<span>                                     
+														<button type="button" class="botao_comprar" onclick="submit('add_carrinho')">
+															<?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?>
+														</button>
+														<?php foreach($codigo_produtos_carrinho as $prod){ ?>
+															<input type="hidden" name="produto[]" value="<?=$prod?>">
+															<?php } ?>
+															<input type="hidden" name="combo_disconto" value="<?=$value->combo_desconto?>">
+															<input type="hidden" name="combo_id" value="<?=$value->combo_id?>">
+															<input type="hidden" name="combo_titulo" value="<?=$value->combo_titulo?>">
+															<input type="hidden" name="plano_id" value="<?=$value->plano_id?>">
+													</span>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<?php 
+								<?php 
+							}
 						}
 					echo '</div>';echo '</div>';echo '</div>';echo '</div>';echo '</div>';echo '</div>';
 				}

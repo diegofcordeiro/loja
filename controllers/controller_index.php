@@ -10959,7 +10959,7 @@ class index extends controller {
 					//carrega sessoes
 					$_SESSION[$this->_sessao_principal]['loja_acesso'] = TOKEN1.$data_dados->codigo;
 					$_SESSION[$this->_sessao_principal]['loja_cod_usuario'] = $data_dados->codigo;
-					$_SESSION[$this->_sessao_principal]['usuario_cpf'] = $data_dados->usuario_cpf;
+					$_SESSION[$this->_sessao_principal]['usuario_cpf'] = $data_dados->fisica_cpf;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $this->_sessao;
 
 					if( empty($data_dados->endereco) OR empty($data_dados->cep) OR empty($data_dados->estado) OR empty($data_dados->cidade) ){

@@ -266,7 +266,7 @@ $url = $_GET['url'];
 								<li class="li_loja <?=($url == '' ? 'selected_orange' : '')?>"><a <?=($url == '' ? 'class="selected_orange_text"' : '')?> href="<?=DOMINIO?>">Home</a></li>
 								<li class="li_loja <?=($url == 'index/canal' ? 'selected_orange' : '')?>"><a <?=($url == 'index/canal' ? 'class="selected_orange_text"' : '')?> href="<?=DOMINIO.$controller?>/canal">Canais</a></li>
 								<?php if($_nome_usuario != 'Visitante'){ ?>
-									<li class="li_loja"><a id="meus_cursos" href="">Meus Cursos</a></li>
+									<!-- <li class="li_loja"><a id="meus_cursos" href="">Meus Cursos</a></li> -->
 								<?php } ?>
 							</ul>
 						</div>

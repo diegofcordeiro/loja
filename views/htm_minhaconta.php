@@ -883,7 +883,7 @@
 									<?php
 									$n = 0;
 									foreach ($lista_pedidos as $key => $valu) {
-												echo '<pre>';print_r($valu);
+												// echo '<pre>';print_r($valu);
 										foreach ($valu as $value) {
 
 											$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
@@ -895,7 +895,11 @@
 												$mensagens = "";
 											}
 											if($value['status_id'] == 4){
-												$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
+												$todays_date = date('d/m/y');
+                								$seven_days = strtotime("+7 day");
+												if($value['data'] < $seven_days){
+													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
+												}
 											}
 											if($value['usar_valor_vindi'] == 1){
 												$value_tot = $value['valor_total_combo_vindi'];

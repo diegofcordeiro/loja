@@ -252,8 +252,8 @@
                               <label class="col-md-12">Combo privado?</label>
                               <div class="col-md-12">
                                   <select class="form-control select2" name="privado" >
-                                      <option value='1' <?php if($data->privado == 0){ echo "selected"; } ?> >Sim</option>
-                                      <option value='0' <?php if($data->privado == 1){ echo "selected"; } ?> >Näo</option>
+                                      <option value='1' <?php if($data->privado == 1){ echo "selected"; } ?> >Sim</option>
+                                      <option value='0' <?php if($data->privado == 0){ echo "selected"; } ?> >Näo</option>
                                   </select>
                               </div>
                             </div>

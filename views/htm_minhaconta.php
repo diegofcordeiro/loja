@@ -897,17 +897,14 @@
 											if($value['status_id'] == 4){
 												$todays_date = date('d/m/y');
                 								$seven_days = strtotime("+7 day");
-												$data_compr = strtotime($value['data']);
-												$date2 = "16/05/19";
-												$timestamp2 = strtotime($date2);
-												echo $timestamp2;
 
+												$data_compr = str_replace("/","-",$value['data']);
+												$data_compr = strtotime($data_compr);
 												echo '7 Dias :<br>';
 												print_r($seven_days);
 												echo ' compra :<br>';
 												print_r($data_compr);
 												echo ' Original :<br>';
-												print_r($value['data']);
 												
 												if($data_compr < $seven_days){
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";

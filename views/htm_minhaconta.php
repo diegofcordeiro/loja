@@ -897,9 +897,9 @@
 											if($value['status_id'] == 4){
 												$todays_date = date('d/m/y');
                 								$seven_days = strtotime("+7 day");
-												$data_compr = date('d/m/y', $value['data']);
+												$data_compr = strtotime($value['data']);
 												print_r($seven_days);
-												echo '<pre>';
+												echo '<<br>';
 												print_r($data_compr);
 												if($data_compr < $seven_days){
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";

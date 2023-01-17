@@ -895,8 +895,8 @@
 												$mensagens = "";
 											}
 											if($value['status_id'] == 4){
-												// $date = str_replace("/","-",$value['data']);
-												$seven_days =  strtotime("+7 day", $value['data']);
+												$date = str_replace("/","-",$value['data']);
+												$seven_days =  strtotime("+7 day", $$date);
 
 												$data_compr = $value['data'];
 												echo '7 Dias :<br>';

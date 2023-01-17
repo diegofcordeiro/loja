@@ -241,8 +241,8 @@
                               <label class="col-md-12">Usar Plano Vindi?</label>
                               <div class="col-md-12">
                                 <select class="form-control select2" name="usar_desconto" >
-                                      <option value='0' <?php if($data->usar_desconto == 0){ echo "selected"; } ?> >Sim</option>
-                                      <option value='1' <?php if($data->usar_desconto == 1){ echo "selected"; } ?> >Näo</option>
+                                      <option value='0' <?php if($data->usar_desconto == 0){ echo "selected"; } ?> >Näo</option>
+                                      <option value='1' <?php if($data->usar_desconto == 1){ echo "selected"; } ?> >Sim</option>
                                   </select>
                               </div>
                             </div>

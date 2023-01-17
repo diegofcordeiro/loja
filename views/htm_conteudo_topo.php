@@ -23,7 +23,7 @@ $lista_icones = $conteudo_sessao['icones'];
 
 $url = $_GET['url'];
 // $usuario_cpf = $_SESSION['usuario_cpf'];
-print_r($_SESSION);
+print_r($_SESSION['usuario_cpf']);
 // $dados['_nome_usuario'] = $this->_nome_usuario;
 ?>
 <style type="text/css">

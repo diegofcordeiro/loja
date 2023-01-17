@@ -898,7 +898,7 @@
 												$todays_date = date('d/m/y');
                 								$seven_days = strtotime("+7 day");
 												$data_compr = strtotime($value['data']);
-												$date2 = "16-05-2019";
+												$date2 = "16/05/19";
 												$timestamp2 = strtotime($date2);
 												echo $timestamp2;
 

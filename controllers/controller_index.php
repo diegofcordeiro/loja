@@ -596,6 +596,7 @@ class index extends controller {
 				$new_cmb[$combo_id]['combo_status'] 		= $obj_cmb->combo_status;
 				$new_cmb[$combo_id]['plano_valor'] 			= $obj_cmb->plano_valor;
 				$new_cmb[$combo_id]['usar_desconto'] 		= $obj_cmb->usar_desconto;
+				$new_cmb[$combo_id]['privado'] 				= $obj_cmb->privado;
 				$new_cmb[$combo_id]['combo_desconto'] 		= $obj_cmb->combo_desconto;
 				$new_cmb[$combo_id]['produtos'] = array($obj_cmb);
 			}

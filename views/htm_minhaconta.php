@@ -897,6 +897,8 @@
 											if($value['status_id'] == 4){
 												$todays_date = date('d/m/y');
                 								$seven_days = strtotime("+7 day");
+												print_r($seven_days);
+												print_r($value['data']);
 												if($value['data'] < $seven_days){
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
 												}

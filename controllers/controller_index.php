@@ -715,7 +715,7 @@ class index extends controller {
 		$dados['canais'] = $produtos->lista_canal();
 		$dados['lista_canal'] = $new;
 		$dados['combos'] = $new_cmb;
-		
+		echo '<pre>'; print_r($dados['combos']);exit;
 		$dados['lista_comprados'] = $new_comprados;
 
 		$dados['lista_canal_novidades'] = $new_novidades;

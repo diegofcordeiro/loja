@@ -419,7 +419,6 @@ $ordem = $conteudo_sessao['ordem'];
 				if(isset($combos) and (count($combos) > 0)){
 					echo '<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile"><div class="content flex-row-fluid" id="kt_content"><div class="row gy-5 g-xl-8"><div class="col-xl-12"><h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Combos</h3><div class="card card-xl-stretch mb-5 mb-xl-8"><div class="container_flex snaps-inline owl-carousel owl-theme">';
 						foreach($combos as $key => $value){
-							print_r($value);
 							if($value->privado == 0){
 								$i_combo = 0;$valor_principal_=0;$qtd_cursos_ = null;$media_estrelas_ = null;$hours_ = null;$minutes_ = null;$seconds_ = null;$data_atualizacao_ = null;$tags_cat_ = array();
 								

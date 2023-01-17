@@ -898,9 +898,6 @@
 												$todays_date = strtotime(date('Y-m-d'));
 												$seven_days =  strtotime("+7 day", $value['data_compra']);
 
-												print_r($todays_date);
-												echo '<br>';
-												print_r($seven_days);
 												if($todays_date < $seven_days){
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
 												}

@@ -902,6 +902,9 @@
 												print_r($seven_days);
 												echo ' compra :<br>';
 												print_r($data_compr);
+												echo ' Original :<br>';
+												print_r($value['data']);
+												
 												if($data_compr < $seven_days){
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
 												}

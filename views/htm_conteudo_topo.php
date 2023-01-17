@@ -347,5 +347,7 @@ $usuario_cpf = $_SESSION['usuario_cpf']
 			</div>
 		</div>
 	</header>
-
+	<script>
+		alert('ere');
+	</script>
 	<section class="margemtopo"></section>

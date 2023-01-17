@@ -898,8 +898,8 @@
 												$todays_date = date('d/m/y');
                 								$seven_days = strtotime("+7 day");
 
-												$data_compr = str_replace("/","-",$value['data']);
-												$data_compr = strtotime($data_compr);
+												// $data_compr = str_replace("/","-",$value['data']);
+												$data_compr = $value['data'];
 												echo '7 Dias :<br>';
 												print_r($seven_days);
 												echo ' compra :<br>';

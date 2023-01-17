@@ -896,7 +896,7 @@
 											}
 											if($value['status_id'] == 4){
 												// $date = str_replace("/","-",$value['data']);
-												$seven_days =  strtotime("+7 day", "1673838000");
+												$seven_days =  strtotime("+7 day", $value['data']);
 
 												$data_compr = $value['data'];
 												echo '7 Dias :<br>';

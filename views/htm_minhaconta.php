@@ -895,7 +895,7 @@
 												$mensagens = "";
 											}
 											if($value['status_id'] == 4){
-												$todays_date = date('Y-m-d');
+												$todays_date = strtotime(date('Y-m-d'));
 												$seven_days =  strtotime("+7 day", $value['data_compra']);
 
 												print_r($todays_date);

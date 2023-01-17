@@ -898,7 +898,9 @@
 												$todays_date = date('d/m/y');
                 								$seven_days = strtotime("+7 day");
 												$data_compr = date('d/m/y', $value['data']);
-
+												print_r($seven_days);
+												echo '<pre>';
+												print_r($data_compr);
 												if($data_compr < $seven_days){
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
 												}

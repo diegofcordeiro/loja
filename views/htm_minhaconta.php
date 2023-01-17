@@ -897,7 +897,7 @@
 											if($value['status_id'] == 4){
 												$seven_days =  strtotime("+7 day", $value['data_compra']);
 
-												print_r($data_compr);
+												print_r($value['data_compra']);
 												echo '<br>';
 												print_r($seven_days);
 												if($value['data_compra'] < $seven_days){

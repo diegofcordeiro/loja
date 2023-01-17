@@ -24,10 +24,9 @@ $lista_icones = $conteudo_sessao['icones'];
 $url = $_GET['url'];
 
 // $dados['_nome_usuario'] = $this->_nome_usuario;
-// echo'<pre>';print_r($_nome_usuario);exit;
+echo'<pre>';print_r($_SESSION);
 
 ?>
-
 <style type="text/css">
 	
 	<?php
@@ -84,9 +83,6 @@ $url = $_GET['url'];
 	}
 	?>
 </style>
-
-
-
 	<style type="text/css">
 		a.botao_padrao{
 		background-color: <?=$primaria?> !important;

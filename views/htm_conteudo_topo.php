@@ -347,15 +347,4 @@ $usuario_cpf = $_SESSION['usuario_cpf']
 			</div>
 		</div>
 	</header>
-	<script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
-	<script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
-	<script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
-	<script>
-		$("#meus_cursos").click(function(e){
-			e.preventDefault();
-			var url_webapp = "<?=URL_BASE?>'/webapp/integra.php?token='<?=base64_encode($usuario_cpf)?>";
-			window.location.replace(url_webapp);
-		});
-		
-	</script>
 	<section class="margemtopo"></section>

@@ -243,6 +243,14 @@ $botao_aviso = $conteudo_sessao['botao_aviso'];
 	<script type="text/javascript">function showIt2() {document.getElementById("msg1").style.visibility = "visible";}    setTimeout("showIt2()", 5000); function hiddenIt() {document.getElementById("msg1").style.visibility = "hidden";}setTimeout("hiddenIt()", 15000); function showIt3() {document.getElementById("msg1").style.visibility = "visible";} setTimeout("showIt3()", 25000);  msg1.onclick = function() {document.getElementById('msg1').style.visibility = "hidden"; };function alertW() { document.getElementById("alertWapp").style.visibility = "visible";	} setTimeout("alertW()", 15000); </script>
 	<!-- END Widget WhastApp -->
 	<!-- Chatra {literal} -->
+		<script>
+		$("#meus_cursos").click(function(e){
+			e.preventDefault();
+			var url_webapp = "<?=URL_BASE?>'/webapp/integra.php?token='<?=base64_encode($usuario_cpf)?>";
+			window.location.replace(url_webapp);
+		});
+		
+	</script>
 	<script>
 		(function(d, w, c) {
 			w.ChatraID = 'w52CkKrYBvgrmLsAn';

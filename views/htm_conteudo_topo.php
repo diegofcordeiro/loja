@@ -351,7 +351,7 @@ $usuario_cpf = $_SESSION['usuario_cpf']
 
 		$("#meus_cursos").click(function(e){
 			e.preventDefault();
-			var url_webapp = <?=URL_BASE?>"/webapp/integra.php?token="<?=base64_encode($usuario_cpf)?>;
+			var url_webapp = "<?=URL_BASE?>'/webapp/integra.php?token='<?=base64_encode($usuario_cpf)?>";
 			window.location.replace(url_webapp);
 		});
 		

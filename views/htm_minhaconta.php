@@ -898,6 +898,10 @@
 												$todays_date = date('d/m/y');
                 								$seven_days = strtotime("+7 day");
 												$data_compr = strtotime($value['data']);
+												$date2 = "16-05-2019";
+												$timestamp2 = strtotime($date2);
+												echo $timestamp2;
+
 												echo '7 Dias :<br>';
 												print_r($seven_days);
 												echo ' compra :<br>';

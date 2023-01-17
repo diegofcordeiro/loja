@@ -895,14 +895,13 @@
 												$mensagens = "";
 											}
 											if($value['status_id'] == 4){
-												$todays_date = date('d/m/y');
-                								$seven_days = strtotime("+7 day");
 
-												// $data_compr = str_replace("/","-",$value['data']);
+												$seven_days =  date($value['data'], strtotime('+7 days'));
+
 												$data_compr = $value['data'];
 												echo '7 Dias :<br>';
 												print_r($seven_days);
-												echo ' compra :<br>';
+												echo ' <br>compra :<br>';
 												print_r($data_compr);
 												echo '<br>';
 												// print_r(!$data_compr < $seven_days);

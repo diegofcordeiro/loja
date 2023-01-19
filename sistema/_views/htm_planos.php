@@ -77,6 +77,8 @@
 											<tr>
 												<th style='width:30px; text-align:center;' >Sel.</th>
 												<th>Nome</th>
+												<th>Preço</th>
+												<th>Intervalo</th>
 												<th>Status</th>
 											</tr>
 										</thead>
@@ -90,6 +92,8 @@
 												<tr>
 												<td class='center' style='width:30px;' ><input type='checkbox' class='marcar' name='apagar_".$value['id']."' value='".$value['id']."' ></td>
 												<td><a href='".$_base['objeto']."alterar_plano/codigo/".$value['id']."' >".$value['titulo']."</a></td>
+												<td><a href='".$_base['objeto']."alterar_plano/codigo/".$value['id']."' >".$value['price']."</a></td>
+												<td><a href='".$_base['objeto']."alterar_plano/codigo/".$value['id']."' >".$value['intervalo']."</a></td>
 												<td style='text-align:center;'><span class='".$bolinha."'></span></td>
 												</tr>
 												";

@@ -33,7 +33,7 @@
 			}
       return $all_planos;
   }
-// echo '<pre>';
+echo '<pre>';
 $plans = get_plans();
 print_r($plans);exit;
 

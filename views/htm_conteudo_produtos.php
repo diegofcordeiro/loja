@@ -533,7 +533,6 @@ $ordem = $conteudo_sessao['ordem'];
 										</div>
 										<div class="desc_text">
 											<div class="name-author all">
-												<p><?=$value->intervalo?></p>
 												<a style="color: #2C3E50;" href="<?=$saiba_mais?>"><?=$value->combo_titulo?></a>
 											</div>
 											<p style="line-height: 16px;font-size:12px">
@@ -593,11 +592,11 @@ $ordem = $conteudo_sessao['ordem'];
 										<?php if($value->usar_desconto != 1){ ?>
 											<div class="price_container">
 												<p class="preco_desc">R$ <?=number_format($valor_principal_full,2,",",".")?></p>
-												<p class="preco_list_indi">
 													<span class="real">R$ </span>
 													<span class="price_card"> <?=$valor_descontado[0]?> </span>
 													<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
 												</p>
+												<p><?=$value->intervalo?></p>
 											</div>
 										<?php }else{ ?>
 											<div class="price_container" style="grid-template-columns: 1fr !important;">

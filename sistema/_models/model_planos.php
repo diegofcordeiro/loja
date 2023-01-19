@@ -13,7 +13,7 @@ Class model_planos extends model{
 		while($value = $exec->fetch_object()){
 			$lista[$n]['id'] = $value->id;
 			$lista[$n]['titulo'] = strip_tags($value->titulo);
-			$lista[$n]['price'] = number_format($value->price, 2, '.', '');
+			$lista[$n]['price'] = 'R$ '.number_format($value->price, 2, '.', '');
 			$lista[$n]['intervalo'] = $value->intervalo;
 			$lista[$n]['status'] = $value->status;
 			$n++;

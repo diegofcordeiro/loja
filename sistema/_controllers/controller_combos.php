@@ -64,7 +64,10 @@ class combos extends controller {
 		$dados['data'] = $combos->carrega_combo($codigo);
 		// print_r($dados['data']);exit;
 		$pr = $combos->get_plano_price($dados['data']->plano_id);
+		$pr = $combos->get_plano_intervalo($dados['data']->plano_id);
+	
 		$dados['price'] = $pr->price;
+		$dados['intervalo'] = $pr->intervalo;
 
         $trilha_curso = array();
 		$n = 0;
@@ -102,6 +105,7 @@ class combos extends controller {
 		$assinatura = $_POST['assinatura'];
 		$privado = $_POST['privado'];
 		$price = $_POST['price'];
+		$intervalo = $_POST['intervalo'];
 		$usar_desconto = $_POST['usar_desconto'];
 		
 		// echo'<pre>';print_r($_POST);exit;
@@ -124,6 +128,7 @@ class combos extends controller {
 			"usar_desconto"=> $usar_desconto,
 			"privado"=> $privado,
 			"valor"=> $price,
+			"intervalo"=> $intervalo,
 			"status"=>$status
 		), " id='$codigo' ");
 

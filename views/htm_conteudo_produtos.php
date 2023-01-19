@@ -606,7 +606,7 @@ $ordem = $conteudo_sessao['ordem'];
 													<span class="price_card"> <?=$valor_descontado[0]?> </span>
 													<span class="virgura_price"> ,<?=($valor_descontado[1]>0 ? $valor_descontado[1]:'00')?>
 												</p>
-												<p><?=$value->intervalo?></p>
+												<p style="font-size: 12px;margin-top: -25px;"><?=$value->intervalo?></p>
 											</div>
 										<?php } ?>
 

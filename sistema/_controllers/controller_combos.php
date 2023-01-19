@@ -67,7 +67,7 @@ class combos extends controller {
 		$pr = $combos->get_plano_intervalo($dados['data']->plano_id);
 	
 		$dados['price'] = $pr->price;
-		$dados['intervalo'] = $pr->intervalo;
+		$dados['intervalo_'] = $pr->intervalo;
 
 		// print_r($dados['intervalo']);exit;
 
@@ -107,7 +107,7 @@ class combos extends controller {
 		$assinatura = $_POST['assinatura'];
 		$privado = $_POST['privado'];
 		$price = $_POST['price'];
-		$intervalo = $_POST['intervalo'];
+		$intervalo = $_POST['intervalo_'];
 		$usar_desconto = $_POST['usar_desconto'];
 		
 		// echo'<pre>';print_r($_POST);exit;

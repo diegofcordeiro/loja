@@ -69,6 +69,8 @@ class combos extends controller {
 		$dados['price'] = $pr->price;
 		$dados['intervalo'] = $pr->intervalo;
 
+		print_r($dados['intervalo']);exit;
+
         $trilha_curso = array();
 		$n = 0;
         $produto_lista = $produtos->lista();

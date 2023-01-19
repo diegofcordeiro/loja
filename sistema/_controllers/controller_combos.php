@@ -67,9 +67,9 @@ class combos extends controller {
 		$pr = $combos->get_plano_intervalo($dados['data']->plano_id);
 	
 		$dados['price'] = $pr->price;
-		$dados['intervalo'] = $pr->intervalo;
+		$dados['intervalo_'] = $pr->intervalo;
 
-		print_r($dados['intervalo']);exit;
+		// print_r($dados['intervalo']);exit;
 
         $trilha_curso = array();
 		$n = 0;

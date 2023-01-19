@@ -230,8 +230,8 @@
                             <div class="form-group">
                               <label class="col-md-12" >Intervalo</label>
                               <div class="col-md-12">
-                                  <input name="intervalo_" id="intervalo_" type="text" class="form-control" disabled value="<?=$intervalo?>" >
-                                  <input name="intervalo" id="intervalo" style="display:" type="text" class="form-control" value="<?=$intervalo?>" >
+                                  <input name="intervalo_" id="intervalo_" type="text" class="form-control" disabled value="<?=$intervalo_?>" >
+                                  <input name="intervalo" id="intervalo" style="display:" type="text" class="form-control" value="<?=$intervalo_?>" >
                               </div>
                             </div>
                           </div>

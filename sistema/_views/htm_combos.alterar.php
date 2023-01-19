@@ -38,6 +38,7 @@ $plans = get_plans();
 // print_r($plans);exit;
 
   foreach($plans as $plan){
+    print_r($plan);exit;
     print_r($plan['plan_items'][0]['product']['pricing_schema']['price']);
     print_r($plan['name']);
     echo '<br>';

@@ -532,6 +532,7 @@ $ordem = $conteudo_sessao['ordem'];
 										</div>
 										<div class="desc_text">
 											<div class="name-author all">
+												<p><?=$value->intervalo?></p>
 												<a style="color: #2C3E50;" href="<?=$saiba_mais?>"><?=$value->combo_titulo?></a>
 											</div>
 											<p style="line-height: 16px;font-size:12px">

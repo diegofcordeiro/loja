@@ -35,13 +35,15 @@
   }
 echo '<pre>';
 $plans = get_plans();
-print_r($plans);exit;
+// print_r($plans);exit;
 
-  // foreach($plans['plans'] as $plan){
-    // print_r($plan['plan_items'][0]['product']['pricing_schema']['price']);
-  //   print_r($plan['name']);
-  // }
-  // exit;
+  foreach($plans['plans'] as $plan){
+    print_r($plan['plan_items'][0]['product']['pricing_schema']['price']);
+    print_r($plan['name']);
+    echo '<br>';
+    print_r($plan['interval_name']);
+  }
+  exit;
 ?>
 <!DOCTYPE html>
 <html>

@@ -59,7 +59,7 @@ class planos extends controller {
 					
 			$db = new mysql();
 			$db->executar("DELETE FROM planos");
-
+			echo '<pre>'; print_r($all_planos);exit;
 			foreach($all_planos as $planos){
 				foreach($planos as $cada){
 					if(isset($cada['plan_items'][0]['product']['pricing_schema']['price'])){

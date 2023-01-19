@@ -637,6 +637,7 @@
             var intervalo = $(this).find('option:selected').attr('data-intervalo');
             $('#price_').val(name);
             $('#intervalo').val(intervalo);
+            $('#intervalo_').val(intervalo);
             $('#price_valor').val(`R$ ${name}`);
           });
           $(document).on('click', '.limited', function(){

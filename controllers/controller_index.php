@@ -571,6 +571,7 @@ class index extends controller {
 									combos.plano_id as plano_id,
 									combos.valor as plano_valor,
 									combos.privado as privado,
+									combos.intervalo as intervalo,
 									combos.usar_desconto as usar_desconto,
 									combos.status as combo_status,
 									combos.desconto as combo_desconto,
@@ -596,6 +597,7 @@ class index extends controller {
 				$new_cmb[$combo_id]['combo_status'] 		= $obj_cmb->combo_status;
 				$new_cmb[$combo_id]['plano_valor'] 			= $obj_cmb->plano_valor;
 				$new_cmb[$combo_id]['usar_desconto'] 		= $obj_cmb->usar_desconto;
+				$new_cmb[$combo_id]['inervalo'] 			= $obj_cmb->inervalo;
 				$new_cmb[$combo_id]['privado'] 				= $obj_cmb->privado;
 				$new_cmb[$combo_id]['combo_desconto'] 		= $obj_cmb->combo_desconto;
 				$new_cmb[$combo_id]['produtos'] = array($obj_cmb);

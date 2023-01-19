@@ -35,15 +35,13 @@
   }
 // echo '<pre>';
 // $plans = get_plans();
-// // print_r($plans);exit;
+// print_r($plans);exit;
 
-//   foreach($plans['plans'] as $plan){
-//     print_r($plan['plan_items'][0]['product']['pricing_schema']['price']);
-//     print_r($plan['name']);
-//     echo '<br>';
-//     print_r($plan['interval_name']);
-//   }
-//   exit;
+  // foreach($plans['plans'] as $plan){
+    // print_r($plan['plan_items'][0]['product']['pricing_schema']['price']);
+  //   print_r($plan['name']);
+  // }
+  // exit;
 ?>
 <!DOCTYPE html>
 <html>
@@ -197,9 +195,9 @@
                                     foreach($plans['plans'] as $pla){
                                       foreach($pla as $plan){
                                        $preco_v = $plan['plan_items'][0]['product']['pricing_schema']['price']; 
-                                       $preco_v = $plan['plan_items'][0]['product']['pricing_schema']['price']; 
+                                       $intervalo = $plan['interval_name']; 
                                       ?>
-                                      <option data-preco="<?=($preco_v > 0 ? $preco_v : 0) ?>" data-intervalo="<?=($preco_v > 0 ? $preco_v : 0) ?>"  value='<?=$plan['id']?>' <?php if($data->plano_id == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
+                                      <option data-preco="<?=($preco_v > 0 ? $preco_v : 0) ?>" data-intervalo="<?=($intervalo != '' ? $intervalo : '') ?>"  value='<?=$plan['id']?>' <?php if($data->plano_id == $plan['id']){ echo "selected"; } ?> ><?=$plan['name']?></option>
                                   
                                   <?php }} ?>
 
@@ -208,7 +206,7 @@
                             </div>
                           </div>
                            
-                          <div class="col-md-3">                   
+                          <div class="col-md-2">                   
                             <div class="form-group">
                               <label class="col-md-12">Ativar/Desativar</label>
                               <div class="col-md-12">
@@ -219,12 +217,21 @@
                               </div>
                             </div>                   
                           </div>
-                          <div class="col-md-3">
+                          <div class="col-md-2">
                             <div class="form-group">
                               <label class="col-md-12" >Preço</label>
                               <div class="col-md-12">
                                   <input name="pricess" id="price_valor" type="text" class="form-control" disabled value="R$ <?=number_format($price, 2, '.', '')?>" >
                                   <input name="price" id="price_" style="display:none" type="text" class="form-control" value="<?=$price?>" >
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-2">
+                            <div class="form-group">
+                              <label class="col-md-12" >Intervalo</label>
+                              <div class="col-md-12">
+                                  <input name="intervalo_" id="intervalo_" type="text" class="form-control" disabled value="" >
+                                  <input name="intervalo" id="intervalo" style="display:" type="text" class="form-control" value="<?=$data->data?>" >
                               </div>
                             </div>
                           </div>
@@ -337,7 +344,6 @@
                     </div>
                   </form>
                 </div>
-
                 <div id="conteudo_curso" class="tab-pane <?php if($aba_selecionada == "conteudo_curso"){ echo "active"; } ?>" >
                   <h3>Adicionar nova Etapa</h3>
                   <div id="show_item">
@@ -461,7 +467,6 @@
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>';" >Voltar</button>
                     </div>
                 </div>
-
                 <div id="feedback" class="tab-pane <?php if($aba_selecionada == "feedback"){ echo "active"; } ?>" >
                 <h3>Quantidade de Feedback</h3>
                   <form action="<?=$_base['objeto']?>add_curso_qtd_feedback" id="curso_feedback" class="form-horizontal" method="post">   
@@ -629,7 +634,9 @@
           $(document).on('change', '#planos_list', function(){
             console.log(this);
             var name = $(this).find('option:selected').attr('data-preco');
+            var intervalo = $(this).find('option:selected').attr('data-intervalo');
             $('#price_').val(name);
+            $('#intervalo').val(intervalo);
             $('#price_valor').val(`R$ ${name}`);
           });
           $(document).on('click', '.limited', function(){

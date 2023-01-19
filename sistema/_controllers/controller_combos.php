@@ -107,7 +107,7 @@ class combos extends controller {
 		$assinatura = $_POST['assinatura'];
 		$privado = $_POST['privado'];
 		$price = $_POST['price'];
-		$intervalo = $_POST['intervalo'];
+		$intervalo = $_POST['intervalo_'];
 		$usar_desconto = $_POST['usar_desconto'];
 		
 		// echo'<pre>';print_r($_POST);exit;

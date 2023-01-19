@@ -328,7 +328,7 @@ $ordem = $conteudo_sessao['ordem'];
 																			<ul>
 																				<li><i class="fas fa-graduation-cap"></i> <?=$qtd_cursos?> cursos</li>
 																				<li><i class="fas fa-clock"></i> <?=$total_minutos?></li>
-																				<li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li>
+																				<!-- <li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li> -->
 																				<li><i class="fas fa-redo"></i> Última atualização em <?=date('d/m/Y', $value->data_atualizacao);?></li>
 																			</ul>
 																			<?php if($media_estrelas == 22){
@@ -553,7 +553,7 @@ $ordem = $conteudo_sessao['ordem'];
 											<ul>
 												<li><i class="fas fa-graduation-cap"></i> <?=$qtd_cursos_?> cursos</li>
 												<li><i class="fas fa-clock"></i> <?=$total_minutos?></li>
-												<li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li>
+												<!-- <li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li> -->
 												<li><i class="fas fa-redo"></i> Última atualização em <?=date('d/m/Y', $data_atualizacao_);?></li>
 											</ul>
 											<?php if($media_estrelas_final == 22){
@@ -799,7 +799,7 @@ $ordem = $conteudo_sessao['ordem'];
 																		<ul>
 																			<li><i class="fas fa-graduation-cap"></i> <?=$qtd_cursos?> cursos</li>
 																			<li><i class="fas fa-clock"></i> <?=$total_minutos?></li>
-																			<li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li>
+																			<!-- <li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li> -->
 																			<li><i class="fas fa-redo"></i> Última atualização em <?=date('d/m/Y', $value->data_atualizacao);?></li>
 																		</ul>
 																		<?php if($media_estrelas == 22){
@@ -1028,7 +1028,7 @@ $ordem = $conteudo_sessao['ordem'];
 																			<ul>
 																				<li><i class="fas fa-graduation-cap"></i> <?=$qtd_cursos?> cursos</li>
 																				<li><i class="fas fa-clock"></i> <?=$total_minutos?></li>
-																				<li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li>
+																				<!-- <li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li> -->
 																				<li><i class="fas fa-redo"></i> Última atualização em <?=date('d/m/Y', $value->data_atualizacao);?></li>
 																			</ul>
 																			<?php if($media_estrelas == 22){
@@ -1256,7 +1256,7 @@ $ordem = $conteudo_sessao['ordem'];
 																			<ul>
 																				<li><i class="fas fa-graduation-cap"></i> <?=$qtd_cursos?> cursos</li>
 																				<li><i class="fas fa-clock"></i> <?=$total_minutos?></li>
-																				<li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li>
+																				<!-- <li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li> -->
 																				<li><i class="fas fa-redo"></i> Última atualização em <?=date('d/m/Y', $value->data_atualizacao);?></li>
 																			</ul>
 																			<?php if($media_estrelas == 22){
@@ -1513,7 +1513,7 @@ $ordem = $conteudo_sessao['ordem'];
 																			<ul>
 																				<li><i class="fas fa-graduation-cap"></i> <?=$qtd_cursos?> cursos</li>
 																				<li><i class="fas fa-clock"></i> <?=$total_minutos?></li>
-																				<li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li>
+																				<!-- <li><i class="far fa-calendar-alt"></i> Disponivel por 1 ano</li> -->
 																				<li><i class="fas fa-redo"></i> Última atualização em <?=date('d/m/Y', $value->data_atualizacao);?></li>
 																			</ul>
 																			<?php if($media_estrelas == 22){

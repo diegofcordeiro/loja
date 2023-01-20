@@ -245,7 +245,6 @@ $botao_aviso = $conteudo_sessao['botao_aviso'];
 	<!-- Chatra {literal} -->
 
   <script type="text/javascript" src="<?=LAYOUT?>js/jquery-2.2.4.min.js" ></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script type="text/javascript" src="<?=LAYOUT?>js/jquery-ui.min.js"></script>  
 	<script>
 		$("#meus_cursos").click(function(e){

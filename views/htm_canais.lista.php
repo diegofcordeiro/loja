@@ -721,10 +721,10 @@
 	}
 	
 	// termina topo
-	$url_banner = URL.'/arquivos/backgorund_canal.png';
+	$url_banner = '/arquivos/backgorund_canal.png';
 	?>
 
-<div class="jumbotron banner_canal" style="background-image: url(<?=$url_banner?>);">
+<div class="jumbotron banner_canal" style="background-image: url(<?=URL.$url_banner?>);">
     <div class="container" style="width: 80%;">
         <h1 class="display-3 nome_do_canal">Escolha o seu<br> canal favorito</h1>
     </div>

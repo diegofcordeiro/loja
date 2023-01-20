@@ -847,7 +847,7 @@
 											<td><a href='$endereco' >".date('d/m/Y', $value['data_compra'])."</a></td>
 											<td><a href='$endereco' >".date('d/m/Y', $value['data_vencimento'])."</a></td>
 											<td><a href='$endereco' >R$ ".$valor_descontado[0].','.$depois_virgula."</a></td>
-											<td><a href='$link' ><span ".$styl.">".$botao_."</span></a></td>
+											<td><a id='meus_cursos' href='$link' ><span ".$styl.">".$botao_."</span></a></td>
 											</tr>
 										";
 										$n++;

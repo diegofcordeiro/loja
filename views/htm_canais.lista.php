@@ -721,7 +721,7 @@
 	}
 	
 	// termina topo
-	$url_banner = URL.'/arquivos/liga.jpg';
+	$url_banner = URL.'/arquivos/backgorund_canal.png';
 	?>
 
 <div class="jumbotron banner_canal" style="background-image: url(<?=$url_banner?>);">

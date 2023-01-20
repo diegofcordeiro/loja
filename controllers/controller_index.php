@@ -13,7 +13,10 @@ class index extends controller {
 		echo '<pre>';
 		$dados = fopen('test.csv', 'r');
 		$linha = fgetcsv($dados,1000,',');
-		foreach ($linha as $l){
+		foreach ($linha as $key => $l){
+			echo '<pre>';
+			print_r($key);
+			echo '<br>';
 			print_r($l);
 		}
 		// while($linha = fgetcsv($dados,1000,',')){

@@ -12,7 +12,7 @@ class index extends controller {
 		ini_set('display_startup_errors', TRUE);
 		echo '<pre>';
 		$dados = fopen('test.csv', 'r');
-		while($linha = fgetcsv($dados,1000,';')){
+		while($linha = fgetcsv($dados,1000,',')){
 			print_r($linha);
 		}
 

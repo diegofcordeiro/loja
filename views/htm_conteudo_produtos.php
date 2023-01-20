@@ -386,7 +386,7 @@ $ordem = $conteudo_sessao['ordem'];
 																		<div class="bottom_card">
 																			<div id="div_comprar">
 																				<?php $link = URL_BASE.'webapp/integra.php?token='.base64_encode($_SESSION['usuario_cpf']);?>
-																				<a href="$link" class="botao_comprar">ASSISTIR</a>
+																				<a href="<?=$link?>" class="botao_comprar">ASSISTIR</a>
 																				<!-- <button type="button" class="botao_comprar" onclick="submit('add_carrinho')">
 																					<?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?>
 																				</button>

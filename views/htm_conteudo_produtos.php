@@ -366,7 +366,7 @@ $ordem = $conteudo_sessao['ordem'];
 																			?>
 																		</div>
 																		<?php if($value->valor_falso > 0){ ?>
-																			<div class="price_container">
+																			<!-- <div class="price_container">
 																				<p class="preco_desc">R$ <?=number_format($value->valor_falso,2,",",".")?></p>
 																				<p class="preco_list_indi">
 																					<span class="real">R$ </span>
@@ -381,7 +381,7 @@ $ordem = $conteudo_sessao['ordem'];
 																						<span class="virgura_price"> ,<?=($valor_principal[1]>0 ? $valor_principal[1]:'00')?>
 																					</p>
 																				<?php }else{ ?>
-																				<p class="preco_list">Gratuito</p>
+																				<p class="preco_list">Gratuito</p> -->
 																		<?php } ?>
 																		<div class="bottom_card">
 																			<div><a href="<?=$endereco?>" onclick="acessando(this);"><p class="saibamais_btn">SAIBA MAIS</p></a></div>

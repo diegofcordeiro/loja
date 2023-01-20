@@ -21,6 +21,16 @@ class index extends controller {
 			echo($linha[5]).'<br>';
 			echo($linha[6]).'<br>';
 			echo($linha[7]).'<br>';
+			echo($linha[8]).'<br>';
+			echo($linha[9]).'<br>';
+			echo($linha[10]).'<br>';
+			echo($linha[11]).'<br>';
+			echo($linha[12]).'<br>';
+			echo($linha[13]).'<br>';
+			echo($linha[14]).'<br>';
+			echo($linha[15]).'<br>';
+			echo($linha[16]).'<br>';
+			echo($linha[17]).'<br>';
 			echo '<hr>';
 		}
 

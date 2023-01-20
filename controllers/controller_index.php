@@ -11,7 +11,8 @@ class index extends controller {
 		ini_set('display_errors', TRUE);
 		ini_set('display_startup_errors', TRUE);
 
-		require_once('vendor/autoload.php');
+		require_once dirname(__FILE__) . '/../Classes/PHPExcel/IOFactory.php';
+		print_r(dirname(__FILE__) . '/../Classes/PHPExcel/IOFactory.php');
 		$objPHPExcel = PHPExcel_IOFactory::load("lists.xlsx");
 		print_r($objPHPExcel);
 	}

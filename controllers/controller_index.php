@@ -12,7 +12,7 @@ class index extends controller {
 		ini_set('display_startup_errors', TRUE);
 
 		// require_once dirname(__FILE__) . '/../Classes/PHPExcel/IOFactory.php';
-		require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/Excel/PHPExcel.php';
+		require_once '../vendor/Excel/PHPExcel.php';
 		// print_r( $_SERVER['DOCUMENT_ROOT'].'/vendor/Excel/PHPExcel/IOFactory.php');
 		$objPHPExcel = new PHPExcel_Reader_excel5();	
 		print_r($objPHPExcel);

@@ -833,11 +833,11 @@
 										$hoje = strtotime($hoje);
 										if($hoje <= $value['data_vencimento']){
 											$botao_ = '<i class="fas fa-play btn_play"></i> ASSISTIR';
-											$link = URL_BASE.'webapp/integra.php?token='.base64_encode($_SESSION['seso_167397569296876']['usuario_cpf']);
+											$link = URL_BASE.'webapp/integra.php?token='.base64_encode($_SESSION['usuario_cpf']);
 											$styl = "style='color:#363a45'";
 										}else{
 											$botao_ = '<i class="fas fa-dollar-sign btn_renovar"></i> RENOVAR';
-											$link = "";
+											$link = "#";
 											$styl = "style='color:#e35864'";
 
 										}
@@ -847,7 +847,7 @@
 											<td><a href='$endereco' >".date('d/m/Y', $value['data_compra'])."</a></td>
 											<td><a href='$endereco' >".date('d/m/Y', $value['data_vencimento'])."</a></td>
 											<td><a href='$endereco' >R$ ".$valor_descontado[0].','.$depois_virgula."</a></td>
-											<td><a id='meus_cursos' href='' ><span ".$styl.">".$botao_."</span></a></td>
+											<td><a href='$link' ><span ".$styl.">".$botao_."</span></a></td>
 											</tr>
 										";
 										$n++;

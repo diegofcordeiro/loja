@@ -365,39 +365,10 @@ $ordem = $conteudo_sessao['ordem'];
 																			}
 																			?>
 																		</div>
-																		<?php if($value->valor_falso > 0){ ?>
-																			<!-- <div class="price_container">
-																				<p class="preco_desc">R$ <?=number_format($value->valor_falso,2,",",".")?></p>
-																				<p class="preco_list_indi">
-																					<span class="real">R$ </span>
-																					<span class="price_card"> <?=$valor_principal[0]?> </span>
-																					<span class="virgura_price"> ,<?=($valor_principal[1]>0 ? $valor_principal[1]:'00')?>
-																				</p>
-																				</div>
-																				<?php }elseif($value->valor > 0){ ?>
-																					<p class="preco_list">
-																						<span class="real">R$ </span>
-																						<span class="price_card"> <?=$valor_principal[0]?> </span>
-																						<span class="virgura_price"> ,<?=($valor_principal[1]>0 ? $valor_principal[1]:'00')?>
-																					</p>
-																				<?php }else{ ?>
-																				<p class="preco_list">Gratuito</p> -->
-																		<?php } ?>
 																		<div class="bottom_card">
 																			<div id="div_comprar">
 																				<?php $link = URL_BASE.'webapp/integra.php?token='.base64_encode($_SESSION['usuario_cpf']);?>
 																				<a href="<?=$link?>" class="botao_comprar">ASSISTIR</a>
-																				<!-- <button type="button" class="botao_comprar" onclick="submit('add_carrinho')">
-																					<?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?>
-																				</button>
-																				<form name="add_carrinho" id="add_carrinho" action="<?=DOMINIO?><?=$controller?>/carrinho_adicionar" method="post" enctype="multipart/form-data" >
-																					<span>                                     
-																						<button type="button" class="botao_comprar" onclick="submit('add_carrinho')">
-																							<?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?>
-																						</button>
-																						<input type="hidden" name="produto" value="<?=$value->codigo?>">
-																					</span>
-																				</form> -->
 																			</div>
 																		</div>
 																	</div>

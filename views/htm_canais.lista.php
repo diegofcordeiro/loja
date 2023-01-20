@@ -721,7 +721,7 @@
 	}
 	
 	// termina topo
-	$url_banner = '/arquivos/backgorund_canal.png';
+	$url_banner = '/arquivos/back_canal.png';
 	?>
 
 <div class="jumbotron banner_canal" style="background-image: url(<?=DOMINIO.$url_banner?>);">

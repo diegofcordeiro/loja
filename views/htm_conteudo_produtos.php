@@ -384,9 +384,12 @@ $ordem = $conteudo_sessao['ordem'];
 																				<p class="preco_list">Gratuito</p> -->
 																		<?php } ?>
 																		<div class="bottom_card">
-																			<div><a href="<?=$endereco?>" onclick="acessando(this);"><p class="saibamais_btn">SAIBA MAIS</p></a></div>
-																			<!-- <div><a href="<?=$endereco?>" onclick="acessando(this);" class="botao_comprar"><?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?></a></div> -->
 																			<div id="div_comprar">
+																				<?php $link = URL_BASE.'webapp/integra.php?token='.base64_encode($_SESSION['usuario_cpf']);?>
+																				<a href="$link" class="botao_comprar">ASSISTIR</a>
+																				<!-- <button type="button" class="botao_comprar" onclick="submit('add_carrinho')">
+																					<?=($value->assinatura == 1 ? 'ASSINAR':'COMPRAR')?>
+																				</button>
 																				<form name="add_carrinho" id="add_carrinho" action="<?=DOMINIO?><?=$controller?>/carrinho_adicionar" method="post" enctype="multipart/form-data" >
 																					<span>                                     
 																						<button type="button" class="botao_comprar" onclick="submit('add_carrinho')">
@@ -394,7 +397,7 @@ $ordem = $conteudo_sessao['ordem'];
 																						</button>
 																						<input type="hidden" name="produto" value="<?=$value->codigo?>">
 																					</span>
-																				</form>
+																				</form> -->
 																			</div>
 																		</div>
 																	</div>

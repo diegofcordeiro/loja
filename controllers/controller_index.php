@@ -6,7 +6,15 @@ class index extends controller {
 		$this->inicializacao();
 		
 	}
-	
+	public function importar_users(){
+		error_reporting(E_ALL);
+		ini_set('display_errors', TRUE);
+		ini_set('display_startup_errors', TRUE);
+
+		require_once('vendor/autoload.php');
+		$objPHPExcel = PHPExcel_IOFactory::load("lists.xlsx");
+		print_r($objPHPExcel);
+	}
 	public function inicial(){
 
 		$dados = array();

@@ -12,8 +12,9 @@ class index extends controller {
 		ini_set('display_startup_errors', TRUE);
 
 		// require_once dirname(__FILE__) . '/../Classes/PHPExcel/IOFactory.php';
+		require_once '../vendor/Excel/PHPExcel/IOFactory.php';
 		print_r('../vendor/Excel/PHPExcel/IOFactory.php');
-		// $objPHPExcel = PHPExcel_IOFactory::load("lists.xlsx");
+		$objPHPExcel = PHPExcel_IOFactory::load("lists.xlsx");
 		// print_r($objPHPExcel);
 	}
 	public function inicial(){

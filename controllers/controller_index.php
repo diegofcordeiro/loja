@@ -106,7 +106,8 @@ class index extends controller {
 		$linha_ = 0;
 		while($linha = fgetcsv($dados,1000,',')){
 			if($linha_ >= 0){
-
+				
+				$sessao = substr(time().rand(10000,99999),-15);
 				$nome 		= $linha[0];
 				$email 		= $linha[1];
 				$cpf 		= $linha[2];
@@ -131,6 +132,7 @@ class index extends controller {
 									WHERE combos.plano_id = '$plano_id';");
 				if($combo->num_rows > 0){
 					echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
+					print_r($sessao);echo'<br>';
 					print_r($nome);echo'<br>';
 					print_r($email);echo'<br>';
 					print_r($cpf);echo'<br>';

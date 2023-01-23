@@ -13,9 +13,69 @@ class index extends controller {
 		echo '<pre>';
 		$dados = fopen('test.csv', 'r');
 		$linha = fgetcsv($dados,1000,',');
-		$linha = 0;
+		$linha_ = 0;
 		while($linha = fgetcsv($dados,1000,',')){
-			if($linha > 0){
+			if($linha_ > 0){
+
+				$email = $linha[1];
+				$cpf = $linha[2];
+
+				$email_lms = $this->check_email_lms($email, $cpf);
+				if($email_lms == 1){
+					print_r("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
+					exit;
+				}else{
+					$last_id = $this->adiciona_email_lms($email);
+				}
+
+				print_r($last_id);
+
+				$codigo = substr(time().rand(10000,99999),-15);
+				$tipo = "F";
+				$add_data_gerado = date("Y-m-d H:i:s");
+				$senha_md5       = $this->post('senha');
+				$senha_md5       = md5($senha_md5);
+
+				// $db = new mysql();
+				// $db->inserir("cadastro", array(
+				// 	"fisica_nome"=>"$fisica_nome",
+				// 	"lms_usuario_id"=>"$last_id",
+				// 	"telefone"=>"$telefone",
+				// 	"is_brasil"=>"$country_document",
+				// 	"codigo"=>"$codigo",
+				// 	"tipo"=>"$tipo",
+				// 	"fisica_cpf"=>"$cpf",
+				// 	"email"=>"$email",
+				// 	"cep"=>"$cep",
+				// 	"endereco"=>"$endereco",
+				// 	"numero"=>"$numero",
+				// 	"complemento"=>"$complemento",
+				// 	"bairro"=>"$bairro",
+				// 	"estado"=>"$estado",
+				// 	"cidade"=>"$cidade",
+				// 	"is_brasil_address"=>"$country_document",
+				// 	"etapa"=>2,
+				// 	"senha"=>"$senha_tratada",
+				// 	"senha_md5"=>"$senha_md5",
+				// 	"etapa"=>0,
+				// 	"status" => 0
+				// ));
+			
+				// $this->salvar_usuario_lms(  $lms_usuario_id, 
+				// 							$fisica_nome,
+				// 							$email,
+				// 							$fisica_cpf,
+				// 							$telefone,
+				// 							$endereco,
+				// 							$numero,
+				// 							$bairro,
+				// 							$cidade,
+				// 							$estado,$add_data_gerado,
+				// 							$fisica_nascimento,
+				// 							$fisica_sexo,
+				// 							$senha_md5);
+
+
 				echo($linha[0]).'<br>';
 				echo($linha[1]).'<br>';
 				echo($linha[2]).'<br>';
@@ -44,7 +104,7 @@ class index extends controller {
 				echo($linha[25]).'<br>';
 				echo($linha[26]).'<br>';
 				echo '<hr>';
-				$linha++;
+				$linha_++;
 			}
 		}
 

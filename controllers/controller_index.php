@@ -28,7 +28,7 @@ class index extends controller {
 					$last_id = $this->adiciona_email_lms($email);
 				}
 
-				print_r($last_id);
+				print_r($last_id);exit;
 
 				$codigo = substr(time().rand(10000,99999),-15);
 				$tipo = "F";

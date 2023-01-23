@@ -107,34 +107,35 @@ class index extends controller {
 		while($linha = fgetcsv($dados,1000,',')){
 			if($linha_ >= 0){
 
-				echo($linha[0]).'<br>';
-				echo($linha[1]).'<br>';
-				echo($linha[2]).'<br>';
-				echo($linha[3]).'<br>';
-				echo($linha[4]).'<br>';
-				echo($linha[5]).'<br>';
-				echo($linha[6]).'<br>';
-				echo($linha[7]).'<br>';
-				echo($linha[8]).'<br>';
-				echo($linha[9]).'<br>';
-				echo($linha[10]).'<br>';
-				echo($linha[11]).'<br>';
-				echo($linha[12]).'<br>';
-				echo($linha[13]).'<br>';
-				echo($linha[14]).'<br>';
-				echo($linha[15]).'<br>';
-				echo($linha[16]).'<br>';
-				echo($linha[17]).'<br>';
-				echo($linha[18]).'<br>';
-				echo($linha[19]).'<br>';
-				echo($linha[20]).'<br>';
-				echo($linha[21]).'<br>';
-				echo($linha[22]).'<br>';
-				echo($linha[23]).'<br>';
-				echo($linha[24]).'<br>';
-				echo($linha[25]).'<br>';
-				echo($linha[26]).'<br>';
-				echo '<hr>';
+				print_r($linha[24]);echo'<br>';
+				// echo($linha[0]).'<br>';
+				// echo($linha[1]).'<br>';
+				// echo($linha[2]).'<br>';
+				// echo($linha[3]).'<br>';
+				// echo($linha[4]).'<br>';
+				// echo($linha[5]).'<br>';
+				// echo($linha[6]).'<br>';
+				// echo($linha[7]).'<br>';
+				// echo($linha[8]).'<br>';
+				// echo($linha[9]).'<br>';
+				// echo($linha[10]).'<br>';
+				// echo($linha[11]).'<br>';
+				// echo($linha[12]).'<br>';
+				// echo($linha[13]).'<br>';
+				// echo($linha[14]).'<br>';
+				// echo($linha[15]).'<br>';
+				// echo($linha[16]).'<br>';
+				// echo($linha[17]).'<br>';
+				// echo($linha[18]).'<br>';
+				// echo($linha[19]).'<br>';
+				// echo($linha[20]).'<br>';
+				// echo($linha[21]).'<br>';
+				// echo($linha[22]).'<br>';
+				// echo($linha[23]).'<br>';
+				// echo($linha[24]).'<br>';
+				// echo($linha[25]).'<br>';
+				// echo($linha[26]).'<br>';
+				// echo '<hr>';
 			}
 			$linha_++;
 		}

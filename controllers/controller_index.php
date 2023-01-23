@@ -107,7 +107,16 @@ class index extends controller {
 		while($linha = fgetcsv($dados,1000,',')){
 			if($linha_ >= 0){
 
-				print_r($linha[24]);echo'<br>';
+				$nome 		= $linha[0];
+				$email 		= $linha[1];
+				$cpf 		= $linha[2];
+				$plano_id 	= $linha[24];
+
+				print_r($nome);echo'<br>';
+				print_r($email);echo'<br>';
+				print_r($cpf);echo'<br>';
+				print_r($plano_id);echo'<br>';
+				echo '<hr>';
 				// echo($linha[0]).'<br>';
 				// echo($linha[1]).'<br>';
 				// echo($linha[2]).'<br>';

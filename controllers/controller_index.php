@@ -102,7 +102,7 @@ class index extends controller {
 		$dados = fopen('test.csv', 'r');
 		$linha = fgetcsv($dados,1000,',');
 		$linha_ = 0;
-		
+		$cadastrado = 0;
 		while($linha = fgetcsv($dados,1000,',')){
 			if($linha_ >= 0){
 				
@@ -133,7 +133,7 @@ class index extends controller {
 									inner join combo_produto on combo_produto.id_combo = combos.id
 									inner join produto on produto.id = combo_produto.id_produto
 									WHERE combos.plano_id = '$plano_id';");
-				$cadastrado = 0;
+				
 				if($combo->num_rows > 0){
 					
 					$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");

@@ -15,7 +15,7 @@ class index extends controller {
 		$linha = fgetcsv($dados,1000,',');
 		$linha_ = 0;
 		while($linha = fgetcsv($dados,1000,',')){
-			if($linha_ > 0){
+			if($linha_ >= 0){
 				$email = $linha[1];
 				$cpf = $linha[2];
 				print_r($email);

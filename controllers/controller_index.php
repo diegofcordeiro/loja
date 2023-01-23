@@ -19,22 +19,22 @@ class index extends controller {
 
 				$email = $linha[1];
 				$cpf = $linha[2];
+				print_r($email);
+				// $email_lms = $this->check_email_lms($email, $cpf);
+				// if($email_lms == 1){
+				// 	print_r("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
+				// 	exit;
+				// }else{
+				// 	$last_id = $this->adiciona_email_lms($email);
+				// }
 
-				$email_lms = $this->check_email_lms($email, $cpf);
-				if($email_lms == 1){
-					print_r("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
-					exit;
-				}else{
-					$last_id = $this->adiciona_email_lms($email);
-				}
+				// print_r($last_id);exit;
 
-				print_r($last_id);exit;
-
-				$codigo = substr(time().rand(10000,99999),-15);
-				$tipo = "F";
-				$add_data_gerado = date("Y-m-d H:i:s");
-				$senha_md5       = $this->post('senha');
-				$senha_md5       = md5($senha_md5);
+				// $codigo = substr(time().rand(10000,99999),-15);
+				// $tipo = "F";
+				// $add_data_gerado = date("Y-m-d H:i:s");
+				// $senha_md5       = $this->post('senha');
+				// $senha_md5       = md5($senha_md5);
 
 				// $db = new mysql();
 				// $db->inserir("cadastro", array(

@@ -19,12 +19,12 @@ class index extends controller {
 		while($linha = fgetcsv($dados,1000,',')){
 			
 			$combo_id = $linha[24];
-			// $nome_combo = $linha[25];
+			$nome_combo = $linha[25];
 			
 			if (!empty($new[$combo_id])){
-				$new[$combo_id] = array_merge($new[$combo_id], array($linha));
+				$new[$combo_id] = array_merge($new[$combo_id], array($nome_combo));
 			}else{
-				$new[$combo_id] = array($linha);
+				$new[$combo_id] = array($nome_combo);
 			}
 				// echo($linha[0]).'<br>';
 				// echo($linha[1]).'<br>';

@@ -23,8 +23,8 @@ class index extends controller {
 
 				$email_lms = $this->check_email_lms($email, $cpf);
 				if($email_lms == 1){
-					print_r("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
-					exit;
+					// print_r("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
+					// exit;
 				}else{
 					$last_id = $this->adiciona_email_lms($email);
 				}

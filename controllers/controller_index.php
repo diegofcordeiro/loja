@@ -113,9 +113,9 @@ class index extends controller {
 				
 				$date_vencimento 	= $linha[5];
 				$data_inicio 		= $linha[6];
-				print_r($data_inicio);
+				print_r(strtotime($data_inicio));
 				echo '<pre>';
-				print_r($date_vencimento);
+				print_r(strtotime($date_vencimento));
 				// echo($linha[0]).'<br>';
 				// echo($linha[1]).'<br>';
 				// echo($linha[2]).'<br>';

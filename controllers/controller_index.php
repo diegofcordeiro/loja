@@ -129,11 +129,19 @@ class index extends controller {
 									inner join combo_produto on combo_produto.id_combo = combos.id
 									inner join produto on produto.id = combo_produto.id_produto
 									WHERE combos.plano_id = '$plano_id';");
+
 				echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
 				print_r($nome);echo'<br>';
 				print_r($email);echo'<br>';
 				print_r($cpf);echo'<br>';
-				print_r($plano_id);echo'<br>';
+				print_r($plano_id);echo'<br>';echo'<br>';
+
+				$produtos = array();
+				while($data = $combo->fetch_object()){
+					$produtos = $data;
+					print_r($produtos);echo'<br>';
+				}
+
 				echo '<hr>';
 				// echo($linha[0]).'<br>';
 				// echo($linha[1]).'<br>';

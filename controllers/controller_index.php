@@ -6,6 +6,56 @@ class index extends controller {
 		$this->inicializacao();
 		
 	}
+
+	public function lista_combos(){
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+		echo '<pre>';
+		$dados = fopen('test.csv', 'r');
+		$linha = fgetcsv($dados,1000,',');
+
+		$new = array();
+		while($linha = fgetcsv($dados,1000,',')){
+			
+			$combo_id = $linha[24];
+			// $nome_combo = $linha[25];
+			
+			if (!empty($new[$combo_id])){
+				$new[$combo_id] = array_merge($new[$combo_id], array($linha));
+			}else{
+				$new[$combo_id] = array($linha);
+			}
+				// echo($linha[0]).'<br>';
+				// echo($linha[1]).'<br>';
+				// echo($linha[2]).'<br>';
+				// echo($linha[3]).'<br>';
+				// echo($linha[4]).'<br>';
+				// echo($linha[5]).'<br>';
+				// echo($linha[6]).'<br>';
+				// echo($linha[7]).'<br>';
+				// echo($linha[8]).'<br>';
+				// echo($linha[9]).'<br>';
+				// echo($linha[10]).'<br>';
+				// echo($linha[11]).'<br>';
+				// echo($linha[12]).'<br>';
+				// echo($linha[13]).'<br>';
+				// echo($linha[14]).'<br>';
+				// echo($linha[15]).'<br>';
+				// echo($linha[16]).'<br>';
+				// echo($linha[17]).'<br>';
+				// echo($linha[18]).'<br>';
+				// echo($linha[19]).'<br>';
+				// echo($linha[20]).'<br>';
+				// echo($linha[21]).'<br>';
+				// echo($linha[22]).'<br>';
+				// echo($linha[23]).'<br>';
+				// echo($linha[24]).'<br>';
+				// echo($linha[25]).'<br>';
+				// echo($linha[26]).'<br>';
+		}
+		echo '<pre>';print_r($new);
+	}
 	public function importar_users_(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);

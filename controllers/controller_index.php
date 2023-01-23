@@ -167,7 +167,7 @@ class index extends controller {
 									WHERE combos.plano_id = '$plano_id';");
 				
 				if($combo->num_rows > 0){
-					$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$cpf';");
+					$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");
 					$codigo = $cadastro_codigo->fetch_object();
 					echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
 					print_r($sessao);echo'<br>';

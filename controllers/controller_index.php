@@ -32,8 +32,7 @@ class index extends controller {
 				$codigo = substr(time().rand(10000,99999),-15);
 				$tipo = "F";
 				$add_data_gerado = date("Y-m-d H:i:s");
-				$senha_md5       = $this->post('senha');
-				$senha_md5       = md5($senha_md5);
+				$senha_md5       = md5($cpf);
 
 				$db = new mysql();
 				$db->inserir("cadastro", array(
@@ -51,7 +50,7 @@ class index extends controller {
 				$this->salvar_usuario_lms(  $last_id, 
 											$nome,
 											$email,
-											null,
+											$cpf,
 											null,
 											null,
 											null,

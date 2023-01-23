@@ -114,6 +114,7 @@ class index extends controller {
 				$date_vencimento 	= $linha[6];
 				$data_inicio 		= $linha[7];
 				print_r($linha[7]);
+				exit;
 
 				// $date_vencimento = $date_vencimento->format('Y-m-d');
 				// $date_vencimento = strtotime($date_vencimento);

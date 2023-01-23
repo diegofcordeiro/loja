@@ -93,8 +93,6 @@ class index extends controller {
 			}
 			$linha_++;
 		}
-
-
 	}
 	public function importar_users_pedidos(){
 		ini_set('display_errors', 1);

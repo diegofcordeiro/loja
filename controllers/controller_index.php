@@ -155,7 +155,6 @@ class index extends controller {
 									combos.valor as plano_valor,
 									combos.intervalo as intervalo,
 									combos.usar_desconto as usar_desconto,
-									combos.usar_desconto as usar_desconto
 									combos.combo_valor as combo_valor,
 									combos.status as combo_status,
 									combos.desconto as combo_desconto,

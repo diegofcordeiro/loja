@@ -143,8 +143,10 @@ class index extends controller {
 				// echo($linha[25]).'<br>';
 				// echo($linha[26]).'<br>';
 				// echo '<hr>';
-				
 
+				// $date_vencimento = $date_vencimento->format('Y-m-d');
+				// $date_vencimento = strtotime($date_vencimento);
+							
 				$conexao = new mysql();
 				$combo = $conexao->query("SELECT
 									combos.id as combo_id,
@@ -153,6 +155,11 @@ class index extends controller {
 									combos.valor as plano_valor,
 									combos.intervalo as intervalo,
 									combos.usar_desconto as usar_desconto,
+									combos.usar_desconto as usar_desconto
+
+									combos.combo_valor as combo_valor,
+
+
 									combos.status as combo_status,
 									combos.desconto as combo_desconto,
 									produto.id as produto_id,
@@ -163,16 +170,21 @@ class index extends controller {
 									inner join produto on produto.id = combo_produto.id_produto
 									WHERE combos.plano_id = '$plano_id';");
 				if($combo->num_rows > 0){
+					$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$cpf';");
+					$codigo = $cadastro_codigo->fetch_object();
 					echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
 					print_r($sessao);echo'<br>';
 					print_r($nome);echo'<br>';
 					print_r($email);echo'<br>';
 					print_r($cpf);echo'<br>';
+					print_r($codigo);echo'<br>';
 					print_r($plano_id);echo'<br>';echo'<br>';
 
 					while($data = $combo->fetch_object()){
 						$array_ = array(
 							"sessao"=>"$sessao",
+							"id_combo"=>"$data->combo_id",
+							"combo_titulo"=>"$data->combo_titulo",
 							"produto"=>"$data->produto_id",
 							"produto_id"=>"$data->id",
 							"produto_ref"=>"$data->ref",
@@ -182,7 +194,8 @@ class index extends controller {
 							"data_vencimento"=>"$date_vencimento",
 							"data_compra"=>"$data_inicio",
 							"quantidade"=>1,
-							"valor_total"=>"$data->valor",
+							"valor_total_combo_vindi"=>"$data->combo_valor",
+							"usar_valor_vindi"=>1,
 							"tipo_envio"=> 3
 						);
 						print_r($array_);echo'<br>';

@@ -108,10 +108,42 @@ class index extends controller {
 			if($linha_ >= 0){
 				
 				$sessao = substr(time().rand(10000,99999),-15);
-				$nome 		= $linha[0];
-				$email 		= $linha[1];
-				$cpf 		= $linha[2];
-				$plano_id 	= $linha[24];
+				$nome 		 		= $linha[0];
+				$email 		 		= $linha[1];
+				$cpf 		 		= $linha[2];
+				$plano_id 	 		= $linha[24];
+				
+				$date_vencimento 	= $linha[6];
+				$data_inicio 		= $linha[7];
+
+				// echo($linha[1]).'<br>';
+				// echo($linha[2]).'<br>';
+				// echo($linha[3]).'<br>';
+				// echo($linha[4]).'<br>';
+				// echo($linha[5]).'<br>';
+				// echo($linha[6]).'<br>';
+				// echo($linha[7]).'<br>';
+				// echo($linha[8]).'<br>';
+				// echo($linha[9]).'<br>';
+				// echo($linha[10]).'<br>';
+				// echo($linha[11]).'<br>';
+				// echo($linha[12]).'<br>';
+				// echo($linha[13]).'<br>';
+				// echo($linha[14]).'<br>';
+				// echo($linha[15]).'<br>';
+				// echo($linha[16]).'<br>';
+				// echo($linha[17]).'<br>';
+				// echo($linha[18]).'<br>';
+				// echo($linha[19]).'<br>';
+				// echo($linha[20]).'<br>';
+				// echo($linha[21]).'<br>';
+				// echo($linha[22]).'<br>';
+				// echo($linha[23]).'<br>';
+				// echo($linha[24]).'<br>';
+				// echo($linha[25]).'<br>';
+				// echo($linha[26]).'<br>';
+				// echo '<hr>';
+				
 
 				$conexao = new mysql();
 				$combo = $conexao->query("SELECT
@@ -138,10 +170,38 @@ class index extends controller {
 					print_r($cpf);echo'<br>';
 					print_r($plano_id);echo'<br>';echo'<br>';
 
-					$produtos = array();
 					while($data = $combo->fetch_object()){
-						$produtos = $data;
-						print_r($produtos);echo'<br>';
+						$array_ = array(
+							"sessao"=>"$sessao",
+							"produto"=>"$data->produto_id",
+							"produto_id"=>"$data->id",
+							"produto_ref"=>"$data->ref",
+							"produto_titulo"=>"$data->protudo_titulo",
+							"produto_valor"=>"$data->valor",
+							"produto_assinatura"=>"$plano_id",
+							"data_vencimento"=>"$date_vencimento",
+							"data_compra"=>"$data_inicio",
+							"quantidade"=>1,
+							"valor_total"=>"$data->valor",
+							"tipo_envio"=> 3
+						);
+						print_r($array_);echo'<br>';
+						
+						// $conexao = new mysql();
+						// $conexao->inserir("pedido_loja_carrinho", array(
+						// 	"sessao"=>"$sessao",
+						// 	"produto"=>"$data->produto_id",
+						// 	"produto_id"=>"$data->id",
+						// 	"produto_ref"=>"$data->ref",
+						// 	"produto_titulo"=>"$data->protudo_titulo",
+						// 	"produto_valor"=>"$data->valor",
+						// 	"produto_assinatura"=>"$plano_id",
+						// 	"data_vencimento"=>"$date_vencimento",
+						// 	"data_compra"=>"$data_inicio",
+						// 	"quantidade"=>1,
+						// 	"valor_total"=>"$data->valor",
+						// 	"tipo_envio"=> 3
+						// ));
 					}
 
 					echo '<hr>';

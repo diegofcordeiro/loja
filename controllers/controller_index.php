@@ -7,9 +7,9 @@ class index extends controller {
 		
 	}
 	public function importar_users(){
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
-		ini_set('display_errors', TRUE);
-		ini_set('display_startup_errors', TRUE);
 		echo '<pre>';
 		$dados = fopen('test.csv', 'r');
 		$linha = fgetcsv($dados,1000,',');

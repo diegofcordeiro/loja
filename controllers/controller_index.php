@@ -196,10 +196,21 @@ class index extends controller {
 							"tipo_envio"=> 3
 						);
 						print_r($array_);echo'<br>';
+						$array_2 = array(
+							"codigo"=>"$sessao",
+							"cadastro"=>$codigo,
+							"data"=>$data_inicio,
+							"valor_total"=>$data->combo_valor,
+							"forma_pagamento"=>5,
+							"status"=>4
+						);
+						print_r($array_2);echo'<br>';
 						
 						// $conexao = new mysql();
 						// $conexao->inserir("pedido_loja_carrinho", array(
 						// 	"sessao"=>"$sessao",
+						// 	"id_combo"=>"$data->combo_id",
+						// 	"combo_titulo"=>"$data->combo_titulo",
 						// 	"produto"=>"$data->produto_id",
 						// 	"produto_id"=>"$data->id",
 						// 	"produto_ref"=>"$data->ref",
@@ -209,7 +220,8 @@ class index extends controller {
 						// 	"data_vencimento"=>"$date_vencimento",
 						// 	"data_compra"=>"$data_inicio",
 						// 	"quantidade"=>1,
-						// 	"valor_total"=>"$data->valor",
+						// 	"valor_total_combo_vindi"=>"$data->combo_valor",
+						// 	"usar_valor_vindi"=>1,
 						// 	"tipo_envio"=> 3
 						// ));
 					}
@@ -217,6 +229,18 @@ class index extends controller {
 					echo '<hr>';
 				}
 				
+
+				// $conexao->alterar("pedido_loja", array(
+				// 			"cadastro"=>$cadastro,
+				// 			"vencimento"=>$vencimento_pedido,
+				// 			"valor_produtos"=>$valor_subtotal,
+				// 			"valor_produtos_desc"=>$total_descontos,
+				// 			"valor_total"=>$valor_total_pedido,
+				// 			"forma_pagamento"=>$formadepagamento,
+				// 			"id_transacao"=>$codigo_transacao,
+				// 			"status"=>0
+				// 		), " codigo='".$this->_sessao."' ");
+
 				// echo($linha[0]).'<br>';
 				// echo($linha[1]).'<br>';
 				// echo($linha[2]).'<br>';

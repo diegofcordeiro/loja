@@ -24,7 +24,7 @@ class index extends controller {
 			if (!empty($new[$combo_id])){
 				$new[$combo_id] = array_merge($new[$combo_id], array($nome_combo));
 			}else{
-				$new[$combo_id] = array($nome_combo);
+				// $new[$combo_id] = array($nome_combo);
 			}
 				// echo($linha[0]).'<br>';
 				// echo($linha[1]).'<br>';

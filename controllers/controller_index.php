@@ -173,7 +173,7 @@ class index extends controller {
 					print_r($nome);echo'<br>';
 					print_r($email);echo'<br>';
 					print_r($cpf);echo'<br>';
-					print_r($codigo);echo'<br>';
+					print_r($codigo->codigo);echo'<br>';
 					print_r($plano_id);echo'<br>';echo'<br>';
 
 
@@ -221,7 +221,7 @@ class index extends controller {
 					}
 					$array_2 = array(
 							"codigo"=>"$sessao",
-							"cadastro"=>$codigo,
+							"cadastro"=>$codigo->codigo,
 							"data"=>$data_inicio,
 							"valor_total"=>$valor_combo,
 							"forma_pagamento"=>5,

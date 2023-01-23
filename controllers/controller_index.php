@@ -16,7 +16,6 @@ class index extends controller {
 		$linha_ = 0;
 		while($linha = fgetcsv($dados,1000,',')){
 			if($linha_ > 0){
-
 				$email = $linha[1];
 				$cpf = $linha[2];
 				print_r($email);
@@ -104,8 +103,8 @@ class index extends controller {
 				echo($linha[25]).'<br>';
 				echo($linha[26]).'<br>';
 				echo '<hr>';
-				$linha_++;
 			}
+			$linha_++;
 		}
 
 

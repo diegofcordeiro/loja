@@ -198,15 +198,6 @@ class index extends controller {
 						"forma_pagamento"=>5,
 						"status"=>4
 					));
-					$array_2 = array(
-						"codigo"=>"$sessao",
-						"cadastro"=>$codigo->codigo,
-						"data"=>$data_inicio,
-						"vencimento"=>$date_vencimento,
-						"valor_total"=>$valor_combo,
-						"forma_pagamento"=>5,
-						"status"=>4
-					);
 					$cadastrado ++;
 				}
 				

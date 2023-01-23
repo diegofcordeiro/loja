@@ -155,7 +155,7 @@ class index extends controller {
 									combos.valor as plano_valor,
 									combos.intervalo as intervalo,
 									combos.usar_desconto as usar_desconto,
-									combos.combo_valor as combo_valor,
+									combos.valor as combo_valor,
 									combos.status as combo_status,
 									combos.desconto as combo_desconto,
 									produto.id as produto_id,
@@ -165,23 +165,7 @@ class index extends controller {
 									inner join combo_produto on combo_produto.id_combo = combos.id
 									inner join produto on produto.id = combo_produto.id_produto
 									WHERE combos.plano_id = '$plano_id';");
-				print_r("SELECT
-									combos.id as combo_id,
-									combos.titulo as combo_titulo,
-									combos.plano_id as plano_id,
-									combos.valor as plano_valor,
-									combos.intervalo as intervalo,
-									combos.usar_desconto as usar_desconto,
-									combos.combo_valor as combo_valor,
-									combos.status as combo_status,
-									combos.desconto as combo_desconto,
-									produto.id as produto_id,
-									produto.titulo as protudo_titulo,
-									produto.*
-									FROM `combos` 
-									inner join combo_produto on combo_produto.id_combo = combos.id
-									inner join produto on produto.id = combo_produto.id_produto
-									WHERE combos.plano_id = '$plano_id';");exit;
+				
 				if($combo->num_rows > 0){
 					$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$cpf';");
 					$codigo = $cadastro_codigo->fetch_object();

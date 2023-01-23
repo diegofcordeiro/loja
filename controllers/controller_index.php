@@ -102,6 +102,7 @@ class index extends controller {
 		$dados = fopen('test.csv', 'r');
 		$linha = fgetcsv($dados,1000,',');
 		$linha_ = 0;
+		
 		while($linha = fgetcsv($dados,1000,',')){
 			if($linha_ >= 0){
 				
@@ -132,45 +133,24 @@ class index extends controller {
 									inner join combo_produto on combo_produto.id_combo = combos.id
 									inner join produto on produto.id = combo_produto.id_produto
 									WHERE combos.plano_id = '$plano_id';");
-				
+				$cadastrado = 0;
 				if($combo->num_rows > 0){
+					
 					$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");
 					print_r("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");
 					$codigo = $cadastro_codigo->fetch_object();
-					echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
-					print_r($sessao);echo'<br>';
-					print_r($nome);echo'<br>';
-					print_r($email);echo'<br>';
-					print_r($cpf);echo'<br>';
-					print_r($codigo->codigo);echo'<br>';
-					print_r($plano_id);echo'<br>';echo'<br>';
-
+					// echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
+					// print_r($sessao);echo'<br>';
+					// print_r($nome);echo'<br>';
+					// print_r($email);echo'<br>';
+					// print_r($cpf);echo'<br>';
+					// print_r($codigo->codigo);echo'<br>';
+					// print_r($plano_id);echo'<br>';echo'<br>';
 
 					$valor_combo = 0;
 					while($data = $combo->fetch_object()){
 						$valor_combo = $data->combo_valor;
-						$array_ = array(
-							"sessao"=>"$sessao",
-							"id_combo"=>"$data->combo_id",
-							"combo_titulo"=>"$data->combo_titulo",
-							"produto"=>"$data->produto_id",
-							"produto_id"=>"$data->id",
-							"produto_ref"=>"$data->ref",
-							"produto_titulo"=>"$data->protudo_titulo",
-							"produto_valor"=>"$data->valor",
-							"produto_assinatura"=>"$plano_id",
-							"data_vencimento"=>"$date_vencimento",
-							"data_compra"=>"$data_inicio",
-							"quantidade"=>1,
-							"valor_total_combo_vindi"=>"$data->combo_valor",
-							"usar_valor_vindi"=>1,
-							"tipo_envio"=> 3
-						);
-						print_r($array_);echo'<br>';
-						
-						
-						// $conexao = new mysql();
-						// $conexao->inserir("pedido_loja_carrinho", array(
+						// $array_ = array(
 						// 	"sessao"=>"$sessao",
 						// 	"id_combo"=>"$data->combo_id",
 						// 	"combo_titulo"=>"$data->combo_titulo",
@@ -186,66 +166,54 @@ class index extends controller {
 						// 	"valor_total_combo_vindi"=>"$data->combo_valor",
 						// 	"usar_valor_vindi"=>1,
 						// 	"tipo_envio"=> 3
-						// ));
+						// );
+						// print_r($array_);echo'<br>';
+						
+						$conexao = new mysql();
+						$conexao->inserir("pedido_loja_carrinho", array(
+							"sessao"=>"$sessao",
+							"id_combo"=>"$data->combo_id",
+							"combo_titulo"=>"$data->combo_titulo",
+							"produto"=>"$data->produto_id",
+							"produto_id"=>"$data->id",
+							"produto_ref"=>"$data->ref",
+							"produto_titulo"=>"$data->protudo_titulo",
+							"produto_valor"=>"$data->valor",
+							"produto_assinatura"=>"$plano_id",
+							"data_vencimento"=>"$date_vencimento",
+							"data_compra"=>"$data_inicio",
+							"quantidade"=>1,
+							"valor_total_combo_vindi"=>"$data->combo_valor",
+							"usar_valor_vindi"=>1,
+							"tipo_envio"=> 3
+						));
 					}
+					$conexao = new mysql();
+					$conexao->inserir("pedido_loja", array(
+						"codigo"=>"$sessao",
+						"cadastro"=>$codigo->codigo,
+						"data"=>$data_inicio,
+						"vencimento"=>$date_vencimento,
+						"valor_total"=>$valor_combo,
+						"forma_pagamento"=>5,
+						"status"=>4
+					));
 					$array_2 = array(
-							"codigo"=>"$sessao",
-							"cadastro"=>$codigo->codigo,
-							"data"=>$data_inicio,
-							"vencimento"=>$date_vencimento,
-							"valor_total"=>$valor_combo,
-							"forma_pagamento"=>5,
-							"status"=>4
-						);
-					print_r($array_2);echo'<br>';
-
-					echo '<hr>';
+						"codigo"=>"$sessao",
+						"cadastro"=>$codigo->codigo,
+						"data"=>$data_inicio,
+						"vencimento"=>$date_vencimento,
+						"valor_total"=>$valor_combo,
+						"forma_pagamento"=>5,
+						"status"=>4
+					);
+					$cadastrado ++;
 				}
 				
-
-				// $conexao->alterar("pedido_loja", array(
-				// 			"cadastro"=>$cadastro,
-				// 			"vencimento"=>$vencimento_pedido,
-				// 			"valor_produtos"=>$valor_subtotal,
-				// 			"valor_produtos_desc"=>$total_descontos,
-				// 			"valor_total"=>$valor_total_pedido,
-				// 			"forma_pagamento"=>$formadepagamento,
-				// 			"id_transacao"=>$codigo_transacao,
-				// 			"status"=>0
-				// 		), " codigo='".$this->_sessao."' ");
-
-				// echo($linha[0]).'<br>';
-				// echo($linha[1]).'<br>';
-				// echo($linha[2]).'<br>';
-				// echo($linha[3]).'<br>';
-				// echo($linha[4]).'<br>';
-				// echo($linha[5]).'<br>';
-				// echo($linha[6]).'<br>';
-				// echo($linha[7]).'<br>';
-				// echo($linha[8]).'<br>';
-				// echo($linha[9]).'<br>';
-				// echo($linha[10]).'<br>';
-				// echo($linha[11]).'<br>';
-				// echo($linha[12]).'<br>';
-				// echo($linha[13]).'<br>';
-				// echo($linha[14]).'<br>';
-				// echo($linha[15]).'<br>';
-				// echo($linha[16]).'<br>';
-				// echo($linha[17]).'<br>';
-				// echo($linha[18]).'<br>';
-				// echo($linha[19]).'<br>';
-				// echo($linha[20]).'<br>';
-				// echo($linha[21]).'<br>';
-				// echo($linha[22]).'<br>';
-				// echo($linha[23]).'<br>';
-				// echo($linha[24]).'<br>';
-				// echo($linha[25]).'<br>';
-				// echo($linha[26]).'<br>';
-				// echo '<hr>';
 			}
 			$linha_++;
 		}
-
+		echo $cadastrado.'Pedios Foram inseridos';
 
 	}
 	public function inicial(){

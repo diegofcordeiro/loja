@@ -114,10 +114,7 @@ class index extends controller {
 				
 				$date_vencimento 	= strtotime($linha[5]);
 				$data_inicio 		= strtotime($linha[6]);
-				print_r($date_vencimento);
-				echo '<pre>';
-				print_r($data_inicio);
-				exit;
+
 				$conexao = new mysql();
 				$combo = $conexao->query("SELECT
 									combos.id as combo_id,

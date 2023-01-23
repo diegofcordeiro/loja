@@ -114,7 +114,10 @@ class index extends controller {
 				
 				$date_vencimento 	= strtotime($linha[5]);
 				$data_inicio 		= strtotime($linha[6]);
-	
+				print_r($linha[5]);
+				echo '<pre>';
+				print_r($linha[6]);
+				exit;
 				$conexao = new mysql();
 				$combo = $conexao->query("SELECT
 									combos.id as combo_id,
@@ -137,7 +140,6 @@ class index extends controller {
 				if($combo->num_rows > 0){
 					
 					$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");
-					print_r("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");
 					$codigo = $cadastro_codigo->fetch_object();
 					// echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
 					// print_r($sessao);echo'<br>';
@@ -174,8 +176,8 @@ class index extends controller {
 							"sessao"=>"$sessao",
 							"id_combo"=>"$data->combo_id",
 							"combo_titulo"=>"$data->combo_titulo",
-							"produto"=>"$data->produto_id",
-							"produto_id"=>"$data->id",
+							"produto"=>"$data->codigo",
+							"produto_id"=>"$data->produto_id",
 							"produto_ref"=>"$data->ref",
 							"produto_titulo"=>"$data->protudo_titulo",
 							"produto_valor"=>"$data->valor",

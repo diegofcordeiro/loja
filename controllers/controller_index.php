@@ -9020,7 +9020,7 @@ class index extends controller {
 					VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
 				$mysqli->query($sql_insert);
 			}else{
-				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 				$mysqli->query($sql_update);
 			}
 		}
@@ -9468,9 +9468,10 @@ class index extends controller {
 				'Content-Type: application/json'
 			),
 		));
-
+		
 		$response = curl_exec($curl);
 		$response = json_decode($response, true);
+
 		curl_close($curl);
 
 		$conexao = new mysql();
@@ -9478,11 +9479,21 @@ class index extends controller {
 		while($data_carrinho = $coisas_carrinho->fetch_object()){
 			
 			if($data_carrinho->id_combo > 0){
+				$conexao = new mysql();
+				$conexao->alterar("pedido_loja_carrinho", array(
+					"status"=>8
+				), " sessao='".$data_carrinho->sessao."' and id_combo='".$data_carrinho->id_combo."' ");
+
 				$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.ref FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
 				while($res_combo = $data_combo->fetch_object()){
 					$this->remove_from_lms($id_usuario,$res_combo->ref);
 				}
 			}else{
+				$conexao = new mysql();
+				$conexao->alterar("pedido_loja_carrinho", array(
+					"status"=>8
+				), " sessao='".$data_carrinho->sessao."' and produto='".$data_carrinho->produto."' ");
+
 				$this->remove_from_lms($id_usuario,$data_carrinho->produto_ref);
 			}
 		}

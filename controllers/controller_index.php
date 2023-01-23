@@ -177,7 +177,10 @@ class index extends controller {
 					print_r($codigo);echo'<br>';
 					print_r($plano_id);echo'<br>';echo'<br>';
 
+
+					$valor_combo = 0;
 					while($data = $combo->fetch_object()){
+						$valor_combo = $data->combo_valor;
 						$array_ = array(
 							"sessao"=>"$sessao",
 							"id_combo"=>"$data->combo_id",
@@ -196,15 +199,7 @@ class index extends controller {
 							"tipo_envio"=> 3
 						);
 						print_r($array_);echo'<br>';
-						$array_2 = array(
-							"codigo"=>"$sessao",
-							"cadastro"=>$codigo,
-							"data"=>$data_inicio,
-							"valor_total"=>$data->combo_valor,
-							"forma_pagamento"=>5,
-							"status"=>4
-						);
-						print_r($array_2);echo'<br>';
+						
 						
 						// $conexao = new mysql();
 						// $conexao->inserir("pedido_loja_carrinho", array(
@@ -225,6 +220,15 @@ class index extends controller {
 						// 	"tipo_envio"=> 3
 						// ));
 					}
+					$array_2 = array(
+							"codigo"=>"$sessao",
+							"cadastro"=>$codigo,
+							"data"=>$data_inicio,
+							"valor_total"=>$valor_combo,
+							"forma_pagamento"=>5,
+							"status"=>4
+						);
+					print_r($array_2);echo'<br>';
 
 					echo '<hr>';
 				}

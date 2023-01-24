@@ -9291,29 +9291,6 @@ class index extends controller {
 			}
 		}	
 		
-		// TEST /////
-		
-	
-		foreach($recorrentes as $key => $recorrencia){
-			echo '<pre>'; print_r($key);
-			echo '<br>'; print_r($recorrencia);
-			$amout = 0;
-			$produto_assinatura = '';
-			foreach($recorrencia as $rec){
-				if($rec->usar_valor_vindi == 1){
-					$amout = $rec->valor_total;
-				}else{
-					$amout = $amout + $rec->valor_total;
-				}
-				$produto_assinatura = $rec->produto_assinatura;
-				echo '<br>'; print_r($rec->produto_ref);
-				// $this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
-			}
-			
-
-		}
-		exit;
-		
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 		
@@ -9327,6 +9304,10 @@ class index extends controller {
 				}
 				$produto_assinatura = $rec->produto_assinatura;
 			}
+			foreach($recorrencia as $rec_lms){
+						$this->integrar_trilha_lms($rec_lms->produto_ref,$cod, $cpf);
+					}
+					exit;
 			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
 			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
 
@@ -9337,7 +9318,9 @@ class index extends controller {
 
 				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
 					$status = 4;
-						$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+					foreach($recorrencia as $rec_lms){
+						$this->integrar_trilha_lms($rec_lms->produto_ref,$cod, $cpf);
+					}
 				}else{
 					$status = 1;
 				}

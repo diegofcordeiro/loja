@@ -9291,6 +9291,7 @@ class index extends controller {
 			}
 		}	
 		
+		echo '<pre>'; print_r($recorrentes);exit;
 		
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){

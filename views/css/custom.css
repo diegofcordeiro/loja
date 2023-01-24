@@ -12,6 +12,9 @@ body{font-family: 'Roboto' !important;}
 .jumbotron{
     border-radius: 0px !important;
 }
+.modal_conteudo{
+  background:white !important;
+}
 @media (max-width: 999px){
     .p-r60{
     padding-right: 30px;

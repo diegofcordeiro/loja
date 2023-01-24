@@ -9292,7 +9292,7 @@ class index extends controller {
 		}	
 		
 		// TEST /////
-		echo '<pre>'; print_r($recorrentes);exit;
+		
 	
 		foreach($recorrentes as $key => $recorrencia){
 		
@@ -9306,7 +9306,7 @@ class index extends controller {
 				}
 				$produto_assinatura = $rec->produto_assinatura;
 			}
-
+			echo '<pre>'; print_r($recorrencia);exit;
 			$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
 
 		}
@@ -9335,7 +9335,7 @@ class index extends controller {
 
 				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
 					$status = 4;
-						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+						$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
 				}else{
 					$status = 1;
 				}

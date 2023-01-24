@@ -9291,7 +9291,26 @@ class index extends controller {
 			}
 		}	
 		
+		// TEST /////
 		echo '<pre>'; print_r($recorrentes);exit;
+	
+		foreach($recorrentes as $key => $recorrencia){
+		
+			$amout = 0;
+			$produto_assinatura = '';
+			foreach($recorrencia as $rec){
+				if($rec->usar_valor_vindi == 1){
+					$amout = $rec->valor_total;
+				}else{
+					$amout = $amout + $rec->valor_total;
+				}
+				$produto_assinatura = $rec->produto_assinatura;
+			}
+
+			$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+
+		}
+		exit;
 		
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
@@ -9316,7 +9335,7 @@ class index extends controller {
 
 				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
 					$status = 4;
-						$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
 				}else{
 					$status = 1;
 				}

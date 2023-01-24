@@ -501,6 +501,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		padding-bottom: 50px;
 		font-size: 16px;
 		color:#333;
+		background: white;
 	}
 
 	.ajuste_botoes_carrinho_d{
@@ -1241,6 +1242,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		padding-bottom: 50px;
 		font-size: 16px;
 		color:#333;
+		background: white;
 	}
 
 	.ajuste_botoes_carrinho_d{
@@ -1634,6 +1636,12 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		text-align:center;
 		border: 2px solid #666;
 		border-radius: 5px;
+	}
+	.cadastro_msg_interna{
+		font-size: 15px;
+		color:#666;
+		padding-bottom: 20px;
+		background: white;
 	}
 	#login_erro_fundo{
 		position: fixed;

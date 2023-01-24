@@ -10734,6 +10734,7 @@ class index extends controller {
 	        //carrega view e envia dados para a tela
 			$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 			$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];
+			echo'<pre>';print_r($dados);exit;
 			$this->view('pedido', $dados);
 
 		} else {
@@ -10839,7 +10840,7 @@ class index extends controller {
 		// envia o email
 		$envio = new model_envio();
 		$retorno = $envio->enviar("Nova interação no Pedido $pedido_id", $msg, $array_lista);
-		echo'<pre>';print_r($data_pedido);exit;
+		
 		$this->msg("Enviado com sucesso!");
 		$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
 	}

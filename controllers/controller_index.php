@@ -2456,7 +2456,7 @@ class index extends controller {
 
 		// retorno de dados caso erro
 		function retorno_erro($msg){
-			echo "<div style='padding;20px;' >".$msg."</div>";	
+			echo "<div style='padding;20px; background:white' >".$msg."</div>";	
 			exit;
 		}
 

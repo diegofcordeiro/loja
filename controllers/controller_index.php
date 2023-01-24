@@ -9307,7 +9307,7 @@ class index extends controller {
 				$produto_assinatura = $rec->produto_assinatura;
 			}
 
-			$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+			$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
 
 		}
 		exit;

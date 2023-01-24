@@ -1859,9 +1859,9 @@
 		
 		function finalizar_cadastro(){
 
-			// $('#modal_janela').modal('show');
-			// $('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
-			$('#modal_load').modal('show');
+			$('#modal_janela').modal('show');
+			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
+			// $('#modal_load').modal('show');
 
 			var dados = $("#cadastro_form").serialize();
 
@@ -1869,22 +1869,23 @@
 				// if(data){
 				// 	$('#modal_conteudo').html(data);
 				// }
+				$('#modal_conteudo').html(data);
 				console.log(data.length);
 				console.log(data);
-				if(data.length != 127){
-					$('#modal_load').modal('hide');
-					$('#modal_janela').modal('show');
-					$('#modal_conteudo').html(data);
-				}else{
-					$('#modal_conteudo_loading').html(data);
-				}
+				// if(data.length != 127){
+				// 	$('#modal_load').modal('hide');
+				// 	$('#modal_janela').modal('show');
+				// 	$('#modal_conteudo').html(data);
+				// }else{
+				// 	$('#modal_conteudo_loading').html(data);
+				// }
 			});
 			
 		} 
 
 		function cadastro_cidades(estado, cidade = null){
 			
-			$('#cadastro_cidade_div').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+			$('#cadastro_cidade_div').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
 
 			$.post('<?=DOMINIO?><?=$controller?>/cidades', {estado: estado, cidade: cidade},function(data){
 				if(data){

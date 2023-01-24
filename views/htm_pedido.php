@@ -1151,8 +1151,8 @@
 								<input type="hidden"  id="brand_" name="brand_">
 								<input type="hidden"  name="vindi_key" value="<?=$forma_pagamento->vindi_key?>">
 
-								<input type="hidden"  name="is_brasil" value="<?=$is_brasil?>">
-								<input type="hidden"  name="is_brasil_address" value="<?=$is_brasil_address?>">
+								<input type="hidden"  name="is_brasil" value="<?=$data_dados->is_brasil?>">
+								<input type="hidden"  name="is_brasil_address" value="<?=$data_dados->is_brasil_address?>">
 								
 								<input type="hidden"  name="vindi_url" value="<?=$forma_pagamento->vindi_url?>">
 								<input type="hidden" name="forma_pagamento" value="<?=$forma_pagamento->id?>">
@@ -1162,9 +1162,9 @@
 									<div class="col-xs-12">
 										<div class="div_form" >
 											<label>País</label><br>
-											<input type="radio" id="Brasil_doc" name="country_document" <?= $is_brasil == 1 ? 'checked':'' ?>  value="1">
+											<input type="radio" id="Brasil_doc" name="country_document" <?= $data_dados->is_brasil == 1 ? 'checked':'' ?>  value="1">
 											<label for="Brasil">Brasil </label>
-											<input type="radio" id="Outros_doc" name="country_document" <?= $is_brasil == 0 ? 'checked':'' ?>  value="0">
+											<input type="radio" id="Outros_doc" name="country_document" <?= $data_dados->is_brasil == 0 ? 'checked':'' ?>  value="0">
 											<label for="Outros">Outros</label><br>
 										</div>
 									</div>
@@ -1199,9 +1199,9 @@
 									</div>
 									<div class="col-xs-4 col-md-4">
 										<div class="form-group">												
-												<label for="tel" id="label_cpf"><?= $is_brasil == 1 ? 'CPF':'Documento' ?></label>
-												<input type="text" style="<?= $is_brasil == 1 ? '':'display: none' ?>" class="form-control" name="cpf" id="cpf"  placeholder="CPF" value="<?=$cpf?>" required/>
-												<input type="text" style="<?= $is_brasil == 0 ? '':'display: none' ?>" class="form-control" name="cpf_outros" id="documento_cpf"  placeholder="Documento" value="<?=$cpf?>" required/>
+												<label for="tel" id="label_cpf"><?= $data_dados->is_brasil == 1 ? 'CPF':'Documento' ?></label>
+												<input type="text" style="<?= $data_dados->is_brasil == 1 ? '':'display: none' ?>" class="form-control" name="cpf" id="cpf"  placeholder="CPF" value="<?=$cpf?>" required/>
+												<input type="text" style="<?= $data_dados->is_brasil == 0 ? '':'display: none' ?>" class="form-control" name="cpf_outros" id="documento_cpf"  placeholder="Documento" value="<?=$cpf?>" required/>
 										</div>
 									</div>
 								</div>
@@ -1210,15 +1210,15 @@
 									<div class="col-xs-12">
 										<div class="div_form" >
 											<label>País</label><br>
-											<input type="radio" id="Brasil_end" name="country_endereco" <?= $is_brasil_address == 1 ? 'checked':'' ?> value="1">
+											<input type="radio" id="Brasil_end" name="country_endereco" <?= $data_dados->is_brasil_address == 1 ? 'checked':'' ?> value="1">
 											<label for="Brasil">Brasil </label>
-											<input type="radio" id="Outros_end" name="country_endereco" <?= $is_brasil_address == 0 ? 'checked':'' ?> value="0">
+											<input type="radio" id="Outros_end" name="country_endereco" <?= $data_dados->is_brasil_address == 0 ? 'checked':'' ?> value="0">
 											<label for="Outros">Outros</label><br>
 										</div>
 									</div>
 								</div>
 								<br>				
-								<div class="endereco_brasil" style="<?= $is_brasil_address == 1 ? '':'display: none' ?>">
+								<div class="endereco_brasil" style="<?= $data_dados->is_brasil_address == 1 ? '':'display: none' ?>">
 									<div class="row">
 										<div class="col-xs-10">
 											<div class="form-group">
@@ -1275,7 +1275,7 @@
 
 								
 			
-								<div class="endereco_outros" style="<?= $is_brasil_address == 0 ? '':'display: none' ?>">
+								<div class="endereco_outros" style="<?= $data_dados->is_brasil_address == 0 ? '':'display: none' ?>">
 									<div class="row">
 										<div class="col-xs-10">
 											<div class="form-group">

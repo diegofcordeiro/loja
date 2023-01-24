@@ -1616,13 +1616,15 @@
 
 			var dados = $('#formlogin').serialize();
 
-			// $('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
-			// $('#modal_janela').modal('show');
-			$('#modal_load').modal('show');
+			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:250px;'></div>");
+			$('#modal_janela').modal('show');
+			$('#fecharmodal').hide();
+			// $('#modal_load').modal('show');
 
 			$.post('<?=DOMINIO?><?=$controller?>/login', dados,function(data){
 				console.log(data.length);
 				console.log(data);
+				$('#fecharmodal').show();
 				if(data.length != 88){
 					$('#modal_load').modal('hide');
 					$('#modal_janela').modal('show');

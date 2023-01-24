@@ -927,6 +927,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		font-size: 15px;
 		color:#666;
 		padding-bottom: 20px;
+		background: white;
 	}
 
 	#login_erro_fundo{
@@ -1633,11 +1634,6 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		text-align:center;
 		border: 2px solid #666;
 		border-radius: 5px;
-	}
-	.cadastro_msg_interna{
-		font-size: 15px;
-		color:#666;
-		padding-bottom: 20px;
 	}
 	#login_erro_fundo{
 		position: fixed;

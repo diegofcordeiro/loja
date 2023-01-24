@@ -37,6 +37,9 @@ h1, h2, h3, h4, h5, h6 {
   opacity: .7 !important;
 }
 
+.modal_conteudo{
+  background:white !important;
+}
 .navbar-toggle {
   background-color: #000;
 }

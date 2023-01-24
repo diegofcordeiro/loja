@@ -9185,8 +9185,12 @@ class index extends controller {
 		$customerService = new Vindi\Customer($arguments);
 		$paymentProfile = new Vindi\PaymentProfile($arguments);
 		$productService = new Vindi\Product;
-		
-		$cpf = $_POST['cpf'];
+		$is_brasil = $_POST['is_brasil'];
+		if($is_brasil == 0){
+			$cpf = $_POST['cpf_outros'];
+		}else{
+			$cpf = $_POST['cpf'];
+		}
 		$recorrencia = 0;
 		$email = $_POST['email'];
 		$name = $_POST['nomeCompleto'];
@@ -9202,8 +9206,6 @@ class index extends controller {
 
 		$cod = $_POST['codigo'];
 
-		echo'<pre>';
-		print_r($_POST);exit;
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([

@@ -1694,7 +1694,8 @@
 		function finaliza_pedido(){
 			
 			$("#modal_janela").modal("show");
-			$("#modal_conteudo").html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
+			$('#fecharmodal').hide();
+			$("#modal_conteudo").html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:250px;'></div>");
 			
 			$.post('<?=DOMINIO?><?=$controller?>/fechar_pedido','',function(data){
 				
@@ -1714,6 +1715,7 @@
 						if(retorno.erro_cod == '2'){
 							window.location='<?=DOMINIO?><?=$controller?>/entrar';
 						} else {
+							$('#fecharmodal').show();
 							$("#modal_conteudo").html("<div class='carrinho_erro'>"+retorno.erro_msg+"</div>");
 						}
 					}            
@@ -1723,7 +1725,7 @@
 
 		function cidades(estado, selecionado = null){
 
-			$('#cidade_div').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+			$('#cidade_div').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
 
 			$.post('<?=DOMINIO?><?=$controller?>/balcoes_cidades', {estado: estado, selecionado: selecionado},function(data){
 				if(data){
@@ -1738,7 +1740,7 @@
 
 		function lista_balcoes(estado, cidade){
 
-			$('#lista_balcoes').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+			$('#lista_balcoes').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
 
 			$.post('<?=DOMINIO?><?=$controller?>/balcoes_lista_carrinho', {estado: estado, cidade: cidade, subtotal: '<?=$carrinho['subtotal']?>', selecionado:'<?=$data_pedido->frete_balcao?>'},function(data){
 				if(data){
@@ -1754,7 +1756,7 @@
 
 		function atualiza_lista_produtos(){
 			
-			$('#lista_produtos').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+			$('#lista_produtos').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
 
 			$.post('<?=DOMINIO?><?=$controller?>/lista_carrinho', { token:'<?=time()?>' },function(data){
 				if(data){
@@ -1783,7 +1785,7 @@
 			});
 		}
 		function atualiza_valores(){
-			$('#lista_valores').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+			$('#lista_valores').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
 			$.post('<?=DOMINIO?><?=$controller?>/lista_valores', { token:'<?=time()?>' },function(data){
 				if(data){
 					$('#lista_valores').html(data);
@@ -1801,7 +1803,7 @@
 		function verifica_cep(){
 			var cep = $('#cep').val();
 			if(cep){
-				$('#lista_frete').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+				$('#lista_frete').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
 				$.post('<?=DOMINIO?><?=$controller?>/carrinho_cep', { token:'<?=time()?>', cep: cep },function(data){
 					if(data){
 						atualiza_valores();
@@ -1811,7 +1813,7 @@
 			}
 		}
 		function seleciona_frete(id, valor){
-			$('#lista_valores').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+			$('#lista_valores').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
 			$.post('<?=DOMINIO?><?=$controller?>/carrinho_frete/id/'+id+'/valor_subtotal/'+valor, { token:'<?=time()?>' },function(data){
 				if(data){
 					atualiza_valores();

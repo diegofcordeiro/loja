@@ -47,7 +47,7 @@
 
   function cidades(estado){
     
-    $('#cidade_div').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+    $('#cidade_div').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
     
     $.post('<?=DOMINIO?>produtos/balcoes_cidades', {estado: estado},function(data){
       if(data){
@@ -59,7 +59,7 @@
   
   function lista_balcoes(estado, cidade){
     
-    $('#lista_balcoes').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+    $('#lista_balcoes').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
     
     $.post('<?=DOMINIO?>produtos/balcoes_lista', {estado: estado, cidade: cidade},function(data){
       if(data){

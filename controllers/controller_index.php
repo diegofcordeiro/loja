@@ -9304,10 +9304,7 @@ class index extends controller {
 				}
 				$produto_assinatura = $rec->produto_assinatura;
 			}
-			foreach($recorrencia as $rec_lms){
-						$this->integrar_trilha_lms($rec_lms->produto_ref,$cod, $cpf);
-					}
-					exit;
+
 			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
 			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
 

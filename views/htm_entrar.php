@@ -1625,13 +1625,14 @@
 				console.log(data.length);
 				console.log(data);
 				$('#fecharmodal').show();
-				if(data.length != 88){
-					$('#modal_load').modal('hide');
-					$('#modal_janela').modal('show');
-					$('#modal_conteudo').html(data);
-				}else{
-					$('#modal_conteudo_loading').html(data);
-				}
+				$('#modal_conteudo').html(data);
+				// if(data.length != 88){
+				// 	$('#modal_load').modal('hide');
+				// 	$('#modal_janela').modal('show');
+				// 	$('#modal_conteudo').html(data);
+				// }else{
+				// 	$('#modal_conteudo_loading').html(data);
+				// }
 			});
 
 		}

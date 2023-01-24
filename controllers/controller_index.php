@@ -9292,7 +9292,7 @@ class index extends controller {
 		}	
 		
 		// TEST /////
-		// echo '<pre>'; print_r($recorrentes);exit;
+		echo '<pre>'; print_r($recorrentes);exit;
 	
 		foreach($recorrentes as $key => $recorrencia){
 		

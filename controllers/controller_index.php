@@ -9202,6 +9202,8 @@ class index extends controller {
 
 		$cod = $_POST['codigo'];
 
+		echo'<pre>';
+		print_r($_POST);exit;
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([

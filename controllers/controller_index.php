@@ -9295,7 +9295,8 @@ class index extends controller {
 		
 	
 		foreach($recorrentes as $key => $recorrencia){
-		
+			echo '<pre>'; print_r($key);
+			echo '<br>'; print_r($recorrencia);
 			$amout = 0;
 			$produto_assinatura = '';
 			foreach($recorrencia as $rec){
@@ -9305,9 +9306,10 @@ class index extends controller {
 					$amout = $amout + $rec->valor_total;
 				}
 				$produto_assinatura = $rec->produto_assinatura;
+				echo '<br>'; print_r($rec->produto_ref);
+				// $this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
 			}
-			echo '<pre>'; print_r($rec->produto_ref);
-			// $this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+			
 
 		}
 		exit;

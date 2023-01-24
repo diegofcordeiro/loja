@@ -9306,8 +9306,8 @@ class index extends controller {
 				}
 				$produto_assinatura = $rec->produto_assinatura;
 			}
-			echo '<pre>'; print_r($rec->produto_ref);exit;
-			$this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
+			echo '<pre>'; print_r($rec->produto_ref);
+			// $this->integrar_trilha_lms($rec->produto_ref,$cod, $cpf);
 
 		}
 		exit;

@@ -9477,7 +9477,7 @@ class index extends controller {
 					}
 				}	
 			}
-			print_r($data_array);exit;
+			
 			foreach($data_array as $data){
 				$id_usuario 				= $data['id_usuario'];
 				$id_perfil 					= $data['id_perfil'];
@@ -9486,6 +9486,7 @@ class index extends controller {
 
 				$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
 				if($exit_line == 0){
+					print_r($data);exit;
 					$delete_query = "DELETE FROM curso_matricula WHERE id_usuario= '$id_usuario' AND id_perfil= '$id_perfil' AND id_trilha= '$id_trilha' AND id_curso= '$id_curso' ";
 					$mysqli->query($delete_query);
 				}

@@ -882,7 +882,7 @@
 											<th>Pedido</th>
 											<th>Valor</th>
 											<th>Status</th>
-											<th>Mensagens</th>
+											<!-- <th>Mensagens</th> -->
 											<th>Ações</th>
 										</tr>
 									</thead>
@@ -921,11 +921,10 @@
 											}
 											echo "
 											<tr>
-											<td><a href='$endereco' >".$value['data']."</a></td>
-											<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
-											<td><a href='$endereco' >R$ ".$value_tot."</a></td>
-											<td><a href='$endereco' >".$value['status']."</a></td>
-											<td><a href='$endereco' style='color:blue;' >".$mensagens."</a></td>
+												<td><a href='$endereco' >".$value['data']."</a></td>
+												<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
+												<td><a href='$endereco' >R$ ".$value_tot."</a></td>
+												<td><a href='$endereco' >".$value['status']."</a></td>
 											<td>$est</td>
 											</tr>
 											";
@@ -935,7 +934,7 @@
 									if($n == 0){
 										echo "
 										<tr>
-										<td colspan='5' style='text-align:center; padding:30px;' >Nenhum pedido encontrado</td> 
+										<td colspan='4' style='text-align:center; padding:30px;' >Nenhum pedido encontrado</td> 
 										</tr>
 										";
 									}

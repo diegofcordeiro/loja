@@ -9610,27 +9610,27 @@ class index extends controller {
 
 		switch ($event->type) {
 			case 'subscription_canceled':
-				$fp = fopen('subscription_canceled.json', "a");
+				$fp = fopen('/var/www/html/loja/controllers/subscription_canceled.json', "w");
 				fwrite($fp, json_encode($event));
 				fclose($fp);
 				break;
 			case 'subscription_created':
-				$fp = fopen('subscription_created.json', "a");
+				$fp = fopen('/var/www/html/loja/controllers/subscription_created.json', "w");
 				fwrite($fp, json_encode($event));
 				fclose($fp);
 				break;
 			case 'charge_rejected':
-				$fp = fopen('charge_rejected.json', "a");
+				$fp = fopen('/var/www/html/loja/controllers/charge_rejected.json', "w");
 				fwrite($fp, json_encode($event));
 				fclose($fp);
 				break;
 			case 'bill_created':
-				$fp = fopen('bill_created.json', "a");
+				$fp = fopen('/var/www/html/loja/controllers/bill_created.json', "w");
 				fwrite($fp, json_encode($event));
 				fclose($fp);
 				break;
 			case 'bill_paid':
-				$fp = fopen('bill_paid.json', "a");
+				$fp = fopen('/var/www/html/loja/controllers/bill_paid.json', "w");
 				fwrite($fp, json_encode($event));
 				fclose($fp);
 				$id_charge 	= $event->data->charge->id;
@@ -9640,7 +9640,7 @@ class index extends controller {
 
 				break;
 			case 'charge_refunded':
-				$fp = fopen('charge_refunded.json', "a");
+				$fp = fopen('/var/www/html/loja/controllers/charge_refunded.json', "w");
 				fwrite($fp, json_encode($event));
 				fclose($fp);
 				$id_charge 	= $event->data->charge->id;

@@ -9716,6 +9716,15 @@ class index extends controller {
 				// $fp = fopen('/var/www/html/loja/controllers/charge_rejected.json', "w");
 				// fwrite($fp, json_encode($event));
 				// fclose($fp);
+				$id_charge = $event->data->charge->id;
+				$id_bill = $event->data->charge->bill->id;
+				$this->rejected_transaction($id_charge, $id_bill);
+		
+				$db = new mysql();
+				$db->alterar("pedido_loja_carrinho", array(
+					"status"=>1,
+				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
+
 				break;
 			case 'bill_created':
 				// $fp = fopen('/var/www/html/loja/controllers/bill_created.json', "w");

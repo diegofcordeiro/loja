@@ -9627,9 +9627,9 @@ class index extends controller {
 				fclose($fp);
 				break;
 			case 'charge_rejected':
-				$fp = fopen('/var/www/html/loja/controllers/charge_rejected.json', "w");
-				fwrite($fp, json_encode($event));
-				fclose($fp);
+				// $fp = fopen('/var/www/html/loja/controllers/charge_rejected.json', "w");
+				// fwrite($fp, json_encode($event));
+				// fclose($fp);
 				break;
 			case 'bill_created':
 				// $fp = fopen('/var/www/html/loja/controllers/bill_created.json', "w");

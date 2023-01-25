@@ -9588,19 +9588,14 @@ class index extends controller {
 		ini_set('display_startup_errors', 1);
 		print_r(error_get_last());
 		error_reporting(E_ALL);
-		$array = array(
-			"ada"=> 'a'
-		);
-		$fp = fopen('/var/www/html/loja/controllers/test1.json', "w");
-		fwrite($fp, json_encode($array));
-		fclose($fp);
+		// $array = array(
+		// 	"ada"=> 'a'
+		// );
+		// $fp = fopen('/var/www/html/loja/controllers/test1.json', "w");
+		// fwrite($fp, json_encode($array));
+		// fclose($fp);
 
-		// $myfile = fopen("/var/www/html/loja/controllers/test.json", "w") or die("Unable to open file!");
-		// $txt = "John Doe\n";
-		// fwrite($myfile, $txt);
-		// $txt = "Jane Doe\n";
-		// fwrite($myfile, $txt);
-		// fclose($myfile);
+
 	}
 	public function WebhookHandler(){
 

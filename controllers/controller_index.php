@@ -9622,7 +9622,9 @@ class index extends controller {
 
 				break;
 			case 'charge_refunded':
-
+				$fp = fopen('charge_refunded', "a");
+				fwrite($fp, json_encode($event));
+				fclose($fp);
 				$id_charge 	= $event->data->charge->id;
 				$id_bill 	= $event->data->charge->bill->id;
 

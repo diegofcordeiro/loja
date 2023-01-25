@@ -911,7 +911,7 @@
 											}
 											if($value['status_id'] == 1){
 												$link = $value['url_vindi'];
-												$est = "<a href='$link' class='btn_ac'>Pagar</a>";
+												$est = "<a href='$link' target='_blank' class='btn_ac'>Pagar</a>";
 
 											}
 											if($value['usar_valor_vindi'] == 1){

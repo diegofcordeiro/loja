@@ -9465,7 +9465,6 @@ class index extends controller {
 				
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
 				if ($result2 = $mysqli->query($sql2)) {
-					print_r("SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref'");
 					while ($obj2 = $result2->fetch_object()) {
 						$array = array(
 							'id_usuario' => $sessao_id->id_lms, 
@@ -9484,7 +9483,6 @@ class index extends controller {
 				}	
 			}
 
-			print_r($data_array);exit;
 			foreach($data_array as $data){
 				$id_usuario 				= $data['id_usuario'];
 				$id_perfil 					= $data['id_perfil'];

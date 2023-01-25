@@ -9462,11 +9462,11 @@ class index extends controller {
 
 			$data_array = array();
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
-			print_r($data_carrinho);
-
+				
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
 				if ($result2 = $mysqli->query($sql2)) {
 					while ($obj2 = $result2->fetch_object()) {
+						print_r($obj2);
 						$array = array(
 							'id_usuario' => $sessao_id->id_lms, 
 							'id_perfil' => 22,

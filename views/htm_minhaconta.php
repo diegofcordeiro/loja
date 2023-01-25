@@ -902,6 +902,9 @@
 													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
 												}
 											}
+											if($value['status_id'] == 1){
+												$endereco = $value['url_vindi'];
+											}
 											if($value['usar_valor_vindi'] == 1){
 												$value_tot = $value['valor_total_combo_vindi'];
 											}else{
@@ -1862,7 +1865,7 @@
 		
 		function cadastro_cidades(estado, cidade = null){
 			
-			$('#cadastro_cidade_div').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:30px;' ></div>");
+			$('#cadastro_cidade_div').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='border:0px; width:250px;' ></div>");
 
 			$.post('<?=DOMINIO?><?=$controller?>/cidades', {estado: estado, cidade: cidade},function(data){
 				if(data){

@@ -9586,6 +9586,7 @@ class index extends controller {
 	public function criar_json(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
+		print_r(error_get_last());
 		error_reporting(E_ALL);
 		$array = array(
 			"ada"=> 'a'

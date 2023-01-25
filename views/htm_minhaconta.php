@@ -921,10 +921,10 @@
 											}
 											echo "
 											<tr>
-												<td><a href='$endereco' >".$value['data']."</a></td>
-												<td><a href='$endereco' >Pedido ".$value['id']."</a></td>
-												<td><a href='$endereco' >R$ ".$value_tot."</a></td>
-												<td><a href='$endereco' >".$value['status']."</a></td>
+												<td>".$value['data']."</td>
+												<td>Pedido ".$value['id']."</td>
+												<td>R$ ".$value_tot."</td>
+												<td>".$value['status']."</td>
 											<td>$est</td>
 											</tr>
 											";

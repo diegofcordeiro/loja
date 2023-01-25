@@ -9593,17 +9593,17 @@ class index extends controller {
 		error_reporting(E_ALL);
 		echo '<pre>';
 
-		$str = file_get_contents('/var/www/html/loja/controllers/bill_paid.json');
+		$str = file_get_contents('/var/www/html/loja/controllers/charge_rejected.json');
     	$data = json_decode($str);
 
-		$id_charge = $data->data->bill->charges[0]->id;
-		$id_bill = $data->data->bill->id;
+		// $id_charge = $data->data->bill->charges[0]->id;
+		// $id_bill = $data->data->bill->id;
 
-		$this->integrar_trilha_lms_pago($id_charge, $id_bill);
-		$db = new mysql();
-		$db->alterar("pedido_loja_carrinho", array(
-			"status"=>4,
-		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
+		// $this->integrar_trilha_lms_pago($id_charge, $id_bill);
+		// $db = new mysql();
+		// $db->alterar("pedido_loja_carrinho", array(
+		// 	"status"=>4,
+		// ), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 		print_r($data);
 

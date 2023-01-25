@@ -30,7 +30,7 @@
 
 	<style type="text/css">
 		.btn_ac{
-			color: white;
+			color: white !important;
 			background: #747474;
 			padding: 4px 14px;
 			border-radius: 3px;

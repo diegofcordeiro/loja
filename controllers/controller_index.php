@@ -9483,25 +9483,11 @@ class index extends controller {
 				$id_perfil 					= $data['id_perfil'];
 				$id_trilha 					= $data['id_trilha'];
 				$id_curso 					= $data['id_curso'];
-				$status_curso 				= $data['status_curso'];
-				$data_matricula 			= $data['data_matricula'];
-				// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
-				$progresso 					= $data['progresso'];
-				$ativo_matricula 			= $data['ativo_matricula'];
-				
+
 				$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
 				if($exit_line == 0){
-					print_r($data);exit;
-				}
-				exit;
-				if($exit_line == 0){
-					$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
-						VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
-					$mysqli->query($sql_insert);
-				}else{
-					// $sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
-					$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
-					$mysqli->query($sql_update);
+					$delete_query = "DELETE FROM curso_matricula WHERE id_usuario= '$id_usuario' AND id_perfil= '$id_perfil' AND id_trilha= '$id_trilha' AND id_curso= '$id_curso' ";
+					$mysqli->query($delete_query);
 				}
 			}
 		}
@@ -9677,10 +9663,11 @@ class index extends controller {
 		print_r($id_bill);
 		echo '<br>';
 		$this->rejected_transaction($id_charge, $id_bill);
-		// $db = new mysql();
-		// $db->alterar("pedido_loja_carrinho", array(
-		// 	"status"=>4,
-		// ), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
+		
+		$db = new mysql();
+		$db->alterar("pedido_loja_carrinho", array(
+			"status"=>1,
+		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 		print_r($data);
 

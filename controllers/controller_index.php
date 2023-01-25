@@ -9596,7 +9596,7 @@ class index extends controller {
 		echo '<br>';
 		print_r($data->data->bill->id);
 		echo '<br>';
-		print_r($data->data->customer->email);
+		print_r($data->data->bill->customer->email);
 		echo '<br>';
 		print_r($data);
 

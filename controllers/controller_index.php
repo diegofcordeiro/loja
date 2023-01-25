@@ -9529,15 +9529,6 @@ class index extends controller {
 									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
 									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");
 		$sessao_id = $sessao_->fetch_object();
-		print_r("SELECT 
-										c.fisica_cpf  as cpf,
-										c.lms_usuario_id  as id_lms,
-										plc.sessao as sessao
-									FROM pedido_loja_carrinho plc
-									INNER JOIN pedido_loja pl on pl.codigo = plc.sessao 
-									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
-									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");exit;
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
 		if($linha_carrinho != 0){
@@ -9563,28 +9554,29 @@ class index extends controller {
 					}
 				}	
 			}
-		}
-		foreach($data_array as $data){
-			$id_usuario 				= $data['id_usuario'];
-			$id_perfil 					= $data['id_perfil'];
-			$id_trilha 					= $data['id_trilha'];
-			$id_curso 					= $data['id_curso'];
-			$status_curso 				= $data['status_curso'];
-			$data_matricula 			= $data['data_matricula'];
-			// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
-			$progresso 					= $data['progresso'];
-			$ativo_matricula 			= $data['ativo_matricula'];
-			
-			$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
+		
+			foreach($data_array as $data){
+				$id_usuario 				= $data['id_usuario'];
+				$id_perfil 					= $data['id_perfil'];
+				$id_trilha 					= $data['id_trilha'];
+				$id_curso 					= $data['id_curso'];
+				$status_curso 				= $data['status_curso'];
+				$data_matricula 			= $data['data_matricula'];
+				// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
+				$progresso 					= $data['progresso'];
+				$ativo_matricula 			= $data['ativo_matricula'];
+				
+				$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
 
-			if($exit_line == 0){
-				$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
-					VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
-				$mysqli->query($sql_insert);
-			}else{
-				// $sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
-				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
-				$mysqli->query($sql_update);
+				if($exit_line == 0){
+					$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
+						VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
+					$mysqli->query($sql_insert);
+				}else{
+					// $sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+					$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+					$mysqli->query($sql_update);
+				}
 			}
 		}
 

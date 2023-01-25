@@ -9592,18 +9592,16 @@ class index extends controller {
 
 		$str = file_get_contents('/var/www/html/loja/controllers/bill_paid.json');
     	$data = json_decode($str);
-		print_r($data->data->bill->charges[0]->id);
-		echo '<br>';
-		print_r($data->data->bill->id);
-		echo '<br>';
-		print_r($data->data->bill->customer->email);
-		echo '<br>';
-		print_r($data);
 
-		// $fp = fopen('/var/www/html/loja/controllers/test1.json', "w");
-		// fwrite($fp, json_encode($array));
-		// fclose($fp);
+		$id_charge = $data->data->bill->charges[0]->id;
+		$id_bill = $data->data->bill->id;
 
+		$this->integrar_trilha_lms_pago($id_charge, $id_bill);
+		
+		$db = new mysql();
+		$db->alterar("pedido_loja_carrinho", array(
+			"status"=>4,
+		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 	}
 	public function WebhookHandler(){
@@ -9634,13 +9632,17 @@ class index extends controller {
 				// fclose($fp);
 				break;
 			case 'bill_paid':
-				$fp = fopen('/var/www/html/loja/controllers/bill_paid.json', "w");
-				fwrite($fp, json_encode($event));
-				fclose($fp);
-				$id_charge 	= $event->data->charge->id;
-				$id_bill 	= $event->data->charge->bill->id;
+				// $fp = fopen('/var/www/html/loja/controllers/bill_paid.json', "w");
+				// fwrite($fp, json_encode($event));
+				// fclose($fp);
+				$id_charge = $event->data->bill->charges[0]->id;
+				$id_bill = $event->data->bill->id;
 
 				$this->integrar_trilha_lms_pago($id_charge, $id_bill);
+				$db = new mysql();
+				$db->alterar("pedido_loja_carrinho", array(
+					"status"=>4,
+				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 				break;
 			case 'charge_refunded':
@@ -9655,10 +9657,6 @@ class index extends controller {
 					"status"=>8,
 				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 				
-				// $db->alterar("pedido_loja", array(
-				// 	"status"=>8,
-				// ), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
-
 				break;
 			case 'test':
 

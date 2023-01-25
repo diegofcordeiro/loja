@@ -886,7 +886,8 @@
 												// echo '<pre>';print_r($valu);
 										foreach ($valu as $value) {
 
-											$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
+											$endereco = "";
+											// $endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
 											$estorno = DOMINIO.$controller."/vindi_estorno/codigo/".$value['charger_id'];
 											$est = '';
 											if($value['msg'] != 0){
@@ -903,7 +904,9 @@
 												}
 											}
 											if($value['status_id'] == 1){
-												$endereco = $value['url_vindi'];
+												$link = $value['url_vindi'];
+												$est = "<a href='$link' style='color:blue;'>Pagar</a>";
+
 											}
 											if($value['usar_valor_vindi'] == 1){
 												$value_tot = $value['valor_total_combo_vindi'];

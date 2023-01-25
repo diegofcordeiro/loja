@@ -9596,8 +9596,8 @@ class index extends controller {
 		$str = file_get_contents('/var/www/html/loja/controllers/charge_rejected.json');
     	$data = json_decode($str);
 
-		$id_charge = $data->data->bill->charges[0]->id;
-		$id_bill = $data->data->bill->id;
+		$id_charge = $data->data->charges->id;
+		$id_bill = $data->data->charger->bill->id;
 
 		print_r($id_charge);
 		echo '<br>';

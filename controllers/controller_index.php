@@ -9481,7 +9481,8 @@ class index extends controller {
 					}
 				}	
 			}
-		
+
+			print_r($data_array);exit;
 			foreach($data_array as $data){
 				$id_usuario 				= $data['id_usuario'];
 				$id_perfil 					= $data['id_perfil'];
@@ -9607,7 +9608,7 @@ class index extends controller {
 		print_r($data);
 
 	}
-	
+
 	public function WebhookHandler(){
 
 		require_once('vendor/autoload.php');	

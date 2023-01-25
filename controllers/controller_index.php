@@ -9596,9 +9596,13 @@ class index extends controller {
 		$str = file_get_contents('/var/www/html/loja/controllers/charge_rejected.json');
     	$data = json_decode($str);
 
-		// $id_charge = $data->data->bill->charges[0]->id;
-		// $id_bill = $data->data->bill->id;
+		$id_charge = $data->data->bill->charges[0]->id;
+		$id_bill = $data->data->bill->id;
 
+		print_r($id_charge);
+		echo '<br>';
+		print_r($id_bill);
+		echo '<br>';
 		// $this->integrar_trilha_lms_pago($id_charge, $id_bill);
 		// $db = new mysql();
 		// $db->alterar("pedido_loja_carrinho", array(

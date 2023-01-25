@@ -9591,7 +9591,7 @@ class index extends controller {
 		$array = array(
 			"ada"=> 'a'
 		);
-		$fp = fopen('test.json', "r");
+		$fp = fopen('/var/www/html/loja/controllers/test.json', "r");
 		fwrite($fp, json_encode($array));
 		fclose($fp);
 	}

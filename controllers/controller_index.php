@@ -9448,7 +9448,6 @@ class index extends controller {
 									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
 									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");
 		$sessao_id = $sessao_->fetch_object();
-		print_r($sessao_id);
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
@@ -9458,7 +9457,9 @@ class index extends controller {
 			while($data_carrinho = $coisas_carrinho->fetch_object()){
 				
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
+				
 				if ($result2 = $mysqli->query($sql2)) {
+					print_r($result2);
 					while ($obj2 = $result2->fetch_object()) {
 						$array = array(
 							'id_usuario' => $sessao_id->id_lms, 

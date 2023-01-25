@@ -29,6 +29,12 @@
 	<?php include_once('htm_css_resp.php'); ?>
 
 	<style type="text/css">
+		.btn_ac{
+			color: white;
+			background: #747474;
+			padding: 4px 14px;
+			border-radius: 3px;
+		}
 		.owl-theme .owl-dots .owl-dot span {	
 		width: 10px;
 		height: 10px;
@@ -900,12 +906,12 @@
 												$seven_days =  strtotime("+7 day", $value['data_compra']);
 
 												if($todays_date < $seven_days){
-													$est = "<a href='$estorno' style='color:blue;'>Estornar</a>";
+													$est = "<a href='$estorno' class='btn_ac'>Estornar</a>";
 												}
 											}
 											if($value['status_id'] == 1){
 												$link = $value['url_vindi'];
-												$est = "<a href='$link' style='color:blue;'>Pagar</a>";
+												$est = "<a href='$link' class='btn_ac'>Pagar</a>";
 
 											}
 											if($value['usar_valor_vindi'] == 1){

@@ -9588,9 +9588,12 @@ class index extends controller {
 		ini_set('display_startup_errors', 1);
 		print_r(error_get_last());
 		error_reporting(E_ALL);
-		// $array = array(
-		// 	"ada"=> 'a'
-		// );
+		echo '<pre>';
+
+		$str = file_get_contents('/var/www/html/loja/controllers/bill_paid.json');
+    	$data = json_decode($str);
+		print_r($data);
+
 		// $fp = fopen('/var/www/html/loja/controllers/test1.json', "w");
 		// fwrite($fp, json_encode($array));
 		// fclose($fp);

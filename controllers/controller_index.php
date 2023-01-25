@@ -9592,6 +9592,10 @@ class index extends controller {
 
 		$str = file_get_contents('/var/www/html/loja/controllers/bill_paid.json');
     	$data = json_decode($str);
+		print_r($data->data->charge->id);
+		echo '<br>';
+		print_r($data->data->charge->bill->id);
+		echo '<br>';
 		print_r($data);
 
 		// $fp = fopen('/var/www/html/loja/controllers/test1.json', "w");

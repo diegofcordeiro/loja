@@ -9461,7 +9461,6 @@ class index extends controller {
 				if ($result2 = $mysqli->query($sql2)) {
 					
 					while ($obj2 = $result2->fetch_object()) {
-						print_r($obj2);
 						$array = array(
 							'id_usuario' => $sessao_id->id_lms, 
 							'id_perfil' => 22,
@@ -9478,7 +9477,7 @@ class index extends controller {
 					}
 				}	
 			}
-			print_r($data_carrinho);exit;
+			print_r($data_array);exit;
 			foreach($data_array as $data){
 				$id_usuario 				= $data['id_usuario'];
 				$id_perfil 					= $data['id_perfil'];

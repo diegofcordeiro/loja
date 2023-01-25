@@ -9645,7 +9645,7 @@ class index extends controller {
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 	}
 
-	public function criar_json(){
+	public function rejeitar_json(){
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		print_r(error_get_last());
@@ -9667,6 +9667,28 @@ class index extends controller {
 		$db = new mysql();
 		$db->alterar("pedido_loja_carrinho", array(
 			"status"=>1,
+		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
+
+		print_r($data);
+
+	}
+	public function pagar_json(){
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		print_r(error_get_last());
+		error_reporting(E_ALL);
+		echo '<pre>';
+
+		$str = file_get_contents('/var/www/html/loja/controllers/bill_paid.json');
+    	$data = json_decode($str);
+
+		$id_charge = $data->data->bill->charges[0]->id;
+		$id_bill = $data->data->bill->id;
+
+		$this->integrar_trilha_lms_pago($id_charge, $id_bill);
+		$db = new mysql();
+		$db->alterar("pedido_loja_carrinho", array(
+			"status"=>4,
 		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 		print_r($data);

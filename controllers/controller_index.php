@@ -9477,7 +9477,7 @@ class index extends controller {
 					}
 				}	
 			}
-			print_r($data_array);exit;
+			
 			foreach($data_array as $data){
 				$id_usuario 				= $data['id_usuario'];
 				$id_perfil 					= $data['id_perfil'];
@@ -9490,7 +9490,10 @@ class index extends controller {
 				$ativo_matricula 			= $data['ativo_matricula'];
 				
 				$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
-
+				if($exit_line == 0){
+					print_r($data);exit;
+				}
+				exit;
 				if($exit_line == 0){
 					$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
 						VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";

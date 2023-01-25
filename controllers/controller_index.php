@@ -9529,7 +9529,14 @@ class index extends controller {
 									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
 									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");
 		$sessao_id = $sessao_->fetch_object();
-		print_r($sessao_id);exit;
+		print_r("SELECT 
+										c.fisica_cpf  as cpf,
+										c.lms_usuario_id  as id_lms,
+										plc.sessao as sessao
+									FROM pedido_loja_carrinho plc
+									INNER JOIN pedido_loja pl on pl.codigo = plc.sessao 
+									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
+									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");exit;
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 

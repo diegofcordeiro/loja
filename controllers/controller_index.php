@@ -6786,7 +6786,7 @@ class index extends controller {
 				}
 				$this->irpara(DOMINIO.$this->_controller."/carrinho");
 			}else{
-				echo '<pre>';print_r($produto);exit;
+				// echo '<pre>Produtos: ';print_r($produto);exit;
 				//confere se ja existe o pedido senão cria um novo pedido
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");
@@ -6824,6 +6824,8 @@ class index extends controller {
 				}
 				foreach($produto as $prod){
 					$data_produto = $produtos->carrega_produto_codigo($prod);
+					echo '<pre>Produtos: ';print_r($data_produto);exit;
+
 					if(isset($data_produto->id)){
 						$conexao = new mysql();
 						$tipo_envio = 3;

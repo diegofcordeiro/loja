@@ -902,6 +902,28 @@ class topos extends controller {
 		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/banner_admin');
 	}
 
+	public function banner_admin_apagar(){
+
+		$codigo = $this->get('codigo');
+
+		$this->valida($codigo);
+
+		$db = new mysql();
+		$exec = $db->executar("SELECT * FROM layout_topos WHERE codigo='$codigo' ");
+		$data = $exec->fetch_object();
+
+		if($data->banner_admin){
+			unlink('../arquivos/imagens/'.$data->banner_admin);
+		}
+
+		$db = new mysql();
+		$db->alterar("layout_topos", array(
+			"banner_admin"=>""
+		), " codigo='$codigo' ");
+
+		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/banner_admin');
+	}
+
 	public function logo_admin(){
 
 		$codigo = $this->get('codigo'); 
@@ -968,8 +990,6 @@ class topos extends controller {
 
 		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/fundo');
 	}
-
-
 
 	public function logo(){
 
@@ -1059,7 +1079,6 @@ class topos extends controller {
 
 		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/logo');
 	}
-
 
 	public function icone_novo(){
 
@@ -1284,9 +1303,6 @@ class topos extends controller {
 
 		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$topo_codigo.'/aba/icones');
 	}
-
-
-
 
 	public function botao_novo(){
 

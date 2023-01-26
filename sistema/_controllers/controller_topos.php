@@ -1016,6 +1016,28 @@ class topos extends controller {
 		}
 	}
 
+	public function logo_admin_apagar(){
+
+		$codigo = $this->get('codigo');
+
+		$this->valida($codigo);
+
+		$db = new mysql();
+		$exec = $db->executar("SELECT * FROM layout_topos WHERE codigo='$codigo' ");
+		$data = $exec->fetch_object();
+
+		if($data->logo){
+			unlink('../arquivos/imagens/'.$data->logo);
+		}
+
+		$db = new mysql();
+		$db->alterar("layout_topos", array(
+			"banner_admin"=>""
+		), " codigo='$codigo' ");
+
+		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/logo');
+	}
+
 	public function logo_apagar(){
 
 		$codigo = $this->get('codigo');

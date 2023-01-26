@@ -449,7 +449,7 @@
                 </div>
 
                 <div id="banner_admin" class="tab-pane <?php if($aba_selecionada == "banner_admin"){ echo "active"; } ?>" >
-                  <?php //if(!$data->logo){ ?>
+                  <?php if(!$banner_admin->banner_admin){ ?>
                     <form action="<?=$_base['objeto']?>banner_admin/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
@@ -476,7 +476,7 @@
                       </div>
 
                     </form>
-                  <?php //} else { ?>
+                  <?php } else { ?>
 
                     <div style="text-align:left;">
                       <img src="<?=PASTA_CLIENTE?>imagens/<?=$banner_admin->banner_admin?>" style="max-width:300px;" >
@@ -487,7 +487,7 @@
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
 
-                  <?php //} ?>
+                  <?php } ?>
                 </div>
 
                 <div id="logo_admin" class="tab-pane <?php if($aba_selecionada == "logo_admin"){ echo "active"; } ?>" >

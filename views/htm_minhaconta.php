@@ -923,7 +923,7 @@
 											<tr>
 												<td>".date('d/m/Y',$value['data_compra'])."</td>
 												<td>Pedido ".$value['id']."</td>
-												<td>R$ ".$value_tot."</td>
+												<td>R$ ".number_format($value_tot,2,",",".")."</td>
 												<td>".$value['status']."</td>
 											<td>$est</td>
 											</tr>

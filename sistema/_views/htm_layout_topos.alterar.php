@@ -24,7 +24,7 @@
 <![endif]-->
 
 <?php include_once('css.php'); ?>
-
+<?php print_r($banner_site);exit; ?>
 </head>
 <body class="hold-transition skin-blue <?php if($_base['menu_fechado'] == 1){ echo "sidebar-collapse"; } ?> sidebar-mini">
   <div class="wrapper">

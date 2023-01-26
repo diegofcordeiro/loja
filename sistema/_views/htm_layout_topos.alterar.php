@@ -359,7 +359,7 @@
                 </div>
 
                 <div id="fundo" class="tab-pane <?php if($aba_selecionada == "fundo"){ echo "active"; } ?>" >
-                  <?php if(!$data->fundo){ ?>
+                  <?php if(!$banner_site){ ?>
                     <form action="<?=$_base['objeto']?>fundo/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
@@ -391,7 +391,7 @@
                   <?php } else { ?>
                   <form action="<?=$_base['objeto']?>link_banner/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
                     <div style="text-align:left;">
-                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$data->fundo?>" style="max-width:300px;" >
+                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$banner_site?>" style="max-width:300px;" >
                     </div>
                     <br>
                     <span>Link do Banner - inclua o link completo <i>https://seulink.com.br</i></span><br>

@@ -237,6 +237,7 @@ class topos extends controller {
 		$config = new model_config();
 		$dados['data'] = $config->carrega_config();
 		$dados['banner_admin'] = $config->carrega_banner_admin();
+		$dados['banner_site'] = $config->carrega_banner_site();
 		$dados['logo_site'] = $config->carrega_logo_site();
 		
 		$dados['codigo'] = $codigo;

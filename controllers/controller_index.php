@@ -6909,7 +6909,7 @@ class index extends controller {
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
 						
-						print_r("SELECT * FROM combos where plano_id='$plano_id' ");
+						print_r("SELECT * FROM combos where plano_id='$plano_id' and id='$combo_id' ");
 						while($data_det = $coisas_det->fetch_object()){
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;

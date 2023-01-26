@@ -6905,7 +6905,7 @@ class index extends controller {
 						$plano_id = $_POST['plano_id'];
 
 						$conexao = new mysql();
-						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
+						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' and id='$combo_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
 						

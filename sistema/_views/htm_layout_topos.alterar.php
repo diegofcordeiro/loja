@@ -22,7 +22,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
+<?php echo '<pre>'; print_r($data);exit;?>
 <?php include_once('css.php'); ?>
 
 </head>
@@ -68,7 +68,7 @@
                   <a href="#logo" data-toggle="tab">Logo site</a>
                 </li>
                 <li <?php if($aba_selecionada == "fundo"){ echo "class='active'"; } ?> >
-                  <a href="#fundo" data-toggle="tab">Banner</a>
+                  <a href="#fundo" data-toggle="tab">Banner Site</a>
                 </li>
                 <li <?php if($aba_selecionada == "senha"){ echo "class='active'"; } ?> >
                   <a href="#senha" data-toggle="tab">Alterar Senha</a>
@@ -357,6 +357,7 @@
 
                   </form>
                 </div>
+
                 <div id="fundo" class="tab-pane <?php if($aba_selecionada == "fundo"){ echo "active"; } ?>" >
                   <?php if(!$data->fundo){ ?>
                     <form action="<?=$_base['objeto']?>fundo/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">

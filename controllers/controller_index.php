@@ -6824,8 +6824,6 @@ class index extends controller {
 				}
 				foreach($produto as $prod){
 					$data_produto = $produtos->carrega_produto_codigo($prod);
-					echo '<pre>Produtos: ';print_r($data_produto);exit;
-
 					if(isset($data_produto->id)){
 						$conexao = new mysql();
 						$tipo_envio = 3;
@@ -6910,6 +6908,7 @@ class index extends controller {
 						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
+						echo '<pre>coisas_det: ';print_r($coisas_det->fetch_object());exit;
 						
 						while($data_det = $coisas_det->fetch_object()){
 							$usar_discount = $data_det->usar_desconto;

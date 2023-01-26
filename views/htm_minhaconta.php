@@ -890,7 +890,7 @@
 									$n = 0;
 									foreach ($lista_pedidos as $key => $valu) {
 										foreach ($valu as $value) {
-											echo '<pre>';print_r($value);
+											// echo '<pre>';print_r($value);
 
 											$endereco = "";
 											// $endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
@@ -921,7 +921,7 @@
 											}
 											echo "
 											<tr>
-												<td>".$value['data']."</td>
+												<td>".date('d/m/Y',$value['data_compra'])."</td>
 												<td>Pedido ".$value['id']."</td>
 												<td>R$ ".$value_tot."</td>
 												<td>".$value['status']."</td>

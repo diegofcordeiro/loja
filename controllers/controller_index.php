@@ -6557,7 +6557,7 @@ class index extends controller {
 						}
 
 						$conexao = new mysql();
-						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
+						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' and id='$combo_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
 						while($data_det = $coisas_det->fetch_object()){
@@ -6579,8 +6579,6 @@ class index extends controller {
 							}
 						}
 
-
-						
 						$tam_altura = '';
 						$tam_largura = '';
 						if($data_produto->tipo != 0){
@@ -6909,12 +6907,9 @@ class index extends controller {
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
 						
-						print_r("SELECT * FROM combos where plano_id='$plano_id' and id='$combo_id' ");
 						while($data_det = $coisas_det->fetch_object()){
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
-							echo'<br>usar_desc: ';print_r($data_det->usar_desconto);
-							echo'<br>valor_combo_vindi: ';print_r($data_det->valor);
 						}
 						$usar_valor_vindi = $usar_discount;
 						if($usar_discount == 1){
@@ -6930,10 +6925,6 @@ class index extends controller {
 								$valor_total = $data_produto->valor;
 							}
 						}
-
-						echo'<pre>valor_total: ';print_r($valor_total);
-						echo'<br>valor_total_combo_vindi: ';print_r($valor_total_combo_vindi);
-						echo'<br>Usar desconto: ';print_r($usar_valor_vindi);exit;
 
 						$tam_altura = '';
 						$tam_largura = '';

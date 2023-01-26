@@ -6908,13 +6908,13 @@ class index extends controller {
 						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
-						echo '<pre>coisas_det: ';print_r($coisas_det->fetch_object());exit;
 						
 						while($data_det = $coisas_det->fetch_object()){
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
 							
 							echo'<br>usar_desc: ';print_r($data_det->usar_desconto);
+							echo'<br>valor_combo_vindi: ';print_r($data_det->valor);
 						}
 						$usar_valor_vindi = $usar_discount;
 						if($usar_discount == 1){

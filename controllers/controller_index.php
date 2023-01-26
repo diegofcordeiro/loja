@@ -6040,10 +6040,9 @@ class index extends controller {
 	public function carrinho_adicionar(){	
 		$dados = array();
 		$dados['_base'] = $this->_base();
-
 		$produtos = new model_produtos();
-
 		$cod_sessao = $this->_sessao;
+
 		if($_POST['produto']){
 			$produto = $_POST['produto'];
 		}else if($this->get('produto')){
@@ -6913,7 +6912,7 @@ class index extends controller {
 						while($data_det = $coisas_det->fetch_object()){
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
-							// echo'<pre>';print_r($data_det);exit;
+							echo'<pre>';print_r($data_det);exit;
 						}
 						$usar_valor_vindi = $usar_discount;
 						if($usar_discount == 1){

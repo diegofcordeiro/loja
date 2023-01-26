@@ -74,7 +74,7 @@
                   <a href="#senha" data-toggle="tab">Alterar Senha</a>
                 </li>
                 <li <?php if($aba_selecionada == "banner_admin"){ echo "class='active'"; } ?> >
-                  <a href="#banner_admin" data-toggle="tab">Alterar Banner admin</a>
+                  <a href="#banner_admin" data-toggle="tab">Imagem tela de login</a>
                 </li>
                 <li <?php if($aba_selecionada == "logo_admin"){ echo "class='active'"; } ?> >
                   <a href="#logo_admin" data-toggle="tab">Alterar Logo admin</a>

@@ -1026,8 +1026,8 @@ class topos extends controller {
 		$exec = $db->executar("SELECT * FROM layout_topos WHERE codigo='$codigo' ");
 		$data = $exec->fetch_object();
 
-		if($data->logo){
-			unlink('../arquivos/imagens/'.$data->logo);
+		if($data->banner_admin){
+			unlink('../arquivos/imagens/'.$data->banner_admin);
 		}
 
 		$db = new mysql();
@@ -1035,7 +1035,7 @@ class topos extends controller {
 			"banner_admin"=>""
 		), " codigo='$codigo' ");
 
-		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/logo');
+		$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/banner_admin');
 	}
 
 	public function logo_apagar(){

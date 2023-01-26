@@ -6929,6 +6929,10 @@ class index extends controller {
 							}
 						}
 
+						echo'<pre>valor_total: ';print_r($valor_total);
+						echo'<br>valor_total_combo_vindi: ';print_r($valor_total_combo_vindi);
+						echo'<br>Usar desconto: ';print_r($usar_valor_vindi);exit;
+
 						$tam_altura = '';
 						$tam_largura = '';
 						if($data_produto->tipo != 0){
@@ -7095,9 +7099,7 @@ class index extends controller {
 						$date_vencimento = $date_vencimento->format('Y-m-d');
 						$date_vencimento = strtotime($date_vencimento);
 						
-						echo'<pre>';print_r($valor_total);
-						echo'<br>';print_r($valor_total_combo_vindi);
-						echo'<br>';print_r($usar_valor_vindi);exit;
+						
 
 						//grava no banco
 						$conexao = new mysql();

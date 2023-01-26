@@ -24,7 +24,7 @@
 <![endif]-->
 
 <?php include_once('css.php'); ?>
-<?php print_r($banner_site->fundo);exit; ?>
+
 </head>
 <body class="hold-transition skin-blue <?php if($_base['menu_fechado'] == 1){ echo "sidebar-collapse"; } ?> sidebar-mini">
   <div class="wrapper">
@@ -359,7 +359,7 @@
                 </div>
 
                 <div id="fundo" class="tab-pane <?php if($aba_selecionada == "fundo"){ echo "active"; } ?>" >
-                  <?php if(!$banner_site){ ?>
+                  <?php if(!$banner_site->fundo){ ?>
                     <form action="<?=$_base['objeto']?>fundo/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
 
                       <fieldset> 
@@ -391,7 +391,7 @@
                   <?php } else { ?>
                   <form action="<?=$_base['objeto']?>link_banner/codigo/<?=$codigo?>" method="post" enctype="multipart/form-data">
                     <div style="text-align:left;">
-                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$banner_site?>" style="max-width:300px;" >
+                      <img src="<?=PASTA_CLIENTE?>imagens/<?=$banner_site->fundo?>" style="max-width:300px;" >
                     </div>
                     <br>
                     <span>Link do Banner - inclua o link completo <i>https://seulink.com.br</i></span><br>

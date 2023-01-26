@@ -525,7 +525,7 @@
                     </div>
 
                     <div style="text-align:left; padding-top:10px;">
-                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>logo_apagar/codigo/<?=$codigo?>');" >Apagar Imagem</button>
+                      <button type="button" class="btn btn-primary" onClick="confirma('<?=$_base['objeto']?>logo_admin_apagar/codigo/<?=$codigo?>');" >Apagar Imagem</button>
                       <button type="button" class="btn btn-default" onClick="window.location='<?=$_base['objeto']?>inicial';" >Voltar</button>
                     </div>
 

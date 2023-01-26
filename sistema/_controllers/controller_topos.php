@@ -890,7 +890,7 @@ class topos extends controller {
 					"banner_admin"=>$nome_arquivo
 				), " codigo='$codigo' ");
 
-				$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/logo');
+				$this->irpara(DOMINIO.$this->_controller.'/alterar/codigo/'.$codigo.'/aba/banner_admin');
 
 			} else {
 

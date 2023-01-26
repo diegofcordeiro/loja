@@ -6786,7 +6786,7 @@ class index extends controller {
 				}
 				$this->irpara(DOMINIO.$this->_controller."/carrinho");
 			}else{
-				// echo '<pre>';print_r($produto);exit;
+				echo '<pre>';print_r($produto);exit;
 				//confere se ja existe o pedido senão cria um novo pedido
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");

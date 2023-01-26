@@ -6912,7 +6912,7 @@ class index extends controller {
 						while($data_det = $coisas_det->fetch_object()){
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
-							echo'<pre>';print_r($data_det);exit;
+							
 						}
 						$usar_valor_vindi = $usar_discount;
 						if($usar_discount == 1){
@@ -7094,7 +7094,11 @@ class index extends controller {
 						$date_vencimento->modify($period); 
 						$date_vencimento = $date_vencimento->format('Y-m-d');
 						$date_vencimento = strtotime($date_vencimento);
-							
+						
+						echo'<pre>';print_r($valor_total);
+						echo'<br>';print_r($valor_total_combo_vindi);
+						echo'<br>';print_r($usar_valor_vindi);exit;
+
 						//grava no banco
 						$conexao = new mysql();
 						$conexao->inserir("pedido_loja_carrinho", array(

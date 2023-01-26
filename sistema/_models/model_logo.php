@@ -11,7 +11,7 @@ Class model_logo extends model{
 		if($data->logo){
 			return PASTA_CLIENTE.'img_logo/'.$data->logo; 
 		} else {
-			return LAYOUT."img/logo.png"; 
+			return LAYOUT."img/logo_default.png"; 
 		}        
     }
 	

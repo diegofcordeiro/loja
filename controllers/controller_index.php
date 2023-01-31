@@ -8428,45 +8428,59 @@ class index extends controller {
 
 
 				default:
-				echo 'Valor total do pedido: '; print_r($valor_total_pedido);exit;
+
+				// echo 'Valor total do pedido: '; print_r($valor_total_pedido);exit;
 				$vencimento_pedido = strtotime("+2 days");
-
 				$conexao = new mysql();
-				$conexao->alterar("pedido_loja", array(
-					"cadastro"=>$cadastro,
-					"vencimento"=>$vencimento_pedido,
-					"valor_produtos"=>$valor_subtotal,
-					"valor_produtos_desc"=>$total_descontos,
-					"valor_total"=>$valor_total_pedido,
-					"forma_pagamento"=>$formadepagamento,
-					"status"=>0
-				), " codigo='".$this->_sessao."' ");
 
-				// baixa estoque
-				$produtos->baixa_estoque($this->_sessao);
+				if($valor_total_pedido == 0){
+					$conexao->alterar("pedido_loja", array(
+						"cadastro"=>$cadastro,
+						"vencimento"=>$vencimento_pedido,
+						"valor_produtos"=>$valor_subtotal,
+						"valor_produtos_desc"=>$total_descontos,
+						"valor_total"=>$valor_total_pedido,
+						"forma_pagamento"=>$formadepagamento,
+						"status"=>4
+					), " codigo='".$this->_sessao."' ");
 
-				// envia email
-				$email_destino = $data_cadastro->email;
-				$envio->enviar("Confirmação de Pedido", $texto_email, array("0"=>"$email_destino"));
-				$envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
+				}else{
+					$conexao->alterar("pedido_loja", array(
+						"cadastro"=>$cadastro,
+						"vencimento"=>$vencimento_pedido,
+						"valor_produtos"=>$valor_subtotal,
+						"valor_produtos_desc"=>$total_descontos,
+						"valor_total"=>$valor_total_pedido,
+						"forma_pagamento"=>$formadepagamento,
+						"status"=>0
+					), " codigo='".$this->_sessao."' ");
+
+					// baixa estoque
+					$produtos->baixa_estoque($this->_sessao);
+
+					// envia email
+					$email_destino = $data_cadastro->email;
+					$envio->enviar("Confirmação de Pedido", $texto_email, array("0"=>"$email_destino"));
+					$envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
 
 
-				$codigo_pedido = $this->_sessao;
+					$codigo_pedido = $this->_sessao;
 
-				$novasessao = $this->gera_codigo();
-				$this->_sessao = $novasessao;
-				$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
+					$novasessao = $this->gera_codigo();
+					$this->_sessao = $novasessao;
+					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
 
 
-				// retorna
-				$ret_erro_cod = "0";
-				$ret_erro_msg = "";
-				$ret_processo = "ok";
-				$ret_forma = "condicional";
-				$ret_forma_code = "";
-				$ret_endereco = "";
+					// retorna
+					$ret_erro_cod = "0";
+					$ret_erro_msg = "";
+					$ret_processo = "ok";
+					$ret_forma = "condicional";
+					$ret_forma_code = "";
+					$ret_endereco = "";
 
-				mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
+					mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
+				}
 				exit;
 
 			}

@@ -8438,7 +8438,7 @@ class index extends controller {
 					$sessao = $this->_sessao;
 					$cpf = $_SESSION['usuario_cpf'];
 					
-					$produtos = $conexao->Executar("SELECT produto FROM pedido_loja_carrinho WHERE sessao='$sessao'");
+					$produtos = $conexao->Executar("SELECT produto_ref FROM pedido_loja_carrinho WHERE sessao='$sessao'");
 					while($data = $produtos->fetch_object()){
 						print_r($data->produto_ref);echo '<br>';
 						print_r($sessao);echo '<br>';

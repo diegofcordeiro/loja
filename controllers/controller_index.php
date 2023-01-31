@@ -8428,7 +8428,7 @@ class index extends controller {
 
 
 				default:
-
+				echo 'Valor total do pedido: '; print_r($valor_total_pedido);exit;
 				$vencimento_pedido = strtotime("+2 days");
 
 				$conexao = new mysql();
@@ -9254,11 +9254,9 @@ class index extends controller {
 				), " codigo='$cod' ");
 			}
 		}
-		
 		/////////  /////////////  /////////////
 
 		/////////////   NAO  RECCORENTE    /////////////
-
 		foreach($nao_recorrentes as $key => $recorrencia){
 			// ini_set('display_errors', 1);
 			// ini_set('display_startup_errors', 1);
@@ -9292,7 +9290,6 @@ class index extends controller {
 		}
 		/////////////  /////////////  /////////////
 			$this->view('finalizada', $dados);
-		
 	}
 
 	public function fina(){

@@ -8452,18 +8452,7 @@ class index extends controller {
 					$novasessao = $this->gera_codigo();
 					$this->_sessao = $novasessao;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
-
-					$dados = array();
-					$dados['_base'] = $this->_base();
-					$dados['objeto'] = DOMINIO.$this->_controller.'/';
-					$dados['controller'] = $this->_controller;
-					$dados['_cod_usuario'] = $this->_cod_usuario;
-					$dados['_sessao'] = $this->_sessao;
-					$dados['_acesso'] = $this->_acesso;
-					$dados['_nome_usuario'] = $this->_nome_usuario;
-					$dados['data_pagina'] = 'Finalizada';
-					$this->view('finalizada', $dados);
-
+					$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
 
 				}else{
 					$conexao->alterar("pedido_loja", array(

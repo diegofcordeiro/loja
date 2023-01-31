@@ -8452,6 +8452,7 @@ class index extends controller {
 					$novasessao = $this->gera_codigo();
 					$this->_sessao = $novasessao;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
+
 					$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
 
 				}else{
@@ -8490,8 +8491,8 @@ class index extends controller {
 					$ret_endereco = "";
 
 					mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
+					exit;
 				}
-				exit;
 
 			}
 

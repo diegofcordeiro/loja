@@ -8452,8 +8452,17 @@ class index extends controller {
 					$novasessao = $this->gera_codigo();
 					$this->_sessao = $novasessao;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
-					echo 'aqui';
-					header('Location: '.DOMINIO.$this->_controller.'/minhaconta');
+
+					// retorna
+					$ret_erro_cod = "0";
+					$ret_erro_msg = "";
+					$ret_processo = "gratis";
+					$ret_forma = "condicional";
+					$ret_forma_code = "";
+					$ret_endereco = "";
+
+					mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
+					exit;
 
 				}else{
 					$conexao->alterar("pedido_loja", array(

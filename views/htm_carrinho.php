@@ -1705,12 +1705,14 @@
 
 					var filtro = data.replace(/^\s+|\s+$/g, "");
 					var retorno = JSON.parse(filtro); 
-					
+					console.log(retorno.processo);
 					if(retorno.processo == 'ok'){
 						
 						window.location="<?=DOMINIO?><?=$controller?>/pedidos_detalhes/codigo/<?=$data_pedido->codigo?>/altera_sessao/true";
 						
-					} else {
+					} else if(retorno.processo == 'gratis') {
+						window.location="<?=DOMINIO?><?=$controller?>/minaconta";
+					}else{
 
 						if(retorno.erro_cod == '2'){
 							window.location='<?=DOMINIO?><?=$controller?>/entrar';

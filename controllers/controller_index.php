@@ -8453,7 +8453,7 @@ class index extends controller {
 					$this->_sessao = $novasessao;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
 					echo 'aqui';
-					$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
+					header('Location: '.DOMINIO.$this->_controller.'/minhaconta');
 
 				}else{
 					$conexao->alterar("pedido_loja", array(

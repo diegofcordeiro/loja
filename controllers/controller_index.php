@@ -8443,6 +8443,29 @@ class index extends controller {
 						"forma_pagamento"=>$formadepagamento,
 						"status"=>4
 					), " codigo='".$this->_sessao."' ");
+					// baixa estoque
+					$produtos->baixa_estoque($this->_sessao);
+
+					// envia email
+					$email_destino = $data_cadastro->email;
+					$envio->enviar("Confirmação de Pedido", $texto_email, array("0"=>"$email_destino"));
+					$envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
+
+
+					$codigo_pedido = $this->_sessao;
+
+					$novasessao = $this->gera_codigo();
+					$this->_sessao = $novasessao;
+					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
+
+
+					// retorna
+					$ret_erro_cod = "0";
+					$ret_erro_msg = "";
+					$ret_processo = "ok";
+					$ret_forma = "condicional";
+					$ret_forma_code = "";
+					$ret_endereco = "";
 
 				}else{
 					$conexao->alterar("pedido_loja", array(

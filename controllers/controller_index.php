@@ -8452,7 +8452,7 @@ class index extends controller {
 					$novasessao = $this->gera_codigo();
 					$this->_sessao = $novasessao;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
-
+					echo 'aqui';
 					$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
 
 				}else{

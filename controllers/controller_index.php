@@ -8443,29 +8443,27 @@ class index extends controller {
 						"forma_pagamento"=>$formadepagamento,
 						"status"=>4
 					), " codigo='".$this->_sessao."' ");
-					// baixa estoque
-					$produtos->baixa_estoque($this->_sessao);
 
-					// envia email
-					$email_destino = $data_cadastro->email;
-					$envio->enviar("Confirmação de Pedido", $texto_email, array("0"=>"$email_destino"));
-					$envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
-
+					$conexao->alterar("pedido_loja_carrinho", array(
+						"status"=>4
+					), " sessao='".$this->_sessao."' ");
 
 					$codigo_pedido = $this->_sessao;
-
 					$novasessao = $this->gera_codigo();
 					$this->_sessao = $novasessao;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
 
+					$dados = array();
+					$dados['_base'] = $this->_base();
+					$dados['objeto'] = DOMINIO.$this->_controller.'/';
+					$dados['controller'] = $this->_controller;
+					$dados['_cod_usuario'] = $this->_cod_usuario;
+					$dados['_sessao'] = $this->_sessao;
+					$dados['_acesso'] = $this->_acesso;
+					$dados['_nome_usuario'] = $this->_nome_usuario;
+					$dados['data_pagina'] = 'Finalizada';
+					$this->view('finalizada', $dados);
 
-					// retorna
-					$ret_erro_cod = "0";
-					$ret_erro_msg = "";
-					$ret_processo = "ok";
-					$ret_forma = "condicional";
-					$ret_forma_code = "";
-					$ret_endereco = "";
 
 				}else{
 					$conexao->alterar("pedido_loja", array(
@@ -9326,7 +9324,7 @@ class index extends controller {
 			}
 		}
 		/////////////  /////////////  /////////////
-			$this->view('finalizada', $dados);
+		$this->view('finalizada', $dados);
 	}
 
 	public function fina(){

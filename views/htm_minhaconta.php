@@ -901,14 +901,6 @@
 											} else {
 												$mensagens = "";
 											}
-											if($value['status_id'] == 4){
-												$todays_date = strtotime(date('Y-m-d'));
-												$seven_days =  strtotime("+7 day", $value['data_compra']);
-												
-												if($todays_date < $seven_days ){
-													$est = "<a href='$estorno' class='btn_ac'>Estornar</a>";
-												}
-											}
 											if($value['status_id'] == 1){
 												$link = $value['url_vindi'];
 												$est = "<a href='$link' target='_blank' class='btn_ac'>Pagar</a>";
@@ -918,6 +910,15 @@
 												$value_tot = $value['valor_total_combo_vindi'];
 											}else{
 												$value_tot = $value['valor_total_carrinho'];
+											}
+
+											if($value['status_id'] == 4){
+												$todays_date = strtotime(date('Y-m-d'));
+												$seven_days =  strtotime("+7 day", $value['data_compra']);
+												
+												if($todays_date < $seven_days || $value_tot != 0){
+													$est = "<a href='$estorno' class='btn_ac'>Estornar</a>";
+												}
 											}
 											echo "
 											<tr>

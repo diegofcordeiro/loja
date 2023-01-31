@@ -9309,34 +9309,48 @@ class index extends controller {
 			// ini_set('display_errors', 1);
 			// ini_set('display_startup_errors', 1);
 			// error_reporting(E_ALL);
-			print_r($recorrencia->valor_total);
-			exit;
-			$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
 
-			if(isset($bill->id)){
-				$id_charge = $bill->charges[0]->id;
-				$id_trans = $bill->id;
-				$url = $bill->url;
-
-				if($bill->status == 'paid'){ 
-					$status = 4;
-					$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
-				}else{
-					$status = 1;
-				}
+			if($recorrencia->valor_total == 0){
+				$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
 				$db = new mysql();
-				$db->alterar("pedido_loja_carrinho", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
-					"url_vindi"=>"$url",
-					"status"=>"$status",
-					
-				), " id='$recorrencia->id' ");
-				$db->alterar("pedido_loja", array(
-					"status"=>"$status",
-					
-				), " codigo='$cod' ");
+					$db->alterar("pedido_loja_carrinho", array(
+						"status"=>4,
+						
+					), " id='$recorrencia->id' ");
+					$db->alterar("pedido_loja", array(
+						"status"=>4,
+						
+					), " codigo='$cod' ");
+			}else{
+			
+				$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
+
+				if(isset($bill->id)){
+					$id_charge = $bill->charges[0]->id;
+					$id_trans = $bill->id;
+					$url = $bill->url;
+
+					if($bill->status == 'paid'){ 
+						$status = 4;
+						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+					}else{
+						$status = 1;
+					}
+					$db = new mysql();
+					$db->alterar("pedido_loja_carrinho", array(
+						"transacao_charger_id"=>"$id_charge",
+						"transacao_bill_id"=>"$id_trans",
+						"url_vindi"=>"$url",
+						"status"=>"$status",
+						
+					), " id='$recorrencia->id' ");
+					$db->alterar("pedido_loja", array(
+						"status"=>"$status",
+						
+					), " codigo='$cod' ");
+				}
 			}
+			
 		}
 
 		/////////////  /////////////  /////////////

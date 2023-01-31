@@ -2760,6 +2760,7 @@ class index extends controller {
 			}
 		}
 	}
+
 	public function adiciona_email_lms($email = NULL){
 		require('conexao.php');
 		$sql = "INSERT INTO usuario (nome) VALUES('$email');";
@@ -9293,6 +9294,7 @@ class index extends controller {
 			$this->view('finalizada', $dados);
 		
 	}
+
 	public function fina(){
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -9306,6 +9308,7 @@ class index extends controller {
 		$chave = $this->_layout;
 		$this->view('finalizada', $dados);
 	}
+
 	public function vindi_add_subscription($id_client,$payment_met,$plano,$prodId,$amout){
 		
 		$subscriptionService = new Vindi\Subscription;
@@ -9843,48 +9846,28 @@ class index extends controller {
 		require_once("api/nfe/init.php");
 		
 		NFe_io::setApiKey('ox28nBhAujjmff3MhD12Fd4LYvS1POv2cAwgZ3HhJ9LOYlVoLVxRcq3ogbR7mwrUpIg'); // Ache sua chave API no painel (https://app.nfe.io/account/apikeys)
-		// echo 'aqui 3';exit;
 		$invoiceCreated = NFe_ServiceInvoice::create(
-		// ID da empresa, você deve copiar exatamente como está no painel
 		'62a8ad08da661a1a14e1a6f5',
-		// Dados da nota fiscal de serviço
 		array(
-			// Código do serviço de acordo com o a cidade
 			'cityServiceCode' => '2690',
-			// Descrição dos serviços prestados
 			'description'     => 'TESTE EMISSAO',
-			// Valor total do serviços
 			'servicesAmount'  => 0.01,
-			// Dados do Tomador dos Serviços
 			'borrower' => array(
-			// CNPJ ou CPF (opcional para tomadores no exterior)
 			'federalTaxNumber' => 191,
-			// Nome da pessoa física ou Razão Social da Empresa
 			'name'             => 'BANCO DO BRASIL SA',
-			// Email para onde deverá ser enviado a nota fiscal
 			'email'            => 'drekehrer@gmail.com', // Para visualizar os e-mails https://www.mailinator.com/
-			// Endereço do tomador
 			'address'          => array(
-				// Código do pais com três letras
 				'country'               => 'BRA',
-				// CEP do endereço (opcional para tomadores no exterior)
 				'postalCode'            => '70073901',
 				// Logradouro
 				'street'                => 'Outros Quadra 1 Bloco G Lote 32',
-				// Número (opcional)
 				'number'                => 'S/N',
-				// Complemento (opcional)
 				'additionalInformation' => 'QUADRA 01 BLOCO G',
-				// Bairro
 				'district'              => 'Asa Sul',
-				// Cidade é opcional para tomadores no exterior
 				'city' => array(
-					// Código do IBGE para a Cidade
 					'code' => '5300108',
-					// Nome da Cidade
 					'name' => 'Brasilia'
 				),
-				// Sigla do estado (opcional para tomadores no exterior)
 				'state' => 'DF'
 			)
 			)

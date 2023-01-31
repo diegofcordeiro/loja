@@ -8434,6 +8434,25 @@ class index extends controller {
 				$conexao = new mysql();
 
 				if($valor_total_pedido == 0){
+
+
+					$sessao = $this->_sessao;
+					$todos_produtos = array();
+					echo '<pre>';
+					$produtos = $conexao->Executar("SELECT produto FROM pedido_loja_carrinho WHERE sessao='$sessao'");
+					while($data = $produtos->fetch_object()){
+						print_r($data);
+					}
+
+					exit;
+
+
+
+					$this->integrar_trilha_lms($rec_lms->produto_ref,$cod, $cpf);
+
+
+
+
 					$conexao->alterar("pedido_loja", array(
 						"cadastro"=>$cadastro,
 						"vencimento"=>$vencimento_pedido,
@@ -8447,6 +8466,7 @@ class index extends controller {
 					$conexao->alterar("pedido_loja_carrinho", array(
 						"status"=>4
 					), " sessao='".$this->_sessao."' ");
+
 
 					$codigo_pedido = $this->_sessao;
 					$novasessao = $this->gera_codigo();

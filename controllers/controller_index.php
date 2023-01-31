@@ -8441,9 +8441,10 @@ class index extends controller {
 					echo '<pre>';
 					$produtos = $conexao->Executar("SELECT produto FROM pedido_loja_carrinho WHERE sessao='$sessao'");
 					while($data = $produtos->fetch_object()){
-						print_r($data);
+						array_push($todos_produtos,$data);
 					}
 
+					print_r($todos_produtos);
 					exit;
 
 

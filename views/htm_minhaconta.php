@@ -890,7 +890,7 @@
 									$n = 0;
 									foreach ($lista_pedidos as $key => $valu) {
 										foreach ($valu as $value) {
-											// echo '<pre>';print_r($value);
+											echo '<pre>';print_r($value);
 
 											$endereco = "";
 											// $endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
@@ -904,8 +904,8 @@
 											if($value['status_id'] == 4){
 												$todays_date = strtotime(date('Y-m-d'));
 												$seven_days =  strtotime("+7 day", $value['data_compra']);
-
-												if($todays_date > $seven_days){
+												
+												if($todays_date < $seven_days ){
 													$est = "<a href='$estorno' class='btn_ac'>Estornar</a>";
 												}
 											}

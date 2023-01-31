@@ -8435,25 +8435,13 @@ class index extends controller {
 
 				if($valor_total_pedido == 0){
 
-
 					$sessao = $this->_sessao;
 					$cpf = $_SESSION['usuario_cpf'];
 					
-					echo '<pre>'.$cpf.'--';
 					$produtos = $conexao->Executar("SELECT produto FROM pedido_loja_carrinho WHERE sessao='$sessao'");
 					while($data = $produtos->fetch_object()){
-						print_r($data->produto);
-						// $this->integrar_trilha_lms($rec_lms->produto_ref,$cod, $cpf);
+						$this->integrar_trilha_lms($data->produto,$sessao, $cpf);
 					}
-
-					exit;
-
-
-
-					
-
-
-
 
 					$conexao->alterar("pedido_loja", array(
 						"cadastro"=>$cadastro,

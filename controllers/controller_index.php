@@ -8440,9 +8440,13 @@ class index extends controller {
 					
 					$produtos = $conexao->Executar("SELECT produto FROM pedido_loja_carrinho WHERE sessao='$sessao'");
 					while($data = $produtos->fetch_object()){
-						$this->integrar_trilha_lms($data->produto,$sessao, $cpf);
+						print_r($data->produto);echo '<br>';
+						print_r($sessao);echo '<br>';
+						print_r($cpf);echo '<br>';
+						echo '------';
+						// $this->integrar_trilha_lms($data->produto,$sessao, $cpf);
 					}
-
+					exit;
 					$conexao->alterar("pedido_loja", array(
 						"cadastro"=>$cadastro,
 						"vencimento"=>$vencimento_pedido,

@@ -1860,7 +1860,7 @@
 		function salvar(){
 
 			$('#modal_janela').modal('show');
-			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
+			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:250px;'></div>");
 
 			var dados = $("#cadastro_form").serialize();
 

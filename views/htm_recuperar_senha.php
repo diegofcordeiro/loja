@@ -1529,11 +1529,13 @@
 
 			var dados = $('#recuperar').serialize();
 
-			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
+			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:250px;'></div>");
 			$('#modal_janela').modal('show');
+			$('#fecharmodal').hide();
 
 			$.post('<?=DOMINIO?><?=$controller?>/recuperar_senha_enviar', dados,function(data){
 				if(data){
+					$('#fecharmodal').show();
 					$('#modal_conteudo').html(data);
 				}
 			});

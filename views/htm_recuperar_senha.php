@@ -1536,7 +1536,8 @@
 			$.post('<?=DOMINIO?><?=$controller?>/recuperar_senha_enviar', dados,function(data){
 				if(data){
 					$('#fecharmodal').show();
-					$('#modal_conteudo').html(data);
+					$('#modal_conteudo').css('background', 'white !important');
+					$('#modal_conteudo').html("data");
 				}
 			});
 

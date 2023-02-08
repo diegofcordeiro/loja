@@ -515,8 +515,8 @@ body{font-family: 'Roboto' !important;}
     .box_renew2{background: #fff;padding: 20px;border-radius: 4px;margin-bottom: 20px;}
     .box_texto{min-height: 0px !important;color: #2C3E50;font-size: 16px;}
     .img_foto_{
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 110%;

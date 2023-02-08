@@ -11616,17 +11616,17 @@ class index extends controller {
 
 		// } else {
 			
-			$ip = $_SERVER['REMOTE_ADDR'];
-			$key = recaptcha_secret;
-			$url = 'https://www.google.com/recaptcha/api/siteverify';
+			// $ip = $_SERVER['REMOTE_ADDR'];
+			// $key = recaptcha_secret;
+			// $url = 'https://www.google.com/recaptcha/api/siteverify';
 
-			// RECAPTCH RESPONSE
-			$recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
-			$data = json_decode($recaptcha_response);
+			// // RECAPTCH RESPONSE
+			// $recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
+			// $data = json_decode($recaptcha_response);
 
-			if(isset($data->success) &&  $data->success === true) {
+			// if(isset($data->success) &&  $data->success === true) {
 
-				//configuracoes
+			// 	//configuracoes
 				$conexao = new mysql();
 				$coisas_config = $conexao->Executar("select * from adm_config where id='1' ");
 				$data_config = $coisas_config->fetch_object();
@@ -11673,10 +11673,10 @@ class index extends controller {
 					exit;
 				}
 
-			} else {
-				echo "Recaptcha inválido, tente novamente!";
-				exit;
-			}
+			// } else {
+			// 	echo "Recaptcha inválido, tente novamente!";
+			// 	exit;
+			// }
 		// }
 	}
 

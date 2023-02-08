@@ -526,7 +526,7 @@ body{font-family: 'Roboto' !important;}
         height: 200px;
         background-repeat: no-repeat;
         background-position: center center;
-        background-size: 200%;
+        background-size: 100%;
         border-radius: 9px 9px 0px 0px;
         width: 350px;
     }
@@ -534,7 +534,7 @@ body{font-family: 'Roboto' !important;}
         width: 350px !important;
     }
     .item{
-        max-width: 330px;
+        max-width: 360px;
     }
     .owl-carousel .owl-item {
         /* width: 320px !important; */

@@ -703,9 +703,9 @@
 								<div class="g-recaptcha" data-sitekey="<?=recaptcha_key?>"></div>
 							</div> -->
 
-							<div class="form-group col-md-4">
+							<div class="form-group col-md-12">
 								<div class="botao_contato" >
-									<div class="btn botao_padrao hvr-float-shadow" style="height: 40px; padding-top:10px;" onClick="enviar_recuperacao()" >ENVIAR</div>
+									<div class="btn botao_padrao hvr-float-shadow" style="height: 40px; padding-top:10px;width: 100%;" onClick="enviar_recuperacao()" >ENVIAR</div>
 								</div>
 							</div>
 

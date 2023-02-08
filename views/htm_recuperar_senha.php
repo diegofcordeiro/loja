@@ -699,9 +699,9 @@
 								<input type="text" name="email" class="form-control formrecuperacao" placeholder="Digite seu E-mail">
 							</div>
 
-							<div class="form-group col-md-8">
+							<!-- <div class="form-group col-md-8">
 								<div class="g-recaptcha" data-sitekey="<?=recaptcha_key?>"></div>
-							</div>
+							</div> -->
 
 							<div class="form-group col-md-4">
 								<div class="botao_contato" >

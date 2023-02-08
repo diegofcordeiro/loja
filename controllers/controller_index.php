@@ -11609,12 +11609,12 @@ class index extends controller {
 		}
 
 		$captcha = $this->post('g-recaptcha-response');
-		if(!$captcha){
+		// if(!$captcha){
 
-			echo "Recaptcha inválido, tente novamente!";
-			exit;
+		// 	echo "Recaptcha inválido, tente novamente!";
+		// 	exit;
 
-		} else {
+		// } else {
 			
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$key = recaptcha_secret;
@@ -11677,7 +11677,7 @@ class index extends controller {
 				echo "Recaptcha inválido, tente novamente!";
 				exit;
 			}
-		}
+		// }
 	}
 
 	public function selecionar_balcao(){

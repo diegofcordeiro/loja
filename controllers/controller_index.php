@@ -11661,7 +11661,7 @@ class index extends controller {
 					$retorno = $envio->enviar("Nova senha de acesso", $msg, array($email), '');
 
 					if($retorno){
-						echo "Recuperação enviada com sucesso! Confira seu e-mail!";
+						echo "<div>Recuperação enviada com sucesso! Confira seu e-mail!</div>";
 						exit;
 					} else {
 						echo "Ocorreu um erro ao enviar sua solicitação, tente novamente mais tarde!";

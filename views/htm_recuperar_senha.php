@@ -32,6 +32,9 @@
 		body {
 			background-color:<?=$pagina_cores[1]?>;
 		}
+		#modal_conteudo{
+			background-color: white;
+		}
 	</style>
 
 </head>

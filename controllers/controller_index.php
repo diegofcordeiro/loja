@@ -137,96 +137,99 @@ class index extends controller {
 				$data_inicio 		= strtotime($linha[6]);
 
 				$conexao = new mysql();
-				$combo = $conexao->query("SELECT
-									combos.id as combo_id,
-									combos.titulo as combo_titulo,
-									combos.plano_id as plano_id,
-									combos.valor as plano_valor,
-									combos.intervalo as intervalo,
-									combos.usar_desconto as usar_desconto,
-									combos.valor as combo_valor,
-									combos.status as combo_status,
-									combos.desconto as combo_desconto,
-									produto.id as produto_id,
-									produto.titulo as protudo_titulo,
-									produto.*
-									FROM `combos` 
-									inner join combo_produto on combo_produto.id_combo = combos.id
-									inner join produto on produto.id = combo_produto.id_produto
-									WHERE combos.plano_id = '$plano_id';");
-				
-				if($combo->num_rows > 0){
-					
-					$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");
-					$codigo = $cadastro_codigo->fetch_object();
-					// echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
-					// print_r($sessao);echo'<br>';
-					// print_r($nome);echo'<br>';
-					// print_r($email);echo'<br>';
-					// print_r($cpf);echo'<br>';
-					// print_r($codigo->codigo);echo'<br>';
-					// print_r($plano_id);echo'<br>';echo'<br>';
 
-					$valor_combo = 0;
-					while($data = $combo->fetch_object()){
-						$valor_combo = $data->combo_valor;
-						// $array_ = array(
-						// 	"sessao"=>"$sessao",
-						// 	"id_combo"=>"$data->combo_id",
-						// 	"combo_titulo"=>"$data->combo_titulo",
-						// 	"produto"=>"$data->produto_id",
-						// 	"produto_id"=>"$data->id",
-						// 	"produto_ref"=>"$data->ref",
-						// 	"produto_titulo"=>"$data->protudo_titulo",
-						// 	"produto_valor"=>"$data->valor",
-						// 	"produto_assinatura"=>"$plano_id",
-						// 	"data_vencimento"=>"$date_vencimento",
-						// 	"data_compra"=>"$data_inicio",
-						// 	"quantidade"=>1,
-						// 	"valor_total_combo_vindi"=>"$data->combo_valor",
-						// 	"usar_valor_vindi"=>1,
-						// 	"tipo_envio"=> 3
-						// );
-						// print_r($array_);echo'<br>';
+				if($cpf != ""){
+					$combo = $conexao->query("SELECT
+										combos.id as combo_id,
+										combos.titulo as combo_titulo,
+										combos.plano_id as plano_id,
+										combos.valor as plano_valor,
+										combos.intervalo as intervalo,
+										combos.usar_desconto as usar_desconto,
+										combos.valor as combo_valor,
+										combos.status as combo_status,
+										combos.desconto as combo_desconto,
+										produto.id as produto_id,
+										produto.titulo as protudo_titulo,
+										produto.*
+										FROM `combos` 
+										inner join combo_produto on combo_produto.id_combo = combos.id
+										inner join produto on produto.id = combo_produto.id_produto
+										WHERE combos.plano_id = '$plano_id';");
+					
+					if($combo->num_rows > 0){
 						
-						$conexao = new mysql();
-						$conexao->inserir("pedido_loja_carrinho", array(
-							"sessao"=>"$sessao",
-							"id_combo"=>"$data->combo_id",
-							"combo_titulo"=>"$data->combo_titulo",
-							"produto"=>"$data->codigo",
-							"produto_id"=>"$data->produto_id",
-							"produto_ref"=>"$data->ref",
-							"produto_titulo"=>"$data->protudo_titulo",
-							"produto_valor"=>"$data->valor",
-							"produto_assinatura"=>"$plano_id",
-							"data_vencimento"=>"$date_vencimento",
-							"data_compra"=>"$data_inicio",
-							"quantidade"=>1,
-							"valor_total_combo_vindi"=>"$data->combo_valor",
-							"usar_valor_vindi"=>1,
-							"tipo_envio"=> 3
-						));
+						$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");
+						$codigo = $cadastro_codigo->fetch_object();
+						echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
+						print_r($sessao);echo'<br>';
+						print_r($nome);echo'<br>';
+						print_r($email);echo'<br>';
+						print_r($cpf);echo'<br>';
+						print_r($codigo->codigo);echo'<br>';
+						print_r($plano_id);echo'<br>';echo'<br>';
+
+						$valor_combo = 0;
+						while($data = $combo->fetch_object()){
+							$valor_combo = $data->combo_valor;
+							
+							$array_ = array(
+								"sessao"=>"$sessao",
+								"id_combo"=>"$data->combo_id",
+								"combo_titulo"=>"$data->combo_titulo",
+								"produto"=>"$data->produto_id",
+								"produto_id"=>"$data->id",
+								"produto_ref"=>"$data->ref",
+								"produto_titulo"=>"$data->protudo_titulo",
+								"produto_valor"=>"$data->valor",
+								"produto_assinatura"=>"$plano_id",
+								"data_vencimento"=>"$date_vencimento",
+								"data_compra"=>"$data_inicio",
+								"quantidade"=>1,
+								"valor_total_combo_vindi"=>"$data->combo_valor",
+								"usar_valor_vindi"=>1,
+								"tipo_envio"=> 3
+							);
+							print_r($array_);echo'<br>';
+							// $conexao = new mysql();
+							// $conexao->inserir("pedido_loja_carrinho", array(
+							// 	"sessao"=>"$sessao",
+							// 	"id_combo"=>"$data->combo_id",
+							// 	"combo_titulo"=>"$data->combo_titulo",
+							// 	"produto"=>"$data->codigo",
+							// 	"produto_id"=>"$data->produto_id",
+							// 	"produto_ref"=>"$data->ref",
+							// 	"produto_titulo"=>"$data->protudo_titulo",
+							// 	"produto_valor"=>"$data->valor",
+							// 	"produto_assinatura"=>"$plano_id",
+							// 	"data_vencimento"=>"$date_vencimento",
+							// 	"data_compra"=>"$data_inicio",
+							// 	"quantidade"=>1,
+							// 	"valor_total_combo_vindi"=>"$data->combo_valor",
+							// 	"usar_valor_vindi"=>1,
+							// 	"tipo_envio"=> 3
+							// ));
+						}
+						// $conexao = new mysql();
+						// $conexao->inserir("pedido_loja", array(
+						// 	"codigo"=>"$sessao",
+						// 	"cadastro"=>$codigo->codigo,
+						// 	"data"=>$data_inicio,
+						// 	"vencimento"=>$date_vencimento,
+						// 	"valor_total"=>$valor_combo,
+						// 	"forma_pagamento"=>5,
+						// 	"status"=>4
+						// ));
+						$cadastrado ++;
 					}
-					$conexao = new mysql();
-					$conexao->inserir("pedido_loja", array(
-						"codigo"=>"$sessao",
-						"cadastro"=>$codigo->codigo,
-						"data"=>$data_inicio,
-						"vencimento"=>$date_vencimento,
-						"valor_total"=>$valor_combo,
-						"forma_pagamento"=>5,
-						"status"=>4
-					));
-					$cadastrado ++;
 				}
-				
 			}
 			$linha_++;
 		}
 		echo $cadastrado.'Pedios Foram inseridos';
 
 	}
+
 	public function inicial(){
 
 		$dados = array();

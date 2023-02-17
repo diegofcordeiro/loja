@@ -70,7 +70,7 @@ class index extends controller {
 				$nome 			= $linha[0];
 				$email 			= $linha[1];
 				$cpf 			= $linha[2];
-				if(!empty($cpf)){
+				if($cpf != ""){
 					$email_lms = $this->check_email_lms($email, $cpf);
 					if($email_lms == 1){
 						print_r("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");

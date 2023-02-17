@@ -173,6 +173,8 @@ class index extends controller {
 										inner join combo_produto on combo_produto.id_combo = combos.id
 										inner join produto on produto.id = combo_produto.id_produto
 										WHERE combos.plano_id = '$plano_id';");
+										print_r($plano_id);echo'<br>';echo'<hr><br>';
+										print_r($combo->num_rows);echo'<hr><br>';
 					
 					if($combo->num_rows > 0){
 						

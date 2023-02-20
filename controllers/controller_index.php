@@ -8745,10 +8745,11 @@ class index extends controller {
 		$bairro = $this->post('bairro');
 		$estado = $this->post('estado');
 		$cidade = $this->post('cidade');
+		$is_brasil = $this->post('is_brasil');
+		
 
 		//validar email consultando no banco
 		if(!$email){
-
 			retorno_erro("E-mail inválido!");
 			exit;
 
@@ -8770,21 +8771,21 @@ class index extends controller {
 				}
 			}
 		}
-
+		$usar_senha = 0;
 		//validar senha
-		if($senha AND $senha_confirma){
-			if($senha != $senha_confirma){
-
+		if(!empty($senha) and !empty($senha_confirma)){
+			if($senha AND $senha_confirma){
+				if($senha != $senha_confirma){
+					retorno_erro("Digite uma senha válida e confirme.");
+					exit;
+				}
+			} else {
 				retorno_erro("Digite uma senha válida e confirme.");
 				exit;
-
 			}
-		} else {
-
-			retorno_erro("Digite uma senha válida e confirme.");
-			exit;
-
+			$usar_senha = 1;
 		}
+		
 
 		// valida documentos
 		require_once("api/cpf_cnpj/cpf_cnpj.php");
@@ -8798,13 +8799,13 @@ class index extends controller {
 				exit;
 
 			} else {
-
-				$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
-				if(!$cpf_cnpj->valida()){
-					retorno_erro("Digite corretamente seu CPF.");
-					exit;
+				if($is_brasil == 1){
+					$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
+					if(!$cpf_cnpj->valida()){
+						retorno_erro("Digite corretamente seu CPF.");
+						exit;
+					}
 				}
-
 			}
 
 			//limpar dados do oposto do tipo (juridica ou fisica)
@@ -8833,7 +8834,7 @@ class index extends controller {
 
 			}
 
-		} else {
+			} else {
 			if(!$juridica_cnpj){
 
 				retorno_erro("Digite corretamente o CNPJ.");				 
@@ -8865,7 +8866,6 @@ class index extends controller {
 			}
 
 		}		 
-
 		//validar todos os campos de telefone e endereço
 		if(!$telefone){
 
@@ -8874,42 +8874,70 @@ class index extends controller {
 
 		}
 		if(!$cep){
-
-			retorno_erro("CEP inválido");	 
-			exit;
+			if($is_brasil == 1){
+				retorno_erro("CEP inválido");	 
+				exit;
+			}
 
 		}
+		
 		if($endereco AND $numero AND $bairro AND $estado AND $cidade){ } else {
-
-			retorno_erro("Preencha corretamente seus dados de endereço!");	 
-			exit;
+			if($is_brasil == 1){
+				retorno_erro("Preencha corretamente seus dados de endereço!");	 
+				exit;
+			}
 
 		}
+		if($usar_senha ==1){
+			$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 
-		$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
+			$db = new mysql();
+			$db->alterar("cadastro", array(
+				"tipo"=>"$tipo",
+				"fisica_nome"=>"$fisica_nome",
+				"fisica_sexo"=>"$fisica_sexo",
+				"fisica_nascimento"=>"$fisica_nascimento",
+				"fisica_cpf"=>"$fisica_cpf",
+				"juridica_nome"=>"$juridica_nome",
+				"juridica_razao"=>"$juridica_razao",
+				"juridica_responsavel"=>"$juridica_responsavel",
+				"juridica_cnpj"=>"$juridica_cnpj", 
+				"cep"=>"$cep",
+				"endereco"=>"$endereco",
+				"numero"=>"$numero",
+				"complemento"=>"$complemento",
+				"bairro"=>"$bairro",
+				"estado"=>"$estado",
+				"cidade"=>"$cidade",
+				"telefone"=>"$telefone",
+				"email"=>"$email",
+				"senha"=>"$senha_tratada"
+			), " codigo='".$this->_cod_usuario."' ");
+		}else{
 
-		$db = new mysql();
-		$db->alterar("cadastro", array(
-			"tipo"=>"$tipo",
-			"fisica_nome"=>"$fisica_nome",
-			"fisica_sexo"=>"$fisica_sexo",
-			"fisica_nascimento"=>"$fisica_nascimento",
-			"fisica_cpf"=>"$fisica_cpf",
-			"juridica_nome"=>"$juridica_nome",
-			"juridica_razao"=>"$juridica_razao",
-			"juridica_responsavel"=>"$juridica_responsavel",
-			"juridica_cnpj"=>"$juridica_cnpj", 
-			"cep"=>"$cep",
-			"endereco"=>"$endereco",
-			"numero"=>"$numero",
-			"complemento"=>"$complemento",
-			"bairro"=>"$bairro",
-			"estado"=>"$estado",
-			"cidade"=>"$cidade",
-			"telefone"=>"$telefone",
-			"email"=>"$email",
-			"senha"=>"$senha_tratada"
-		), " codigo='".$this->_cod_usuario."' ");
+			$db = new mysql();
+			$db->alterar("cadastro", array(
+				"tipo"=>"$tipo",
+				"fisica_nome"=>"$fisica_nome",
+				"fisica_sexo"=>"$fisica_sexo",
+				"fisica_nascimento"=>"$fisica_nascimento",
+				"fisica_cpf"=>"$fisica_cpf",
+				"juridica_nome"=>"$juridica_nome",
+				"juridica_razao"=>"$juridica_razao",
+				"juridica_responsavel"=>"$juridica_responsavel",
+				"juridica_cnpj"=>"$juridica_cnpj", 
+				"cep"=>"$cep",
+				"endereco"=>"$endereco",
+				"numero"=>"$numero",
+				"complemento"=>"$complemento",
+				"bairro"=>"$bairro",
+				"estado"=>"$estado",
+				"cidade"=>"$cidade",
+				"telefone"=>"$telefone",
+			), " codigo='".$this->_cod_usuario."' ");
+
+		}
+		
 
 
 		// se deu tudo certo retorna ok

@@ -133,32 +133,32 @@ class config extends controller {
 			}
 
 
-			$this->send_email_($email_testes_destino);
-			// require_once("_api/phpmailer/class.phpmailer.php");
+			// $this->send_email_($email_testes_destino);
+			require_once("_api/phpmailer/class.phpmailer.php");
 			
-			// $mail = new PHPMailer();
-			// $mail->SetLanguage("br", '_api/phpmailer/language/');
+			$mail = new PHPMailer();
+			$mail->SetLanguage("br", '_api/phpmailer/language/');
 
-			// $mail->IsSMTP();
-			// $mail->Host = $email_host;
-			// $mail->Port = $email_porta;
-			// $mail->SMTPAuth = true;
-			// $mail->Username = $email_usuario;
-			// $mail->Password = $email_senha;
-			// $mail->From = $email_origem;
-			// $mail->FromName = $email_nome;
-			// $mail->AddAddress($email_testes_destino, "");
-			// $mail->WordWrap = 50;
-			// $mail->IsHTML(true);
-			// $mail->Subject = "Teste de envio";
-			// $mail->Body = "<div>E-mail de teste</div>";
+			$mail->IsSMTP();
+			$mail->Host = $email_host;
+			$mail->Port = $email_porta;
+			$mail->SMTPAuth = true;
+			$mail->Username = $email_usuario;
+			$mail->Password = $email_senha;
+			$mail->From = $email_origem;
+			$mail->FromName = $email_nome;
+			$mail->AddAddress($email_testes_destino, "");
+			$mail->WordWrap = 50;
+			$mail->IsHTML(true);
+			$mail->Subject = "Teste de envio";
+			$mail->Body = "<div>E-mail de teste</div>";
 
 			
-			// if($mail->Send()){
-			// 	$this->msg('Teste realizado com sucesso!');
-			// } else {
-			// 	$this->msg('Ocorreu um erro: '.$mail->ErrorInfo);
-			// }
+			if($mail->Send()){
+				$this->msg('Teste realizado com sucesso!');
+			} else {
+				$this->msg('Ocorreu um erro: '.$mail->ErrorInfo);
+			}
 		}
 
 		$this->irpara(DOMINIO.$this->_controller.'/inicial/aba/smtp');

@@ -29,7 +29,7 @@ Class model_envio extends model{
 			    $mail->Password = $data_config->email_senha;                       // SMTP password
 			    $mail->SMTPSecure = 'TLS';                         // Enable TLS encryption, `ssl` also accepted
 			    $mail->Port = $data_config->email_porta;
-			    $mail->setFrom($data_config->email_origem, $data_config->email_nome);
+			    $mail->setFrom($data_config->email_origem, utf8_decode($data_config->email_nome));
 			    
 			    foreach ($emails_destino as $key => $value) {
 			    	$mail->addAddress($value, '');
@@ -38,6 +38,10 @@ Class model_envio extends model{
 			    if($email_resposta){
 			    	$mail->addReplyTo($email_resposta, '');
 			    }
+			    
+			   	// $mail->addCC('cc@example.com');
+			    // $mail->addBCC('bcc@example.com');
+			    
 			    // anexos
 			    foreach ($anexos as $key => $value) {
 			    	$mail->addAttachment($value); 
@@ -45,8 +49,8 @@ Class model_envio extends model{
 			    
 			    //Content
 			    $mail->isHTML(true); // Set email format to HTML
-			    $mail->Subject = $assunto;
-			    $mail->Body    = $msg;
+			    $mail->Subject = utf8_decode($assunto);
+			    $mail->Body    = utf8_decode($msg);
 			    //$mail->AltBody = '';
 
 			    if($mail->send()){

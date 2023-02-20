@@ -11636,7 +11636,7 @@ class index extends controller {
 					$msg = "
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p>".$textos->conteudo('146177966276191')."</p></div>
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p><strong>Novo usuário:</strong> $email</p></div>
-					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p><strong>Sua nova senha:</strong> $senha</p></div>
+					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p><strong>Sua nova senha:</strong> $data_cadastro->fisica_cpf</p></div>
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p></p></div>
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p></p></div>
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p>Este e-mail foi gerado automáticamente, por favor não responda.</p></div>

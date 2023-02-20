@@ -785,7 +785,8 @@ class index extends controller {
 									produto.*
 									FROM `combos` 
 									inner join combo_produto on combo_produto.id_combo = combos.id
-									inner join produto on produto.id = combo_produto.id_produto;");
+									inner join produto on produto.id = combo_produto.id_produto
+									WHERE produto.status = 1;");
 		$new_cmb = array();
 		while ($obj_cmb = $combo->fetch_object()) {
 			// array_push($new_cmb,$obj_cmb);

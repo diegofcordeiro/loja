@@ -765,6 +765,14 @@
 
 				<form id="cadastro_form" >
 
+					<div class="div_form" >
+						<label>País</label><br>
+						<input type="radio" id="Brasil_doc" name="country_document" <?= $data_dados->is_brasil == 1 ? 'checked':'' ?>  value="1">
+						<label for="Brasil">Brasil </label>
+						<input type="radio" id="Outros_doc" name="country_document" <?= $data_dados->is_brasil == 0 ? 'checked':'' ?>  value="0">
+						<label for="Outros">Outros</label><br>
+					</div>
+					<hr>
 					<div class='col-xs-12 col-sm-6 col-md-6'>                   
 
 						<div class="cadastro_div" >
@@ -772,6 +780,7 @@
 							<div style="font-size:14px; text-align:left;" >DADOS DE ACESSO</div>
 
 							<div class="div_form" ><input type="text" class="form-control cadastro_form" name='email' id='email' placeholder="Digite seu E-mail" value="<?=$data_dados->email?>" ></div>
+							<div class="div_form" ><input type="hidden" class="form-control cadastro_form" name='is_brasil' id='is_brasil' placeholder="" value="<?=$data_dados->is_brasil?>" ></div>
 
 							<div class="div_form" ><input type="password" class="form-control cadastro_form" name='senha' id='senha' placeholder="Digite sua Senha" ></div>
 
@@ -795,7 +804,8 @@
 
 								<div class="div_form" ><input type="text" class="form-control cadastro_form" name='fisica_nascimento' id='fisica_nascimento' value="<?php if($data_dados->fisica_nascimento){ echo date('d/m/Y', $data_dados->fisica_nascimento); } ?>" maxlength="10" size="30" onkeydown="Mascara(this,Data);" onkeypress="Mascara(this,Data);" onkeyup="Mascara(this,Data);" placeholder="Data Nascimento" ></div>
 
-								<div class="div_form" ><input type="text" class="form-control cadastro_form" name='fisica_cpf' id='fisica_cpf' value="<?=$data_dados->fisica_cpf?>" onkeypress="Mascara(this,Integer)" maxlength="11" name="cpf" placeholder="CPF" ></div>
+								<div class="div_form" ><input type="text" style="<?= $data_dados->is_brasil == 1 ? '':'display: none' ?>" class="form-control cadastro_form" name='fisica_cpf' id='fisica_cpf' value="<?=$data_dados->fisica_cpf?>" onkeypress="Mascara(this,Integer)" maxlength="11" name="cpf" placeholder="CPF" ></div>
+								<div class="div_form" ><input type="text" style="<?= $data_dados->is_brasil == 0 ? '':'display: none' ?>" class="form-control cadastro_form" name="cpf_outros" id="documento_cpf"  placeholder="Documento" value="<?=$data_dados->fisica_cpf?>"/></div>
 
 							</div>
 
@@ -824,45 +834,68 @@
 						<div class="cadastro_div" >
 
 							<div style="font-size:14px; text-align:left;" >DADOS PARA ENTREGA</div>
-
-							<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_cep" name="cadastro_cep" placeholder="Digite seu Cep" onkeypress="Mascara(this,ceppp)" onKeyDown="Mascara(this,ceppp)" size="9" maxlength="9"  onblur="buscar_endereco()" value="<?=$data_dados->cep?>" ></div> 
-							<div class="div_form" >
-								<div style="text-align:left;">
-									<div><a href="http://www.buscacep.correios.com.br/sistemas/buscacep/default.cfm" target="_blank" style="font-size:13px;" >Não sei meu CEP</a></div>
-								</div>
-							</div>
-
-							<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_endereco" name="endereco" value="<?=$data_dados->endereco?>" placeholder="Endereço" value="<?=$endereco?>" ></div>
-
-							<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_numero" name="numero" value="<?=$data_dados->numero?>" placeholder="Número" ></div>
-
-							<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_complemento" name="complemento" value="<?=$data_dados->complemento?>" placeholder="Complemento" ></div>
-
-							<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_bairro" name="bairro" value="<?=$data_dados->bairro?>" placeholder="Bairro" value="<?=$bairro?>" ></div>
-
-							<div class="div_form" >
-								<select name="estado" id="cadastro_estado" class="form-control select2 cadastro_select" onChange="cadastro_cidades(this.value)" >
-									<?php
-
-									foreach ($estados as $key => $value) {
-
-										if($value['selected']){ $select = "selected"; } else { $select = ""; }
-										echo "<option value='".$value['uf']."' $select >".$value['nome']."</option>";
-
-									}
-
-									?>
-								</select>
-							</div> 
-
-							<div class="div_form" id="cadastro_cidade_div">
-								<select id="cidade" name="cidade" class="form-control select2 cadastro_form" >
-									<option value='' >Selecione</option>
-								</select>
-							</div>
 							
-							<div class="div_form" style="text-align: right;" >								
-								<?=$botao_padrao?>
+
+							<div class="endereco_brasil" style="<?= $data_dados->is_brasil_address == 1 ? '':'display: none' ?>">
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_cep" name="cadastro_cep" placeholder="Digite seu Cep" onkeypress="Mascara(this,ceppp)" onKeyDown="Mascara(this,ceppp)" size="9" maxlength="9"  onblur="buscar_endereco()" value="<?=$data_dados->cep?>" ></div> 
+								<div class="div_form" >
+									<div style="text-align:left;">
+										<div><a href="http://www.buscacep.correios.com.br/sistemas/buscacep/default.cfm" target="_blank" style="font-size:13px;" >Não sei meu CEP</a></div>
+									</div>
+								</div>
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_endereco" name="endereco" value="<?=$data_dados->endereco?>" placeholder="Endereço" value="<?=$endereco?>" ></div>
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_numero" name="numero" value="<?=$data_dados->numero?>" placeholder="Número" ></div>
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_complemento" name="complemento" value="<?=$data_dados->complemento?>" placeholder="Complemento" ></div>
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_bairro" name="bairro" value="<?=$data_dados->bairro?>" placeholder="Bairro" value="<?=$bairro?>" ></div>
+
+								<div class="div_form" >
+									<select name="estado" id="cadastro_estado" class="form-control select2 cadastro_select" onChange="cadastro_cidades(this.value)" >
+										<?php
+
+										foreach ($estados as $key => $value) {
+
+											if($value['selected']){ $select = "selected"; } else { $select = ""; }
+											echo "<option value='".$value['uf']."' $select >".$value['nome']."</option>";
+
+										}
+
+										?>
+									</select>
+								</div> 
+
+								<div class="div_form" id="cadastro_cidade_div">
+									<select id="cidade" name="cidade" class="form-control select2 cadastro_form" >
+										<option value='' >Selecione</option>
+									</select>
+								</div>
+								
+								<div class="div_form" style="text-align: right;" >								
+									<?=$botao_padrao?>
+								</div>
+
+							</div>
+
+							<div class="endereco_outros" style="<?= $data_dados->is_brasil_address == 0 ? '':'display: none' ?>">
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_cep" name="cadastro_cep" placeholder="Digite seu Código postal" value="<?=$data_dados->cep?>" ></div> 
+							
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_endereco" name="endereco" value="<?=$data_dados->endereco?>" placeholder="Endereço" value="<?=$endereco?>" ></div>
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_numero" name="numero" value="<?=$data_dados->numero?>" placeholder="Número" ></div>
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_complemento" name="complemento" value="<?=$data_dados->complemento?>" placeholder="Complemento" ></div>
+
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cadastro_estado" name="estado" value="<?=$data_dados->estado?>" placeholder="Complemento" ></div> 
+								<div class="div_form" ><input type="text" class="form-control cadastro_form" id="cidade" name="cidade" value="<?=$data_dados->estado?>" placeholder="Complemento" ></div> 
+								
+								<div class="div_form" style="text-align: right;" >								
+									<?=$botao_padrao?>
+								</div>
 							</div>
 
 						</div>
@@ -1648,6 +1681,7 @@
 		<script type="text/javascript">
 
 			$(document).ready(function(){
+				
 				$(document).bind("contextmenu",function(e){
 					return false;
 				});
@@ -1676,6 +1710,30 @@
 
 	<script>
 
+		$("#Brasil_doc").click(function(){
+			$("#label_cpf").html('CPF');
+			$("#fisica_cpf").show();
+			$("#documento_cpf").hide();
+			$(".endereco_brasil").show();
+			$(".endereco_outros").hide();
+		});
+		$("#Outros_doc").click(function(){
+			$("#label_cpf").html('Document');
+			$("#fisica_cpf").hide();
+			$("#documento_cpf").show();
+			$(".endereco_brasil").hide();
+			$(".endereco_outros").show();
+		});
+
+		// $("#Brasil_end").click(function(){
+		// 	$(".endereco_brasil").show();
+		// 	$(".endereco_outros").hide();
+		// });
+		// $("#Outros_end").click(function(){
+		// 	$(".endereco_brasil").hide();
+		// 	$(".endereco_outros").show();
+		// });
+
 		function tipo_cadastro(tipo){
 
 			if(tipo == 'J'){
@@ -1691,7 +1749,7 @@
 		function salvar(){
 
 			$('#modal_janela').modal('show');
-			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:25px;'></div>");
+			$('#modal_conteudo').html("<div style='text-align:center;'><img src='<?=LAYOUT?>img/loading.gif' style='width:250px;'></div>");
 
 			var dados = $("#cadastro_form").serialize();
 

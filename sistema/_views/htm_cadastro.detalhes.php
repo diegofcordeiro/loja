@@ -276,7 +276,7 @@
 
 						</section>
 
-						<section class="panel">
+						<!-- <section class="panel">
 							<div class="panel-body">
 								<div>
 									<form action="<?=$_base['objeto']?>comentario_grv" method="post" >
@@ -295,7 +295,7 @@
 									</form>
 								</div>
 							</div>
-						</section>						
+						</section>						 -->
 						<section class="panel">
 							<div class="panel-body">
 

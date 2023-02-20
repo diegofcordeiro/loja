@@ -276,7 +276,26 @@
 
 						</section>
 
+						<section class="panel">
+							<div class="panel-body">
+								<div>
+									<form action="<?=$_base['objeto']?>comentario_grv" method="post" >
 
+										<div>Redefinir Senha</div>
+
+										<div>
+											<textarea name="comentario" class="form-control" style="height:80px;" ></textarea>
+										</div>
+
+										<div style="text-align:right; margin-top:15px;">
+											<button type="submit" class="btn btn-primary">Salvar</button>
+											<input type="hidden" name="codigo" value="<?=$data->codigo?>" >
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</section>						
 						<section class="panel">
 							<div class="panel-body">
 

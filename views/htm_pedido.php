@@ -1011,48 +1011,57 @@
 
 
 								<hr>
+								
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="form-group">
 											<label for="cardNumber">Nº Cartão</label>
 											<div class="input-group">
-												<input type="tel" class="form-control" name="cardNumber" pattern=".{17,19}" placeholder="Valid Card Number" id="input-cc" autocomplete="cc-number" required autofocus value=""/>
+												<input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required autofocus value="4111 1111 1111 1111"/>
 												<span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
 											</div>
 										</div>                            
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-6 col-md-6">
+									<div class="col-xs-7 col-md-5">
 										<div class="form-group">
 											<label for="cardExpiry">Validade</label>
-											<input type="tel" class="form-control"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
+											<input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" required value="12/2030"/>
 										</div>
 									</div>
-									<div class="col-xs-6 col-md-6">
+									<div class="col-xs-3 col-md-3">
 										<div class="form-group">
 											<label for="cardCVC">CVV</label>
-											<input type="tel" class="form-control" data-mask="000" name="cardCVC" placeholder="CVV" autocomplete="cc-csc" required value="123"/>
+											<input type="tel" class="form-control" name="cardCVC" placeholder="CVV" autocomplete="cc-csc" required value="123"/>
 										</div>
 									</div>
 									<div class="col-xs-2">
 										<div class="form-group">
-											<!-- <label for="installments">Recorrencia</label>
-												<select name="recorrencia" class="form-control">
-													<option selected value="0">0</option>
-													<option value="1">Mensal</option>
-												</select> -->
-												<input type="hidden" name="carrinho_coisas[]" value=<?$produtos['lista']?>>
+											<label for="installments">Parcelas</label>
+												<select name="installments" id="select-installments" class="form-control">
+													<option selected>1</option>
+												</select>
 												<input type="hidden" name="installmentValue">
 										</div>                            
+									</div>
+									<div class="col-xs-2 col-md-2">
+										<div class="form-group">
+											<label for="recorrencia">Recorrencia?</label>
+											<select id="recorrencia" class="form-control" name="recorrencia">
+												<option value="1">Sim</option>
+												<option value="0">Não</option>
+											</select>
+										</div>
 									</div>
 								</div>
 								<br><br>
 								<div class="row">
 									<div class="col-xs-12">
-										<button id="btn_pagar_bill" class="btn btn-success btn-lg btn-block" type="submit">Pagar</button>
+										<button class="pagar_btn btn btn-success btn-lg btn-block" type="button">Pagar</button>
 									</div>
 								</div>
+
 
 
 

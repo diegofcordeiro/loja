@@ -7834,7 +7834,7 @@ class index extends controller {
 					if($retorno_pagseguro['erro'] == 0){
 
 						$codigo_transacao = $retorno_pagseguro['code'];
-						echo '<pre>'; print_r($codigo_transacao); exit;
+						
 						if($codigo_transacao){
 
 							$vencimento_pedido = strtotime("+1 days");
@@ -7851,6 +7851,8 @@ class index extends controller {
 								"id_transacao"=>$codigo_transacao,
 								"status"=>0
 							), " codigo='".$this->_sessao."' ");
+
+							echo '<pre>'; print_r($conexao); exit;
 
 								// baixa estoque
 							$produtos->baixa_estoque($this->_sessao);

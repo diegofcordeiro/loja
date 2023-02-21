@@ -7834,7 +7834,7 @@ class index extends controller {
 					if($retorno_pagseguro['erro'] == 0){
 
 						$codigo_transacao = $retorno_pagseguro['code'];
-
+						echo '<pre>'; print_r($codigo_transacao); exit;
 						if($codigo_transacao){
 
 							$vencimento_pedido = strtotime("+1 days");

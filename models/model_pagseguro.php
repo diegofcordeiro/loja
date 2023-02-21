@@ -207,8 +207,8 @@ Class model_pagseguro extends model{
 				$ddd = substr($telefone_limpo, 0, 2);
 				$fone = substr($telefone_limpo, 2);
 			}else{
-				$ddd = '';
-				$fone = '';
+				$ddd = '11';
+				$fone = '999999999';
 			}
 			
 
@@ -251,7 +251,11 @@ Class model_pagseguro extends model{
 			$xml = curl_exec($curl);		
 			curl_close($curl);
 			$xml = simplexml_load_string($xml);
-			echo '<pre>'; print_r($xml); exit;
+
+			echo '<pre>'; 
+			print_r($data);echo'<br>';
+			print_r($xml); exit;
+
 			if($xml != 'Unauthorized'){
 
 				if(count($xml->error) > 0){

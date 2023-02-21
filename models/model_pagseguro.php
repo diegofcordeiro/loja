@@ -202,7 +202,7 @@ Class model_pagseguro extends model{
 				$documento_tipo = "CNPJ";
 			}
 
-			$telefone_limpo = str_replace(array("(", ")", " ", "-", "."), "", $data_dados->telefone);
+			$telefone_limpo = str_replace(array("(", ")", " ", "+" ,"-", "."), "", $data_dados->telefone);
 			$ddd = substr($telefone_limpo, 0, 2);
 			$fone = substr($telefone_limpo, 2);
 

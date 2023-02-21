@@ -7869,7 +7869,7 @@ class index extends controller {
 							$this->_sessao = $novasessao;
 							$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
 							
-							echo '<pre>'; print_r('aqui'); exit;
+							// echo '<pre>'; print_r('aqui'); exit;
 
 							// retorna
 							$ret_erro_cod = "0";
@@ -7886,7 +7886,7 @@ class index extends controller {
 
 							// retorna
 							$ret_erro_cod = "1";
-							$ret_erro_msg = "Dados de cadastro incorretos";
+							$ret_erro_msg = "Dados de cadastro incorretos1";
 							//$ret_erro_msg = "Dados de cadastro incorretos - ".$retorno_pagseguro['erro_msg'];
 							$ret_processo = "erro";
 							$ret_forma = "";
@@ -7901,7 +7901,7 @@ class index extends controller {
 
 						// retorna
 						$ret_erro_cod = "1";
-						$ret_erro_msg = "Dados de cadastro incorretos";
+						$ret_erro_msg = "Dados de cadastro incorretos2";
 						//$ret_erro_msg = "Dados de cadastro incorretos - ".$retorno_pagseguro['erro_msg'];
 						$ret_processo = "erro";
 						$ret_forma = "";

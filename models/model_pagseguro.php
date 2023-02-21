@@ -205,6 +205,10 @@ Class model_pagseguro extends model{
 			$telefone_limpo = str_replace(array("(", ")", " ", "+" ,"-", "."), "", $data_dados->telefone);
 			$ddd = substr($telefone_limpo, 0, 2);
 			$fone = substr($telefone_limpo, 2);
+			
+			if($data_dados->is_brasil == 0){
+				$fone = '999999999';
+			}
 
 			$data = array();
 

@@ -7852,7 +7852,7 @@ class index extends controller {
 								"status"=>0
 							), " codigo='".$this->_sessao."' ");
 
-							echo '<pre>'; print_r($conexao); exit;
+							
 
 								// baixa estoque
 							$produtos->baixa_estoque($this->_sessao);
@@ -7868,7 +7868,8 @@ class index extends controller {
 							$novasessao = $this->gera_codigo();
 							$this->_sessao = $novasessao;
 							$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
-
+							
+							echo '<pre>'; print_r('aqui'); exit;
 
 							// retorna
 							$ret_erro_cod = "0";

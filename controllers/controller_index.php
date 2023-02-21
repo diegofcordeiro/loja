@@ -7830,7 +7830,7 @@ class index extends controller {
 					// instancia model
 					$pagseguro = new model_pagseguro();
 					$retorno_pagseguro = $pagseguro->pagamento($codigo_pedido, $this->_cod_usuario, "Pedido $data_pedido->id", $valor_total_pedido);
-					echo '<pre>'; print_r($retorno_pagseguro); exit;
+					
 					if($retorno_pagseguro['erro'] == 0){
 
 						$codigo_transacao = $retorno_pagseguro['code'];

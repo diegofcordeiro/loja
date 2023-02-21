@@ -245,7 +245,7 @@ Class model_pagseguro extends model{
 			$xml = curl_exec($curl);		
 			curl_close($curl);
 			$xml = simplexml_load_string($xml);
-			
+			echo '<pre>'; print_r($xml); exit;
 			if($xml != 'Unauthorized'){
 
 				if(count($xml->error) > 0){

@@ -7848,7 +7848,7 @@ class index extends controller {
 								"valor_produtos_desc"=>$total_descontos,
 								"valor_total"=>$valor_total_pedido,
 								"forma_pagamento"=>$formadepagamento,
-								"id_transacao"=>$codigo_transacao,
+								"id_transacao_pagseguro"=>$codigo_transacao,
 								"status"=>0
 							), " codigo='".$this->_sessao."' ");
 

@@ -2749,6 +2749,7 @@ $(function(){
 	function setIssuers(status, response) {
 		if (status == 200) {
 			let issuerSelect = document.getElementById('issuer');
+			console.log(issuerSelect);
 			response.forEach( issuer => {
 				let opt = document.createElement('option');
 				opt.text = issuer.name;

@@ -31,6 +31,8 @@ Class model_pedidos extends model{
 				 	$lista[$i]['charger_id'] = $data_pedido->transacao_charger_id;
 				 	$lista[$i]['status_id'] = $data_carrinho->status;
 				 	$lista[$i]['msg'] = $this->mensagens_n_lidas($data_pedido->codigo);
+				 	$lista[$i]['forma_pagamento'] = $data_pedido->forma_pagamento;
+
 
 					$lista[$i]['sessao'] = $data_carrinho->sessao;
 					$lista[$i]['combo_id'] = $data_carrinho->id_combo;

@@ -1131,16 +1131,16 @@
 						<div style="margin-top:20px;" >
 							
 							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/vindi_flow">
-								<input type="hidden"  id="brand_" name="brand_">
-								<input type="hidden"  name="vindi_key" value="<?=$forma_pagamento->vindi_key?>">
+								<input type="text"  id="brand_" name="brand_">
+								<input type="text"  name="vindi_key" value="<?=$forma_pagamento->vindi_key?>">
 
-								<input type="hidden"  name="is_brasil" value="<?=$data_dados->is_brasil?>">
-								<input type="hidden"  name="is_brasil_address" value="<?=$data_dados->is_brasil_address?>">
+								<input type="text"  name="is_brasil" value="<?=$data_dados->is_brasil?>">
+								<input type="text"  name="is_brasil_address" value="<?=$data_dados->is_brasil_address?>">
 								
-								<input type="hidden"  name="vindi_url" value="<?=$forma_pagamento->vindi_url?>">
-								<input type="hidden" name="forma_pagamento" value="<?=$forma_pagamento->id?>">
-								<input type="hidden" name="codigo" value="<?=$data_pedido->codigo?>">
-								<input type="hidden" name="amount_" value="<?=$data_pedido->valor_total?>">
+								<input type="text"  name="vindi_url" value="<?=$forma_pagamento->vindi_url?>">
+								<input type="text" name="forma_pagamento" value="<?=$forma_pagamento->id?>">
+								<input type="text" name="codigo" value="<?=$data_pedido->codigo?>">
+								<input type="text" name="amount_" value="<?=$data_pedido->valor_total?>">
 								
 								
 								<div class="row">

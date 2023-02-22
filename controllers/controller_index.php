@@ -8779,7 +8779,12 @@ class index extends controller {
 		curl_close($curl);
 		echo '<pre>';
 		$response = json_decode($response, true);
-		print_r($response['results'][0]['id']);exit;
+
+		$id = 0;
+		if(isset($response['results'][0]['id'])){
+			$id = $response['results'][0]['id'];
+		}
+		print_r($id);exit;
 
 	}
 	

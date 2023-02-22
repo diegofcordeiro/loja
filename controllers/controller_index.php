@@ -8600,15 +8600,8 @@ class index extends controller {
 		if($user_exist == 0){
 			$new_user = $this->add_mercadopago_user($email, $_POST['mercadopago_access_token']);
 			$mercado_pago_userid = $new_user->id;
-			$db = new mysql();
-			$db->alterar("cadastro", array(
-				"mercadopago_id"=>"$new_user->id",
-			), " email='$email' ");
 		}else{
-			$conexao = new mysql();
-			$coisas = $conexao->Executar("SELECT mercadopago_id FROM cadastro WHERE email='$email' ");
-			$mercado_pago_userid = $coisas->fetch_object();
-			$mercado_pago_userid = $mercado_pago_userid->mercadopago_id;
+			$mercado_pago_userid = $user_exist;
 		}
 		
 		print_r($mercado_pago_userid);
@@ -8784,7 +8777,7 @@ class index extends controller {
 		if(isset($response['results'][0]['id'])){
 			$id = $response['results'][0]['id'];
 		}
-		print_r($id);exit;
+		return $id;
 
 	}
 	

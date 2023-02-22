@@ -1131,7 +1131,7 @@
 						<div style="margin-top:20px;" >
 							<?php //echo '<pre>'; print_r($forma_pagamento);exit; ?>
 
-							<form action="process.php?id_plan=<?php $id_plan = isset($_GET['id_plan']) ? $_GET['id_plan'] : "2c9380848243b8d7018244eaccda0042"; echo $id_plan; ?>" method="post" id="paymentForm" style="margin-top: 50px;background-color: #fff;padding: 5px;border-radius: 10px;font-family: arial;">
+							<form action="<?=DOMINIO?>index/mercadopago_flow" method="post" id="paymentForm" style="margin-top: 50px;background-color: #fff;padding: 5px;border-radius: 10px;font-family: arial;">
 								<h3>Detalhe do comprador</h3>
 									<div>
 									<div>

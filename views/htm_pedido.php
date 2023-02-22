@@ -1131,20 +1131,66 @@
 						<div style="margin-top:20px;" >
 							<?php //echo '<pre>'; print_r($forma_pagamento);exit; ?>
 
-							<form id="form-checkout">
-								<div id="form-checkout__cardNumber" class="container"></div>
-								<div id="form-checkout__expirationDate" class="container"></div>
-								<div id="form-checkout__securityCode" class="container"></div>
-								<input type="text" id="form-checkout__cardholderName" />
-								<select id="form-checkout__issuer"></select>
-								<select id="form-checkout__installments"></select>
-								<select id="form-checkout__identificationType"></select>
-								<input type="text" id="form-checkout__identificationNumber" />
-								<input type="email" id="form-checkout__cardholderEmail" />
-
-								<button type="submit" id="form-checkout__submit">Pagar</button>
-								<progress value="0" class="progress-bar">Carregando...</progress>
-							</form>
+							<form action="process.php?id_plan=<?php $id_plan = isset($_GET['id_plan']) ? $_GET['id_plan'] : "2c9380848243b8d7018244eaccda0042"; echo $id_plan; ?>" method="post" id="paymentForm" style="margin-top: 50px;background-color: #fff;padding: 5px;border-radius: 10px;font-family: arial;">
+								<h3>Detalhe do comprador</h3>
+									<div>
+									<div>
+										<label for="email">E-mail</label>
+										<input id="email" name="email" type="text" value="test@test.com"/>
+									</div>
+									<div>
+										<label for="docType">Tipo de documento</label>
+										<select id="docType" name="docType" data-checkout="docType" type="text"></select>
+									</div>
+									<div>
+										<label for="docNumber">Número do documento</label>
+										<input id="docNumber" name="docNumber" data-checkout="docNumber" type="text"/>
+									</div>
+									</div>
+								<h3>Detalhes do cartão</h3>
+									<div>
+									<div>
+										<label for="cardholderName">Titular do cartão</label>
+										<input id="cardholderName" data-checkout="cardholderName" type="text">
+									</div>
+									<div>
+										<label for="">Data de vencimento</label>
+										<div>
+										<input value="11" type="text" placeholder="MM" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
+											onselectstart="return false" onpaste="return false"
+											oncopy="return false" oncut="return false"
+											ondrag="return false" ondrop="return false" autocomplete=off>
+										<span class="date-separator">/</span>
+										<input value="25" type="text" placeholder="YY" id="cardExpirationYear" data-checkout="cardExpirationYear"
+											onselectstart="return false" onpaste="return false"
+											oncopy="return false" oncut="return false"
+											ondrag="return false" ondrop="return false" autocomplete=off>
+										</div>
+									</div>
+									<div>
+										<label for="cardNumber">Número do cartão</label>
+										<input value="4235647728025682" type="text" id="cardNumber" data-checkout="cardNumber"
+										onselectstart="return false" onpaste="return true"
+										oncopy="return false" oncut="return false"
+										ondrag="return false" ondrop="return false" autocomplete=off>
+									</div>
+									<div>
+										<label for="securityCode">Código de segurança</label>
+										<input value="123" id="securityCode" data-checkout="securityCode" type="text"
+										onselectstart="return false" onpaste="return false"
+										oncopy="return false" oncut="return false"
+										ondrag="return false" ondrop="return false" autocomplete=off>
+									</div>
+									<div>
+										<input type="hidden" name="transactionAmount" id="transactionAmount" value="100" />
+										<input type="hidden" name="paymentMethodId" id="paymentMethodId" />
+										<input type="hidden" name="description" id="description" />
+										<br>
+										<button type="submit" style="width: 95%;background-color: #35baf6;border: none;font-size: 30px;color: #fff;border-radius: 10px;">Salvar</button>
+										<br>
+									</div>
+								</div>
+								</form>
 							<!-- <form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 								<input type="text"  id="brand_" name="brand_">
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
@@ -2661,7 +2707,7 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
   	<script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://sdk.mercadopago.com/js/v2"></script>
+	<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
   	<script type="text/javascript" src="index_mercadopago.js" defer></script>
 <script type="text/javascript">
 	

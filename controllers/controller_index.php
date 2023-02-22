@@ -7966,15 +7966,15 @@ class index extends controller {
 					$enderecoderetorno = DOMINIO."index/pedidos_detalhes/codigo/".$codigo_pedido."/";
 					$enderecoderetorno_sucesso = DOMINIO."index/pedidos_detalhes/codigo/".$codigo_pedido."/";
 					
-					print_r($data_pagamento->mercadopago_client_id);exit;
 					require_once('vendor/autoload.php');
-
+					
 					MercadoPago\SDK::setClientId($data_pagamento->mercadopago_client_id);
 					MercadoPago\SDK::setClientSecret($data_pagamento->mercadopago_client_secret);
 					MercadoPago\SDK::setAccessToken($data_pagamento->mercadopago_access_token);
-						//$data_pagamento->mercadopago_public_key
-
+					//$data_pagamento->mercadopago_public_key
+					
 					$preference = new MercadoPago\Preference();
+					print_r($preference);exit;
 
 					$valor_tratado_mp = str_replace(".", "", $valores->trata_valor($valor_total_pedido));
 					$valor_tratado_mp = str_replace(",", ".", $valor_tratado_mp);

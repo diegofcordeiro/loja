@@ -7961,7 +7961,7 @@ class index extends controller {
 
 				// MercadoPago
 				case '3':
-
+					print_r('aqui');exit;
 					$conexao = new mysql();
 					$coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='3' ");
 					$data_pagamento = $coisas_pagamento->fetch_object();
@@ -10072,8 +10072,6 @@ class index extends controller {
 		if($_POST['forma_pagamento'] == 1){
 
 			if($_POST['recorrencia'] == 1){
-				
-				
 				// $curl_2 = curl_init();
 
 				// curl_setopt_array($curl_2, array(

@@ -8432,6 +8432,301 @@ class index extends controller {
 
 	///////// PAGAMENTOS /////////
 
+	public function mercadopago_flow(){
+
+		$dados = array();
+		$dados['_base'] = $this->_base();
+		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['controller'] = $this->_controller;
+		$dados['_cod_usuario'] = $this->_cod_usuario;
+		$dados['_sessao'] = $this->_sessao;
+		$dados['_acesso'] = $this->_acesso;
+		$dados['_nome_usuario'] = $this->_nome_usuario;
+		$dados['data_pagina'] = 'Finalizada';
+		$chave = $this->_layout;
+		
+		$conexao = new mysql();
+		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
+		if($coisas->num_rows != 1){
+			$this->_layout = "index";
+			$this->irpara(DOMINIO);
+		}
+		$dados['data_pagina'] = $coisas->fetch_object();
+		$codigo_pagina = $dados['data_pagina']->codigo;
+		
+		////////////////////////////////////////////////////////////////////////
+		
+		$cores = array();
+		
+		$conexao = new mysql();
+		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
+		while($data = $coisas->fetch_object()){
+			$cores[$data->codigo] = $data->cor;
+		}
+		$dados['pagina_cores'] = $cores;
+		
+		////////////////////////////////////////////////////////////////////////
+		
+		$lista_blocos = array();
+		$n_bloc = 0; 
+
+		$conexao = new mysql();
+		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
+		$data_ordem = $exec->fetch_object();
+
+		if(isset($data_ordem->data)){
+
+			$order = explode(',', $data_ordem->data);
+
+			foreach($order as $key => $value){
+
+				$conexao = new mysql();
+				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
+				$data_bloco = $coisas_bloco->fetch_object();
+
+				if(isset($data_bloco->id)){
+
+					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
+					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
+					$lista_blocos[$n_bloc]['colunas'] = $data_bloco->colunas;
+					$lista_blocos[$n_bloc]['full'] = $data_bloco->full;
+					$lista_blocos[$n_bloc]['formato'] = $data_bloco->formato;
+
+					$n_col = 1;
+					while ($n_col <= $data_bloco->colunas) {
+
+						$item_codigo = '';
+						if($n_col == 1){
+							$item_codigo = $data_bloco->coluna1;
+						}
+						if($n_col == 2){
+							$item_codigo = $data_bloco->coluna2;
+						}
+						if($n_col == 3){
+							$item_codigo = $data_bloco->coluna3;
+						}
+						if($n_col == 4){
+							$item_codigo = $data_bloco->coluna4;
+						}
+						if($n_col == 5){
+							$item_codigo = $data_bloco->coluna5;
+						}
+						if($n_col == 6){
+							$item_codigo = $data_bloco->coluna6;
+						}
+						if($n_col == 1){
+							$item_codigo = $data_bloco->coluna1;
+						}
+
+						$lista_layout = array(); 
+
+						if($item_codigo){
+
+							$conexao = new mysql();
+							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
+							$data = $coisas->fetch_object();
+
+							if(isset($data->id)){
+
+								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+
+								$lista_layout['id'] = $modulo_id;
+								$lista_layout['codigo'] = $data->codigo;
+								$lista_layout['titulo'] = $data->titulo;
+								$lista_layout['tipo'] = $data->tipo;
+
+								if($data->tipo == 'topo'){
+									$topos = new model_topos();
+									$lista_layout['conteudo'] = $topos->lista($data->codigo);
+									$banners = new model_banners();
+									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
+								}
+
+								if($data->tipo == 'rodape'){							
+									$rodapes = new model_rodapes();
+									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
+								}
+
+								// termina tipos de conteudo
+							}
+						}
+
+						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+
+						$n_col++;
+					}
+
+					$n_bloc++;
+				}
+
+			}
+
+		}
+
+		$dados['layout_lista'] = $lista_blocos;
+		require_once('vendor/autoload.php');
+
+ 
+   		MercadoPago\SDK::setAccessToken($_POST['mercadopago_access_token']);
+
+		// $mercadopago_client_id 			= $_POST['mercadopago_client_id'];
+		// $mercadopago_client_secret 		= $_POST['mercadopago_client_secret'];
+		// $mercadopago_public_key 		= $_POST['mercadopago_public_key'];
+		// $mercadopago_access_token	    = $_POST['mercadopago_access_token'];
+		
+		$is_brasil = $_POST['is_brasil'];
+		if($is_brasil == 0){
+			$cpf = $_POST['cpf_outros'];
+		}else{
+			$cpf = $_POST['cpf'];
+		}
+		$recorrencia = 0;
+		$email = $_POST['email'];
+		$name = $_POST['nomeCompleto'];
+		
+		$name_on_card = $_POST['nomeCompleto'];
+		$card_number = $_POST['cardNumber'];
+		$expiration_card = $_POST['cardExpiry'];
+		$cvv = $_POST['cardCVC'];
+		$payment_company_name = $_POST['brand_'];
+		$total_amount = $_POST['amount_'];
+		$card_number = str_replace("-","",$card_number);
+		$last4 = substr($card_number,12,16);
+
+		$cod = $_POST['codigo'];
+
+
+		exit;
+		// Checando se usuario existe na MERCADO PAGO
+		
+
+		
+		//////////////////////////////////////////////////////////////
+
+		$conexao = new mysql();
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$cod."' ");
+		$linha_carrinho = $coisas_carrinho->num_rows;
+		
+		if($linha_carrinho != 0){
+
+			$recorrentes = array();
+			$nao_recorrentes = array();
+			while($data_carrinho = $coisas_carrinho->fetch_object()){
+				if($data_carrinho->id_combo > 0){
+
+					$id_combo = $data_carrinho->id_combo;
+					if (!empty($recorrentes[$id_combo]))
+					{
+						$recorrentes[$id_combo] = array_merge($recorrentes[$id_combo], array($data_carrinho));
+					}
+					else
+					{
+						$recorrentes[$id_combo] = array($data_carrinho);
+					}
+				}else{
+					$nao_recorrentes[] = $data_carrinho;
+				}
+				
+			}
+		}	
+		
+		/////////     RECCORENTE    /////////////
+		foreach($recorrentes as $key => $recorrencia){
+		
+			$amout = 0;
+			$produto_assinatura = '';
+			foreach($recorrencia as $rec){
+				if($rec->usar_valor_vindi == 1){
+					$amout = $rec->valor_total;
+				}else{
+					$amout = $amout + $rec->valor_total;
+				}
+				$produto_assinatura = $rec->produto_assinatura;
+			}
+
+			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
+			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
+
+			if(isset($bill['bill']['id'])){
+				$id_charge = $bill['bill']['charges'][0]['id'];
+				$id_trans = $bill['bill']['id'];
+				$url = $bill['bill']['url'];
+
+				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
+					$status = 4;
+					foreach($recorrencia as $rec_lms){
+						$this->integrar_trilha_lms($rec_lms->produto_ref,$cod, $cpf);
+					}
+				}else{
+					$status = 1;
+				}
+				$db = new mysql();
+				$db->alterar("pedido_loja_carrinho", array(
+					"transacao_charger_id"=>"$id_charge",
+					"transacao_bill_id"=>"$id_trans",
+					"url_vindi"=>"$url",
+					"status"=>"$status",
+				), " sessao='$cod' and id_combo='$rec->id_combo' ");
+
+				$db->alterar("pedido_loja", array(
+					"status"=>"$status",
+				), " codigo='$cod' ");
+			}
+		}
+		/////////  /////////////  /////////////
+
+		/////////////   NAO  RECCORENTE    /////////////
+		foreach($nao_recorrentes as $key => $recorrencia){
+			// ini_set('display_errors', 1);
+			// ini_set('display_startup_errors', 1);
+			// error_reporting(E_ALL);
+
+			if($recorrencia->valor_total == 0){
+				$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+				$db = new mysql();
+					$db->alterar("pedido_loja_carrinho", array(
+						"status"=>4,
+						
+					), " id='$recorrencia->id' ");
+					$db->alterar("pedido_loja", array(
+						"status"=>4,
+						
+					), " codigo='$cod' ");
+			}else{
+			
+				$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
+
+				if(isset($bill->id)){
+					$id_charge = $bill->charges[0]->id;
+					$id_trans = $bill->id;
+					$url = $bill->url;
+
+					if($bill->status == 'paid'){ 
+						$status = 4;
+						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+					}else{
+						$status = 1;
+					}
+					$db = new mysql();
+					$db->alterar("pedido_loja_carrinho", array(
+						"transacao_charger_id"=>"$id_charge",
+						"transacao_bill_id"=>"$id_trans",
+						"url_vindi"=>"$url",
+						"status"=>"$status",
+						
+					), " id='$recorrencia->id' ");
+					$db->alterar("pedido_loja", array(
+						"status"=>"$status",
+						
+					), " codigo='$cod' ");
+				}
+			}
+			
+		}
+		/////////////  /////////////  /////////////
+		$this->view('finalizada', $dados);
+	}
+
 	public function vindi_flow(){
 
 		$dados = array();

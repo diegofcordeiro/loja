@@ -1132,7 +1132,10 @@
 							<?php echo '<pre>'; print_r($forma_pagamento);exit; ?>
 							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 								<input type="text"  id="brand_" name="brand_">
-								<input type="text"  name="vindi_key" value="<?=$forma_pagamento->vindi_key?>">
+								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
+								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
+								<input type="text"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
+								<input type="text"  name="mercadopago_access_token" value="<?=$forma_pagamento->mercadopago_access_token?>">
 
 								<input type="text"  name="is_brasil" value="<?=$data_dados->is_brasil?>">
 								<input type="text"  name="is_brasil_address" value="<?=$data_dados->is_brasil_address?>">

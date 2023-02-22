@@ -8594,14 +8594,17 @@ class index extends controller {
 
 		$cod = $_POST['codigo'];
 
-		$email = '2332sdasd@gmail.com';
 
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
+
 		if($user_exist == 0){
 			$new_user = $this->add_mercadopago_user($email, $_POST['mercadopago_access_token']);
-			$new_user_id = $new_user->id;
-		}
 
+			$db = new mysql();
+			$db->alterar("cadastr", array(
+				"mercadopago_id"=>"$new_user->id",
+			), " email='$email' ");
+		}
 
 		
 

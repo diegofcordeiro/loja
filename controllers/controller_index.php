@@ -8604,11 +8604,10 @@ class index extends controller {
 			$mercado_pago_userid = $user_exist;
 		}
 		
-		print_r($mercado_pago_userid);
-		echo '<br><pre>';
+		echo '<pre>';
 		print_r($email);
 		echo '<br>';
-		print_r($user_exist);
+		print_r($mercado_pago_userid);
 		exit;
 		// Checando se usuario existe na MERCADO PAGO
 		

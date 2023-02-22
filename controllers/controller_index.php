@@ -8577,12 +8577,12 @@ class index extends controller {
 		// $customer->save();
 
 		$filters = array(
-			"id"=>"drekehrer1@gmail.com"
+			"email"=>"drekehrer1@gmail.com"
 		);
 
 		$customers = MercadoPago\Customer::search($filters);
 
-		echo '<pre>'; print_r($customers->total);exit;
+		echo '<pre>'; print_r($customers);exit;
 
 
 		// $mercadopago_client_id 			= $_POST['mercadopago_client_id'];

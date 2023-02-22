@@ -2708,7 +2708,7 @@
   	<script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
-  	<script type="text/javascript" src="index_mercadopago.js" defer></script>
+  	<!-- <script type="text/javascript" src="index_mercadopago.js" defer></script> -->
 <script type="text/javascript">
 	
 	

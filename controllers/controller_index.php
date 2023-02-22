@@ -8594,10 +8594,13 @@ class index extends controller {
 
 		$cod = $_POST['codigo'];
 
-
+		$email = 'sdasd@gmail.com';
+		
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
-
-		print_r($user_exist);
+		if($user_exist == 0){
+			$new_user = $this->add_mercadopago_user($email, $_POST['mercadopago_access_token']);
+		}
+		print_r($new_user);
 		exit;
 		// Checando se usuario existe na MERCADO PAGO
 		
@@ -8736,7 +8739,7 @@ class index extends controller {
 		$customer = new MercadoPago\Customer();
 		$customer->email = $email;
 		$customer->save();
-
+		return $customers;
 	}
 
 	public function check_mercadopago_user($email, $token){

@@ -6,6 +6,7 @@ window.Mercadopago.setPublishableKey("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b"
         document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
 
         function guessPaymentMethod(event) {
+            console.log('aqui');
             let cardnumber = document.getElementById("cardNumber").value;
             if (cardnumber.length >= 6) {
                 let bin = cardnumber.substring(0,6);
@@ -79,7 +80,7 @@ window.Mercadopago.setPublishableKey("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b"
 
         doSubmit = false;
         document.getElementById('paymentForm').addEventListener('submit', getCardToken);
-        
+
         function getCardToken(event){
             event.preventDefault();
             if(!doSubmit){

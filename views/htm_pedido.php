@@ -1130,7 +1130,7 @@
 
 						<div style="margin-top:20px;" >
 							
-							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/vindi_flow">
+							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 								<input type="text"  id="brand_" name="brand_">
 								<input type="text"  name="vindi_key" value="<?=$forma_pagamento->vindi_key?>">
 

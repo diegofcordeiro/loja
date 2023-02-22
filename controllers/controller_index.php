@@ -7786,13 +7786,9 @@ class index extends controller {
 
 			// confere se tem forma de pagamento
 			if($data_pedido->forma_pagamento > 0){
-				echo '<pre>';print_r('1');exit;
-
 				$formadepagamento = $data_pedido->forma_pagamento;
 
 			} else {
-				print_r('2');exit;
-
 				$formas = new model_formas_pg();
 				$lista_pg = $formas->lista();						
 				$formadepagamento = $lista_pg[0]['id'];

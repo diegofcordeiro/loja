@@ -8572,10 +8572,19 @@ class index extends controller {
  
    		MercadoPago\SDK::setAccessToken($_POST['mercadopago_access_token']);
 
-		$customer = new MercadoPago\Customer();
-		$customer->email = "drekehrer1@gmail.com";
-		$customer->save();
-		echo '<pre>'; print_r($customer);exit;
+		// $customer = new MercadoPago\Customer();
+		// $customer->email = "drekehrer1@gmail.com";
+		// $customer->save();
+
+		$filters = array(
+			"email"=>"drekehrer1@gmail.com"
+		);
+
+		$customers = MercadoPago\Customer::search($filters);
+
+		echo '<pre>'; print_r($customers);exit;
+
+
 		// $mercadopago_client_id 			= $_POST['mercadopago_client_id'];
 		// $mercadopago_client_secret 		= $_POST['mercadopago_client_secret'];
 		// $mercadopago_public_key 		= $_POST['mercadopago_public_key'];

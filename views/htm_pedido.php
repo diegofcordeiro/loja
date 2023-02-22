@@ -1131,66 +1131,20 @@
 						<div style="margin-top:20px;" >
 							<?php //echo '<pre>'; print_r($forma_pagamento);exit; ?>
 
-							<form action="<?=DOMINIO?>index/mercadopago_flow" method="post" id="paymentForm" style="margin-top: 50px;background-color: #fff;padding: 5px;border-radius: 10px;font-family: arial;">
-								<h3>Detalhe do comprador</h3>
-									<div>
-									<div>
-										<label for="email">E-mail</label>
-										<input id="email" name="email" type="text" value="test@test.com"/>
-									</div>
-									<div>
-										<label for="docType">Tipo de documento</label>
-										<select id="docType" name="docType" data-checkout="docType" type="text"></select>
-									</div>
-									<div>
-										<label for="docNumber">Número do documento</label>
-										<input id="docNumber" name="docNumber" data-checkout="docNumber" type="text"/>
-									</div>
-									</div>
-								<h3>Detalhes do cartão</h3>
-									<div>
-									<div>
-										<label for="cardholderName">Titular do cartão</label>
-										<input id="cardholderName" data-checkout="cardholderName" type="text">
-									</div>
-									<div>
-										<label for="">Data de vencimento</label>
-										<div>
-										<input value="11" type="text" placeholder="MM" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
-											onselectstart="return false" onpaste="return false"
-											oncopy="return false" oncut="return false"
-											ondrag="return false" ondrop="return false" autocomplete=off>
-										<span class="date-separator">/</span>
-										<input value="25" type="text" placeholder="YY" id="cardExpirationYear" data-checkout="cardExpirationYear"
-											onselectstart="return false" onpaste="return false"
-											oncopy="return false" oncut="return false"
-											ondrag="return false" ondrop="return false" autocomplete=off>
-										</div>
-									</div>
-									<div>
-										<label for="cardNumber">Número do cartão</label>
-										<input value="4235647728025682" type="text" id="cardNumber_mp" data-checkout="cardNumber_mp"
-										onselectstart="return false" onpaste="return true"
-										oncopy="return false" oncut="return false"
-										ondrag="return false" ondrop="return false" autocomplete=off>
-									</div>
-									<div>
-										<label for="securityCode">Código de segurança</label>
-										<input value="123" id="securityCode" data-checkout="securityCode" type="text"
-										onselectstart="return false" onpaste="return false"
-										oncopy="return false" oncut="return false"
-										ondrag="return false" ondrop="return false" autocomplete=off>
-									</div>
-									<div>
-										<input type="text" name="transactionAmount" id="transactionAmount" value="100" />
-										<input type="text" name="paymentMethodId" id="paymentMethodId" />
-										<input type="text" name="description" id="description" />
-										<br>
-										<button type="submit" style="width: 95%;background-color: #35baf6;border: none;font-size: 30px;color: #fff;border-radius: 10px;">Salvar</button>
-										<br>
-									</div>
-								</div>
-								</form>
+							<form id="form-checkout">
+								<div id="form-checkout__cardNumber" class="container"></div>
+								<div id="form-checkout__expirationDate" class="container"></div>
+								<div id="form-checkout__securityCode" class="container"></div>
+								<input type="text" id="form-checkout__cardholderName" />
+								<select id="form-checkout__issuer"></select>
+								<select id="form-checkout__installments"></select>
+								<select id="form-checkout__identificationType"></select>
+								<input type="text" id="form-checkout__identificationNumber" />
+								<input type="email" id="form-checkout__cardholderEmail" />
+
+								<button type="submit" id="form-checkout__submit">Pagar</button>
+								<progress value="0" class="progress-bar">Carregando...</progress>
+							</form>
 							<!-- <form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 								<input type="text"  id="brand_" name="brand_">
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
@@ -2707,118 +2661,108 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
   	<script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
-
+	
+	<!-- <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script> -->
+	<script src="https://sdk.mercadopago.com/js/v2"></script>
 <script type="text/javascript">
-console.log('aqui');
-window.Mercadopago.setPublishableKey("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b");
-$(function(){
-	window.Mercadopago.getIdentificationTypes();
+const mp = new MercadoPago("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b");
 
-	document.getElementById('cardNumber_mp').addEventListener('change', guessPaymentMethod);
+const cardForm = mp.cardForm({
+      amount: "100.5",
+      iframe: true,
+      form: {
+        id: "form-checkout",
+        cardNumber: {
+          id: "form-checkout__cardNumber",
+          placeholder: "Número do cartão",
+        },
+        expirationDate: {
+          id: "form-checkout__expirationDate",
+          placeholder: "MM/YY",
+        },
+        securityCode: {
+          id: "form-checkout__securityCode",
+          placeholder: "Código de segurança",
+        },
+        cardholderName: {
+          id: "form-checkout__cardholderName",
+          placeholder: "Titular do cartão",
+        },
+        issuer: {
+          id: "form-checkout__issuer",
+          placeholder: "Banco emissor",
+        },
+        installments: {
+          id: "form-checkout__installments",
+          placeholder: "Parcelas",
+        },        
+        identificationType: {
+          id: "form-checkout__identificationType",
+          placeholder: "Tipo de documento",
+        },
+        identificationNumber: {
+          id: "form-checkout__identificationNumber",
+          placeholder: "Número do documento",
+        },
+        cardholderEmail: {
+          id: "form-checkout__cardholderEmail",
+          placeholder: "E-mail",
+        },
+      },
+      callbacks: {
+        onFormMounted: error => {
+          if (error) return console.warn("Form Mounted handling error: ", error);
+          console.log("Form mounted");
+        },
+        onSubmit: event => {
+          event.preventDefault();
 
-	function guessPaymentMethod(event) {
-		let cardnumber_mp = document.getElementById("cardNumber_mp").value;
-		if (cardnumber_mp.length >= 6) {
-			let bin = cardnumber_mp.substring(0,6);
-			window.Mercadopago.getPaymentMethod({
-				"bin": bin
-			}, setPaymentMethod);
-		}
-	};
+          const {
+            paymentMethodId: payment_method_id,
+            issuerId: issuer_id,
+            cardholderEmail: email,
+            amount,
+            token,
+            installments,
+            identificationNumber,
+            identificationType,
+          } = cardForm.getCardFormData();
 
-	function setPaymentMethod(status, response) {
-		if (status == 200) {
-			let paymentMethod = response[0];
-			document.getElementById('paymentMethodId').value = paymentMethod.id;
+          fetch("/process_payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token,
+              issuer_id,
+              payment_method_id,
+              transaction_amount: Number(amount),
+              installments: Number(installments),
+              description: "Descrição do produto",
+              payer: {
+                email,
+                identification: {
+                  type: identificationType,
+                  number: identificationNumber,
+                },
+              },
+            }),
+          });
+        },
+        onFetching: (resource) => {
+          console.log("Fetching resource: ", resource);
 
-			getIssuers(paymentMethod.id);
-		} else {
-			alert(`payment method info error: ${response}`);
-		}
-	}
+          // Animate progress bar
+          const progressBar = document.querySelector(".progress-bar");
+          progressBar.removeAttribute("value");
 
-
-	function getIssuers(paymentMethodId) {
-		window.Mercadopago.getIssuers(
-			paymentMethodId,
-			setIssuers
-		);
-	}
-
-	function setIssuers(status, response) {
-		if (status == 200) {
-			let issuerSelect = document.getElementById('issuer');
-			console.log(issuerSelect);
-			response.forEach( issuer => {
-				let opt = document.createElement('option');
-				opt.text = issuer.name;
-				opt.value = issuer.id;
-				issuerSelect.appendChild(opt);
-			});
-
-			getInstallments(
-				document.getElementById('paymentMethodId').value,
-				document.getElementById('transactionAmount').value,
-				issuerSelect.value
-			);
-		} else {
-			alert(`issuers method info error: ${response}`);
-		}
-	}
-
-	function getInstallments(paymentMethodId, transactionAmount, issuerId){
-			window.Mercadopago.getInstallments({
-				"payment_method_id": paymentMethodId,
-				"amount": parseFloat(transactionAmount),
-				"issuer_id": parseInt(issuerId)
-			}, setInstallments);
-	}
-
-	function setInstallments(status, response){
-		if (status == 200) {
-			document.getElementById('installments').options.length = 0;
-			response[0].payer_costs.forEach( payerCost => {
-				let opt = document.createElement('option');
-				opt.text = payerCost.recommended_message;
-				opt.value = payerCost.installments;
-				document.getElementById('installments').appendChild(opt);
-			});
-		} else {
-			alert(`installments method info error: ${response}`);
-		}
-	}
-
-
-	doSubmit = false;
-	document.getElementById('paymentForm').addEventListener('submit', getCardToken);
-
-	function getCardToken(event){
-		event.preventDefault();
-		if(!doSubmit){
-			let $form = document.getElementById('paymentForm');
-			window.Mercadopago.createToken($form, setCardTokenAndPay);
-			return false;
-		}
-	};
-
-	function setCardTokenAndPay(status, response) {
-		if (status == 200 || status == 201) {
-			let form = document.getElementById('paymentForm');
-			let card = document.createElement('input');
-			card.setAttribute('name', 'token');
-			card.setAttribute('type', 'hidden');
-			card.setAttribute('value', response.id);
-			form.appendChild(card);
-			doSubmit=true;
-			form.submit();
-		} else {
-			alert("Verify filled data!\n"+JSON.stringify(response, null, 4));
-		}
-	};
-
-
-});
+          return () => {
+            progressBar.setAttribute("value", "0");
+          };
+        }
+      },
+    });
 
 </script>
 

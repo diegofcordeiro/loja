@@ -7785,12 +7785,13 @@ class index extends controller {
 			$codigo_pedido = $this->_sessao;
 
 			// confere se tem forma de pagamento
-			print_r($data_pedido->forma_pagamento);exit;
 			if($data_pedido->forma_pagamento){
+				print_r('1');exit;
 
 				$formadepagamento = $data_pedido->forma_pagamento;
 
 			} else {
+				print_r('2');exit;
 
 				$formas = new model_formas_pg();
 				$lista_pg = $formas->lista();						

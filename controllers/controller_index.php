@@ -8763,7 +8763,7 @@ class index extends controller {
 		);
 
 		$customers = MercadoPago\Customer::search($filters);
-		echo '<pre>'; print_r($customers); exit;
+		echo '<pre>'; print_r($customers->_class); exit;
 		return $customers->total;
 	}
 	

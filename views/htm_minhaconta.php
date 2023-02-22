@@ -890,7 +890,7 @@
 									$n = 0;
 									foreach ($lista_pedidos as $key => $valu) {
 										foreach ($valu as $value) {
-											echo '<pre>';print_r($value);
+											// echo '<pre>';print_r($value);
 
 											$endereco = "";
 											$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
@@ -901,10 +901,12 @@
 											} else {
 												$mensagens = "";
 											}
-											if($value['status_id'] == 1){
+											if($value['status_id'] == 1 && $value['forma_pagamento'] == 5){
 												$link = $value['url_vindi'];
 												$est = "<a href='$link' target='_blank' class='btn_ac'>Pagar</a>";
-
+											}
+											if($value['status_id'] == '' && $value['forma_pagamento'] == 3){
+												$est = "<a href='$endereco' class='btn_ac'>Pagar</a>";
 											}
 											if($value['usar_valor_vindi'] == 1){
 												$value_tot = $value['valor_total_combo_vindi'];

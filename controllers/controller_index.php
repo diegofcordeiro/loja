@@ -8608,6 +8608,7 @@ class index extends controller {
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT mercadopago_id FROM cadastro WHERE email='$email' ");
 			$mercado_pago_userid = $coisas->fetch_object();
+			$mercado_pago_userid = $mercado_pago_userid->mercadopago_id;
 		}
 		
 		print_r($mercado_pago_userid);

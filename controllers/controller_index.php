@@ -7819,7 +7819,7 @@ class index extends controller {
 				$lista_envio_adm[$n_envio] = $data->email;
 				$n_envio++;
 			}
-			
+
 			switch ($formadepagamento) {
 
 				// direciona para pagamento pagseguro
@@ -7959,7 +7959,7 @@ class index extends controller {
 
 				// MercadoPago
 				case '3':
-					print_r('aqui');exit;
+
 					$conexao = new mysql();
 					$coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='3' ");
 					$data_pagamento = $coisas_pagamento->fetch_object();

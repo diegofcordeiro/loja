@@ -8601,7 +8601,7 @@ class index extends controller {
 			$new_user = $this->add_mercadopago_user($email, $_POST['mercadopago_access_token']);
 
 			$db = new mysql();
-			$db->alterar("cadastr", array(
+			$db->alterar("cadastro", array(
 				"mercadopago_id"=>"$new_user->id",
 			), " email='$email' ");
 		}
@@ -8763,6 +8763,7 @@ class index extends controller {
 		);
 
 		$customers = MercadoPago\Customer::search($filters);
+		echo '<pre>'; print_r($customers); exit;
 		return $customers->total;
 	}
 	

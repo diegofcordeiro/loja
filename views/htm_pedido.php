@@ -1169,7 +1169,7 @@
 									</div>
 									<div>
 										<label for="cardNumber">Número do cartão</label>
-										<input value="4235647728025682" type="text" id="cardNumber" data-checkout="cardNumber"
+										<input value="4235647728025682" type="text" id="cardNumber_mp" data-checkout="cardNumber_mp"
 										onselectstart="return false" onpaste="return true"
 										oncopy="return false" oncut="return false"
 										ondrag="return false" ondrop="return false" autocomplete=off>

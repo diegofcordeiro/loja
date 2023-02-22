@@ -3,13 +3,13 @@ window.Mercadopago.setPublishableKey("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b"
     $(function(){
         window.Mercadopago.getIdentificationTypes();
 
-        document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
+        document.getElementById('cardNumber_mp').addEventListener('change', guessPaymentMethod);
 
         function guessPaymentMethod(event) {
             console.log('aqui');
-            let cardnumber = document.getElementById("cardNumber").value;
-            if (cardnumber.length >= 6) {
-                let bin = cardnumber.substring(0,6);
+            let cardnumber_mp = document.getElementById("cardNumber_mp").value;
+            if (cardnumber_mp.length >= 6) {
+                let bin = cardnumber_mp.substring(0,6);
                 window.Mercadopago.getPaymentMethod({
                     "bin": bin
                 }, setPaymentMethod);

@@ -2728,7 +2728,7 @@ const cardForm = mp.cardForm({
             identificationType,
           } = cardForm.getCardFormData();
 
-          fetch("/process_payment", {
+          fetch("<?=DOMINIO?><?=$controller?>/mercadopago_flow", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

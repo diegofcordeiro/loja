@@ -7785,8 +7785,8 @@ class index extends controller {
 			$codigo_pedido = $this->_sessao;
 
 			// confere se tem forma de pagamento
-			echo '<pre>';print_r($data_pedido);exit;
-			if($data_pedido->forma_pagamento){
+			if($data_pedido->forma_pagamento > 0){
+				echo '<pre>';print_r('1');exit;
 
 				$formadepagamento = $data_pedido->forma_pagamento;
 

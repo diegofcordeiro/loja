@@ -8582,7 +8582,7 @@ class index extends controller {
 
 		$customers = MercadoPago\Customer::search($filters);
 
-		echo '<pre>'; print_r($customers->storage);exit;
+		echo '<pre>'; print_r($customers);exit;
 
 
 		// $mercadopago_client_id 			= $_POST['mercadopago_client_id'];

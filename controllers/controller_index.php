@@ -8433,7 +8433,10 @@ class index extends controller {
 	///////// PAGAMENTOS /////////
 
 	public function mercadopago_flow(){
-
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+		
 		$dados = array();
 		$dados['_base'] = $this->_base();
 		$dados['objeto'] = DOMINIO.$this->_controller.'/';
@@ -8567,7 +8570,7 @@ class index extends controller {
 		require_once('vendor/autoload.php');
 
  
-   		MercadoPago\SDK::setAccessToken($_POST['mercadopago_access_token']);
+   		// MercadoPago\SDK::setAccessToken($_POST['mercadopago_access_token']);
 
 		// $mercadopago_client_id 			= $_POST['mercadopago_client_id'];
 		// $mercadopago_client_secret 		= $_POST['mercadopago_client_secret'];

@@ -7821,7 +7821,7 @@ class index extends controller {
 				$lista_envio_adm[$n_envio] = $data->email;
 				$n_envio++;
 			}
-
+			print_r($formadepagamento);exit;
 			switch ($formadepagamento) {
 
 				// direciona para pagamento pagseguro

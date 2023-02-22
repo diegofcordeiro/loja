@@ -7575,7 +7575,9 @@ class index extends controller {
 	}
 
 	public function fechar_pedido(){
-		
+		ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 		// retorno
 		function mostra_result($erro_cod, $erro_msg, $processo, $forma){
 

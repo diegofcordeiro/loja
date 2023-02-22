@@ -1130,7 +1130,22 @@
 
 						<div style="margin-top:20px;" >
 							<?php //echo '<pre>'; print_r($forma_pagamento);exit; ?>
-							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
+
+							<form id="form-checkout">
+								<div id="form-checkout__cardNumber" class="container"></div>
+								<div id="form-checkout__expirationDate" class="container"></div>
+								<div id="form-checkout__securityCode" class="container"></div>
+								<input type="text" id="form-checkout__cardholderName" />
+								<select id="form-checkout__issuer"></select>
+								<select id="form-checkout__installments"></select>
+								<select id="form-checkout__identificationType"></select>
+								<input type="text" id="form-checkout__identificationNumber" />
+								<input type="email" id="form-checkout__cardholderEmail" />
+
+								<button type="submit" id="form-checkout__submit">Pagar</button>
+								<progress value="0" class="progress-bar">Carregando...</progress>
+							</form>
+							<!-- <form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 								<input type="text"  id="brand_" name="brand_">
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
 								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
@@ -1336,11 +1351,11 @@
 									</div>
 									<div class="col-xs-2">
 										<div class="form-group">
-											<!-- <label for="installments">Recorrencia</label>
+											<label for="installments">Recorrencia</label>
 												<select name="recorrencia" class="form-control">
 													<option selected value="0">0</option>
 													<option value="1">Mensal</option>
-												</select> -->
+												</select> 
 												<input type="hidden" name="carrinho_coisas[]" value=<?$produtos['lista']?>>
 												<input type="hidden" name="installmentValue">
 										</div>                            
@@ -1359,7 +1374,7 @@
 									// 	$n++;
 									// }
 								?>
-							</form>	
+							</form>	 -->
 						
 						</div>
 

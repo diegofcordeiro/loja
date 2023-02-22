@@ -890,10 +890,10 @@
 									$n = 0;
 									foreach ($lista_pedidos as $key => $valu) {
 										foreach ($valu as $value) {
-											// echo '<pre>';print_r($value);
+											echo '<pre>';print_r($value);
 
 											$endereco = "";
-											// $endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
+											$endereco = DOMINIO.$controller."/pedidos_detalhes/codigo/".$value['codigo'];
 											$estorno = DOMINIO.$controller."/vindi_estorno/codigo/".$value['charger_id'];
 											$est = '';
 											if($value['msg'] != 0){
@@ -926,7 +926,7 @@
 												<td>Pedido ".$value['id']."</td>
 												<td>R$ ".number_format($value_tot,2,",",".")."</td>
 												<td>".$value['status']."</td>
-											<td>$est</td>
+												<td>$est</td>
 											</tr>
 											";
 											$n++;

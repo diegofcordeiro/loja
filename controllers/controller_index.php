@@ -7961,48 +7961,22 @@ error_reporting(E_ALL);
 
 				// MercadoPago
 				case '3':
+					$vencimento_pedido = strtotime("+2 days");
 					$conexao = new mysql();
-					$coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='3' ");
-					$data_pagamento = $coisas_pagamento->fetch_object();
-					
-					$enderecoderetorno = DOMINIO."index/pedidos_detalhes/codigo/".$codigo_pedido."/";
-					$enderecoderetorno_sucesso = DOMINIO."index/pedidos_detalhes/codigo/".$codigo_pedido."/";
-					
-					require_once('vendor/autoload.php');
-					
-					MercadoPago\SDK::setClientId($data_pagamento->mercadopago_client_id);
-					MercadoPago\SDK::setClientSecret($data_pagamento->mercadopago_client_secret);
-					MercadoPago\SDK::setAccessToken($data_pagamento->mercadopago_access_token);
-					//$data_pagamento->mercadopago_public_key
-					
-					$preference = new MercadoPago\Preference();
-					print_r($preference);exit;
+					if($valor_total_pedido == 0){
 
-					$valor_tratado_mp = str_replace(".", "", $valores->trata_valor($valor_total_pedido));
-					$valor_tratado_mp = str_replace(",", ".", $valor_tratado_mp);
+						$sessao = $this->_sessao;
+						$cpf = $_SESSION['usuario_cpf'];
+						
+						$produtos = $conexao->Executar("SELECT produto_ref FROM pedido_loja_carrinho WHERE sessao='$sessao'");
+						while($data = $produtos->fetch_object()){
+							// print_r($data->produto_ref);echo '<br>';
+							// print_r($sessao);echo '<br>';
+							// print_r($cpf);echo '<br>';
+							// echo '------';
+							$this->integrar_trilha_lms($data->produto_ref,$sessao, $cpf);
+						}
 
-					$item = new MercadoPago\Item(); 
-					$item->title = "Pedido ".$data_pedido->id;
-					$item->quantity = 1;
-					$item->unit_price = $valor_tratado_mp;
-					$preference->items = array($item);
-					$preference->external_reference = $codigo_pedido;
-					$preference->back_urls = array(
-						"success" => "$enderecoderetorno_sucesso",
-						"failure" => "$enderecoderetorno",
-						"pending" => "$enderecoderetorno_sucesso"
-					);
-					$preference->auto_return = "all";
-					$preference->notification_url = DOMINIO."sistema/mercadopago_retorno/index.php";					 
-					$preference->save();
-
-					if($preference->id){
-
-						$codigo_transacao = $preference->id;
-
-						$vencimento_pedido = strtotime("+2 days");
-
-						$conexao = new mysql();
 						$conexao->alterar("pedido_loja", array(
 							"cadastro"=>$cadastro,
 							"vencimento"=>$vencimento_pedido,
@@ -8010,45 +7984,158 @@ error_reporting(E_ALL);
 							"valor_produtos_desc"=>$total_descontos,
 							"valor_total"=>$valor_total_pedido,
 							"forma_pagamento"=>$formadepagamento,
-							"id_transacao"=>$codigo_transacao,
-							"status"=>1
+							"status"=>4
+						), " codigo='".$this->_sessao."' ");
+
+						$conexao->alterar("pedido_loja_carrinho", array(
+							"status"=>4
+						), " sessao='".$this->_sessao."' ");
+
+
+						$codigo_pedido = $this->_sessao;
+						$novasessao = $this->gera_codigo();
+						$this->_sessao = $novasessao;
+						$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
+
+						// retorna
+						$ret_erro_cod = "0";
+						$ret_erro_msg = "";
+						$ret_processo = "gratis";
+						$ret_forma = "condicional";
+						$ret_forma_code = "";
+						$ret_endereco = "";
+
+						mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
+						exit;
+
+					}else{
+
+						$conexao->alterar("pedido_loja", array(
+							"cadastro"=>$cadastro,
+							"vencimento"=>$vencimento_pedido,
+							"valor_produtos"=>$valor_subtotal,
+							"valor_produtos_desc"=>$total_descontos,
+							"valor_total"=>$valor_total_pedido,
+							"forma_pagamento"=>$formadepagamento,
+							"status"=>0
 						), " codigo='".$this->_sessao."' ");
 
 						// baixa estoque
 						$produtos->baixa_estoque($this->_sessao);
 
 						// envia email
-						$msg = $texto_email;
 						$email_destino = $data_cadastro->email;
-						$envio->enviar("Confirmação de Pedido", $msg, array("0"=>"$email_destino"));
+						$envio->enviar("Confirmação de Pedido", $texto_email, array("0"=>"$email_destino"));
 						$envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
 
-							// retorna
+
+						$codigo_pedido = $this->_sessao;
+
+						$novasessao = $this->gera_codigo();
+						$this->_sessao = $novasessao;
+						$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
+
+
+						// retorna
 						$ret_erro_cod = "0";
 						$ret_erro_msg = "";
 						$ret_processo = "ok";
-						$ret_forma = "mercadopago";
-						$ret_forma_code = "$codigo_transacao";
-						$ret_endereco = "";
-
-						mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
-						exit;
-
-					} else {
-
-							// retorna
-						$ret_erro_cod = "1";
-						$ret_erro_msg = "Dados de pagamento incorretos";
-
-							//$ret_erro_msg = "Dados de cadastro incorretos - ".$retorno_mercadopago['erro_msg'];
-						$ret_processo = "erro";
-						$ret_forma = "";
+						$ret_forma = "condicional";
 						$ret_forma_code = "";
 						$ret_endereco = "";
 
 						mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
 						exit;
-					} 
+
+						// $conexao = new mysql();
+						// $coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='3' ");
+						// $data_pagamento = $coisas_pagamento->fetch_object();
+						
+						// $enderecoderetorno = DOMINIO."index/pedidos_detalhes/codigo/".$codigo_pedido."/";
+						// $enderecoderetorno_sucesso = DOMINIO."index/pedidos_detalhes/codigo/".$codigo_pedido."/";
+						
+						// require_once('vendor/autoload.php');
+						
+						// MercadoPago\SDK::setClientId($data_pagamento->mercadopago_client_id);
+						// MercadoPago\SDK::setClientSecret($data_pagamento->mercadopago_client_secret);
+						// MercadoPago\SDK::setAccessToken($data_pagamento->mercadopago_access_token);
+						// //$data_pagamento->mercadopago_public_key
+						
+						// $preference = new MercadoPago\Preference();
+						// print_r($preference);exit;
+
+						// $valor_tratado_mp = str_replace(".", "", $valores->trata_valor($valor_total_pedido));
+						// $valor_tratado_mp = str_replace(",", ".", $valor_tratado_mp);
+
+						// $item = new MercadoPago\Item(); 
+						// $item->title = "Pedido ".$data_pedido->id;
+						// $item->quantity = 1;
+						// $item->unit_price = $valor_tratado_mp;
+						// $preference->items = array($item);
+						// $preference->external_reference = $codigo_pedido;
+						// $preference->back_urls = array(
+						// 	"success" => "$enderecoderetorno_sucesso",
+						// 	"failure" => "$enderecoderetorno",
+						// 	"pending" => "$enderecoderetorno_sucesso"
+						// );
+						// $preference->auto_return = "all";
+						// $preference->notification_url = DOMINIO."sistema/mercadopago_retorno/index.php";					 
+						// $preference->save();
+
+						// if($preference->id){
+
+						// 	$codigo_transacao = $preference->id;
+
+						// 	$vencimento_pedido = strtotime("+2 days");
+
+						// 	$conexao = new mysql();
+						// 	$conexao->alterar("pedido_loja", array(
+						// 		"cadastro"=>$cadastro,
+						// 		"vencimento"=>$vencimento_pedido,
+						// 		"valor_produtos"=>$valor_subtotal,
+						// 		"valor_produtos_desc"=>$total_descontos,
+						// 		"valor_total"=>$valor_total_pedido,
+						// 		"forma_pagamento"=>$formadepagamento,
+						// 		"id_transacao"=>$codigo_transacao,
+						// 		"status"=>1
+						// 	), " codigo='".$this->_sessao."' ");
+
+						// 	// baixa estoque
+						// 	$produtos->baixa_estoque($this->_sessao);
+
+						// 	// envia email
+						// 	$msg = $texto_email;
+						// 	$email_destino = $data_cadastro->email;
+						// 	$envio->enviar("Confirmação de Pedido", $msg, array("0"=>"$email_destino"));
+						// 	$envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
+
+						// 		// retorna
+						// 	$ret_erro_cod = "0";
+						// 	$ret_erro_msg = "";
+						// 	$ret_processo = "ok";
+						// 	$ret_forma = "mercadopago";
+						// 	$ret_forma_code = "$codigo_transacao";
+						// 	$ret_endereco = "";
+
+						// 	mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
+						// 	exit;
+
+						// } else {
+
+						// 		// retorna
+						// 	$ret_erro_cod = "1";
+						// 	$ret_erro_msg = "Dados de pagamento incorretos";
+
+						// 		//$ret_erro_msg = "Dados de cadastro incorretos - ".$retorno_mercadopago['erro_msg'];
+						// 	$ret_processo = "erro";
+						// 	$ret_forma = "";
+						// 	$ret_forma_code = "";
+						// 	$ret_endereco = "";
+
+						// 	mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
+						// 	exit;
+						// } 
+					}
 
 				break;
 
@@ -8389,7 +8476,6 @@ error_reporting(E_ALL);
 
 				default:
 
-				// echo 'Valor total do pedido: '; print_r($valor_total_pedido);exit;
 				$vencimento_pedido = strtotime("+2 days");
 				$conexao = new mysql();
 

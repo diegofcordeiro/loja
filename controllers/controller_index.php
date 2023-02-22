@@ -8778,7 +8778,8 @@ class index extends controller {
 
 		curl_close($curl);
 		echo '<pre>';
-		print_r(json_decode($response['results']));exit;
+		$response = json_decode($response, true);
+		print_r($response);exit;
 
 	}
 	

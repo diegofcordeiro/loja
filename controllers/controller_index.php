@@ -8593,8 +8593,8 @@ class index extends controller {
 		$last4 = substr($card_number,12,16);
 
 		$cod = $_POST['codigo'];
-		$token = trim($_POST['token']);
-		print_r('token cartao:' .$token);
+
+		echo '<pre>'; print_r($_POST);exit;
 
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
 

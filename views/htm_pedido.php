@@ -840,7 +840,7 @@
 								<input type="hidden" name="token">
 								<input type="hidden" name="forma_pagamento" value="<?=$forma_pagamento->id?>">
 								<input type="hidden" name="senderHash">
-								<input type="hidden" name="id_transacao" value="<?=$data_pedido->id_transacao?>">
+								<input type="hidden" name="id_transacao" value="<?=$data_pedido->id_transacao_pagseguro?>">
 								<input type="hidden" name="amount" value="<?=$data_pedido->valor_total?>">
 								<input type="hidden" name="shippingCoast" value="0">
 
@@ -1128,14 +1128,14 @@
 
 					<?php if( ($forma_pagamento->id == 3) AND ($data_pedido->status <= 3) ){ ?>
 
-						<!-- <div style="margin-top:20px;" >
+						<div style="margin-top:20px;" >
 							
 							<form id='envairpgmp' name='envairpgmp' method='POST'>
 								<script src='https://www.mercadopago.com.br/integrations/v1/web-payment-checkout.js' data-preference-id='<?=$data_pedido->id_transacao?>' ></script>
 							</form>
 							
 							<div style="font-size: 12px; margin-top: 10px;">Caso já tenha efetuado o pagamento aguarde a compensação.</div>
-						</div> -->
+						</div>
 
 					<?php } ?>
 

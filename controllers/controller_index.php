@@ -8567,24 +8567,7 @@ class index extends controller {
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
-		require_once('vendor/autoload.php');
-
- 
-   		MercadoPago\SDK::setAccessToken($_POST['mercadopago_access_token']);
-
-		// $customer = new MercadoPago\Customer();
-		// $customer->email = "drekehrer1@gmail.com";
-		// $customer->save();
-
-		$filters = array(
-			"email"=>"drekehrer1@gmail.com"
-		);
-
-		$customers = MercadoPago\Customer::search($filters);
-
-		echo '<pre>'; print_r($customers->total);exit;
-
-
+	
 		// $mercadopago_client_id 			= $_POST['mercadopago_client_id'];
 		// $mercadopago_client_secret 		= $_POST['mercadopago_client_secret'];
 		// $mercadopago_public_key 		= $_POST['mercadopago_public_key'];
@@ -8612,6 +8595,9 @@ class index extends controller {
 		$cod = $_POST['codigo'];
 
 
+		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
+
+		print_r($user_exist);
 		exit;
 		// Checando se usuario existe na MERCADO PAGO
 		
@@ -8742,6 +8728,29 @@ class index extends controller {
 		/////////////  /////////////  /////////////
 		$this->view('finalizada', $dados);
 	}
+
+	public function add_mercadopago_user($email, $token){
+		require_once('vendor/autoload.php');
+   		MercadoPago\SDK::setAccessToken($token);
+
+		$customer = new MercadoPago\Customer();
+		$customer->email = $email;
+		$customer->save();
+
+	}
+
+	public function check_mercadopago_user($email, $token){
+		require_once('vendor/autoload.php');
+   		MercadoPago\SDK::setAccessToken($token);
+
+		$filters = array(
+			"email"=>$email
+		);
+
+		$customers = MercadoPago\Customer::search($filters);
+		return $customers->total;
+	}
+	
 
 	public function vindi_flow(){
 

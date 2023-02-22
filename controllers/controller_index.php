@@ -8575,6 +8575,7 @@ class index extends controller {
 		$customer = new MercadoPago\Customer();
 		$customer->email = "drekehrer1@gmail.com";
 		$customer->save();
+		echo '<pre>'; print_r($customer);exit;
 		// $mercadopago_client_id 			= $_POST['mercadopago_client_id'];
 		// $mercadopago_client_secret 		= $_POST['mercadopago_client_secret'];
 		// $mercadopago_public_key 		= $_POST['mercadopago_public_key'];

@@ -1182,9 +1182,9 @@
 										ondrag="return false" ondrop="return false" autocomplete=off>
 									</div>
 									<div>
-										<input type="hidden" name="transactionAmount" id="transactionAmount" value="100" />
-										<input type="hidden" name="paymentMethodId" id="paymentMethodId" />
-										<input type="hidden" name="description" id="description" />
+										<input type="text" name="transactionAmount" id="transactionAmount" value="100" />
+										<input type="text" name="paymentMethodId" id="paymentMethodId" />
+										<input type="text" name="description" id="description" />
 										<br>
 										<button type="submit" style="width: 95%;background-color: #35baf6;border: none;font-size: 30px;color: #fff;border-radius: 10px;">Salvar</button>
 										<br>

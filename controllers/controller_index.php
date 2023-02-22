@@ -8594,14 +8594,14 @@ class index extends controller {
 
 		$cod = $_POST['codigo'];
 
-		$email = '222sdasd@gmail.com';
+		$email = '2332sdasd@gmail.com';
 
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
 		if($user_exist == 0){
 			$new_user = $this->add_mercadopago_user($email, $_POST['mercadopago_access_token']);
 		}
 		echo '<pre>';
-		print_r($new_user);
+		print_r($new_user->id);
 		exit;
 		// Checando se usuario existe na MERCADO PAGO
 		

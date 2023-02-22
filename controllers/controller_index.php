@@ -8612,7 +8612,6 @@ class index extends controller {
 		}
 		
 		print_r($mercado_pago_userid);
-
 		echo '<br><pre>';
 		print_r($email);
 		echo '<br>';
@@ -8759,15 +8758,28 @@ class index extends controller {
 	}
 
 	public function check_mercadopago_user($email, $token){
-		require_once('vendor/autoload.php');
-   		MercadoPago\SDK::setAccessToken($token);
+		$curl = curl_init();
 
-		$filters = array(
-			"email"=>$email
-		);
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'https://api.mercadopago.com/v1/customers/search?email='.$email.'',
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'GET',
+			CURLOPT_HTTPHEADER => array(
+				'Authorization: Bearer '.$token.''
+			),
+		));
 
-		$customers = MercadoPago\Customer::search($filters);
-		return $customers->total;
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		echo '<pre>';
+		print_r($response);exit;
+
 	}
 	
 

@@ -1,5 +1,6 @@
+console.log('aqui');
 window.Mercadopago.setPublishableKey("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b");
-
+console.log('aqui');
     $(function(){
         window.Mercadopago.getIdentificationTypes();
 

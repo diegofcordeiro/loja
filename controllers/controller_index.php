@@ -8577,7 +8577,7 @@ class index extends controller {
 		// $customer->save();
 
 		$filters = array(
-			"email"=>"drekehrer1@gmail.com"
+			"id"=>"1315696223-79Xom5SnfrJtOc"
 		);
 
 		$customers = MercadoPago\Customer::search($filters);

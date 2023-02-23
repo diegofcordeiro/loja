@@ -1141,8 +1141,13 @@
 								padding: 10px 20px;
 								background-color: #eee;	
 								}
-								
-								
+	
+								.container iframe{
+									background-color: #fff !important;
+									padding: 10px 20px !important;
+									width: 95.6%;
+									height: 18px !important;
+								}
 								
 							</style>
 

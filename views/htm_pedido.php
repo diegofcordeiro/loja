@@ -1310,6 +1310,9 @@
 									}
 
 							</script>
+							 <script>
+								const mp = new MercadoPago("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b");
+							</script>
 							<form id="form-checkout" action="process_payment.php" method="POST">
 								<p><b>Nome:</b> APRO - 
 								<b>Cartão:</b> 5031433215406351 -

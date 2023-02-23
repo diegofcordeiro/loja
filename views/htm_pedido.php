@@ -1129,7 +1129,7 @@
 					<?php if( ($forma_pagamento->id == 3) AND ($data_pedido->status <= 3) ){ ?>
 
 						<div style="margin-top:20px;" >
-							<?php //echo '<pre>'; print_r($forma_pagamento);exit; ?>
+							<?php echo '<pre>'; print_r($email);exit; ?>
 
 							<form id="form-checkout" action="<?=DOMINIO?>index/mercadopago_flow" method="POST">
 								<p><b>Nome:</b> APRO - 

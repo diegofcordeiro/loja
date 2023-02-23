@@ -1132,12 +1132,7 @@
 							<?php //echo '<pre>'; print_r($email);exit; ?>
 
 							<style>
-								*{
-									padding: 0;
-									margin: 0;
-									border: 0;
-								}
-								
+
 								#form-checkout {
 								display: flex;
 								flex-direction: column;
@@ -1147,11 +1142,6 @@
 								background-color: #eee;	
 								}
 
-								.container {
-								height: auto;
-								display: block;
-								margin-top: 10px; 
-								}
 								
 								.container iframe{
 									background-color: #fff !important;
@@ -1216,7 +1206,6 @@
 									font-weight: 400;
 									font-family: 'Montserrat', sans-serif;
 									width: 100%;
-									background-color: #662747;
 									color: #fff;
 									border-radius: 5px;
 									-moz-border-radius: 5px;
@@ -1224,9 +1213,6 @@
 									cursor: pointer;
 								}
 								
-								button:hover{
-									background-color: #511f38;
-								}
 								
 							</style>
 

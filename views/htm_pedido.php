@@ -1226,10 +1226,7 @@
 								<div id="form-checkout__cardNumber" class="container"></div>
 								<div id="form-checkout__expirationDate" class="container"></div>
 								<div id="form-checkout__securityCode" class="container"></div>
-								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
-								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
-								<input type="text"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
-								<input type="text"  name="mercadopago_access_token" value="<?=$forma_pagamento->mercadopago_access_token?>">
+								
 								<input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"  class="fields" />
 								<select id="form-checkout__issuer" name="issuer">
 								<option value="" disabled selected>Banco emissor</option>
@@ -1247,6 +1244,10 @@
 								<input id="paymentMethodId" name="paymentMethodId" type="hidden">
 								<input id="transactionAmount" name="transactionAmount" type="hidden" value="100">
 								<input id="description" name="description" type="hidden" value="Nome do Produto">
+								<input type="hidden"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
+								<input type="hidden"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
+								<input type="hidden"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
+								<input type="hidden"  name="mercadopago_access_token" value="<?=$forma_pagamento->mercadopago_access_token?>">
 
 								<button type="submit" id="form-checkout__submit">Pagar Agora</button>
 							</form>

@@ -1144,9 +1144,14 @@
 	
 								.container iframe{
 									background-color: #fff !important;
-									padding: 10px 20px !important;
-									width: 95.6%;
-									height: 18px !important;
+									/* padding: 10px 20px !important; */
+									width: 100%;
+									height: 25px !important;
+								}
+								.cont_iframe{
+									width: 100%;
+									padding: 0px;
+									margin: 0px;
 								}
 								
 							</style>
@@ -1158,9 +1163,9 @@
 								<b>Data:</b> 11/2025 -
 								<b>CPF:</b> 12345678909</p>
 								
-								<div id="form-checkout__cardNumber" class="container"></div>
-								<div id="form-checkout__expirationDate" class="container"></div>
-								<div id="form-checkout__securityCode" class="container"></div>
+								<div id="form-checkout__cardNumber" class="container cont_iframe"></div>
+								<div id="form-checkout__expirationDate" class="container cont_iframe"></div>
+								<div id="form-checkout__securityCode" class="container cont_iframe"></div>
 								
 								<input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"  class="fields" />
 								<select id="form-checkout__issuer" name="issuer">

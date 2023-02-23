@@ -1132,6 +1132,9 @@
 							<?php //echo '<pre>'; print_r($forma_pagamento);exit; ?>
 
 							<script src="https://sdk.mercadopago.com/js/v2"></script>
+							 <script>
+								const mp = new MercadoPago("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b");
+							</script>
 							<script type="text/javascript">
 								const publicKey = "TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b";
 								const mercadopago = new MercadoPago(publicKey);
@@ -1310,9 +1313,7 @@
 									}
 
 							</script>
-							 <script>
-								const mp = new MercadoPago("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b");
-							</script>
+							
 							<form id="form-checkout" action="process_payment.php" method="POST">
 								<p><b>Nome:</b> APRO - 
 								<b>Cartão:</b> 5031433215406351 -

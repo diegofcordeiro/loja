@@ -1141,77 +1141,7 @@
 								padding: 10px 20px;
 								background-color: #eee;	
 								}
-
 								
-								.container iframe{
-									background-color: #fff !important;
-									padding: 10px 20px !important;
-									width: 95.6%;
-									height: 18px !important;
-								}
-								
-								h1{
-									font-size: 1.6em;
-									font-weight: 600;
-									font-family: 'Montserrat', sans-serif;
-									text-transform: uppercase;
-									margin-top: 30px;
-								}
-								
-								p{
-									font-size: 1em;
-									font-weight: 400;
-									font-family: 'Montserrat', sans-serif;
-									text-align: center;
-									margin: 10px 0;
-								}
-								
-								label{
-									margin-top: 10px;
-									margin-bottom: 3px;
-									font-size: 1em;
-									font-weight: 400;
-									font-family: 'Montserrat', sans-serif;
-									display: block;
-								}
-								
-								input[type=text], input[type=email], input[type=number]{
-									padding: 10px 20px;
-									margin-top: 10px;
-									margin-bottom: 3px;
-									font-size: 1em;
-									font-weight: 400;
-									font-family: 'Montserrat', sans-serif;
-									display: block;
-									background-color: #fff;
-									width: 100%;
-								}
-								
-								select{
-									padding: 10px 20px;
-									margin-top: 10px;
-									margin-bottom: 3px;
-									font-size: 1em;
-									font-weight: 400;
-									font-family: 'Montserrat', sans-serif;
-									display: block;
-									background-color: #fff;
-									width: 100%;
-								}
-								
-								button{
-									margin-top: 10px;
-									padding: 10px 20px;
-									font-size: 1em;
-									font-weight: 400;
-									font-family: 'Montserrat', sans-serif;
-									width: 100%;
-									color: #fff;
-									border-radius: 5px;
-									-moz-border-radius: 5px;
-									-webkit-border-radius: 5px;
-									cursor: pointer;
-								}
 								
 								
 							</style>

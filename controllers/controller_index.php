@@ -2479,8 +2479,7 @@ class index extends controller {
 
 			$email_lms = $this->check_email_lms($email, $fisica_cpf);
 			if($email_lms == 1){
-				retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
-				exit;
+				$last_id = $this->check_email_lms_ativo($email, $fisica_cpf);
 			}else{
 				$last_id = $this->adiciona_email_lms($email);
 			}
@@ -2695,7 +2694,7 @@ class index extends controller {
 
 				// echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>".$textos->conteudo('159649081566934')."</div>";
 
-				echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>Bem-vindo! Faça seu login.</div>";
+				// echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>Bem-vindo! Faça seu login.</div>";
 				
 				// echo "<div style='padding-top:20px; padding-bottom:20px; text-align:center;'><a href='".DOMINIO.$this->_controller."/entrar' class='botao_padrao' >FAÇA SEU LOGIN</a></div>";
 
@@ -2709,7 +2708,8 @@ class index extends controller {
 				$senha_md5 = $this->post('senha');
 				$senha_md5 = md5($senha_md5);
 				$this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome,$data_confere->email,$data_confere->fisica_cpf,$data_confere->telefone,$data_confere->endereco,$data_confere->numero,$data_confere->bairro,$data_confere->cidade,$data_confere->estado,$add_data_gerado,$data_confere->fisica_nascimento,$data_confere->fisica_sexo,$senha_md5);
-
+				
+				$this->irpara(DOMINIO.'index/entrar');
 			} else {
 				
 				$this->irpara(DOMINIO.'index/entrar');
@@ -2725,6 +2725,22 @@ class index extends controller {
 		$last_id = $mysqli->insert_id;
 		$mysqli->close();
 		return $last_id;
+	}
+
+	public function check_email_lms_ativo($email = NULL, $fisica_cpf){
+		require('conexao.php');
+		$sql = "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf' AND ativo = 2;";
+		if ($result = $mysqli->query($sql)) {
+			if($result->num_rows == 1){
+				$data = $result->fetch_object();
+				$update = "UPDATE usuario ativo=1 WHERE id= '$data->id';";
+				$mysqli->query($update);
+
+				return $data->id;
+			}else{
+				return 0;
+			}
+		}
 	}
 	 
 	public function check_email_lms($email = NULL, $fisica_cpf){

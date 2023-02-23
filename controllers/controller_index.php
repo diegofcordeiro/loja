@@ -8569,11 +8569,7 @@ class index extends controller {
 
 		$dados['layout_lista'] = $lista_blocos;
 	
-		// $mercadopago_client_id 			= $_POST['mercadopago_client_id'];
-		// $mercadopago_client_secret 		= $_POST['mercadopago_client_secret'];
-		// $mercadopago_public_key 		= $_POST['mercadopago_public_key'];
-		// $mercadopago_access_token	    = $_POST['mercadopago_access_token'];
-		
+
 		$is_brasil = $_POST['is_brasil'];
 		if($is_brasil == 0){
 			$cpf = $_POST['cpf_outros'];
@@ -8582,60 +8578,36 @@ class index extends controller {
 		}
 		$recorrencia = 0;
 		$email = $_POST['email'];
-		$name = $_POST['nomeCompleto'];
-		
-		$name_on_card = $_POST['nomeCompleto'];
-		$card_number = $_POST['cardNumber'];
-		$expiration_card = $_POST['cardExpiry'];
-		$cvv = $_POST['cardCVC'];
-		$payment_company_name = $_POST['brand_'];
-		$total_amount = $_POST['amount_'];
-
-		echo '<pre>';
-		print_r($_POST);
-		exit;
-
+		$mercadopago_client_id 			= $_POST['mercadopago_client_id'];
+		$mercadopago_client_secret 		= $_POST['mercadopago_client_secret'];
+		$mercadopago_public_key 		= $_POST['mercadopago_public_key'];
+		$mercadopago_access_token	    = $_POST['mercadopago_access_token'];
 		$transactionAmount = (float)$_POST['transactionAmount'];
-		$token = $_POST['token'];
+		$card_token = $_POST['token'];
 		$description = $_POST['description'];
+		$installments = $_POST['installments'];
+		$identificationType = $_POST['identificationType'];
+		$identificationNumber = $_POST['identificationNumber'];
 		$installments = (int)$_POST['installments'];
 		$paymentMethodId = $_POST['paymentMethodId'];
 		$issuer = (int)$_POST['issuer'];
-
-
-		echo '<br> transactionAmount:';
-		print_r($transactionAmount);
-		echo '<br> token: ';
-		print_r($token);
-		echo '<br> desc: ';
-		print_r($description);
-		echo '<br> installments:';
-		print_r($installments);
-		echo '<br>paymentMethodId :';
-		print_r($paymentMethodId);
-		echo '<br> issuer:';
-		print_r($issuer);
-		exit;
-
+		$cod = $_POST['codigo'];
 
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
 
 		if($user_exist == 0){
 			$new_user = $this->add_mercadopago_user($email, $_POST['mercadopago_access_token']);
-			$mercado_pago_userid = $new_user->id;
+			$id_client = $new_user->id;
 		}else{
-			$mercado_pago_userid = $user_exist;
+			$id_client = $user_exist;
 		}
 		
-		echo '<pre>';
-		print_r($email);
-		echo '<br>';
-		print_r($mercado_pago_userid);
-		exit;
-		// Checando se usuario existe na MERCADO PAGO
-		
+		// echo '<pre>';
+		// print_r($email);
+		// echo '<br>';
+		// print_r($mercado_pago_userid);
+		// exit;
 
-		
 		//////////////////////////////////////////////////////////////
 
 		$conexao = new mysql();
@@ -8712,9 +8684,6 @@ class index extends controller {
 
 		/////////////   NAO  RECCORENTE    /////////////
 		foreach($nao_recorrentes as $key => $recorrencia){
-			// ini_set('display_errors', 1);
-			// ini_set('display_startup_errors', 1);
-			// error_reporting(E_ALL);
 
 			if($recorrencia->valor_total == 0){
 				$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);

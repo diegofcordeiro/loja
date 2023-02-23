@@ -1167,10 +1167,10 @@
 							</form>
 							<script src="https://sdk.mercadopago.com/js/v2"></script>
 							 <script>
-								const mp = new MercadoPago("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b");
+								const mp = new MercadoPago("<?=$forma_pagamento->mercadopago_public_key?>");
 							</script>
 							<script type="text/javascript">
-								const publicKey = "TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b";
+								const publicKey = "<?=$forma_pagamento->mercadopago_public_key?>";
 								const mercadopago = new MercadoPago(publicKey);
 
 								//Inicializar campos de cartão

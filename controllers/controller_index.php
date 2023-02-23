@@ -8602,12 +8602,6 @@ class index extends controller {
 			$id_client = $user_exist;
 		}
 		
-		// echo '<pre>';
-		// print_r($email);
-		// echo '<br>';
-		// print_r($mercado_pago_userid);
-		// exit;
-
 		//////////////////////////////////////////////////////////////
 
 		$conexao = new mysql();
@@ -8636,7 +8630,52 @@ class index extends controller {
 				
 			}
 		}	
-		
+		/////////////   NAO  RECCORENTE    /////////////
+		foreach($nao_recorrentes as $key => $recorrencia){
+
+			if($recorrencia->valor_total == 0){
+				$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+				$db = new mysql();
+					$db->alterar("pedido_loja_carrinho", array(
+						"status"=>4,
+						
+					), " id='$recorrencia->id' ");
+					$db->alterar("pedido_loja", array(
+						"status"=>4,
+						
+					), " codigo='$cod' ");
+			}else{
+				$bill = $this->pagar_mercado_pag($email,$recorrencia->valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$mercadopago_access_token);
+				echo'<pre>';print_r($bill);
+				// if(isset($bill->id)){
+				// 	$id_charge = $bill->charges[0]->id;
+				// 	$id_trans = $bill->id;
+				// 	$url = $bill->url;
+
+				// 	if($bill->status == 'paid'){ 
+				// 		$status = 4;
+				// 		$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+				// 	}else{
+				// 		$status = 1;
+				// 	}
+				// 	$db = new mysql();
+				// 	$db->alterar("pedido_loja_carrinho", array(
+				// 		"transacao_charger_id"=>"$id_charge",
+				// 		"transacao_bill_id"=>"$id_trans",
+				// 		"url_vindi"=>"$url",
+				// 		"status"=>"$status",
+						
+				// 	), " id='$recorrencia->id' ");
+				// 	$db->alterar("pedido_loja", array(
+				// 		"status"=>"$status",
+						
+				// 	), " codigo='$cod' ");
+				// }
+			}
+			
+		}
+		/////////////  /////////////  /////////////
+
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 		
@@ -8682,53 +8721,37 @@ class index extends controller {
 		}
 		/////////  /////////////  /////////////
 
-		/////////////   NAO  RECCORENTE    /////////////
-		foreach($nao_recorrentes as $key => $recorrencia){
-
-			if($recorrencia->valor_total == 0){
-				$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
-				$db = new mysql();
-					$db->alterar("pedido_loja_carrinho", array(
-						"status"=>4,
-						
-					), " id='$recorrencia->id' ");
-					$db->alterar("pedido_loja", array(
-						"status"=>4,
-						
-					), " codigo='$cod' ");
-			}else{
-			
-				$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
-
-				if(isset($bill->id)){
-					$id_charge = $bill->charges[0]->id;
-					$id_trans = $bill->id;
-					$url = $bill->url;
-
-					if($bill->status == 'paid'){ 
-						$status = 4;
-						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
-					}else{
-						$status = 1;
-					}
-					$db = new mysql();
-					$db->alterar("pedido_loja_carrinho", array(
-						"transacao_charger_id"=>"$id_charge",
-						"transacao_bill_id"=>"$id_trans",
-						"url_vindi"=>"$url",
-						"status"=>"$status",
-						
-					), " id='$recorrencia->id' ");
-					$db->alterar("pedido_loja", array(
-						"status"=>"$status",
-						
-					), " codigo='$cod' ");
-				}
-			}
-			
-		}
-		/////////////  /////////////  /////////////
 		$this->view('finalizada', $dados);
+	}
+	
+	public function pagar_mercado_pag($email,$recorrencia_valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$access_token){
+		require_once('vendor/autoload.php');
+		MercadoPago\SDK::setAccessToken($access_token);
+		
+		$payment = new MercadoPago\Payment();
+		$payment->transaction_amount = $recorrencia_valor_total;
+		$payment->token = $card_token;
+		$payment->description = $description;
+		$payment->installments = $installments;
+		$payment->payment_method_id = $paymentMethodId;
+		$payment->issuer_id = $issuer;
+		
+		$payer = new MercadoPago\Payer();
+		$payer->email = $email;
+		$payer->identification = array(
+			"type" => $identificationType,
+			"number" => $identificationNumber
+		);
+		$payment->payer = $payer;
+		
+		$payment->save();
+		
+		$response = array(
+			'status' => $payment->status,
+			'status_detail' => $payment->status_detail,
+			'id' => $payment->id
+		);
+		echo json_encode($response);
 	}
 
 	public function add_mercadopago_user($email, $token){
@@ -8770,38 +8793,7 @@ class index extends controller {
 		}
 		return $id;
 
-	}
-
-	public function pagar_mercado_pag(){
-		// require_once('vendor/autoload.php');
-		// MercadoPago\SDK::setAccessToken("TEST-2533540554772216-052517-0d4e85095878a16b94b1412023b1c777-1130248373");
-		
-		// $payment = new MercadoPago\Payment();
-		// $payment->transaction_amount = (float)$_POST['transactionAmount'];
-		// $payment->token = $_POST['token'];
-		// $payment->description = $_POST['description'];
-		// $payment->installments = (int)$_POST['installments'];
-		// $payment->payment_method_id = $_POST['paymentMethodId'];
-		// $payment->issuer_id = (int)$_POST['issuer'];
-		
-		// $payer = new MercadoPago\Payer();
-		// $payer->email = $_POST['email'];
-		// $payer->identification = array(
-		// 	"type" => $_POST['identificationType'],
-		// 	"number" => $_POST['identificationNumber']
-		// );
-		// $payment->payer = $payer;
-		
-		// $payment->save();
-		
-		// $response = array(
-		// 	'status' => $payment->status,
-		// 	'status_detail' => $payment->status_detail,
-		// 	'id' => $payment->id
-		// );
-		// echo json_encode($response);
-	}
-	
+	}	
 
 	public function vindi_flow(){
 

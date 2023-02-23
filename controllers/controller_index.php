@@ -8601,7 +8601,7 @@ class index extends controller {
 		}else{
 			$id_client = $user_exist;
 		}
-		
+
 		//////////////////////////////////////////////////////////////
 
 		$conexao = new mysql();
@@ -8630,6 +8630,8 @@ class index extends controller {
 				
 			}
 		}	
+
+		echo'<br>';print_R($nao_recorrentes);exit;
 		/////////////   NAO  RECCORENTE    /////////////
 		foreach($nao_recorrentes as $key => $recorrencia){
 

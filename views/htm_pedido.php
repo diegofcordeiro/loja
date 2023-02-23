@@ -1131,6 +1131,40 @@
 						<div style="margin-top:20px;" >
 							<?php //echo '<pre>'; print_r($forma_pagamento);exit; ?>
 
+							<form id="form-checkout" action="process_payment.php" method="POST">
+								<p><b>Nome:</b> APRO - 
+								<b>Cartão:</b> 5031433215406351 -
+								<b>CVV:</b> 123 -
+								<b>Data:</b> 11/2025 -
+								<b>CPF:</b> 12345678909</p>
+								
+								<div id="form-checkout__cardNumber" class="container"></div>
+								<div id="form-checkout__expirationDate" class="container"></div>
+								<div id="form-checkout__securityCode" class="container"></div>
+								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
+								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
+								<input type="text"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
+								<input type="text"  name="mercadopago_access_token" value="<?=$forma_pagamento->mercadopago_access_token?>">
+								<input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"  class="fields" />
+								<select id="form-checkout__issuer" name="issuer">
+								<option value="" disabled selected>Banco emissor</option>
+								</select>
+								<select id="form-checkout__installments" name="installments">
+								<option value="" disabled selected>Parcelas</option>
+								</select>
+								<select id="form-checkout__identificationType" name="identificationType">
+								<option value="" disabled selected>Tipo de documento</option>
+								</select>
+								<input type="text" id="form-checkout__identificationNumber" class="fields" name="identificationNumber" placeholder="Número do documento" />
+								<input type="email" id="form-checkout__email" name="email" class="fields" placeholder="E-mail"/>
+
+								<input id="token" name="token" type="hidden">
+								<input id="paymentMethodId" name="paymentMethodId" type="hidden">
+								<input id="transactionAmount" name="transactionAmount" type="hidden" value="100">
+								<input id="description" name="description" type="hidden" value="Nome do Produto">
+
+								<button type="submit" id="form-checkout__submit">Pagar Agora</button>
+							</form>
 							<script src="https://sdk.mercadopago.com/js/v2"></script>
 							 <script>
 								const mp = new MercadoPago("TEST-e977e890-5e81-4c9f-b62c-4a5046eb9c4b");
@@ -1314,40 +1348,7 @@
 
 							</script>
 							
-							<form id="form-checkout" action="process_payment.php" method="POST">
-								<p><b>Nome:</b> APRO - 
-								<b>Cartão:</b> 5031433215406351 -
-								<b>CVV:</b> 123 -
-								<b>Data:</b> 11/2025 -
-								<b>CPF:</b> 12345678909</p>
-								
-								<div id="form-checkout__cardNumber" class="container"></div>
-								<div id="form-checkout__expirationDate" class="container"></div>
-								<div id="form-checkout__securityCode" class="container"></div>
-								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
-								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
-								<input type="text"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
-								<input type="text"  name="mercadopago_access_token" value="<?=$forma_pagamento->mercadopago_access_token?>">
-								<input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"  class="fields" />
-								<select id="form-checkout__issuer" name="issuer">
-								<option value="" disabled selected>Banco emissor</option>
-								</select>
-								<select id="form-checkout__installments" name="installments">
-								<option value="" disabled selected>Parcelas</option>
-								</select>
-								<select id="form-checkout__identificationType" name="identificationType">
-								<option value="" disabled selected>Tipo de documento</option>
-								</select>
-								<input type="text" id="form-checkout__identificationNumber" class="fields" name="identificationNumber" placeholder="Número do documento" />
-								<input type="email" id="form-checkout__email" name="email" class="fields" placeholder="E-mail"/>
-
-								<input id="token" name="token" type="hidden">
-								<input id="paymentMethodId" name="paymentMethodId" type="hidden">
-								<input id="transactionAmount" name="transactionAmount" type="hidden" value="100">
-								<input id="description" name="description" type="hidden" value="Nome do Produto">
-
-								<button type="submit" id="form-checkout__submit">Pagar Agora</button>
-							</form>
+							
 							<!-- <form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 								<input type="text"  id="brand_" name="brand_">
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">

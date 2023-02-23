@@ -1131,7 +1131,7 @@
 						<div style="margin-top:20px;" >
 							<?php //echo '<pre>'; print_r($forma_pagamento);exit; ?>
 
-							<form id="form-checkout" action="process_payment.php" method="POST">
+							<form id="form-checkout" action="<?=DOMINIO?>index/mercadopago_flow" method="POST">
 								<p><b>Nome:</b> APRO - 
 								<b>Cartão:</b> 5031433215406351 -
 								<b>CVV:</b> 123 -

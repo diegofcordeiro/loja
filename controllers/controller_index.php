@@ -8434,35 +8434,6 @@ class index extends controller {
 
 	public function mercadopago_flow(){
 
-
-		require_once('vendor/autoload.php');
-		MercadoPago\SDK::setAccessToken("TEST-2533540554772216-052517-0d4e85095878a16b94b1412023b1c777-1130248373");
-		
-		$payment = new MercadoPago\Payment();
-		$payment->transaction_amount = (float)$_POST['transactionAmount'];
-		$payment->token = $_POST['token'];
-		$payment->description = $_POST['description'];
-		$payment->installments = (int)$_POST['installments'];
-		$payment->payment_method_id = $_POST['paymentMethodId'];
-		$payment->issuer_id = (int)$_POST['issuer'];
-		
-		$payer = new MercadoPago\Payer();
-		$payer->email = $_POST['email'];
-		$payer->identification = array(
-			"type" => $_POST['identificationType'],
-			"number" => $_POST['identificationNumber']
-		);
-		$payment->payer = $payer;
-		
-		$payment->save();
-		
-		$response = array(
-			'status' => $payment->status,
-			'status_detail' => $payment->status_detail,
-			'id' => $payment->id
-		);
-		echo json_encode($response);
-		exit;
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
@@ -8620,6 +8591,9 @@ class index extends controller {
 		$payment_company_name = $_POST['brand_'];
 		$total_amount = $_POST['amount_'];
 
+		echo '<pre>';
+		print_r($_POST);
+		exit;
 
 		$transactionAmount = (float)$_POST['transactionAmount'];
 		$token = $_POST['token'];
@@ -8643,7 +8617,6 @@ class index extends controller {
 		print_r($issuer);
 		exit;
 
-		// echo '<pre>'; print_r($_POST);exit;
 
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
 
@@ -8828,6 +8801,36 @@ class index extends controller {
 		}
 		return $id;
 
+	}
+
+	public function pagar_mercado_pag(){
+		// require_once('vendor/autoload.php');
+		// MercadoPago\SDK::setAccessToken("TEST-2533540554772216-052517-0d4e85095878a16b94b1412023b1c777-1130248373");
+		
+		// $payment = new MercadoPago\Payment();
+		// $payment->transaction_amount = (float)$_POST['transactionAmount'];
+		// $payment->token = $_POST['token'];
+		// $payment->description = $_POST['description'];
+		// $payment->installments = (int)$_POST['installments'];
+		// $payment->payment_method_id = $_POST['paymentMethodId'];
+		// $payment->issuer_id = (int)$_POST['issuer'];
+		
+		// $payer = new MercadoPago\Payer();
+		// $payer->email = $_POST['email'];
+		// $payer->identification = array(
+		// 	"type" => $_POST['identificationType'],
+		// 	"number" => $_POST['identificationNumber']
+		// );
+		// $payment->payer = $payer;
+		
+		// $payment->save();
+		
+		// $response = array(
+		// 	'status' => $payment->status,
+		// 	'status_detail' => $payment->status_detail,
+		// 	'id' => $payment->id
+		// );
+		// echo json_encode($response);
 	}
 	
 

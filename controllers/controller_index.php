@@ -8434,7 +8434,34 @@ class index extends controller {
 
 	public function mercadopago_flow(){
 
-		print_r('aqii');
+
+		require_once('vendor/autoload.php');
+		MercadoPago\SDK::setAccessToken("TEST-2533540554772216-052517-0d4e85095878a16b94b1412023b1c777-1130248373");
+		
+		$payment = new MercadoPago\Payment();
+		$payment->transaction_amount = (float)$_POST['transactionAmount'];
+		$payment->token = $_POST['token'];
+		$payment->description = $_POST['description'];
+		$payment->installments = (int)$_POST['installments'];
+		$payment->payment_method_id = $_POST['paymentMethodId'];
+		$payment->issuer_id = (int)$_POST['issuer'];
+		
+		$payer = new MercadoPago\Payer();
+		$payer->email = $_POST['email'];
+		$payer->identification = array(
+			"type" => $_POST['identificationType'],
+			"number" => $_POST['identificationNumber']
+		);
+		$payment->payer = $payer;
+		
+		$payment->save();
+		
+		$response = array(
+			'status' => $payment->status,
+			'status_detail' => $payment->status_detail,
+			'id' => $payment->id
+		);
+		echo json_encode($response);
 		exit;
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);

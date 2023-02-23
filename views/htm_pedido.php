@@ -1156,7 +1156,7 @@
 								<option value="" disabled selected>Tipo de documento</option>
 								</select>
 								<input type="text" id="form-checkout__identificationNumber" class="fields" name="identificationNumber" placeholder="Número do documento" />
-								<input type="email" id="form-checkout__email" name="email" class="fields" placeholder="E-mail"/>
+								<input type="email" value="<?=$email?>" id="form-checkout__email" name="email" class="fields" placeholder="E-mail"/>
 
 								<input id="token" name="token" type="hidden">
 								<input id="paymentMethodId" name="paymentMethodId" type="hidden">

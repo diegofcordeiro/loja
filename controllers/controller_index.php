@@ -8589,12 +8589,31 @@ class index extends controller {
 		$cvv = $_POST['cardCVC'];
 		$payment_company_name = $_POST['brand_'];
 		$total_amount = $_POST['amount_'];
-		$card_number = str_replace("-","",$card_number);
-		$last4 = substr($card_number,12,16);
 
-		$cod = $_POST['codigo'];
 
-		echo '<pre>'; print_r($_POST);exit;
+		$transactionAmount = (float)$_POST['transactionAmount'];
+		$token = $_POST['token'];
+		$description = $_POST['description'];
+		$installments = (int)$_POST['installments'];
+		$paymentMethodId = $_POST['paymentMethodId'];
+		$issuer = (int)$_POST['issuer'];
+
+
+		echo '<br> transactionAmount:';
+		print_r($transactionAmount);
+		echo '<br> token: ';
+		print_r($token);
+		echo '<br> desc: ';
+		print_r($description);
+		echo '<br> installments:';
+		print_r($installments);
+		echo '<br>paymentMethodId :';
+		print_r($paymentMethodId);
+		echo '<br> issuer:';
+		print_r($issuer);
+		exit;
+
+		// echo '<pre>'; print_r($_POST);exit;
 
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
 

@@ -8631,7 +8631,7 @@ class index extends controller {
 			}
 		}	
 
-		echo'<br>';print_R($nao_recorrentes);exit;
+		// echo'<br>';print_R($nao_recorrentes);exit;
 		/////////////   NAO  RECCORENTE    /////////////
 		foreach($nao_recorrentes as $key => $recorrencia){
 
@@ -8647,7 +8647,7 @@ class index extends controller {
 						
 					), " codigo='$cod' ");
 			}else{
-				$bill = $this->pagar_mercado_pag($email,$recorrencia->valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$mercadopago_access_token);
+				$bill = $this->pagar_mercado_pag($email,(float)$recorrencia->valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$mercadopago_access_token);
 				echo'<pre>';print_r($bill);
 				// if(isset($bill->id)){
 				// 	$id_charge = $bill->charges[0]->id;

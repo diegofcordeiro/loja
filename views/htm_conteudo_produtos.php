@@ -388,7 +388,8 @@ $ordem = $conteudo_sessao['ordem'];
 		?>
 		<?php
 			if($conteudo_config->formato == 1){
-				if(isset($combos) and (count($combos) > 0)){
+
+				if(isset($combos) and (count($combos) > 0 and $forma_pagamento == 5)){
 					echo '<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile"><div class="content flex-row-fluid" id="kt_content"><div class="row gy-5 g-xl-8"><div class="col-xl-12"><h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Combos</h3><div class="card card-xl-stretch mb-5 mb-xl-8"><div class="container_flex snaps-inline owl-carousel owl-theme">';
 						foreach($combos as $key => $value){
 							// print_r($value);

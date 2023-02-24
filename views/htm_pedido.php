@@ -1205,9 +1205,7 @@
 									</div>
 									<div class="col-xs-4 col-md-4">
 										<div class="form-group">												
-												<label for="tel" id="label_cpf"><?= $data_dados->is_brasil == 1 ? 'CPF':'Documento' ?></label>
-												<input type="text" style="<?= $data_dados->is_brasil == 1 ? '':'display: none' ?>" class="form-control" name="cpf" id="cpf"  placeholder="CPF" value="<?=$cpf?>" required/>
-												<input type="text" style="<?= $data_dados->is_brasil == 0 ? '':'display: none' ?>" class="form-control" name="cpf_outros" id="documento_cpf"  placeholder="Documento" value="<?=$cpf?>" required/>
+											<input type="text" id="form-checkout__identificationNumber" class="fields" name="identificationNumber" placeholder="Número do documento" />
 										</div>
 									</div>
 								</div>
@@ -1227,13 +1225,13 @@
 									<div class="col-xs-4 col-md-4">
 										<div class="form-group">
 											<label for="cardExpiry">Validade</label>
-											<input type="tel" class="form-control"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
+											<div id="form-checkout__expirationDate" class="container cont_iframe"></div>
 										</div>
 									</div>
 									<div class="col-xs-4 col-md-4">
 										<div class="form-group">
 											<label for="cardCVC">CVV</label>
-											<input type="tel" class="form-control" data-mask="000" name="cardCVC" placeholder="CVV" autocomplete="cc-csc" required value="123"/>
+											<div id="form-checkout__securityCode" class="container cont_iframe"></div>
 										</div>
 									</div>
 									<div class="col-xs-4 col-md-4">
@@ -1246,22 +1244,14 @@
 									</div>
 								</div>
 								<br><br>
-								
-								<div id="form-checkout__expirationDate" class="container cont_iframe"></div>
-								<div id="form-checkout__securityCode" class="container cont_iframe"></div>
-								
-								<input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"  class="fields" />
-								<select id="form-checkout__issuer" name="issuer">
+							
+							
+								<select id="form-checkout__issuer" name="issuer" style="display:none" >
 								<option value="" disabled selected>Banco emissor</option>
 								</select>
-								<select id="form-checkout__installments" name="installments">
-								<option value="" disabled selected>Parcelas</option>
-								</select>
-								<select id="form-checkout__identificationType" name="identificationType">
+								<select style="display:none" id="form-checkout__identificationType" name="identificationType">
 								<option value="" disabled selected>Tipo de documento</option>
 								</select>
-								<input type="text" id="form-checkout__identificationNumber" class="fields" name="identificationNumber" placeholder="Número do documento" />
-								<input type="email" value="<?=$email?>" id="form-checkout__email" name="email" class="fields" placeholder="E-mail"/>
 
 								<input id="token" name="token" type="hidden">
 								<input id="paymentMethodId" name="paymentMethodId" type="hidden">

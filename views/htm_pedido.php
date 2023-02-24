@@ -1184,6 +1184,7 @@
 								<input id="paymentMethodId" name="paymentMethodId" type="hidden">
 								<input id="transactionAmount" name="transactionAmount" type="hidden" value="100">
 								<input id="description" name="description" type="hidden" value="Nome do Produto">
+
 								<input type="hidden"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
 								<input type="hidden"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
 								<input type="hidden"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
@@ -1378,6 +1379,7 @@
 							
 							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 								<input type="text"  id="brand_" name="brand_">
+
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
 								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
 								<input type="text"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
@@ -1407,7 +1409,8 @@
 									<div class="col-xs-8 col-md-8">
 										<div class="form-group">
 											<label for="cardNumber">Nome Completo</label>
-											<input type="text" class="form-control" name="nomeCompleto" placeholder="Nome Completo" autocomplete="Nome completo" value="<?=$nome_cli?>" required/>
+											<!-- <input type="text" class="form-control" name="nomeCompleto" placeholder="Nome Completo" autocomplete="Nome completo" value="<?=$nome_cli?>" required/> -->
+											<input type="text" id="form-checkout__cardholderName" name="nomeCompleto" placeholder="Nome Completo"  class="form-control" value="<?=$nome_cli?>"/>
 										</div>                            
 									</div>
 									<div class="col-xs-4 col-md-4">
@@ -1421,7 +1424,8 @@
 									<div class="col-xs-4 col-md-4">
 										<div class="form-group">
 											<label for="email">E-mail</label>
-											<input type="email" class="form-control" name="email" placeholder="E-mail" autocomplete="Email" value="<?=$email?>" required/>
+											<!-- <input type="email" class="form-control" name="email" placeholder="E-mail" autocomplete="Email" value="<?=$email?>" required/> -->
+											<input type="email" value="<?=$email?>" id="form-checkout__email" name="email" class="form-control" placeholder="E-mail"/>
 										</div>
 									</div>
 									<div class="col-xs-4 col-md-4">

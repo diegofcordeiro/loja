@@ -308,18 +308,14 @@ class cadastro extends controller {
 		
 		$codigo = $this->post('codigo');
 		$senha = $this->post('senha');
+		$senha_md5 = md5($senha);
+		$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 
 		$exec = $db->executar("SELECT lms_usuario_id FROM cadastro WHERE codigo = '$codigo'");
 		$res = $exec->fetch_object();
-		print_r("SELECT lms_usuario_id FROM cadastro WHERE codigo = '$codigo'");
-		print_r($res->lms_usuario_id);
-		exit;
-		$sql = "UPDATE usuario SET  senha = '$senha' WHERE id = '$lms_usuario_id'";
+
+		$sql = "UPDATE usuario SET  senha = '$senha_md5' WHERE id = '$res->lms_usuario_id'";
 		$mysqli->query($sql);
-
-
-		$senha_md5 = md5($senha);
-		$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 
 		$db->alterar("cadastro", array(			
 			"senha"=>"$senha_tratada",

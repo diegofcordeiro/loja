@@ -8675,7 +8675,9 @@ class index extends controller {
 					), " codigo='$cod' ");
 			}else{
 				$bill = $this->pagar_mercado_pag($email,(float)$recorrencia->valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$mercadopago_access_token);
-				print_r($bill);
+				print_r($bill['status']);
+				print_r($bill['id']);
+
 				// if(isset($bill->id)){
 				// 	$id_charge = $bill->charges[0]->id;
 				// 	$id_trans = $bill->id;

@@ -283,8 +283,8 @@
 							}
 
 							.generator {
-								width: 400px;
-								height: 200px;
+								width: 100%;
+								height: 120px;
 								display: flex;
 								justify-content: space-evenly;
 								align-items: flex-start;
@@ -314,7 +314,7 @@
 							.generator .buttons {
 								width: 100%;
 								display: flex;
-								justify-content: space-between;
+								justify-content: left;
 							}
 
 							.generator a {
@@ -384,7 +384,7 @@
 												<input type="text" placeholder="Password" id="pass">
 												<div class="buttons">
 													<a id="btn">Generate</a>
-													<a id="btncp">Copy</a>
+													<a id="btncp" style="margin-left:10px">Copy</a>
 												</div>
 										</div>
 

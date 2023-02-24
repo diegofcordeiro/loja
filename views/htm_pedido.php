@@ -1134,12 +1134,12 @@
 							<style>
 
 								#form-checkout {
-								display: flex;
+								/* display: flex;
 								flex-direction: column;
 								width: 60%;
 								margin: 100px 20%;
 								padding: 10px 20px;
-								background-color: #eee;	
+								background-color: #eee;	 */
 								}
 	
 								.container iframe{

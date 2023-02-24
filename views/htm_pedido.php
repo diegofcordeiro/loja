@@ -1162,7 +1162,7 @@
 								<b>CVV:</b> 123 -
 								<b>Data:</b> 11/2025 -
 								<b>CPF:</b> 12345678909</p>
-								<div class="row">
+								<!-- <div class="row">
 									<div class="col-xs-12">
 										<div class="div_form" >
 											<label>País</label><br>
@@ -1172,7 +1172,7 @@
 											<label for="Outros">Outros</label><br>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<br>	
 								<div class="row">
 									<div class="col-xs-8 col-md-8">

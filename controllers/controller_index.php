@@ -8643,6 +8643,7 @@ class index extends controller {
 			}
 		}	
 
+		$dados['status'] = 'pendente';
 		/////////////   NAO  RECCORENTE    /////////////
 		foreach($nao_recorrentes as $key => $recorrencia){
 
@@ -8662,7 +8663,9 @@ class index extends controller {
 
 				if(isset($bill['id'])){
 					$id_trans = $bill['id'];
+					$dados['status'] = $bill['status'];
 					if($bill['status'] == 'approved'){ 
+						$dados['status'] = 'aprovada';
 						$status = 4;
 						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
 					}else{
@@ -9097,7 +9100,7 @@ class index extends controller {
 			}
 			
 		}
-
+		$dados['status'] = 'aprovada';
 		/////////////  /////////////  /////////////
 		$this->view('finalizada', $dados);
 	}

@@ -8456,10 +8456,6 @@ class index extends controller {
 
 	public function mercadopago_flow(){
 
-		// ini_set('display_errors', 1);
-		// ini_set('display_startup_errors', 1);
-		// error_reporting(E_ALL);
-
 		$dados = array();
 		$dados['_base'] = $this->_base();
 		$dados['objeto'] = DOMINIO.$this->_controller.'/';
@@ -8590,14 +8586,8 @@ class index extends controller {
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
-	
-
-		// $is_brasil = $_POST['is_brasil'];
-		// if($is_brasil == 0){
-		// 	$cpf = $_POST['cpf_outros'];
-		// }else{
-		// 	$cpf = $_POST['cpf'];
-		// }
+		$this->view('finalizada', $dados);
+		exit;
 		$recorrencia = 0;
 		$email = $_POST['email'];
 		$mercadopago_client_id 			= $_POST['mercadopago_client_id'];
@@ -8654,7 +8644,6 @@ class index extends controller {
 			}
 		}	
 
-		// echo'<br>';print_R($nao_recorrentes);exit;
 		/////////////   NAO  RECCORENTE    /////////////
 		foreach($nao_recorrentes as $key => $recorrencia){
 

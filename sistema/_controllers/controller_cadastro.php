@@ -303,14 +303,23 @@ class cadastro extends controller {
 	}
 
 	public function alterar_senha_usuario(){
-
+		require('conexao.php');
+		$db = new mysql();
+		
 		$codigo = $this->post('codigo');
 		$senha = $this->post('senha');
-		
+
+		$exec = $db->executar("SELECT lms_usuario_id FROM cadastro WHERE codigo = '$codigo'");
+		$res = $exec->fetch_object();
+		print_r($res);
+		exit;
+		$sql = "UPDATE usuario SET  senha = '$senha' WHERE id = '$lms_usuario_id'";
+		$mysqli->query($sql);
+
+
 		$senha_md5 = md5($senha);
 		$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 
-		$db = new mysql();
 		$db->alterar("cadastro", array(			
 			"senha"=>"$senha_tratada",
 			"senha_md5"=>"$senha_md5"

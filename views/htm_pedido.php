@@ -1239,12 +1239,9 @@
 									<div class="col-xs-2">
 										<div class="form-group">
 											<label for="installments">Recorrencia</label>
-												<select name="recorrencia" class="form-control">
-													<option selected value="0">0</option>
-													<option value="1">Mensal</option>
-												</select> 
-												<input type="hidden" name="carrinho_coisas[]" value=<?$produtos['lista']?>>
-												<input type="hidden" name="installmentValue">
+												<select id="form-checkout__installments" name="installments">
+													<option value="" disabled selected>Parcelas</option>
+												</select>
 										</div>                            
 									</div>
 								</div>

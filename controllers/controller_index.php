@@ -8613,8 +8613,7 @@ class index extends controller {
 		}else{
 			$id_client = $user_exist;
 		}
-		$this->view('finalizada', $dados);
-		exit;
+		
 		//////////////////////////////////////////////
 
 		$conexao = new mysql();
@@ -8748,7 +8747,6 @@ class index extends controller {
 		$response = curl_exec($curl);
 
 		curl_close($curl);
-		echo '<pre>';
 		$response = json_decode($response, true);
 
 		$id = 0;

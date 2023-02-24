@@ -507,6 +507,7 @@
 			return password;
 		}
 		btn.addEventListener("click", () => {
+			preventDefault();
 			pass.value = generatePass();
 		});
 

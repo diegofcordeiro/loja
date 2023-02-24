@@ -1169,7 +1169,7 @@
 								
 								<input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"  class="fields" />
 								<select id="form-checkout__issuer" name="issuer">
-								<option value="" disabled selected>Banco emissor</option>
+									<option value="" disabled selected>Banco emissor</option>
 								</select>
 								<select id="form-checkout__installments" name="installments">
 								<option value="" disabled selected>Parcelas</option>
@@ -1378,7 +1378,6 @@
 							
 							
 							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
-								<input type="text"  id="brand_" name="brand_">
 
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
 								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
@@ -1391,7 +1390,6 @@
 								<input type="text" name="forma_pagamento" value="<?=$forma_pagamento->id?>">
 								<input type="text" name="codigo" value="<?=$data_pedido->codigo?>">
 								<input type="text" name="amount_" value="<?=$data_pedido->valor_total?>">
-								
 								
 								<div class="row">
 									<div class="col-xs-12">
@@ -1454,7 +1452,8 @@
 										</div>
 									</div>
 								</div>
-								<br>				
+								<br>	
+
 								<div class="endereco_brasil" style="<?= $data_dados->is_brasil_address == 1 ? '':'display: none' ?>">
 									<div class="row">
 										<div class="col-xs-10">
@@ -1508,9 +1507,6 @@
 										</div>
 									</div>
 								</div>
-
-
-								
 			
 								<div class="endereco_outros" style="<?= $data_dados->is_brasil_address == 0 ? '':'display: none' ?>">
 									<div class="row">
@@ -1555,17 +1551,14 @@
 									</div>
 								</div>
 
-
-
-
-
 								<hr>
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="form-group">
 											<label for="cardNumber">Nº Cartão</label>
 											<div class="input-group">
-												<input type="tel" class="form-control" name="cardNumber" pattern=".{17,19}" placeholder="Valid Card Number" id="input-cc" autocomplete="cc-number" required autofocus value=""/>
+												<div id="form-checkout__cardNumber" class="form-control"></div>
+												<!-- <input type="tel" class="form-control" name="cardNumber" pattern=".{17,19}" placeholder="Valid Card Number" id="input-cc" autocomplete="cc-number" required autofocus value=""/> -->
 												<span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
 											</div>
 										</div>                            

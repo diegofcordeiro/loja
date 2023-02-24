@@ -1144,9 +1144,11 @@
 	
 								.container iframe{
 									background-color: #fff !important;
-									/* padding: 10px 20px !important; */
+									padding: 6px 20px !important;
 									width: 100%;
-									height: 25px !important;
+									height: 35px !important;
+									border: 1px #cccccc solid;
+									border-radius: 5px;
 								}
 								.cont_iframe{
 									width: 100%;

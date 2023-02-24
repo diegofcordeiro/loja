@@ -387,8 +387,8 @@
 												<p>Random Password</p>
 												<input type="text" placeholder="Password" id="pass">
 												<div class="buttons">
-													<button id="btn">Generate</button>
-													<button id="btncp">Copy</button>
+													<a id="btn">Generate</a>
+													<a id="btncp">Copy</a>
 												</div>
 										</div>
 
@@ -507,7 +507,6 @@
 			return password;
 		}
 		btn.addEventListener("click", () => {
-			preventDefault();
 			pass.value = generatePass();
 		});
 

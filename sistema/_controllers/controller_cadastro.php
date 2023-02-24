@@ -302,6 +302,23 @@ class cadastro extends controller {
 		$this->irpara(DOMINIO.$this->_controller.'/detalhes/codigo/'.$codigo);
 	}
 
+	public function alterar_senha_usuario(){
+
+		$codigo = $this->post('codigo');
+		$senha = $this->post('senha');
+		
+		$senha_md5 = md5($senha);
+		$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
+
+		$db = new mysql();
+		$db->alterar("cadastro", array(			
+			"senha"=>"$senha_tratada",
+			"senha_md5"=>"$senha_md5"
+		), " codigo='$codigo' ");
+
+		$this->irpara(DOMINIO.$this->_controller.'/detalhes/codigo/'.$codigo);
+	}
+
 	public function comentario_apagar(){
 
 		$codigo = $this->get('cadastro');

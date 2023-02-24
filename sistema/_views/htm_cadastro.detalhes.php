@@ -374,12 +374,12 @@
 						<section class="panel">
 							<div class="panel-body">
 								<div>
-									<form action="<?=$_base['objeto']?>comentario_grv" method="post" >
+									<form action="<?=$_base['objeto']?>alterar_senha_usuario" method="post" >
 
 										<div>Redefinir Senha</div>
 
 										<div class="generator">
-												<input type="text" placeholder="Password" id="pass">
+												<input type="text" placeholder="Password" name="senha" id="pass">
 												<div class="buttons">
 													<a id="btn">Generate</a>
 													<a id="btncp" style="margin-left:10px">Copy</a>

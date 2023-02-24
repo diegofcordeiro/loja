@@ -696,12 +696,12 @@
 					<?php if($status == 'aprovada'){ ?>
 						<p>COMPRA EFETUADA COM SUCESSO!</p>
 						<br><br>
-						<a class="m_c" href="<?=URL_BASE?>/webapp/curso/trilhas" target="_blank">Ir para os meus cursos</a>
+						<a class="m_c" href="<?=URL_BASE?>/webapp/curso/trilhas" >Ir para os meus cursos</a>
 						<br><br>
 					<?php }else{?>
 						<p>COMPRA PENDENTE, AGUARDE!</p>
 						<br><br>
-						<a class="m_c" href="<?=URL_BASE?>/loja/index/minhaconta" target="_blank">Ver Pedidos</a>
+						<a class="m_c" href="<?=URL_BASE?>/loja/index/minhaconta" >Ver Pedidos</a>
 						<br><br>
 					<?php }?>
 

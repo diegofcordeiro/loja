@@ -1218,7 +1218,7 @@
 											<label for="cardNumber">Nº Cartão</label>
 											<div class="input-group">
 												<div id="form-checkout__cardNumber" class="container cont_iframe"></div>
-												<span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+												<!-- <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span> -->
 											</div>
 										</div>                            
 									</div>

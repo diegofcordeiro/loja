@@ -319,16 +319,14 @@
 
 							.generator a {
 								position: relative;
-								padding: 10px 20px;
-								border-radius: 10px;
+								padding: 5px 10px;
 								text-transform: capitalize;
-								background: #0084ff;
-								color: #ddd;
+								background: #222d32;
+								color: #fff;
 								border: none;
 								cursor: pointer;
 								letter-spacing: 1px;
-								font-size: 18px;
-								font-weight: bold;
+								font-size: 14px;
 								transition: 0.2s;
 							}
 

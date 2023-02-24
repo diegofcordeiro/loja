@@ -8592,12 +8592,12 @@ class index extends controller {
 		$dados['layout_lista'] = $lista_blocos;
 	
 
-		$is_brasil = $_POST['is_brasil'];
-		if($is_brasil == 0){
-			$cpf = $_POST['cpf_outros'];
-		}else{
-			$cpf = $_POST['cpf'];
-		}
+		// $is_brasil = $_POST['is_brasil'];
+		// if($is_brasil == 0){
+		// 	$cpf = $_POST['cpf_outros'];
+		// }else{
+		// 	$cpf = $_POST['cpf'];
+		// }
 		$recorrencia = 0;
 		$email = $_POST['email'];
 		$mercadopago_client_id 			= $_POST['mercadopago_client_id'];
@@ -8614,6 +8614,7 @@ class index extends controller {
 		$paymentMethodId = $_POST['paymentMethodId'];
 		$issuer = (int)$_POST['issuer'];
 		$cod = $_POST['codigo'];
+		$cpf = $_POST['cpf'];
 
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
 

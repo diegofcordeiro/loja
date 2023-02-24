@@ -8696,51 +8696,6 @@ class index extends controller {
 		}
 		/////////////  /////////////  /////////////
 
-		/////////     RECCORENTE    /////////////
-		foreach($recorrentes as $key => $recorrencia){
-		
-			$amout = 0;
-			$produto_assinatura = '';
-			foreach($recorrencia as $rec){
-				if($rec->usar_valor_vindi == 1){
-					$amout = $rec->valor_total;
-				}else{
-					$amout = $amout + $rec->valor_total;
-				}
-				$produto_assinatura = $rec->produto_assinatura;
-			}
-
-			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
-			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
-
-			if(isset($bill['bill']['id'])){
-				$id_charge = $bill['bill']['charges'][0]['id'];
-				$id_trans = $bill['bill']['id'];
-				$url = $bill['bill']['url'];
-
-				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
-					$status = 4;
-					foreach($recorrencia as $rec_lms){
-						$this->integrar_trilha_lms($rec_lms->produto_ref,$cod, $cpf);
-					}
-				}else{
-					$status = 1;
-				}
-				$db = new mysql();
-				$db->alterar("pedido_loja_carrinho", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
-					"url_vindi"=>"$url",
-					"status"=>"$status",
-				), " sessao='$cod' and id_combo='$rec->id_combo' ");
-
-				$db->alterar("pedido_loja", array(
-					"status"=>"$status",
-				), " codigo='$cod' ");
-			}
-		}
-		/////////  /////////////  /////////////
-
 		$this->view('finalizada', $dados);
 	}
 	

@@ -914,6 +914,10 @@ class index extends controller {
 			}
 		}
 
+		$coisas_pagamento = $conexao->Executar("SELECT id FROM pagamento WHERE ativo='0' ");
+		$data_pagamento = $coisas_pagamento->fetch_object();
+		echo '<pre>'; print_r($data_pagamento);exit;
+		
 		$dados['cat_selecionada'] = ($_POST['categoria'] > 0 ? $_POST['categoria'] : 0);
 		$dados['autor_selecionado'] = ($_POST['autor'] > 0 ? $_POST['autor'] : 0);
 		$dados['buscar_campo'] = $_POST['buscar1'];
@@ -934,7 +938,8 @@ class index extends controller {
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];
-		echo '<pre>'; print_r($dados);exit;
+		
+		
 		$this->view('index', $dados);
 	}
 

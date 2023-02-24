@@ -1212,7 +1212,44 @@
 									</div>
 								</div>
 								<hr>
-								<div id="form-checkout__cardNumber" class="container cont_iframe"></div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="form-group">
+											<label for="cardNumber">Nº Cartão</label>
+											<div class="input-group">
+												<div id="form-checkout__cardNumber" class="container cont_iframe"></div>
+												<span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+											</div>
+										</div>                            
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-6 col-md-6">
+										<div class="form-group">
+											<label for="cardExpiry">Validade</label>
+											<input type="tel" class="form-control"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
+										</div>
+									</div>
+									<div class="col-xs-6 col-md-6">
+										<div class="form-group">
+											<label for="cardCVC">CVV</label>
+											<input type="tel" class="form-control" data-mask="000" name="cardCVC" placeholder="CVV" autocomplete="cc-csc" required value="123"/>
+										</div>
+									</div>
+									<div class="col-xs-2">
+										<div class="form-group">
+											<label for="installments">Recorrencia</label>
+												<select name="recorrencia" class="form-control">
+													<option selected value="0">0</option>
+													<option value="1">Mensal</option>
+												</select> 
+												<input type="hidden" name="carrinho_coisas[]" value=<?$produtos['lista']?>>
+												<input type="hidden" name="installmentValue">
+										</div>                            
+									</div>
+								</div>
+								<br><br>
+								
 								<div id="form-checkout__expirationDate" class="container cont_iframe"></div>
 								<div id="form-checkout__securityCode" class="container cont_iframe"></div>
 								

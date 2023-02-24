@@ -1169,7 +1169,7 @@
 								
 								<input type="text" id="form-checkout__cardholderName" placeholder="Titular do cartão"  class="fields" />
 								<select id="form-checkout__issuer" name="issuer">
-									<option value="" disabled selected>Banco emissor</option>
+								<option value="" disabled selected>Banco emissor</option>
 								</select>
 								<select id="form-checkout__installments" name="installments">
 								<option value="" disabled selected>Parcelas</option>
@@ -1377,7 +1377,8 @@
 							</script>
 							
 							
-							<form name="formulario_" id="form-checkout" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
+							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
+								<input type="text"  id="brand_" name="brand_">
 
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
 								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">

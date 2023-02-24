@@ -8624,13 +8624,8 @@ class index extends controller {
 		}else{
 			$id_client = $user_exist;
 		}
-
-
-		echo'<pre>';
-
-		print_r($_POST);
-		echo '<br>';
-		//////////////////////////////////////////////////////////////
+		
+		//////////////////////////////////////////////
 
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$cod."' ");
@@ -8687,7 +8682,7 @@ class index extends controller {
 					}
 					$db = new mysql();
 					$db->alterar("pedido_loja_carrinho", array(
-						"transacao_bill_id"=>"$id_trans",
+						"id_transacao_mercadopago"=>"$id_trans",
 						"status"=>"$status",
 						
 					), " id='$recorrencia->id' ");
@@ -8700,7 +8695,7 @@ class index extends controller {
 			
 		}
 		/////////////  /////////////  /////////////
-		exit;
+
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 		

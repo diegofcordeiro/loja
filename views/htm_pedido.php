@@ -1163,6 +1163,79 @@
 								<b>Data:</b> 11/2025 -
 								<b>CPF:</b> 12345678909</p>
 								
+								<input type="hidden"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
+								<input type="hidden"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
+								<input type="hidden"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
+								<input type="hidden"  name="mercadopago_access_token" value="<?=$forma_pagamento->mercadopago_access_token?>">
+								<input type="text" name="codigo" value="<?=$data_pedido->codigo?>">
+								<input type="text" name="forma_pagamento" value="<?=$forma_pagamento->id?>">
+								<input type="text" name="amount_" value="<?=$data_pedido->valor_total?>">
+
+
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="div_form" >
+											<label>País</label><br>
+											<input type="radio" id="Brasil_doc" name="country_document" <?= $data_dados->is_brasil == 1 ? 'checked':'' ?>  value="1">
+											<label for="Brasil">Brasil </label>
+											<input type="radio" id="Outros_doc" name="country_document" <?= $data_dados->is_brasil == 0 ? 'checked':'' ?>  value="0">
+											<label for="Outros">Outros</label><br>
+										</div>
+									</div>
+								</div>
+								<br>	
+								<div class="row">
+									<div class="col-xs-8 col-md-8">
+										<div class="form-group">
+											<label for="cardNumber">Nome Completo</label>
+											<!-- <input type="text" class="form-control" name="nomeCompleto" placeholder="Nome Completo" autocomplete="Nome completo" value="<?=$nome_cli?>" required/> -->
+											<input type="text" id="form-checkout__cardholderName" name="nomeCompleto" placeholder="Nome Completo"  class="form-control" value="<?=$nome_cli?>"/>
+										</div>                            
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<div class="form-group">
+											<label for="nascimento">Data de Nascimento</label>
+											<input type="date" class="form-control" name="nascimento" placeholder="Data de Nascimento" autocomplete="Data de Nascimento" value="<?=$fisica_nascimento?>" required/>
+										</div>                            
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-4 col-md-4">
+										<div class="form-group">
+											<label for="email">E-mail</label>
+											<!-- <input type="email" class="form-control" name="email" placeholder="E-mail" autocomplete="Email" value="<?=$email?>" required/> -->
+											<input type="email" value="<?=$email?>" id="form-checkout__email" name="email" class="form-control" placeholder="E-mail"/>
+										</div>
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<div class="form-group">
+											<label for="tel">Telefone</label>
+											<input type="text" class="form-control" name="telefone" id="telefone" maxlength="15" placeholder="Telefone" autocomplete="Telefone" value="<?=$telefone?>" required/>
+										</div>
+									</div>
+									<div class="col-xs-4 col-md-4">
+										<div class="form-group">												
+												<label for="tel" id="label_cpf"><?= $data_dados->is_brasil == 1 ? 'CPF':'Documento' ?></label>
+												<input type="text" style="<?= $data_dados->is_brasil == 1 ? '':'display: none' ?>" class="form-control" name="cpf" id="cpf"  placeholder="CPF" value="<?=$cpf?>" required/>
+												<input type="text" style="<?= $data_dados->is_brasil == 0 ? '':'display: none' ?>" class="form-control" name="cpf_outros" id="documento_cpf"  placeholder="Documento" value="<?=$cpf?>" required/>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="div_form" >
+											<label>País</label><br>
+											<input type="radio" id="Brasil_end" name="country_endereco" <?= $data_dados->is_brasil_address == 1 ? 'checked':'' ?> value="1">
+											<label for="Brasil">Brasil </label>
+											<input type="radio" id="Outros_end" name="country_endereco" <?= $data_dados->is_brasil_address == 0 ? 'checked':'' ?> value="0">
+											<label for="Outros">Outros</label><br>
+										</div>
+									</div>
+								</div>
+								<br>
+
+
 								<div id="form-checkout__cardNumber" class="container cont_iframe"></div>
 								<div id="form-checkout__expirationDate" class="container cont_iframe"></div>
 								<div id="form-checkout__securityCode" class="container cont_iframe"></div>
@@ -1185,12 +1258,7 @@
 								<input id="transactionAmount" name="transactionAmount" type="hidden" value="100">
 								<input id="description" name="description" type="hidden" value="Nome do Produto">
 
-								<input type="hidden"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
-								<input type="hidden"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
-								<input type="hidden"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
-								<input type="hidden"  name="mercadopago_access_token" value="<?=$forma_pagamento->mercadopago_access_token?>">
-								<input type="text" name="codigo" value="<?=$data_pedido->codigo?>">
-
+								
 								<button type="submit" id="form-checkout__submit">Pagar Agora</button>
 							</form>
 							<script src="https://sdk.mercadopago.com/js/v2"></script>

@@ -1206,7 +1206,8 @@
 										</div>
 									</div>
 									<div class="col-xs-4 col-md-4">
-										<div class="form-group">												
+										<div class="form-group">	
+											<label for="tel">CPF</label>											
 											<input type="text" id="form-checkout__identificationNumber" class="fields" name="identificationNumber" value="<?=$cpf?>" placeholder="Número do documento" />
 										</div>
 									</div>

@@ -1376,7 +1376,7 @@
 							</script>
 							
 							
-							<!-- <form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
+							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 								<input type="text"  id="brand_" name="brand_">
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
 								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
@@ -1605,7 +1605,7 @@
 									// 	$n++;
 									// }
 								?>
-							</form>	 -->
+							</form>	
 						
 						</div>
 

@@ -8675,34 +8675,26 @@ class index extends controller {
 					), " codigo='$cod' ");
 			}else{
 				$bill = $this->pagar_mercado_pag($email,(float)$recorrencia->valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$mercadopago_access_token);
-				echo 'final: ';
-				print_r($bill['status']);
-				print_r($bill['id']);
 
-				// if(isset($bill->id)){
-				// 	$id_charge = $bill->charges[0]->id;
-				// 	$id_trans = $bill->id;
-				// 	$url = $bill->url;
-
-				// 	if($bill->status == 'paid'){ 
-				// 		$status = 4;
-				// 		$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
-				// 	}else{
-				// 		$status = 1;
-				// 	}
-				// 	$db = new mysql();
-				// 	$db->alterar("pedido_loja_carrinho", array(
-				// 		"transacao_charger_id"=>"$id_charge",
-				// 		"transacao_bill_id"=>"$id_trans",
-				// 		"url_vindi"=>"$url",
-				// 		"status"=>"$status",
+				if(isset($bill['id'])){
+					$id_trans = $bill['id'];
+					if($bill['status'] == 'approved'){ 
+						$status = 4;
+						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+					}else{
+						$status = 1;
+					}
+					$db = new mysql();
+					$db->alterar("pedido_loja_carrinho", array(
+						"transacao_bill_id"=>"$id_trans",
+						"status"=>"$status",
 						
-				// 	), " id='$recorrencia->id' ");
-				// 	$db->alterar("pedido_loja", array(
-				// 		"status"=>"$status",
+					), " id='$recorrencia->id' ");
+					$db->alterar("pedido_loja", array(
+						"status"=>"$status",
 						
-				// 	), " codigo='$cod' ");
-				// }
+					), " codigo='$cod' ");
+				}
 			}
 			
 		}

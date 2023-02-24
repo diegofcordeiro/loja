@@ -1205,7 +1205,7 @@
 									</div>
 									<div class="col-xs-4 col-md-4">
 										<div class="form-group">												
-											<input type="text" id="form-checkout__identificationNumber" class="fields" name="identificationNumber" placeholder="Número do documento" />
+											<input type="text" id="form-checkout__identificationNumber" class="fields" name="identificationNumber" value="<?=$cpf?>" placeholder="Número do documento" />
 										</div>
 									</div>
 								</div>

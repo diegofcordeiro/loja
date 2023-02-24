@@ -1240,7 +1240,7 @@
 									<div class="col-xs-4 col-md-4">
 										<div class="form-group">
 											<label for="installments">Recorrencia</label>
-												<select id="form-checkout__installments" name="installments">
+												<select id="form-checkout__installments" class="form-control" name="installments">
 													<option value="" disabled selected>Parcelas</option>
 												</select>
 										</div>                            

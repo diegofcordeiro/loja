@@ -8586,8 +8586,7 @@ class index extends controller {
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
-		$this->view('finalizada', $dados);
-		exit;
+		
 		$recorrencia = 0;
 		$email = $_POST['email'];
 		$mercadopago_client_id 			= $_POST['mercadopago_client_id'];
@@ -8614,7 +8613,8 @@ class index extends controller {
 		}else{
 			$id_client = $user_exist;
 		}
-		
+		$this->view('finalizada', $dados);
+		exit;
 		//////////////////////////////////////////////
 
 		$conexao = new mysql();

@@ -311,6 +311,7 @@ class cadastro extends controller {
 
 		$exec = $db->executar("SELECT lms_usuario_id FROM cadastro WHERE codigo = '$codigo'");
 		$res = $exec->fetch_object();
+		print_r("SELECT lms_usuario_id FROM cadastro WHERE codigo = '$codigo'");
 		print_r($res);
 		exit;
 		$sql = "UPDATE usuario SET  senha = '$senha' WHERE id = '$lms_usuario_id'";

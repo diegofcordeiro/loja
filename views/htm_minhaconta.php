@@ -914,7 +914,7 @@
 												$value_tot = $value['valor_total_carrinho'];
 											}
 
-											if($value['status_id'] == 4){
+											if($value['status_id'] == 4 && $value['forma_pagamento'] == 5){
 												$todays_date = strtotime(date('Y-m-d'));
 												$seven_days =  strtotime("+7 day", $value['data_compra']);
 												

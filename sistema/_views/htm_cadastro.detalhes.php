@@ -297,12 +297,13 @@
 							}
 
 							.generator input {
-								width: 100%;
-								height: 120px;
-								display: flex;
-								justify-content: space-evenly;
-								align-items: flex-start;
-								flex-direction: column;
+								    width: 100%;
+									height: 40px;
+									padding: 10px;
+									background: none;
+									outline: none;
+									border: 2px solid #ddd;
+									color: #222;
 
 							}
 
@@ -318,14 +319,16 @@
 
 							.generator a {
 								position: relative;
-								padding: 2px 8px;
+								padding: 10px 20px;
+								border-radius: 10px;
 								text-transform: capitalize;
-								background: #222d32;
+								background: #0084ff;
 								color: #ddd;
 								border: none;
 								cursor: pointer;
 								letter-spacing: 1px;
-								font-size: 13px;
+								font-size: 18px;
+								font-weight: bold;
 								transition: 0.2s;
 							}
 
@@ -381,7 +384,7 @@
 												<input type="text" placeholder="Password" id="pass">
 												<div class="buttons">
 													<a id="btn">Generate</a>
-													<a id="btncp" style="margin-left:10px">Copy</a>
+													<a id="btncp">Copy</a>
 												</div>
 										</div>
 

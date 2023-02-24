@@ -320,7 +320,7 @@
 								justify-content: space-between;
 							}
 
-							.generator button {
+							.generator a {
 								position: relative;
 								padding: 10px 20px;
 								border-radius: 10px;
@@ -335,7 +335,7 @@
 								transition: 0.2s;
 							}
 
-							.generator button:hover {
+							.generator a:hover {
 								background: #0d72d1;
 							}
 
@@ -384,7 +384,6 @@
 										<div>Redefinir Senha</div>
 
 										<div class="generator">
-												<p>Random Password</p>
 												<input type="text" placeholder="Password" id="pass">
 												<div class="buttons">
 													<a id="btn">Generate</a>

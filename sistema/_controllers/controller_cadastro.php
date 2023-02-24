@@ -303,8 +303,7 @@ class cadastro extends controller {
 	}
 
 	public function alterar_senha_usuario(){
-		echo realpath(dirname('../../controllers/conexao.php'));exit;
-		require('../../controllers/conexao.php');
+		require('../controllers/conexao.php');
 		$db = new mysql();
 		
 		$codigo = $this->post('codigo');

@@ -701,7 +701,7 @@
 					<?php }else{?>
 						<p>COMPRA PENDENTE, AGUARDE!</p>
 						<br><br>
-						<a class="m_c" href="<?=URL_BASE?>/loja/index/minhaconta" target="_blank">Ir para os meus cursos</a>
+						<a class="m_c" href="<?=URL_BASE?>/loja/index/minhaconta" target="_blank">Ver Pedidos</a>
 						<br><br>
 					<?php }?>
 

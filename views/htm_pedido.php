@@ -1209,7 +1209,7 @@
 										<div class="form-group">	
 											<label for="tel">CPF</label>											
 											<input type="text" class="form-control" id="form-checkout__identificationNumber" name="identificationNumber" value="<?=$cpf?>" placeholder="Número do documento" />
-											<input type="text" class="form-control" name="cpf" value="<?=$cpf?>"  />
+											<input type="hideen" class="form-control" name="cpf" value="<?=$cpf?>"  />
 										</div>
 									</div>
 								</div>

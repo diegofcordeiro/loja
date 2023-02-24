@@ -1557,8 +1557,7 @@
 										<div class="form-group">
 											<label for="cardNumber">Nº Cartão</label>
 											<div class="input-group">
-												<!-- <input type="tel" class="form-control" name="cardNumber" pattern=".{17,19}" placeholder="Valid Card Number" id="input-cc" autocomplete="cc-number" required autofocus value=""/> -->
-												<div id="form-checkout__cardNumber" class="container cont_iframe"></div>
+												<input type="tel" class="form-control" name="cardNumber" pattern=".{17,19}" placeholder="Valid Card Number" id="input-cc" autocomplete="cc-number" required autofocus value=""/>
 												<span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
 											</div>
 										</div>                            

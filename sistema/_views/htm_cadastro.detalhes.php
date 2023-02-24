@@ -275,7 +275,107 @@
 							</div> 
 
 						</section>
+						<style>
+						
+							::selection {
+								color: #222;
+								background: #ddd;
+							}
 
+							.generator {
+								width: 400px;
+								height: 200px;
+								display: flex;
+								justify-content: space-evenly;
+								align-items: flex-start;
+								flex-direction: column;
+							}
+
+							.generator p {
+								color: #ddd;
+								font-size: 24px;
+							}
+
+							.generator input {
+								width: 100%;
+								height: 50px;
+								padding: 10px;
+								background: none;
+								outline: none;
+								border: 2px solid #ddd;
+								border-radius: 8px;
+								color: #ddd;
+								font-size: 18px;
+								letter-spacing: 1px;
+								transition: 0.2s;
+							}
+
+							.generator input.active {
+								border-color: #4dff4d;
+							}
+
+							.generator .buttons {
+								width: 100%;
+								display: flex;
+								justify-content: space-between;
+							}
+
+							.generator button {
+								position: relative;
+								padding: 10px 20px;
+								border-radius: 10px;
+								text-transform: capitalize;
+								background: #0084ff;
+								color: #ddd;
+								border: none;
+								cursor: pointer;
+								letter-spacing: 1px;
+								font-size: 18px;
+								font-weight: bold;
+								transition: 0.2s;
+							}
+
+							.generator button:hover {
+								background: #0d72d1;
+							}
+
+							.generator #btncp::before {
+								position: absolute;
+								content: "Copied";
+								top: 50%;
+								left: 0;
+								transform: translateY(-50%);
+								color: #4dff4d;
+								transition: 0.2s linear;
+								z-index: -1;
+							}
+
+							.generator input.active ~ .buttons #btncp::before {
+								left: -70px;
+							}
+
+
+							/* YouTube icon */
+							#ytb {
+							position: absolute;
+							height: 70px;
+							width: 70px;
+							left: calc(50% - 35px);
+							top: 10px;
+							text-align: center;
+							line-height: 70px;
+							border: 2px solid transparent;
+							color: #ff1717;
+							font-size: 30px;
+							transition: 0.2s;
+							}
+
+							#ytb:hover{
+							border-radius: 50%;
+							border-color: #ff1717;
+							box-shadow: 0 0 10px #ff4040;
+							}
+						</style>
 						<section class="panel">
 							<div class="panel-body">
 								<div>
@@ -283,8 +383,13 @@
 
 										<div>Redefinir Senha</div>
 
-										<div>
-											<textarea name="comentario" class="form-control" style="height:80px;" ></textarea>
+										<div class="generator">
+												<p>Random Password</p>
+												<input type="text" placeholder="Password" id="pass">
+												<div class="buttons">
+													<button id="btn">Generate</button>
+													<button id="btncp">Copy</button>
+												</div>
 										</div>
 
 										<div style="text-align:right; margin-top:15px;">
@@ -386,6 +491,35 @@
 	<script src="<?=LAYOUT?>js/funcoes.js"></script>
 	<script>function dominio(){ return '<?=DOMINIO?>'; }</script>
 	<script>
+		let pass = document.getElementById("pass");
+		let btn = document.getElementById("btn");
+		let btncp = document.getElementById("btncp");
+
+		function generatePass() {
+			let chars =
+				"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+[]{}?><";
+			let passLength = 20;
+			let password = "";
+
+			for (let i = 0; i < passLength; i++)
+				password += chars[Math.floor(Math.random() * chars.length)];
+
+			return password;
+		}
+		btn.addEventListener("click", () => {
+			pass.value = generatePass();
+		});
+
+		btncp.addEventListener("click", () => {
+			if (pass.value != "") {
+				navigator.clipboard.writeText(pass.value);
+				pass.classList.add("active");
+				setTimeout(() => {
+					pass.classList.remove("active");
+				}, 1000);
+			}
+		});
+
 		$(document).ready(function(){	
 			$(".select2").select2();	
 		});

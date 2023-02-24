@@ -313,7 +313,7 @@
 							.generator .buttons {
 								width: 100%;
 								display: flex;
-								justify-content: left;
+								justify-content: space-between;
 							}
 
 							.generator a {

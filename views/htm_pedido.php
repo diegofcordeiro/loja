@@ -1377,7 +1377,7 @@
 							</script>
 							
 							
-							<form name="formulario_" id="formulario_" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
+							<form name="formulario_" id="form-checkout" method="POST" action="<?=DOMINIO?>index/mercadopago_flow">
 
 								<input type="text"  name="mercadopago_client_id" value="<?=$forma_pagamento->mercadopago_client_id?>">
 								<input type="text"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
@@ -1557,8 +1557,8 @@
 										<div class="form-group">
 											<label for="cardNumber">Nº Cartão</label>
 											<div class="input-group">
-												<div id="form-checkout__cardNumber" class="form-control"></div>
 												<!-- <input type="tel" class="form-control" name="cardNumber" pattern=".{17,19}" placeholder="Valid Card Number" id="input-cc" autocomplete="cc-number" required autofocus value=""/> -->
+												<div id="form-checkout__cardNumber" class="container cont_iframe"></div>
 												<span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
 											</div>
 										</div>                            

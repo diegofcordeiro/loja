@@ -1224,19 +1224,19 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-6 col-md-6">
+									<div class="col-xs-4 col-md-4">
 										<div class="form-group">
 											<label for="cardExpiry">Validade</label>
 											<input type="tel" class="form-control"  data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
 										</div>
 									</div>
-									<div class="col-xs-6 col-md-6">
+									<div class="col-xs-4 col-md-4">
 										<div class="form-group">
 											<label for="cardCVC">CVV</label>
 											<input type="tel" class="form-control" data-mask="000" name="cardCVC" placeholder="CVV" autocomplete="cc-csc" required value="123"/>
 										</div>
 									</div>
-									<div class="col-xs-2">
+									<div class="col-xs-4 col-md-4">
 										<div class="form-group">
 											<label for="installments">Recorrencia</label>
 												<select id="form-checkout__installments" name="installments">

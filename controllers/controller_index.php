@@ -8624,6 +8624,11 @@ class index extends controller {
 			$id_client = $user_exist;
 		}
 
+
+		echo'<pre>';
+
+		print_r($_POST);
+		echo '<br>';
 		//////////////////////////////////////////////////////////////
 
 		$conexao = new mysql();
@@ -8670,7 +8675,7 @@ class index extends controller {
 					), " codigo='$cod' ");
 			}else{
 				$bill = $this->pagar_mercado_pag($email,(float)$recorrencia->valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$mercadopago_access_token);
-				echo'<pre>';print_r($bill);
+				print_r($bill);
 				// if(isset($bill->id)){
 				// 	$id_charge = $bill->charges[0]->id;
 				// 	$id_trans = $bill->id;
@@ -8699,7 +8704,7 @@ class index extends controller {
 			
 		}
 		/////////////  /////////////  /////////////
-
+		exit;
 		/////////     RECCORENTE    /////////////
 		foreach($recorrentes as $key => $recorrencia){
 		

@@ -1216,7 +1216,7 @@
 									<div class="col-xs-12">
 										<div class="form-group">
 											<label for="cardNumber">Nº Cartão</label>
-											<div class="input-group">
+											<div class="input-group" style="width: 100%;">
 												<div id="form-checkout__cardNumber" class="container cont_iframe"></div>
 												<!-- <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span> -->
 											</div>

@@ -1262,9 +1262,15 @@
 								<input type="hidden"  name="mercadopago_client_secret" value="<?=$forma_pagamento->mercadopago_client_secret?>">
 								<input type="hidden"  name="mercadopago_public_key" value="<?=$forma_pagamento->mercadopago_public_key?>">
 								<input type="hidden"  name="mercadopago_access_token" value="<?=$forma_pagamento->mercadopago_access_token?>">
-								<input type="hidden" name="codigo" value="<?=$data_pedido->codigo?>">
+								<input type="hidden" name="codigo" value="<?=$data_pedido->codigo?>">	
 
-								<button type="submit" id="form-checkout__submit">Pagar Agora</button>
+								<br><br>
+								<div class="row">
+									<div class="col-xs-12">
+										<button type="submit" class="btn btn-success btn-lg btn-block"  id="form-checkout__submit">Pagar</button>
+									</div>
+								</div>
+
 							</form>
 							<script src="https://sdk.mercadopago.com/js/v2"></script>
 							 <script>

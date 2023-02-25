@@ -2494,7 +2494,8 @@ class index extends controller {
 			$codigo = substr(time().rand(10000,99999),-15);
 			$tipo = "F";
 
-
+			$fisica_cpf = str_replace("-","",$fisica_cpf);
+			$fisica_cpf = str_replace(".","",$fisica_cpf);
 
 			$db = new mysql();
 			$db->inserir("cadastro", array(

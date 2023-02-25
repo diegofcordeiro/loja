@@ -11114,6 +11114,8 @@ class index extends controller {
 		$prefixosessao = $this->_sessao.'_';
 		
 		$email = $this->post('login_usuario');
+		$email = str_replace("-","",$email);
+		$email = str_replace(".","",$email);
 		$senha = $this->post('login_senha');
 
 		if($email AND $senha) {
@@ -11132,7 +11134,8 @@ class index extends controller {
 					$_SESSION['usuario_cpf'] = $data_dados->fisica_cpf;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $this->_sessao;
 
-					if( empty($data_dados->endereco) OR empty($data_dados->cep) OR empty($data_dados->estado) OR empty($data_dados->cidade) ){
+					if( 1 == 4 ){
+					// if( empty($data_dados->endereco) OR empty($data_dados->cep) OR empty($data_dados->estado) OR empty($data_dados->cidade) ){
 
 						$this->irpara(DOMINIO.$this->_controller.'/alterar_cadastro');
 

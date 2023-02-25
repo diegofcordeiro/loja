@@ -379,7 +379,7 @@
 										<div>Redefinir Senha</div>
 
 										<div class="generator">
-												<input type="text" placeholder="Password" name="senha" id="pass">
+												<input type="text" placeholder="Password" name="senha" min="1" max="12" id="pass">
 												<div class="buttons">
 													<a id="btn">Generate</a>
 													<a id="btncp" style="margin-left:10px">Copy</a>

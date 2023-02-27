@@ -169,7 +169,7 @@ $url = $_GET['url'];
 		/* padding: 10px 0px;margin-top: 10px; */
 		margin-bottom: -1px;
 	}
-	.span_btn{padding: 5px 10px 5px 10px; border-radius: 5px;border: 1px #2c3e4f solid;}
+	.span_btn{padding: 15px 10px 15px 10px; border-radius: 5px;border: 1px #2c3e4f solid;}
 	.span_btn_cad{padding: 5px 10px 5px 10px;border-radius: 5px;border: 1px <?=$primaria?> solid;background: <?=$primaria?>;color: white !important;}
 	.busca_input {
 		border-top: none;

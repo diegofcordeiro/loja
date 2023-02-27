@@ -112,7 +112,7 @@
 		padding-top:9px;
 		padding-bottom:10px; */
 		text-align: center;
-		padding: 30px 18px;
+		padding: 30px 10px;
 	}
 	a.botao_conta_topo span{
 		display:block;

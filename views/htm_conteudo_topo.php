@@ -157,7 +157,7 @@ $url = $_GET['url'];
 		display: inline-block;
 		width: 100%;
 		margin: 0px;
-		margin-top: 8px;
+		/* margin-top: 8px; */
 		margin-bottom: 0px;
 	}
 	/* .logo_div {
@@ -165,7 +165,8 @@ $url = $_GET['url'];
 		padding: 10px 0px;
 	} */
 	.busca_div, .div_botoes_topo{
-		padding: 10px 0px;margin-top: 10px;margin-bottom: -1px;
+		/* padding: 10px 0px;margin-top: 10px; */
+		margin-bottom: -1px;
 	}
 	.span_btn{padding: 5px 10px 5px 10px; border-radius: 5px;border: 1px #2c3e4f solid;}
 	.span_btn_cad{padding: 5px 10px 5px 10px;border-radius: 5px;border: 1px <?=$primaria?> solid;background: <?=$primaria?>;color: white !important;}

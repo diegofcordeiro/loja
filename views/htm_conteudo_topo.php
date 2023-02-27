@@ -280,7 +280,7 @@ $url = $_GET['url'];
 											<i class="fas fa-shopping-cart"></i>
 										</a>
 										<a class="botao_conta_topo" href="<?=DOMINIO?>index/entrar">
-											<span class="span_btn">Fazer login</span>
+											<span class="span_btn">Sou Assinante</span>
 										</a>
 										<a class="botao_conta_topo" href="<?=DOMINIO?>index/cadastro_basico">
 											<span class="span_btn_cad" style="color: white !important;">Cadastre-se</span>
@@ -332,7 +332,7 @@ $url = $_GET['url'];
 								<?php if($_nome_usuario == 'Visitante'){ ?>
 									<ul class="nav navbar-nav navbar-right">
 										<li class=""><a href="<?=DOMINIO?>index/carrinho"><i class="fas fa-shopping-cart"></i></li>
-										<li><a href="<?=DOMINIO?>index/entrar"><span class="span_btn">Fazer login</span></a></li>
+										<li><a href="<?=DOMINIO?>index/entrar"><span class="span_btn">Sou Assinante</span></a></li>
 										<li><a href="<?=DOMINIO?>index/cadastro_basico"><span class="span_btn_cad" style="color: white !important;">Cadastre-se</span></a></li>
 									</ul>
 								<?php }else{ ?>

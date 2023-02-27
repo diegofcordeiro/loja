@@ -331,7 +331,7 @@ $url = $_GET['url'];
 								</button>
 								<!-- <a class="navbar-brand" href="#">Project name</a> -->
 								<a href="<?=DOMINIO?>" class="logo_mobile_" ><img src="<?=$logo_topo?>" ></a>
-								<a href="<?=DOMINIO?><?=$controller?>/minhaconta" class="menu_assinante_desk">Sou Assinante</a>
+								<a href="" id="meus_cursos" class="menu_assinante_desk">Sou Assinante</a>
 							</div>
 							<div id="navbar" class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">
@@ -350,7 +350,7 @@ $url = $_GET['url'];
 										<ul class="dropdown-menu">
 											<li><a href="<?=DOMINIO?><?=$controller?>/minhaconta">Minha conta</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/alterar_cadastro">Alterar cadastro</a></li>
-											<li><a href="" id="meus_cursos">Meus Cursos</a></li>
+											<!-- <li><a href="" id="meus_cursos">Meus Cursos</a></li> -->
 											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
 										</ul>
 									</div>

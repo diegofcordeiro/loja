@@ -149,7 +149,7 @@
 			top: 28%;
 			right: 4%;
 			cursor: pointer;
-			color: lightgray;
+			color: #646464;
 		}
 	</style>
 
@@ -807,8 +807,8 @@
 
 							<div class="div_form" ><input type="text" class="form-control login_form" name="login_usuario" id="login_usuario" placeholder="Digite seu CPF/Documento" ></div>
 							<!-- <div class="div_form" ><input type="password" class="form-control login_form" name="login_senha" id="login_senha" placeholder="Digite sua Senha" ></div> -->
-							<div class="password-container">
-								<input type="password" placeholder="Password..." id="password">
+							<div class="div_form">
+								<input type="password" placeholder="Digite sua Senha" class="form-control login_form" name="login_senha" id="password">
 								<i class="fa-solid fa-eye" id="eye"></i>
 							</div>
 							<div class="div_form" >

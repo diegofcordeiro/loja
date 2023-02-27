@@ -134,9 +134,22 @@
 			background: white;
 			margin-bottom: 10px;
 		}
-		form i {
-			margin-left: -30px;
+		.password-container{
+			width: 400px;
+			position: relative;
+		}
+		.password-container input[type="password"],
+		.password-container input[type="text"]{
+			width: 100%;
+			padding: 12px 36px 12px 12px;
+			box-sizing: border-box;
+		}
+		.fa-eye{
+			position: absolute;
+			top: 28%;
+			right: 4%;
 			cursor: pointer;
+			color: lightgray;
 		}
 	</style>
 
@@ -794,7 +807,10 @@
 
 							<div class="div_form" ><input type="text" class="form-control login_form" name="login_usuario" id="login_usuario" placeholder="Digite seu CPF/Documento" ></div>
 							<!-- <div class="div_form" ><input type="password" class="form-control login_form" name="login_senha" id="login_senha" placeholder="Digite sua Senha" ></div> -->
-							<div class="div_form" ><input type="password" class="form-control login_form" name="login_senha" id="password" laceholder="Digite sua Senha" /><i class="bi bi-eye-slash" id="togglePassword"></i></div>
+							<div class="password-container">
+								<input type="password" placeholder="Password..." id="password">
+								<i class="fa-solid fa-eye" id="eye"></i>
+							</div>
 							<div class="div_form" >
 								<div style="float:left; text-align:left;">
 									<div><a href="<?=DOMINIO?><?=$controller?>/recuperar_senha" style="font-size:13px; color: <?=$pagina_cores[6]?>" >Esqueci minha senha!</a></div>

@@ -249,7 +249,7 @@ $url = $_GET['url'];
 		background-color: <?=$primaria?> !important;
 	}
 	.menu_assinante_desk{
-		padding: 20px 10px;
+		padding: 18px 10px;
 		background: <?=$primaria?> !important;
 		color: white;
 		float: right;
@@ -330,7 +330,7 @@ $url = $_GET['url'];
 								</button>
 								<!-- <a class="navbar-brand" href="#">Project name</a> -->
 								<a href="<?=DOMINIO?>" class="logo_mobile_" ><img src="<?=$logo_topo?>" ></a>
-								<a href="<?=DOMINIO?>" class="menu_assinante_desk">Sou Assinante</a>
+								<a href="<?=DOMINIO?><?=$controller?>/minhaconta" class="menu_assinante_desk">Sou Assinante</a>
 							</div>
 							<div id="navbar" class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">
@@ -340,7 +340,6 @@ $url = $_GET['url'];
 								<?php if($_nome_usuario == 'Visitante'){ ?>
 									<ul class="nav navbar-nav navbar-right">
 										<li class=""><a href="<?=DOMINIO?>index/carrinho"><i class="fas fa-shopping-cart"></i></li>
-										<li><a href="<?=DOMINIO?>index/entrar"><span class="span_btn">Sou Assinante</span></a></li>
 										<li><a href="<?=DOMINIO?>index/cadastro_basico"><span class="span_btn_cad" style="color: white !important;">Cadastre-se</span></a></li>
 									</ul>
 								<?php }else{ ?>

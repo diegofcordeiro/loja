@@ -323,7 +323,9 @@ $url = $_GET['url'];
 								</button>
 								<!-- <a class="navbar-brand" href="#">Project name</a> -->
 								<a href="<?=DOMINIO?>" class="logo_mobile_" ><img src="<?=$logo_topo?>" ></a>
+								<a href="<?=DOMINIO?>" class="">Sou Assinante</a>
 							</div>
+							<div>aqui</div>
 							<div id="navbar" class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">
 									<li class="<?=($url == '' ? 'active' : '')?>"><a href="<?=DOMINIO?>">Home</a></li>

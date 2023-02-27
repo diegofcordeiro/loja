@@ -248,6 +248,13 @@ $url = $_GET['url'];
 	.dropdown-menu li a:hover, .dropdown-menu li a:focus {
 		background-color: <?=$primaria?> !important;
 	}
+	.menu_assinante_desk{
+		padding: 20px 10px;
+		background: <?=$primaria?> !important;
+		color: white;
+		float: right;
+		margin-right: 50px;
+	}
 </style>
 	<header id="header">
 		<div class="topo6">
@@ -323,7 +330,7 @@ $url = $_GET['url'];
 								</button>
 								<!-- <a class="navbar-brand" href="#">Project name</a> -->
 								<a href="<?=DOMINIO?>" class="logo_mobile_" ><img src="<?=$logo_topo?>" ></a>
-								<a href="<?=DOMINIO?>" class="">Sou Assinante</a>
+								<a href="<?=DOMINIO?>" class="menu_assinante_desk">Sou Assinante</a>
 							</div>
 							<div id="navbar" class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">

@@ -350,7 +350,7 @@ $url = $_GET['url'];
 										<ul class="dropdown-menu">
 											<li><a href="<?=DOMINIO?><?=$controller?>/minhaconta">Minha conta</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/alterar_cadastro">Alterar cadastro</a></li>
-											<!-- <li><a href="" id="meus_cursos">Meus Cursos</a></li> -->
+											<li><a href="" id="meus_cursos">Meus Cursos</a></li>
 											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
 										</ul>
 									</div>

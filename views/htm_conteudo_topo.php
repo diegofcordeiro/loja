@@ -248,107 +248,29 @@ $url = $_GET['url'];
 	}
 </style>
 	<header id="header">
-		<div class="topo6">
-			<div id="topo" class="header-middle">
-				<div class="container desk_menu">
-					<div class="row">
-						<div class="col-xs-12 col-sm-2 col-md-2">
-							<div class="logo_div logo_div_desk">
-								<a href="<?=DOMINIO?>" class="logo" ><img src="<?=$logo_topo?>" ></a>
-							</div>
-						</div>
-						<?php if($_nome_usuario == 'Visitante'){ ?>
-							<div class="col-xs-12 col-sm-6 col-md-6">
-						<?php }else {?>
-							<div class="col-xs-12 col-sm-8 col-md-8">
-						<?php }?>
-							<ul class="ul_loja">
-								<li class="li_loja <?=($url == '' ? 'selected_orange' : '')?>"><a <?=($url == '' ? 'class="selected_orange_text"' : '')?> href="<?=DOMINIO?>">Home</a></li>
-								<li class="li_loja <?=($url == 'index/canal' ? 'selected_orange' : '')?>"><a <?=($url == 'index/canal' ? 'class="selected_orange_text"' : '')?> href="<?=DOMINIO.$controller?>/canal">Canais</a></li>
-								<?php if($_nome_usuario != 'Visitante'){ ?>
-									<li class="li_loja"><a id="meus_cursos_" href="">Meus Cursos</a></li>
-								<?php } ?>
-							</ul>
-						</div>
-						<?php if($_nome_usuario == 'Visitante'){ ?>
-							<div class="col-xs-12 col-sm-4 col-md-4">
-								<div class="div_botoes_topo">
-										<a class="botao_conta_topo" href="<?=DOMINIO?>index/carrinho">
-											<i class="fas fa-shopping-cart"></i>
-										</a>
-										<a class="botao_conta_topo" href="<?=DOMINIO?>index/entrar">
-											<span class="span_btn">Fazer login</span>
-										</a>
-										<a class="botao_conta_topo" href="<?=DOMINIO?>index/cadastro_basico">
-											<span class="span_btn_cad" style="color: white !important;">Cadastre-se</span>
-										</a>
-									<div style="clear: both;"></div>
-								</div>
-							</div>
-							<?php }else{ ?>
-								<div class="col-xs-2 col-sm-2 col-md-2" style="margin-top: 25px;">
-									<div class="dropdown" style="float:left">
-										<button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><?=$_nome_usuario?>
-										<span class="caret"></span></button>
-										<ul class="dropdown-menu">
-											<li><a href="<?=DOMINIO?><?=$controller?>/minhaconta">Minha conta</a></li>
-											<li><a href="<?=DOMINIO?><?=$controller?>/alterar_cadastro">Alterar cadastro</a></li>
-											<li><a href="" id="meus_cursos">Meus Cursos</a></li>
-											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
-										</ul>
-									</div>
-									<a class="botao_conta_topo" href="<?=DOMINIO?>index/carrinho">
-										<i class="fas fa-shopping-cart"></i>
-									</a>
-									<div style="clear: both;"></div>
-								</div>
-							<?php } ?>
-						</div>
-					</div>
-				</div>
-				<div class="container mobile_menu">
-					<nav class="navbar navbar-default">
-						<div class="container-fluid">
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								</button>
-								<!-- <a class="navbar-brand" href="#">Project name</a> -->
-								<a href="<?=DOMINIO?>" class="logo_mobile_" ><img src="<?=$logo_topo?>" ></a>
-							</div>
-							<div id="navbar" class="navbar-collapse collapse">
-								<ul class="nav navbar-nav">
-									<li class="<?=($url == '' ? 'active' : '')?>"><a href="<?=DOMINIO?>">Home</a></li>
-									<li class="<?=($url == 'index/canal' ? 'active' : '')?>"><a href="<?=DOMINIO.$controller?>/canal">Canais</a></li>
-								</ul>
-								<?php if($_nome_usuario == 'Visitante'){ ?>
-									<ul class="nav navbar-nav navbar-right">
-										<li class=""><a href="<?=DOMINIO?>index/carrinho"><i class="fas fa-shopping-cart"></i></li>
-										<li><a href="<?=DOMINIO?>index/entrar"><span class="span_btn">Fazer login</span></a></li>
-										<li><a href="<?=DOMINIO?>index/cadastro_basico"><span class="span_btn_cad" style="color: white !important;">Cadastre-se</span></a></li>
-									</ul>
-								<?php }else{ ?>
-									<div class="dropdown">
-										<button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><?=$_nome_usuario?>
-										<span class="caret"></span></button>
-										<ul class="dropdown-menu">
-											<li><a href="<?=DOMINIO?><?=$controller?>/minhaconta">Minha conta</a></li>
-											<li><a href="<?=DOMINIO?><?=$controller?>/alterar_cadastro">Alterar cadastro</a></li>
-											<li><a href="" id="meus_cursos">Meus Cursos</a></li>
-											<li><a href="<?=DOMINIO?><?=$controller?>/logout">Sair</a></li>
-										</ul>
-									</div>
-									<div style="clear: both;"></div>
-									<br><br>
-								<?php } ?>
-							</div>
-						</div>
-					</nav>
-				</div>
+		
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<a class="navbar-brand" href="#">Fixed navbar</a>
+			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="navbar-collapse collapse" id="navbarCollapse" style="">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+				<a class="nav-link" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
+			<form class="form-inline mt-2 mt-md-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
 			</div>
-		</div>
+		</nav>
 	</header>
 	<section class="margemtopo"></section>

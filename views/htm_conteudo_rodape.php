@@ -254,7 +254,9 @@ $botao_aviso = $conteudo_sessao['botao_aviso'];
 		});
 		$("#meus_cursos_").click(function(e){
 			e.preventDefault();
+
 			var url_webapp = "<?=URL_BASE?>webapp/integra.php?token=<?=base64_encode($_SESSION['usuario_cpf'])?>";
+			console.log('aqui: '+url_webapp);
 			window.location.replace(url_webapp);
 		});
 		

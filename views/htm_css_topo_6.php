@@ -118,7 +118,7 @@
 		display:block;
 		font-size:10px;
 		font-weight: 400;
-		padding-top:3px; 
+		/* padding-top:3px;  */
 		color: <?=$cores['161']?> !important;
 	}
 	.topo_redes{

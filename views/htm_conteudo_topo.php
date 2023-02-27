@@ -249,7 +249,7 @@ $url = $_GET['url'];
 		background-color: <?=$primaria?> !important;
 	}
 	.menu_assinante_desk{
-		padding: 18px 10px;
+		padding: 20px 10px;
 		background: <?=$primaria?> !important;
 		color: white;
 		float: right;

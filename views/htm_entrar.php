@@ -24,7 +24,7 @@
 	<link href="<?=LAYOUT?>css/responsiveslides.css" rel="stylesheet" type="text/css" />
 	<link href="<?=LAYOUT?>api/bxslider/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 	<link href="<?=LAYOUT?>api/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	<?php include_once('htm_css.php'); ?>
 	<?php include_once('htm_css_resp.php'); ?>
 

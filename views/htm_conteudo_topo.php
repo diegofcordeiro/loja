@@ -237,7 +237,7 @@ $url = $_GET['url'];
 	}
 	.mobile_menu{margin: 0 !important;padding: 0 !important;}
 	.logo_mobile_{float: left;max-width: 140px;margin-left: 5px;}
-	.navbar-default {border: none !important;margin-top: 15px !important;margin-bottom: -5px !important;}
+	.navbar-default {border: none !important;margin-top: 0px !important;margin-bottom: -5px !important;}
 	.navbar-collapse.collapse {padding-top: 0px !important;border: none !important;}
 	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
 		color: white;
@@ -325,7 +325,6 @@ $url = $_GET['url'];
 								<a href="<?=DOMINIO?>" class="logo_mobile_" ><img src="<?=$logo_topo?>" ></a>
 								<a href="<?=DOMINIO?>" class="">Sou Assinante</a>
 							</div>
-							<div>aqui</div>
 							<div id="navbar" class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">
 									<li class="<?=($url == '' ? 'active' : '')?>"><a href="<?=DOMINIO?>">Home</a></li>

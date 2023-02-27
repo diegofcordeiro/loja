@@ -107,11 +107,12 @@
 	a.botao_conta_topo{
 		display: inline-block;
 		float:none;
-		padding-left: 15px;
+		/* padding-left: 15px;
 		padding-right:0px;
 		padding-top:9px;
-		padding-bottom:10px;
+		padding-bottom:10px; */
 		text-align: center;
+		padding: 30px 18px;
 	}
 	a.botao_conta_topo span{
 		display:block;

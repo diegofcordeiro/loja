@@ -214,19 +214,19 @@ $url = $_GET['url'];
 	@media (min-width: 1369px){
 		.logo_div {
 			width: 60%;
-			padding: 10px 0px;
+			/* padding: 10px 0px; */
 		}
 	}
 	@media (min-width: 1101px) and (max-width: 1368px){
 		.logo_div {
 			width: 90%;
-			padding: 10px 0px;
+			/* padding: 10px 0px; */
 		}
 	}
 	@media (max-width: 1100px){
 		.logo_div {
 			width: 80%;
-			padding: 10px 0px;
+			/* padding: 10px 0px; */
 		}
 		.logo_div_desk {
 			width: 100% !important;

@@ -159,6 +159,7 @@ $url = $_GET['url'];
 		margin: 0px;
 		/* margin-top: 8px; */
 		margin-bottom: 0px;
+		padding: 10px 10px;
 	}
 	/* .logo_div {
 		width: 100%;

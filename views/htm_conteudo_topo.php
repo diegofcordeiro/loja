@@ -331,7 +331,11 @@ $url = $_GET['url'];
 								</button>
 								<!-- <a class="navbar-brand" href="#">Project name</a> -->
 								<a href="<?=DOMINIO?>" class="logo_mobile_" ><img src="<?=$logo_topo?>" ></a>
-								<a class="menu_assinante_desk" href="<?=URL_BASE?>webapp/integra.php?token=<?=base64_encode($_SESSION['usuario_cpf'])?>">Sou Assinante</a>
+								<?php if($_nome_usuario == 'Visitante'){ ?>
+									<a class="menu_assinante_desk" href="<?=DOMINIO?><?=$controller?>/minhaconta">Sou Assinante</a>
+								<?php }else{ ?>
+										<a class="menu_assinante_desk" href="<?=URL_BASE?>webapp/integra.php?token=<?=base64_encode($_SESSION['usuario_cpf'])?>">Sou Assinante</a>
+								<?php } ?>
 							</div>
 							<div id="navbar" class="navbar-collapse collapse">
 								<ul class="nav navbar-nav">

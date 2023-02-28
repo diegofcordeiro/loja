@@ -958,8 +958,9 @@
 					</div>
 				</div>
 			<?php } else {
-				echo 'Nenhum curso encontrado.';
-			} ?>
+				echo 'Nenhum curso encontrado.'; ?>
+				<button style="background: <?= $primaria ?>;border: none;padding: 6px 50px;border-radius: 8px;color: #fff;font-size: 16px;" onclick="history.go(-1);">Voltar</button>
+			<?php } ?>
 
 
 		</div>

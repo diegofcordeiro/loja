@@ -710,7 +710,7 @@
 	<section class="animate-effect" style="margin-top:-50px; margin-bottom: 50px;">
 		<div class="container">
 
-			<?php if (($novos_cursos)) { ?>
+			<?php if (isset($novos_cursos)) { ?>
 				<div class="row">
 					<div class='col-xs-12 col-sm-12 col-md-12'>
 						<?php
@@ -957,7 +957,9 @@
 						?>
 					</div>
 				</div>
-			<?php } ?>
+			<?php } else {
+				echo 'Nenhum curso encontrado.';
+			} ?>
 
 
 		</div>

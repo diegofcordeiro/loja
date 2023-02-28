@@ -723,9 +723,9 @@
                                             <div class="card card-xl-stretch mb-5 mb-xl-8">
                                                 <div class="container_flex_cat snaps-inline owl-carousel owl-theme">';
 						foreach ($novos_cursos as $key => $value) {
-							echo '<pre>';
-							print_r($value);
-							exit;
+							// echo '<pre>';
+							// print_r($value);
+							// exit;
 							$conexao = new mysql();
 							$cursos = new model_cursos();
 							$exec = mysqli_query($conexao, "SELECT cursos.* 

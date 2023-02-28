@@ -710,7 +710,9 @@
 	<section class="animate-effect" style="margin-top:-50px; margin-bottom: 50px;">
 		<div class="container">
 
-			<?php if (isset($novos_cursos) && count($novos_cursos) > 0) { ?>
+			<?php if (isset($novos_cursos)) {
+				print_r(count($novos_cursos));
+			?>
 				<div class="row">
 					<div class='col-xs-12 col-sm-12 col-md-12'>
 						<?php

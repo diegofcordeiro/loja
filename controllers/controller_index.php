@@ -1,144 +1,151 @@
 <?php
 
-class index extends controller {
-	
-	public function init(){
+class index extends controller
+{
+
+	public function init()
+	{
 		$this->inicializacao();
-		
 	}
 
-	public function lista_combos(){
+	public function lista_combos()
+	{
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 		echo '<pre>';
 		$dados = fopen('test.csv', 'r');
-		$linha = fgetcsv($dados,1000,',');
+		$linha = fgetcsv($dados, 1000, ',');
 
 		$new = array();
-		while($linha = fgetcsv($dados,1000,',')){
-			
+		while ($linha = fgetcsv($dados, 1000, ',')) {
+
 			$combo_id = $linha[24];
 			$nome_combo = $linha[25];
-			
-			if (!empty($new[$combo_id])){
+
+			if (!empty($new[$combo_id])) {
 				// $new[$combo_id] = array_merge($new[$combo_id], array($nome_combo));
-			}else{
+			} else {
 				$new[$combo_id] = array($nome_combo);
 			}
-				// echo($linha[0]).'<br>';
-				// echo($linha[1]).'<br>';
-				// echo($linha[2]).'<br>';
-				// echo($linha[3]).'<br>';
-				// echo($linha[4]).'<br>';
-				// echo($linha[5]).'<br>';
-				// echo($linha[6]).'<br>';
-				// echo($linha[7]).'<br>';
-				// echo($linha[8]).'<br>';
-				// echo($linha[9]).'<br>';
-				// echo($linha[10]).'<br>';
-				// echo($linha[11]).'<br>';
-				// echo($linha[12]).'<br>';
-				// echo($linha[13]).'<br>';
-				// echo($linha[14]).'<br>';
-				// echo($linha[15]).'<br>';
-				// echo($linha[16]).'<br>';
-				// echo($linha[17]).'<br>';
-				// echo($linha[18]).'<br>';
-				// echo($linha[19]).'<br>';
-				// echo($linha[20]).'<br>';
-				// echo($linha[21]).'<br>';
-				// echo($linha[22]).'<br>';
-				// echo($linha[23]).'<br>';
-				// echo($linha[24]).'<br>';
-				// echo($linha[25]).'<br>';
-				// echo($linha[26]).'<br>';
+			// echo($linha[0]).'<br>';
+			// echo($linha[1]).'<br>';
+			// echo($linha[2]).'<br>';
+			// echo($linha[3]).'<br>';
+			// echo($linha[4]).'<br>';
+			// echo($linha[5]).'<br>';
+			// echo($linha[6]).'<br>';
+			// echo($linha[7]).'<br>';
+			// echo($linha[8]).'<br>';
+			// echo($linha[9]).'<br>';
+			// echo($linha[10]).'<br>';
+			// echo($linha[11]).'<br>';
+			// echo($linha[12]).'<br>';
+			// echo($linha[13]).'<br>';
+			// echo($linha[14]).'<br>';
+			// echo($linha[15]).'<br>';
+			// echo($linha[16]).'<br>';
+			// echo($linha[17]).'<br>';
+			// echo($linha[18]).'<br>';
+			// echo($linha[19]).'<br>';
+			// echo($linha[20]).'<br>';
+			// echo($linha[21]).'<br>';
+			// echo($linha[22]).'<br>';
+			// echo($linha[23]).'<br>';
+			// echo($linha[24]).'<br>';
+			// echo($linha[25]).'<br>';
+			// echo($linha[26]).'<br>';
 		}
-		echo '<pre>';print_r($new);
+		echo '<pre>';
+		print_r($new);
 	}
-	public function importar_users_(){
+	public function importar_users_()
+	{
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 		echo '<pre>';
 		$dados = fopen('test.csv', 'r');
-		$linha = fgetcsv($dados,1000,',');
+		$linha = fgetcsv($dados, 1000, ',');
 		$linha_ = 0;
-		while($linha = fgetcsv($dados,1000,',')){
-			if($linha_ >= 0){
+		while ($linha = fgetcsv($dados, 1000, ',')) {
+			if ($linha_ >= 0) {
 
 				$nome 			= $linha[0];
 				$email 			= $linha[1];
 				$cpf 			= $linha[2];
-				if($cpf != ""){
+				if ($cpf != "") {
 					$email_lms = $this->check_email_lms($email, $cpf);
-					if($email_lms == 1){
+					if ($email_lms == 1) {
 						print_r("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
 						// exit;
-					}else{
+					} else {
 						$last_id = $this->adiciona_email_lms($email);
-						$codigo = substr(time().rand(10000,99999),-15);
+						$codigo = substr(time() . rand(10000, 99999), -15);
 						$tipo = "F";
 						$add_data_gerado = date("Y-m-d H:i:s");
 						$senha_md5       = md5($cpf);
 
 						$db = new mysql();
 						$db->inserir("cadastro", array(
-							"fisica_nome"=>"$nome",
-							"lms_usuario_id"=>"$last_id",
-							"codigo"=>"$codigo",
-							"tipo"=>"$tipo",
-							"fisica_cpf"=>"$cpf",
-							"email"=>"$email",
-							"senha_md5"=>"$senha_md5",
-							"etapa"=>0,
+							"fisica_nome" => "$nome",
+							"lms_usuario_id" => "$last_id",
+							"codigo" => "$codigo",
+							"tipo" => "$tipo",
+							"fisica_cpf" => "$cpf",
+							"email" => "$email",
+							"senha_md5" => "$senha_md5",
+							"etapa" => 0,
 							"status" => 0
 						));
-					
-						$this->salvar_usuario_lms(  $last_id, 
-													$nome,
-													$email,
-													$cpf,
-													null,
-													null,
-													null,
-													null,
-													null,
-													null,
-													$add_data_gerado,
-													null,
-													null,
-													$senha_md5);
+
+						$this->salvar_usuario_lms(
+							$last_id,
+							$nome,
+							$email,
+							$cpf,
+							null,
+							null,
+							null,
+							null,
+							null,
+							null,
+							$add_data_gerado,
+							null,
+							null,
+							$senha_md5
+						);
 					}
 				}
 			}
 			$linha_++;
 		}
 	}
-	public function importar_users_pedidos(){
+	public function importar_users_pedidos()
+	{
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 		echo '<pre>';
 		$dados = fopen('test.csv', 'r');
-		$linha = fgetcsv($dados,1000,',');
+		$linha = fgetcsv($dados, 1000, ',');
 		$linha_ = 0;
 		$cadastrado = 0;
-		while($linha = fgetcsv($dados,1000,',')){
-			if($linha_ >= 0){
-				
-				$sessao = substr(time().rand(10000,99999),-15);
+		while ($linha = fgetcsv($dados, 1000, ',')) {
+			if ($linha_ >= 0) {
+
+				$sessao = substr(time() . rand(10000, 99999), -15);
 				$nome 		 		= $linha[0];
 				$email 		 		= $linha[1];
 				$cpf 		 		= $linha[2];
 				$plano_id 	 		= $linha[24];
-				
+
 				$date_vencimento 	= strtotime($linha[5]);
 				$data_inicio 		= strtotime($linha[6]);
 
 				$conexao = new mysql();
 
-				if($cpf != ""){
+				if ($cpf != "") {
 					$combo = $conexao->query("SELECT
 										combos.id as combo_id,
 										combos.titulo as combo_titulo,
@@ -156,9 +163,9 @@ class index extends controller {
 										inner join combo_produto on combo_produto.id_combo = combos.id
 										inner join produto on produto.id = combo_produto.id_produto
 										WHERE combos.plano_id = '$plano_id';");
-					
-					if($combo->num_rows > 0){
-						
+
+					if ($combo->num_rows > 0) {
+
 						$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf' and email = '$email';");
 						$codigo = $cadastro_codigo->fetch_object();
 						// echo "Numero de Produtos: ";print_r($combo->num_rows);echo'<br>';
@@ -170,73 +177,72 @@ class index extends controller {
 						// print_r($plano_id);echo'<br>';echo'<br>';
 
 						$valor_combo = 0;
-						while($data = $combo->fetch_object()){
+						while ($data = $combo->fetch_object()) {
 							$valor_combo = $data->combo_valor;
-						
+
 							$conexao = new mysql();
 							$conexao->inserir("pedido_loja_carrinho", array(
-								"sessao"=>"$sessao",
-								"id_combo"=>"$data->combo_id",
-								"combo_titulo"=>"$data->combo_titulo",
-								"produto"=>"$data->codigo",
-								"produto_id"=>"$data->produto_id",
-								"produto_ref"=>"$data->ref",
-								"produto_titulo"=>"$data->protudo_titulo",
-								"produto_valor"=>"$data->valor",
-								"produto_assinatura"=>"$plano_id",
-								"data_vencimento"=>"$date_vencimento",
-								"data_compra"=>"$data_inicio",
-								"quantidade"=>1,
-								"valor_total_combo_vindi"=>"$data->combo_valor",
-								"usar_valor_vindi"=>1,
-								"tipo_envio"=> 3
+								"sessao" => "$sessao",
+								"id_combo" => "$data->combo_id",
+								"combo_titulo" => "$data->combo_titulo",
+								"produto" => "$data->codigo",
+								"produto_id" => "$data->produto_id",
+								"produto_ref" => "$data->ref",
+								"produto_titulo" => "$data->protudo_titulo",
+								"produto_valor" => "$data->valor",
+								"produto_assinatura" => "$plano_id",
+								"data_vencimento" => "$date_vencimento",
+								"data_compra" => "$data_inicio",
+								"quantidade" => 1,
+								"valor_total_combo_vindi" => "$data->combo_valor",
+								"usar_valor_vindi" => 1,
+								"tipo_envio" => 3
 							));
 						}
 						$conexao = new mysql();
 						$conexao->inserir("pedido_loja", array(
-							"codigo"=>"$sessao",
-							"cadastro"=>$codigo->codigo,
-							"data"=>$data_inicio,
-							"vencimento"=>$date_vencimento,
-							"valor_total"=>$valor_combo,
-							"forma_pagamento"=>5,
-							"status"=>4
+							"codigo" => "$sessao",
+							"cadastro" => $codigo->codigo,
+							"data" => $data_inicio,
+							"vencimento" => $date_vencimento,
+							"valor_total" => $valor_combo,
+							"forma_pagamento" => 5,
+							"status" => 4
 						));
-						$cadastrado ++;
+						$cadastrado++;
 					}
 				}
 			}
 			$linha_++;
 		}
-		echo $cadastrado.'Pedios Foram inseridos';
-
+		echo $cadastrado . 'Pedios Foram inseridos';
 	}
-	
-	public function inicial(){
+
+	public function inicial()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
 		$dados['_acesso'] = $this->_acesso;
 		$dados['_nome_usuario'] = $this->_nome_usuario;
-	
+
 		// lista_produto_comprado
-		if($dados['_nome_usuario'] != 'Visitante'){ 
-			
+		if ($dados['_nome_usuario'] != 'Visitante') {
+
 			$pedidos = new model_pedidos();
 			$lista_minhas_compras = $pedidos->lista_produto_comprado($dados['_cod_usuario']);
 
-			if(count($lista_minhas_compras) > 0){
+			if (count($lista_minhas_compras) > 0) {
 				$in_ids = '';
-				foreach($lista_minhas_compras as $key => $curso){
-					$point = (count($lista_minhas_compras)==1 || $key == 0) ? '' : ',';
-					$in_ids .= $point.$curso['produto_codigo'];
-					
+				foreach ($lista_minhas_compras as $key => $curso) {
+					$point = (count($lista_minhas_compras) == 1 || $key == 0) ? '' : ',';
+					$in_ids .= $point . $curso['produto_codigo'];
 				}
-				
+
 				$conexao = new mysql();
 				$result_comprados = $conexao->query("SELECT distinct 
 										autor.nome as autor_nome,
@@ -251,29 +257,29 @@ class index extends controller {
 										order by produto.id desc;");
 				$new_comprados = array();
 				while ($obj_novidades = $result_comprados->fetch_object()) {
-					$new_comprados = array_merge($new_comprados,array($obj_novidades));
+					$new_comprados = array_merge($new_comprados, array($obj_novidades));
 				}
 			}
 		}
-		
+
 		// itens da inicial
 		$chave = $this->_layout;
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' AND status='1' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
 		$dados['data_pagina'] = $coisas->fetch_object();
 		$codigo_pagina = $dados['data_pagina']->codigo;
-		
+
 		////////////////////////////////////////////////////////////////////////
 
 		$cores = array();
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -281,10 +287,10 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$dados['banner_popup'] = array();
-		if($codigo_pagina == 1){
+		if ($codigo_pagina == 1) {
 			// banner por cima da tela
 			$banners = new model_banners();
-			$dados['banner_popup'] = $banners->lista_simples('148713351986017'); 
+			$dados['banner_popup'] = $banners->lista_simples('148713351986017');
 		}
 
 		// banners laterais
@@ -297,23 +303,23 @@ class index extends controller {
 		$busca_padrao = $this->get('busca');
 		////////////////////////////////////////////////////////////////////////
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
-			
+		if (isset($data_ordem->data)) {
+
 			$order = explode(',', $data_ordem->data);
-			
-			foreach($order as $key_ordemm => $value_bloco_principal){
-				
+
+			foreach ($order as $key_ordemm => $value_bloco_principal) {
+
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value_bloco_principal' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -322,257 +328,317 @@ class index extends controller {
 					$lista_blocos[$n_bloc]['formato'] = $data_bloco->formato;
 					$lista_blocos[$n_bloc]['cor_fundo'] = $data_bloco->cor_fundo;
 
-					
+
 					$lista_blocos[$n_bloc]['img_fundo'] = $data_bloco->img_fundo;
 
 					$n_col = 1;
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 								// echo'<pre>';print_r($lista_layout);exit;
-								if($data->tipo == 'acordeon'){
+								if ($data->tipo == 'acordeon') {
 									$acordeon = new model_acordeon();
 									$lista_layout['conteudo'] = $acordeon->lista($data->codigo);
 								}
 
-								if($data->tipo == 'banner'){
+								if ($data->tipo == 'banner') {
 									$banners = new model_banners();
 									$lista_layout['conteudo'] = $banners->lista($data->codigo);
 								}
 
-								if($data->tipo == 'conteudos_blocos'){							
+								if ($data->tipo == 'conteudos_blocos') {
 									$conteudos_blocos = new model_conteudos_blocos();
 									$lista_layout['conteudo'] = $conteudos_blocos->carregar($data->codigo);
 								}
 
-								if($data->tipo == 'rastreamento'){							
+								if ($data->tipo == 'rastreamento') {
 									$rastreamento = new model_rastreamento();
 									$lista_layout['conteudo'] = $rastreamento->carregar($data->codigo);
 								}
 
-								if($data->tipo == 'cadastro_email'){
+								if ($data->tipo == 'cadastro_email') {
 									$cadastro_email = new model_cadastro_email();
 									$lista_layout['conteudo'] = $cadastro_email->carregar($data->codigo);
 								}
 
-								if($data->tipo == 'cadastro_fone'){							
+								if ($data->tipo == 'cadastro_fone') {
 									$cadastro_fone = new model_cadastro_fone();
 									$lista_layout['conteudo'] = $cadastro_fone->carregar($data->codigo);
 								}
 
-								if($data->tipo == 'cadastro'){							
+								if ($data->tipo == 'cadastro') {
 									$cadastro = new model_cadastro();
 									$lista_layout['conteudo'] = $cadastro->carregar($data->codigo);
 									$estados_cidades = new model_estados_cidades();
 									$lista_layout['conteudo']['estados'] = $estados_cidades->lista_estados();
 								}
 
-								if($data->tipo == 'caracteristicas'){
+								if ($data->tipo == 'caracteristicas') {
 									$caracteristicas = new model_caracteristicas();
 									$lista_layout['conteudo'] = $caracteristicas->lista($data->codigo);
 								}
 
-								if($data->tipo == 'contador'){
+								if ($data->tipo == 'contador') {
 									$contador = new model_contador();
 									$lista_layout['conteudo'] = $contador->lista($data->codigo);
 								}
 
-								if($data->tipo == 'destaques'){
+								if ($data->tipo == 'destaques') {
 									$destaques = new model_destaques();
 									$lista_layout['conteudo'] = $destaques->lista($data->codigo);
 								}
 
-								if($data->tipo == 'contato'){							
+								if ($data->tipo == 'contato') {
 									$contato = new model_contato();
 									$lista_layout['conteudo'] = $contato->carregar($data->codigo);
 								}
 
-								if($data->tipo == 'equipe'){
+								if ($data->tipo == 'equipe') {
 									$equipe = new model_equipe();
 									$lista_layout['conteudo'] = $equipe->lista($data->codigo);
 								}
 
-								if($data->tipo == 'postagens'){
+								if ($data->tipo == 'postagens') {
 
 									$postagens = new model_postagens();
 									$id_var = $modulo_id;
 									$postagens->controller_name = $this->_controller;
 									$postagens->id_var = $id_var;
 
-									if($busca_padrao){
+									if ($busca_padrao) {
 										$postagens->busca = $busca_padrao;
 									}
 
-									if($this->get('busca_'.$id_var)){ $postagens->busca = $this->get('busca_'.$id_var); }
-									if($this->get('categoria_'.$id_var)){ $postagens->categoria = $this->get('categoria_'.$id_var); }
-									if($this->get('startitem_'.$id_var)){ $postagens->startitem = $this->get('startitem_'.$id_var); }
-									if($this->get('startpage_'.$id_var)){ $postagens->startpage = $this->get('startpage_'.$id_var); }
-									if($this->get('endpage_'.$id_var)){ $postagens->endpage = $this->get('endpage_'.$id_var); }
-									if($this->get('reven_'.$id_var)){ $postagens->reven = $this->get('reven_'.$id_var); }
+									if ($this->get('busca_' . $id_var)) {
+										$postagens->busca = $this->get('busca_' . $id_var);
+									}
+									if ($this->get('categoria_' . $id_var)) {
+										$postagens->categoria = $this->get('categoria_' . $id_var);
+									}
+									if ($this->get('startitem_' . $id_var)) {
+										$postagens->startitem = $this->get('startitem_' . $id_var);
+									}
+									if ($this->get('startpage_' . $id_var)) {
+										$postagens->startpage = $this->get('startpage_' . $id_var);
+									}
+									if ($this->get('endpage_' . $id_var)) {
+										$postagens->endpage = $this->get('endpage_' . $id_var);
+									}
+									if ($this->get('reven_' . $id_var)) {
+										$postagens->reven = $this->get('reven_' . $id_var);
+									}
 									$lista_layout['conteudo'] = $postagens->lista($data->codigo);
-
 								}
 
-								if($data->tipo == 'planos'){
+								if ($data->tipo == 'planos') {
 									$planos = new model_planos();
 									$lista_layout['conteudo'] = $planos->lista($data->codigo);
 								}
 
-								if($data->tipo == 'depoimentos'){
+								if ($data->tipo == 'depoimentos') {
 									$depoimentos = new model_depoimentos();
 									$lista_layout['conteudo'] = $depoimentos->lista($data->codigo);
 								}
 
-								if($data->tipo == 'duvidas'){							
+								if ($data->tipo == 'duvidas') {
 									$duvidas = new model_duvidas();
 									$lista_layout['conteudo'] = $duvidas->lista($data->codigo);
 								}
 
-								if($data->tipo == 'parceiros'){
+								if ($data->tipo == 'parceiros') {
 									$parceiros = new model_parceiros();
 									$lista_layout['conteudo'] = $parceiros->lista($data->codigo);
 								}
 
-								if($data->tipo == 'enquete'){							
+								if ($data->tipo == 'enquete') {
 									$enquete = new model_enquetes();
 									$lista_layout['conteudo'] = $enquete->carregar($data->codigo);
 								}
 
-								if($data->tipo == 'servicos'){							
+								if ($data->tipo == 'servicos') {
 									$servicos = new model_servicos();
 									$lista_layout['conteudo'] = $servicos->lista($data->codigo);
 								}
 
-								if($data->tipo == 'filiais'){							
+								if ($data->tipo == 'filiais') {
 									$filiais = new model_filiais();
 									$lista_layout['conteudo'] = $filiais->lista($data->codigo);
 								}
 
-								if($data->tipo == 'videos'){							
+								if ($data->tipo == 'videos') {
 									$videos = new model_videos();
 									$lista_layout['conteudo'] = $videos->lista($data->codigo);
 								}
 
-								if($data->tipo == 'audios'){							
+								if ($data->tipo == 'audios') {
 									$audios = new model_audios();
 									$lista_layout['conteudo'] = $audios->lista($data->codigo);
 								}
 
-								if($data->tipo == 'fotos'){							
+								if ($data->tipo == 'fotos') {
 									$fotos = new model_fotos();
 									$lista_layout['conteudo'] = $fotos->lista($data->codigo);
 								}
 
-								if($data->tipo == 'revistajornal'){							
+								if ($data->tipo == 'revistajornal') {
 									$revistas = new model_revistas();
 									$lista_layout['conteudo'] = $revistas->lista($data->codigo);
 								}
 
-								if($data->tipo == 'produtos'){
+								if ($data->tipo == 'produtos') {
 
 									$produtos = new model_produtos();
 									$id_var = $modulo_id;
 									$produtos->controller_name = $this->_controller;
 									$produtos->id_var = $id_var;
 
-									if($busca_padrao){
+									if ($busca_padrao) {
 										$produtos->busca = $busca_padrao;
 									}
 
-									if($this->get('busca')){ $produtos->busca = $this->get('busca'); }
-									if($this->get('categoria_'.$id_var)){ $produtos->categoria = $this->get('categoria_'.$id_var); }
-									if($this->get('prod_categoria')){ $produtos->categoria = $this->get('prod_categoria'); }
-									if($this->get('marca_'.$id_var)){ $produtos->marca = $this->get('marca_'.$id_var); }
-									if($this->get('prod_marca')){ $produtos->marca = $this->get('prod_marca'); }
-									if($this->get('startitem_'.$id_var)){ $produtos->startitem = $this->get('startitem_'.$id_var); }
-									if($this->get('startpage_'.$id_var)){ $produtos->startpage = $this->get('startpage_'.$id_var); }
-									if($this->get('endpage_'.$id_var)){ $produtos->endpage = $this->get('endpage_'.$id_var); }
-									if($this->get('reven_'.$id_var)){ $produtos->reven = $this->get('reven_'.$id_var); }
-									if($this->get('ordem_'.$id_var)){ $produtos->ordem = $this->get('ordem_'.$id_var); }
+									if ($this->get('busca')) {
+										$produtos->busca = $this->get('busca');
+									}
+									if ($this->get('categoria_' . $id_var)) {
+										$produtos->categoria = $this->get('categoria_' . $id_var);
+									}
+									if ($this->get('prod_categoria')) {
+										$produtos->categoria = $this->get('prod_categoria');
+									}
+									if ($this->get('marca_' . $id_var)) {
+										$produtos->marca = $this->get('marca_' . $id_var);
+									}
+									if ($this->get('prod_marca')) {
+										$produtos->marca = $this->get('prod_marca');
+									}
+									if ($this->get('startitem_' . $id_var)) {
+										$produtos->startitem = $this->get('startitem_' . $id_var);
+									}
+									if ($this->get('startpage_' . $id_var)) {
+										$produtos->startpage = $this->get('startpage_' . $id_var);
+									}
+									if ($this->get('endpage_' . $id_var)) {
+										$produtos->endpage = $this->get('endpage_' . $id_var);
+									}
+									if ($this->get('reven_' . $id_var)) {
+										$produtos->reven = $this->get('reven_' . $id_var);
+									}
+									if ($this->get('ordem_' . $id_var)) {
+										$produtos->ordem = $this->get('ordem_' . $id_var);
+									}
 
 									$lista_layout['conteudo'] = $produtos->lista($data->codigo);
-
 								}
 
-								if($data->tipo == 'widgets'){							
+								if ($data->tipo == 'widgets') {
 									$widgets = new model_widgets();
 									$lista_layout['conteudo'] = $widgets->carregar($data->codigo);
 								}
 
-								if($data->tipo == 'imoveis'){
+								if ($data->tipo == 'imoveis') {
 
 									$imoveis = new model_imoveis();
 									$id_var = $modulo_id;
 									$imoveis->controller_name = $this->_controller;
 									$imoveis->id_var = $id_var;
 
-									if($busca_padrao){
+									if ($busca_padrao) {
 										$imoveis->busca = $busca_padrao;
 									}
 
-									if($this->get('imo_ref')){ $imoveis->busca = $this->get('imo_ref'); }
-									if($this->get('imo_cat')){ $imoveis->categoria = $this->get('imo_cat'); }
-									if($this->get('imo_tipo')){ $imoveis->tipo = $this->get('imo_tipo'); }
-									if($this->get('imo_cidade')){ $imoveis->cidade = $this->get('imo_cidade'); }
-									if($this->get('imo_bairro')){ $imoveis->bairro = $this->get('imo_bairro'); }
-									if($this->get('imo_dorm')){ $imoveis->dormitorios = $this->get('imo_dorm'); }
-									if($this->get('imo_suites')){ $imoveis->suites = $this->get('imo_suites'); }
-									if($this->get('imo_gara')){ $imoveis->garagens = $this->get('imo_gara'); }
+									if ($this->get('imo_ref')) {
+										$imoveis->busca = $this->get('imo_ref');
+									}
+									if ($this->get('imo_cat')) {
+										$imoveis->categoria = $this->get('imo_cat');
+									}
+									if ($this->get('imo_tipo')) {
+										$imoveis->tipo = $this->get('imo_tipo');
+									}
+									if ($this->get('imo_cidade')) {
+										$imoveis->cidade = $this->get('imo_cidade');
+									}
+									if ($this->get('imo_bairro')) {
+										$imoveis->bairro = $this->get('imo_bairro');
+									}
+									if ($this->get('imo_dorm')) {
+										$imoveis->dormitorios = $this->get('imo_dorm');
+									}
+									if ($this->get('imo_suites')) {
+										$imoveis->suites = $this->get('imo_suites');
+									}
+									if ($this->get('imo_gara')) {
+										$imoveis->garagens = $this->get('imo_gara');
+									}
 
-									if($this->get('imo_val_max')){ $imoveis->valor_max = $this->get('imo_val_max'); }
-									if($this->get('imo_val_min')){ $imoveis->valor_min = $this->get('imo_val_min'); }
+									if ($this->get('imo_val_max')) {
+										$imoveis->valor_max = $this->get('imo_val_max');
+									}
+									if ($this->get('imo_val_min')) {
+										$imoveis->valor_min = $this->get('imo_val_min');
+									}
 
-									if($this->get('imo_ordem')){ $imoveis->ordem = $this->get('imo_ordem'); }
+									if ($this->get('imo_ordem')) {
+										$imoveis->ordem = $this->get('imo_ordem');
+									}
 
-									if($this->get('startitem_'.$id_var)){ $imoveis->startitem = $this->get('startitem_'.$id_var); }
-									if($this->get('startpage_'.$id_var)){ $imoveis->startpage = $this->get('startpage_'.$id_var); }
-									if($this->get('endpage_'.$id_var)){ $imoveis->endpage = $this->get('endpage_'.$id_var); }
-									if($this->get('reven_'.$id_var)){ $imoveis->reven = $this->get('reven_'.$id_var); }
+									if ($this->get('startitem_' . $id_var)) {
+										$imoveis->startitem = $this->get('startitem_' . $id_var);
+									}
+									if ($this->get('startpage_' . $id_var)) {
+										$imoveis->startpage = $this->get('startpage_' . $id_var);
+									}
+									if ($this->get('endpage_' . $id_var)) {
+										$imoveis->endpage = $this->get('endpage_' . $id_var);
+									}
+									if ($this->get('reven_' . $id_var)) {
+										$imoveis->reven = $this->get('reven_' . $id_var);
+									}
 
 									$lista_layout['conteudo'] = $imoveis->lista($data->codigo);
 
@@ -585,101 +651,165 @@ class index extends controller {
 									$dados['imo_comprar_valor_min'] = 10000;
 									$dados['imo_comprar_valor_max'] = 10000000;
 
-									if($this->get('imo_cat') == '5280'){
+									if ($this->get('imo_cat') == '5280') {
 
-										if($this->get('imo_val_min')){ $dados['imo_alugar_valor_min'] = $this->get('imo_val_min'); }
-										if($this->get('imo_val_max')){ $dados['imo_alugar_valor_max'] = $this->get('imo_val_max'); }
-
+										if ($this->get('imo_val_min')) {
+											$dados['imo_alugar_valor_min'] = $this->get('imo_val_min');
+										}
+										if ($this->get('imo_val_max')) {
+											$dados['imo_alugar_valor_max'] = $this->get('imo_val_max');
+										}
 									} else {
 
-										if($this->get('imo_val_min')){ $dados['imo_comprar_valor_min'] = $this->get('imo_val_min'); }
-										if($this->get('imo_val_max')){ $dados['imo_comprar_valor_max'] = $this->get('imo_val_max'); }
-
+										if ($this->get('imo_val_min')) {
+											$dados['imo_comprar_valor_min'] = $this->get('imo_val_min');
+										}
+										if ($this->get('imo_val_max')) {
+											$dados['imo_comprar_valor_max'] = $this->get('imo_val_max');
+										}
 									}
-
 								}
 
-								if($data->tipo == 'garagem'){
+								if ($data->tipo == 'garagem') {
 
 									$garagem = new model_garagem();
 									$id_var = $modulo_id;
 									$garagem->controller_name = $this->_controller;
 									$garagem->id_var = $id_var;
-									
-									if($busca_padrao){
+
+									if ($busca_padrao) {
 										$garagem->busca = $busca_padrao;
 									}
 
-									if($this->get('gara_busca')){ $garagem->busca = $this->get('gara_busca'); }
-									if($this->get('gara_tipo')){ $garagem->tipo = $this->get('gara_tipo'); }
-									if($this->get('gara_cat')){ $garagem->categoria = $this->get('gara_cat'); }
-									if($this->get('gara_marca')){ $garagem->marca = $this->get('gara_marca'); }
-									if($this->get('gara_modelo')){ $garagem->modelo = $this->get('gara_modelo'); }
-									if($this->get('gara_combustivel')){ $garagem->combustivel = $this->get('gara_combustivel'); }
-									if($this->get('gara_transmissao')){ $garagem->transmissao = $this->get('gara_transmissao'); }
-									if($this->get('gara_cor')){ $garagem->cor = $this->get('gara_cor'); }
-									if($this->get('gara_motor')){ $garagem->motor = $this->get('gara_motor'); } 
+									if ($this->get('gara_busca')) {
+										$garagem->busca = $this->get('gara_busca');
+									}
+									if ($this->get('gara_tipo')) {
+										$garagem->tipo = $this->get('gara_tipo');
+									}
+									if ($this->get('gara_cat')) {
+										$garagem->categoria = $this->get('gara_cat');
+									}
+									if ($this->get('gara_marca')) {
+										$garagem->marca = $this->get('gara_marca');
+									}
+									if ($this->get('gara_modelo')) {
+										$garagem->modelo = $this->get('gara_modelo');
+									}
+									if ($this->get('gara_combustivel')) {
+										$garagem->combustivel = $this->get('gara_combustivel');
+									}
+									if ($this->get('gara_transmissao')) {
+										$garagem->transmissao = $this->get('gara_transmissao');
+									}
+									if ($this->get('gara_cor')) {
+										$garagem->cor = $this->get('gara_cor');
+									}
+									if ($this->get('gara_motor')) {
+										$garagem->motor = $this->get('gara_motor');
+									}
 
-									if($this->get('gara_val_max')){ $garagem->valor_max = $this->get('gara_val_max'); }
-									if($this->get('gara_val_min')){ $garagem->valor_min = $this->get('gara_val_min'); }
+									if ($this->get('gara_val_max')) {
+										$garagem->valor_max = $this->get('gara_val_max');
+									}
+									if ($this->get('gara_val_min')) {
+										$garagem->valor_min = $this->get('gara_val_min');
+									}
 
-									if($this->get('gara_ano_fab')){ $garagem->ano_fab = $this->get('gara_ano_fab'); }
-									if($this->get('gara_ano_mod')){ $garagem->ano_mod = $this->get('gara_ano_mod'); }
-									
-									if($this->get('gara_ordem')){ $garagem->ordem = $this->get('gara_ordem'); }
-									
-									if($this->get('startitem_'.$id_var)){ $garagem->startitem = $this->get('startitem_'.$id_var); }
-									if($this->get('startpage_'.$id_var)){ $garagem->startpage = $this->get('startpage_'.$id_var); }
-									if($this->get('endpage_'.$id_var)){ $garagem->endpage = $this->get('endpage_'.$id_var); }
-									if($this->get('reven_'.$id_var)){ $garagem->reven = $this->get('reven_'.$id_var); }
-									
+									if ($this->get('gara_ano_fab')) {
+										$garagem->ano_fab = $this->get('gara_ano_fab');
+									}
+									if ($this->get('gara_ano_mod')) {
+										$garagem->ano_mod = $this->get('gara_ano_mod');
+									}
+
+									if ($this->get('gara_ordem')) {
+										$garagem->ordem = $this->get('gara_ordem');
+									}
+
+									if ($this->get('startitem_' . $id_var)) {
+										$garagem->startitem = $this->get('startitem_' . $id_var);
+									}
+									if ($this->get('startpage_' . $id_var)) {
+										$garagem->startpage = $this->get('startpage_' . $id_var);
+									}
+									if ($this->get('endpage_' . $id_var)) {
+										$garagem->endpage = $this->get('endpage_' . $id_var);
+									}
+									if ($this->get('reven_' . $id_var)) {
+										$garagem->reven = $this->get('reven_' . $id_var);
+									}
+
 									$lista_layout['conteudo'] = $garagem->lista($data->codigo);
 
 
-									$dados['gara_tipo_busca'] = $this->get('gara_tipo_busca');									
+									$dados['gara_tipo_busca'] = $this->get('gara_tipo_busca');
 									$dados['gara_valor_min'] = 10000;
 									$dados['gara_valor_max'] = 10000000;
-
 								}
 
-								if($data->tipo == 'classificados'){
+								if ($data->tipo == 'classificados') {
 
 									$classificados = new model_classificados();
 									$id_var = $modulo_id;
 									$classificados->controller_name = $this->_controller;
 									$classificados->id_var = $id_var;
 
-									if($busca_padrao){
+									if ($busca_padrao) {
 										$classificados->busca = $busca_padrao;
 									}
 
-									if($this->get('cla_ref')){ $classificados->busca = $this->get('cla_ref'); }
-									if($this->get('cla_cat')){ $classificados->categoria = $this->get('cla_cat'); }
-									if($this->get('cla_cidade')){ $classificados->cidade = $this->get('cla_cidade'); }
-									if($this->get('cla_bairro')){ $classificados->bairro = $this->get('cla_bairro'); }
+									if ($this->get('cla_ref')) {
+										$classificados->busca = $this->get('cla_ref');
+									}
+									if ($this->get('cla_cat')) {
+										$classificados->categoria = $this->get('cla_cat');
+									}
+									if ($this->get('cla_cidade')) {
+										$classificados->cidade = $this->get('cla_cidade');
+									}
+									if ($this->get('cla_bairro')) {
+										$classificados->bairro = $this->get('cla_bairro');
+									}
 
-									if($this->get('cla_val_max')){ $classificados->valor_max = $this->get('cla_val_max'); }
-									if($this->get('cla_val_min')){ $classificados->valor_min = $this->get('cla_val_min'); }
+									if ($this->get('cla_val_max')) {
+										$classificados->valor_max = $this->get('cla_val_max');
+									}
+									if ($this->get('cla_val_min')) {
+										$classificados->valor_min = $this->get('cla_val_min');
+									}
 
-									if($this->get('cla_ordem')){ $classificados->ordem = $this->get('cla_ordem'); }
+									if ($this->get('cla_ordem')) {
+										$classificados->ordem = $this->get('cla_ordem');
+									}
 
-									if($this->get('startitem_'.$id_var)){ $classificados->startitem = $this->get('startitem_'.$id_var); }
-									if($this->get('startpage_'.$id_var)){ $classificados->startpage = $this->get('startpage_'.$id_var); }
-									if($this->get('endpage_'.$id_var)){ $classificados->endpage = $this->get('endpage_'.$id_var); }
-									if($this->get('reven_'.$id_var)){ $classificados->reven = $this->get('reven_'.$id_var); }
+									if ($this->get('startitem_' . $id_var)) {
+										$classificados->startitem = $this->get('startitem_' . $id_var);
+									}
+									if ($this->get('startpage_' . $id_var)) {
+										$classificados->startpage = $this->get('startpage_' . $id_var);
+									}
+									if ($this->get('endpage_' . $id_var)) {
+										$classificados->endpage = $this->get('endpage_' . $id_var);
+									}
+									if ($this->get('reven_' . $id_var)) {
+										$classificados->reven = $this->get('reven_' . $id_var);
+									}
 
 									$opcoes_array = array();
 									$n_op = 0;
 									$opcoes = $classificados->lista_opcoes();
 									foreach ($opcoes as $key_op => $value_op) {
 										foreach ($value_op['opcoes'] as $key_op2 => $value_op2) {
-											if($this->get('cla_op_'.$value_op2['id']) == 1){
+											if ($this->get('cla_op_' . $value_op2['id']) == 1) {
 												$opcoes_array[$n_op] = $value_op2['codigo'];
 												$n_op++;
 											}
 										}
 									}
-									if($n_op != 0){ $classificados->opcoes = $opcoes_array; }
+									if ($n_op != 0) {
+										$classificados->opcoes = $opcoes_array;
+									}
 
 									$lista_layout['conteudo'] = $classificados->lista($data->codigo);
 
@@ -688,13 +818,16 @@ class index extends controller {
 									$dados['cla_valor_min'] = 50;
 									$dados['cla_valor_max'] = 1000;
 
-									if($this->get('cla_val_min')){ $dados['cla_valor_min'] = $this->get('cla_val_min'); }
-									if($this->get('cla_val_max')){ $dados['cla_valor_max'] = $this->get('cla_val_max'); }
-
+									if ($this->get('cla_val_min')) {
+										$dados['cla_valor_min'] = $this->get('cla_val_min');
+									}
+									if ($this->get('cla_val_max')) {
+										$dados['cla_valor_max'] = $this->get('cla_val_max');
+									}
 								}
 
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -707,38 +840,36 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$query = null;
 		$inner = null;
 		$campo = null;
 		// print_r($_POST);
-		if($_POST['autor']){
-			if($_POST['autor'] == 0){
+		if ($_POST['autor']) {
+			if ($_POST['autor'] == 0) {
 				$query = '';
 				$inner = '';
 				$campo = '';
-			}else{
+			} else {
 				$id_autor = $_POST['autor'];
 				$query .= " AND autor.id = $id_autor ";
 			}
 		}
-		if($_POST['categoria']){
-			if($_POST['categoria'] == 0){
+		if ($_POST['categoria']) {
+			if ($_POST['categoria'] == 0) {
 				$query = '';
 				$inner = '';
 				$campo = '';
-			}else{
+			} else {
 				$id_categoria = $_POST['categoria'];
 				$campo .= " produto_categoria.id as categoria_id, produto_categoria.titulo as categoria, ";
 				$inner .= " inner join produto_categoria_sel on produto_categoria_sel.produto_codigo = produto.codigo
@@ -746,7 +877,7 @@ class index extends controller {
 				$query .= " AND produto_categoria.id = $id_categoria ";
 			}
 		}
-		if($_POST['estrelas']){
+		if ($_POST['estrelas']) {
 			$estrela = $_POST['estrelas'];
 			$campo .= " t2.media_estrela, ";
 			$inner .= " inner join curso_produto on curso_produto.id_produto = produto.id
@@ -757,17 +888,17 @@ class index extends controller {
 			group by curso_produto.id_produto) t2 on curso_produto.id_produto = t2.id_produto ";
 			$query .= " AND t2.media_estrela <= $estrela ";
 		}
-		if($_POST['buscar1']){
-			if($_POST['buscar1'] == ''){
+		if ($_POST['buscar1']) {
+			if ($_POST['buscar1'] == '') {
 				$query = '';
 				$inner = '';
 				$campo = '';
-			}else{
+			} else {
 				$buscar_campo = $_POST['buscar1'];
 				$query .= " AND produto.titulo LIKE '%$buscar_campo%' ";
 			}
 		}
-		
+
 		$conexao = new mysql();
 		$combo = $conexao->query("SELECT
 									combos.id as combo_id,
@@ -790,13 +921,13 @@ class index extends controller {
 		$new_cmb = array();
 		while ($obj_cmb = $combo->fetch_object()) {
 			// array_push($new_cmb,$obj_cmb);
-			
+
 			$combo_id = $obj_cmb->combo_id;
-			
-			if (!empty($new_cmb[$combo_id])){
+
+			if (!empty($new_cmb[$combo_id])) {
 				// $new_cmb[$combo_id] = array_merge($new_cmb[$combo_id], array($obj_cmb));
-				array_push($new_cmb[$combo_id]['produtos'],$obj_cmb);
-			}else{
+				array_push($new_cmb[$combo_id]['produtos'], $obj_cmb);
+			} else {
 				$new_cmb[$combo_id]['combo_id'] 			= $obj_cmb->combo_id;
 				$new_cmb[$combo_id]['combo_titulo'] 		= $obj_cmb->combo_titulo;
 				$new_cmb[$combo_id]['combo_banner'] 		= $obj_cmb->combo_banner;
@@ -832,9 +963,9 @@ class index extends controller {
 		$new = array();
 		while ($obj = $result->fetch_object()) {
 			$nm_canal = $obj->nm_canal;
-			if (!empty($new[$nm_canal])){
+			if (!empty($new[$nm_canal])) {
 				$new[$nm_canal] = array_merge($new[$nm_canal], array($obj));
-			}else{
+			} else {
 				$new[$nm_canal] = array($obj);
 			}
 		}
@@ -857,9 +988,9 @@ class index extends controller {
 		$new_novidades = array();
 		while ($obj_novidades = $result_novidades->fetch_object()) {
 			$nm_canal_novidades = $obj_novidades->nm_canal;
-			if (!empty($new_novidades[$nm_canal_novidades])){
+			if (!empty($new_novidades[$nm_canal_novidades])) {
 				$new_novidades[$nm_canal_novidades] = array_merge($new_novidades[$nm_canal_novidades], array($obj_novidades));
-			}else{
+			} else {
 				$new_novidades[$nm_canal_novidades] = array($obj_novidades);
 			}
 		}
@@ -882,9 +1013,9 @@ class index extends controller {
 		$new_vendidos = array();
 		while ($obj_vendidos = $result_vendidos->fetch_object()) {
 			$nm_canal_vendidos = $obj_vendidos->nm_canal;
-			if (!empty($new_vendidos[$nm_canal_vendidos])){
+			if (!empty($new_vendidos[$nm_canal_vendidos])) {
 				$new_vendidos[$nm_canal_vendidos] = array_merge($new_vendidos[$nm_canal_vendidos], array($obj_vendidos));
-			}else{
+			} else {
 				$new_vendidos[$nm_canal_vendidos] = array($obj_vendidos);
 			}
 		}
@@ -907,9 +1038,9 @@ class index extends controller {
 		$new_melhor_qualificado = array();
 		while ($obj_melhor_qualificado = $result_melhor_qualificado->fetch_object()) {
 			$nm_canal_melhor_qualificado = $obj_melhor_qualificado->nm_canal;
-			if (!empty($new_melhor_qualificado[$nm_canal_melhor_qualificado])){
+			if (!empty($new_melhor_qualificado[$nm_canal_melhor_qualificado])) {
 				$new_melhor_qualificado[$nm_canal_melhor_qualificado] = array_merge($new_melhor_qualificado[$nm_canal_melhor_qualificado], array($obj_melhor_qualificado));
-			}else{
+			} else {
 				$new_melhor_qualificado[$nm_canal_melhor_qualificado] = array($obj_melhor_qualificado);
 			}
 		}
@@ -922,7 +1053,7 @@ class index extends controller {
 		$dados['autor_selecionado'] = ($_POST['autor'] > 0 ? $_POST['autor'] : 0);
 		$dados['buscar_campo'] = $_POST['buscar1'];
 		$dados['estrelas_campo'] = ($_POST['estrelas'] > 0 ? $_POST['estrelas'] : 0);
-		
+
 		$dados['categorias'] = $produtos->lista_categorias();
 		$dados['autores'] = $produtos->lista_autor();
 		$dados['canais'] = $produtos->lista_canal();
@@ -938,15 +1069,16 @@ class index extends controller {
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];
-		
-		
+
+
 		$this->view('index', $dados);
 	}
 
-	public function cat_produto(){
+	public function cat_produto()
+	{
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -960,7 +1092,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -973,7 +1105,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -981,23 +1113,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -1009,53 +1141,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -1064,16 +1196,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -1081,7 +1211,7 @@ class index extends controller {
 
 		$id = $this->get('id');
 
-		if(!$id){
+		if (!$id) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -1097,12 +1227,12 @@ class index extends controller {
 									inner join produto_categoria_sel t2 on t1.codigo = t2.produto_codigo 
 									inner join produto_categoria t3 on t2.categoria_codigo = t3.codigo 
 									inner join (select max(id) id, codigo, imagem from produto_imagem group by codigo) t4 on t1.codigo=t4.codigo
-									WHERE 1 = 1 and t3.id = $id ");
+									WHERE 1 = 1 and t3.id = $id and t1.only_combo = 1");
 
 
 		$new = array();
 		while ($obj = $result->fetch_object()) {
-			array_push($new,$obj);
+			array_push($new, $obj);
 		}
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
@@ -1114,7 +1244,8 @@ class index extends controller {
 		$this->view('cat_produto.detalhes', $dados);
 	}
 
-	public function cadastro_email(){
+	public function cadastro_email()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -1123,18 +1254,18 @@ class index extends controller {
 		$email = $this->get('email');
 		$grupo = $this->get('grupo');
 
-		if(!$nome){
+		if (!$nome) {
 			$retorno = "erro";
 		} else {
-			if(!$email){
+			if (!$email) {
 				$retorno = "erro";
 			} else {
-				if(!$grupo){
+				if (!$grupo) {
 					$retorno = "erro";
 				} else {
 					$valida = new model_valida();
 
-					if(!$valida->email($email)){
+					if (!$valida->email($email)) {
 						$retorno = "erro";
 					} else {
 
@@ -1142,7 +1273,7 @@ class index extends controller {
 						$exec = $db->executar("select * from cadastro_email WHERE email='$email' AND grupo_codigo='$grupo' ");
 						$linhas = $exec->num_rows;
 
-						if($linhas == 0){
+						if ($linhas == 0) {
 
 							$conexao = new mysql();
 							$coisas_grupo = $conexao->Executar("select titulo from cadastro_email_grupos where codigo='$grupo' ");
@@ -1152,17 +1283,16 @@ class index extends controller {
 
 							$db = new mysql();
 							$db->inserir("cadastro_email", array(
-								"nome"=>"$nome",
-								"email"=>"$email",
-								"grupo_codigo"=>"$grupo",
-								"grupo_titulo"=>"$grupo_titulo"
+								"nome" => "$nome",
+								"email" => "$email",
+								"grupo_codigo" => "$grupo",
+								"grupo_titulo" => "$grupo_titulo"
 							));
-
 						}
 
 						$retorno = "ok";
-					}		
-				}		
+					}
+				}
 			}
 		}
 
@@ -1171,7 +1301,8 @@ class index extends controller {
 		$this->view('conteudo_cadastro_email.retorno', $dados);
 	}
 
-	public function cadastro_fone(){
+	public function cadastro_fone()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -1180,13 +1311,13 @@ class index extends controller {
 		$fone = $this->get('fone');
 		$grupo = $this->get('grupo');
 
-		if(!$nome){
+		if (!$nome) {
 			$retorno = "erro";
 		} else {
-			if(!$fone){
+			if (!$fone) {
 				$retorno = "erro";
 			} else {
-				if(!$grupo){
+				if (!$grupo) {
 					$retorno = "erro";
 				} else {
 
@@ -1194,7 +1325,7 @@ class index extends controller {
 					$exec = $db->executar("select * from cadastro_fone WHERE fone='$fone' AND grupo_codigo='$grupo' ");
 					$linhas = $exec->num_rows;
 
-					if($linhas == 0){
+					if ($linhas == 0) {
 
 						$conexao = new mysql();
 						$coisas_grupo = $conexao->Executar("select titulo from cadastro_fone_grupos where codigo='$grupo' ");
@@ -1204,16 +1335,15 @@ class index extends controller {
 
 						$db = new mysql();
 						$db->inserir("cadastro_fone", array(
-							"nome"=>"$nome",
-							"fone"=>"$fone",
-							"grupo_codigo"=>"$grupo",
-							"grupo_titulo"=>"$grupo_titulo"
+							"nome" => "$nome",
+							"fone" => "$fone",
+							"grupo_codigo" => "$grupo",
+							"grupo_titulo" => "$grupo_titulo"
 						));
-
 					}
 
 					$retorno = "ok";
-				}		
+				}
 			}
 		}
 
@@ -1222,7 +1352,8 @@ class index extends controller {
 		$this->view('conteudo_cadastro_fone.retorno', $dados);
 	}
 
-	public function contato_enviar(){
+	public function contato_enviar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -1235,25 +1366,25 @@ class index extends controller {
 		$captcha = $this->post('g-recaptcha-response');
 		$grupo = $this->post('grupo');
 		$email_destino = $this->post('email_destino');
-		
-		if($nome AND $email AND $grupo){
-			
+
+		if ($nome and $email and $grupo) {
+
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$key = recaptcha_secret;
 			$url = 'https://www.google.com/recaptcha/api/siteverify';
 
 			// RECAPTCH RESPONSE
-			$recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
+			$recaptcha_response = file_get_contents($url . '?secret=' . $key . '&response=' . $captcha . '&remoteip=' . $ip);
 			$data = json_decode($recaptcha_response);
-			if(isset($data->success) &&  $data->success === true) {
+			if (isset($data->success) &&  $data->success === true) {
 
 				/* mensagem */
-				$msg =  "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Contato enviado pelo Website</strong></p>";	
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> ".$nome."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Cidade:</strong> ".$cidade."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>E-mail:</strong> ".$email."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> ".$fone."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Mensagem:</strong> ".$mensagem."</p>";
+				$msg =  "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Contato enviado pelo Website</strong></p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> " . $nome . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Cidade:</strong> " . $cidade . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>E-mail:</strong> " . $email . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> " . $fone . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Mensagem:</strong> " . $mensagem . "</p>";
 
 
 				$db = new mysql();
@@ -1263,48 +1394,45 @@ class index extends controller {
 				$lista_envio = array();
 				$n = 0;
 
-				if($data_grupo->tipo_envio == 'todos'){ 
+				if ($data_grupo->tipo_envio == 'todos') {
 
 					$db = new mysql();
 					$exec = $db->executar("select * from contato WHERE grupo='$grupo' ");
-					while($data = $exec->fetch_object()){
+					while ($data = $exec->fetch_object()) {
 						$lista_envio[$n] = $data->email;
 						$n++;
 					}
-
 				} else {
-					if(!$email_destino){
+					if (!$email_destino) {
 						echo "O destino selecionado é inválido!";
 						exit;
 					}
 					$lista_envio[0] = $email_destino;
 				}
-				
+
 				$envio = new model_envio();
 				$retorno = $envio->enviar("Contato", $msg, $lista_envio, $email);
-				if($retorno['status'] == 1){
+				if ($retorno['status'] == 1) {
 					echo $retorno['msg'];
 				} else {
-					echo 'Erro no envio - '.$retorno['msg'];
+					echo 'Erro no envio - ' . $retorno['msg'];
 				}
-
 			} else {
 				echo "Erro na validação do captcha, tente novamente!";
 				exit;
 			}
-
 		} else {
 			echo "Preencha todos os campos para continuar";
 			exit;
 		}
-
 	}
 
-	public function leitura(){
+	public function leitura()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -1317,7 +1445,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -1330,7 +1458,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -1338,23 +1466,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
-			
+		if (isset($data_ordem->data)) {
+
 			$order = explode(',', $data_ordem->data);
-			
-			foreach($order as $key => $value){
-				
+
+			foreach ($order as $key => $value) {
+
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -1366,53 +1494,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -1421,16 +1549,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -1438,7 +1564,7 @@ class index extends controller {
 
 		$id = $this->get('id');
 
-		if(!$id){
+		if (!$id) {
 			$this->irpara(DOMINIO);
 			exit;
 		}
@@ -1448,7 +1574,7 @@ class index extends controller {
 
 		$postagens = new model_postagens();
 		$dados['data'] = $postagens->carrega_postagem($id);
-		if(!$dados['data']->id){
+		if (!$dados['data']->id) {
 			$this->irpara(DOMINIO);
 			exit;
 		}
@@ -1462,12 +1588,12 @@ class index extends controller {
 		$codigo = $dados['data']->codigo;
 
 		//endereco da noticia		 
-		$dados['endereco_noticia'] = DOMINIO.$this->_controller."/leitura/id/".$dados['data']->amigavel;
+		$dados['endereco_noticia'] = DOMINIO . $this->_controller . "/leitura/id/" . $dados['data']->amigavel;
 		$dados['endereco_noticia_sem_ssl'] = $string = str_replace("https://", "http://", $dados['endereco_noticia']);
 
 		//autor se tiver
-		if($dados['data']->autor){			
-			$dados['autor'] = $postagens->autor_postagem($dados['data']->autor);			
+		if ($dados['data']->autor) {
+			$dados['autor'] = $postagens->autor_postagem($dados['data']->autor);
 		} else {
 			$dados['autor'] = "";
 		}
@@ -1483,20 +1609,19 @@ class index extends controller {
 		$dados['imagem_principal_largura'] = "";
 		$dados['imagem_principal_altura'] = "";
 		$dados['imagem_principal'] = "";
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 			$dados['imagem_principal_sem_ssl'] = $string = str_replace("https://", "http://", $dados['imagens'][0]['imagem_g']);
 
-			$imagem_principal = "arquivos/img_postagens_g/".$dados['data']->codigo."/".$dados['imagens'][0]['imagem'];
+			$imagem_principal = "arquivos/img_postagens_g/" . $dados['data']->codigo . "/" . $dados['imagens'][0]['imagem'];
 			list($largura, $altura) = getimagesize($imagem_principal);
-			if($largura){
+			if ($largura) {
 				$dados['imagem_principal_largura'] = $largura;
 			}
-			if($altura){
+			if ($altura) {
 				$dados['imagem_principal_altura'] = $altura;
 			}
-
 		}
 
 
@@ -1515,47 +1640,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao .= "<a class='botao_padrao botao_".$data->codigo."' onclick=\"history.go(-1);\" >".$data->texto."</a>";
-
+			$botao .= "<a class='botao_padrao botao_" . $data->codigo . "' onclick=\"history.go(-1);\" >" . $data->texto . "</a>";
 		} else {
 			$botao = "";
 		}
@@ -1564,10 +1687,10 @@ class index extends controller {
 
 		//carrega view e envia dados para a tela
 		$this->view('leitura', $dados);
-
 	}
 
-	public function buscar(){
+	public function buscar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -1575,24 +1698,25 @@ class index extends controller {
 		$buscatag = $this->post('busca');
 		$pg_des = $this->get('pg');
 
-		if(!$buscatag){
+		if (!$buscatag) {
 			$this->irpara(DOMINIO);
 			exit;
 		} else {
-			$buscatag_filtrado = str_replace(array('/',' '), "", $buscatag);
-			if($pg_des){
-				$this->irpara(DOMINIO.$pg_des.'/inicial/busca/'.$buscatag_filtrado);
+			$buscatag_filtrado = str_replace(array('/', ' '), "", $buscatag);
+			if ($pg_des) {
+				$this->irpara(DOMINIO . $pg_des . '/inicial/busca/' . $buscatag_filtrado);
 			} else {
-				$this->irpara(DOMINIO.$this->_controller.'/busca/tag/'.$buscatag_filtrado);
+				$this->irpara(DOMINIO . $this->_controller . '/busca/tag/' . $buscatag_filtrado);
 			}
 		}
 	}
 
-	public function busca(){
+	public function busca()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -1606,7 +1730,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -1619,30 +1743,30 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
 
 		////////////////////////////////////////////////////////////////////////
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
-			
+		if (isset($data_ordem->data)) {
+
 			$order = explode(',', $data_ordem->data);
-			
-			foreach($order as $key => $value){
-				
+
+			foreach ($order as $key => $value) {
+
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -1654,53 +1778,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -1709,22 +1833,20 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
 
 		$buscatag = $this->get('tag');
-		if(!$buscatag){
+		if (!$buscatag) {
 			$this->irpara(DOMINIO);
 			exit;
 		}
@@ -1737,13 +1859,13 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas_noticias = $conexao->Executar("SELECT * FROM noticia WHERE titulo LIKE '%$buscatag%' OR previa LIKE '%$buscatag%' ORDER BY data desc");
-		if($coisas_noticias->num_rows != 0){
-			while($data_noticias = $coisas_noticias->fetch_object()){
+		if ($coisas_noticias->num_rows != 0) {
+			while ($data_noticias = $coisas_noticias->fetch_object()) {
 
 				$lista[$n]['tipo'] = 'noticias';
-				$lista[$n]['titulo'] = "Postagens - ".$data_noticias->titulo;
+				$lista[$n]['titulo'] = "Postagens - " . $data_noticias->titulo;
 				$lista[$n]['previa'] = $data_noticias->previa;
-				$lista[$n]['endereco'] = DOMINIO.$this->_controller."/leitura/id/".$data_noticias->amigavel;
+				$lista[$n]['endereco'] = DOMINIO . $this->_controller . "/leitura/id/" . $data_noticias->amigavel;
 
 				$n++;
 			}
@@ -1753,13 +1875,13 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas_produtos = $conexao->Executar("SELECT * FROM produto WHERE titulo LIKE '%$buscatag%' OR ref LIKE '%$buscatag%' ORDER BY id asc");
-		if($coisas_produtos->num_rows != 0){
-			while($data_produtos = $coisas_produtos->fetch_object()){
+		if ($coisas_produtos->num_rows != 0) {
+			while ($data_produtos = $coisas_produtos->fetch_object()) {
 
 				$lista[$n]['tipo'] = 'produtos';
-				$lista[$n]['titulo'] = "Produtos - ".$data_produtos->titulo;
+				$lista[$n]['titulo'] = "Produtos - " . $data_produtos->titulo;
 				$lista[$n]['previa'] = $data_produtos->previa;
-				$lista[$n]['endereco'] = DOMINIO.$this->_controller."/produto/id/".$data_produtos->id;
+				$lista[$n]['endereco'] = DOMINIO . $this->_controller . "/produto/id/" . $data_produtos->id;
 
 				$n++;
 			}
@@ -1769,13 +1891,13 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas_imoveis = $conexao->Executar("SELECT * FROM imoveis WHERE titulo LIKE '%$buscatag%' OR cod_interno LIKE '%$buscatag%' ORDER BY id asc");
-		if($coisas_imoveis->num_rows != 0){
-			while($data_imoveis = $coisas_imoveis->fetch_object()){
+		if ($coisas_imoveis->num_rows != 0) {
+			while ($data_imoveis = $coisas_imoveis->fetch_object()) {
 
 				$lista[$n]['tipo'] = 'imoveis';
-				$lista[$n]['titulo'] = "Imóveis - ".$data_imoveis->titulo;
+				$lista[$n]['titulo'] = "Imóveis - " . $data_imoveis->titulo;
 				$lista[$n]['previa'] = '';
-				$lista[$n]['endereco'] = DOMINIO.$this->_controller."/imoveis_detalhes/id/".$data_imoveis->codigo;
+				$lista[$n]['endereco'] = DOMINIO . $this->_controller . "/imoveis_detalhes/id/" . $data_imoveis->codigo;
 
 				$n++;
 			}
@@ -1789,11 +1911,12 @@ class index extends controller {
 		$this->view('busca', $dados);
 	}
 
-	public function criar_depoimento(){
+	public function criar_depoimento()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -1802,22 +1925,22 @@ class index extends controller {
 
 		$codigo_item = $this->get('codigo');
 
-		if($codigo_item){
+		if ($codigo_item) {
 
 			$conexao = new mysql();
 			$exec = $conexao->Executar("SELECT * FROM depoimentos_grupos WHERE codigo='$codigo_item' ");
 			$data_grupo = $exec->fetch_object();
 
 			// cores
-			$layout = new model_layout(); 
+			$layout = new model_layout();
 			$dados['botao'] = $layout->carrega_botao($data_grupo->botao_codigo, " aquivaiolink ", true);
-
 		}
 
-		$this->view('conteudo_depoimentos_adicionar', $dados);		 
+		$this->view('conteudo_depoimentos_adicionar', $dados);
 	}
 
-	public function enviar_depoimento(){
+	public function enviar_depoimento()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -1828,34 +1951,34 @@ class index extends controller {
 		$msg = $this->post('msg');
 
 		// validacoes
-		if($nome AND $email AND $msg){
+		if ($nome and $email and $msg) {
 
 			$time = time();
 
 			$db = new mysql();
 			$db->inserir("depoimentos", array(
-				'data'=>$time,
-				'nome'=>$nome,
-				'email'=>$email,
-				'cidade'=>$cidade,
-				'conteudo'=>$msg,
-				'bloqueio'=>"1"
+				'data' => $time,
+				'nome' => $nome,
+				'email' => $email,
+				'cidade' => $cidade,
+				'conteudo' => $msg,
+				'bloqueio' => "1"
 			));
 
 			$this->msg('Seu depoimento foi enviado com sucesso!');
 			$this->volta(1);
-
 		} else {
 			$this->msg('Informe seus dados corretamente e tente novamente.');
 			$this->volta(1);
 		}
 	}
 
-	public function cidades(){ 
+	public function cidades()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -1869,22 +1992,23 @@ class index extends controller {
 
 		$dados['cidades'] = $estados_cidades->lista_cidades($estado, $cidade);
 
- 		//carrega view e envia dados para a tela
+		//carrega view e envia dados para a tela
 		$this->view('cidades', $dados);
 	}
 
-	public function busca_endereco_cep(){
+	public function busca_endereco_cep()
+	{
 
 		$cep = $this->post('cep');
-		if($cep){
+		if ($cep) {
 
 			$buscacep = new model_cep();
 			$resultado_busca_cep = $buscacep->retorno($cep);
 
 			$retorno = array();
 
-			if($resultado_busca_cep['rua']){
-				$retorno['endereco'] = $resultado_busca_cep['rua_tipo']." ".$resultado_busca_cep['rua'];
+			if ($resultado_busca_cep['rua']) {
+				$retorno['endereco'] = $resultado_busca_cep['rua_tipo'] . " " . $resultado_busca_cep['rua'];
 			} else {
 				$retorno['endereco'] = "";
 			}
@@ -1897,14 +2021,16 @@ class index extends controller {
 		}
 	}
 
-	public function finalizar_cadastro(){
+	public function finalizar_cadastro()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
 
 		// retorno de dados caso erro
-		function retorno_erro($msg){
-			echo "<div style='padding:20px;background:white' >".$msg."</div>";	
+		function retorno_erro($msg)
+		{
+			echo "<div style='padding:20px;background:white' >" . $msg . "</div>";
 			exit;
 		}
 
@@ -1919,7 +2045,7 @@ class index extends controller {
 		$fisica_nome = $this->post('fisica_nome');
 		$fisica_sexo = $this->post('fisica_sexo');
 		$fisica_nascimento = $this->post('fisica_nascimento');
-		$fisica_cpf = $this->post('fisica_cpf'); 
+		$fisica_cpf = $this->post('fisica_cpf');
 
 		$juridica_nome = $this->post('juridica_nome');
 		$juridica_razao = $this->post('juridica_razao');
@@ -1939,15 +2065,14 @@ class index extends controller {
 		$promocoes = $this->post('promocoes');
 
 		//validar email consultando no banco
-		if(!$email){
+		if (!$email) {
 
 			retorno_erro("E-mail inválido!");
 			exit;
-
 		} else {
 
-			$validaemail = new model_valida();				
-			if(!$validaemail->email($email)){
+			$validaemail = new model_valida();
+			if (!$validaemail->email($email)) {
 				retorno_erro("E-mail inválido!");
 				exit;
 			} else {
@@ -1956,7 +2081,7 @@ class index extends controller {
 				$coisas = $conexao->Executar("SELECT * FROM cadastro WHERE email='$email' ");
 				$linhas = $coisas->num_rows;
 
-				if($linhas != 0){
+				if ($linhas != 0) {
 					retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
 					exit;
 				}
@@ -1964,23 +2089,20 @@ class index extends controller {
 		}
 
 
-		if($cadastro_com_login == 1){
+		if ($cadastro_com_login == 1) {
 
 			//validar senha
-			if($senha AND $senha_confirma){
-				if($senha != $senha_confirma){
+			if ($senha and $senha_confirma) {
+				if ($senha != $senha_confirma) {
 
 					retorno_erro("Digite uma senha válida e confirme.");
 					exit;
-
 				}
 			} else {
 
 				retorno_erro("Digite uma senha válida e confirme.");
 				exit;
-
 			}
-
 		} else {
 			$senha = '0000';
 		}
@@ -1991,19 +2113,18 @@ class index extends controller {
 		require_once("api/cpf_cnpj/cpf_cnpj.php");
 
 		//validar cpf ou cnpj simples
-		if($tipo == 'F'){		 
+		if ($tipo == 'F') {
 
-			if(!$fisica_cpf){
-				retorno_erro("Digite corretamente seu CPF.");			 
+			if (!$fisica_cpf) {
+				retorno_erro("Digite corretamente seu CPF.");
 				exit;
 			} else {
 
 				$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
-				if(!$cpf_cnpj->valida()){
+				if (!$cpf_cnpj->valida()) {
 
 					retorno_erro("Digite corretamente seu CPF.");
 					exit;
-
 				} else {
 
 					$fisica_cpf = $cpf_cnpj->formata();
@@ -2011,13 +2132,11 @@ class index extends controller {
 					// confere se ja existe
 					$conexao = new mysql();
 					$coisas = $conexao->Executar("SELECT * FROM cadastro WHERE fisica_cpf='$fisica_cpf' ");
-					if($coisas->num_rows != 0){
-						retorno_erro("CPF já cadastrado.");			 
+					if ($coisas->num_rows != 0) {
+						retorno_erro("CPF já cadastrado.");
 						exit;
 					}
-
 				}
-
 			}
 
 			//limpar dados do oposto do tipo (juridica ou fisica)
@@ -2028,49 +2147,46 @@ class index extends controller {
 			$juridica_responsavel = "";
 
 
-			if(!$fisica_nome){
-				retorno_erro("Digite seu nome completo.");	 
-				exit;				
-			}
-			if(!$fisica_sexo){
-				retorno_erro("Informe seu sexo.");	 
+			if (!$fisica_nome) {
+				retorno_erro("Digite seu nome completo.");
 				exit;
 			}
-			if(!$fisica_nascimento){
-				retorno_erro("Informe sua data de nascimento.");	 
+			if (!$fisica_sexo) {
+				retorno_erro("Informe seu sexo.");
+				exit;
+			}
+			if (!$fisica_nascimento) {
+				retorno_erro("Informe sua data de nascimento.");
 				exit;
 			} else {
 
 				// transforma data em inteiro
-				$arraydata = explode("/", $fisica_nascimento); 
-				if($arraydata[2] <= 1920){
-					retorno_erro("Informe sua data de nascimento corretamente.");				 
+				$arraydata = explode("/", $fisica_nascimento);
+				if ($arraydata[2] <= 1920) {
+					retorno_erro("Informe sua data de nascimento corretamente.");
 					exit;
 				}
-				if($arraydata[1] > 12){
-					retorno_erro("Informe sua data de nascimento corretamente.");				 
+				if ($arraydata[1] > 12) {
+					retorno_erro("Informe sua data de nascimento corretamente.");
 					exit;
 				}
-				if($arraydata[0] > 31){
-					retorno_erro("Informe sua data de nascimento corretamente.");				 
+				if ($arraydata[0] > 31) {
+					retorno_erro("Informe sua data de nascimento corretamente.");
 					exit;
 				}
-				$hora_montada = $arraydata[2]."-".$arraydata[1]."-".$arraydata[0]." 00:00:01";
+				$hora_montada = $arraydata[2] . "-" . $arraydata[1] . "-" . $arraydata[0] . " 00:00:01";
 				$fisica_nascimento = strtotime($hora_montada);
-
-			} 
-
+			}
 		} else {
-			if(!$juridica_cnpj){
+			if (!$juridica_cnpj) {
 
-				retorno_erro("Digite corretamente o CNPJ.");				 
+				retorno_erro("Digite corretamente o CNPJ.");
 				exit;
-
 			} else {
 
 				$cpf_cnpj = new valida_cpf_cnpj("$juridica_cnpj");
-				if(!$cpf_cnpj->valida()){
-					retorno_erro("Digite corretamente o CNPJ.");				 
+				if (!$cpf_cnpj->valida()) {
+					retorno_erro("Digite corretamente o CNPJ.");
 					exit;
 				} else {
 
@@ -2079,13 +2195,11 @@ class index extends controller {
 					// confere se ja existe
 					$conexao = new mysql();
 					$coisas = $conexao->Executar("SELECT * FROM cadastro WHERE juridica_cnpj='$juridica_cnpj' ");
-					if($coisas->num_rows != 0){
-						retorno_erro("CNPJ já cadastrado.");			 
+					if ($coisas->num_rows != 0) {
+						retorno_erro("CNPJ já cadastrado.");
 						exit;
 					}
-
 				}
-
 			}
 
 			//limpar dados do oposto do tipo (juridica ou fisica)
@@ -2094,76 +2208,73 @@ class index extends controller {
 			$fisica_nascimento = "";
 			$fisica_cpf = "";
 
-			if(!$juridica_nome){
-				retorno_erro("Complete todos os dados da empresa.");	 
+			if (!$juridica_nome) {
+				retorno_erro("Complete todos os dados da empresa.");
 				exit;
 			}
-			if(!$juridica_razao){
-				retorno_erro("Complete todos os dados da empresa.");	 
+			if (!$juridica_razao) {
+				retorno_erro("Complete todos os dados da empresa.");
 				exit;
 			}
-
 		}
 
-		if(!$cep){
+		if (!$cep) {
 
-			retorno_erro("CEP inválido");	 
+			retorno_erro("CEP inválido");
 			exit;
-
 		}
-		if($endereco AND $numero AND $bairro AND $estado AND $cidade){ } else {
+		if ($endereco and $numero and $bairro and $estado and $cidade) {
+		} else {
 
-			retorno_erro("Preencha corretamente seus dados de endereço!");	 
+			retorno_erro("Preencha corretamente seus dados de endereço!");
 			exit;
-
 		}
 
 		//gravar no banco de dados
-		$codigo = substr(time().rand(10000,99999),-15);
+		$codigo = substr(time() . rand(10000, 99999), -15);
 
 		$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 
 		$db = new mysql();
 		$db->inserir("cadastro", array(
-			"codigo"=>"$codigo",
-			"tipo"=>"$tipo",
-			"fisica_nome"=>"$fisica_nome",
-			"fisica_sexo"=>"$fisica_sexo",
-			"fisica_nascimento"=>"$fisica_nascimento",
-			"fisica_cpf"=>"$fisica_cpf",
-			"juridica_nome"=>"$juridica_nome",
-			"juridica_razao"=>"$juridica_razao",
-			"juridica_responsavel"=>"$juridica_responsavel",
-			"juridica_cnpj"=>"$juridica_cnpj",
-			"juridica_ie"=>"$juridica_ie",
-			"cep"=>"$cep",
-			"endereco"=>"$endereco",
-			"numero"=>"$numero",
-			"complemento"=>"$complemento",
-			"bairro"=>"$bairro",
-			"estado"=>"$estado",
-			"cidade"=>"$cidade",
-			"telefone"=>"$telefone",
-			"email"=>"$email",
-			"senha"=>"$senha_tratada",
-			"receber_promocoes"=>"$promocoes"
+			"codigo" => "$codigo",
+			"tipo" => "$tipo",
+			"fisica_nome" => "$fisica_nome",
+			"fisica_sexo" => "$fisica_sexo",
+			"fisica_nascimento" => "$fisica_nascimento",
+			"fisica_cpf" => "$fisica_cpf",
+			"juridica_nome" => "$juridica_nome",
+			"juridica_razao" => "$juridica_razao",
+			"juridica_responsavel" => "$juridica_responsavel",
+			"juridica_cnpj" => "$juridica_cnpj",
+			"juridica_ie" => "$juridica_ie",
+			"cep" => "$cep",
+			"endereco" => "$endereco",
+			"numero" => "$numero",
+			"complemento" => "$complemento",
+			"bairro" => "$bairro",
+			"estado" => "$estado",
+			"cidade" => "$cidade",
+			"telefone" => "$telefone",
+			"email" => "$email",
+			"senha" => "$senha_tratada",
+			"receber_promocoes" => "$promocoes"
 		));
-		
-		
+
+
 		//gera cupom se necessário
 		$cupons = '';
 		$model_cupom = new model_cupom();
-		
+
 		$conexao = new mysql();
 		$coisas_promo = $conexao->Executar("select codigo from cupom where cadastro='1' ");
-		while($data_promo = $coisas_promo->fetch_object()){
+		while ($data_promo = $coisas_promo->fetch_object()) {
 
 			$cupom = $model_cupom->gera_cupom_promo($data_promo->codigo);
 
 			$cupons .= "<div style='padding:10px; font-size:13px; color:#000;'>
 			<p>Você ganhou um cupom de desconto para sua primeira compra,<br>utilize o seguinte codigo quando finalizar sua compra para ganhar o desconto: <strong>$cupom</strong> </p>
 			</div>";
-
 		}
 
 
@@ -2172,7 +2283,7 @@ class index extends controller {
 
 		//criando o codigo html para enviar no email
 
-		if($tipo == 'F'){
+		if ($tipo == 'F') {
 			$nome_email = $fisica_nome;
 		} else {
 			$nome_email = $juridica_nome;
@@ -2180,24 +2291,24 @@ class index extends controller {
 
 		/* mensagem */
 		$msg = "
-		<div style='padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000;'><p>".utf8_decode('Olá').", ".$nome_email."</p></div>
-		<div style='padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000;'><p>".$textos->conteudo('146172119158298')."</p></div>	
-		".utf8_decode($cupons)."
+		<div style='padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000;'><p>" . utf8_decode('Olá') . ", " . $nome_email . "</p></div>
+		<div style='padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000;'><p>" . $textos->conteudo('146172119158298') . "</p></div>	
+		" . utf8_decode($cupons) . "
 		";
 
 		// envia o email
 		$envio = new model_envio();
-		$retorno = $envio->enviar("Cadastro concluído com sucesso!", $msg, array("0"=>"$email"));
+		$retorno = $envio->enviar("Cadastro concluído com sucesso!", $msg, array("0" => "$email"));
 
-		echo "<div style='padding:20px;'>".$textos->conteudo('159649081566934')."</div>";
-
+		echo "<div style='padding:20px;'>" . $textos->conteudo('159649081566934') . "</div>";
 	}
 
-	public function cadastro_basico(){
+	public function cadastro_basico()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -2207,10 +2318,10 @@ class index extends controller {
 		// itens da inciial
 
 		$chave = $this->_layout;
-		
+
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -2223,29 +2334,29 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
-			
+		if (isset($data_ordem->data)) {
+
 			$order = explode(',', $data_ordem->data);
-			
-			foreach($order as $key => $value){
-				
+
+			foreach ($order as $key => $value) {
+
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -2257,53 +2368,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
-								
-								if($data->tipo == 'topo'){
+
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -2312,16 +2423,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -2338,47 +2447,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao .= "<a class='botao_padrao botao_".$data->codigo."' onclick=\"finalizar_cadastro();\" >".$data->texto."</a>";
-
+			$botao .= "<a class='botao_padrao botao_" . $data->codigo . "' onclick=\"finalizar_cadastro();\" >" . $data->texto . "</a>";
 		} else {
 			$botao = "";
 		}
@@ -2388,7 +2495,7 @@ class index extends controller {
 
 		$codigo_cadastro = $this->get('codigo');
 
-		if($codigo_cadastro){
+		if ($codigo_cadastro) {
 
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM cadastro WHERE codigo='$codigo_cadastro' ");
@@ -2398,7 +2505,6 @@ class index extends controller {
 
 			$estados_cidades = new model_estados_cidades();
 			$dados['estados'] = $estados_cidades->lista_estados();
-
 		} else {
 			$etapa = 0;
 		}
@@ -2412,55 +2518,56 @@ class index extends controller {
 		$this->view('cadastro', $dados);
 	}
 
-	public function cadastro_basico_grv(){
+	public function cadastro_basico_grv()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
 
 		// retorno de dados caso erro
-		function retorno_erro($msg){
-			echo "<div style='padding:20px; background:white' >".$msg."</div>";	
+		function retorno_erro($msg)
+		{
+			echo "<div style='padding:20px; background:white' >" . $msg . "</div>";
 			exit;
 		}
 
 		$etapa = $this->post('etapa');
 
 
-		if($etapa == 0){
+		if ($etapa == 0) {
 
 			$email = $this->post('email');
 			$confirma_email = $this->post('confirma_email');
 
-			if($email != $confirma_email){
+			if ($email != $confirma_email) {
 				retorno_erro("E-mails são diferentes!");
 				exit;
 			}
 
 			$fisica_nome = $this->post('fisica_nome');
 			$country_document = $this->post('country_document');
-			
-			if($country_document == 0){
+
+			if ($country_document == 0) {
 				$fisica_cpf = $this->post('fisica_documento');
 				$telefone = $this->post('cadastro_telefone');
-			}else{
+			} else {
 				$fisica_cpf = $this->post('fisica_cpf');
 				$telefone = $this->post('cadastro_telefone_brasil');
 			}
-			if(!$fisica_cpf){
+			if (!$fisica_cpf) {
 				retorno_erro("Digite corretamente seu CPF.");
 				exit;
-
-			} elseif($country_document == 1) {
+			} elseif ($country_document == 1) {
 				require_once("api/cpf_cnpj/cpf_cnpj.php");
 				$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
-				if(!$cpf_cnpj->valida()){
+				if (!$cpf_cnpj->valida()) {
 					retorno_erro("Digite corretamente seu CPF.");
 					exit;
 				}
 			}
 
-			$validaemail = new model_valida();	
-			if(!$validaemail->email($email)){
+			$validaemail = new model_valida();
+			if (!$validaemail->email($email)) {
 				retorno_erro("E-mail inválido!");
 				exit;
 			} else {
@@ -2469,49 +2576,49 @@ class index extends controller {
 				$coisas = $conexao->Executar("SELECT * FROM cadastro WHERE email='$email' ");
 				$linhas = $coisas->num_rows;
 
-				if($linhas != 0){
+				if ($linhas != 0) {
 
 					$data = $coisas->fetch_object();
 
-					if($data->etapa == 0){
+					if ($data->etapa == 0) {
 						retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
 						exit;
 					} else {
-						$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$data->codigo);
+						$this->irpara(DOMINIO . 'index/cadastro_basico/codigo/' . $data->codigo);
 						exit;
 					}
 				}
 			}
 
 			$email_lms = $this->check_email_lms($email, $fisica_cpf);
-			if($email_lms == 1){
+			if ($email_lms == 1) {
 				$last_id = $this->check_email_lms_ativo($email, $fisica_cpf);
-			}else{
+			} else {
 				$last_id = $this->adiciona_email_lms($email);
 			}
 
 			//gravar no banco de dados
-			$codigo = substr(time().rand(10000,99999),-15);
+			$codigo = substr(time() . rand(10000, 99999), -15);
 			$tipo = "F";
 
-			$fisica_cpf = str_replace("-","",$fisica_cpf);
-			$fisica_cpf = str_replace(".","",$fisica_cpf);
+			$fisica_cpf = str_replace("-", "", $fisica_cpf);
+			$fisica_cpf = str_replace(".", "", $fisica_cpf);
 
 			$db = new mysql();
 			$db->inserir("cadastro", array(
-				"fisica_nome"=>"$fisica_nome",
-				"lms_usuario_id"=>"$last_id",
-				"telefone"=>"$telefone",
-				"is_brasil"=>"$country_document",
-				"codigo"=>"$codigo",
-				"tipo"=>"$tipo",
-				"fisica_cpf"=>"$fisica_cpf",
-				"email"=>"$email",
-				"senha"=>"000",
-				"etapa"=>1
+				"fisica_nome" => "$fisica_nome",
+				"lms_usuario_id" => "$last_id",
+				"telefone" => "$telefone",
+				"is_brasil" => "$country_document",
+				"codigo" => "$codigo",
+				"tipo" => "$tipo",
+				"fisica_cpf" => "$fisica_cpf",
+				"email" => "$email",
+				"senha" => "000",
+				"etapa" => 1
 			));
 
-			$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$codigo);
+			$this->irpara(DOMINIO . 'index/cadastro_basico/codigo/' . $codigo);
 			exit;
 		}
 
@@ -2528,7 +2635,7 @@ class index extends controller {
 
 		// 	$fisica_nome = $this->post('fisica_nome');
 		// 	$country_document = $this->post('country_document');
-			
+
 		// 	if($country_document == 0){
 		// 		$fisica_cpf = $this->post('fisica_documento');
 		// 		$telefone = $this->post('cadastro_telefone');
@@ -2554,7 +2661,7 @@ class index extends controller {
 		// 		}
 
 		// 	}
-			
+
 		// 	$db = new mysql();
 		// 	$db->alterar("cadastro", array(
 		// 		"fisica_nome"=>"$fisica_nome",
@@ -2569,16 +2676,16 @@ class index extends controller {
 		// }
 
 
-		if($etapa == 1){
+		if ($etapa == 1) {
 
 			$codigo = $this->post('codigo');
-			if(!$codigo){
+			if (!$codigo) {
 				retorno_erro("Ocorreu um erro!");
-				exit;				
+				exit;
 			}
 
 			$country_document = $this->post('country_document');
-			if($country_document == 1){
+			if ($country_document == 1) {
 				$cep = $this->post('cadastro_cep');
 				$endereco = $this->post('endereco_');
 				$numero = $this->post('numero_');
@@ -2586,15 +2693,16 @@ class index extends controller {
 				$bairro = $this->post('bairro_');
 				$estado = $this->post('estado_');
 				$cidade = $this->post('cidade');
-				if(!$cep){
-					retorno_erro("CEP inválido");	 
+				if (!$cep) {
+					retorno_erro("CEP inválido");
 					exit;
 				}
-				if($endereco AND $numero AND $bairro AND $estado AND $cidade){} else {
-					retorno_erro("Preencha corretamente seus dados de endereço!");	 
+				if ($endereco and $numero and $bairro and $estado and $cidade) {
+				} else {
+					retorno_erro("Preencha corretamente seus dados de endereço!");
 					exit;
 				}
-			}else{
+			} else {
 				$cep = $this->post('postcode');
 				$endereco = $this->post('endereco');
 				$numero = $this->post('numero');
@@ -2602,43 +2710,42 @@ class index extends controller {
 				$bairro = $this->post('bairro');
 				$cidade = $this->post('cidade_outros');
 				$estado = '';
-
 			}
 
 			$db = new mysql();
 			$db->alterar("cadastro", array(
-				"cep"=>"$cep",
-				"endereco"=>"$endereco",
-				"numero"=>"$numero",
-				"complemento"=>"$complemento",
-				"bairro"=>"$bairro",
-				"estado"=>"$estado",
-				"cidade"=>"$cidade",
-				"is_brasil_address"=>"$country_document",
-				"etapa"=>2
-			), " codigo='".$codigo."' AND etapa='1'  ");
+				"cep" => "$cep",
+				"endereco" => "$endereco",
+				"numero" => "$numero",
+				"complemento" => "$complemento",
+				"bairro" => "$bairro",
+				"estado" => "$estado",
+				"cidade" => "$cidade",
+				"is_brasil_address" => "$country_document",
+				"etapa" => 2
+			), " codigo='" . $codigo . "' AND etapa='1'  ");
 
 
-			$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$codigo);
+			$this->irpara(DOMINIO . 'index/cadastro_basico/codigo/' . $codigo);
 			exit;
 		}
 
 
-		if($etapa == 2){
+		if ($etapa == 2) {
 
 			$codigo = $this->post('codigo');
 
-			if(!$codigo){
+			if (!$codigo) {
 				retorno_erro("Ocorreu um erro!");
-				exit;				
+				exit;
 			}
 
 			$senha = $this->post('senha');
 			$senha_confirma = $this->post('senha_confirma');
 
 			//validar senha
-			if($senha AND $senha_confirma){
-				if($senha != $senha_confirma){
+			if ($senha and $senha_confirma) {
+				if ($senha != $senha_confirma) {
 					retorno_erro("Digite uma senha válida e confirme.");
 					exit;
 				}
@@ -2652,16 +2759,16 @@ class index extends controller {
 			$senha_md5 = md5($senha_md5);
 
 			$db = new mysql();
-			$db->alterar("cadastro", array( 
-				"senha"=>"$senha_tratada",
-				"senha_md5"=>"$senha_md5",
-				"etapa"=>3
-			), " codigo='".$codigo."' AND etapa='2' ");
+			$db->alterar("cadastro", array(
+				"senha" => "$senha_tratada",
+				"senha_md5" => "$senha_md5",
+				"etapa" => 3
+			), " codigo='" . $codigo . "' AND etapa='2' ");
 
 
 			$conexao = new mysql();
 			$coisas_confere = $conexao->Executar("select * from cadastro where codigo='$codigo' AND etapa='3' ");
-			if($coisas_confere->num_rows == 1){
+			if ($coisas_confere->num_rows == 1) {
 
 				$data_confere = $coisas_confere->fetch_object();
 
@@ -2674,14 +2781,13 @@ class index extends controller {
 
 				$conexao = new mysql();
 				$coisas_promo = $conexao->Executar("select codigo from cupom where cadastro='1' ");
-				while($data_promo = $coisas_promo->fetch_object()){
+				while ($data_promo = $coisas_promo->fetch_object()) {
 
 					$cupom = $model_cupom->gera_cupom_promo($data_promo->codigo);
 
 					$cupons .= "<div style='padding:10px; font-size:13px; color:#000;'>
 					<p>Você ganhou um cupom de desconto para sua primeira compra,<br>utilize o seguinte codigo quando finalizar sua compra para ganhar o desconto: <strong>$cupom</strong> </p>
 					</div>";
-
 				}
 
 
@@ -2690,9 +2796,9 @@ class index extends controller {
 
 				/* mensagem */
 				$msg = "
-				<div style='padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000;'><p>".utf8_decode('Olá').", ".$nome_email."</p></div>
-				<div style='padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000;'><p>".$textos->conteudo('146172119158298')."</p></div>	
-				".utf8_decode($cupons)."
+				<div style='padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000;'><p>" . utf8_decode('Olá') . ", " . $nome_email . "</p></div>
+				<div style='padding:10px; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#000;'><p>" . $textos->conteudo('146172119158298') . "</p></div>	
+				" . utf8_decode($cupons) . "
 				";
 
 				// envia o email
@@ -2702,30 +2808,31 @@ class index extends controller {
 				// echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>".$textos->conteudo('159649081566934')."</div>";
 
 				// echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>Bem-vindo! Faça seu login.</div>";
-				
+
 				// echo "<div style='padding-top:20px; padding-bottom:20px; text-align:center;'><a href='".DOMINIO.$this->_controller."/entrar' class='botao_padrao' >FAÇA SEU LOGIN</a></div>";
 
 				$db = new mysql();
 				$db->alterar("cadastro", array(
-					"etapa"=>0,
+					"etapa" => 0,
 					"status" => 0
-				), " codigo='".$codigo."' AND etapa='3' ");
-				
+				), " codigo='" . $codigo . "' AND etapa='3' ");
+
 				$add_data_gerado		= date("Y-m-d H:i:s");
 				$senha_md5 = $this->post('senha');
 				$senha_md5 = md5($senha_md5);
-				$this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome,$data_confere->email,$data_confere->fisica_cpf,$data_confere->telefone,$data_confere->endereco,$data_confere->numero,$data_confere->bairro,$data_confere->cidade,$data_confere->estado,$add_data_gerado,$data_confere->fisica_nascimento,$data_confere->fisica_sexo,$senha_md5);
-				
-				$this->irpara(DOMINIO.'index/entrar');
+				$this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome, $data_confere->email, $data_confere->fisica_cpf, $data_confere->telefone, $data_confere->endereco, $data_confere->numero, $data_confere->bairro, $data_confere->cidade, $data_confere->estado, $add_data_gerado, $data_confere->fisica_nascimento, $data_confere->fisica_sexo, $senha_md5);
+
+				$this->irpara(DOMINIO . 'index/entrar');
 			} else {
-				
-				$this->irpara(DOMINIO.'index/entrar');
+
+				$this->irpara(DOMINIO . 'index/entrar');
 				exit;
 			}
 		}
 	}
 
-	public function adiciona_email_lms($email = NULL){
+	public function adiciona_email_lms($email = NULL)
+	{
 		require('conexao.php');
 		$sql = "INSERT INTO usuario (nome) VALUES('$email');";
 		$mysqli->query($sql);
@@ -2734,77 +2841,80 @@ class index extends controller {
 		return $last_id;
 	}
 
-	public function check_email_lms_ativo($email = NULL, $fisica_cpf){
+	public function check_email_lms_ativo($email = NULL, $fisica_cpf)
+	{
 		require('conexao.php');
 		$sql = "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf' AND ativo = 2;";
 		if ($result = $mysqli->query($sql)) {
-			if($result->num_rows == 1){
+			if ($result->num_rows == 1) {
 				$data = $result->fetch_object();
 				$update = "UPDATE usuario ativo=1 WHERE id= '$data->id';";
 				$mysqli->query($update);
 
 				return $data->id;
-			}else{
-				return 0;
-			}
-		}
-	}
-	 
-	public function check_email_lms($email = NULL, $fisica_cpf){
-		require('conexao.php');
-		$sql = "SELECT email FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';";
-		if ($result = $mysqli->query($sql)) {
-			if($result->num_rows == 1){
-				return 1;
-			}else{
+			} else {
 				return 0;
 			}
 		}
 	}
 
-	public function salvar_usuario_lms($lms_usuario_id, $fisica_nome = NULL ,$email = NULL ,$fisica_cpf = NULL ,$telefone = NULL ,$endereco = NULL ,$numero = NULL ,$bairro = NULL ,$cidade = NULL ,$estado = NULL ,$add_data_gerado = NULL ,$fisica_nascimento = NULL ,$fisica_sexo = NULL ,$senha = NULL ){
+	public function check_email_lms($email = NULL, $fisica_cpf)
+	{
+		require('conexao.php');
+		$sql = "SELECT email FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';";
+		if ($result = $mysqli->query($sql)) {
+			if ($result->num_rows == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
+	}
+
+	public function salvar_usuario_lms($lms_usuario_id, $fisica_nome = NULL, $email = NULL, $fisica_cpf = NULL, $telefone = NULL, $endereco = NULL, $numero = NULL, $bairro = NULL, $cidade = NULL, $estado = NULL, $add_data_gerado = NULL, $fisica_nascimento = NULL, $fisica_sexo = NULL, $senha = NULL)
+	{
 
 		require('conexao.php');
 		$sql = "UPDATE usuario
 				SET id_ocupacao = 29, id_perfil = 22, id_pais = 1, id_empresa = 1, nome = '$fisica_nome', email = '$email', cpf = '$fisica_cpf', telefone = '$telefone', endereco = '$endereco', numero = '$numero', bairro = '$bairro', cidade = '$cidade', ativo =1, senha = '$senha', pontos = 0, acessibilidade = 0, avisoemail = 0, instrutor =0, id_loja = 3, performance = '0'
 				WHERE id = '$lms_usuario_id'";
 		$mysqli->query($sql);
-		
+
 		$mysqli->close();
 	}
 
-	public function duvidas_respostas(){
+	public function duvidas_respostas()
+	{
 
 		$codigo = $this->post('codigo');
-		if($codigo){
+		if ($codigo) {
 
 			$db = new mysql();
 			$exec = $db->Executar("SELECT * FROM duvidas WHERE codigo='$codigo' ");
 			$data = $exec->fetch_object();
 
 			echo "
-			<div class='duvidas_pergunta'>".$data->titulo."</div>
-			<div class='duvidas_resposta' >".nl2br($data->resposta)."</div>
+			<div class='duvidas_pergunta'>" . $data->titulo . "</div>
+			<div class='duvidas_resposta' >" . nl2br($data->resposta) . "</div>
 			";
-
 		}
 	}
 
-	public function resultado_enquete(){
+	public function resultado_enquete()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 
 		$codigo = $this->get('codigo');
 
-		if(!$codigo){
+		if (!$codigo) {
 
 			echo "Ocorreu um erro!";
 			exit;
-
 		}
 
 
@@ -2820,28 +2930,28 @@ class index extends controller {
 
 		//calcula total de votos
 		$conexao = new mysql();
-		$coisas_vot_total = $conexao->Executar("SELECT id FROM enquete_voto WHERE codigo_enquete='".$dados['enquete']['codigo']."' ");
+		$coisas_vot_total = $conexao->Executar("SELECT id FROM enquete_voto WHERE codigo_enquete='" . $dados['enquete']['codigo'] . "' ");
 		$linhas_vot_total = $coisas_vot_total->num_rows;
 
 		//lisa respostas
 		$respostas = array();
 		$conexao = new mysql();
-		$coisas = $conexao->Executar("SELECT * FROM enquete_resposta WHERE enquete_codigo='".$dados['enquete']['codigo']."' ");
+		$coisas = $conexao->Executar("SELECT * FROM enquete_resposta WHERE enquete_codigo='" . $dados['enquete']['codigo'] . "' ");
 		$n = 0;
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 
 			$respostas[$n]['texto'] = $data->resposta;
 			$respostas[$n]['codigo'] = $data->codigo;
 
 			//calula numero de votos
 			$conexao = new mysql();
-			$coisas_vot = $conexao->Executar("SELECT id FROM enquete_voto WHERE codigo_enquete='".$dados['enquete']['codigo']."' AND codigo_resposta='$data->codigo' ");
+			$coisas_vot = $conexao->Executar("SELECT id FROM enquete_voto WHERE codigo_enquete='" . $dados['enquete']['codigo'] . "' AND codigo_resposta='$data->codigo' ");
 			$linhas_vot = $coisas_vot->num_rows;
 
 			$respostas[$n]['votos'] = $linhas_vot;
 
 			//calula porcentagem de votos
-			if($linhas_vot != 0){
+			if ($linhas_vot != 0) {
 				$porcento = ($linhas_vot / $linhas_vot_total) * 100;
 				$porcento = $trata->trata_valor_calculo($porcento);
 			} else {
@@ -2858,18 +2968,19 @@ class index extends controller {
 		$this->view('conteudo_enquete_resultado', $dados);
 	}
 
-	public function enquete_votar(){
+	public function enquete_votar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 
 		$codigo_enquete = $this->post('codigo');
 		$voto = $this->post('enquete');
 
-		if($codigo_enquete AND $voto){
+		if ($codigo_enquete and $voto) {
 
 			$ip = $_SERVER["REMOTE_ADDR"];
 			$time = time();
@@ -2879,9 +2990,9 @@ class index extends controller {
 			$coisas = $conexao->Executar("SELECT data FROM enquete_voto WHERE codigo_enquete='$codigo_enquete' AND ip='$ip' order by id desc limit 1 ");
 
 			//caso já exista um voto confere se foi no mesmo dia
-			if($coisas->num_rows != 0){
+			if ($coisas->num_rows != 0) {
 				$data = $coisas->fetch_object();
-				if(date('d/m/Y') == date('d/m/Y', $data->data)){
+				if (date('d/m/Y') == date('d/m/Y', $data->data)) {
 					echo "Desculpe, é permitido apenas 1 voto por pessoa/ip";
 					exit;
 				}
@@ -2890,10 +3001,10 @@ class index extends controller {
 			// se passou nas validações grava o voto no banco
 			$db = new mysql();
 			$coisas = $db->inserir("enquete_voto", array(
-				"data"=>"$time",
-				"codigo_enquete"=>"$codigo_enquete",
-				"codigo_resposta"=>"$voto",
-				"ip"=>"$ip"
+				"data" => "$time",
+				"codigo_enquete" => "$codigo_enquete",
+				"codigo_resposta" => "$voto",
+				"ip" => "$ip"
 			));
 
 			echo "Obrigao por votar!";
@@ -2902,14 +3013,14 @@ class index extends controller {
 			echo "Preencha o campo de resposta!";
 			exit;
 		}
-
 	}
 
-	public function servicos_detalhes(){
+	public function servicos_detalhes()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -2923,7 +3034,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -2936,7 +3047,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -2944,23 +3055,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -2972,53 +3083,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -3027,16 +3138,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -3044,7 +3153,7 @@ class index extends controller {
 
 		$id = $this->get('id');
 
-		if(!$id){
+		if (!$id) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -3055,14 +3164,14 @@ class index extends controller {
 
 		//carrega view e envia dados para a tela
 		$this->view('servicos.detalhes', $dados);
+	}
 
-	}	
-
-	public function filial(){
+	public function filial()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -3076,7 +3185,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -3089,7 +3198,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -3097,23 +3206,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -3125,53 +3234,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -3180,16 +3289,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -3197,7 +3304,7 @@ class index extends controller {
 
 		$codigo = $this->get('codigo');
 
-		if(!$codigo){
+		if (!$codigo) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -3210,33 +3317,36 @@ class index extends controller {
 		$this->view('filiais.detalhes', $dados);
 	}
 
-	public function videos_categoria(){
+	public function videos_categoria()
+	{
 
 		$categoria = $this->post('categoria');
 		$itens_por_linha = $this->post('itens_por_linha');
 		$mostrar_titulo_video = $this->post('mostrar_titulo_video');
 
-		if($categoria){
+		if ($categoria) {
 
 			$n_row = 1;
 
 			$db = new mysql();
 			$exec = $db->Executar("SELECT * FROM videos WHERE categoria='$categoria' ");
-			while($data = $exec->fetch_object()){
+			while ($data = $exec->fetch_object()) {
 
-				if($n_row == 1){ echo "<div class='row' >"; }
+				if ($n_row == 1) {
+					echo "<div class='row' >";
+				}
 
 
-				if($itens_por_linha == 1){
+				if ($itens_por_linha == 1) {
 					echo "<div class='col-xs-12 col-sm-12 col-md-12' >";
 				}
-				if($itens_por_linha == 2){
+				if ($itens_por_linha == 2) {
 					echo "<div class='col-xs-12 col-sm-6 col-md-6' >";
 				}
-				if($itens_por_linha == 3){
+				if ($itens_por_linha == 3) {
 					echo "<div class='col-xs-12 col-sm-4 col-md-4' >";
 				}
-				if($itens_por_linha == 4){
+				if ($itens_por_linha == 4) {
 					echo "<div class='col-xs-12 col-sm-3 col-md-3' >";
 				}
 
@@ -3244,62 +3354,69 @@ class index extends controller {
 				<div class='videos_div' >
 				";
 
-				if($mostrar_titulo_video == 1){
+				if ($mostrar_titulo_video == 1) {
 
-					echo "<div class='videos_titulo'  >".$data->titulo."</div>";
-
+					echo "<div class='videos_titulo'  >" . $data->titulo . "</div>";
 				}
 
 				echo "
-				<div class='videos_descricao' >".$data->previa."</div>
-				<div class='videos_conteudo' >".$data->conteudo."</div>
+				<div class='videos_descricao' >" . $data->previa . "</div>
+				<div class='videos_conteudo' >" . $data->conteudo . "</div>
 
 				</div>
 				</div>
 				";
 
-				if($n_row == $itens_por_linha){ echo "</div>"; $n_row = 1; } else { $n_row++; }
-
+				if ($n_row == $itens_por_linha) {
+					echo "</div>";
+					$n_row = 1;
+				} else {
+					$n_row++;
+				}
 			}
 
-			if($n_row != 1){ echo "</div>"; }
-
+			if ($n_row != 1) {
+				echo "</div>";
+			}
 		}
 	}
 
-	public function audios_categoria(){
+	public function audios_categoria()
+	{
 
 		$categoria = $this->post('categoria');
 		$itens_por_linha = $this->post('itens_por_linha');
 		$mostrar_titulo_audio = $this->post('mostrar_titulo_audio');
 
 		$ntotal = 0;
-		if($categoria){
+		if ($categoria) {
 
 			$n_row = 1;
 
 			$db = new mysql();
 			$exec = $db->Executar("SELECT * FROM audios WHERE categoria='$categoria' ");
-			while($data = $exec->fetch_object()){
+			while ($data = $exec->fetch_object()) {
 
-				if($n_row == 1){ echo "<div class='row' >"; }
+				if ($n_row == 1) {
+					echo "<div class='row' >";
+				}
 
 
-				if($itens_por_linha == 1){
+				if ($itens_por_linha == 1) {
 					echo "<div class='col-xs-12 col-sm-12 col-md-12' >";
 				}
-				if($itens_por_linha == 2){
+				if ($itens_por_linha == 2) {
 					echo "<div class='col-xs-12 col-sm-6 col-md-6' >";
 				}
-				if($itens_por_linha == 3){
+				if ($itens_por_linha == 3) {
 					echo "<div class='col-xs-12 col-sm-4 col-md-4' >";
 				}
-				if($itens_por_linha == 4){
+				if ($itens_por_linha == 4) {
 					echo "<div class='col-xs-12 col-sm-3 col-md-3' >";
 				}
 
 
-				if($data->status == 1){
+				if ($data->status == 1) {
 					$status = "<div class='audios_status1' >Online</div>";
 				} else {
 					$status = "<div class='audios_status2' >Offline</div>";
@@ -3310,13 +3427,13 @@ class index extends controller {
 				<div class='row' >
 
 				<div class='col-xs-4 col-sm-3 col-md-3' >
-				<div class='audios_img' style='background-image:url(".PASTA_CLIENTE."img_audios/".$data->imagem.")' ></div>
+				<div class='audios_img' style='background-image:url(" . PASTA_CLIENTE . "img_audios/" . $data->imagem . ")' ></div>
 				<div class='audios_titulo'  >
-				".$data->titulo."
+				" . $data->titulo . "
 				";
 
-				if($data->previa){
-					echo "<div class='audios_descricao' >".$data->previa."</div>";
+				if ($data->previa) {
+					echo "<div class='audios_descricao' >" . $data->previa . "</div>";
 				}
 
 				echo "
@@ -3325,7 +3442,7 @@ class index extends controller {
 				</div>
 
 				<div class='col-xs-4 col-sm-2 col-md-2' >
-				<div class='audios_tempo' >".$data->tempo."</div>
+				<div class='audios_tempo' >" . $data->tempo . "</div>
 				</div>
 
 				<div class='col-xs-4 col-sm-2 col-md-2' >
@@ -3335,7 +3452,7 @@ class index extends controller {
 				<div class='col-xs-12 col-sm-5 col-md-5' >
 				<div class='audios_conteudo' >
 				<audio controls='controls'>
-				<source src='".PASTA_CLIENTE."audios/".$data->arquivo."' type='audio/mp3' />
+				<source src='" . PASTA_CLIENTE . "audios/" . $data->arquivo . "' type='audio/mp3' />
 				O seu navegador não suporta o elemento <code>audio</code>.
 				</audio>
 				</div>
@@ -3347,38 +3464,42 @@ class index extends controller {
 				";
 
 				$ntotal++;
-				if($n_row == $itens_por_linha){ echo "</div>"; $n_row = 1; } else { $n_row++; }
-
+				if ($n_row == $itens_por_linha) {
+					echo "</div>";
+					$n_row = 1;
+				} else {
+					$n_row++;
+				}
 			}
 
-			if($n_row != 1){ echo "</div>"; }
-
+			if ($n_row != 1) {
+				echo "</div>";
+			}
 		}
 
-		if($ntotal == 0){
+		if ($ntotal == 0) {
 			echo "<div style='text-align:center; margin-top:30px;'>Nenhum resultado</a>";
-
 		}
-
 	}
 
-	public function fotos_categoria(){
+	public function fotos_categoria()
+	{
 
 		$fotos = new model_fotos();
 
 		$categoria = $this->post('categoria');
-		$itens_por_linha = $this->post('itens_por_linha'); 
+		$itens_por_linha = $this->post('itens_por_linha');
 		$formato = $this->post('formato');
 		$max_itens = $this->post('max_itens');
 
-		if($categoria)	{
+		if ($categoria) {
 
 			$n_row = 1;
 			$total_n = 1;
 			$lista = array();
 			$n = 0;
 
-			if($formato == 'imagens'){
+			if ($formato == 'imagens') {
 
 				// imagens aleatorias clicar e ampliar
 
@@ -3386,9 +3507,9 @@ class index extends controller {
 
 				$db = new mysql();
 				$exec = $db->Executar("SELECT * FROM fotos WHERE categoria='$categoria' ");
-				while($data = $exec->fetch_object()){
+				while ($data = $exec->fetch_object()) {
 					$imagens = $fotos->imagens($data->codigo);
-					foreach ($imagens['lista'] as $key2 => $value2) {							
+					foreach ($imagens['lista'] as $key2 => $value2) {
 						$lista[$n] = $value2['imagem_g'];
 						$n++;
 					}
@@ -3398,49 +3519,56 @@ class index extends controller {
 
 				foreach ($lista as $key => $value) {
 
-					if($total_n <= $max_itens){
+					if ($total_n <= $max_itens) {
 
-						if($n_row == 1){ echo "<div class='row' style='padding-left:15px; padding-right:15px;' >"; }
+						if ($n_row == 1) {
+							echo "<div class='row' style='padding-left:15px; padding-right:15px;' >";
+						}
 
-						if($itens_por_linha == 1){
+						if ($itens_por_linha == 1) {
 							echo "<div class='col-xs-12 col-sm-12 col-md-12' style='padding-left:0px; padding-right:0px;' >";
 						}
-						if($itens_por_linha == 2){
+						if ($itens_por_linha == 2) {
 							echo "<div class='col-xs-12 col-sm-6 col-md-6' style='padding-left:0px; padding-right:0px;' >";
 						}
-						if($itens_por_linha == 3){
+						if ($itens_por_linha == 3) {
 							echo "<div class='col-xs-12 col-sm-4 col-md-4' style='padding-left:0px; padding-right:0px;' >";
 						}
-						if($itens_por_linha == 4){
+						if ($itens_por_linha == 4) {
 							echo "<div class='col-xs-12 col-sm-3 col-md-3' style='padding-left:0px; padding-right:0px;' >";
 						}
 
 						echo " 
-						<a class='fotos1_div' style='background-image:url(".$value.");' href='".$value."' ></a>
+						<a class='fotos1_div' style='background-image:url(" . $value . ");' href='" . $value . "' ></a>
 						</div>
 						";
 
 						$total_n++;
 
-						if($n_row == $itens_por_linha){ echo "</div>"; $n_row = 1; } else { $n_row++; }
-
+						if ($n_row == $itens_por_linha) {
+							echo "</div>";
+							$n_row = 1;
+						} else {
+							$n_row++;
+						}
 					}
 				}
-				if($n_row != 1){ echo "</div>"; }
+				if ($n_row != 1) {
+					echo "</div>";
+				}
 
 				echo "</div>
 
 				<script> $(function () { $('.ampliar_imagem').photobox('a',{ time:0 }); }); </script>
 
 				";
-
 			} else {
 
 				// albuns clicar e abrir nova pagina 
 
 				$conexao = new mysql();
-				$coisas = $conexao->Executar("SELECT * FROM fotos WHERE categoria='".$categoria."' ");
-				while($data = $coisas->fetch_object()){
+				$coisas = $conexao->Executar("SELECT * FROM fotos WHERE categoria='" . $categoria . "' ");
+				while ($data = $coisas->fetch_object()) {
 
 					$lista[$n]['id'] = $data->id;
 					$lista[$n]['codigo'] = $data->codigo;
@@ -3455,48 +3583,55 @@ class index extends controller {
 				$n_row = 1;
 				$total_n = 1;
 				foreach ($lista as $key => $value) {
-					if($total_n <= $max_itens){
+					if ($total_n <= $max_itens) {
 
-						if($n_row == 1){ echo "<div class='row' >"; }
+						if ($n_row == 1) {
+							echo "<div class='row' >";
+						}
 
-						if($itens_por_linha == 1){
+						if ($itens_por_linha == 1) {
 							echo "<div class='col-xs-12 col-sm-12 col-md-12' >";
 						}
-						if($itens_por_linha == 2){
+						if ($itens_por_linha == 2) {
 							echo "<div class='col-xs-12 col-sm-6 col-md-6' >";
 						}
-						if($itens_por_linha == 3){
+						if ($itens_por_linha == 3) {
 							echo "<div class='col-xs-12 col-sm-4 col-md-4' >";
 						}
-						if($itens_por_linha == 4){
+						if ($itens_por_linha == 4) {
 							echo "<div class='col-xs-12 col-sm-3 col-md-3' >";
 						}
 
 						echo " 
-						<a class='fotos2_div' style='background-image:url(".$value['imagem'].");' href='".DOMINIO.$this->_controller."/fotos_detalhes/codigo/".$value['codigo']."' ></a>
-						<a class='fotos2_titulo' href='".DOMINIO.$this->_controller."/fotos_detalhes/codigo/".$value['codigo']."' >".$value['titulo']."</a>
+						<a class='fotos2_div' style='background-image:url(" . $value['imagem'] . ");' href='" . DOMINIO . $this->_controller . "/fotos_detalhes/codigo/" . $value['codigo'] . "' ></a>
+						<a class='fotos2_titulo' href='" . DOMINIO . $this->_controller . "/fotos_detalhes/codigo/" . $value['codigo'] . "' >" . $value['titulo'] . "</a>
 
 						</div>
 						";
 
 						$total_n++;
 
-						if($n_row == $itens_por_linha){ echo "</div>"; $n_row = 1; } else { $n_row++; }
-
+						if ($n_row == $itens_por_linha) {
+							echo "</div>";
+							$n_row = 1;
+						} else {
+							$n_row++;
+						}
 					}
 				}
-				if($n_row != 1){ echo "</div>"; }
-
+				if ($n_row != 1) {
+					echo "</div>";
+				}
 			}
-
 		}
 	}
 
-	public function fotos_detalhes(){
+	public function fotos_detalhes()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -3510,7 +3645,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -3523,7 +3658,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -3531,23 +3666,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -3559,53 +3694,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -3614,16 +3749,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -3631,7 +3764,7 @@ class index extends controller {
 
 		$codigo = $this->get('codigo');
 
-		if(!$codigo){
+		if (!$codigo) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -3644,11 +3777,12 @@ class index extends controller {
 		$this->view('fotos.detalhes', $dados);
 	}
 
-	public function edicao_leitura(){
+	public function edicao_leitura()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -3662,7 +3796,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -3675,7 +3809,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -3683,23 +3817,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -3711,53 +3845,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -3766,16 +3900,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -3783,7 +3915,7 @@ class index extends controller {
 
 		$codigo = $this->get('codigo');
 
-		if(!$codigo){
+		if (!$codigo) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -3797,10 +3929,10 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas_edicao = $conexao->Executar("SELECT * FROM revistajornal_imagem WHERE codigo='$codigo' ORDER by pagina asc ");
-		while($data_edicao = $coisas_edicao->fetch_object()){
+		while ($data_edicao = $coisas_edicao->fetch_object()) {
 
 			$revista_paginas[$n]['pagina'] = $data_edicao->pagina;
-			$revista_paginas[$n]['imagem'] = PASTA_CLIENTE.'img_revistajornal_g/'.$data_edicao->imagem;
+			$revista_paginas[$n]['imagem'] = PASTA_CLIENTE . 'img_revistajornal_g/' . $data_edicao->imagem;
 
 			$n++;
 		}
@@ -3810,11 +3942,12 @@ class index extends controller {
 		//carrega view e envia dados para a tela
 		$this->view('revista.detalhes', $dados);
 	}
-	
-	public function combo_trilhas(){
+
+	public function combo_trilhas()
+	{
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -3828,7 +3961,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -3841,7 +3974,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -3849,23 +3982,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -3877,53 +4010,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -3932,16 +4065,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -3949,7 +4080,7 @@ class index extends controller {
 
 		$id = $this->get('id');
 
-		if(!$id){
+		if (!$id) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -3975,7 +4106,7 @@ class index extends controller {
 
 		$new = array();
 		while ($obj = $result->fetch_object()) {
-			array_push($new,$obj);
+			array_push($new, $obj);
 		}
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
@@ -3986,11 +4117,12 @@ class index extends controller {
 		$this->view('combo_trilhas.detalhes', $dados);
 	}
 
-	public function canais(){
-		
+	public function canais()
+	{
+
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -4004,7 +4136,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -4017,7 +4149,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -4025,23 +4157,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -4053,53 +4185,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -4108,16 +4240,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -4125,7 +4255,7 @@ class index extends controller {
 
 		$id = $this->get('id');
 
-		if(!$id){
+		if (!$id) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -4134,24 +4264,26 @@ class index extends controller {
 
 		$canal_config = $conexao->query("SELECT canal.id_canal, canal.banner as bann, canal.bio, canal.email, canal.profile, canal.nm_canal FROM loja.canal where  canal.id_canal = '$id' ");
 
-		$query = null;$inner = null;$campo = null;
+		$query = null;
+		$inner = null;
+		$campo = null;
 
-		if($_POST['autor']){
-			if($_POST['autor'] == 0){
+		if ($_POST['autor']) {
+			if ($_POST['autor'] == 0) {
 				$query = '';
 				$inner = '';
 				$campo = '';
-			}else{
+			} else {
 				$id_autor = $_POST['autor'];
 				$query .= " AND autor.id = $id_autor ";
 			}
 		}
-		if($_POST['categoria']){
-			if($_POST['categoria'] == 0){
+		if ($_POST['categoria']) {
+			if ($_POST['categoria'] == 0) {
 				$query = '';
 				$inner = '';
 				$campo = '';
-			}else{
+			} else {
 				$id_categoria = $_POST['categoria'];
 				$campo .= " produto_categoria.id as categoria_id, produto_categoria.titulo as categoria, ";
 				$inner .= " inner join produto_categoria_sel on produto_categoria_sel.produto_codigo = produto.codigo
@@ -4159,7 +4291,7 @@ class index extends controller {
 				$query .= " AND produto_categoria.id = $id_categoria ";
 			}
 		}
-		if($_POST['estrelas']){
+		if ($_POST['estrelas']) {
 			$estrela = $_POST['estrelas'];
 			$campo .= " t2.media_estrela, ";
 			$inner .= " inner join curso_produto on curso_produto.id_produto = produto.id
@@ -4170,12 +4302,12 @@ class index extends controller {
 			group by curso_produto.id_produto) t2 on curso_produto.id_produto = t2.id_produto ";
 			$query .= " AND t2.media_estrela <= $estrela ";
 		}
-		if($_POST['buscar1']){
-			if($_POST['buscar1'] == ''){
+		if ($_POST['buscar1']) {
+			if ($_POST['buscar1'] == '') {
 				$query = '';
 				$inner = '';
 				$campo = '';
-			}else{
+			} else {
 				$buscar_campo = $_POST['buscar1'];
 				$query .= " AND produto.titulo LIKE '%$buscar_campo%' ";
 			}
@@ -4224,17 +4356,17 @@ class index extends controller {
 
 		$canal_conf = array();
 		while ($obj_canal = $canal_config->fetch_object()) {
-			array_push($canal_conf,$obj_canal);
+			array_push($canal_conf, $obj_canal);
 		}
 
 		$new = array();
 		while ($obj = $result->fetch_object()) {
-			array_push($new,$obj);
+			array_push($new, $obj);
 		}
-		
+
 		$avaliacao_new = array();
 		while ($obj_ava = $avaliacao->fetch_object()) {
-			array_push($avaliacao_new,$obj_ava);
+			array_push($avaliacao_new, $obj_ava);
 		}
 
 		$dados['cat_selecionada'] = ($_POST['categoria'] > 0 ? $_POST['categoria'] : 0);
@@ -4255,11 +4387,12 @@ class index extends controller {
 		$this->view('canais.detalhes', $dados);
 	}
 
-	public function canal(){
-		
+	public function canal()
+	{
+
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -4273,7 +4406,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -4286,7 +4419,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -4294,23 +4427,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -4322,53 +4455,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -4377,31 +4510,30 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
-		
+
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];
 
 		$this->view('canais.lista', $dados);
 	}
 
-	public function curso(){
+	public function curso()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -4415,7 +4547,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -4428,7 +4560,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -4436,23 +4568,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -4464,53 +4596,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -4519,16 +4651,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -4536,7 +4666,7 @@ class index extends controller {
 
 		$id = $this->get('id');
 		// print_r($id);exit;
-		if(!$id){
+		if (!$id) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -4551,7 +4681,7 @@ class index extends controller {
 		//codigo
 		$codigo = $dados['data']->id;
 		$dados['curso_conteudo'] = $cursos->curso_conteudo($codigo);
-		
+
 
 		// valor 
 		$dados['valor_banco'] = $dados['data']->valor;
@@ -4564,24 +4694,24 @@ class index extends controller {
 		//pega imagens
 		$dados['imagens'] = $cursos->imagens($codigo)['imagens'];
 
- 		// tamanhos
+		// tamanhos
 		$dados['tamanhos'] = $cursos->tamanhos($codigo);
 
- 		// cores
+		// cores
 		$dados['cursos_cores'] = $cursos->cores($codigo);
 
- 		// variacoes
+		// variacoes
 		$dados['variacoes'] = $cursos->variacoes($codigo);
 
 
 		$opcao_selecionada = $this->get('opcao');
 		$dados['opcao_selecionada'] = $opcao_selecionada;
 
-		if(count($dados['variacoes']) >= 1){
+		if (count($dados['variacoes']) >= 1) {
 
-			if($opcao_selecionada){
+			if ($opcao_selecionada) {
 				foreach ($dados['variacoes'] as $key => $value) {
-					if($opcao_selecionada == $value['codigo']){						 
+					if ($opcao_selecionada == $value['codigo']) {
 						$valor_banco = $value['valor'];
 					}
 				}
@@ -4590,18 +4720,20 @@ class index extends controller {
 			}
 			$dados['valor_banco'] = $valor_banco;
 			$dados['valor_de'] = $valores->trata_valor($dados['valor_banco']);
-			$dados['valor_principal'] = $valores->trata_valor($dados['valor_banco']);	
+			$dados['valor_principal'] = $valores->trata_valor($dados['valor_banco']);
 		}
 
 		$tipoarte = $this->get('tipoarte');
-		if(!$tipoarte){ $tipoarte = 0; }
+		if (!$tipoarte) {
+			$tipoarte = 0;
+		}
 		$dados['tipoarte'] = $tipoarte;
 
 		$modelogratisselecionado = $this->get('modelogratisselecionado');
 		$dados['modelogratisselecionado'] = $modelogratisselecionado;
 
 		//endereco da noticia		 
-		$dados['endereco'] = DOMINIO.$this->_controller."/produto/id/".$dados['data']->id;
+		$dados['endereco'] = DOMINIO . $this->_controller . "/produto/id/" . $dados['data']->id;
 
 		$dados['gabaritos'] = $cursos->gabaritos($codigo);
 
@@ -4616,45 +4748,43 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao .= "<a class='botao_padrao botao_".$data->codigo."' onclick=\"history.go(-1);\" >".$data->texto."</a>";
-
+			$botao .= "<a class='botao_padrao botao_" . $data->codigo . "' onclick=\"history.go(-1);\" >" . $data->texto . "</a>";
 		} else {
 			$botao = "";
 		}
@@ -4669,55 +4799,77 @@ class index extends controller {
 		$lista = array();
 		$i_ = 0;
 		$total_estrelas = 0;
-		$estrela1 = 0;	
-		$estrela2 = 0;	
-		$estrela3 = 0;	
-		$estrela4 = 0;	
-		$estrela5 = 0;	
-		while($data = $exec->fetch_object()) {
+		$estrela1 = 0;
+		$estrela2 = 0;
+		$estrela3 = 0;
+		$estrela4 = 0;
+		$estrela5 = 0;
+		while ($data = $exec->fetch_object()) {
 			$lista[$i_]['id'] = $data->id;
 			$lista[$i_]['nome'] = $data->nome;
 			$lista[$i_]['estrela'] = $data->estrela;
 			$lista[$i_]['texto'] = $data->texto;
-			
+
 			$total_estrelas += $data->estrela;
-			if($data->estrela == 5){$estrela5++;}
-			if($data->estrela == 4){$estrela4++;}
-			if($data->estrela == 3){$estrela3++;}
-			if($data->estrela == 2){$estrela2++;}
-			if($data->estrela == 1){$estrela1++;}
+			if ($data->estrela == 5) {
+				$estrela5++;
+			}
+			if ($data->estrela == 4) {
+				$estrela4++;
+			}
+			if ($data->estrela == 3) {
+				$estrela3++;
+			}
+			if ($data->estrela == 2) {
+				$estrela2++;
+			}
+			if ($data->estrela == 1) {
+				$estrela1++;
+			}
 			$i_++;
 		}
 		$estrelas = array($estrela5, $estrela4, $estrela3, $estrela2, $estrela1);
 
 		$total_aulas = 0;
 		$seconds = 0;
-		foreach($dados['curso_conteudo'] as $row){
-			foreach($row['conteudo'] as $cont){
-				list( $g, $i, $s ) = explode( ':', $cont['duracao'] ); 
+		foreach ($dados['curso_conteudo'] as $row) {
+			foreach ($row['conteudo'] as $cont) {
+				list($g, $i, $s) = explode(':', $cont['duracao']);
 				$seconds += $g * 3600;
 				$seconds += $i * 60;
 				$seconds += $s;
 			}
 			$total_aulas += count($row['conteudo']);
 		}
-		$hours = floor( $seconds / 3600 );
+		$hours = floor($seconds / 3600);
 		$seconds -= $hours * 3600;
-		$minutes = floor( $seconds / 60 );
+		$minutes = floor($seconds / 60);
 		$seconds -= ($minutes * 60);
-		
-		if($hours > 0 ){$hours = $hours.'hrs ';}else{$hours = '';};
-		if($minutes > 0 ){$minutes = $minutes.'min ';}else{$minutes = '';};
-		if($seconds > 0 ){$seconds = $seconds.'seg ';}else{$seconds = '';};
-		
-		$total_minutos = $hours.' '.$minutes.' '.$seconds;
+
+		if ($hours > 0) {
+			$hours = $hours . 'hrs ';
+		} else {
+			$hours = '';
+		};
+		if ($minutes > 0) {
+			$minutes = $minutes . 'min ';
+		} else {
+			$minutes = '';
+		};
+		if ($seconds > 0) {
+			$seconds = $seconds . 'seg ';
+		} else {
+			$seconds = '';
+		};
+
+		$total_minutos = $hours . ' ' . $minutes . ' ' . $seconds;
 
 
 		$dados['estrelas'] = $estrelas;
 		$dados['lista_feedback'] = $lista;
 		// echo'<pre>';print_r($dados['lista_feedback']);exit;
-	
-		$dados['total_estrelas'] = number_format(($total_estrelas)/$i_, 1, ',', ',');
+
+		$dados['total_estrelas'] = number_format(($total_estrelas) / $i_, 1, ',', ',');
 		$dados['qtd_conteudo'] = count($dados['curso_conteudo']);
 		$dados['total_aulas'] = $total_aulas;
 		$dados['total_minutos'] = $total_minutos;
@@ -4728,11 +4880,12 @@ class index extends controller {
 		$this->view('cursos.detalhes', $dados);
 	}
 
-	public function produto(){
+	public function produto()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -4746,7 +4899,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -4759,7 +4912,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -4767,23 +4920,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -4795,53 +4948,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -4850,16 +5003,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -4867,7 +5018,7 @@ class index extends controller {
 
 		$id = $this->get('id');
 		// print_r($id);exit;
-		if(!$id){
+		if (!$id) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -4894,24 +5045,24 @@ class index extends controller {
 		//pega imagens
 		$dados['imagens'] = $produtos->imagens($codigo)['imagens'];
 
- 		// tamanhos
+		// tamanhos
 		$dados['tamanhos'] = $produtos->tamanhos($codigo);
 
- 		// cores
+		// cores
 		$dados['produtos_cores'] = $produtos->cores($codigo);
 
- 		// variacoes
+		// variacoes
 		$dados['variacoes'] = $produtos->variacoes($codigo);
 
 
 		$opcao_selecionada = $this->get('opcao');
 		$dados['opcao_selecionada'] = $opcao_selecionada;
 
-		if(count($dados['variacoes']) >= 1){
+		if (count($dados['variacoes']) >= 1) {
 
-			if($opcao_selecionada){
+			if ($opcao_selecionada) {
 				foreach ($dados['variacoes'] as $key => $value) {
-					if($opcao_selecionada == $value['codigo']){						 
+					if ($opcao_selecionada == $value['codigo']) {
 						$valor_banco = $value['valor'];
 					}
 				}
@@ -4920,18 +5071,20 @@ class index extends controller {
 			}
 			$dados['valor_banco'] = $valor_banco;
 			$dados['valor_de'] = $valores->trata_valor($dados['valor_banco']);
-			$dados['valor_principal'] = $valores->trata_valor($dados['valor_banco']);	
+			$dados['valor_principal'] = $valores->trata_valor($dados['valor_banco']);
 		}
 
 		$tipoarte = $this->get('tipoarte');
-		if(!$tipoarte){ $tipoarte = 0; }
+		if (!$tipoarte) {
+			$tipoarte = 0;
+		}
 		$dados['tipoarte'] = $tipoarte;
 
 		$modelogratisselecionado = $this->get('modelogratisselecionado');
 		$dados['modelogratisselecionado'] = $modelogratisselecionado;
 
 		//endereco da noticia		 
-		$dados['endereco'] = DOMINIO.$this->_controller."/produto/id/".$dados['data']->id;
+		$dados['endereco'] = DOMINIO . $this->_controller . "/produto/id/" . $dados['data']->id;
 
 		$dados['gabaritos'] = $produtos->gabaritos($codigo);
 
@@ -4946,47 +5099,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao .= "<a class='botao_padrao botao_".$data->codigo."' onclick=\"history.go(-1);\" >".$data->texto."</a>";
-
+			$botao .= "<a class='botao_padrao botao_" . $data->codigo . "' onclick=\"history.go(-1);\" >" . $data->texto . "</a>";
 		} else {
 			$botao = "";
 		}
@@ -4999,7 +5150,7 @@ class index extends controller {
 								where curso_produto.id_produto = '$id' ");
 		$lista = array();
 		$i = 0;
-		while($data = $exec->fetch_object()) {
+		while ($data = $exec->fetch_object()) {
 			$lista[$i]['id'] = $data->id;
 			$lista[$i]['nome'] = $data->nome;
 			$lista[$i]['capa'] = $data->capa;
@@ -5013,23 +5164,37 @@ class index extends controller {
 			$lista[$i]['previa'] = $data->previa;
 			$lista[$i]['comentarios_id'] = $data->texto_livre;
 			$lista[$i]['esconder'] = $data->esconder;
-			
+
 			$exec2 = $db->executar("SELECT feedback.* 
 								FROM `feedback` 
 								inner join curso_feedback on feedback.id = curso_feedback.id_feedback 
 								where curso_feedback.id_curso = '$data->id' ");
-			
+
 			$i_ = 0;
 			$total_estrelas = 0;
-			$estrela1 = 0;$estrela2 = 0;$estrela3 = 0;$estrela4 = 0;$estrela5 = 0;	
-			
-			while($data2 = $exec2->fetch_object()) {
+			$estrela1 = 0;
+			$estrela2 = 0;
+			$estrela3 = 0;
+			$estrela4 = 0;
+			$estrela5 = 0;
+
+			while ($data2 = $exec2->fetch_object()) {
 				$total_estrelas += $data2->estrela;
-				if($data2->estrela == 5){$estrela5++;}
-				if($data2->estrela == 4){$estrela4++;}
-				if($data2->estrela == 3){$estrela3++;}
-				if($data2->estrela == 2){$estrela2++;}
-				if($data2->estrela == 1){$estrela1++;}
+				if ($data2->estrela == 5) {
+					$estrela5++;
+				}
+				if ($data2->estrela == 4) {
+					$estrela4++;
+				}
+				if ($data2->estrela == 3) {
+					$estrela3++;
+				}
+				if ($data2->estrela == 2) {
+					$estrela2++;
+				}
+				if ($data2->estrela == 1) {
+					$estrela1++;
+				}
 				$i_++;
 			}
 
@@ -5038,28 +5203,40 @@ class index extends controller {
 			$cursos = new model_cursos();
 			$dados1['curso_conteudo'] = $cursos->curso_conteudo($data->id);
 
-			foreach($dados1['curso_conteudo'] as $row_){
-				foreach($row_['conteudo'] as $cont){
-					list( $g, $i__, $s ) = explode( ':', $cont['duracao'] ); 
+			foreach ($dados1['curso_conteudo'] as $row_) {
+				foreach ($row_['conteudo'] as $cont) {
+					list($g, $i__, $s) = explode(':', $cont['duracao']);
 					$seconds += $g * 3600;
 					$seconds += $i__ * 60;
 					$seconds += $s;
 				}
 				$total_aulas += count($row_['conteudo']);
 			}
-			$hours = floor( $seconds / 3600 );
+			$hours = floor($seconds / 3600);
 			$seconds -= $hours * 3600;
-			$minutes = floor( $seconds / 60 );
+			$minutes = floor($seconds / 60);
 			$seconds -= ($minutes * 60);
-			
-			if($hours > 0 ){$hours = ' '.$hours.'hrs ';}else{$hours = '';};
-			if($minutes > 0 ){$minutes = $minutes.'min ';}else{$minutes = '';};
-			if($seconds > 0 ){$seconds = $seconds.'seg ';}else{$seconds = '';};
-			$total_minutos = $hours.' '.$minutes.' '.$seconds;
+
+			if ($hours > 0) {
+				$hours = ' ' . $hours . 'hrs ';
+			} else {
+				$hours = '';
+			};
+			if ($minutes > 0) {
+				$minutes = $minutes . 'min ';
+			} else {
+				$minutes = '';
+			};
+			if ($seconds > 0) {
+				$seconds = $seconds . 'seg ';
+			} else {
+				$seconds = '';
+			};
+			$total_minutos = $hours . ' ' . $minutes . ' ' . $seconds;
 
 			$lista[$i]['total_minutos'] = $total_minutos;
 			// $lista[$i]['total_estrelas'] = ($total_estrelas)/$i_;
-			$lista[$i]['total_estrelas'] = number_format(($total_estrelas)/$i_, 1, ',', ',');
+			$lista[$i]['total_estrelas'] = number_format(($total_estrelas) / $i_, 1, ',', ',');
 			$lista[$i]['qtd_feedbacks'] = $i_;
 
 			$i++;
@@ -5073,7 +5250,8 @@ class index extends controller {
 		$this->view('produtos.detalhes', $dados);
 	}
 
-	public function produto_tipoarte(){
+	public function produto_tipoarte()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -5081,11 +5259,11 @@ class index extends controller {
 
 		$produto = $this->post('produto');
 		$opcao = $this->post('id');
-		if(!$opcao){
+		if (!$opcao) {
 			echo "Erro, selecione uma opção válida!";
 			exit;
 		}
-		if(!$produto){
+		if (!$produto) {
 			echo "Erro, produto inválido!";
 			exit;
 		}
@@ -5097,20 +5275,19 @@ class index extends controller {
 		$dados['acabamentos'] = $produtos->acabamentos();
 
 		$modelogratisselecionado = $this->post('modelogratisselecionado');
-		if($modelogratisselecionado){
+		if ($modelogratisselecionado) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM produto_modelos WHERE codigo='$modelogratisselecionado' ");
 			$data = $exec->fetch_object();
 
-			if($data->titulo){
+			if ($data->titulo) {
 				$dados['modelo_selecionado'] = $data->titulo;
 				$dados['modelo_selecionado_codigo'] = $modelogratisselecionado;
 			} else {
 				$dados['modelo_selecionado'] = 'Nenhum';
 				$dados['modelo_selecionado_codigo'] = '';
 			}
-
 		} else {
 			$dados['modelo_selecionado'] = 'Nenhum';
 			$dados['modelo_selecionado_codigo'] = '';
@@ -5120,14 +5297,15 @@ class index extends controller {
 		$this->view('produtos.detalhes.opcoes', $dados);
 	}
 
-	public function produto_modelos_gratis(){
+	public function produto_modelos_gratis()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
 		$dados['controller'] = $this->_controller;
 
 		$produto = $this->get('produto');
-		if(!$produto){
+		if (!$produto) {
 			echo "Erro, produto inválido!";
 			exit;
 		}
@@ -5140,18 +5318,19 @@ class index extends controller {
 		$this->view('produtos.detalhes.modelos_gratis', $dados);
 	}
 
-	public function produto_modelos_gratis_lista(){
+	public function produto_modelos_gratis_lista()
+	{
 
 		$dados = array();
-		$dados['_base'] = $this->_base(); 
+		$dados['_base'] = $this->_base();
 
 		$produto = $this->post('produto');
-		if(!$produto){
+		if (!$produto) {
 			echo "Erro, produto inválido!";
 			exit;
 		}
 		$categoria = $this->post('categoria');
-		if(!$categoria){
+		if (!$categoria) {
 			echo "Erro, categoria inválida!";
 			exit;
 		}
@@ -5166,24 +5345,24 @@ class index extends controller {
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM produto_modelos WHERE categoria='$categoria' order by titulo asc");
-		while($data = $exec->fetch_object()) {
+		while ($data = $exec->fetch_object()) {
 
 			$db = new mysql();
 			$exec2 = $db->executar("SELECT * FROM produto_modelos_sel WHERE produto_codigo='$produto' AND layout_codigo='$data->codigo' ");
-			if($exec2->num_rows != 0){
+			if ($exec2->num_rows != 0) {
 
 				echo "
-				<a style='display:block; width:100%; margin-top:20px;' href='".DOMINIO.$this->_controller."/produto/id/".$id_produto."/modelogratisselecionado/".$data->codigo."/tipoarte/1' >
-				<span style='display:block; width:100%; text-align:center; font-size:15px; font-weight:bold;' >".$data->titulo."</span>
-				<img src='".PASTA_CLIENTE."img_produtos_modelos/".$data->imagem."' style='width:100%;' >
+				<a style='display:block; width:100%; margin-top:20px;' href='" . DOMINIO . $this->_controller . "/produto/id/" . $id_produto . "/modelogratisselecionado/" . $data->codigo . "/tipoarte/1' >
+				<span style='display:block; width:100%; text-align:center; font-size:15px; font-weight:bold;' >" . $data->titulo . "</span>
+				<img src='" . PASTA_CLIENTE . "img_produtos_modelos/" . $data->imagem . "' style='width:100%;' >
 				</a>
 				";
-
 			}
-		}		
+		}
 	}
 
-	public function detalhes_estoque(){
+	public function detalhes_estoque()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -5192,144 +5371,147 @@ class index extends controller {
 		$codigo = $this->post('produto');
 
 		$tamanho = $this->post('tamanho');
-		if(!$tamanho){
+		if (!$tamanho) {
 			$tamanho = '-';
 		}
 
 		$cor = $this->post('cor');
-		if(!$cor){
+		if (!$cor) {
 			$cor = '-';
 		}
 
 		$variacao = $this->post('variacao');
-		if(!$variacao){
+		if (!$variacao) {
 			$variacao = '-';
 		}
 
 		//carrega modulo de produtos
 		$produtos = new model_produtos();
 
-		$data_produto = $produtos->carrega_produto($id);		 
+		$data_produto = $produtos->carrega_produto($id);
 
 		// print_r($data_produto->assinatura);
 
-        //confere se tem opcoes de seleçao 
+		//confere se tem opcoes de seleçao 
 		$i = 0;
 		$mensagem_selecao = '';
 
 		$conexao = new mysql();
 		$coisas_det = $conexao->Executar("SELECT * FROM produto_variacao_sel where produto_codigo='$codigo' ");
-		while($data_det = $coisas_det->fetch_object()){
+		while ($data_det = $coisas_det->fetch_object()) {
 			$conexao = new mysql();
 			$data_det2 = $conexao->Executar("SELECT id FROM produto_variacao where codigo='$data_det->variacao_codigo' ")->fetch_object();
-			if(isset($data_det2->id)){
-				if($variacao == 0){ $i++; $mensagem_selecao = 'Selecione uma opção.'; }
+			if (isset($data_det2->id)) {
+				if ($variacao == 0) {
+					$i++;
+					$mensagem_selecao = 'Selecione uma opção.';
+				}
 			}
 		}
 		$conexao = new mysql();
 		$coisas_det = $conexao->Executar("SELECT * FROM produto_cor_sel where produto_codigo='$codigo' ");
-		while($data_det = $coisas_det->fetch_object()){
+		while ($data_det = $coisas_det->fetch_object()) {
 			$conexao = new mysql();
 			$data_det2 = $conexao->Executar("SELECT id FROM produto_cor where codigo='$data_det->cor_codigo' ")->fetch_object();
-			if(isset($data_det2->id)){
-				if($cor == 0){ $i++; $mensagem_selecao = 'Selecione uma cor.'; }
-			}        
+			if (isset($data_det2->id)) {
+				if ($cor == 0) {
+					$i++;
+					$mensagem_selecao = 'Selecione uma cor.';
+				}
+			}
 		}
 		$conexao = new mysql();
 		$coisas_det = $conexao->Executar("SELECT * FROM produto_tamanho_sel where produto_codigo='$codigo' ");
-		while($data_det = $coisas_det->fetch_object()){
+		while ($data_det = $coisas_det->fetch_object()) {
 			$conexao = new mysql();
 			$data_det2 = $conexao->Executar("SELECT id FROM produto_tamanho where codigo='$data_det->tamanho_codigo' ")->fetch_object();
-			if(isset($data_det2->id)){
-				if($tamanho == 0){ $i++; $mensagem_selecao = 'Selecione um tamanho.'; }
-			}             
+			if (isset($data_det2->id)) {
+				if ($tamanho == 0) {
+					$i++;
+					$mensagem_selecao = 'Selecione um tamanho.';
+				}
+			}
 		}
 
 
-		if($i == 0){
+		if ($i == 0) {
 
-            //confere se nao é venda sem estoque
-			if($data_produto->semestoque == 0){
+			//confere se nao é venda sem estoque
+			if ($data_produto->semestoque == 0) {
 
 				$estoque_total = $produtos->estoque_quantidade($codigo, $tamanho, $cor, $variacao);
 
-                //confere se tem estoque disponivel
-				if($estoque_total >= 1){
+				//confere se tem estoque disponivel
+				if ($estoque_total >= 1) {
 
-					if($estoque_total == 1){
-						$disponiveis =  "<div style='font-size:13px;'>".$estoque_total." Disponível</div>";
+					if ($estoque_total == 1) {
+						$disponiveis =  "<div style='font-size:13px;'>" . $estoque_total . " Disponível</div>";
 					} else {
-						$disponiveis =  "<div style='font-size:13px;'>".$estoque_total." Disponíveis</div>";
+						$disponiveis =  "<div style='font-size:13px;'>" . $estoque_total . " Disponíveis</div>";
 					}
 
-					if($data_produto->assinatura == 1){
+					if ($data_produto->assinatura == 1) {
 						echo '
 						<span>
 						<button type="button" class="btn btn-fefault cart" onClick="submit(\'add_carrinho\')" >
 						Assinar
 						</button>
-						<input type="hidden" name="produto" value="'.$codigo.'" >
+						<input type="hidden" name="produto" value="' . $codigo . '" >
 
-						<div style="padding-top:10px;" >'.$disponiveis.'</div>
+						<div style="padding-top:10px;" >' . $disponiveis . '</div>
 						</span>
 						';
-					}else{
+					} else {
 						echo '
 						<span>
 						<button type="button" class="btn btn-fefault cart" onClick="submit(\'add_carrinho\')" >
 						Comprar agora
 						</button>
-						<input type="hidden" name="produto" value="'.$codigo.'" >
+						<input type="hidden" name="produto" value="' . $codigo . '" >
 
-						<div style="padding-top:10px;" >'.$disponiveis.'</div>
+						<div style="padding-top:10px;" >' . $disponiveis . '</div>
 						</span>
 						';
 					}
-
 				} else {
 					echo "
 					<div style='padding-top:5px; color:red;' >Produto indisponível</div>
 					";
 				}
-
 			} else {
-				if($data_produto->assinatura == 1){
+				if ($data_produto->assinatura == 1) {
 					echo '
 						<span>                                     
 						<button type="button" class="btn btn-fefault cart" onClick="submit(\'add_carrinho\')" >
 						Assinar
 						</button>
-						<input type="hidden" name="produto" value="'.$codigo.'" >
+						<input type="hidden" name="produto" value="' . $codigo . '" >
 						</span>
 						';
-				}else{
+				} else {
 					echo '
 						<span>                                     
 						<button type="button" class="btn btn-fefault cart" onClick="submit(\'add_carrinho\')" >
 						Comprar agora
 						</button>
-						<input type="hidden" name="produto" value="'.$codigo.'" >
+						<input type="hidden" name="produto" value="' . $codigo . '" >
 						</span>
 						';
 				}
-
-				
-
 			}
-
 		} else {
 			echo "
 			<div>$mensagem_selecao</div>
 			";
 		}
-
 	}
 
-	public function produto_enviar_anexo(){
+	public function produto_enviar_anexo()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -5341,47 +5523,47 @@ class index extends controller {
 		$this->view('produtos.enviar_anexo', $dados);
 	}
 
-	public function produto_enviar_anexo_grv(){
+	public function produto_enviar_anexo_grv()
+	{
 
-		$dir = __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'arquivos'.DIRECTORY_SEPARATOR.'uploads';
+		$dir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'arquivos' . DIRECTORY_SEPARATOR . 'uploads';
 
-		if(isset($_FILES['file'])){
+		if (isset($_FILES['file'])) {
 
 			$arquivo = $_FILES['file'];
-			$nomenovo = time().'_'.$_FILES['file']['name'];
+			$nomenovo = time() . '_' . $_FILES['file']['name'];
 
 			$modelarquivo = new model_arquivos_imagens();
-			if(!$modelarquivo->filtro($arquivo)){
+			if (!$modelarquivo->filtro($arquivo)) {
 
 				$retorno = array();
 				$retorno['status'] = "erro";
 				$retorno['msg'] = "Arquivo com formato inválido ou inexistente!";
 				echo json_encode($retorno);
-
 			} else {
 
-				if(move_uploaded_file($_FILES['file']['tmp_name'], $dir . DIRECTORY_SEPARATOR . $nomenovo )){
+				if (move_uploaded_file($_FILES['file']['tmp_name'], $dir . DIRECTORY_SEPARATOR . $nomenovo)) {
 					$retorno = array();
 					$retorno['status'] = "ok";
 					$retorno['msg'] = "Envio Concluido!";
 					$retorno['nomearquivo'] = $nomenovo;
 					echo json_encode($retorno);
-				}else{
+				} else {
 					$retorno = array();
 					$retorno['status'] = "erro";
 					$retorno['msg'] = "Erro de upload, arquivo muito grande ou com algum defeito.";
 					echo json_encode($retorno);
 				}
-
 			}
 		}
 	}
 
-	public function balcoes(){
+	public function balcoes()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -5394,33 +5576,34 @@ class index extends controller {
 		$this->view('produtos.balcoes', $dados);
 	}
 
-	public function balcoes_cidades(){
+	public function balcoes_cidades()
+	{
 
 		$estado = $this->post('estado');
 		$selecionado = $this->post('selecionado');
 
 		echo "
-		<select id='cidade' name='cidade' class='form-control select2' onChange=\"lista_balcoes('".$estado."',this.value);\" >
+		<select id='cidade' name='cidade' class='form-control select2' onChange=\"lista_balcoes('" . $estado . "',this.value);\" >
 		<option value='' >Selecione</option>
 		";
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM cidade where uf='$estado' order by nome asc ");
-		while($data = $exec->fetch_object()){
+		while ($data = $exec->fetch_object()) {
 
 			$db = new mysql();
-			$exec2 = $db->executar("SELECT id FROM balcoes where uf='$estado' AND cidade='$data->nome' ");			
+			$exec2 = $db->executar("SELECT id FROM balcoes where uf='$estado' AND cidade='$data->nome' ");
 			$itens = $exec2->num_rows;
 
-			if($itens != 0){
+			if ($itens != 0) {
 
-				if($selecionado == $data->nome){
+				if ($selecionado == $data->nome) {
 					$selected = " selected='' ";
 				} else {
 					$selected = "";
 				}
 
-				echo "<option value='".$data->nome."' $selected >".$data->nome."</option>";
+				echo "<option value='" . $data->nome . "' $selected >" . $data->nome . "</option>";
 			}
 		}
 
@@ -5429,35 +5612,34 @@ class index extends controller {
 
 		<script> $(function () { $('.select2').select2(); }); </script>
 		";
-
 	}
 
-	public function balcoes_lista(){
+	public function balcoes_lista()
+	{
 
 		$uf = $this->post('estado');
 		$cidade = $this->post('cidade');
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM balcoes WHERE uf='$uf' AND cidade='$cidade' order by id asc");
-		while($data = $exec->fetch_object()) {
+		while ($data = $exec->fetch_object()) {
 
 			echo "
 			<div style='text-align:left; font-size:15px; width:100%;' >
 
-			<div style='font-weight:bold; color:#000;'>".$data->titulo."</div>
+			<div style='font-weight:bold; color:#000;'>" . $data->titulo . "</div>
 
-			<div style='margin-top:5px; color:#333;'>".nl2br($data->descricao)."</div>
+			<div style='margin-top:5px; color:#333;'>" . nl2br($data->descricao) . "</div>
 
 			<hr>
 
 			</div>
 			";
-
 		}
-
 	}
 
-	public function balcoes_lista_carrinho(){
+	public function balcoes_lista_carrinho()
+	{
 
 		$uf = $this->post('estado');
 		$cidade = $this->post('cidade');
@@ -5468,26 +5650,29 @@ class index extends controller {
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM balcoes WHERE uf='$uf' AND cidade='$cidade' order by id asc");
-		while($data = $exec->fetch_object()) {
+		while ($data = $exec->fetch_object()) {
 
-			if($selecionado == $data->codigo){ $select = "checked"; } else { $select = ""; }
+			if ($selecionado == $data->codigo) {
+				$select = "checked";
+			} else {
+				$select = "";
+			}
 			$valor_tratado = $valores->trata_valor($data->valor);
 
 			echo "
 			<div style='padding-top:5px; '>
-			<input type='radio' name='frete' id='frete_".$data->id."' value='".$data->codigo."' onChange=\"window.location='".DOMINIO.$this->_controller."/selecionar_balcao/codigo/".$data->codigo."/valor_subtotal/".$subtotal."'\" $select style='cursor:pointer;' > <label for='frete_".$data->id."' style='font-weight:normal; cursor:pointer;' >".$data->titulo." - <strong> R$ ".$valor_tratado."</strong></label>
+			<input type='radio' name='frete' id='frete_" . $data->id . "' value='" . $data->codigo . "' onChange=\"window.location='" . DOMINIO . $this->_controller . "/selecionar_balcao/codigo/" . $data->codigo . "/valor_subtotal/" . $subtotal . "'\" $select style='cursor:pointer;' > <label for='frete_" . $data->id . "' style='font-weight:normal; cursor:pointer;' >" . $data->titulo . " - <strong> R$ " . $valor_tratado . "</strong></label>
 			</div>
 			";
-
 		}
-
 	}
 
-	public function carrinho(){
+	public function carrinho()
+	{
 		$dados = array();
 		$dados['_base'] = $this->_base();
 		// echo '<pre>';print_r($dados);exit;
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -5501,7 +5686,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -5514,7 +5699,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -5522,23 +5707,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -5550,53 +5735,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -5605,16 +5790,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -5631,47 +5814,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_car' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -5685,7 +5866,7 @@ class index extends controller {
 
 
 		// carrega modulo de produtos
-		$produtos = new model_produtos(); 
+		$produtos = new model_produtos();
 
 		//carrega modulo de produtos
 		$carrinho = new model_carrinho();
@@ -5693,7 +5874,7 @@ class index extends controller {
 		$fretes = new model_fretes();
 		$formas_pg = new model_formas_pg();
 
-		$dados['carrinho'] = $carrinho->carrinho($this->_sessao); 
+		$dados['carrinho'] = $carrinho->carrinho($this->_sessao);
 		// echo'<pre>';print_r($dados['carrinho']);exit;
 		$dados['itens_n'] = 0;
 
@@ -5701,13 +5882,13 @@ class index extends controller {
 		foreach ($dados['carrinho']['lista'] as $key => $value) {
 			$dados['tipo_envio'] = $value['tipo_envio'];
 		}
-		
+
 		$dados['itens_n'] = count($dados['carrinho']['lista']);
 
 		$dados['cep_destino'] = '';
 
 		// se foi criado o pedido
-		if($dados['carrinho']['pedido']){		 
+		if ($dados['carrinho']['pedido']) {
 
 			$dados['data_pedido'] = $carrinho->carrega($this->_sessao);
 
@@ -5717,46 +5898,42 @@ class index extends controller {
 
 
 			///////////////////////////
-	       	// frete
+			// frete
 
 			$dados['balcoes_lista'] = $fretes->lista_balcoes();
 
 			///////////////////////////
 			// cupom
 			$dados['minimo_compra'] = 'R$ 0,00';
-			if($dados['data_pedido']->cupom){
+			if ($dados['data_pedido']->cupom) {
 
 				$conexao = new mysql();
-				$coisas_cupom = $conexao->Executar("SELECT * FROM cupom_lista where cupom='".$dados['data_pedido']->cupom."' ");
+				$coisas_cupom = $conexao->Executar("SELECT * FROM cupom_lista where cupom='" . $dados['data_pedido']->cupom . "' ");
 				$data_cupom = $coisas_cupom->fetch_object();
 
-				if(isset($data_cupom->codigo)){
+				if (isset($data_cupom->codigo)) {
 
 					$conexao = new mysql();
 					$coisas_promo = $conexao->Executar("SELECT * FROM cupom WHERE codigo='$data_cupom->codigo' ");
 					$data_promo = $coisas_promo->fetch_object();
 
-					$dados['minimo_compra'] = 'R$ '.$valores->trata_valor($data_promo->valor_minimo);
+					$dados['minimo_compra'] = 'R$ ' . $valores->trata_valor($data_promo->valor_minimo);
 
 					//minimo de compra
-					if($valor_subtotal > $data_promo->valor_minimo){
+					if ($valor_subtotal > $data_promo->valor_minimo) {
 
-						if($dados['data_pedido']->cupom_desconto_porc > 0){
+						if ($dados['data_pedido']->cupom_desconto_porc > 0) {
 
 							$percentual = $dados['data_pedido']->cupom_desconto_porc / 100.0;
-							$valor_desconto_cupom = $valores->trata_valor_calculo( $percentual * $valor_subtotal );
+							$valor_desconto_cupom = $valores->trata_valor_calculo($percentual * $valor_subtotal);
 							$valor_desconto_cupom = $dados['data_pedido']->cupom_desconto_fixo + $valor_desconto_cupom;
-
 						} else {
 							$valor_desconto_cupom = $dados['data_pedido']->cupom_desconto_fixo;
 						}
-
 					} else {
 						$valor_desconto_cupom = 0;
-					} 
-
+					}
 				}
-
 			} else {
 				$valor_desconto_cupom = 0;
 			}
@@ -5764,23 +5941,21 @@ class index extends controller {
 			$dados['valor_desconto_cupom'] = $valor_desconto_cupom;
 			$dados['valor_desconto_cupom_tratado'] = $valores->trata_valor($valor_desconto_cupom);
 
-	       	///////////////////////////
-	       	// descontos da forma de pagamento
+			///////////////////////////
+			// descontos da forma de pagamento
 
 			$dados['pagamento_lista'] = $formas_pg->lista($dados['data_pedido']->forma_pagamento);
 
-			if($dados['data_pedido']->forma_pagamento){
+			if ($dados['data_pedido']->forma_pagamento) {
 
-				if($dados['data_pedido']->forma_pagamento_desc_porc > 0){
+				if ($dados['data_pedido']->forma_pagamento_desc_porc > 0) {
 
 					$percentual = $dados['data_pedido']->forma_pagamento_desc_porc / 100.0;
-					$valor_desconto_forma_pag = $valores->trata_valor_calculo( $percentual * $valor_subtotal );
+					$valor_desconto_forma_pag = $valores->trata_valor_calculo($percentual * $valor_subtotal);
 					$valor_desconto_forma_pag = $dados['data_pedido']->forma_pagamento_desc_fixo + $valor_desconto_forma_pag;
-
 				} else {
 					$valor_desconto_forma_pag = $dados['data_pedido']->forma_pagamento_desc_fixo;
 				}
-
 			} else {
 				$valor_desconto_forma_pag = 0;
 			}
@@ -5788,30 +5963,28 @@ class index extends controller {
 			$dados['valor_desconto_forma_pag_tratado'] = $valores->trata_valor($valor_desconto_forma_pag);
 
 
-	       	///////////////////////////
-	       	//calculo total
+			///////////////////////////
+			//calculo total
 			$dados['valor_frete_tratado'] = $valores->trata_valor($dados['data_pedido']->frete_valor);
-			$valor_total_pedido = ( ( $valor_subtotal - $valor_desconto_cupom ) - $valor_desconto_forma_pag ) + $dados['data_pedido']->frete_valor;
+			$valor_total_pedido = (($valor_subtotal - $valor_desconto_cupom) - $valor_desconto_forma_pag) + $dados['data_pedido']->frete_valor;
 
-			if($valor_total_pedido < 0){
+			if ($valor_total_pedido < 0) {
 				$valor_total_pedido = 0;
 			}
 
 			$dados['valor_total_pedido'] = $valor_total_pedido;
 			$dados['valor_total_pedido_tratado'] = $valores->trata_valor($valor_total_pedido);
-
 		}
 
 		$estados = new model_estados_cidades();
 		$dados['estados'] = $estados->lista_estados();
 
-		if(isset($dados['data_pedido'])){
-			if($dados['data_pedido']->frete_balcao){
+		if (isset($dados['data_pedido'])) {
+			if ($dados['data_pedido']->frete_balcao) {
 
 				$conexao = new mysql();
-				$coisas_balcao = $conexao->Executar("SELECT * FROM balcoes WHERE codigo='".$dados['data_pedido']->frete_balcao."' ");
+				$coisas_balcao = $conexao->Executar("SELECT * FROM balcoes WHERE codigo='" . $dados['data_pedido']->frete_balcao . "' ");
 				$dados['data_balcao'] = $coisas_balcao->fetch_object();
-
 			} else {
 				$dados['data_balcao'] = null;
 			}
@@ -5819,7 +5992,7 @@ class index extends controller {
 			$dados['data_balcao'] = null;
 		}
 
-		if($this->_cod_usuario){
+		if ($this->_cod_usuario) {
 			$cadastro = new model_cadastro();
 			$dados['data_dados'] = $cadastro->dados_usuario($this->_cod_usuario);
 		}
@@ -5827,7 +6000,7 @@ class index extends controller {
 		$dados['logado_cep'] = 0;
 
 		// se tiver logado pega o cep do cadastro
-		if( isset($_SESSION[$this->_sessao_principal]['loja_acesso']) AND isset($_SESSION[$this->_sessao_principal]['loja_cod_usuario']) AND isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao']) ) {
+		if (isset($_SESSION[$this->_sessao_principal]['loja_acesso']) and isset($_SESSION[$this->_sessao_principal]['loja_cod_usuario']) and isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao'])) {
 			$dados['logado_cep'] = 1;
 			$cadastro_model = new model_cadastro();
 			$data_cadastro = $cadastro_model->dados_usuario($this->_cod_usuario);
@@ -5836,11 +6009,12 @@ class index extends controller {
 
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];
- 		//carrega view e envia dados para a tela
+		//carrega view e envia dados para a tela
 		$this->view('carrinho', $dados);
 	}
 
-	public function lista_valores(){
+	public function lista_valores()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -5850,10 +6024,10 @@ class index extends controller {
 		$valores = new model_valores();
 		$formas_pg = new model_formas_pg();
 
-		$dados['carrinho'] = $carrinho->carrinho($this->_sessao); 
+		$dados['carrinho'] = $carrinho->carrinho($this->_sessao);
 
 		// se foi criado o pedido
-		if($dados['carrinho']['pedido']){		 
+		if ($dados['carrinho']['pedido']) {
 
 			$dados['data_pedido'] = $carrinho->carrega($this->_sessao);
 
@@ -5862,39 +6036,35 @@ class index extends controller {
 			///////////////////////////
 			// cupom
 			$dados['minimo_compra'] = 'R$ 0,00';
-			if($dados['data_pedido']->cupom){
+			if ($dados['data_pedido']->cupom) {
 
 				$conexao = new mysql();
-				$coisas_cupom = $conexao->Executar("SELECT * FROM cupom_lista where cupom='".$dados['data_pedido']->cupom."' ");
+				$coisas_cupom = $conexao->Executar("SELECT * FROM cupom_lista where cupom='" . $dados['data_pedido']->cupom . "' ");
 				$data_cupom = $coisas_cupom->fetch_object();
 
-				if(isset($data_cupom->codigo)){
+				if (isset($data_cupom->codigo)) {
 
 					$conexao = new mysql();
 					$coisas_promo = $conexao->Executar("SELECT * FROM cupom WHERE codigo='$data_cupom->codigo' ");
 					$data_promo = $coisas_promo->fetch_object();
 
-					$dados['minimo_compra'] = 'R$ '.$valores->trata_valor($data_promo->valor_minimo);
+					$dados['minimo_compra'] = 'R$ ' . $valores->trata_valor($data_promo->valor_minimo);
 
 					//minimo de compra
-					if($valor_subtotal > $data_promo->valor_minimo){
+					if ($valor_subtotal > $data_promo->valor_minimo) {
 
-						if($dados['data_pedido']->cupom_desconto_porc > 0){
+						if ($dados['data_pedido']->cupom_desconto_porc > 0) {
 
 							$percentual = $dados['data_pedido']->cupom_desconto_porc / 100.0;
-							$valor_desconto_cupom = $valores->trata_valor_calculo( $percentual * $valor_subtotal );
+							$valor_desconto_cupom = $valores->trata_valor_calculo($percentual * $valor_subtotal);
 							$valor_desconto_cupom = $dados['data_pedido']->cupom_desconto_fixo + $valor_desconto_cupom;
-
 						} else {
 							$valor_desconto_cupom = $dados['data_pedido']->cupom_desconto_fixo;
 						}
-
 					} else {
 						$valor_desconto_cupom = 0;
-					} 
-
+					}
 				}
-
 			} else {
 				$valor_desconto_cupom = 0;
 			}
@@ -5902,23 +6072,21 @@ class index extends controller {
 			$dados['valor_desconto_cupom'] = $valor_desconto_cupom;
 			$dados['valor_desconto_cupom_tratado'] = $valores->trata_valor($valor_desconto_cupom);
 
-	       	///////////////////////////
-	       	// descontos da forma de pagamento
+			///////////////////////////
+			// descontos da forma de pagamento
 
 			$dados['pagamento_lista'] = $formas_pg->lista($dados['data_pedido']->forma_pagamento);
 
-			if($dados['data_pedido']->forma_pagamento){
+			if ($dados['data_pedido']->forma_pagamento) {
 
-				if($dados['data_pedido']->forma_pagamento_desc_porc > 0){
+				if ($dados['data_pedido']->forma_pagamento_desc_porc > 0) {
 
 					$percentual = $dados['data_pedido']->forma_pagamento_desc_porc / 100.0;
-					$valor_desconto_forma_pag = $valores->trata_valor_calculo( $percentual * $valor_subtotal );
+					$valor_desconto_forma_pag = $valores->trata_valor_calculo($percentual * $valor_subtotal);
 					$valor_desconto_forma_pag = $dados['data_pedido']->forma_pagamento_desc_fixo + $valor_desconto_forma_pag;
-
 				} else {
 					$valor_desconto_forma_pag = $dados['data_pedido']->forma_pagamento_desc_fixo;
 				}
-
 			} else {
 				$valor_desconto_forma_pag = 0;
 			}
@@ -5926,12 +6094,12 @@ class index extends controller {
 			$dados['valor_desconto_forma_pag_tratado'] = $valores->trata_valor($valor_desconto_forma_pag);
 
 
-	       	///////////////////////////
-	       	//calculo total
+			///////////////////////////
+			//calculo total
 			$dados['valor_frete_tratado'] = $valores->trata_valor($dados['data_pedido']->frete_valor);
-			$valor_total_pedido = ( ( $valor_subtotal - $valor_desconto_cupom ) - $valor_desconto_forma_pag ) + $dados['data_pedido']->frete_valor;
+			$valor_total_pedido = (($valor_subtotal - $valor_desconto_cupom) - $valor_desconto_forma_pag) + $dados['data_pedido']->frete_valor;
 
-			if($valor_total_pedido < 0){
+			if ($valor_total_pedido < 0) {
 				$valor_total_pedido = 0;
 			}
 
@@ -5939,18 +6107,17 @@ class index extends controller {
 			$dados['valor_total_pedido_tratado'] = $valores->trata_valor($valor_total_pedido);
 
 			$this->view('carrinho_valores', $dados);
-
 		} else {
 			echo '.';
 		}
-
 	}
 
-	public function lista_carrinho(){
+	public function lista_carrinho()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 		$carrinho = new model_carrinho();
@@ -5966,47 +6133,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_car' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -6018,57 +6183,57 @@ class index extends controller {
 		$this->view('carrinho_lista', $dados);
 	}
 
-	public function carrinho_adicionar(){	
+	public function carrinho_adicionar()
+	{
 		$dados = array();
 		$dados['_base'] = $this->_base();
 		$produtos = new model_produtos();
 		$cod_sessao = $this->_sessao;
 
-		if($_POST['produto']){
+		if ($_POST['produto']) {
 			$produto = $_POST['produto'];
-		}else if($this->get('produto')){
-			$produto = $this->get('produto'); 
-		}
-		else if($this->get('combo')){
-			$combo = $this->get('combo'); 
+		} else if ($this->get('produto')) {
+			$produto = $this->get('produto');
+		} else if ($this->get('combo')) {
+			$combo = $this->get('combo');
 			$produto = array();
 			$conexao = new mysql();
 			$coisas_det = $conexao->Executar("SELECT produto.codigo 
 													FROM produto 
 													inner join combo_produto on combo_produto.id_produto = produto.id
 													where id_combo='$combo' ");
-			while($data_det = $coisas_det->fetch_object()){
-				array_push($produto,$data_det->codigo);
+			while ($data_det = $coisas_det->fetch_object()) {
+				array_push($produto, $data_det->codigo);
 			}
 		}
-		if(!is_array($produto)){	
+		if (!is_array($produto)) {
 			$conexao = new mysql();
-			$coisas_carrinho = $conexao->Executar("SELECT id FROM pedido_loja_carrinho where sessao='".$this->_sessao."' and produto='".$produto."' ");
+			$coisas_carrinho = $conexao->Executar("SELECT id FROM pedido_loja_carrinho where sessao='" . $this->_sessao . "' and produto='" . $produto . "' ");
 			$data_carrinho = $coisas_carrinho->fetch_object();
-			if($data_carrinho){
+			if ($data_carrinho) {
 				$this->msg('Produto já adicionado no carrinho!');
 				$this->volta(1);
 			}
 
 			$quantidade = $this->post('quantidade');
-			if(!$produto){
+			if (!$produto) {
 				$this->msg('Produto não indentificado!1');
 				$this->volta(1);
 			}
-			if(!$quantidade){
+			if (!$quantidade) {
 				$quantidade = 1;
 			}
-			if( (!$quantidade) OR ($quantidade <= 0) ){
+			if ((!$quantidade) or ($quantidade <= 0)) {
 				$this->msg('Quantidade inválida!');
 				$this->volta(1);
 			}
 
 			//confere se ja existe o pedido senão cria um novo pedido
 			$conexao = new mysql();
-			$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");
+			$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='" . $this->_sessao . "' ");
 			$data = $coisas->fetch_object();
 
-			if(!isset($data->id)){
+			if (!isset($data->id)) {
 
 				$time = time();
 				$ip = $_SERVER["REMOTE_ADDR"];
@@ -6076,38 +6241,37 @@ class index extends controller {
 				//grava no banco
 				$conexao = new mysql();
 				$conexao->inserir("pedido_loja", array(
-					"codigo"=>"$cod_sessao",
-					"data"=>"$time",
-					"ip"=>"$ip",
-					"status"=>"0"
+					"codigo" => "$cod_sessao",
+					"data" => "$time",
+					"ip" => "$ip",
+					"status" => "0"
 				));
-
 			} else {
 
 				//confere se o pedido foi finalizado
-				if($data->status != 0){
-					$this->irpara(DOMINIO.$this->_controller."/carrinho");
+				if ($data->status != 0) {
+					$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 				} else {
 					//zera dados de frete
 					$conexao = new mysql();
 					$conexao->alterar("pedido_loja", array(
-						"frete"=>"",
-						"frete_titulo"=>"",
-						"frete_valor"=>"",
-						"valor_produtos"=>"0",
-						"valor_produtos_desc"=>"0",
-						"valor_total"=>"0",
-						"status"=>"0"
+						"frete" => "",
+						"frete_titulo" => "",
+						"frete_valor" => "",
+						"valor_produtos" => "0",
+						"valor_produtos_desc" => "0",
+						"valor_total" => "0",
+						"status" => "0"
 					), " sessao='$cod_sessao' ");
-				}			
+				}
 			}
 
 			// produto
 			$data_produto = $produtos->carrega_produto_codigo($produto);
 
 			//verifica se o produto existe
-			if(isset($data_produto->id)){
-				
+			if (isset($data_produto->id)) {
+
 				$tipo_envio = $data_produto->tipo_entrega;
 				// print_r($tipo_envio);exit;
 				$conexao = new mysql();
@@ -6119,63 +6283,63 @@ class index extends controller {
 				// }
 				//verifica obrigaçao do campo Tamanho
 				$tamanho = $this->post('tamanho');
-				if(!$tamanho){
+				if (!$tamanho) {
 
 					$conexao = new mysql();
 					$coisas_det = $conexao->Executar("SELECT * FROM produto_tamanho_sel where produto_codigo='$produto' ");
 					$i = 0;
-					while($data_det = $coisas_det->fetch_object()){
+					while ($data_det = $coisas_det->fetch_object()) {
 
 						$conexao = new mysql();
 						$data_det2 = $conexao->Executar("SELECT id FROM produto_tamanho where codigo='$data_det->tamanho_codigo' ")->fetch_object();
 
-						if(isset($data_det2->id)){
+						if (isset($data_det2->id)) {
 							$i++;
 						}
 					}
-					if($i != 0){
+					if ($i != 0) {
 						$this->msg('Selecione o tamanho!');
 						$this->volta(1);
 					}
-				}		
+				}
 				//verifica obrigaçao do campo Cor
 				$cor = $this->post('cor');
-				if(!$cor){
+				if (!$cor) {
 
 					$conexao = new mysql();
 					$coisas_det = $conexao->Executar("SELECT * FROM produto_cor_sel where produto_codigo='$produto' ");
 					$i = 0;
-					while($data_det = $coisas_det->fetch_object()){
+					while ($data_det = $coisas_det->fetch_object()) {
 
 						$conexao = new mysql();
 						$data_det2 = $conexao->Executar("SELECT id FROM produto_cor where codigo='$data_det->cor_codigo' ")->fetch_object();
 
-						if(isset($data_det2->id)){
+						if (isset($data_det2->id)) {
 							$i++;
 						}
 					}
-					if($i != 0){
+					if ($i != 0) {
 						$this->msg('Selecione uma cor!');
 						$this->volta(1);
 					}
 				}
 				//verifica obrigaçao do campo variacao
 				$variacao = $this->post('variacao');
-				if(!$variacao){
+				if (!$variacao) {
 
 					$conexao = new mysql();
 					$coisas_det = $conexao->Executar("SELECT * FROM produto_variacao_sel where produto_codigo='$produto' ");
 					$i = 0;
-					while($data_det = $coisas_det->fetch_object()){
+					while ($data_det = $coisas_det->fetch_object()) {
 
 						$conexao = new mysql();
 						$data_det2 = $conexao->Executar("SELECT id FROM produto_variacao where codigo='$data_det->variacao_codigo' ")->fetch_object();
 
-						if(isset($data_det2->id)){
+						if (isset($data_det2->id)) {
 							$i++;
 						}
 					}
-					if($i != 0){
+					if ($i != 0) {
 						$this->msg('Selecione uma variação!');
 						$this->volta(1);
 					}
@@ -6184,7 +6348,7 @@ class index extends controller {
 				$valor_total = $data_produto->valor;
 				$valores = new model_valores();
 				$variacao = $this->post('variacao');
-				if($variacao){
+				if ($variacao) {
 
 					$conexao = new mysql();
 					$coisas = $conexao->Executar("SELECT * FROM produto_variacao where codigo='$variacao' ");
@@ -6198,7 +6362,6 @@ class index extends controller {
 					$variacao_titulo = $data->titulo;
 
 					$valor_total = $data2->valor;
-
 				} else {
 					$variacao = '-';
 					$variacao_valor = 0;
@@ -6206,26 +6369,25 @@ class index extends controller {
 				}
 				$tam_altura = '';
 				$tam_largura = '';
-				if($data_produto->tipo != 0){
+				if ($data_produto->tipo != 0) {
 
 					$tamanho_largura = $valores->trata_valor_banco($this->post('tamanho_largura'));
 					$tamanho_altura = $valores->trata_valor_banco($this->post('tamanho_altura'));
 
-					if($data_produto->tipo == 1){
+					if ($data_produto->tipo == 1) {
 						$tipounidade = 'm';
 					}
-					if($data_produto->tipo == 2){
+					if ($data_produto->tipo == 2) {
 						$tipounidade = 'cm';
 					}
 
-					$tam_altura = $tamanho_altura.' '.$tipounidade;
-					$tam_largura = $tamanho_largura.' '.$tipounidade;
+					$tam_altura = $tamanho_altura . ' ' . $tipounidade;
+					$tam_largura = $tamanho_largura . ' ' . $tipounidade;
 
 					$valor_total = $tamanho_altura * $tamanho_largura * $valor_total;
-
-				} 
+				}
 				//tamanho
-				if($tamanho){
+				if ($tamanho) {
 
 					$conexao = new mysql();
 					$coisas = $conexao->Executar("SELECT * FROM produto_tamanho where codigo='$tamanho' ");
@@ -6239,14 +6401,13 @@ class index extends controller {
 					$tamanho_titulo = $data->titulo;
 
 					$valor_total = $valor_total + $data2->valor;
-
 				} else {
 					$tamanho = '-';
 					$tamanho_valor = 0;
 					$tamanho_titulo = "";
 				}
 				//Cor
-				if($cor){
+				if ($cor) {
 
 					$conexao = new mysql();
 					$coisas = $conexao->Executar("SELECT * FROM produto_cor where codigo='$cor' ");
@@ -6260,34 +6421,31 @@ class index extends controller {
 					$cor_titulo = $data->titulo;
 
 					$valor_total = $valor_total + $data2->valor;
-
 				} else {
 					$cor = '-';
 					$cor_valor = 0;
 					$cor_titulo = "";
 				}
 				// confere estoque se tiver menos do que o selecionado substitui pela quantidade disponivel
-				if($data_produto->semestoque == 0){
+				if ($data_produto->semestoque == 0) {
 
 					$quantidade_disponivel = $produtos->estoque_quantidade($produto, $tamanho, $cor, $variacao);
 
-					if($quantidade_disponivel <= 0){
+					if ($quantidade_disponivel <= 0) {
 
 						$this->msg('Produto indisponível em estoque!');
 						$this->volta(1);
-
 					} else {
-						if($quantidade > $quantidade_disponivel){
+						if ($quantidade > $quantidade_disponivel) {
 							$quantidade = $quantidade_disponivel;
 						}
 					}
-
 				}
 
-				if($data_produto->impresso == 1){
+				if ($data_produto->impresso == 1) {
 
 					$tipoarte = $this->post('tipoarte');
-					if(!$tipoarte){
+					if (!$tipoarte) {
 						$this->msg('Preencha todos os campos obrigatórios');
 						$this->volta(1);
 					}
@@ -6296,41 +6454,38 @@ class index extends controller {
 					$dados_arte = '';
 					$valor_arte = 0;
 
-					if($tipoarte == 1){
+					if ($tipoarte == 1) {
 
 						$modelo_codigo = $this->post('modelo_selecionado_codigo');
-						if(!$modelo_codigo){
+						if (!$modelo_codigo) {
 							$this->msg('Preencha todos os campos obrigatórios');
 							$this->volta(1);
 						}
 
 						$dados_arte = $this->post('dados_arte');
-
 					}
 
-					if($tipoarte == 2){
+					if ($tipoarte == 2) {
 
 						$dados_arte = $this->post('dados_arte');
 
-					// valor arte
+						// valor arte
 						$valor_arte = $data_produto->valor_arte;
 						$valor_total = $valor_total + $valor_arte;
-
 					}
 
 
 					$arte_acabamento = $this->post('arte_acabamento');
-					$arquivo_arte = $this->post('arquivo_arte'); 
+					$arquivo_arte = $this->post('arquivo_arte');
 
 
-					if($data_produto->obrigacaodoanexo == 1){
-						if($tipoarte == 3){
+					if ($data_produto->obrigacaodoanexo == 1) {
+						if ($tipoarte == 3) {
 
-							if(!$arquivo_arte){
+							if (!$arquivo_arte) {
 								$this->msg('Favor anexar sua arte para continuar.');
 								$this->volta(1);
 							}
-
 						}
 					}
 				} else {
@@ -6345,20 +6500,20 @@ class index extends controller {
 
 				$titulodoproduto = "";
 
-				if($data_produto->material){
-					$titulodoproduto .= $data_produto->material.' ';
+				if ($data_produto->material) {
+					$titulodoproduto .= $data_produto->material . ' ';
 				}
-				if($data_produto->formato){
-					$titulodoproduto .= $data_produto->formato.' ';
+				if ($data_produto->formato) {
+					$titulodoproduto .= $data_produto->formato . ' ';
 				}
-				if($data_produto->cores){
-					$titulodoproduto .= $data_produto->cores.' ';
+				if ($data_produto->cores) {
+					$titulodoproduto .= $data_produto->cores . ' ';
 				}
-				if($data_produto->revestimento){
-					$titulodoproduto .= $data_produto->revestimento.' ';
+				if ($data_produto->revestimento) {
+					$titulodoproduto .= $data_produto->revestimento . ' ';
 				}
-				if($data_produto->acabamento){
-					$titulodoproduto .= $data_produto->acabamento.' ';
+				if ($data_produto->acabamento) {
+					$titulodoproduto .= $data_produto->acabamento . ' ';
 				}
 
 				$data_compra = new DateTime('now');
@@ -6366,161 +6521,159 @@ class index extends controller {
 				$data_compra = strtotime($data_compra);
 
 				$date_vencimento = new DateTime('now');
-				$period = '+'.$data_produto->data_vencimento. ' month';
-				$date_vencimento->modify($period); 
+				$period = '+' . $data_produto->data_vencimento . ' month';
+				$date_vencimento->modify($period);
 				$date_vencimento = $date_vencimento->format('Y-m-d');
 				$date_vencimento = strtotime($date_vencimento);
 
 				//grava no banco
 				$conexao = new mysql();
 				$conexao->inserir("pedido_loja_carrinho", array(
-					"sessao"=>"$cod_sessao",
-					"produto"=>"$produto",
-					"produto_id"=>"$data_produto->id",
-					"produto_ref"=>"$data_produto->ref",
-					"produto_titulo"=>"$data_produto->titulo",
-					"produto_subtitulo"=>"$titulodoproduto",
-					"produto_valor"=>"$data_produto->valor",
-					"produto_assinatura"=>0,
-					"data_vencimento"=>"$date_vencimento",
-					"data_compra"=>"$data_compra",
-					"tamanho"=>"$tamanho",
-					"tamanho_titulo"=>"$tamanho_titulo",
-					"tamanho_valor"=>"$tamanho_valor",
-					"cor"=>"$cor",
-					"cor_titulo"=>"$cor_titulo",
-					"cor_valor"=>"$cor_valor",
-					"variacao"=>"$variacao",
-					"variacao_titulo"=>"$variacao_titulo",
-					"variacao_valor"=>"$variacao_valor",
-					"quantidade"=>"$quantidade",
-					"valor_arte"=>"$valor_arte",
-					"valor_total"=>"$valor_total",
-					"tipoarte"=>"$tipoarte",
-					"modelo_codigo"=>"$modelo_codigo",
-					"dados_arte"=>"$dados_arte",
-					"arquivo_arte"=>"$arquivo_arte",
-					"arte_acabamento"=>"$arte_acabamento",
-					"tipo_envio"=> 3,
-					"tam_largura"=>"$tam_largura",
-					"tam_altura"=>"$tam_altura"
+					"sessao" => "$cod_sessao",
+					"produto" => "$produto",
+					"produto_id" => "$data_produto->id",
+					"produto_ref" => "$data_produto->ref",
+					"produto_titulo" => "$data_produto->titulo",
+					"produto_subtitulo" => "$titulodoproduto",
+					"produto_valor" => "$data_produto->valor",
+					"produto_assinatura" => 0,
+					"data_vencimento" => "$date_vencimento",
+					"data_compra" => "$data_compra",
+					"tamanho" => "$tamanho",
+					"tamanho_titulo" => "$tamanho_titulo",
+					"tamanho_valor" => "$tamanho_valor",
+					"cor" => "$cor",
+					"cor_titulo" => "$cor_titulo",
+					"cor_valor" => "$cor_valor",
+					"variacao" => "$variacao",
+					"variacao_titulo" => "$variacao_titulo",
+					"variacao_valor" => "$variacao_valor",
+					"quantidade" => "$quantidade",
+					"valor_arte" => "$valor_arte",
+					"valor_total" => "$valor_total",
+					"tipoarte" => "$tipoarte",
+					"modelo_codigo" => "$modelo_codigo",
+					"dados_arte" => "$dados_arte",
+					"arquivo_arte" => "$arquivo_arte",
+					"arte_acabamento" => "$arte_acabamento",
+					"tipo_envio" => 3,
+					"tam_largura" => "$tam_largura",
+					"tam_altura" => "$tam_altura"
 				));
 				/////////////////////// AQUI ///////////////////////
 
-				$this->irpara(DOMINIO.$this->_controller."/carrinho");
-
-			} else {			
+				$this->irpara(DOMINIO . $this->_controller . "/carrinho");
+			} else {
 				$this->msg('Produto não encontrado!');
 				$this->volta(1);
 			}
-		}else{
-			if($this->get('combo')){
+		} else {
+			if ($this->get('combo')) {
 				$conexao = new mysql();
-				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");
+				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='" . $this->_sessao . "' ");
 				$data = $coisas->fetch_object();
 
-				if(!isset($data->id)){
+				if (!isset($data->id)) {
 					$time = time();
 					$ip = $_SERVER["REMOTE_ADDR"];
 					//grava no banco
 					$conexao = new mysql();
 					$conexao->inserir("pedido_loja", array(
-						"codigo"=>"$cod_sessao",
-						"data"=>"$time",
-						"ip"=>"$ip",
-						"status"=>"0"
+						"codigo" => "$cod_sessao",
+						"data" => "$time",
+						"ip" => "$ip",
+						"status" => "0"
 					));
-
 				} else {
 					//confere se o pedido foi finalizado
-					if($data->status != 0){
-						$this->irpara(DOMINIO.$this->_controller."/carrinho");
+					if ($data->status != 0) {
+						$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 					} else {
 						//zera dados de frete
 						$conexao = new mysql();
 						$conexao->alterar("pedido_loja", array(
-							"frete"=>"",
-							"frete_titulo"=>"",
-							"frete_valor"=>"",
-							"valor_produtos"=>"0",
-							"valor_produtos_desc"=>"0",
-							"valor_total"=>"0",
-							"status"=>"0"
+							"frete" => "",
+							"frete_titulo" => "",
+							"frete_valor" => "",
+							"valor_produtos" => "0",
+							"valor_produtos_desc" => "0",
+							"valor_total" => "0",
+							"status" => "0"
 						), " sessao='$cod_sessao' ");
-					}			
+					}
 				}
-				foreach($produto as $prod){
+				foreach ($produto as $prod) {
 					$combo_id_get = $this->get('combo');
 					$data_produto = $produtos->carrega_produto_codigo($prod);
-					if(isset($data_produto->id)){
+					if (isset($data_produto->id)) {
 						$conexao = new mysql();
 						$tipo_envio = 3;
 						$combo_id = null;
 						$combo_id = $combo_id_get;
-						if($combo_id_get > 0){
+						if ($combo_id_get > 0) {
 							$combo_id = $combo_id_get;
 							$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$cod_sessao' AND produto = '$prod' AND id_combo = $combo_id ");
 							$linha_carrinho = $coisas_carrinho->num_rows;
-							if($linha_carrinho != 0){			
+							if ($linha_carrinho != 0) {
 								$this->msg('Você não pode adicionar 2 combos iguais.');
-								$this->irpara(DOMINIO.$this->_controller."/carrinho");
+								$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 							}
 						}
 						$tamanho = $this->post('tamanho');
-						if(!$tamanho){
+						if (!$tamanho) {
 
 							$conexao = new mysql();
 							$coisas_det = $conexao->Executar("SELECT * FROM produto_tamanho_sel where produto_codigo='$produto' ");
 							$i = 0;
-							while($data_det = $coisas_det->fetch_object()){
+							while ($data_det = $coisas_det->fetch_object()) {
 
 								$conexao = new mysql();
 								$data_det2 = $conexao->Executar("SELECT id FROM produto_tamanho where codigo='$data_det->tamanho_codigo' ")->fetch_object();
 
-								if(isset($data_det2->id)){
+								if (isset($data_det2->id)) {
 									$i++;
 								}
 							}
-							if($i != 0){
+							if ($i != 0) {
 								$this->msg('Selecione o tamanho!');
 								$this->volta(1);
 							}
-						}		
+						}
 						$cor = $this->post('cor');
-						if(!$cor){
+						if (!$cor) {
 
 							$conexao = new mysql();
 							$coisas_det = $conexao->Executar("SELECT * FROM produto_cor_sel where produto_codigo='$produto' ");
 							$i = 0;
-							while($data_det = $coisas_det->fetch_object()){
+							while ($data_det = $coisas_det->fetch_object()) {
 
 								$conexao = new mysql();
 								$data_det2 = $conexao->Executar("SELECT id FROM produto_cor where codigo='$data_det->cor_codigo' ")->fetch_object();
 
-								if(isset($data_det2->id)){
+								if (isset($data_det2->id)) {
 									$i++;
 								}
 							}
-							if($i != 0){
+							if ($i != 0) {
 								$this->msg('Selecione uma cor!');
 								$this->volta(1);
 							}
 						}
 						$variacao = $this->post('variacao');
-						if(!$variacao){
+						if (!$variacao) {
 							$conexao = new mysql();
 							$coisas_det = $conexao->Executar("SELECT * FROM produto_variacao_sel where produto_codigo='$produto' ");
 							$i = 0;
-							while($data_det = $coisas_det->fetch_object()){
+							while ($data_det = $coisas_det->fetch_object()) {
 
 								$conexao = new mysql();
 								$data_det2 = $conexao->Executar("SELECT id FROM produto_variacao where codigo='$data_det->variacao_codigo' ")->fetch_object();
 
-								if(isset($data_det2->id)){
+								if (isset($data_det2->id)) {
 									$i++;
 								}
 							}
-							if($i != 0){
+							if ($i != 0) {
 								$this->msg('Selecione uma variação!');
 								$this->volta(1);
 							}
@@ -6529,9 +6682,9 @@ class index extends controller {
 						$combo_titulo = '';
 						$plano_id = '';
 						$combo_disconto_get = '';
-						
+
 						$coisas_combo = $conexao->Executar("SELECT * FROM combos where id='$combo_id' ");
-						while($data_det = $coisas_combo->fetch_object()){
+						while ($data_det = $coisas_combo->fetch_object()) {
 							$combo_titulo = $data_det->titulo;
 							$plano_id = $data_det->plano_id;
 							$combo_disconto = $data_det->desconto;
@@ -6541,46 +6694,45 @@ class index extends controller {
 						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' and id='$combo_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
-						while($data_det = $coisas_det->fetch_object()){
+						while ($data_det = $coisas_det->fetch_object()) {
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
 						}
 						$usar_valor_vindi = $usar_discount;
-						if($usar_discount == 1){
+						if ($usar_discount == 1) {
 							$valor_total = 0;
 							$valor_total_combo_vindi = $valor_combo_vindi;
 							$valor_total = $valor_total_combo_vindi;
-						}else{
+						} else {
 							$combo_disconto = 0;
-							if($combo_disconto_get > 0){
+							if ($combo_disconto_get > 0) {
 								$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $combo_disconto_get);
 								$combo_disconto = $combo_disconto_get;
-							}else{
+							} else {
 								$valor_total = $data_produto->valor;
 							}
 						}
 
 						$tam_altura = '';
 						$tam_largura = '';
-						if($data_produto->tipo != 0){
+						if ($data_produto->tipo != 0) {
 
 							$tamanho_largura = $valores->trata_valor_banco($this->post('tamanho_largura'));
 							$tamanho_altura = $valores->trata_valor_banco($this->post('tamanho_altura'));
 
-							if($data_produto->tipo == 1){
+							if ($data_produto->tipo == 1) {
 								$tipounidade = 'm';
 							}
-							if($data_produto->tipo == 2){
+							if ($data_produto->tipo == 2) {
 								$tipounidade = 'cm';
 							}
 
-							$tam_altura = $tamanho_altura.' '.$tipounidade;
-							$tam_largura = $tamanho_largura.' '.$tipounidade;
+							$tam_altura = $tamanho_altura . ' ' . $tipounidade;
+							$tam_largura = $tamanho_largura . ' ' . $tipounidade;
 
 							$valor_total = $tamanho_altura * $tamanho_largura * $valor_total;
-
-						} 
-						if($tamanho){
+						}
+						if ($tamanho) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM produto_tamanho where codigo='$tamanho' ");
@@ -6594,13 +6746,12 @@ class index extends controller {
 							$tamanho_titulo = $data->titulo;
 
 							$valor_total = $valor_total + $data2->valor;
-
 						} else {
 							$tamanho = '-';
 							$tamanho_valor = 0;
 							$tamanho_titulo = "";
 						}
-						if($cor){
+						if ($cor) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM produto_cor where codigo='$cor' ");
@@ -6614,32 +6765,29 @@ class index extends controller {
 							$cor_titulo = $data->titulo;
 
 							$valor_total = $valor_total + $data2->valor;
-
 						} else {
 							$cor = '-';
 							$cor_valor = 0;
 							$cor_titulo = "";
 						}
-						if($data_produto->semestoque == 0){
+						if ($data_produto->semestoque == 0) {
 
 							$quantidade_disponivel = $produtos->estoque_quantidade($produto, $tamanho, $cor, $variacao);
 
-							if($quantidade_disponivel <= 0){
+							if ($quantidade_disponivel <= 0) {
 
 								$this->msg('Produto indisponível em estoque!');
 								$this->volta(1);
-
 							} else {
-								if($quantidade > $quantidade_disponivel){
+								if ($quantidade > $quantidade_disponivel) {
 									$quantidade = $quantidade_disponivel;
 								}
 							}
-
 						}
-						if($data_produto->impresso == 1){
+						if ($data_produto->impresso == 1) {
 
 							$tipoarte = $this->post('tipoarte');
-							if(!$tipoarte){
+							if (!$tipoarte) {
 								$this->msg('Preencha todos os campos obrigatórios');
 								$this->volta(1);
 							}
@@ -6648,41 +6796,38 @@ class index extends controller {
 							$dados_arte = '';
 							$valor_arte = 0;
 
-							if($tipoarte == 1){
+							if ($tipoarte == 1) {
 
 								$modelo_codigo = $this->post('modelo_selecionado_codigo');
-								if(!$modelo_codigo){
+								if (!$modelo_codigo) {
 									$this->msg('Preencha todos os campos obrigatórios');
 									$this->volta(1);
 								}
 
 								$dados_arte = $this->post('dados_arte');
-
 							}
 
-							if($tipoarte == 2){
+							if ($tipoarte == 2) {
 
 								$dados_arte = $this->post('dados_arte');
 
-							// valor arte
+								// valor arte
 								$valor_arte = $data_produto->valor_arte;
 								$valor_total = $valor_total + $valor_arte;
-
 							}
 
 
 							$arte_acabamento = $this->post('arte_acabamento');
-							$arquivo_arte = $this->post('arquivo_arte'); 
+							$arquivo_arte = $this->post('arquivo_arte');
 
 
-							if($data_produto->obrigacaodoanexo == 1){
-								if($tipoarte == 3){
+							if ($data_produto->obrigacaodoanexo == 1) {
+								if ($tipoarte == 3) {
 
-									if(!$arquivo_arte){
+									if (!$arquivo_arte) {
 										$this->msg('Favor anexar sua arte para continuar.');
 										$this->volta(1);
 									}
-
 								}
 							}
 						} else {
@@ -6694,20 +6839,20 @@ class index extends controller {
 							$arte_acabamento = '';
 						}
 						$titulodoproduto = "";
-						if($data_produto->material){
-							$titulodoproduto .= $data_produto->material.' ';
+						if ($data_produto->material) {
+							$titulodoproduto .= $data_produto->material . ' ';
 						}
-						if($data_produto->formato){
-							$titulodoproduto .= $data_produto->formato.' ';
+						if ($data_produto->formato) {
+							$titulodoproduto .= $data_produto->formato . ' ';
 						}
-						if($data_produto->cores){
-							$titulodoproduto .= $data_produto->cores.' ';
+						if ($data_produto->cores) {
+							$titulodoproduto .= $data_produto->cores . ' ';
 						}
-						if($data_produto->revestimento){
-							$titulodoproduto .= $data_produto->revestimento.' ';
+						if ($data_produto->revestimento) {
+							$titulodoproduto .= $data_produto->revestimento . ' ';
 						}
-						if($data_produto->acabamento){
-							$titulodoproduto .= $data_produto->acabamento.' ';
+						if ($data_produto->acabamento) {
+							$titulodoproduto .= $data_produto->acabamento . ' ';
 						}
 
 						$data_compra = new DateTime('now');
@@ -6715,166 +6860,165 @@ class index extends controller {
 						$data_compra = strtotime($data_compra);
 
 						$date_vencimento = new DateTime('now');
-						$period = '+'.$data_produto->data_vencimento. ' month';
-						$date_vencimento->modify($period); 
+						$period = '+' . $data_produto->data_vencimento . ' month';
+						$date_vencimento->modify($period);
 						$date_vencimento = $date_vencimento->format('Y-m-d');
 						$date_vencimento = strtotime($date_vencimento);
-							
+
 						//grava no banco
 						$conexao = new mysql();
 						$conexao->inserir("pedido_loja_carrinho", array(
-							"sessao"=>"$cod_sessao",
-							"produto"=>"$prod",
-							"produto_id"=>"$data_produto->id",
-							"produto_ref"=>"$data_produto->ref",
-							"id_combo"=>"$combo_id",
-							"combo_titulo"=>"$combo_titulo",
-							"data_vencimento"=>"$date_vencimento",
-							"produto_assinatura"=>"$plano_id",
-							"data_compra"=>"$data_compra",
-							"produto_titulo"=>"$data_produto->titulo",
-							"produto_subtitulo"=>"$titulodoproduto",
-							"produto_valor"=>"$data_produto->valor",
-							"tamanho"=>"$tamanho",
-							"tamanho_titulo"=>"$tamanho_titulo",
-							"tamanho_valor"=>"$tamanho_valor",
-							"cor"=>"$cor",
-							"cor_titulo"=>"$cor_titulo",
-							"cor_valor"=>"$cor_valor",
-							"variacao"=>"$variacao",
-							"variacao_titulo"=>"",
-							"variacao_valor"=>0,
-							"quantidade"=> 1,
-							"valor_arte"=>"$valor_arte",
-							"valor_total"=>"$valor_total",
-							"valor_total_combo_vindi"=>"$valor_total_combo_vindi",
-							"usar_valor_vindi"=>"$usar_valor_vindi",
-							"combo_desconto"=>"$combo_disconto",
-							"tipoarte"=>"$tipoarte",
-							"modelo_codigo"=>"$modelo_codigo",
-							"dados_arte"=>"$dados_arte",
-							"arquivo_arte"=>"$arquivo_arte",
-							"arte_acabamento"=>"$arte_acabamento",
-							"tipo_envio"=> 3,
-							"tam_largura"=>"$tam_largura",
-							"tam_altura"=>"$tam_altura"
+							"sessao" => "$cod_sessao",
+							"produto" => "$prod",
+							"produto_id" => "$data_produto->id",
+							"produto_ref" => "$data_produto->ref",
+							"id_combo" => "$combo_id",
+							"combo_titulo" => "$combo_titulo",
+							"data_vencimento" => "$date_vencimento",
+							"produto_assinatura" => "$plano_id",
+							"data_compra" => "$data_compra",
+							"produto_titulo" => "$data_produto->titulo",
+							"produto_subtitulo" => "$titulodoproduto",
+							"produto_valor" => "$data_produto->valor",
+							"tamanho" => "$tamanho",
+							"tamanho_titulo" => "$tamanho_titulo",
+							"tamanho_valor" => "$tamanho_valor",
+							"cor" => "$cor",
+							"cor_titulo" => "$cor_titulo",
+							"cor_valor" => "$cor_valor",
+							"variacao" => "$variacao",
+							"variacao_titulo" => "",
+							"variacao_valor" => 0,
+							"quantidade" => 1,
+							"valor_arte" => "$valor_arte",
+							"valor_total" => "$valor_total",
+							"valor_total_combo_vindi" => "$valor_total_combo_vindi",
+							"usar_valor_vindi" => "$usar_valor_vindi",
+							"combo_desconto" => "$combo_disconto",
+							"tipoarte" => "$tipoarte",
+							"modelo_codigo" => "$modelo_codigo",
+							"dados_arte" => "$dados_arte",
+							"arquivo_arte" => "$arquivo_arte",
+							"arte_acabamento" => "$arte_acabamento",
+							"tipo_envio" => 3,
+							"tam_largura" => "$tam_largura",
+							"tam_altura" => "$tam_altura"
 						));
 
 						// echo'<pre>';print_r($conexao);exit;
 					}
 				}
-				$this->irpara(DOMINIO.$this->_controller."/carrinho");
-			}else{
+				$this->irpara(DOMINIO . $this->_controller . "/carrinho");
+			} else {
 				// echo '<pre>Produtos: ';print_r($produto);exit;
 				//confere se ja existe o pedido senão cria um novo pedido
 				$conexao = new mysql();
-				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");
+				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='" . $this->_sessao . "' ");
 				$data = $coisas->fetch_object();
 
-				if(!isset($data->id)){
+				if (!isset($data->id)) {
 					$time = time();
 					$ip = $_SERVER["REMOTE_ADDR"];
 					//grava no banco
 					$conexao = new mysql();
 					$conexao->inserir("pedido_loja", array(
-						"codigo"=>"$cod_sessao",
-						"data"=>"$time",
-						"ip"=>"$ip",
-						"status"=>"0"
+						"codigo" => "$cod_sessao",
+						"data" => "$time",
+						"ip" => "$ip",
+						"status" => "0"
 					));
-
 				} else {
 					//confere se o pedido foi finalizado
-					if($data->status != 0){
-						$this->irpara(DOMINIO.$this->_controller."/carrinho");
+					if ($data->status != 0) {
+						$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 					} else {
 						//zera dados de frete
 						$conexao = new mysql();
 						$conexao->alterar("pedido_loja", array(
-							"frete"=>"",
-							"frete_titulo"=>"",
-							"frete_valor"=>"",
-							"valor_produtos"=>"0",
-							"valor_produtos_desc"=>"0",
-							"valor_total"=>"0",
-							"status"=>"0"
+							"frete" => "",
+							"frete_titulo" => "",
+							"frete_valor" => "",
+							"valor_produtos" => "0",
+							"valor_produtos_desc" => "0",
+							"valor_total" => "0",
+							"status" => "0"
 						), " sessao='$cod_sessao' ");
-					}			
+					}
 				}
-				foreach($produto as $prod){
+				foreach ($produto as $prod) {
 					$data_produto = $produtos->carrega_produto_codigo($prod);
-					if(isset($data_produto->id)){
+					if (isset($data_produto->id)) {
 						$conexao = new mysql();
 						$tipo_envio = 3;
 						$combo_id = null;
-						if($_POST['combo_id'] > 0){
+						if ($_POST['combo_id'] > 0) {
 							$combo_id = $_POST['combo_id'];
 							$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$cod_sessao' AND produto = '$prod' AND id_combo = $combo_id ");
 							$linha_carrinho = $coisas_carrinho->num_rows;
-							if($linha_carrinho != 0){			
+							if ($linha_carrinho != 0) {
 								$this->msg('Você não pode adicionar 2 combos iguais.');
 								$this->volta(1);
 							}
 						}
 						//verifica obrigaçao do campo Tamanho
 						$tamanho = $this->post('tamanho');
-						if(!$tamanho){
+						if (!$tamanho) {
 
 							$conexao = new mysql();
 							$coisas_det = $conexao->Executar("SELECT * FROM produto_tamanho_sel where produto_codigo='$produto' ");
 							$i = 0;
-							while($data_det = $coisas_det->fetch_object()){
+							while ($data_det = $coisas_det->fetch_object()) {
 
 								$conexao = new mysql();
 								$data_det2 = $conexao->Executar("SELECT id FROM produto_tamanho where codigo='$data_det->tamanho_codigo' ")->fetch_object();
 
-								if(isset($data_det2->id)){
+								if (isset($data_det2->id)) {
 									$i++;
 								}
 							}
-							if($i != 0){
+							if ($i != 0) {
 								$this->msg('Selecione o tamanho!');
 								$this->volta(1);
 							}
-						}		
+						}
 						//verifica obrigaçao do campo Cor
 						$cor = $this->post('cor');
-						if(!$cor){
+						if (!$cor) {
 
 							$conexao = new mysql();
 							$coisas_det = $conexao->Executar("SELECT * FROM produto_cor_sel where produto_codigo='$produto' ");
 							$i = 0;
-							while($data_det = $coisas_det->fetch_object()){
+							while ($data_det = $coisas_det->fetch_object()) {
 
 								$conexao = new mysql();
 								$data_det2 = $conexao->Executar("SELECT id FROM produto_cor where codigo='$data_det->cor_codigo' ")->fetch_object();
 
-								if(isset($data_det2->id)){
+								if (isset($data_det2->id)) {
 									$i++;
 								}
 							}
-							if($i != 0){
+							if ($i != 0) {
 								$this->msg('Selecione uma cor!');
 								$this->volta(1);
 							}
 						}
 						//verifica obrigaçao do campo variacao
 						$variacao = $this->post('variacao');
-						if(!$variacao){
+						if (!$variacao) {
 
 							$conexao = new mysql();
 							$coisas_det = $conexao->Executar("SELECT * FROM produto_variacao_sel where produto_codigo='$produto' ");
 							$i = 0;
-							while($data_det = $coisas_det->fetch_object()){
+							while ($data_det = $coisas_det->fetch_object()) {
 
 								$conexao = new mysql();
 								$data_det2 = $conexao->Executar("SELECT id FROM produto_variacao where codigo='$data_det->variacao_codigo' ")->fetch_object();
 
-								if(isset($data_det2->id)){
+								if (isset($data_det2->id)) {
 									$i++;
 								}
 							}
-							if($i != 0){
+							if ($i != 0) {
 								$this->msg('Selecione uma variação!');
 								$this->volta(1);
 							}
@@ -6887,48 +7031,47 @@ class index extends controller {
 						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' and id='$combo_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
-						
-						while($data_det = $coisas_det->fetch_object()){
+
+						while ($data_det = $coisas_det->fetch_object()) {
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
 						}
 						$usar_valor_vindi = $usar_discount;
-						if($usar_discount == 1){
+						if ($usar_discount == 1) {
 							$valor_total = 0;
 							$valor_total_combo_vindi = $valor_combo_vindi;
 							$valor_total = $valor_total_combo_vindi;
-						}else{
+						} else {
 							$combo_disconto = 0;
-							if($_POST['combo_disconto'] > 0){
+							if ($_POST['combo_disconto'] > 0) {
 								$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
 								$combo_disconto = $_POST['combo_disconto'];
-							}else{
+							} else {
 								$valor_total = $data_produto->valor;
 							}
 						}
 
 						$tam_altura = '';
 						$tam_largura = '';
-						if($data_produto->tipo != 0){
+						if ($data_produto->tipo != 0) {
 
 							$tamanho_largura = $valores->trata_valor_banco($this->post('tamanho_largura'));
 							$tamanho_altura = $valores->trata_valor_banco($this->post('tamanho_altura'));
 
-							if($data_produto->tipo == 1){
+							if ($data_produto->tipo == 1) {
 								$tipounidade = 'm';
 							}
-							if($data_produto->tipo == 2){
+							if ($data_produto->tipo == 2) {
 								$tipounidade = 'cm';
 							}
 
-							$tam_altura = $tamanho_altura.' '.$tipounidade;
-							$tam_largura = $tamanho_largura.' '.$tipounidade;
+							$tam_altura = $tamanho_altura . ' ' . $tipounidade;
+							$tam_largura = $tamanho_largura . ' ' . $tipounidade;
 
 							$valor_total = $tamanho_altura * $tamanho_largura * $valor_total;
-
-						} 
+						}
 						//tamanho
-						if($tamanho){
+						if ($tamanho) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM produto_tamanho where codigo='$tamanho' ");
@@ -6942,14 +7085,13 @@ class index extends controller {
 							$tamanho_titulo = $data->titulo;
 
 							$valor_total = $valor_total + $data2->valor;
-
 						} else {
 							$tamanho = '-';
 							$tamanho_valor = 0;
 							$tamanho_titulo = "";
 						}
 						//Cor
-						if($cor){
+						if ($cor) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM produto_cor where codigo='$cor' ");
@@ -6963,34 +7105,31 @@ class index extends controller {
 							$cor_titulo = $data->titulo;
 
 							$valor_total = $valor_total + $data2->valor;
-
 						} else {
 							$cor = '-';
 							$cor_valor = 0;
 							$cor_titulo = "";
 						}
 						// confere estoque se tiver menos do que o selecionado substitui pela quantidade disponivel
-						if($data_produto->semestoque == 0){
+						if ($data_produto->semestoque == 0) {
 
 							$quantidade_disponivel = $produtos->estoque_quantidade($produto, $tamanho, $cor, $variacao);
 
-							if($quantidade_disponivel <= 0){
+							if ($quantidade_disponivel <= 0) {
 
 								$this->msg('Produto indisponível em estoque!');
 								$this->volta(1);
-
 							} else {
-								if($quantidade > $quantidade_disponivel){
+								if ($quantidade > $quantidade_disponivel) {
 									$quantidade = $quantidade_disponivel;
 								}
 							}
-
 						}
 
-						if($data_produto->impresso == 1){
+						if ($data_produto->impresso == 1) {
 
 							$tipoarte = $this->post('tipoarte');
-							if(!$tipoarte){
+							if (!$tipoarte) {
 								$this->msg('Preencha todos os campos obrigatórios');
 								$this->volta(1);
 							}
@@ -6999,41 +7138,38 @@ class index extends controller {
 							$dados_arte = '';
 							$valor_arte = 0;
 
-							if($tipoarte == 1){
+							if ($tipoarte == 1) {
 
 								$modelo_codigo = $this->post('modelo_selecionado_codigo');
-								if(!$modelo_codigo){
+								if (!$modelo_codigo) {
 									$this->msg('Preencha todos os campos obrigatórios');
 									$this->volta(1);
 								}
 
 								$dados_arte = $this->post('dados_arte');
-
 							}
 
-							if($tipoarte == 2){
+							if ($tipoarte == 2) {
 
 								$dados_arte = $this->post('dados_arte');
 
-							// valor arte
+								// valor arte
 								$valor_arte = $data_produto->valor_arte;
 								$valor_total = $valor_total + $valor_arte;
-
 							}
 
 
 							$arte_acabamento = $this->post('arte_acabamento');
-							$arquivo_arte = $this->post('arquivo_arte'); 
+							$arquivo_arte = $this->post('arquivo_arte');
 
 
-							if($data_produto->obrigacaodoanexo == 1){
-								if($tipoarte == 3){
+							if ($data_produto->obrigacaodoanexo == 1) {
+								if ($tipoarte == 3) {
 
-									if(!$arquivo_arte){
+									if (!$arquivo_arte) {
 										$this->msg('Favor anexar sua arte para continuar.');
 										$this->volta(1);
 									}
-
 								}
 							}
 						} else {
@@ -7047,20 +7183,20 @@ class index extends controller {
 
 						$titulodoproduto = "";
 
-						if($data_produto->material){
-							$titulodoproduto .= $data_produto->material.' ';
+						if ($data_produto->material) {
+							$titulodoproduto .= $data_produto->material . ' ';
 						}
-						if($data_produto->formato){
-							$titulodoproduto .= $data_produto->formato.' ';
+						if ($data_produto->formato) {
+							$titulodoproduto .= $data_produto->formato . ' ';
 						}
-						if($data_produto->cores){
-							$titulodoproduto .= $data_produto->cores.' ';
+						if ($data_produto->cores) {
+							$titulodoproduto .= $data_produto->cores . ' ';
 						}
-						if($data_produto->revestimento){
-							$titulodoproduto .= $data_produto->revestimento.' ';
+						if ($data_produto->revestimento) {
+							$titulodoproduto .= $data_produto->revestimento . ' ';
 						}
-						if($data_produto->acabamento){
-							$titulodoproduto .= $data_produto->acabamento.' ';
+						if ($data_produto->acabamento) {
+							$titulodoproduto .= $data_produto->acabamento . ' ';
 						}
 
 						$data_compra = new DateTime('now');
@@ -7068,63 +7204,64 @@ class index extends controller {
 						$data_compra = strtotime($data_compra);
 
 						$date_vencimento = new DateTime('now');
-						$period = '+'.$data_produto->data_vencimento. ' month';
-						$date_vencimento->modify($period); 
+						$period = '+' . $data_produto->data_vencimento . ' month';
+						$date_vencimento->modify($period);
 						$date_vencimento = $date_vencimento->format('Y-m-d');
 						$date_vencimento = strtotime($date_vencimento);
-						
-						
+
+
 
 						//grava no banco
 						$conexao = new mysql();
 						$conexao->inserir("pedido_loja_carrinho", array(
-							"sessao"=>"$cod_sessao",
-							"produto"=>"$prod",
-							"produto_id"=>"$data_produto->id",
-							"produto_ref"=>"$data_produto->ref",
-							"id_combo"=>"$combo_id",
-							"combo_titulo"=>"$combo_titulo",
-							"data_vencimento"=>"$date_vencimento",
-							"produto_assinatura"=>"$plano_id",
-							"data_compra"=>"$data_compra",
-							"produto_titulo"=>"$data_produto->titulo",
-							"produto_subtitulo"=>"$titulodoproduto",
-							"produto_valor"=>"$data_produto->valor",
-							"tamanho"=>"$tamanho",
-							"tamanho_titulo"=>"$tamanho_titulo",
-							"tamanho_valor"=>"$tamanho_valor",
-							"cor"=>"$cor",
-							"cor_titulo"=>"$cor_titulo",
-							"cor_valor"=>"$cor_valor",
-							"variacao"=>"$variacao",
-							"variacao_titulo"=>"",
-							"variacao_valor"=>0,
-							"quantidade"=> 1,
-							"valor_arte"=>"$valor_arte",
-							"valor_total"=>"$valor_total",
-							"valor_total_combo_vindi"=>"$valor_total_combo_vindi",
-							"usar_valor_vindi"=>"$usar_valor_vindi",
-							"combo_desconto"=>"$combo_disconto",
-							"tipoarte"=>"$tipoarte",
-							"modelo_codigo"=>"$modelo_codigo",
-							"dados_arte"=>"$dados_arte",
-							"arquivo_arte"=>"$arquivo_arte",
-							"arte_acabamento"=>"$arte_acabamento",
-							"tipo_envio"=> 3,
-							"tam_largura"=>"$tam_largura",
-							"tam_altura"=>"$tam_altura"
+							"sessao" => "$cod_sessao",
+							"produto" => "$prod",
+							"produto_id" => "$data_produto->id",
+							"produto_ref" => "$data_produto->ref",
+							"id_combo" => "$combo_id",
+							"combo_titulo" => "$combo_titulo",
+							"data_vencimento" => "$date_vencimento",
+							"produto_assinatura" => "$plano_id",
+							"data_compra" => "$data_compra",
+							"produto_titulo" => "$data_produto->titulo",
+							"produto_subtitulo" => "$titulodoproduto",
+							"produto_valor" => "$data_produto->valor",
+							"tamanho" => "$tamanho",
+							"tamanho_titulo" => "$tamanho_titulo",
+							"tamanho_valor" => "$tamanho_valor",
+							"cor" => "$cor",
+							"cor_titulo" => "$cor_titulo",
+							"cor_valor" => "$cor_valor",
+							"variacao" => "$variacao",
+							"variacao_titulo" => "",
+							"variacao_valor" => 0,
+							"quantidade" => 1,
+							"valor_arte" => "$valor_arte",
+							"valor_total" => "$valor_total",
+							"valor_total_combo_vindi" => "$valor_total_combo_vindi",
+							"usar_valor_vindi" => "$usar_valor_vindi",
+							"combo_desconto" => "$combo_disconto",
+							"tipoarte" => "$tipoarte",
+							"modelo_codigo" => "$modelo_codigo",
+							"dados_arte" => "$dados_arte",
+							"arquivo_arte" => "$arquivo_arte",
+							"arte_acabamento" => "$arte_acabamento",
+							"tipo_envio" => 3,
+							"tam_largura" => "$tam_largura",
+							"tam_altura" => "$tam_altura"
 						));
 
 						// echo'<pre>';print_r($conexao);exit;
 					}
 					// echo'<pre>';print_r($data_produto);exit;
 				}
-				$this->irpara(DOMINIO.$this->_controller."/carrinho");
+				$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 			}
-		}	
+		}
 	}
 
-	public function carrinho_adicionar_plano(){	
+	public function carrinho_adicionar_plano()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -7134,19 +7271,19 @@ class index extends controller {
 
 		$cod_sessao = $this->_sessao;
 
-		$produto = $this->get('id'); 
+		$produto = $this->get('id');
 
-		if(!$produto){
+		if (!$produto) {
 			$this->msg('Plano não indentificado!');
 			$this->volta(1);
 		}
 
 		//confere se ja existe o pedido senão cria um novo pedido
 		$conexao = new mysql();
-		$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='".$this->_sessao."' ");
+		$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='" . $this->_sessao . "' ");
 		$data = $coisas->fetch_object();
 
-		if(!isset($data->id)){
+		if (!isset($data->id)) {
 
 			$time = time();
 			$ip = $_SERVER["REMOTE_ADDR"];
@@ -7154,28 +7291,27 @@ class index extends controller {
 			//grava no banco
 			$conexao = new mysql();
 			$conexao->inserir("pedido_loja", array(
-				"codigo"=>"$cod_sessao",
-				"data"=>"$time",
-				"ip"=>"$ip",
-				"status"=>"0"
+				"codigo" => "$cod_sessao",
+				"data" => "$time",
+				"ip" => "$ip",
+				"status" => "0"
 			));
-
 		} else {
 
 			//confere se o pedido foi finalizado
-			if($data->status != 0){
-				$this->irpara(DOMINIO.$this->_controller."/carrinho");
+			if ($data->status != 0) {
+				$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 			} else {
 				//zera dados de frete
 				$conexao = new mysql();
 				$conexao->alterar("pedido_loja", array(
-					"frete"=>"",
-					"frete_titulo"=>"",
-					"frete_valor"=>"",
-					"valor_produtos"=>"0",
-					"valor_produtos_desc"=>"0",
-					"valor_total"=>"0",
-					"status"=>"0"
+					"frete" => "",
+					"frete_titulo" => "",
+					"frete_valor" => "",
+					"valor_produtos" => "0",
+					"valor_produtos_desc" => "0",
+					"valor_total" => "0",
+					"status" => "0"
 				), " sessao='$cod_sessao' ");
 			}
 		}
@@ -7186,7 +7322,7 @@ class index extends controller {
 		$data_produto = $coisas->fetch_object();
 
 		//verifica se o produto existe
-		if(isset($data_produto->id)){
+		if (isset($data_produto->id)) {
 
 			// valor base
 			$valor_total = $data_produto->valor;
@@ -7195,14 +7331,14 @@ class index extends controller {
 			$variacao = '-';
 			$variacao_valor = 0;
 			$variacao_titulo = "";
-			
+
 			$tam_altura = '';
 			$tam_largura = '';
-			
+
 			$tamanho = '-';
 			$tamanho_valor = 0;
 			$tamanho_titulo = "";
-			
+
 			$cor = '-';
 			$cor_valor = 0;
 			$cor_titulo = "";
@@ -7222,185 +7358,181 @@ class index extends controller {
 			$data_compra = strtotime($data_compra);
 
 			$date_vencimento = new DateTime('now');
-			$period = '+'.$data_produto->data_vencimento. ' month';
-			$date_vencimento->modify($period); 
+			$period = '+' . $data_produto->data_vencimento . ' month';
+			$date_vencimento->modify($period);
 			$date_vencimento = $date_vencimento->format('Y-m-d');
 			$date_vencimento = strtotime($date_vencimento);
 
 			//grava no banco
 			$conexao = new mysql();
 			$conexao->inserir("pedido_loja_carrinho", array(
-				"sessao"=>"$cod_sessao",
-				"produto"=>"$produto",
-				"produto_id"=>"$data_produto->id",
-				"produto_ref"=>"$data_produto->ref",
-				"produto_titulo"=>"$data_produto->titulo",
-				"data_vencimento"=>"$date_vencimento",
-				"produto_assinatura"=>"$data_produto->assinatura",
-				"data_compra"=>"$data_compra",
-				"produto_subtitulo"=>"$titulodoproduto",
-				"produto_valor"=>"$data_produto->valor",
-				"tamanho"=>"$tamanho",
-				"tamanho_titulo"=>"$tamanho_titulo",
-				"tamanho_valor"=>"$tamanho_valor",
-				"cor"=>"$cor",
-				"cor_titulo"=>"$cor_titulo",
-				"cor_valor"=>"$cor_valor",
-				"variacao"=>"$variacao",
-				"variacao_titulo"=>"$variacao_titulo",
-				"variacao_valor"=>"$variacao_valor",
-				"quantidade"=>1,
-				"valor_arte"=>0,
-				"valor_total"=>$valor_total,
-				"tipoarte"=>"$tipoarte",
-				"modelo_codigo"=>"$modelo_codigo",
-				"dados_arte"=>"$dados_arte",
-				"arquivo_arte"=>"$arquivo_arte",
-				"arte_acabamento"=>"$arte_acabamento",
-				"tipo_envio"=>0,
-				"tam_largura"=>"$tam_largura",
-				"tam_altura"=>"$tam_altura",
-				"plano"=>1
+				"sessao" => "$cod_sessao",
+				"produto" => "$produto",
+				"produto_id" => "$data_produto->id",
+				"produto_ref" => "$data_produto->ref",
+				"produto_titulo" => "$data_produto->titulo",
+				"data_vencimento" => "$date_vencimento",
+				"produto_assinatura" => "$data_produto->assinatura",
+				"data_compra" => "$data_compra",
+				"produto_subtitulo" => "$titulodoproduto",
+				"produto_valor" => "$data_produto->valor",
+				"tamanho" => "$tamanho",
+				"tamanho_titulo" => "$tamanho_titulo",
+				"tamanho_valor" => "$tamanho_valor",
+				"cor" => "$cor",
+				"cor_titulo" => "$cor_titulo",
+				"cor_valor" => "$cor_valor",
+				"variacao" => "$variacao",
+				"variacao_titulo" => "$variacao_titulo",
+				"variacao_valor" => "$variacao_valor",
+				"quantidade" => 1,
+				"valor_arte" => 0,
+				"valor_total" => $valor_total,
+				"tipoarte" => "$tipoarte",
+				"modelo_codigo" => "$modelo_codigo",
+				"dados_arte" => "$dados_arte",
+				"arquivo_arte" => "$arquivo_arte",
+				"arte_acabamento" => "$arte_acabamento",
+				"tipo_envio" => 0,
+				"tam_largura" => "$tam_largura",
+				"tam_altura" => "$tam_altura",
+				"plano" => 1
 			));
 
-			$this->irpara(DOMINIO.$this->_controller."/carrinho");
-
-		} else {			
+			$this->irpara(DOMINIO . $this->_controller . "/carrinho");
+		} else {
 			$this->msg('Plano não encontrado!');
 			$this->volta(1);
 		}
-
 	}
 
-	public function quantidade(){
+	public function quantidade()
+	{
 
 		$produtos = new model_produtos();
 
 		$id = $this->post('id');
-		if($id){
+		if ($id) {
 
 			$quantidade = $this->post('quantidade');
-			if($quantidade < 1){
+			if ($quantidade < 1) {
 				echo "erro";
 				exit;
 			}
 
 			$conexao = new mysql();
-			$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho where id='$id' AND sessao='".$this->_sessao."' ");
+			$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho where id='$id' AND sessao='" . $this->_sessao . "' ");
 			$data_carrinho = $coisas_carrinho->fetch_object();
 
-			if(isset($data_carrinho->id)){
+			if (isset($data_carrinho->id)) {
 
 				$conexao = new mysql();
 				$coisas_produto = $conexao->Executar("SELECT * FROM produto WHERE codigo='$data_carrinho->produto' ");
 				$data_produto = $coisas_produto->fetch_object();
 
-				if(!isset($data_produto->semestoque)){
+				if (!isset($data_produto->semestoque)) {
 					echo "erro";
 					exit;
 				}
 
 				//confere se nao é venda sem estoque
-				if($data_produto->semestoque == 1){
+				if ($data_produto->semestoque == 1) {
 
 					$conexao = new mysql();
 					$conexao->alterar("pedido_loja_carrinho", array(
-						"quantidade"=>"$quantidade"
-					), " id='$id' AND sessao='".$this->_sessao."' ");
+						"quantidade" => "$quantidade"
+					), " id='$id' AND sessao='" . $this->_sessao . "' ");
 
 					//zera dados de frete
 					$conexao = new mysql();
 					$conexao->alterar("pedido_loja", array(
-						"frete"=>"",
-						"frete_titulo"=>"",
-						"frete_valor"=>"",
-						"valor_produtos"=>"0",
-						"valor_produtos_desc"=>"0",
-						"valor_total"=>"0",
-						"status"=>"0"
-					), " codigo='".$this->_sessao."' ");
+						"frete" => "",
+						"frete_titulo" => "",
+						"frete_valor" => "",
+						"valor_produtos" => "0",
+						"valor_produtos_desc" => "0",
+						"valor_total" => "0",
+						"status" => "0"
+					), " codigo='" . $this->_sessao . "' ");
 
 					echo "ok";
-
 				} else {
 
 					// confere estoque se tiver menos do que o selecionado substitui pela quantidade disponivel
-					if($data_produto->semestoque == 0){
+					if ($data_produto->semestoque == 0) {
 
 						$quantidade_disponivel = $produtos->estoque_quantidade($data_carrinho->produto, $data_carrinho->tamanho, $data_carrinho->cor, $data_carrinho->variacao);
 
-						if($quantidade_disponivel <= 0){
+						if ($quantidade_disponivel <= 0) {
 							echo "erro";
 							exit;
 						} else {
-							if($quantidade > $quantidade_disponivel){
+							if ($quantidade > $quantidade_disponivel) {
 								$quantidade = $quantidade_disponivel;
 							}
 						}
-
 					}
 
 					$conexao = new mysql();
 					$conexao->alterar("pedido_loja_carrinho", array(
-						"quantidade"=>"$quantidade"
-					), " id='$id' AND sessao='".$this->_sessao."' ");
+						"quantidade" => "$quantidade"
+					), " id='$id' AND sessao='" . $this->_sessao . "' ");
 
 					//zera dados de frete
 					$conexao = new mysql();
 					$conexao->alterar("pedido_loja", array(
-						"frete"=>"",
-						"frete_titulo"=>"",
-						"frete_valor"=>"",
-						"valor_produtos"=>"0",
-						"valor_produtos_desc"=>"0",
-						"valor_total"=>"0",
-						"status"=>"0"
-					), " codigo='".$this->_sessao."' ");
-
-				} 
+						"frete" => "",
+						"frete_titulo" => "",
+						"frete_valor" => "",
+						"valor_produtos" => "0",
+						"valor_produtos_desc" => "0",
+						"valor_total" => "0",
+						"status" => "0"
+					), " codigo='" . $this->_sessao . "' ");
+				}
 
 				echo "ok";
-
 			}
 		}
 	}
 
-	public function remover_carrinho(){
+	public function remover_carrinho()
+	{
 
 		$id = $this->get('id');
-		if($id){
+		if ($id) {
 
 			$conexao = new mysql();
 			$linha = $conexao->Executar("SELECT * FROM pedido_loja_carrinho where id='$id' ");
 
 			$line = $linha->fetch_object();
-			if($line->id_combo > 0){
-				$conexao->apagar("pedido_loja_carrinho", " id_combo='$line->id_combo' AND sessao='".$this->_sessao."' "); 
-			}else{
-				$conexao->apagar("pedido_loja_carrinho", " id='$id' AND sessao='".$this->_sessao."' ");
+			if ($line->id_combo > 0) {
+				$conexao->apagar("pedido_loja_carrinho", " id_combo='$line->id_combo' AND sessao='" . $this->_sessao . "' ");
+			} else {
+				$conexao->apagar("pedido_loja_carrinho", " id='$id' AND sessao='" . $this->_sessao . "' ");
 			}
 
 			//zera dados de frete
 			$conexao = new mysql();
 			$conexao->alterar("pedido_loja", array(
-				"frete"=>"",
-				"frete_titulo"=>"",
-				"frete_valor"=>"",
-				"valor_produtos"=>"0",
-				"valor_produtos_desc"=>"0",
-				"valor_total"=>"0",
-				"status"=>"0"
-			), " codigo='".$this->_sessao."' ");
+				"frete" => "",
+				"frete_titulo" => "",
+				"frete_valor" => "",
+				"valor_produtos" => "0",
+				"valor_produtos_desc" => "0",
+				"valor_total" => "0",
+				"status" => "0"
+			), " codigo='" . $this->_sessao . "' ");
 
 			echo "ok";
 		}
-
 	}
 
-	public function carrinho_cupom(){
+	public function carrinho_cupom()
+	{
 
 		$cupom = rtrim(ltrim($this->post('cupom')));
-		if(!$cupom){
+		if (!$cupom) {
 			echo "erro";
 			exit;
 		}
@@ -7409,70 +7541,69 @@ class index extends controller {
 		$coisas_cupom = $conexao->Executar("SELECT * FROM cupom_lista where cupom='$cupom' ");
 		$data_cupom = $coisas_cupom->fetch_object();
 
-		if(isset($data_cupom->codigo)){
+		if (isset($data_cupom->codigo)) {
 
 			$conexao = new mysql();
 			$coisas_promo = $conexao->Executar("SELECT * FROM cupom WHERE codigo='$data_cupom->codigo' ");
 			$data_promo = $coisas_promo->fetch_object();
 
-			if(!isset($data_promo->id)){
+			if (!isset($data_promo->id)) {
 				echo "erro";
 				exit;
 			}
 
 			//confere se é unico
-			if($data_promo->tipo == 0){
-				if($data_cupom->utilizado != 0){
+			if ($data_promo->tipo == 0) {
+				if ($data_cupom->utilizado != 0) {
 					$this->msg('Cupom inválido ou expirado!');
-					$this->irpara(DOMINIO.$this->_controller."/carrinho");
+					$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 				}
 			}
 
 			//confere se ja tem cupom 
-			$carrinho = new model_carrinho();		 
+			$carrinho = new model_carrinho();
 			$data_pedido = $carrinho->carrega($this->_sessao);
 
-			if($data_pedido->cupom){
+			if ($data_pedido->cupom) {
 				$conexao = new mysql();
 				$conexao->alterar("cupom_lista", array(
-					"utilizado"=>"0"
-				), " cupom='".$data_pedido->cupom."' ");
+					"utilizado" => "0"
+				), " cupom='" . $data_pedido->cupom . "' ");
 			}
 
 			//adiciona cupom ao pedido
 			$conexao = new mysql();
 			$conexao->alterar("pedido_loja", array(
-				"cupom"=>"$cupom",
-				"cupom_promocao"=>"$data_promo->titulo",
-				"cupom_desconto_fixo"=>$data_promo->desconto_fixo,
-				"cupom_desconto_porc"=>$data_promo->desconto_porc,
-				"frete"=>"",
-				"frete_titulo"=>"",
-				"frete_valor"=>0,
-				"valor_produtos"=>0,
-				"valor_produtos_desc"=>0,
-				"valor_total"=>0,
-				"status"=>0
-			), " codigo='".$this->_sessao."' ");
+				"cupom" => "$cupom",
+				"cupom_promocao" => "$data_promo->titulo",
+				"cupom_desconto_fixo" => $data_promo->desconto_fixo,
+				"cupom_desconto_porc" => $data_promo->desconto_porc,
+				"frete" => "",
+				"frete_titulo" => "",
+				"frete_valor" => 0,
+				"valor_produtos" => 0,
+				"valor_produtos_desc" => 0,
+				"valor_total" => 0,
+				"status" => 0
+			), " codigo='" . $this->_sessao . "' ");
 
 			echo "ok";
-
 		} else {
 			echo "erro";
 			exit;
 		}
-
 	}
 
-	public function carrinho_cep(){
+	public function carrinho_cep()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 		$cep = rtrim(ltrim($this->post('cep')));
-		if(!$cep){
+		if (!$cep) {
 			echo "Cep Inválido!";
 			exit;
 		}
@@ -7485,7 +7616,7 @@ class index extends controller {
 		// echo "</pre>";
 		// exit;
 
-		if(!$cep_array['uf']){
+		if (!$cep_array['uf']) {
 			echo "Cep Inválido!";
 			exit;
 		}
@@ -7493,12 +7624,12 @@ class index extends controller {
 		//adiciona cep
 		$conexao = new mysql();
 		$conexao->alterar("pedido_loja", array(
-			"cep_destino"=>"$cep",
-			"frete"=>"",
-			"frete_titulo"=>"",
-			"frete_valor"=>0,
-			"status"=>0
-		), " codigo='".$this->_sessao."' ");
+			"cep_destino" => "$cep",
+			"frete" => "",
+			"frete_titulo" => "",
+			"frete_valor" => 0,
+			"status" => 0
+		), " codigo='" . $this->_sessao . "' ");
 
 		$carrinho = new model_carrinho();
 		$dados['carrinho'] = $carrinho->carrinho($this->_sessao);
@@ -7512,13 +7643,14 @@ class index extends controller {
 		$this->view('carrinho_fretes', $dados);
 	}
 
-	public function carrinho_forma_pagamento(){
+	public function carrinho_forma_pagamento()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
 
 		$id = $this->get('id');
-		if(!$id){
+		if (!$id) {
 			exit;
 		}
 
@@ -7526,25 +7658,25 @@ class index extends controller {
 		$coisas = $conexao->Executar("SELECT * FROM pagamento WHERE id='$id' ");
 		$data = $coisas->fetch_object();
 
-		if( ($data->id) AND ($data->ativo == 0) ){
+		if (($data->id) and ($data->ativo == 0)) {
 
 			$conexao = new mysql();
 			$conexao->alterar("pedido_loja", array(
-				"forma_pagamento"=>$id,
-				"forma_pagamento_desc_fixo"=>$data->desconto_fixo,
-				"forma_pagamento_desc_porc"=>$data->desconto_porc,				
-				"valor_produtos"=>"0",
-				"valor_produtos_desc"=>"0",
-				"valor_total"=>"0",
-				"status"=>"0"
-			), " codigo='".$this->_sessao."' ");
+				"forma_pagamento" => $id,
+				"forma_pagamento_desc_fixo" => $data->desconto_fixo,
+				"forma_pagamento_desc_porc" => $data->desconto_porc,
+				"valor_produtos" => "0",
+				"valor_produtos_desc" => "0",
+				"valor_total" => "0",
+				"status" => "0"
+			), " codigo='" . $this->_sessao . "' ");
 
 			echo 'ok';
-
 		}
 	}
 
-	public function carrinho_frete(){
+	public function carrinho_frete()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -7552,18 +7684,18 @@ class index extends controller {
 		$fretes = new model_fretes();
 
 		$id = $this->get('id');
-		if(!$id){
+		if (!$id) {
 			exit;
 		}
 
 		$valor_subtotal = $this->get('valor_subtotal');
-		if(!$valor_subtotal){
+		if (!$valor_subtotal) {
 			exit;
 		}
 
 		//informaçoes do pedido
 		$conexao = new mysql();
-		$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='".$this->_sessao."' ");
+		$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='" . $this->_sessao . "' ");
 		$data_pedido = $coisas_pedido->fetch_object();
 
 		// frete
@@ -7572,37 +7704,38 @@ class index extends controller {
 		$valor_frete = 0;
 		$titulo = '';
 		foreach ($frete as $key => $value) {
-			if($value['selected']){
+			if ($value['selected']) {
 				$valor_frete = $value['valor_frete'];
 				$obs = $value['obs'];
 				$titulo = $value['titulo'];
 			}
 		}
 
-		if($titulo){
+		if ($titulo) {
 
 			//adiciona frete
 			$conexao = new mysql();
 			$conexao->alterar("pedido_loja", array(
-				"frete"=>$id,
-				"frete_titulo"=>$titulo,
-				"frete_valor"=>$valor_frete,
-				"frete_obs"=>$obs,
-				"valor_total"=>0,
-				"status"=>0
-			), " codigo='".$this->_sessao."' ");
+				"frete" => $id,
+				"frete_titulo" => $titulo,
+				"frete_valor" => $valor_frete,
+				"frete_obs" => $obs,
+				"valor_total" => 0,
+				"status" => 0
+			), " codigo='" . $this->_sessao . "' ");
 
 			echo "ok";
-
 		}
 	}
 
-	public function fechar_pedido(){
+	public function fechar_pedido()
+	{
 		// ini_set('display_errors', 1);
 		// ini_set('display_startup_errors', 1);
 		// error_reporting(E_ALL);
 		// retorno
-		function mostra_result($erro_cod, $erro_msg, $processo, $forma){
+		function mostra_result($erro_cod, $erro_msg, $processo, $forma)
+		{
 
 			$retorno = array();
 
@@ -7615,7 +7748,7 @@ class index extends controller {
 			exit;
 		}
 
-		if( isset($_SESSION[$this->_sessao_principal]['loja_acesso']) AND isset($_SESSION[$this->_sessao_principal]['loja_cod_usuario']) AND isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao']) ) {
+		if (isset($_SESSION[$this->_sessao_principal]['loja_acesso']) and isset($_SESSION[$this->_sessao_principal]['loja_cod_usuario']) and isset($_SESSION[$this->_sessao_principal]['loja_cod_sessao'])) {
 		} else {
 			mostra_result(2, '', 'erro', '');
 			exit;
@@ -7633,12 +7766,12 @@ class index extends controller {
 
 		//informaçoes do pedido
 		$conexao = new mysql();
-		$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='".$this->_sessao."' ");
+		$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='" . $this->_sessao . "' ");
 		$data_pedido = $coisas_pedido->fetch_object();
 
-		
+
 		//confere frete
-		if(!$data_pedido->frete){
+		if (!$data_pedido->frete) {
 
 			// if(!$data_pedido->frete_balcao){
 
@@ -7654,10 +7787,10 @@ class index extends controller {
 			// }
 		} else {
 
-			if($data_pedido->frete != 3){
+			if ($data_pedido->frete != 3) {
 
 				//confere cep
-				if(!$data_pedido->cep_destino){
+				if (!$data_pedido->cep_destino) {
 
 					$ret_erro_cod = "1";
 					$ret_erro_msg = "Informe seu cep para continuar";
@@ -7673,8 +7806,8 @@ class index extends controller {
 		}
 
 		// confere cupom
-		if($data_pedido->cupom){
-			if($cupons->confere_cupom_pedido($this->_sessao, $data_pedido->cupom) != 'ok'){
+		if ($data_pedido->cupom) {
+			if ($cupons->confere_cupom_pedido($this->_sessao, $data_pedido->cupom) != 'ok') {
 
 				$ret_erro_cod = "1";
 				$ret_erro_msg = "Cupom invalido ou expirado";
@@ -7693,15 +7826,15 @@ class index extends controller {
 
 		// confere produtos
 		$conexao = new mysql();
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$this->_sessao."' ");
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='" . $this->_sessao . "' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
-	
-		if($linha_carrinho != 0){
-			
-			while($data_carrinho = $coisas_carrinho->fetch_object()){
-				if($data_carrinho->plano == 0){
-				
+
+		if ($linha_carrinho != 0) {
+
+			while ($data_carrinho = $coisas_carrinho->fetch_object()) {
+				if ($data_carrinho->plano == 0) {
+
 					$total_estoque = $produtos->estoque_quantidade($data_carrinho->produto, $data_carrinho->tamanho, $data_carrinho->cor, $data_carrinho->variacao);
 
 					$conexao = new mysql();
@@ -7709,11 +7842,11 @@ class index extends controller {
 					$data_produto = $coisas_produto->fetch_object();
 
 					//Confere Estoque
-					if($data_produto->semestoque == 0){
-						if($data_carrinho->quantidade > $total_estoque){
+					if ($data_produto->semestoque == 0) {
+						if ($data_carrinho->quantidade > $total_estoque) {
 
 							$ret_erro_cod = "1";
-							$ret_erro_msg = "Estoque indisponível para o produto: ".$data_carrinho->produto_titulo;
+							$ret_erro_msg = "Estoque indisponível para o produto: " . $data_carrinho->produto_titulo;
 							$ret_processo = "erro";
 							$ret_forma = "";
 							$ret_forma_code = "";
@@ -7723,80 +7856,79 @@ class index extends controller {
 							exit;
 						}
 					}
-
 				} else {
 					$total_estoque = 0;
-					
+
 					$conexao = new mysql();
 					$coisas_produto = $conexao->Executar("SELECT * FROM planos WHERE codigo='$data_carrinho->produto' ");
 					$data_produto = $coisas_produto->fetch_object();
-
 				}
-				if($data_carrinho->usar_valor_vindi == 1){
-					if($data_carrinho->id_combo != 0){
+				if ($data_carrinho->usar_valor_vindi == 1) {
+					if ($data_carrinho->id_combo != 0) {
 						$conexao = new mysql();
-						$count_prod = $conexao->Executar("SELECT * FROM combo_produto WHERE id_combo='".$data_carrinho->id_combo."' ");
+						$count_prod = $conexao->Executar("SELECT * FROM combo_produto WHERE id_combo='" . $data_carrinho->id_combo . "' ");
 						$count_prod = $count_prod->num_rows;
-						$total_vindi_combo_half = ($data_carrinho->valor_total/$count_prod);
+						$total_vindi_combo_half = ($data_carrinho->valor_total / $count_prod);
 						$total_unitario = $total_vindi_combo_half;
 					}
-				}else{
+				} else {
 					$total_unitario = $data_carrinho->valor_total;
 				}
-			
+
 				$total_quantidade = $valores->trata_valor_calculo($total_unitario * $data_carrinho->quantidade);
 				$valor_subtotal = $valores->trata_valor_calculo($valor_subtotal + $total_quantidade);
-				
+
 				// informações da lista para envio 
 
 				$produto_nome = "<div>$data_carrinho->quantidade un - $data_carrinho->produto_titulo</div>";
-				if($data_carrinho->tamanho_titulo){ $produto_nome .= "<div>Tamanho: $data_carrinho->tamanho_titulo</div>"; }
-				if($data_carrinho->cor_titulo){ $produto_nome .= "<div>Cor: $data_carrinho->cor_titulo</div>"; }
-				if($data_carrinho->variacao_titulo){ $produto_nome .= "<div>Variação: $data_carrinho->variacao_titulo</div>"; }
+				if ($data_carrinho->tamanho_titulo) {
+					$produto_nome .= "<div>Tamanho: $data_carrinho->tamanho_titulo</div>";
+				}
+				if ($data_carrinho->cor_titulo) {
+					$produto_nome .= "<div>Cor: $data_carrinho->cor_titulo</div>";
+				}
+				if ($data_carrinho->variacao_titulo) {
+					$produto_nome .= "<div>Variação: $data_carrinho->variacao_titulo</div>";
+				}
 
-				if($data_carrinho->tipoarte == 1){
+				if ($data_carrinho->tipoarte == 1) {
 
 					$conexao = new mysql();
 					$coisas_artemod = $conexao->Executar("SELECT titulo FROM produto_modelos WHERE codigo='$data_carrinho->modelo_codigo' ");
 					$data_artemod = $coisas_artemod->fetch_object();
 
-					$produto_nome .= "<div>Arte: Modelo gratis - ".$data_artemod->titulo."</div>";
-
+					$produto_nome .= "<div>Arte: Modelo gratis - " . $data_artemod->titulo . "</div>";
 				}
-				if($data_carrinho->tipoarte == 2){
-					$produto_nome .= "<div>Arte: Criação - adicional R$ ".$valores->trata_valor($data_carrinho->valor_arte)."</div>";
+				if ($data_carrinho->tipoarte == 2) {
+					$produto_nome .= "<div>Arte: Criação - adicional R$ " . $valores->trata_valor($data_carrinho->valor_arte) . "</div>";
 				}
-				if($data_carrinho->tipoarte == 3){
+				if ($data_carrinho->tipoarte == 3) {
 					$produto_nome .= "<div>Arte: Enviado pelo cliente</div>";
 				}
 
-				if($data_carrinho->arte_acabamento != 0){
+				if ($data_carrinho->arte_acabamento != 0) {
 
 					$conexao = new mysql();
 					$coisas_acaba = $conexao->Executar("SELECT titulo FROM produto_acabamentos WHERE codigo='$data_carrinho->arte_acabamento' ");
 					$data_acaba = $coisas_acaba->fetch_object();
 
-					$produto_nome .= "<div>Acabamento: ".$data_acaba->titulo."</div>";
-
+					$produto_nome .= "<div>Acabamento: " . $data_acaba->titulo . "</div>";
 				}
-				if($data_carrinho->arquivo_arte){
+				if ($data_carrinho->arquivo_arte) {
 
-					$produto_nome .= "<div>Anexo: <a href='".PASTA_CLIENTE."uploads/".$data_carrinho->arquivo_arte."' target='_blank'>Abrir</a></div>";
-
+					$produto_nome .= "<div>Anexo: <a href='" . PASTA_CLIENTE . "uploads/" . $data_carrinho->arquivo_arte . "' target='_blank'>Abrir</a></div>";
 				}
 
-				if($data_carrinho->dados_arte){					
-					$produto_nome .= "<div>Dados da arte: <a onclick=\"modal('".DOMINIO."meuspedidos/dados_arte/id/".$data_carrinho->id."', 'Dados da arte');\" style='cursor:pointer;' >Ver</a></div>";
-
+				if ($data_carrinho->dados_arte) {
+					$produto_nome .= "<div>Dados da arte: <a onclick=\"modal('" . DOMINIO . "meuspedidos/dados_arte/id/" . $data_carrinho->id . "', 'Dados da arte');\" style='cursor:pointer;' >Ver</a></div>";
 				}
 
 				$itens_para_email .= $produto_nome;
 				$itens_para_email .= "<br><br>";
-				
 			}
 
 			$valor_desconto_cupom = 0;
-			
+
 			$valor_desconto_forma_pag = 0;
 
 			//calcula o total
@@ -7810,20 +7942,18 @@ class index extends controller {
 			$codigo_pedido = $this->_sessao;
 
 			// confere se tem forma de pagamento
-			if($data_pedido->forma_pagamento > 0){
+			if ($data_pedido->forma_pagamento > 0) {
 				$formadepagamento = $data_pedido->forma_pagamento;
-
 			} else {
 				$formas = new model_formas_pg();
-				$lista_pg = $formas->lista();						
+				$lista_pg = $formas->lista();
 				$formadepagamento = $lista_pg[0]['id'];
-
 			}
 
 			$cadastro_model = new model_cadastro();
 			$data_cadastro = $cadastro_model->dados_usuario($this->_cod_usuario);
 
-			if($data_cadastro->tipo == 'F'){
+			if ($data_cadastro->tipo == 'F') {
 				$nome_do_cliente = $data_cadastro->fisica_nome;
 			} else {
 				$nome_do_cliente = $data_cadastro->juridica_nome;
@@ -7832,50 +7962,50 @@ class index extends controller {
 			$envio = new model_envio();
 			$textos = new model_textos();
 
-			$texto_email = "<div style='font-size:14px;'>Olá, $nome_do_cliente<br><br><strong>Pedido $data_pedido->id</strong></div>".$textos->conteudo('150457686833612')."<br>".$itens_para_email;
+			$texto_email = "<div style='font-size:14px;'>Olá, $nome_do_cliente<br><br><strong>Pedido $data_pedido->id</strong></div>" . $textos->conteudo('150457686833612') . "<br>" . $itens_para_email;
 
-			$texto_email_admin = "Parabéns você tem uma nova venda, acesse o sistema para mais informações.<br><br>Email do Cliente: $data_cadastro->email <br><br>".$itens_para_email;
+			$texto_email_admin = "Parabéns você tem uma nova venda, acesse o sistema para mais informações.<br><br>Email do Cliente: $data_cadastro->email <br><br>" . $itens_para_email;
 
 			$db = new mysql();
 			$exec = $db->executar("select * from contato ");
 			$lista_envio_adm = array();
 			$n_envio = 0;
-			while($data = $exec->fetch_object()){
+			while ($data = $exec->fetch_object()) {
 				$lista_envio_adm[$n_envio] = $data->email;
 				$n_envio++;
 			}
-			
-			if($formadepagamento) {
+
+			if ($formadepagamento) {
 
 				$vencimento_pedido = strtotime("+2 days");
 				$conexao = new mysql();
-				if($valor_total_pedido == 0){
+				if ($valor_total_pedido == 0) {
 
 					$sessao = $this->_sessao;
 					$cpf = $_SESSION['usuario_cpf'];
-					
+
 					$produtos = $conexao->Executar("SELECT produto_ref FROM pedido_loja_carrinho WHERE sessao='$sessao'");
-					while($data = $produtos->fetch_object()){
+					while ($data = $produtos->fetch_object()) {
 						// print_r($data->produto_ref);echo '<br>';
 						// print_r($sessao);echo '<br>';
 						// print_r($cpf);echo '<br>';
 						// echo '------';
-						$this->integrar_trilha_lms($data->produto_ref,$sessao, $cpf);
+						$this->integrar_trilha_lms($data->produto_ref, $sessao, $cpf);
 					}
 
 					$conexao->alterar("pedido_loja", array(
-						"cadastro"=>$cadastro,
-						"vencimento"=>$vencimento_pedido,
-						"valor_produtos"=>$valor_subtotal,
-						"valor_produtos_desc"=>$total_descontos,
-						"valor_total"=>$valor_total_pedido,
-						"forma_pagamento"=>$formadepagamento,
-						"status"=>4
-					), " codigo='".$this->_sessao."' ");
+						"cadastro" => $cadastro,
+						"vencimento" => $vencimento_pedido,
+						"valor_produtos" => $valor_subtotal,
+						"valor_produtos_desc" => $total_descontos,
+						"valor_total" => $valor_total_pedido,
+						"forma_pagamento" => $formadepagamento,
+						"status" => 4
+					), " codigo='" . $this->_sessao . "' ");
 
 					$conexao->alterar("pedido_loja_carrinho", array(
-						"status"=>4
-					), " sessao='".$this->_sessao."' ");
+						"status" => 4
+					), " sessao='" . $this->_sessao . "' ");
 
 
 					$codigo_pedido = $this->_sessao;
@@ -7893,25 +8023,24 @@ class index extends controller {
 
 					mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
 					exit;
-
-				}else{
+				} else {
 
 					$conexao->alterar("pedido_loja", array(
-						"cadastro"=>$cadastro,
-						"vencimento"=>$vencimento_pedido,
-						"valor_produtos"=>$valor_subtotal,
-						"valor_produtos_desc"=>$total_descontos,
-						"valor_total"=>$valor_total_pedido,
-						"forma_pagamento"=>$formadepagamento,
-						"status"=>0
-					), " codigo='".$this->_sessao."' ");
+						"cadastro" => $cadastro,
+						"vencimento" => $vencimento_pedido,
+						"valor_produtos" => $valor_subtotal,
+						"valor_produtos_desc" => $total_descontos,
+						"valor_total" => $valor_total_pedido,
+						"forma_pagamento" => $formadepagamento,
+						"status" => 0
+					), " codigo='" . $this->_sessao . "' ");
 
 					// baixa estoque
 					$produtos->baixa_estoque($this->_sessao);
 
 					// envia email
 					$email_destino = $data_cadastro->email;
-					$envio->enviar("Confirmação de Pedido", $texto_email, array("0"=>"$email_destino"));
+					$envio->enviar("Confirmação de Pedido", $texto_email, array("0" => "$email_destino"));
 					$envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
 
 
@@ -7933,7 +8062,6 @@ class index extends controller {
 					mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
 					exit;
 				}
-
 			} else {
 
 				// retorna
@@ -7946,18 +8074,18 @@ class index extends controller {
 
 				mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
 				exit;
-
 			}
 		}
 	}
 
-	public function alterar_cadastro(){
+	public function alterar_cadastro()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -7970,7 +8098,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -7983,7 +8111,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -7991,23 +8119,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -8019,53 +8147,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -8074,16 +8202,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -8106,74 +8232,74 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao .= "<a class='botao_padrao botao_".$data->codigo."' onclick=\"salvar();\" >".$data->texto."</a>";
-
+			$botao .= "<a class='botao_padrao botao_" . $data->codigo . "' onclick=\"salvar();\" >" . $data->texto . "</a>";
 		} else {
 			$botao = "";
 		}
 		$dados['nome_do_usuario'] = $this->_nome_usuario;
 
-		$dados['botao_padrao'] = $botao;		 
-		
+		$dados['botao_padrao'] = $botao;
+
 		$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 		$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];
- 		//carrega view e envia dados para a tela
+		//carrega view e envia dados para a tela
 		$this->view('cadastro_alterar', $dados);
 	}
 
-	public function salvar_cadastro(){
+	public function salvar_cadastro()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
 
 		// retorno de dados caso erro
-		function retorno_erro($msg){
+		function retorno_erro($msg)
+		{
 
 			$retorno = array();
 			$retorno['erro'] = 1;
 			$retorno['processo'] = 'erro';
 			$retorno['erro_msg'] = $msg;
 
-			echo json_encode($retorno);	
+			echo json_encode($retorno);
 			exit;
 		}
 
@@ -8188,7 +8314,7 @@ class index extends controller {
 		$fisica_nome = $this->post('fisica_nome');
 		$fisica_sexo = $this->post('fisica_sexo');
 		$fisica_nascimento = $this->post('fisica_nascimento');
-		$fisica_cpf = $this->post('fisica_cpf'); 
+		$fisica_cpf = $this->post('fisica_cpf');
 
 		$juridica_nome = $this->post('juridica_nome');
 		$juridica_razao = $this->post('juridica_razao');
@@ -8205,26 +8331,25 @@ class index extends controller {
 		$estado = $this->post('estado');
 		$cidade = $this->post('cidade');
 		$is_brasil = $this->post('is_brasil');
-		
+
 
 		//validar email consultando no banco
-		if(!$email){
+		if (!$email) {
 			retorno_erro("E-mail inválido!");
 			exit;
-
 		} else {
 
-			$validaemail = new model_valida();				
-			if(!$validaemail->email($email)){
+			$validaemail = new model_valida();
+			if (!$validaemail->email($email)) {
 				retorno_erro("E-mail inválido!");
 				exit;
 			} else {
 
 				$conexao = new mysql();
-				$coisas = $conexao->Executar("SELECT * FROM cadastro WHERE email='$email' AND codigo!='".$this->_cod_usuario."'  ");
+				$coisas = $conexao->Executar("SELECT * FROM cadastro WHERE email='$email' AND codigo!='" . $this->_cod_usuario . "'  ");
 				$linhas = $coisas->num_rows;
 
-				if($linhas != 0){
+				if ($linhas != 0) {
 					retorno_erro("Este e-mail esta sendo utilizado por outro cadastro,<br>informe um e-mail diferente ou tente a recuperação de senha.");
 					exit;
 				}
@@ -8232,9 +8357,9 @@ class index extends controller {
 		}
 		$usar_senha = 0;
 		//validar senha
-		if(!empty($senha) and !empty($senha_confirma)){
-			if($senha AND $senha_confirma){
-				if($senha != $senha_confirma){
+		if (!empty($senha) and !empty($senha_confirma)) {
+			if ($senha and $senha_confirma) {
+				if ($senha != $senha_confirma) {
 					retorno_erro("Digite uma senha válida e confirme.");
 					exit;
 				}
@@ -8244,23 +8369,22 @@ class index extends controller {
 			}
 			$usar_senha = 1;
 		}
-		
+
 
 		// valida documentos
 		require_once("api/cpf_cnpj/cpf_cnpj.php");
 
 		//validar cpf ou cnpj simples
-		if($tipo == 'F'){
+		if ($tipo == 'F') {
 
-			if(!$fisica_cpf){
+			if (!$fisica_cpf) {
 
-				retorno_erro("Digite corretamente seu CPF.");			 
+				retorno_erro("Digite corretamente seu CPF.");
 				exit;
-
 			} else {
-				if($is_brasil == 1){
+				if ($is_brasil == 1) {
 					$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
-					if(!$cpf_cnpj->valida()){
+					if (!$cpf_cnpj->valida()) {
 						retorno_erro("Digite corretamente seu CPF.");
 						exit;
 					}
@@ -8273,40 +8397,36 @@ class index extends controller {
 			$juridica_cnpj = "";
 			$juridica_responsavel = "";
 
-			if(!$fisica_nome){
-				retorno_erro("Digite seu nome completo.");	 
-				exit;				
-			}
-			if(!$fisica_sexo){
-				retorno_erro("Informe seu sexo.");	 
+			if (!$fisica_nome) {
+				retorno_erro("Digite seu nome completo.");
 				exit;
 			}
-			if(!$fisica_nascimento){
-				retorno_erro("Informe sua data de nascimento.");	 
+			if (!$fisica_sexo) {
+				retorno_erro("Informe seu sexo.");
+				exit;
+			}
+			if (!$fisica_nascimento) {
+				retorno_erro("Informe sua data de nascimento.");
 				exit;
 			} else {
 
 				// transforma data em inteiro
-				$arraydata = explode("/", $fisica_nascimento);				
-				$hora_montada = $arraydata[2]."-".$arraydata[1]."-".$arraydata[0]." 00:00:01";
+				$arraydata = explode("/", $fisica_nascimento);
+				$hora_montada = $arraydata[2] . "-" . $arraydata[1] . "-" . $arraydata[0] . " 00:00:01";
 				$fisica_nascimento = strtotime($hora_montada);
-
 			}
+		} else {
+			if (!$juridica_cnpj) {
 
-			} else {
-			if(!$juridica_cnpj){
-
-				retorno_erro("Digite corretamente o CNPJ.");				 
+				retorno_erro("Digite corretamente o CNPJ.");
 				exit;
-
 			} else {
 
 				$cpf_cnpj = new valida_cpf_cnpj("$juridica_cnpj");
-				if(!$cpf_cnpj->valida()){
-					retorno_erro("Digite corretamente o CNPJ.");				 
+				if (!$cpf_cnpj->valida()) {
+					retorno_erro("Digite corretamente o CNPJ.");
 					exit;
 				}
-
 			}
 
 			//limpar dados do oposto do tipo (juridica ou fisica)
@@ -8315,88 +8435,84 @@ class index extends controller {
 			$fisica_nascimento = "";
 			$fisica_cpf = "";
 
-			if(!$juridica_nome){
-				retorno_erro("Complete todos os dados da empresa.");	 
+			if (!$juridica_nome) {
+				retorno_erro("Complete todos os dados da empresa.");
 				exit;
 			}
-			if(!$juridica_razao){
-				retorno_erro("Complete todos os dados da empresa.");	 
+			if (!$juridica_razao) {
+				retorno_erro("Complete todos os dados da empresa.");
 				exit;
 			}
-
-		}		 
+		}
 		//validar todos os campos de telefone e endereço
-		if(!$telefone){
+		if (!$telefone) {
 
-			retorno_erro("Telefone inválido");	 
+			retorno_erro("Telefone inválido");
 			exit;
-
 		}
-		if(!$cep){
-			if($is_brasil == 1){
-				retorno_erro("CEP inválido");	 
+		if (!$cep) {
+			if ($is_brasil == 1) {
+				retorno_erro("CEP inválido");
 				exit;
 			}
-
 		}
-		
-		if($endereco AND $numero AND $bairro AND $estado AND $cidade){ } else {
-			if($is_brasil == 1){
-				retorno_erro("Preencha corretamente seus dados de endereço!");	 
+
+		if ($endereco and $numero and $bairro and $estado and $cidade) {
+		} else {
+			if ($is_brasil == 1) {
+				retorno_erro("Preencha corretamente seus dados de endereço!");
 				exit;
 			}
-
 		}
-		if($usar_senha ==1){
+		if ($usar_senha == 1) {
 			$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 
 			$db = new mysql();
 			$db->alterar("cadastro", array(
-				"tipo"=>"$tipo",
-				"fisica_nome"=>"$fisica_nome",
-				"fisica_sexo"=>"$fisica_sexo",
-				"fisica_nascimento"=>"$fisica_nascimento",
-				"fisica_cpf"=>"$fisica_cpf",
-				"juridica_nome"=>"$juridica_nome",
-				"juridica_razao"=>"$juridica_razao",
-				"juridica_responsavel"=>"$juridica_responsavel",
-				"juridica_cnpj"=>"$juridica_cnpj", 
-				"cep"=>"$cep",
-				"endereco"=>"$endereco",
-				"numero"=>"$numero",
-				"complemento"=>"$complemento",
-				"bairro"=>"$bairro",
-				"estado"=>"$estado",
-				"cidade"=>"$cidade",
-				"telefone"=>"$telefone",
-				"email"=>"$email",
-				"senha"=>"$senha_tratada"
-			), " codigo='".$this->_cod_usuario."' ");
-		}else{
+				"tipo" => "$tipo",
+				"fisica_nome" => "$fisica_nome",
+				"fisica_sexo" => "$fisica_sexo",
+				"fisica_nascimento" => "$fisica_nascimento",
+				"fisica_cpf" => "$fisica_cpf",
+				"juridica_nome" => "$juridica_nome",
+				"juridica_razao" => "$juridica_razao",
+				"juridica_responsavel" => "$juridica_responsavel",
+				"juridica_cnpj" => "$juridica_cnpj",
+				"cep" => "$cep",
+				"endereco" => "$endereco",
+				"numero" => "$numero",
+				"complemento" => "$complemento",
+				"bairro" => "$bairro",
+				"estado" => "$estado",
+				"cidade" => "$cidade",
+				"telefone" => "$telefone",
+				"email" => "$email",
+				"senha" => "$senha_tratada"
+			), " codigo='" . $this->_cod_usuario . "' ");
+		} else {
 
 			$db = new mysql();
 			$db->alterar("cadastro", array(
-				"tipo"=>"$tipo",
-				"fisica_nome"=>"$fisica_nome",
-				"fisica_sexo"=>"$fisica_sexo",
-				"fisica_nascimento"=>"$fisica_nascimento",
-				"fisica_cpf"=>"$fisica_cpf",
-				"juridica_nome"=>"$juridica_nome",
-				"juridica_razao"=>"$juridica_razao",
-				"juridica_responsavel"=>"$juridica_responsavel",
-				"juridica_cnpj"=>"$juridica_cnpj", 
-				"cep"=>"$cep",
-				"endereco"=>"$endereco",
-				"numero"=>"$numero",
-				"complemento"=>"$complemento",
-				"bairro"=>"$bairro",
-				"estado"=>"$estado",
-				"cidade"=>"$cidade",
-				"telefone"=>"$telefone",
-			), " codigo='".$this->_cod_usuario."' ");
-
+				"tipo" => "$tipo",
+				"fisica_nome" => "$fisica_nome",
+				"fisica_sexo" => "$fisica_sexo",
+				"fisica_nascimento" => "$fisica_nascimento",
+				"fisica_cpf" => "$fisica_cpf",
+				"juridica_nome" => "$juridica_nome",
+				"juridica_razao" => "$juridica_razao",
+				"juridica_responsavel" => "$juridica_responsavel",
+				"juridica_cnpj" => "$juridica_cnpj",
+				"cep" => "$cep",
+				"endereco" => "$endereco",
+				"numero" => "$numero",
+				"complemento" => "$complemento",
+				"bairro" => "$bairro",
+				"estado" => "$estado",
+				"cidade" => "$cidade",
+				"telefone" => "$telefone",
+			), " codigo='" . $this->_cod_usuario . "' ");
 		}
-		
+
 
 
 		// se deu tudo certo retorna ok
@@ -8404,11 +8520,12 @@ class index extends controller {
 		$retorno['erro'] = 0;
 		$retorno['processo'] = 'ok';
 		$retorno['erro_msg'] = '<strong>Seu cadastro foi atualizado com sucesso!</strong>';
-		echo json_encode($retorno);	
+		echo json_encode($retorno);
 		exit;
 	}
 
-	public function update_clients_vindi(){
+	public function update_clients_vindi()
+	{
 		$id = 38584546;
 
 		require_once('vendor/autoload.php');
@@ -8416,7 +8533,7 @@ class index extends controller {
 			'VINDI_API_KEY' => 'OgsJZgvfOkCv6k_xfxVRoOhK015dphT2tZ3JeS2XQ1M',
 			'VINDI_API_URI' => 'https://app.vindi.com.br/api/v1/'
 		);
-		
+
 		$customerService = new Vindi\Customer($arguments);
 		$customerService->update($id, [
 			'notes' => 'Atualizado pelo Andre via API',
@@ -8425,41 +8542,42 @@ class index extends controller {
 		print_r($customerService->all());
 	}
 
-	public function check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso){
+	public function check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso)
+	{
 		require('conexao.php');
 
 		$sql = "SELECT id_curso FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 		if ($result = $mysqli->query($sql)) {
 
-			if($result->num_rows == 1){
+			if ($result->num_rows == 1) {
 				return 1;
-			}else{
+			} else {
 				return 0;
 			}
 		}
-		
 	}
 	/////////  ESTORNO /////////
 
-	public function estorno(){
+	public function estorno()
+	{
 		require('conexao.php');
 
 		$conexao = new mysql();
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$_POST['codigo']."' ");
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='" . $_POST['codigo'] . "' ");
 
 		$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 		$mysqli->query($sql_update);
-
 	}
 	/////////////////////////////
 
 	///////// PAGAMENTOS /////////
 
-	public function mercadopago_flow(){
+	public function mercadopago_flow()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -8467,47 +8585,47 @@ class index extends controller {
 		$dados['_nome_usuario'] = $this->_nome_usuario;
 		$dados['data_pagina'] = 'Finalizada';
 		$chave = $this->_layout;
-		
+
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
 		$dados['data_pagina'] = $coisas->fetch_object();
 		$codigo_pagina = $dados['data_pagina']->codigo;
-		
+
 		////////////////////////////////////////////////////////////////////////
-		
+
 		$cores = array();
-		
+
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
-		
+
 		////////////////////////////////////////////////////////////////////////
-		
+
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -8519,53 +8637,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -8574,20 +8692,18 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
-		
+
 		$recorrencia = 0;
 		$email = $_POST['email'];
 		$mercadopago_client_id 			= $_POST['mercadopago_client_id'];
@@ -8608,93 +8724,89 @@ class index extends controller {
 
 		$user_exist = $this->check_mercadopago_user($email, $_POST['mercadopago_access_token']);
 
-		if($user_exist == 0){
+		if ($user_exist == 0) {
 			$new_user = $this->add_mercadopago_user($email, $_POST['mercadopago_access_token']);
 			$id_client = $new_user->id;
-		}else{
+		} else {
 			$id_client = $user_exist;
 		}
-		
+
 		//////////////////////////////////////////////
 
 		$conexao = new mysql();
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$cod."' ");
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='" . $cod . "' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
-		
-		if($linha_carrinho != 0){
+
+		if ($linha_carrinho != 0) {
 
 			$recorrentes = array();
 			$nao_recorrentes = array();
-			while($data_carrinho = $coisas_carrinho->fetch_object()){
-				if($data_carrinho->id_combo > 0){
+			while ($data_carrinho = $coisas_carrinho->fetch_object()) {
+				if ($data_carrinho->id_combo > 0) {
 
 					$id_combo = $data_carrinho->id_combo;
-					if (!empty($recorrentes[$id_combo]))
-					{
+					if (!empty($recorrentes[$id_combo])) {
 						$recorrentes[$id_combo] = array_merge($recorrentes[$id_combo], array($data_carrinho));
-					}
-					else
-					{
+					} else {
 						$recorrentes[$id_combo] = array($data_carrinho);
 					}
-				}else{
+				} else {
 					$nao_recorrentes[] = $data_carrinho;
 				}
-				
 			}
-		}	
+		}
 
 		$dados['status'] = 'pendente';
 		/////////////   NAO  RECCORENTE    /////////////
-		foreach($nao_recorrentes as $key => $recorrencia){
+		foreach ($nao_recorrentes as $key => $recorrencia) {
 
-			if($recorrencia->valor_total == 0){
-				$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+			if ($recorrencia->valor_total == 0) {
+				$this->integrar_trilha_lms($recorrencia->produto_ref, $cod, $cpf);
 				$db = new mysql();
-					$db->alterar("pedido_loja_carrinho", array(
-						"status"=>4,
-						
-					), " id='$recorrencia->id' ");
-					$db->alterar("pedido_loja", array(
-						"status"=>4,
-						
-					), " codigo='$cod' ");
-			}else{
-				$bill = $this->pagar_mercado_pag($email,(float)$recorrencia->valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$mercadopago_access_token);
+				$db->alterar("pedido_loja_carrinho", array(
+					"status" => 4,
 
-				if(isset($bill['id'])){
+				), " id='$recorrencia->id' ");
+				$db->alterar("pedido_loja", array(
+					"status" => 4,
+
+				), " codigo='$cod' ");
+			} else {
+				$bill = $this->pagar_mercado_pag($email, (float)$recorrencia->valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber, $mercadopago_access_token);
+
+				if (isset($bill['id'])) {
 					$id_trans = $bill['id'];
 					$dados['status'] = $bill['status'];
-					if($bill['status'] == 'approved'){ 
+					if ($bill['status'] == 'approved') {
 						$dados['status'] = 'aprovada';
 						$status = 4;
-						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
-					}else{
+						$this->integrar_trilha_lms($recorrencia->produto_ref, $cod, $cpf);
+					} else {
 						$status = 1;
 					}
 					$db = new mysql();
 					$db->alterar("pedido_loja_carrinho", array(
-						"id_transacao_mercadopago"=>"$id_trans",
-						"status"=>"$status",
-						
+						"id_transacao_mercadopago" => "$id_trans",
+						"status" => "$status",
+
 					), " id='$recorrencia->id' ");
 					$db->alterar("pedido_loja", array(
-						"status"=>"$status",
-						
+						"status" => "$status",
+
 					), " codigo='$cod' ");
 				}
 			}
-			
 		}
 		/////////////  /////////////  /////////////
 
 		$this->view('finalizada', $dados);
 	}
-	
-	public function pagar_mercado_pag($email,$recorrencia_valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber,$access_token){
+
+	public function pagar_mercado_pag($email, $recorrencia_valor_total, $card_token, $description, $installments, $paymentMethodId, $issuer, $identificationType, $identificationNumber, $access_token)
+	{
 		require_once('vendor/autoload.php');
 		MercadoPago\SDK::setAccessToken($access_token);
-		
+
 		$payment = new MercadoPago\Payment();
 		$payment->transaction_amount = $recorrencia_valor_total;
 		$payment->token = $card_token;
@@ -8702,7 +8814,7 @@ class index extends controller {
 		$payment->installments = $installments;
 		$payment->payment_method_id = $paymentMethodId;
 		$payment->issuer_id = $issuer;
-		
+
 		$payer = new MercadoPago\Payer();
 		$payer->email = $email;
 		$payer->identification = array(
@@ -8710,9 +8822,9 @@ class index extends controller {
 			"number" => $identificationNumber
 		);
 		$payment->payer = $payer;
-		
+
 		$payment->save();
-		
+
 		$response = array(
 			'status' => $payment->status,
 			'status_detail' => $payment->status_detail,
@@ -8721,9 +8833,10 @@ class index extends controller {
 		return $response;
 	}
 
-	public function add_mercadopago_user($email, $token){
+	public function add_mercadopago_user($email, $token)
+	{
 		require_once('vendor/autoload.php');
-   		MercadoPago\SDK::setAccessToken($token);
+		MercadoPago\SDK::setAccessToken($token);
 
 		$customer = new MercadoPago\Customer();
 		$customer->email = $email;
@@ -8731,11 +8844,12 @@ class index extends controller {
 		return $customer;
 	}
 
-	public function check_mercadopago_user($email, $token){
+	public function check_mercadopago_user($email, $token)
+	{
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://api.mercadopago.com/v1/customers/search?email='.$email.'',
+			CURLOPT_URL => 'https://api.mercadopago.com/v1/customers/search?email=' . $email . '',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -8744,7 +8858,7 @@ class index extends controller {
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'GET',
 			CURLOPT_HTTPHEADER => array(
-				'Authorization: Bearer '.$token.''
+				'Authorization: Bearer ' . $token . ''
 			),
 		));
 
@@ -8754,18 +8868,18 @@ class index extends controller {
 		$response = json_decode($response, true);
 
 		$id = 0;
-		if(isset($response['results'][0]['id'])){
+		if (isset($response['results'][0]['id'])) {
 			$id = $response['results'][0]['id'];
 		}
 		return $id;
+	}
 
-	}	
-
-	public function vindi_flow(){
+	public function vindi_flow()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -8773,47 +8887,47 @@ class index extends controller {
 		$dados['_nome_usuario'] = $this->_nome_usuario;
 		$dados['data_pagina'] = 'Finalizada';
 		$chave = $this->_layout;
-		
+
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
 		$dados['data_pagina'] = $coisas->fetch_object();
 		$codigo_pagina = $dados['data_pagina']->codigo;
-		
+
 		////////////////////////////////////////////////////////////////////////
-		
+
 		$cores = array();
-		
+
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
-		
+
 		////////////////////////////////////////////////////////////////////////
-		
+
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -8825,53 +8939,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -8880,16 +8994,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -8903,39 +9015,39 @@ class index extends controller {
 		$paymentProfile = new Vindi\PaymentProfile($arguments);
 		$productService = new Vindi\Product;
 		$is_brasil = $_POST['is_brasil'];
-		if($is_brasil == 0){
+		if ($is_brasil == 0) {
 			$cpf = $_POST['cpf_outros'];
-		}else{
+		} else {
 			$cpf = $_POST['cpf'];
 		}
 		$recorrencia = 0;
 		$email = $_POST['email'];
 		$name = $_POST['nomeCompleto'];
-		
+
 		$name_on_card = $_POST['nomeCompleto'];
 		$card_number = $_POST['cardNumber'];
 		$expiration_card = $_POST['cardExpiry'];
 		$cvv = $_POST['cardCVC'];
 		$payment_company_name = $_POST['brand_'];
 		$total_amount = $_POST['amount_'];
-		$card_number = str_replace("-","",$card_number);
-		$last4 = substr($card_number,12,16);
+		$card_number = str_replace("-", "", $card_number);
+		$last4 = substr($card_number, 12, 16);
 
 		$cod = $_POST['codigo'];
 
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([
-			'query' => 'email: "'.$email.'"'
+			'query' => 'email: "' . $email . '"'
 		]);
-		if($customer[0]->id > 0){//pegando o id do usuario na VINDI
+		if ($customer[0]->id > 0) { //pegando o id do usuario na VINDI
 			$id_client = $customer[0]->id;
-		}else{ // Adicionando usuario
+		} else { // Adicionando usuario
 			$data = [
 				'name'   => $name,
 				'email'  => $email
 			];
-			$add_client = $this->vindi_add_new_client($arguments,$data);
+			$add_client = $this->vindi_add_new_client($arguments, $data);
 			$id_client = $add_client->id;
 		}
 		//////////////////////////////////////////////////////////////
@@ -8943,23 +9055,23 @@ class index extends controller {
 		//////////////////////////////////////////////////////////////
 		// Checando meio de pagamento do usuario na VINDI
 		$result = $paymentProfile->all([
-			'query' => 'customer_id="'.$id_client.'"'
+			'query' => 'customer_id="' . $id_client . '"'
 		]);
 
 		//Checando se tem algum cartao cadastrado e se ele eh o mesmo que o usuario passou
 		$last_four = 0;
 		$pay_met = 0;
-		foreach($result as $res){
-			if($res->status == 'active'){
+		foreach ($result as $res) {
+			if ($res->status == 'active') {
 				$last_four = $res->card_number_last_four;
 				$pay_met = $res->payment_method->code;
 			}
 		}
-				
+
 		// Adicionando cartao na VINDI se nao tiver nenhum cartao cadastrado ou se o cartao usado é diferente
-		if($last_four == $last4){
+		if ($last_four == $last4) {
 			$payment_met = $pay_met;
-		}else{
+		} else {
 			$card = [
 				'name' => $name_on_card,
 				"holder_name" => $name_on_card,
@@ -8970,146 +9082,142 @@ class index extends controller {
 				"payment_company_code" => $payment_company_name,
 				"customer_id" => $id_client
 			];
-			$add_card = $this->vindi_add_card_to_client($arguments,$card);
+			$add_card = $this->vindi_add_card_to_client($arguments, $card);
 
-			if(isset($add_card->payment_method->code)){
+			if (isset($add_card->payment_method->code)) {
 				$payment_met =  $add_card->payment_method->code;
-			}else{
+			} else {
 				$this->msg($add_card);
-				$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$cod);
+				$this->irpara(DOMINIO . $this->_controller . '/pedidos_detalhes/codigo/' . $cod);
 			}
-		}	
+		}
 		//////////////////////////////////////////////////////////////
 
 		$conexao = new mysql();
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='".$cod."' ");
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='" . $cod . "' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
-		
-		if($linha_carrinho != 0){
+
+		if ($linha_carrinho != 0) {
 
 			$recorrentes = array();
 			$nao_recorrentes = array();
-			while($data_carrinho = $coisas_carrinho->fetch_object()){
-				if($data_carrinho->id_combo > 0){
+			while ($data_carrinho = $coisas_carrinho->fetch_object()) {
+				if ($data_carrinho->id_combo > 0) {
 
 					$id_combo = $data_carrinho->id_combo;
-					if (!empty($recorrentes[$id_combo]))
-					{
+					if (!empty($recorrentes[$id_combo])) {
 						$recorrentes[$id_combo] = array_merge($recorrentes[$id_combo], array($data_carrinho));
-					}
-					else
-					{
+					} else {
 						$recorrentes[$id_combo] = array($data_carrinho);
 					}
-				}else{
+				} else {
 					$nao_recorrentes[] = $data_carrinho;
 				}
-				
 			}
-		}	
-		
+		}
+
 		/////////     RECCORENTE    /////////////
-		foreach($recorrentes as $key => $recorrencia){
-		
+		foreach ($recorrentes as $key => $recorrencia) {
+
 			$amout = 0;
 			$produto_assinatura = '';
-			foreach($recorrencia as $rec){
-				if($rec->usar_valor_vindi == 1){
+			foreach ($recorrencia as $rec) {
+				if ($rec->usar_valor_vindi == 1) {
 					$amout = $rec->valor_total;
-				}else{
+				} else {
 					$amout = $amout + $rec->valor_total;
 				}
 				$produto_assinatura = $rec->produto_assinatura;
 			}
 
 			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
-			$bill = $this->vindi_add_subscription($id_client,$payment_met,$produto_assinatura,1040228,$amout);
+			$bill = $this->vindi_add_subscription($id_client, $payment_met, $produto_assinatura, 1040228, $amout);
 
-			if(isset($bill['bill']['id'])){
+			if (isset($bill['bill']['id'])) {
 				$id_charge = $bill['bill']['charges'][0]['id'];
 				$id_trans = $bill['bill']['id'];
 				$url = $bill['bill']['url'];
 
-				if($bill['bill']['charges'][0]['status'] == 'paid'){ 
+				if ($bill['bill']['charges'][0]['status'] == 'paid') {
 					$status = 4;
-					foreach($recorrencia as $rec_lms){
-						$this->integrar_trilha_lms($rec_lms->produto_ref,$cod, $cpf);
+					foreach ($recorrencia as $rec_lms) {
+						$this->integrar_trilha_lms($rec_lms->produto_ref, $cod, $cpf);
 					}
-				}else{
+				} else {
 					$status = 1;
 				}
 				$db = new mysql();
 				$db->alterar("pedido_loja_carrinho", array(
-					"transacao_charger_id"=>"$id_charge",
-					"transacao_bill_id"=>"$id_trans",
-					"url_vindi"=>"$url",
-					"status"=>"$status",
+					"transacao_charger_id" => "$id_charge",
+					"transacao_bill_id" => "$id_trans",
+					"url_vindi" => "$url",
+					"status" => "$status",
 				), " sessao='$cod' and id_combo='$rec->id_combo' ");
 
 				$db->alterar("pedido_loja", array(
-					"status"=>"$status",
+					"status" => "$status",
 				), " codigo='$cod' ");
 			}
 		}
 		/////////  /////////////  /////////////
 
 		/////////////   NAO  RECCORENTE    /////////////
-		foreach($nao_recorrentes as $key => $recorrencia){
+		foreach ($nao_recorrentes as $key => $recorrencia) {
 			// ini_set('display_errors', 1);
 			// ini_set('display_startup_errors', 1);
 			// error_reporting(E_ALL);
 
-			if($recorrencia->valor_total == 0){
-				$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
+			if ($recorrencia->valor_total == 0) {
+				$this->integrar_trilha_lms($recorrencia->produto_ref, $cod, $cpf);
 				$db = new mysql();
-					$db->alterar("pedido_loja_carrinho", array(
-						"status"=>4,
-						
-					), " id='$recorrencia->id' ");
-					$db->alterar("pedido_loja", array(
-						"status"=>4,
-						
-					), " codigo='$cod' ");
-			}else{
-			
-				$bill = $this->pay_bill_vindi($id_client,$payment_met,$recorrencia->valor_total);
+				$db->alterar("pedido_loja_carrinho", array(
+					"status" => 4,
 
-				if(isset($bill->id)){
+				), " id='$recorrencia->id' ");
+				$db->alterar("pedido_loja", array(
+					"status" => 4,
+
+				), " codigo='$cod' ");
+			} else {
+
+				$bill = $this->pay_bill_vindi($id_client, $payment_met, $recorrencia->valor_total);
+
+				if (isset($bill->id)) {
 					$id_charge = $bill->charges[0]->id;
 					$id_trans = $bill->id;
 					$url = $bill->url;
 
-					if($bill->status == 'paid'){ 
+					if ($bill->status == 'paid') {
 						$status = 4;
-						$this->integrar_trilha_lms($recorrencia->produto_ref,$cod, $cpf);
-					}else{
+						$this->integrar_trilha_lms($recorrencia->produto_ref, $cod, $cpf);
+					} else {
 						$status = 1;
 					}
 					$db = new mysql();
 					$db->alterar("pedido_loja_carrinho", array(
-						"transacao_charger_id"=>"$id_charge",
-						"transacao_bill_id"=>"$id_trans",
-						"url_vindi"=>"$url",
-						"status"=>"$status",
-						
+						"transacao_charger_id" => "$id_charge",
+						"transacao_bill_id" => "$id_trans",
+						"url_vindi" => "$url",
+						"status" => "$status",
+
 					), " id='$recorrencia->id' ");
 					$db->alterar("pedido_loja", array(
-						"status"=>"$status",
-						
+						"status" => "$status",
+
 					), " codigo='$cod' ");
 				}
 			}
-			
 		}
 		$dados['status'] = 'aprovada';
 		/////////////  /////////////  /////////////
 		$this->view('finalizada', $dados);
 	}
 
-	public function fina(){
+	public function fina()
+	{
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -9120,10 +9228,11 @@ class index extends controller {
 		$this->view('finalizada', $dados);
 	}
 
-	public function vindi_add_subscription($id_client,$payment_met,$plano,$prodId,$amout){
-		
+	public function vindi_add_subscription($id_client, $payment_met, $plano, $prodId, $amout)
+	{
+
 		$subscriptionService = new Vindi\Subscription;
-		try{
+		try {
 			$subscription = $subscriptionService->create([
 				'plan_id' => $plano,
 				'customer_id' => $id_client,
@@ -9139,33 +9248,38 @@ class index extends controller {
 			]);
 			$lastResponse = $subscriptionService->getLastResponse()->getBody();
 			$decoded_body = json_decode($lastResponse, true);
-		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());exit;
+		} catch (Vindi\Exceptions\ValidationException $e) {
+			echo '<pre>';
+			var_dump($e->getErrors());
+			exit;
 		}
 		return $decoded_body;
 	}
 
-	public function vindi_add_new_client($arguments,$data){
+	public function vindi_add_new_client($arguments, $data)
+	{
 		$customerService = new Vindi\Customer($arguments);
 		$customer = $customerService->create($data);
 		return $customer;
 	}
 
-	public function vindi_add_card_to_client($arguments,$data){
+	public function vindi_add_card_to_client($arguments, $data)
+	{
 		$paymentProfileData = new Vindi\PaymentProfile($arguments);
-		try{
+		try {
 			$paymentProfile = $paymentProfileData->create($data);
-		} catch(Vindi\Exceptions\ValidationException $e){
+		} catch (Vindi\Exceptions\ValidationException $e) {
 			$paymentProfile = 'Verifique os detalhes do seu cartão e tente novamente.';
 		}
 		return $paymentProfile;
 	}
 
-	public function pay_bill_vindi($id_client,$payment_met,$amout){
+	public function pay_bill_vindi($id_client, $payment_met, $amout)
+	{
 
 		$billService = new Vindi\Bill;
-		try{
-		$bill = $billService->create( [
+		try {
+			$bill = $billService->create([
 				'customer_id' => $id_client,
 				'payment_method_code' => $payment_met,
 				'bill_items' => [
@@ -9174,22 +9288,25 @@ class index extends controller {
 						'amount' => $amout
 					]
 				]
-		]);
-		} catch(Vindi\Exceptions\ValidationException $e){
-			echo '<pre>';var_dump($e->getErrors());exit;
+			]);
+		} catch (Vindi\Exceptions\ValidationException $e) {
+			echo '<pre>';
+			var_dump($e->getErrors());
+			exit;
 		}
 		return $bill;
 	}
 
-	public function vindi_estorno(){
+	public function vindi_estorno()
+	{
 		$codigo = $this->get('codigo');
-		$id_usuario =$_SESSION['usuario_id'];
-		
+		$id_usuario = $_SESSION['usuario_id'];
+
 		require_once('vendor/autoload.php');
 
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/'.$codigo.'/refund',
+			CURLOPT_URL => 'https://app.vindi.com.br/api/v1/charges/' . $codigo . '/refund',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -9197,7 +9314,7 @@ class index extends controller {
 			CURLOPT_FOLLOWLOCATION => true,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS =>'{
+			CURLOPT_POSTFIELDS => '{
 				"cancel_bill": "true",
 				"comments": "Estorno pelo site"
 			}',
@@ -9207,7 +9324,7 @@ class index extends controller {
 				'Content-Type: application/json'
 			),
 		));
-		
+
 		$response = curl_exec($curl);
 		$response = json_decode($response, true);
 
@@ -9215,34 +9332,34 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas_carrinho = $conexao->Executar("SELECT SUM(valor_total) as valor_total_soma, pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE transacao_charger_id='$codigo' group by id_combo ");
-		while($data_carrinho = $coisas_carrinho->fetch_object()){
-			
-			if($data_carrinho->id_combo > 0){
+		while ($data_carrinho = $coisas_carrinho->fetch_object()) {
+
+			if ($data_carrinho->id_combo > 0) {
 				$conexao = new mysql();
 				$conexao->alterar("pedido_loja_carrinho", array(
-					"status"=>8
-				), " sessao='".$data_carrinho->sessao."' and id_combo='".$data_carrinho->id_combo."' ");
+					"status" => 8
+				), " sessao='" . $data_carrinho->sessao . "' and id_combo='" . $data_carrinho->id_combo . "' ");
 
 				$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.ref FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
-				while($res_combo = $data_combo->fetch_object()){
-					$this->remove_from_lms($id_usuario,$res_combo->ref);
+				while ($res_combo = $data_combo->fetch_object()) {
+					$this->remove_from_lms($id_usuario, $res_combo->ref);
 				}
-			}else{
+			} else {
 				$conexao = new mysql();
 				$conexao->alterar("pedido_loja_carrinho", array(
-					"status"=>8
-				), " sessao='".$data_carrinho->sessao."' and produto='".$data_carrinho->produto."' ");
+					"status" => 8
+				), " sessao='" . $data_carrinho->sessao . "' and produto='" . $data_carrinho->produto . "' ");
 
-				$this->remove_from_lms($id_usuario,$data_carrinho->produto_ref);
+				$this->remove_from_lms($id_usuario, $data_carrinho->produto_ref);
 			}
 		}
-		
-		$this->irpara(DOMINIO.$this->_controller.'/minhaconta');
 
+		$this->irpara(DOMINIO . $this->_controller . '/minhaconta');
 	}
 
-	public function rejected_transaction($id_charge, $id_bill){
-		
+	public function rejected_transaction($id_charge, $id_bill)
+	{
+
 		require('conexao.php');
 		$conexao = new mysql();
 		$sessao_ = $conexao->Executar("SELECT 
@@ -9252,23 +9369,23 @@ class index extends controller {
 									FROM pedido_loja_carrinho plc
 									INNER JOIN pedido_loja pl on pl.codigo = plc.sessao 
 									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
-									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");
+									WHERE plc.transacao_charger_id = '" . $id_charge . "' AND plc.transacao_bill_id = '" . $id_bill . "' LIMIT 1 ");
 		$sessao_id = $sessao_->fetch_object();
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' ");
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '" . $id_charge . "' and transacao_bill_id = '" . $id_bill . "' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
-		if($linha_carrinho != 0){
+		if ($linha_carrinho != 0) {
 
 			$data_array = array();
-			while($data_carrinho = $coisas_carrinho->fetch_object()){
-				
+			while ($data_carrinho = $coisas_carrinho->fetch_object()) {
+
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
-				
+
 				if ($result2 = $mysqli->query($sql2)) {
-					
+
 					while ($obj2 = $result2->fetch_object()) {
 						$array = array(
-							'id_usuario' => $sessao_id->id_lms, 
+							'id_usuario' => $sessao_id->id_lms,
 							'id_perfil' => 22,
 							'id_trilha' => $data_carrinho->produto_ref,
 							'id_curso'  => $obj2->id,
@@ -9278,13 +9395,13 @@ class index extends controller {
 							'progresso' => 0,
 							'ativo_matricula' => 1
 						);
-						
-						array_push($data_array,$array);
+
+						array_push($data_array, $array);
 					}
-				}	
+				}
 			}
-			
-			foreach($data_array as $data){
+
+			foreach ($data_array as $data) {
 				$id_usuario 				= $data['id_usuario'];
 				$id_perfil 					= $data['id_perfil'];
 				$id_trilha 					= $data['id_trilha'];
@@ -9294,16 +9411,17 @@ class index extends controller {
 				$mysqli->query($delete_query);
 			}
 		}
-
 	}
 
-	public function remove_from_lms($id_usuario, $id_trilha){
+	public function remove_from_lms($id_usuario, $id_trilha)
+	{
 		require('conexao.php');
 		$sql_insert = "DELETE FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_trilha='$id_trilha'";
 		$mysqli->query($sql_insert);
 	}
 
-	public function integrar_trilha_lms_pago($id_charge, $id_bill){
+	public function integrar_trilha_lms_pago($id_charge, $id_bill)
+	{
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
 		$conexao = new mysql();
@@ -9314,22 +9432,22 @@ class index extends controller {
 									FROM pedido_loja_carrinho plc
 									INNER JOIN pedido_loja pl on pl.codigo = plc.sessao 
 									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
-									WHERE plc.transacao_charger_id = '".$id_charge."' AND plc.transacao_bill_id = '".$id_bill."' LIMIT 1 ");
+									WHERE plc.transacao_charger_id = '" . $id_charge . "' AND plc.transacao_bill_id = '" . $id_bill . "' LIMIT 1 ");
 		$sessao_id = $sessao_->fetch_object();
 
-		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '".$id_charge."' and transacao_bill_id = '".$id_bill."' ");
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '" . $id_charge . "' and transacao_bill_id = '" . $id_bill . "' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
-		if($linha_carrinho != 0){
+		if ($linha_carrinho != 0) {
 
 			$data_array = array();
-			while($data_carrinho = $coisas_carrinho->fetch_object()){
-				
+			while ($data_carrinho = $coisas_carrinho->fetch_object()) {
+
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
 				if ($result2 = $mysqli->query($sql2)) {
 					while ($obj2 = $result2->fetch_object()) {
 						$array = array(
-							'id_usuario' => $sessao_id->id_lms, 
+							'id_usuario' => $sessao_id->id_lms,
 							'id_perfil' => 22,
 							'id_trilha' => $data_carrinho->produto_ref,
 							'id_curso'  => $obj2->id,
@@ -9339,13 +9457,13 @@ class index extends controller {
 							'progresso' => 0,
 							'ativo_matricula' => 1
 						);
-						
-						array_push($data_array,$array);
+
+						array_push($data_array, $array);
 					}
-				}	
+				}
 			}
 
-			foreach($data_array as $data){
+			foreach ($data_array as $data) {
 				$id_usuario 				= $data['id_usuario'];
 				$id_perfil 					= $data['id_perfil'];
 				$id_trilha 					= $data['id_trilha'];
@@ -9355,14 +9473,14 @@ class index extends controller {
 				// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
 				$progresso 					= $data['progresso'];
 				$ativo_matricula 			= $data['ativo_matricula'];
-				
+
 				$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
 
-				if($exit_line == 0){
+				if ($exit_line == 0) {
 					$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
 						VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
 					$mysqli->query($sql_insert);
-				}else{
+				} else {
 					// $sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 					$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 					$mysqli->query($sql_update);
@@ -9373,15 +9491,16 @@ class index extends controller {
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 	}
 
-	public function integrar_trilha_lms($produto_ref,$sessao_loja, $cpf){
+	public function integrar_trilha_lms($produto_ref, $sessao_loja, $cpf)
+	{
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 		require('conexao.php');
 
-		$cpf = str_replace("-","",$cpf);
-		$cpf = str_replace(".","",$cpf);
+		$cpf = str_replace("-", "", $cpf);
+		$cpf = str_replace(".", "", $cpf);
 
 		$conexao = new mysql();
-		$coisas_carrinho = $conexao->Executar("select * from pedido_loja_carrinho WHERE sessao = '".$sessao_loja."' and produto_ref = '".$produto_ref."' ");
+		$coisas_carrinho = $conexao->Executar("select * from pedido_loja_carrinho WHERE sessao = '" . $sessao_loja . "' and produto_ref = '" . $produto_ref . "' ");
 		$linha_carrinho = $coisas_carrinho->num_rows;
 
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
@@ -9391,21 +9510,21 @@ class index extends controller {
 			while ($obj = $result->fetch_object()) {
 				$id_usuario = $obj->id;
 				$id_perfil  = $obj->id_perfil;
-		  	}
-		  	$result->free_result();
+			}
+			$result->free_result();
 		}
 
-		if($linha_carrinho != 0){
+		if ($linha_carrinho != 0) {
 
 			$data_array = array();
-			while($data_carrinho = $coisas_carrinho->fetch_object()){
+			while ($data_carrinho = $coisas_carrinho->fetch_object()) {
 
 
 				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
 				if ($result2 = $mysqli->query($sql2)) {
 					while ($obj2 = $result2->fetch_object()) {
 						$array = array(
-							'id_usuario' => $id_usuario, 
+							'id_usuario' => $id_usuario,
 							'id_perfil' => $id_perfil,
 							'id_trilha' => $data_carrinho->produto_ref,
 							'id_curso'  => $obj2->id,
@@ -9415,14 +9534,14 @@ class index extends controller {
 							'progresso' => 0,
 							'ativo_matricula' => 1
 						);
-						
-						array_push($data_array,$array);
+
+						array_push($data_array, $array);
 					}
-				}	
+				}
 			}
 		}
 
-		foreach($data_array as $data){
+		foreach ($data_array as $data) {
 			$id_usuario 				= $data['id_usuario'];
 			$id_perfil 					= $data['id_perfil'];
 			$id_trilha 					= $data['id_trilha'];
@@ -9432,14 +9551,14 @@ class index extends controller {
 			// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
 			$progresso 					= $data['progresso'];
 			$ativo_matricula 			= $data['ativo_matricula'];
-			
+
 			$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
 
-			if($exit_line == 0){
+			if ($exit_line == 0) {
 				$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
 					VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
 				$mysqli->query($sql_insert);
-			}else{
+			} else {
 				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
 				$mysqli->query($sql_update);
 			}
@@ -9448,7 +9567,8 @@ class index extends controller {
 		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 	}
 
-	public function rejeitar_json(){
+	public function rejeitar_json()
+	{
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		print_r(error_get_last());
@@ -9456,7 +9576,7 @@ class index extends controller {
 		echo '<pre>';
 
 		$str = file_get_contents('/var/www/html/loja/controllers/charge_rejected.json');
-    	$data = json_decode($str);
+		$data = json_decode($str);
 
 		$id_charge = $data->data->charge->id;
 		$id_bill = $data->data->charge->bill->id;
@@ -9466,17 +9586,17 @@ class index extends controller {
 		print_r($id_bill);
 		echo '<br>';
 		$this->rejected_transaction($id_charge, $id_bill);
-		
+
 		$db = new mysql();
 		$db->alterar("pedido_loja_carrinho", array(
-			"status"=>1,
+			"status" => 1,
 		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 		print_r($data);
-
 	}
-	
-	public function pagar_json(){
+
+	public function pagar_json()
+	{
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		print_r(error_get_last());
@@ -9484,7 +9604,7 @@ class index extends controller {
 		echo '<pre>';
 
 		$str = file_get_contents('/var/www/html/loja/controllers/bill_paid.json');
-    	$data = json_decode($str);
+		$data = json_decode($str);
 
 		$id_charge = $data->data->bill->charges[0]->id;
 		$id_bill = $data->data->bill->id;
@@ -9492,16 +9612,16 @@ class index extends controller {
 		$this->integrar_trilha_lms_pago($id_charge, $id_bill);
 		$db = new mysql();
 		$db->alterar("pedido_loja_carrinho", array(
-			"status"=>4,
+			"status" => 4,
 		), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 		print_r($data);
-
 	}
 
-	public function WebhookHandler(){
+	public function WebhookHandler()
+	{
 
-		require_once('vendor/autoload.php');	
+		require_once('vendor/autoload.php');
 		$webhookHandler = new Vindi\WebhookHandler();
 		$event = $webhookHandler->handle();
 
@@ -9523,10 +9643,10 @@ class index extends controller {
 				$id_charge = $event->data->charge->id;
 				$id_bill = $event->data->charge->bill->id;
 				$this->rejected_transaction($id_charge, $id_bill);
-		
+
 				$db = new mysql();
 				$db->alterar("pedido_loja_carrinho", array(
-					"status"=>1,
+					"status" => 1,
 				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 				break;
@@ -9542,7 +9662,7 @@ class index extends controller {
 				$this->integrar_trilha_lms_pago($id_charge, $id_bill);
 				$db = new mysql();
 				$db->alterar("pedido_loja_carrinho", array(
-					"status"=>4,
+					"status" => 4,
 				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
 
 				break;
@@ -9555,9 +9675,9 @@ class index extends controller {
 
 				$db = new mysql();
 				$db->alterar("pedido_loja_carrinho", array(
-					"status"=>8,
+					"status" => 8,
 				), " transacao_charger_id='$id_charge' and transacao_bill_id='$id_bill' ");
-				
+
 				break;
 			case 'test':
 
@@ -9568,22 +9688,23 @@ class index extends controller {
 		}
 	}
 
-	public function pay2(){
-		
+	public function pay2()
+	{
+
 		// ------------------------------------------------------------------
 
 		$curl_2 = curl_init();
 
 		curl_setopt_array($curl_2, array(
-		CURLOPT_URL => 'https://ws.sandbox.pagseguro.uol.com.br/pre-approvals?email=financeiro@zoombusiness.com.br&token=0FA44F019F824AFF9917B863CB3C1B1C',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'POST',
-		CURLOPT_POSTFIELDS =>'{
+			CURLOPT_URL => 'https://ws.sandbox.pagseguro.uol.com.br/pre-approvals?email=financeiro@zoombusiness.com.br&token=0FA44F019F824AFF9917B863CB3C1B1C',
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'POST',
+			CURLOPT_POSTFIELDS => '{
 			"plan": "655F6DF79898E33554D96FB303B5137A",
 			"reference": "Teste",
 			"sender": {
@@ -9638,60 +9759,59 @@ class index extends controller {
 				}
 			}
 		}',
-		CURLOPT_HTTPHEADER => array(
-			'Content-Type: application/json',
-			'Accept: application/vnd.pagseguro.com.br.v1+json;charset=ISO-8859-1'
-		),
+			CURLOPT_HTTPHEADER => array(
+				'Content-Type: application/json',
+				'Accept: application/vnd.pagseguro.com.br.v1+json;charset=ISO-8859-1'
+			),
 		));
 
 		$response2 = curl_exec($curl_2);
 
 		curl_close($curl_2);
 		echo $response2;
-		
-
-		
 	}
 
-	public function nfe(){
+	public function nfe()
+	{
 		require_once("api/nfe/init.php");
-		
+
 		NFe_io::setApiKey('ox28nBhAujjmff3MhD12Fd4LYvS1POv2cAwgZ3HhJ9LOYlVoLVxRcq3ogbR7mwrUpIg'); // Ache sua chave API no painel (https://app.nfe.io/account/apikeys)
 		$invoiceCreated = NFe_ServiceInvoice::create(
-		'62a8ad08da661a1a14e1a6f5',
-		array(
-			'cityServiceCode' => '2690',
-			'description'     => 'TESTE EMISSAO',
-			'servicesAmount'  => 0.01,
-			'borrower' => array(
-			'federalTaxNumber' => 191,
-			'name'             => 'BANCO DO BRASIL SA',
-			'email'            => 'drekehrer@gmail.com', // Para visualizar os e-mails https://www.mailinator.com/
-			'address'          => array(
-				'country'               => 'BRA',
-				'postalCode'            => '70073901',
-				// Logradouro
-				'street'                => 'Outros Quadra 1 Bloco G Lote 32',
-				'number'                => 'S/N',
-				'additionalInformation' => 'QUADRA 01 BLOCO G',
-				'district'              => 'Asa Sul',
-				'city' => array(
-					'code' => '5300108',
-					'name' => 'Brasilia'
-				),
-				'state' => 'DF'
+			'62a8ad08da661a1a14e1a6f5',
+			array(
+				'cityServiceCode' => '2690',
+				'description'     => 'TESTE EMISSAO',
+				'servicesAmount'  => 0.01,
+				'borrower' => array(
+					'federalTaxNumber' => 191,
+					'name'             => 'BANCO DO BRASIL SA',
+					'email'            => 'drekehrer@gmail.com', // Para visualizar os e-mails https://www.mailinator.com/
+					'address'          => array(
+						'country'               => 'BRA',
+						'postalCode'            => '70073901',
+						// Logradouro
+						'street'                => 'Outros Quadra 1 Bloco G Lote 32',
+						'number'                => 'S/N',
+						'additionalInformation' => 'QUADRA 01 BLOCO G',
+						'district'              => 'Asa Sul',
+						'city' => array(
+							'code' => '5300108',
+							'name' => 'Brasilia'
+						),
+						'state' => 'DF'
+					)
+				)
 			)
-			)
-		)
 		);
 
-		echo($invoiceCreated->id);
+		echo ($invoiceCreated->id);
 	}
 
-	public function pay(){
+	public function pay()
+	{
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -9704,7 +9824,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -9717,7 +9837,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -9725,23 +9845,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -9753,53 +9873,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -9808,31 +9928,29 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
-			$dados['layout_lista'] = $lista_blocos;
+		$dados['layout_lista'] = $lista_blocos;
 
-			$pref = $_POST['telefone'];
-			$tel  = $_POST['telefone'];
-			$pref = $pref[1].$pref[2];
-			$tel  = substr($tel, 5); 
-			$tel  = str_replace("-","",$tel);
-			$cpf  = str_replace("-","",$_POST['cpf']);
-			$cpf  = str_replace(".","",$cpf);
+		$pref = $_POST['telefone'];
+		$tel  = $_POST['telefone'];
+		$pref = $pref[1] . $pref[2];
+		$tel  = substr($tel, 5);
+		$tel  = str_replace("-", "", $tel);
+		$cpf  = str_replace("-", "", $_POST['cpf']);
+		$cpf  = str_replace(".", "", $cpf);
 
-		if($_POST['forma_pagamento'] == 1){
+		if ($_POST['forma_pagamento'] == 1) {
 
-			if($_POST['recorrencia'] == 1){
+			if ($_POST['recorrencia'] == 1) {
 				// $curl_2 = curl_init();
 
 				// curl_setopt_array($curl_2, array(
@@ -9911,15 +10029,15 @@ class index extends controller {
 				// echo $response2->code;
 				$curl3 = curl_init();
 				curl_setopt_array($curl3, array(
-				CURLOPT_URL => 'https://ws.sandbox.pagseguro.uol.com.br/pre-approvals/payment?email=financeiro@zoombusiness.com.br&token=0FA44F019F824AFF9917B863CB3C1B1C',
-				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_ENCODING => '',
-				CURLOPT_MAXREDIRS => 10,
-				CURLOPT_TIMEOUT => 0,
-				CURLOPT_FOLLOWLOCATION => true,
-				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				CURLOPT_CUSTOMREQUEST => 'POST',
-				CURLOPT_POSTFIELDS =>'<payment>
+					CURLOPT_URL => 'https://ws.sandbox.pagseguro.uol.com.br/pre-approvals/payment?email=financeiro@zoombusiness.com.br&token=0FA44F019F824AFF9917B863CB3C1B1C',
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_ENCODING => '',
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 0,
+					CURLOPT_FOLLOWLOCATION => true,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_CUSTOMREQUEST => 'POST',
+					CURLOPT_POSTFIELDS => '<payment>
 					<items>
 						<item>
 							<id>0001</id>
@@ -9949,10 +10067,10 @@ class index extends controller {
 					<reference>REF1234-1</reference>
 					<preApprovalCode>656B265F363601EFF4905FA64EA319FB</preApprovalCode>
 				</payment> ',
-				CURLOPT_HTTPHEADER => array(
-					'Content-Type: application/xml',
-					'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1'
-				),
+					CURLOPT_HTTPHEADER => array(
+						'Content-Type: application/xml',
+						'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1'
+					),
 				));
 
 				$response3 = curl_exec($curl3);
@@ -9960,8 +10078,7 @@ class index extends controller {
 				curl_close($curl3);
 				echo '<pre>';
 				print_r($response3);
-
-			}else{
+			} else {
 				print_r('aqui2');
 				exit;
 				$creditCardToken = htmlspecialchars($_POST["token"]);
@@ -9977,17 +10094,17 @@ class index extends controller {
 
 
 				$params = array(
-					'email'                     => $PAGSEGURO_EMAIL,  
+					'email'                     => $PAGSEGURO_EMAIL,
 					'token'                     => $PAGSEGURO_TOKEN,
 					'creditCardToken'           => $creditCardToken,
 					'senderHash'                => $senderHash,
 					'receiverEmail'             => $PAGSEGURO_EMAIL,
-					'paymentMode'               => 'default', 
-					'paymentMethod'             => 'creditCard', 
+					'paymentMode'               => 'default',
+					'paymentMethod'             => 'creditCard',
 					'currency'                  => 'BRL',
 					'itemId1'                   => '0001',
-					'itemDescription1'          => 'Test',  
-					'itemAmount1'               => $itemAmount,  
+					'itemDescription1'          => 'Test',
+					'itemAmount1'               => $itemAmount,
 					'itemQuantity1'             => 1,
 					'reference'                 => $id_transacao,
 					'senderName'                => $_POST['nomeCompleto'],
@@ -10024,33 +10141,64 @@ class index extends controller {
 
 				$header = array('Content-Type' => 'application/json; charset=UTF-8;');
 				$PAGSEGURO_API_URL = 'https://ws.sandbox.pagseguro.uol.com.br/v2';
-				$response = $this->curlExec($PAGSEGURO_API_URL."/transactions", $params, $header);
-				
+				$response = $this->curlExec($PAGSEGURO_API_URL . "/transactions", $params, $header);
+
 				$json = json_decode(json_encode(simplexml_load_string($response)));
 
-				if($json->status == 1){
+				if ($json->status == 1) {
 					$this->view('finalizada', $dados);
 				}
-			}	
-		}elseif($_POST['forma_pagamento'] == 6){
+			}
+		} elseif ($_POST['forma_pagamento'] == 6) {
 
-			function cielo_capture($MerchantID,$MerchantKey,$Ambiente,$MerchantOrderId,$description,$amount,$currencyCode,$cardType,$cardNumber,$cardExpiry,$cardStart,$cardIssueNumber,
-			$cardCvv, $firstname,  $lastname, $email, $address1, $address2,  $city, $state,  $postcode, $country, $phone, $companyName, $systemUrl,  $returnUrl,  $langPayNow,
-			$moduleDisplayName, $moduleName,  $whmcsVersion, $parcelas, $ccpf)
-			{
+			function cielo_capture(
+				$MerchantID,
+				$MerchantKey,
+				$Ambiente,
+				$MerchantOrderId,
+				$description,
+				$amount,
+				$currencyCode,
+				$cardType,
+				$cardNumber,
+				$cardExpiry,
+				$cardStart,
+				$cardIssueNumber,
+				$cardCvv,
+				$firstname,
+				$lastname,
+				$email,
+				$address1,
+				$address2,
+				$city,
+				$state,
+				$postcode,
+				$country,
+				$phone,
+				$companyName,
+				$systemUrl,
+				$returnUrl,
+				$langPayNow,
+				$moduleDisplayName,
+				$moduleName,
+				$whmcsVersion,
+				$parcelas,
+				$ccpf
+			) {
 				/*Transformar valor em centavos */
 				$amount = str_replace(",", "", $amount);
 				$amount = str_replace(".", "", $amount);
 
-				if ( preg_match('/^5[1-5]/', $cardNumber) ): $bandeira = 'Master';
-				elseif ( preg_match('/^4/', $cardNumber) ): $bandeira = 'Visa';
-				elseif ( preg_match('/^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/', $cardNumber) ): $bandeira = 'Elo';
-				elseif ( preg_match('/^3(?:0[0-5]|[68][0-9])[0-9]{11}/', $cardNumber) ): $bandeira = 'Diners';
-				elseif ( preg_match('/^6(?:011|5[0-9]{2})[0-9]{12}/', $cardNumber) ): $bandeira = 'Discover';
-				elseif ( preg_match('/^(?:2131|1800|35\d{3})\d{11}/', $cardNumber) ): $bandeira = 'JCB';
-				elseif ( preg_match('/^3[47][0-9]{13}/', $cardNumber) ): $bandeira = 'Amex';
-				elseif ( preg_match('/^50/', $cardNumber) ): $bandeira = 'Aura';
-				else: $bandeira = 'Visa'; endif;
+				if (preg_match('/^5[1-5]/', $cardNumber)) : $bandeira = 'Master';
+				elseif (preg_match('/^4/', $cardNumber)) : $bandeira = 'Visa';
+				elseif (preg_match('/^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/', $cardNumber)) : $bandeira = 'Elo';
+				elseif (preg_match('/^3(?:0[0-5]|[68][0-9])[0-9]{11}/', $cardNumber)) : $bandeira = 'Diners';
+				elseif (preg_match('/^6(?:011|5[0-9]{2})[0-9]{12}/', $cardNumber)) : $bandeira = 'Discover';
+				elseif (preg_match('/^(?:2131|1800|35\d{3})\d{11}/', $cardNumber)) : $bandeira = 'JCB';
+				elseif (preg_match('/^3[47][0-9]{13}/', $cardNumber)) : $bandeira = 'Amex';
+				elseif (preg_match('/^50/', $cardNumber)) : $bandeira = 'Aura';
+				else : $bandeira = 'Visa';
+				endif;
 
 				$request = array(
 					"MerchantOrderId" => $MerchantOrderId,  //Numero de identifica��o do Pedido.
@@ -10061,11 +10209,11 @@ class index extends controller {
 					"Payment" => array(
 						"Type" => "CreditCard",
 						"Amount" => $amount,
-						"Currency" => "BRL", 
+						"Currency" => "BRL",
 						"Capture" => true,
 						"Country" => "BRA",
 						"Installments" => $parcelas,
-						"SoftDescriptor" => substr(str_replace('w','',str_replace('.','',$_SERVER['SERVER_NAME'])),0,12),
+						"SoftDescriptor" => substr(str_replace('w', '', str_replace('.', '', $_SERVER['SERVER_NAME'])), 0, 12),
 						"CreditCard" => array(
 							"CardNumber" => $cardNumber,
 							"ExpirationDate" => $cardExpiry,
@@ -10074,22 +10222,28 @@ class index extends controller {
 						)
 					)
 				);
-				echo'<pre>';print_r($request);exit;
+				echo '<pre>';
+				print_r($request);
+				exit;
 				$data_string = json_encode($request, true);
-				if ($Ambiente==2){
+				if ($Ambiente == 2) {
 					$ch = curl_init("https://apisandbox.cieloecommerce.cielo.com.br/1/sales"); //ambiente de  testes
-				}else{
+				} else {
 					$ch = curl_init("https://api.cieloecommerce.cielo.com.br/1/sales");      //ambiente de producao
 				}
 				echo $ch;
 				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-					'Content-Type: application/json',
-					'MerchantId: ' . $MerchantID,
-					'MerchantKey: ' . $MerchantKey,
-					'Content-Length: ' . strlen($data_string))
+				curl_setopt(
+					$ch,
+					CURLOPT_HTTPHEADER,
+					array(
+						'Content-Type: application/json',
+						'MerchantId: ' . $MerchantID,
+						'MerchantKey: ' . $MerchantKey,
+						'Content-Length: ' . strlen($data_string)
+					)
 				);
 				$result = curl_exec($ch);
 				$result = json_decode($result, true);
@@ -10098,54 +10252,86 @@ class index extends controller {
 
 			$pref = $_POST['telefone'];
 			$tel  = $_POST['telefone'];
-			$pref = $pref[1].$pref[2];
-			$tel  = substr($tel, 5); 
-			$tel  = str_replace("-","",$tel);
-			$cpf  = str_replace("-","",$_POST['cpf']);
-			$cpf  = str_replace(".","",$cpf);
+			$pref = $pref[1] . $pref[2];
+			$tel  = substr($tel, 5);
+			$tel  = str_replace("-", "", $tel);
+			$cpf  = str_replace("-", "", $_POST['cpf']);
+			$cpf  = str_replace(".", "", $cpf);
 			$itemAmount = number_format($_POST["amount"], 2, '.', '');
 
 
-			$cMerchantOrderId=1;  
-			$cvencimento=$_POST['cardExpiry'];
+			$cMerchantOrderId = 1;
+			$cvencimento = $_POST['cardExpiry'];
 			// $primeironome=explode(' ',$_POST['nomeCompleto']);
-			$cnome=$_POST['nomeCompleto'];
-			$csobrenome='';
-			$cemail=$_POST['email'];
-			$cendereco=$_POST['endereco'];
-			$cbairro=$_POST['bairro'];
-			$ccidade=$_POST['cidade'];
-			$cuf=$_POST['estado'];
-			$ccep=$_POST['cep'];
-			$cparcelas=$_POST['parcelas'];
-			$ccpf=$cpf;
-			$cvalor=$itemAmount;
-			$cfrete=0;
-			$cwhatsapp=$tel;
-			$cnumerocartao=$_POST['cardNumber'];
-			$cvv=$_POST['cardCVC'];
+			$cnome = $_POST['nomeCompleto'];
+			$csobrenome = '';
+			$cemail = $_POST['email'];
+			$cendereco = $_POST['endereco'];
+			$cbairro = $_POST['bairro'];
+			$ccidade = $_POST['cidade'];
+			$cuf = $_POST['estado'];
+			$ccep = $_POST['cep'];
+			$cparcelas = $_POST['parcelas'];
+			$ccpf = $cpf;
+			$cvalor = $itemAmount;
+			$cfrete = 0;
+			$cwhatsapp = $tel;
+			$cnumerocartao = $_POST['cardNumber'];
+			$cvv = $_POST['cardCVC'];
 			$cloja = null;
-			$cidcielo="";  
-			$ckeycielo=""; 
-			$retorno=cielo_capture($cidcielo,$ckeycielo,2,$cMerchantOrderId,'',$cvalor,'','',$cnumerocartao,$cvencimento,'','',
-			$cvv, $cnome,  $csobrenome, $cemail, $cendereco, '',  $ccidade, $cuf,  $ccep, 'BRASIL', $cwhatsapp, $cloja, '',  '',  'PT',
-			'', '',  '',$cparcelas, $ccpf);
+			$cidcielo = "";
+			$ckeycielo = "";
+			$retorno = cielo_capture(
+				$cidcielo,
+				$ckeycielo,
+				2,
+				$cMerchantOrderId,
+				'',
+				$cvalor,
+				'',
+				'',
+				$cnumerocartao,
+				$cvencimento,
+				'',
+				'',
+				$cvv,
+				$cnome,
+				$csobrenome,
+				$cemail,
+				$cendereco,
+				'',
+				$ccidade,
+				$cuf,
+				$ccep,
+				'BRASIL',
+				$cwhatsapp,
+				$cloja,
+				'',
+				'',
+				'PT',
+				'',
+				'',
+				'',
+				$cparcelas,
+				$ccpf
+			);
 
-			print_r($retorno);exit;
-			if($retorno['Payment']['Status'] == 1){
+			print_r($retorno);
+			exit;
+			if ($retorno['Payment']['Status'] == 1) {
 				$this->view('finalizada', $dados);
 			}
-
 		}
 	}
 
-	public function minhaconta(){
+	public function minhaconta()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -10159,7 +10345,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -10172,7 +10358,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -10180,23 +10366,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -10208,53 +10394,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -10263,16 +10449,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -10298,47 +10482,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -10352,17 +10534,18 @@ class index extends controller {
 		$dados['botao_style'] = $botao_style;
 
 
- 		//carrega view e envia dados para a tela
-		$this->view('minhaconta', $dados);		
+		//carrega view e envia dados para a tela
+		$this->view('minhaconta', $dados);
 	}
 
-	public function pedidos_detalhes(){
+	public function pedidos_detalhes()
+	{
 
 		$this->autenticado();
-		
+
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -10372,7 +10555,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$nome = $conexao->Executar("SELECT * FROM `cadastro` WHERE `fisica_nome` = '$nome'");
-		while($data = $nome->fetch_object()){
+		while ($data = $nome->fetch_object()) {
 			$dados['nome_cli'] 			= $data->fisica_nome;
 			$dados['cpf'] 				= $data->fisica_cpf;
 			$dados['fisica_nascimento'] = date('Y-m-d', $data->fisica_nascimento);
@@ -10391,7 +10574,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -10404,7 +10587,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -10412,23 +10595,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -10440,53 +10623,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -10495,16 +10678,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -10516,12 +10697,12 @@ class index extends controller {
 
 		//carrega modulo de produtos
 		$valores = new model_valores();
-		$pedidos = new model_pedidos(); 
-		$fretes = new model_fretes(); 
+		$pedidos = new model_pedidos();
+		$fretes = new model_fretes();
 
 		//altera sessao
 		$altera_sessao = $this->get('altera_sessao');
-		if($altera_sessao){
+		if ($altera_sessao) {
 			$novasessao = $this->gera_codigo();
 			$this->_sessao = $novasessao;
 			$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $novasessao;
@@ -10537,15 +10718,15 @@ class index extends controller {
 		$codigo = $this->get('codigo');
 
 		$dados['data_pedido'] = $pedidos->carrega($codigo);
-		
+
 		// se foi criado o pedido
-		if($dados['data_pedido']->id){
+		if ($dados['data_pedido']->id) {
 
 			// zera mensagens nao limpa_mensagens_n_lidas
 			$pedidos->limpa_mensagens_n_lidas($codigo);
 			$dados['mensagens'] = $pedidos->lista_mensagens($codigo);
 
-			$status = $dados['data_pedido']->status;	 		
+			$status = $dados['data_pedido']->status;
 			$dados['status'] = $pedidos->status($status);
 
 			$dados['forma_pagamento'] = $pedidos->forma_pagamento_dados($dados['data_pedido']->forma_pagamento);
@@ -10554,26 +10735,24 @@ class index extends controller {
 
 			$dados['valor_desconto_cupom_tratado'] = $valores->trata_valor($dados['data_pedido']->valor_produtos_desc);
 			$dados['valor_frete_tratado'] = $valores->trata_valor($dados['data_pedido']->frete_valor);
-			$dados['valor_total_pedido_tratado'] = $valores->trata_valor($dados['data_pedido']->valor_total);			
+			$dados['valor_total_pedido_tratado'] = $valores->trata_valor($dados['data_pedido']->valor_total);
 			$dados['valor_total_pedido_paypal'] = $valores->trata_valor_banco($dados['valor_total_pedido_tratado']);
 
-			if($dados['data_pedido']->frete_balcao){
+			if ($dados['data_pedido']->frete_balcao) {
 
 				$dados['envio'] = $fretes->carrega_balcao($dados['data_pedido']->frete_balcao);
-				$dados['envio_titulo'] = 'Retirada em balcão - '.$dados['envio']->titulo;
-
+				$dados['envio_titulo'] = 'Retirada em balcão - ' . $dados['envio']->titulo;
 			} else {
 
-				if($dados['data_pedido']->frete == 99999){
+				if ($dados['data_pedido']->frete == 99999) {
 					$dados['envio_titulo'] = "Frete Gratis";
 				} else {
 					$dados['envio'] = $fretes->carrega($dados['data_pedido']->frete);
 					$dados['envio_titulo'] = $dados['envio']->titulo;
 				}
-
 			}
 			// paypal
-			if($dados['data_pedido']->forma_pagamento == 4){
+			if ($dados['data_pedido']->forma_pagamento == 4) {
 			}
 			// botao e detalhes 
 
@@ -10585,47 +10764,45 @@ class index extends controller {
 			$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 			$data = $coisas->fetch_object();
 
-			if(isset($data->codigo)){
+			if (isset($data->codigo)) {
 
 				$botao_style = "
 				<style>
-				a.botao_".$data->codigo.", .botao_".$data->codigo."{
-					border:".$data->borda."px solid ".$data->cor_borda." !important; 
+				a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+					border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 				
-					border-radius:".$data->borda_radius."px !important; 
-					color:".$data->cor_texto." !important;
+					border-radius:" . $data->borda_radius . "px !important; 
+					color:" . $data->cor_texto . " !important;
 					cursor:pointer !important;
-					padding-top:".$data->padding_top."px !important;
-					padding-left:".$data->padding_left."px !important;
-					padding-right:".$data->padding_right."px !important;
-					padding-bottom:".$data->padding_bottom."px !important;
+					padding-top:" . $data->padding_top . "px !important;
+					padding-left:" . $data->padding_left . "px !important;
+					padding-right:" . $data->padding_right . "px !important;
+					padding-bottom:" . $data->padding_bottom . "px !important;
 					";
 
-					if($data->imagem_fundo){
+				if ($data->imagem_fundo) {
 
-						$botao_style .= "
-						background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+					$botao_style .= "
+						background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 						background-repeat:no-repeat !important; 
 						background-size:cover !important; 
 						background-position:center !important;
 						";
-
-					}
-
-					$botao_style .= "
 				}
-				a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+				$botao_style .= "
+				}
+				a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 					
 					
-					border-radius:".$data->borda_radius."px !important;
-					color:".$data->cor_sel_texto." !important;
+					border-radius:" . $data->borda_radius . "px !important;
+					color:" . $data->cor_sel_texto . " !important;
 				}
 
 				</style>
 				";
 
-				$botao_css = "botao_padrao botao_".$data->codigo;
-
+				$botao_css = "botao_padrao botao_" . $data->codigo;
 			} else {
 				$botao_css = "";
 				$botao_style = "";
@@ -10635,20 +10812,19 @@ class index extends controller {
 			$dados['botao_style'] = $botao_style;
 
 			// echo '<pre>';print_r($dados);exit;
-	        //carrega view e envia dados para a tela
+			//carrega view e envia dados para a tela
 			$dados['primaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][0]['cor'];
 			$dados['secundaria'] = $dados['layout_lista'][0]['coluna1']['conteudo']['cores']['detalhes'][1]['cor'];
 			// echo'<pre>';print_r($dados);exit;
 			$this->view('pedido', $dados);
-
 		} else {
 			$this->msg('Pedido não encontrado!');
 			$this->volta(1);
 		}
-
 	}
 
-	public function enviar_comprovante_pg(){
+	public function enviar_comprovante_pg()
+	{
 
 		$this->autenticado();
 
@@ -10659,67 +10835,69 @@ class index extends controller {
 		$pedido_id = $this->post('pedido_id');
 		$mensagem = $this->post('mensagem');
 
- 		// validacoes
+		// validacoes
 		$this->valida($pedido);
 
- 		// arquivo
+		// arquivo
 		$nome_arquivo = "";
 
 		$arquivo_original = $_FILES['arquivo'];
 		$tmp_name = $_FILES['arquivo']['tmp_name'];
 
-		if($tmp_name){
+		if ($tmp_name) {
 
 			// images
-         	//  'png' => 'image/png',
-            //'jpe' => 'image/jpeg',
-            //'jpeg' => 'image/jpeg',
-            //'jpg' => 'image/jpeg',
-            //'gif' => 'image/gif',
-            //'bmp' => 'image/bmp',
+			//  'png' => 'image/png',
+			//'jpe' => 'image/jpeg',
+			//'jpeg' => 'image/jpeg',
+			//'jpg' => 'image/jpeg',
+			//'gif' => 'image/gif',
+			//'bmp' => 'image/bmp',
 
 			$tipo_arquivo = mime_content_type($tmp_name);
 
-			if($tipo_arquivo != 'image/png'){
-				if($tipo_arquivo != 'image/jpeg'){
-					if($tipo_arquivo != 'image/bmp'){
-						if($tipo_arquivo != 'image/gif'){
-							if($tipo_arquivo != 'application/pdf'){
+			if ($tipo_arquivo != 'image/png') {
+				if ($tipo_arquivo != 'image/jpeg') {
+					if ($tipo_arquivo != 'image/bmp') {
+						if ($tipo_arquivo != 'image/gif') {
+							if ($tipo_arquivo != 'application/pdf') {
 								$this->msg('Não foi possível anexar o arquivo, verifique o formato do seu arquivo!');
-								$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
+								$this->irpara(DOMINIO . $this->_controller . '/pedidos_detalhes/codigo/' . $pedido);
 							}
 						}
 					}
 				}
 			}
 
-	 		//carrega model de gestao de imagens
+			//carrega model de gestao de imagens
 			$arquivo = new model_arquivos_imagens();
 
 			//// Definicao de Diretorios / 
 			$diretorio = "arquivos/anexos_pedidos/$pedido/";
 			// verifica se exite a pasta
-			if(!is_dir($diretorio)) {
+			if (!is_dir($diretorio)) {
 				mkdir($diretorio);
 			}
 
-			if(!$arquivo->filtro($arquivo_original)){ $this->msg('Arquivo com formato inválido ou inexistente!'); $this->volta(1); } else {
+			if (!$arquivo->filtro($arquivo_original)) {
+				$this->msg('Arquivo com formato inválido ou inexistente!');
+				$this->volta(1);
+			} else {
 
 				$nome_original = $_FILES['arquivo']['name'];
-				$nome_arquivo  = $this->gera_codigo().'.'.$arquivo->extensao($nome_original);				
-				$destino = $diretorio.$nome_arquivo;
+				$nome_arquivo  = $this->gera_codigo() . '.' . $arquivo->extensao($nome_original);
+				$destino = $diretorio . $nome_arquivo;
 
-				if(!copy($tmp_name, $destino)){ 
+				if (!copy($tmp_name, $destino)) {
 					$this->msg('Não foi possível anexar o arquivo, verifique o tamanho e o nome do seu arquivo!');
-					$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
+					$this->irpara(DOMINIO . $this->_controller . '/pedidos_detalhes/codigo/' . $pedido);
 				}
 			}
 
 			$db = new mysql();
 			$db->alterar("pedido_loja", array(
-				"comprovante"=>"$nome_arquivo"
+				"comprovante" => "$nome_arquivo"
 			), " codigo='$pedido' ");
-
 		} else {
 			$this->msg('Selecione um comprovante válido para continuar!');
 			$this->volta(1);
@@ -10736,7 +10914,7 @@ class index extends controller {
 		$n = 0;
 		$db = new mysql();
 		$exec = $db->executar("select * from contato ");
-		while($data = $exec->fetch_object()){
+		while ($data = $exec->fetch_object()) {
 			$array_lista[$n] = $data->email;
 			$n++;
 		}
@@ -10744,12 +10922,13 @@ class index extends controller {
 		// envia o email
 		$envio = new model_envio();
 		$retorno = $envio->enviar("Nova interação no Pedido $pedido_id", $msg, $array_lista);
-		
+
 		$this->msg("Enviado com sucesso!");
-		$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
+		$this->irpara(DOMINIO . $this->_controller . '/pedidos_detalhes/codigo/' . $pedido);
 	}
 
-	public function pedido_envia_msg(){
+	public function pedido_envia_msg()
+	{
 
 		$this->autenticado();
 
@@ -10761,63 +10940,66 @@ class index extends controller {
 		$pedido_id = $this->post('pedido_id');
 		$mensagem = $this->post('mensagem');
 
- 		// validacoes
+		// validacoes
 		$this->valida($pedido);
-		if(!$mensagem){
-		//	$this->msg('Digite uma mensagem para continuar...');
-		//	$this->volta(1);
+		if (!$mensagem) {
+			//	$this->msg('Digite uma mensagem para continuar...');
+			//	$this->volta(1);
 		}
 
- 		// arquivo
+		// arquivo
 		$nome_arquivo = "";
 
 		$arquivo_original = $_FILES['arquivo'];
 		$tmp_name = $_FILES['arquivo']['tmp_name'];
 
-		if($tmp_name){
+		if ($tmp_name) {
 
 			// images
-         	//  'png' => 'image/png',
-            //'jpe' => 'image/jpeg',
-            //'jpeg' => 'image/jpeg',
-            //'jpg' => 'image/jpeg',
-            //'gif' => 'image/gif',
-            //'bmp' => 'image/bmp',
+			//  'png' => 'image/png',
+			//'jpe' => 'image/jpeg',
+			//'jpeg' => 'image/jpeg',
+			//'jpg' => 'image/jpeg',
+			//'gif' => 'image/gif',
+			//'bmp' => 'image/bmp',
 
 			$tipo_arquivo = mime_content_type($tmp_name);
 
-			if($tipo_arquivo != 'image/png'){
-				if($tipo_arquivo != 'image/jpeg'){
-					if($tipo_arquivo != 'image/bmp'){
-						if($tipo_arquivo != 'image/gif'){
-							if($tipo_arquivo != 'application/pdf'){
+			if ($tipo_arquivo != 'image/png') {
+				if ($tipo_arquivo != 'image/jpeg') {
+					if ($tipo_arquivo != 'image/bmp') {
+						if ($tipo_arquivo != 'image/gif') {
+							if ($tipo_arquivo != 'application/pdf') {
 								$this->msg('Não foi possível anexar o arquivo, verifique o formato do seu arquivo!');
-								$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
+								$this->irpara(DOMINIO . $this->_controller . '/pedidos_detalhes/codigo/' . $pedido);
 							}
 						}
 					}
 				}
 			}
 
-	 		//carrega model de gestao de imagens
+			//carrega model de gestao de imagens
 			$arquivo = new model_arquivos_imagens();
 
 			//// Definicao de Diretorios / 
 			$diretorio = "arquivos/anexos_pedidos/$pedido/";
 			// verifica se exite a pasta
-			if(!is_dir($diretorio)) {
+			if (!is_dir($diretorio)) {
 				mkdir($diretorio);
 			}
 
-			if(!$arquivo->filtro($arquivo_original)){ $this->msg('Arquivo com formato inválido ou inexistente!'); $this->volta(1); } else {
+			if (!$arquivo->filtro($arquivo_original)) {
+				$this->msg('Arquivo com formato inválido ou inexistente!');
+				$this->volta(1);
+			} else {
 
 				$nome_original = $_FILES['arquivo']['name'];
-				$nome_arquivo  = $this->gera_codigo().'.'.$arquivo->extensao($nome_original);				
-				$destino = $diretorio.$nome_arquivo;
+				$nome_arquivo  = $this->gera_codigo() . '.' . $arquivo->extensao($nome_original);
+				$destino = $diretorio . $nome_arquivo;
 
-				if(!copy($tmp_name, $destino)){ 
+				if (!copy($tmp_name, $destino)) {
 					$this->msg('Não foi possível anexar o arquivo, verifique o tamanho e o nome do seu arquivo!');
-					$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
+					$this->irpara(DOMINIO . $this->_controller . '/pedidos_detalhes/codigo/' . $pedido);
 				}
 			}
 		}
@@ -10826,12 +11008,12 @@ class index extends controller {
 
 		$db = new mysql();
 		$db->inserir("pedido_loja_mensagens", array(
-			"pedido"=>"$pedido",
-			"usuario"=>$this->_cod_usuario,
-			"data"=>$time,
-			"msg"=>"$mensagem",
-			"anexo"=>"$nome_arquivo",
-			"lida"=>0
+			"pedido" => "$pedido",
+			"usuario" => $this->_cod_usuario,
+			"data" => $time,
+			"msg" => "$mensagem",
+			"anexo" => "$nome_arquivo",
+			"lida" => 0
 		));
 
 		$pedidos = new model_pedidos();
@@ -10845,7 +11027,7 @@ class index extends controller {
 		$n = 0;
 		$db = new mysql();
 		$exec = $db->executar("select * from contato ");
-		while($data = $exec->fetch_object()){
+		while ($data = $exec->fetch_object()) {
 			$array_lista[$n] = $data->email;
 			$n++;
 		}
@@ -10855,10 +11037,11 @@ class index extends controller {
 		$retorno = $envio->enviar("Nova mensagem no Pedido $pedido_id", $msg, $array_lista);
 
 		$this->msg("Mensagem enviada com sucesso!");
-		$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
+		$this->irpara(DOMINIO . $this->_controller . '/pedidos_detalhes/codigo/' . $pedido);
 	}
 
-	public function cancelar_pedido(){
+	public function cancelar_pedido()
+	{
 
 		$this->autenticado();
 
@@ -10867,19 +11050,20 @@ class index extends controller {
 
 		$pedido = $this->get('codigo');
 
-		if($pedido){
+		if ($pedido) {
 
-			$produtos = new model_produtos(); 
-			$pedidos = new model_pedidos(); 
+			$produtos = new model_produtos();
+			$pedidos = new model_pedidos();
 			$data_pedido = $pedidos->carrega($pedido);
 
-			if($data_pedido->id){
+			if ($data_pedido->id) {
 
-				if($data_pedido->cadastro == $this->_cod_usuario){	
+				if ($data_pedido->cadastro == $this->_cod_usuario) {
 
-					if( $data_pedido->status <= 3 ){
+					if ($data_pedido->status <= 3) {
 
-						function lista_carrinho($codigo){
+						function lista_carrinho($codigo)
+						{
 
 							$valores = new model_valores();
 							$produtos = new model_produtos();
@@ -10891,14 +11075,20 @@ class index extends controller {
 							$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE sessao='$codigo' ");
 							$linha_carrinho = $coisas_carrinho->num_rows;
 
-							if($linha_carrinho != 0){
-								while($data_carrinho = $coisas_carrinho->fetch_object()){
+							if ($linha_carrinho != 0) {
+								while ($data_carrinho = $coisas_carrinho->fetch_object()) {
 
 									$produto_nome = "<div>$data_carrinho->produto_titulo</div>";
 
-									if($data_carrinho->tamanho_titulo){ $produto_nome .= "<div>Tamanho: $data_carrinho->tamanho_titulo</div>"; }
-									if($data_carrinho->cor_titulo){ $produto_nome .= "<div>Cor: $data_carrinho->cor_titulo</div>"; }
-									if($data_carrinho->variacao_titulo){ $produto_nome .= "<div>Variação: $data_carrinho->variacao_titulo</div>"; }
+									if ($data_carrinho->tamanho_titulo) {
+										$produto_nome .= "<div>Tamanho: $data_carrinho->tamanho_titulo</div>";
+									}
+									if ($data_carrinho->cor_titulo) {
+										$produto_nome .= "<div>Cor: $data_carrinho->cor_titulo</div>";
+									}
+									if ($data_carrinho->variacao_titulo) {
+										$produto_nome .= "<div>Variação: $data_carrinho->variacao_titulo</div>";
+									}
 
 									$lista[$i]['id'] = $data_carrinho->id;
 									$lista[$i]['produto'] = $data_carrinho->produto;
@@ -10914,8 +11104,8 @@ class index extends controller {
 									$lista[$i]['total_calculo_tratado'] = $valores->trata_valor($lista[$i]['total_calculo']);
 									$lista[$i]['reserva_estoque'] = $data_carrinho->reserva_estoque;
 
-									if(!isset($imagem[0]['imagem_g'])){
-										$lista[$i]['produto_imagem'] = LAYOUT."img/semimagem.png";
+									if (!isset($imagem[0]['imagem_g'])) {
+										$lista[$i]['produto_imagem'] = LAYOUT . "img/semimagem.png";
 									} else {
 										$lista[$i]['produto_imagem'] = $imagem[0]['imagem_g'];
 									}
@@ -10930,9 +11120,9 @@ class index extends controller {
 						foreach (lista_carrinho($pedido) as $key => $value) {
 
 							// lista itens
-							if($value['reserva_estoque'] == 1){
+							if ($value['reserva_estoque'] == 1) {
 
-								$descricao = "Registro Automatico - Adicionado ".$value['quantidade']." item(s) - Cancelamento Pedido ".$data_pedido->id." ";
+								$descricao = "Registro Automatico - Adicionado " . $value['quantidade'] . " item(s) - Cancelamento Pedido " . $data_pedido->id . " ";
 
 								// volta estoque
 								$produtos->add_estoque_auto($value['produto'], $value['tamanho'], $value['cor'], $value['variacao'], $value['quantidade'], $descricao);
@@ -10940,36 +11130,34 @@ class index extends controller {
 								// marca como processado
 								$db = new mysql();
 								$db->alterar("pedido_loja_carrinho", array(
-									"reserva_estoque"=>"0"
-								), " id='".$value['id']."' ");
-
+									"reserva_estoque" => "0"
+								), " id='" . $value['id'] . "' ");
 							}
 						}
 
 						$db = new mysql();
 						$db->alterar("pedido_loja", array(
-							"status"=>"7"
-						), " codigo='".$pedido."' ");
+							"status" => "7"
+						), " codigo='" . $pedido . "' ");
 
 						$this->msg("Pedido cancelado com sucesso!");
 					}
 				}
 			}
-
-
 		}
 
 
-		$this->irpara(DOMINIO.$this->_controller.'/pedidos_detalhes/codigo/'.$pedido);
+		$this->irpara(DOMINIO . $this->_controller . '/pedidos_detalhes/codigo/' . $pedido);
 	}
 
 	/////////  END PAGAMENTO /////////
 
-	public function entrar(){
+	public function entrar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -10983,7 +11171,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -10996,7 +11184,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -11004,23 +11192,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -11032,53 +11220,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -11087,16 +11275,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -11107,54 +11293,54 @@ class index extends controller {
 		$this->view('entrar', $dados);
 	}
 
-	public function login(){
-		
+	public function login()
+	{
+
 		$time = time();
 		$ip = $_SERVER["REMOTE_ADDR"];
-		$prefixosessao = $this->_sessao.'_';
-		
+		$prefixosessao = $this->_sessao . '_';
+
 		$email = $this->post('login_usuario');
-		$email = str_replace("-","",$email);
-		$email = str_replace(".","",$email);
+		$email = str_replace("-", "", $email);
+		$email = str_replace(".", "", $email);
 		$senha = $this->post('login_senha');
 
-		if($email AND $senha) {
+		if ($email and $senha) {
 
 			$conexao = new mysql();
 			$coisas_dados = $conexao->Executar("SELECT * FROM cadastro WHERE fisica_cpf='$email' ");
 			$data_dados = $coisas_dados->fetch_object();
 
-			if($coisas_dados->num_rows == 1){
+			if ($coisas_dados->num_rows == 1) {
 
-				if( password_verify($senha, $data_dados->senha) ){
+				if (password_verify($senha, $data_dados->senha)) {
 
 					//carrega sessoes
-					$_SESSION[$this->_sessao_principal]['loja_acesso'] = TOKEN1.$data_dados->codigo;
+					$_SESSION[$this->_sessao_principal]['loja_acesso'] = TOKEN1 . $data_dados->codigo;
 					$_SESSION[$this->_sessao_principal]['loja_cod_usuario'] = $data_dados->codigo;
 					$_SESSION['usuario_cpf'] = $data_dados->fisica_cpf;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $this->_sessao;
 
-					if( 1 == 4 ){
-					// if( empty($data_dados->endereco) OR empty($data_dados->cep) OR empty($data_dados->estado) OR empty($data_dados->cidade) ){
+					if (1 == 4) {
+						// if( empty($data_dados->endereco) OR empty($data_dados->cep) OR empty($data_dados->estado) OR empty($data_dados->cidade) ){
 
-						$this->irpara(DOMINIO.$this->_controller.'/alterar_cadastro');
-
+						$this->irpara(DOMINIO . $this->_controller . '/alterar_cadastro');
 					} else {
 
 						//confere se tem pedido  (se tiver salva usuario no pedido e renova sessao)
 						$conexao = new mysql();
-						$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='".$this->_sessao."' ");
+						$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='" . $this->_sessao . "' ");
 						$linhas = $coisas_pedido->num_rows;
-						
-						
 
-						if($linhas == 1){
-							$this->irpara(DOMINIO.$this->_controller.'/carrinho');
+
+
+						if ($linhas == 1) {
+							$this->irpara(DOMINIO . $this->_controller . '/carrinho');
 						} else {
 
-							if($_SESSION['acesso_controller']){ 
-								if($_SESSION['acesso_action']){ 
-									$destino = DOMINIO.$_SESSION['acesso_controller'].'/'.$_SESSION['acesso_action'];
+							if ($_SESSION['acesso_controller']) {
+								if ($_SESSION['acesso_action']) {
+									$destino = DOMINIO . $_SESSION['acesso_controller'] . '/' . $_SESSION['acesso_action'];
 								} else {
 									$destino = DOMINIO;
 								}
@@ -11164,49 +11350,43 @@ class index extends controller {
 
 							$this->irpara($destino);
 						}
-
-					}				
-
+					}
 				} else {
 
 					echo "
 					<div class='cadastro_msg_interna' style='padding-top:20px; text-align:center;' >E-mail ou senha incorreto(s)!</div>
 					";
 					exit;
-
 				}
-
 			} else {
 
 				echo "
 				<div class='cadastro_msg_interna' style='padding-top:20px; text-align:center;' >E-mail ou senha incorreto(s)!</div>
 				";
 				exit;
-
 			}
-
 		} else {
 			echo "
 			<div class='cadastro_msg_interna' style='padding-top:20px; text-align:center;' >Digite seu e-mail e sua senha para continuar!</div>
 			";
 			exit;
 		}
-
 	}
 
-	public function logout(){
+	public function logout()
+	{
 
 		$this->finaliza_sessao();
 		$this->irpara(DOMINIO);
 		exit;
-
 	}
 
-	public function recuperar_senha(){
+	public function recuperar_senha()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -11220,7 +11400,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -11233,7 +11413,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -11241,23 +11421,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -11269,53 +11449,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -11324,16 +11504,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -11343,7 +11521,8 @@ class index extends controller {
 		$this->view('recuperar_senha', $dados);
 	}
 
-	public function recuperar_senha_enviar(){
+	public function recuperar_senha_enviar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -11353,7 +11532,7 @@ class index extends controller {
 
 		$email = $this->post('email');
 
-		if(!$valida->email($email)){
+		if (!$valida->email($email)) {
 			echo "Digite o e-mail do cadastro corretamente";
 			exit;
 		}
@@ -11365,41 +11544,41 @@ class index extends controller {
 		// 	exit;
 
 		// } else {
-			
-			// $ip = $_SERVER['REMOTE_ADDR'];
-			// $key = recaptcha_secret;
-			// $url = 'https://www.google.com/recaptcha/api/siteverify';
 
-			// // RECAPTCH RESPONSE
-			// $recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
-			// $data = json_decode($recaptcha_response);
+		// $ip = $_SERVER['REMOTE_ADDR'];
+		// $key = recaptcha_secret;
+		// $url = 'https://www.google.com/recaptcha/api/siteverify';
 
-			// if(isset($data->success) &&  $data->success === true) {
+		// // RECAPTCH RESPONSE
+		// $recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
+		// $data = json_decode($recaptcha_response);
 
-			// 	//configuracoes
-				$conexao = new mysql();
-				$coisas_config = $conexao->Executar("select * from adm_config where id='1' ");
-				$data_config = $coisas_config->fetch_object();
+		// if(isset($data->success) &&  $data->success === true) {
 
-				//lista emails
-				$conexao = new mysql();
-				$coisas_cadastro = $conexao->Executar("select * from cadastro where email='$email' ");
-				$linhas_cadastro = $coisas_cadastro->num_rows;
+		// 	//configuracoes
+		$conexao = new mysql();
+		$coisas_config = $conexao->Executar("select * from adm_config where id='1' ");
+		$data_config = $coisas_config->fetch_object();
 
-				if($linhas_cadastro == 1){
+		//lista emails
+		$conexao = new mysql();
+		$coisas_cadastro = $conexao->Executar("select * from cadastro where email='$email' ");
+		$linhas_cadastro = $coisas_cadastro->num_rows;
 
-					$data_cadastro = $coisas_cadastro->fetch_object();
+		if ($linhas_cadastro == 1) {
 
-					$senha = rand(11111, 99999);
+			$data_cadastro = $coisas_cadastro->fetch_object();
 
-					$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
+			$senha = rand(11111, 99999);
 
-					$conexao = new mysql();
-					$conexao->Executar("UPDATE cadastro SET senha='$senha_tratada' WHERE codigo='$data_cadastro->codigo' ");
+			$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 
-					/* mensagem */
-					$msg = "
-					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p>".$textos->conteudo('146177966276191')."</p></div>
+			$conexao = new mysql();
+			$conexao->Executar("UPDATE cadastro SET senha='$senha_tratada' WHERE codigo='$data_cadastro->codigo' ");
+
+			/* mensagem */
+			$msg = "
+					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p>" . $textos->conteudo('146177966276191') . "</p></div>
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p><strong>Login:</strong> $data_cadastro->fisica_cpf</p></div>
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p><strong>Sua nova senha:</strong> $senha</p></div>
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p></p></div>
@@ -11407,30 +11586,30 @@ class index extends controller {
 					<div style='font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;'><p>Este e-mail foi gerado automáticamente, por favor não responda.</p></div>
 					";
 
-					$envio = new model_envio();
-					$retorno = $envio->enviar("Nova senha de acesso", $msg, array($email), '');
+			$envio = new model_envio();
+			$retorno = $envio->enviar("Nova senha de acesso", $msg, array($email), '');
 
-					if($retorno){
-						echo "<div>Recuperação enviada com sucesso! Confira seu e-mail!</div>";
-						exit;
-					} else {
-						echo "Ocorreu um erro ao enviar sua solicitação, tente novamente mais tarde!";
-						exit;
-					}
+			if ($retorno) {
+				echo "<div>Recuperação enviada com sucesso! Confira seu e-mail!</div>";
+				exit;
+			} else {
+				echo "Ocorreu um erro ao enviar sua solicitação, tente novamente mais tarde!";
+				exit;
+			}
+		} else {
+			echo "Desculpe, Não encontramos cadastros vinculados a este e-mail!";
+			exit;
+		}
 
-				} else {
-					echo "Desculpe, Não encontramos cadastros vinculados a este e-mail!";
-					exit;
-				}
-
-			// } else {
-			// 	echo "Recaptcha inválido, tente novamente!";
-			// 	exit;
-			// }
+		// } else {
+		// 	echo "Recaptcha inválido, tente novamente!";
+		// 	exit;
+		// }
 		// }
 	}
 
-	public function selecionar_balcao(){
+	public function selecionar_balcao()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
@@ -11438,54 +11617,52 @@ class index extends controller {
 		$fretes = new model_fretes();
 
 		$codigo = $this->get('codigo');
-		if(!$codigo){
+		if (!$codigo) {
 			$this->msg('Balcão inválido!');
-			$this->irpara(DOMINIO."carrinho");
+			$this->irpara(DOMINIO . "carrinho");
 		}
 
 		$valor_subtotal = $this->get('valor_subtotal');
-		if(!$valor_subtotal){
+		if (!$valor_subtotal) {
 			$this->msg('Forma de envio inválida!');
-			$this->irpara(DOMINIO."carrinho");
+			$this->irpara(DOMINIO . "carrinho");
 		}
 
 		//informaçoes do pedido
 		$conexao = new mysql();
-		$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='".$this->_sessao."' ");
+		$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='" . $this->_sessao . "' ");
 		$data_pedido = $coisas_pedido->fetch_object();
 
 		$conexao = new mysql();
-		$coisas_balcao = $conexao->Executar("SELECT * FROM balcoes WHERE codigo='".$codigo."' ");
+		$coisas_balcao = $conexao->Executar("SELECT * FROM balcoes WHERE codigo='" . $codigo . "' ");
 		$data_balcao = $coisas_balcao->fetch_object();
 
 		$titulo = $data_balcao->titulo;
 		$valor_frete = $data_balcao->valor;
 
-		if($titulo){
+		if ($titulo) {
 
 			//adiciona frete
 			$conexao = new mysql();
 			$conexao->alterar("pedido_loja", array(
-				"frete"=>"",
-				"frete_balcao"=>$codigo,
-				"frete_titulo"=>$titulo,
-				"frete_valor"=>$valor_frete,
-				"valor_total"=>0,
-				"status"=>0
-			), " codigo='".$this->_sessao."' ");
+				"frete" => "",
+				"frete_balcao" => $codigo,
+				"frete_titulo" => $titulo,
+				"frete_valor" => $valor_frete,
+				"valor_total" => 0,
+				"status" => 0
+			), " codigo='" . $this->_sessao . "' ");
 
-			$this->irpara(DOMINIO.$this->_controller."/carrinho");
-
+			$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 		} else {
 
 			$this->msg('Balcão inválido!');
-			$this->irpara(DOMINIO.$this->_controller."/carrinho");
-
+			$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 		}
-
 	}
 
-	public function sitemap(){
+	public function sitemap()
+	{
 
 		header("Content-Type: application/xml; charset=UTF-8");
 		echo '<?xml version="1.0" encoding="UTF-8"?>';
@@ -11501,73 +11678,70 @@ class index extends controller {
 		http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 		<url>
-		<loc>'.DOMINIO.'</loc>
-		<lastmod>'.$hoje.'</lastmod>
+		<loc>' . DOMINIO . '</loc>
+		<lastmod>' . $hoje . '</lastmod>
 		</url>
 
 		';
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT chave FROM layout_paginas WHERE id!=1 ORDER BY id ASC");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 
-			$destino = DOMINIO.$data->chave;
+			$destino = DOMINIO . $data->chave;
 
 			echo '
 			<url>
-			<loc>'.$destino.'</loc>
-			<lastmod>'.$hoje.'</lastmod>
+			<loc>' . $destino . '</loc>
+			<lastmod>' . $hoje . '</lastmod>
 			<priority>0.9</priority> 
 			</url>
 			';
-
 		}
 
 
 		// noticias 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT amigavel, data FROM noticia ORDER by data desc");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 
-			$destino = DOMINIO."index/leitura/id/".$data->amigavel;
+			$destino = DOMINIO . "index/leitura/id/" . $data->amigavel;
 			$dia = date('Y-m-d', $data->data);
 
 			echo '
 			<url>
-			<loc>'.$destino.'</loc>
-			<lastmod>'.$dia.'</lastmod>
+			<loc>' . $destino . '</loc>
+			<lastmod>' . $dia . '</lastmod>
 			<priority>0.8</priority> 
 			</url>
 			';
-
 		}
 
 
 		// produtos
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT id FROM produto WHERE esconder='0' ORDER by id desc");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 
-			$destino = DOMINIO."index/produto/id/".$data->id."/"; 
+			$destino = DOMINIO . "index/produto/id/" . $data->id . "/";
 
 			echo '
 			<url>
-			<loc>'.$destino.'</loc>
-			<lastmod>'.$hoje.'</lastmod>
+			<loc>' . $destino . '</loc>
+			<lastmod>' . $hoje . '</lastmod>
 			<priority>0.9</priority> 
 			</url>
 			';
-
 		}
 
 
 		echo '
 		</urlset>
 		';
-
 	}
 
-	public function pagamento_paypal(){
+	public function pagamento_paypal()
+	{
 
 		$codigo = $this->get('codigo');
 		$id_transacao = $this->get('id');
@@ -11578,9 +11752,9 @@ class index extends controller {
 		$data_pedido = $pedidos->carrega($codigo);
 
 		// se foi criado o pedido
-		if($data_pedido->id AND $id_transacao){
+		if ($data_pedido->id and $id_transacao) {
 
-			if( ($data_pedido->forma_pagamento == 4) AND ($data_pedido->status <= 3) ){
+			if (($data_pedido->forma_pagamento == 4) and ($data_pedido->status <= 3)) {
 
 				$conexao = new mysql();
 				$coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='4' ");
@@ -11588,89 +11762,100 @@ class index extends controller {
 
 				$PAYPAL_SANDBOX = false;
 
-				$paypalURL = $PAYPAL_SANDBOX?'https://api.sandbox.paypal.com/v1/':'https://api.paypal.com/v1/';
+				$paypalURL = $PAYPAL_SANDBOX ? 'https://api.sandbox.paypal.com/v1/' : 'https://api.paypal.com/v1/';
 
-				$ch = curl_init(); 
-				curl_setopt($ch, CURLOPT_URL, $paypalURL.'oauth2/token'); 
-				curl_setopt($ch, CURLOPT_HEADER, false); 
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-				curl_setopt($ch, CURLOPT_POST, true); 
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-				curl_setopt($ch, CURLOPT_USERPWD, $data_pagamento->paypal_clienteid.":".$data_pagamento->paypal_clientesecret); 
-				curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials"); 
-				$response = curl_exec($ch); 
-				curl_close($ch); 
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $paypalURL . 'oauth2/token');
+				curl_setopt($ch, CURLOPT_HEADER, false);
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+				curl_setopt($ch, CURLOPT_POST, true);
+				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				curl_setopt($ch, CURLOPT_USERPWD, $data_pagamento->paypal_clienteid . ":" . $data_pagamento->paypal_clientesecret);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+				$response = curl_exec($ch);
+				curl_close($ch);
 
-				if(empty($response)){
+				if (empty($response)) {
 
-					echo "erro"; exit;
+					echo "erro";
+					exit;
+				} else {
 
-				} else { 
-
-					$jsonData = json_decode($response); 
+					$jsonData = json_decode($response);
 
 					// print_r($jsonData);
 
-					$curl = curl_init($paypalURL.'payments/payment/'.$paymentid); 
-					curl_setopt($curl, CURLOPT_POST, false); 
-					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); 
-					curl_setopt($curl, CURLOPT_HEADER, false); 
-					curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); 
-					curl_setopt($curl, CURLOPT_HTTPHEADER, array( 
-						'Authorization: Bearer ' . $jsonData->access_token, 
-						'Accept: application/json', 
-						'Content-Type: application/xml' 
-					)); 
-					$response = curl_exec($curl); 
-					curl_close($curl); 
+					$curl = curl_init($paypalURL . 'payments/payment/' . $paymentid);
+					curl_setopt($curl, CURLOPT_POST, false);
+					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+					curl_setopt($curl, CURLOPT_HEADER, false);
+					curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+					curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+						'Authorization: Bearer ' . $jsonData->access_token,
+						'Accept: application/json',
+						'Content-Type: application/xml'
+					));
+					$response = curl_exec($curl);
+					curl_close($curl);
 
-					$paymentCheck = json_decode($response); 
+					$paymentCheck = json_decode($response);
 
-					if($paymentCheck && $paymentCheck->state == 'approved'){ 
+					if ($paymentCheck && $paymentCheck->state == 'approved') {
 
 						$db = new mysql();
 						$db->alterar("pedido_loja",  array(
-							"status"=>4
-						), " codigo='".$data_pedido->id."' AND cadastro='".$this->_cod_usuario."' ");
-
+							"status" => 4
+						), " codigo='" . $data_pedido->id . "' AND cadastro='" . $this->_cod_usuario . "' ");
 					}
 
 					//print_r($result);
 				}
 			}
 
-			$this->irpara(DOMINIO.$this->_controller."/pedidos_detalhes/codigo/".$codigo);
+			$this->irpara(DOMINIO . $this->_controller . "/pedidos_detalhes/codigo/" . $codigo);
 		}
 
 		$this->irpara(DOMINIO);
 	}
 
-	public function rastreamento_detalhes(){
+	public function rastreamento_detalhes()
+	{
 
 		$refe = $this->post('rastreio_codigo');
 
-		if($refe){
+		if ($refe) {
 
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM rastreamento_objetos WHERE ref='$refe' ");
 
-			if($coisas->num_rows == 0){
+			if ($coisas->num_rows == 0) {
 
 				echo "<div style='text-align:center; padding:10px;'>Nenhum item encontrado para essa consulta!</div>";
 				exit;
-
 			} else {
 
 				$dados['data'] = $coisas->fetch_object();
 
 				$statusob = "";
 
-				if($dados['data']->status == 0){ $statusob = "Enviado"; }
-				if($dados['data']->status == 1){ $statusob = "Em Trânsito"; }
-				if($dados['data']->status == 2){ $statusob = "Extraviado"; }
-				if($dados['data']->status == 3){ $statusob = "Recusado"; }
-				if($dados['data']->status == 4){ $statusob = "Endereço não localizado"; }
-				if($dados['data']->status == 5){ $statusob = "Entregue"; }
+				if ($dados['data']->status == 0) {
+					$statusob = "Enviado";
+				}
+				if ($dados['data']->status == 1) {
+					$statusob = "Em Trânsito";
+				}
+				if ($dados['data']->status == 2) {
+					$statusob = "Extraviado";
+				}
+				if ($dados['data']->status == 3) {
+					$statusob = "Recusado";
+				}
+				if ($dados['data']->status == 4) {
+					$statusob = "Endereço não localizado";
+				}
+				if ($dados['data']->status == 5) {
+					$statusob = "Entregue";
+				}
 
 				$dados['status'] = $statusob;
 
@@ -11681,10 +11866,10 @@ class index extends controller {
 				$atualizacao = date('d/m/Y', $dados['data']->data);
 
 				$conexao = new mysql();
-				$coisas_itens = $conexao->Executar("SELECT * FROM rastreamento_objetos_itens WHERE codigo='".$dados['data']->codigo."' ORDER by id asc ");
-				while($data_itens = $coisas_itens->fetch_object()){
+				$coisas_itens = $conexao->Executar("SELECT * FROM rastreamento_objetos_itens WHERE codigo='" . $dados['data']->codigo . "' ORDER by id asc ");
+				while ($data_itens = $coisas_itens->fetch_object()) {
 
-					$atualizacao = date('d/m/Y', $data_itens->data);						
+					$atualizacao = date('d/m/Y', $data_itens->data);
 					$itens[$n]['dia'] = date('d/m/Y', $data_itens->data);
 					$itens[$n]['descricao'] = nl2br($data_itens->descricao);
 
@@ -11697,21 +11882,19 @@ class index extends controller {
 
 				$this->view('conteudo_rastreamento.detalhes', $dados);
 			}
-
-		} else {			
+		} else {
 
 			echo "<div style='text-align:center; padding:10px;'>Informe o codigo para continuar!</div>";
 			exit;
-
 		}
-
 	}
 
-	public function veiculo_detalhes(){
+	public function veiculo_detalhes()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -11724,7 +11907,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -11737,7 +11920,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -11745,23 +11928,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -11773,53 +11956,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -11828,16 +12011,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -11845,22 +12026,22 @@ class index extends controller {
 
 		$codigo = $this->get('id');
 
-		if(!$codigo){
+		if (!$codigo) {
 			$this->irpara(DOMINIO);
 		}
 
 
 		$conexao = new mysql();
 		$coisas_garagemm = $conexao->Executar("SELECT * FROM garagem where codigo='$codigo' ");
-		$dados['data'] = $coisas_garagemm->fetch_object();		
+		$dados['data'] = $coisas_garagemm->fetch_object();
 
-		if( !$dados['data']->id ){
+		if (!$dados['data']->id) {
 			$this->irpara(DOMINIO);
 		}
 
 		$garagem = new model_garagem();
 		$dados['imagens'] = $garagem->imagens($dados['data']->codigo);
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 		}
 
@@ -11873,32 +12054,31 @@ class index extends controller {
 		$conexao = new mysql();
 		$coisas_garagem = $conexao->Executar("SELECT * FROM garagem_detalhes where id='1' ");
 		$dados['data_detalhes'] = $coisas_garagem->fetch_object();
-		
+
 		$layoutttt = new model_layout();
 		$dados['cores'] = $layoutttt->lista_cores('garagem_detalhes')['lista'];
 		$dados['cores_detalhes'] = $layoutttt->lista_cores('garagem_detalhes');
-		
+
 		//pega imagens 
 
 		$dados['imagem_principal_largura'] = "";
 		$dados['imagem_principal_altura'] = "";
 		$dados['imagem_principal'] = "";
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 			$dados['imagem_principal_sem_ssl'] = $string = str_replace("https://", "http://", $dados['imagens'][0]['imagem_g']);
 
-			$imagem_principal = "arquivos/img_veiculos_g/".$dados['data']->codigo."/".$dados['imagens'][0]['imagem'];
+			$imagem_principal = "arquivos/img_veiculos_g/" . $dados['data']->codigo . "/" . $dados['imagens'][0]['imagem'];
 			list($largura, $altura) = getimagesize($imagem_principal);
-			if($largura){
+			if ($largura) {
 				$dados['imagem_principal_largura'] = $largura;
 			}
-			if($altura){
+			if ($altura) {
 				$dados['imagem_principal_altura'] = $altura;
 			}
+		}
 
-		}	
-		
 
 		//$dados['endereco_postagem'] = DOMINIO.$this->_controller."/veiculo_detalhes/id/".$dados['data']->codigo;
 		$dados['endereco_postagem'] = '';
@@ -11913,11 +12093,12 @@ class index extends controller {
 		$this->view('veiculo.detalhes', $dados);
 	}
 
-	public function veiculo_detalhes2(){
+	public function veiculo_detalhes2()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -11930,7 +12111,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -11943,7 +12124,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -11951,23 +12132,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -11979,53 +12160,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -12034,16 +12215,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -12051,7 +12230,7 @@ class index extends controller {
 
 		$codigo = $this->get('id');
 
-		if(!$codigo){
+		if (!$codigo) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -12060,13 +12239,13 @@ class index extends controller {
 		$coisas_imovel = $conexao->Executar("SELECT * FROM garagem where codigo='$codigo' ");
 		$dados['data'] = $coisas_imovel->fetch_object();
 
-		if( !$dados['data']->id ){
+		if (!$dados['data']->id) {
 			$this->irpara(DOMINIO);
 		}
 
 		$garagem = new model_garagem();
 		$dados['imagens'] = $garagem->imagens($dados['data']->codigo);
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 		}
 
@@ -12089,35 +12268,35 @@ class index extends controller {
 		$dados['imagem_principal_largura'] = "";
 		$dados['imagem_principal_altura'] = "";
 		$dados['imagem_principal'] = "";
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 			$dados['imagem_principal_sem_ssl'] = $string = str_replace("https://", "http://", $dados['imagens'][0]['imagem_g']);
 
-			$imagem_principal = "arquivos/img_veiculos_g/".$dados['data']->codigo."/".$dados['imagens'][0]['imagem'];
+			$imagem_principal = "arquivos/img_veiculos_g/" . $dados['data']->codigo . "/" . $dados['imagens'][0]['imagem'];
 			list($largura, $altura) = getimagesize($imagem_principal);
-			if($largura){
+			if ($largura) {
 				$dados['imagem_principal_largura'] = $largura;
 			}
-			if($altura){
+			if ($altura) {
 				$dados['imagem_principal_altura'] = $altura;
 			}
+		}
 
-		}	
 
-
-		$dados['endereco_postagem'] = DOMINIO.$this->_controller."/veiculo_detalhes2/id/".$dados['data']->codigo;
+		$dados['endereco_postagem'] = DOMINIO . $this->_controller . "/veiculo_detalhes2/id/" . $dados['data']->codigo;
 		$dados['endereco_postagem_sem_ssl'] = $string = str_replace("https://", "http://", $dados['endereco_postagem']);
 
 
 		$this->view('veiculo.detalhes2', $dados);
 	}
 
-	public function imoveis_detalhes(){
+	public function imoveis_detalhes()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -12131,7 +12310,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -12144,7 +12323,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -12152,23 +12331,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -12180,53 +12359,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -12235,16 +12414,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -12252,7 +12429,7 @@ class index extends controller {
 
 		$codigo = $this->get('id');
 
-		if(!$codigo){
+		if (!$codigo) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -12261,20 +12438,20 @@ class index extends controller {
 		$coisas_imovel = $conexao->Executar("SELECT * FROM imoveis where codigo='$codigo' ");
 		$dados['data'] = $coisas_imovel->fetch_object();
 
-		if( !$dados['data']->id ){
+		if (!$dados['data']->id) {
 			$this->irpara(DOMINIO);
 		}
 
 		$imoveis = new model_imoveis();
 		$dados['imagens'] = $imoveis->imagens($dados['data']->codigo);
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 		}
 
 		$valores = new model_valores();
 		$dados['valor'] = $valores->trata_valor($dados['data']->valor);
 		$dados['iptu'] = $valores->trata_valor($dados['data']->iptu);
-		$dados['condominio'] = $valores->trata_valor($dados['data']->condominio);	
+		$dados['condominio'] = $valores->trata_valor($dados['data']->condominio);
 		$dados['similares'] = $imoveis->similares($dados['data']->codigo, $dados['data']->categoria_id, $dados['data']->tipo_id);
 
 		$dados['opcoes'] = $imoveis->opcoes($dados['data']->codigo);
@@ -12288,58 +12465,58 @@ class index extends controller {
 		$formatodapaginadetalhes = $dados['data_detalhes']->formato_pg;
 
 		$layoutttt = new model_layout();
-		$dados['cores_imo'] = $layoutttt->lista_cores('imoveis_detalhes'.$formatodapaginadetalhes)['lista'];
+		$dados['cores_imo'] = $layoutttt->lista_cores('imoveis_detalhes' . $formatodapaginadetalhes)['lista'];
 
 
 
-		$dados['endereco_imovel_sem_ssl'] = DOMINIO.$this->_controller.'/imoveis_detalhes/id/'.$dados['data']->codigo;
+		$dados['endereco_imovel_sem_ssl'] = DOMINIO . $this->_controller . '/imoveis_detalhes/id/' . $dados['data']->codigo;
 
 		//pega imagens 
 
 		$dados['imagem_principal_largura'] = "";
 		$dados['imagem_principal_altura'] = "";
 		$dados['imagem_principal'] = "";
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 			$dados['imagem_principal_sem_ssl'] = $string = str_replace("https://", "http://", $dados['imagens'][0]['imagem_g']);
 
-			$imagem_principal = "arquivos/img_imoveis_g/".$dados['data']->codigo."/".$dados['imagens'][0]['imagem'];
+			$imagem_principal = "arquivos/img_imoveis_g/" . $dados['data']->codigo . "/" . $dados['imagens'][0]['imagem'];
 			list($largura, $altura) = getimagesize($imagem_principal);
-			if($largura){
+			if ($largura) {
 				$dados['imagem_principal_largura'] = $largura;
 			}
-			if($altura){
+			if ($altura) {
 				$dados['imagem_principal_altura'] = $altura;
 			}
-
-		}	
+		}
 
 		// favoritos
 		$conexao = new mysql();
-		$coisas_fav = $conexao->Executar("SELECT * FROM imoveis_favoritos where codigo='".$dados['data']->codigo."' AND sessao='".$this->_sessao."' ");
-		if($coisas_fav->num_rows == 0){
+		$coisas_fav = $conexao->Executar("SELECT * FROM imoveis_favoritos where codigo='" . $dados['data']->codigo . "' AND sessao='" . $this->_sessao . "' ");
+		if ($coisas_fav->num_rows == 0) {
 			$dados['favorito'] = 2;
 		} else {
 			$dados['favorito'] = 1;
 		}
 
-		$dados['endereco_postagem'] = DOMINIO.$this->_controller."/imoveis_detalhes/id/".$dados['data']->codigo;
+		$dados['endereco_postagem'] = DOMINIO . $this->_controller . "/imoveis_detalhes/id/" . $dados['data']->codigo;
 		$dados['endereco_postagem_sem_ssl'] = $string = str_replace("https://", "http://", $dados['endereco_postagem']);
 
 
-		if($formatodapaginadetalhes == 2){
+		if ($formatodapaginadetalhes == 2) {
 			$this->view('imoveis.detalhes2', $dados);
 		} else {
 			$this->view('imoveis.detalhes', $dados);
 		}
 	}
 
-	public function imoveis_agendar(){
+	public function imoveis_agendar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -12347,8 +12524,8 @@ class index extends controller {
 		$dados['_nome_usuario'] = $this->_nome_usuario;
 
 		$id = $this->get('id');
-		if(!$id){
-			$this->irpara(DOMINIO."erro");
+		if (!$id) {
+			$this->irpara(DOMINIO . "erro");
 		}
 
 		$conexao = new mysql();
@@ -12359,11 +12536,12 @@ class index extends controller {
 		$this->view('imoveis.agendar', $dados);
 	}
 
-	public function imoveis_agendar_enviar(){
+	public function imoveis_agendar_enviar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 
@@ -12374,22 +12552,22 @@ class index extends controller {
 		$imovel = $this->post('imovel');
 		$captcha = $this->post('g-recaptcha-response');
 
-		if($nome AND $email AND $imovel){
+		if ($nome and $email and $imovel) {
 
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$key = recaptcha_secret;
 			$url = 'https://www.google.com/recaptcha/api/siteverify';
 
-			$recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
+			$recaptcha_response = file_get_contents($url . '?secret=' . $key . '&response=' . $captcha . '&remoteip=' . $ip);
 			$data = json_decode($recaptcha_response);
-			if(isset($data->success) &&  $data->success === true) {
+			if (isset($data->success) &&  $data->success === true) {
 
 				$msg =  "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Agendar Visita</strong></p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> ".$nome."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>E-mail:</strong> ".$email."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> ".$fone."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Imóvel:</strong> ".$imovel."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Mensagem:</strong> ".$mensagem."</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> " . $nome . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>E-mail:</strong> " . $email . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> " . $fone . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Imóvel:</strong> " . $imovel . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Mensagem:</strong> " . $mensagem . "</p>";
 
 				$db = new mysql();
 				$exec_det = $db->executar("SELECT * FROM imoveis_detalhes where id='1' ");
@@ -12404,25 +12582,23 @@ class index extends controller {
 
 				$this->msg($retorno['msg']);
 				$this->volta(1);
-
 			} else {
 				$this->msg('Erro na validação do captcha, tente novamente!');
 				$this->volta(1);
-			} 
-
+			}
 		} else {
 			$this->msg("Preencha todos os campos para continuar");
 			$this->volta(1);
 			exit;
 		}
-
 	}
 
-	public function imovel_desejo(){
+	public function imovel_desejo()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -12430,8 +12606,8 @@ class index extends controller {
 		$dados['_nome_usuario'] = $this->_nome_usuario;
 
 		$id = $this->get('id');
-		if(!$id){
-			$this->irpara(DOMINIO."erro");
+		if (!$id) {
+			$this->irpara(DOMINIO . "erro");
 		}
 
 		$conexao = new mysql();
@@ -12442,11 +12618,12 @@ class index extends controller {
 		$this->view('imoveis.desejo', $dados);
 	}
 
-	public function desejo_enviar(){
+	public function desejo_enviar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 		$nome = $this->post('nome');
@@ -12456,22 +12633,22 @@ class index extends controller {
 		$imovel = $this->post('imovel');
 		$captcha = $this->post('g-recaptcha-response');
 
-		if($nome AND $email AND $imovel){
+		if ($nome and $email and $imovel) {
 
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$key = recaptcha_secret;
 			$url = 'https://www.google.com/recaptcha/api/siteverify';
 
-			$recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
+			$recaptcha_response = file_get_contents($url . '?secret=' . $key . '&response=' . $captcha . '&remoteip=' . $ip);
 			$data = json_decode($recaptcha_response);
-			if(isset($data->success) &&  $data->success === true) {
+			if (isset($data->success) &&  $data->success === true) {
 
 				$msg =  "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Desejo receber mais informações</strong></p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> ".$nome."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>E-mail:</strong> ".$email."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> ".$fone."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Imóvel:</strong> ".$imovel."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Mensagem:</strong> ".$mensagem."</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> " . $nome . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>E-mail:</strong> " . $email . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> " . $fone . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Imóvel:</strong> " . $imovel . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Mensagem:</strong> " . $mensagem . "</p>";
 
 				$db = new mysql();
 				$exec_det = $db->executar("SELECT * FROM imoveis_detalhes where id='1' ");
@@ -12486,25 +12663,23 @@ class index extends controller {
 
 				$this->msg($retorno['msg']);
 				$this->volta(1);
-
 			} else {
 				$this->msg('Erro na validação do captcha, tente novamente!');
 				$this->volta(1);
-			} 
-
+			}
 		} else {
 			$this->msg("Preencha todos os campos para continuar");
 			$this->volta(1);
 			exit;
 		}
-
 	}
 
-	public function desejo_enviar2(){
+	public function desejo_enviar2()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 		$nome = $this->post('nome');
@@ -12512,13 +12687,13 @@ class index extends controller {
 		$mensagem = $this->post('msg');
 		$imovel = $this->post('imovel');
 
-		if($nome AND $fone AND $imovel){
+		if ($nome and $fone and $imovel) {
 
 			$msg =  "<p><strong>Desejo receber mais informações</strong></p>";
-			$msg .= "<p><strong>Nome:</strong> ".$nome."</p>";
-			$msg .= "<p><strong>Telefone:</strong> ".$fone."</p>";
-			$msg .= "<p><strong>Imóvel:</strong> ".$imovel."</p>";
-			$msg .= "<p><strong>Mensagem:</strong> ".$mensagem."</p>";
+			$msg .= "<p><strong>Nome:</strong> " . $nome . "</p>";
+			$msg .= "<p><strong>Telefone:</strong> " . $fone . "</p>";
+			$msg .= "<p><strong>Imóvel:</strong> " . $imovel . "</p>";
+			$msg .= "<p><strong>Mensagem:</strong> " . $mensagem . "</p>";
 
 			$db = new mysql();
 			$exec_det = $db->executar("SELECT * FROM imoveis_detalhes where id='1' ");
@@ -12533,19 +12708,18 @@ class index extends controller {
 
 			echo $retorno['msg'];
 			exit;
-
 		} else {
 			echo "Preencha todos os campos para continuar";
 			exit;
 		}
+	}
 
-	}	
-
-	public function desejo_enviar_cla(){
+	public function desejo_enviar_cla()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 		$nome = $this->post('nome');
@@ -12553,30 +12727,29 @@ class index extends controller {
 		$mensagem = $this->post('msg');
 		$anuncio = $this->post('anuncio');
 
-		if($nome AND $fone AND $anuncio){
+		if ($nome and $fone and $anuncio) {
 
 			$msg =  "<p><strong>Desejo receber mais informações</strong></p>";
-			$msg .= "<p><strong>Nome:</strong> ".$nome."</p>";
-			$msg .= "<p><strong>Telefone:</strong> ".$fone."</p>";
-			$msg .= "<p><strong>Anúncio:</strong> ".$anuncio."</p>";
-			$msg .= "<p><strong>Mensagem:</strong> ".$mensagem."</p>";
+			$msg .= "<p><strong>Nome:</strong> " . $nome . "</p>";
+			$msg .= "<p><strong>Telefone:</strong> " . $fone . "</p>";
+			$msg .= "<p><strong>Anúncio:</strong> " . $anuncio . "</p>";
+			$msg .= "<p><strong>Mensagem:</strong> " . $mensagem . "</p>";
 
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM classificados where codigo='$anuncio' ");
 			$data = $coisas->fetch_object();
 
-			if($data->cadastro){
+			if ($data->cadastro) {
 
 				$cadastro = new model_cadastro();
-				$data_cad = $cadastro->dados_usuario($data->cadastro);	
-				if($data_cad->email){
+				$data_cad = $cadastro->dados_usuario($data->cadastro);
+				if ($data_cad->email) {
 					$lista_envio = array();
 					$lista_envio[0] = $data_cad->email;
 				} else {
 					echo "Este anúncio não pode receber mensagens";
 					exit;
 				}
-
 			} else {
 				echo "Este anúncio não pode receber mensagens";
 				exit;
@@ -12588,19 +12761,18 @@ class index extends controller {
 
 			echo $retorno['msg'];
 			exit;
-
 		} else {
 			echo "Preencha todos os campos para continuar";
 			exit;
 		}
+	}
 
-	}	
-
-	public function imoveis_proposta(){
+	public function imoveis_proposta()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -12608,8 +12780,8 @@ class index extends controller {
 		$dados['_nome_usuario'] = $this->_nome_usuario;
 
 		$id = $this->get('id');
-		if(!$id){
-			$this->irpara(DOMINIO."erro");
+		if (!$id) {
+			$this->irpara(DOMINIO . "erro");
 		}
 
 		$conexao = new mysql();
@@ -12620,11 +12792,12 @@ class index extends controller {
 		$this->view('imoveis.proposta', $dados);
 	}
 
-	public function imoveis_proposta_enviar(){
+	public function imoveis_proposta_enviar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 		$nome = $this->post('nome');
@@ -12634,22 +12807,22 @@ class index extends controller {
 		$imovel = $this->post('imovel');
 		$captcha = $this->post('g-recaptcha-response');
 
-		if($nome AND $email AND $imovel){
+		if ($nome and $email and $imovel) {
 
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$key = recaptcha_secret;
 			$url = 'https://www.google.com/recaptcha/api/siteverify';
 
-			$recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
+			$recaptcha_response = file_get_contents($url . '?secret=' . $key . '&response=' . $captcha . '&remoteip=' . $ip);
 			$data = json_decode($recaptcha_response);
-			if(isset($data->success) &&  $data->success === true) {
+			if (isset($data->success) &&  $data->success === true) {
 
 				$msg =  "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Proposta</strong></p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> ".$nome."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>E-mail:</strong> ".$email."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> ".$fone."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Imóvel:</strong> ".$imovel."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Mensagem:</strong> ".$mensagem."</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> " . $nome . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>E-mail:</strong> " . $email . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> " . $fone . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Imóvel:</strong> " . $imovel . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Mensagem:</strong> " . $mensagem . "</p>";
 
 				$db = new mysql();
 				$exec_det = $db->executar("SELECT * FROM imoveis_detalhes where id='1' ");
@@ -12664,25 +12837,23 @@ class index extends controller {
 
 				$this->msg($retorno['msg']);
 				$this->volta(1);
-
 			} else {
 				$this->msg('Erro na validação do captcha, tente novamente!');
 				$this->volta(1);
-			} 
-
+			}
 		} else {
 			$this->msg("Preencha todos os campos para continuar");
 			$this->volta(1);
 			exit;
 		}
-
 	}
 
-	public function ligamospravc(){
+	public function ligamospravc()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -12693,11 +12864,12 @@ class index extends controller {
 		$this->view('imoveis.ligamospravc', $dados);
 	}
 
-	public function ligamospravc_enviar(){
+	public function ligamospravc_enviar()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 
 		$nome = $this->post('nome');
@@ -12705,20 +12877,20 @@ class index extends controller {
 		$fone = $this->post('fone');
 		$captcha = $this->post('g-recaptcha-response');
 
-		if($nome AND $hora AND $fone){
+		if ($nome and $hora and $fone) {
 
 			$ip = $_SERVER['REMOTE_ADDR'];
 			$key = recaptcha_secret;
 			$url = 'https://www.google.com/recaptcha/api/siteverify';
 
-			$recaptcha_response = file_get_contents($url.'?secret='.$key.'&response='.$captcha.'&remoteip='.$ip);
+			$recaptcha_response = file_get_contents($url . '?secret=' . $key . '&response=' . $captcha . '&remoteip=' . $ip);
 			$data = json_decode($recaptcha_response);
-			if(isset($data->success) &&  $data->success === true) {
+			if (isset($data->success) &&  $data->success === true) {
 
 				$msg =  "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Ligue me</strong></p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> ".$nome."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Horário:</strong> ".$hora."</p>";
-				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> ".$fone."</p>";  
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Nome:</strong> " . $nome . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Horário:</strong> " . $hora . "</p>";
+				$msg .= "<p style='font-family:Arial,sans-serif; font-size:12px;'><strong>Telefone:</strong> " . $fone . "</p>";
 
 				$db = new mysql();
 				$exec_det = $db->executar("SELECT * FROM imoveis_detalhes where id='1' ");
@@ -12733,27 +12905,25 @@ class index extends controller {
 
 				$this->msg($retorno['msg']);
 				$this->volta(1);
-
 			} else {
 				$this->msg('Erro na validação do captcha, tente novamente!');
 				$this->volta(1);
-			} 
-
+			}
 		} else {
 			$this->msg("Preencha todos os campos para continuar");
 			$this->volta(1);
 			exit;
 		}
-
 	}
 
-	public function carrega_bairros(){
+	public function carrega_bairros()
+	{
 
 		$cidade = $this->post('cidade');
 		$bairro = $this->post('bairro');
 		$bairro_nome = $this->post('bairro_nome');
 
-		if($cidade){
+		if ($cidade) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM imoveis_cidades WHERE codigo='$cidade' ");
@@ -12766,31 +12936,29 @@ class index extends controller {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT codigo, bairro FROM imoveis_bairros WHERE cidade='$data_cid->cidade' AND estado='$data_cid->estado' order by bairro asc");
-			while($data = $exec->fetch_object()) {
+			while ($data = $exec->fetch_object()) {
 
 				$selected = "";
-				if($bairro == $data->codigo){
+				if ($bairro == $data->codigo) {
 					$selected = "selected=''";
 				}
-				if($bairro_nome == $data->bairro){
+				if ($bairro_nome == $data->bairro) {
 					$selected = "selected=''";
 				}
-				
-				echo "<option value='".$data->codigo."' $selected >".$data->bairro."</option>";
+
+				echo "<option value='" . $data->codigo . "' $selected >" . $data->bairro . "</option>";
 			}
 
 			echo "
 			</select>
 			";
-
 		} else {
 
 			echo "
 			<select class='select2' name='bairro' >
 			<option value='0' selected >Bairro</option>
 			</select>
-			"; 
-
+			";
 		}
 
 		echo "
@@ -12798,15 +12966,15 @@ class index extends controller {
 		$('.select2').select2();
 		</script>
 		";
-
 	}
 
-	public function carrega_bairros_cla(){
+	public function carrega_bairros_cla()
+	{
 
 		$cidade = $this->post('cidade');
 		$bairro = $this->post('bairro');
 
-		if($cidade){
+		if ($cidade) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM classificados_cidades WHERE codigo='$cidade' ");
@@ -12819,29 +12987,27 @@ class index extends controller {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT codigo, bairro FROM classificados_bairros WHERE cidade='$data_cid->cidade' AND estado='$data_cid->estado' order by bairro asc");
-			while($data = $exec->fetch_object()) {
+			while ($data = $exec->fetch_object()) {
 
-				if($bairro == $data->codigo){
+				if ($bairro == $data->codigo) {
 					$selected = "selected=''";
 				} else {
 					$selected = "";
 				}
 
-				echo "<option value='".$data->codigo."' $selected >".$data->bairro."</option>";
+				echo "<option value='" . $data->codigo . "' $selected >" . $data->bairro . "</option>";
 			}
 
 			echo "
 			</select>
 			";
-
 		} else {
 
 			echo "
 			<select class='select2' name='bairro' >
 			<option value='0' selected >Bairro</option>
 			</select>
-			"; 
-
+			";
 		}
 
 		echo "
@@ -12849,107 +13015,103 @@ class index extends controller {
 		$('.select2').select2();
 		</script>
 		";
-
 	}
 
-	public function imoveis_busca_simp(){
+	public function imoveis_busca_simp()
+	{
 
 		$conteudo_id = $this->post('grupo_pagina');
 
-		if($conteudo_id){
+		if ($conteudo_id) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM imoveis_grupos WHERE id='$conteudo_id' ");
 			$data_destino = $exec->fetch_object();
 
-			if($data_destino->busca_pagina){
+			if ($data_destino->busca_pagina) {
 
 				$categoria = $this->post('categoria');
 				$tipo = $this->post('tipo');
 				$cidade = $this->post('cidade');
 				$bairro = $this->post('bairro');
 
-				$this->irpara(DOMINIO.$data_destino->busca_pagina.'/inicial/imo_cat/'.$categoria.'/imo_tipo/'.$tipo.'/imo_cidade/'.$cidade.'/imo_bairro/'.$bairro.'/imo_tipo_busca/1');
-
+				$this->irpara(DOMINIO . $data_destino->busca_pagina . '/inicial/imo_cat/' . $categoria . '/imo_tipo/' . $tipo . '/imo_cidade/' . $cidade . '/imo_bairro/' . $bairro . '/imo_tipo_busca/1');
 			} else {
 				$this->irpara(DOMINIO);
 			}
 		} else {
 			$this->irpara(DOMINIO);
 		}
-
 	}
 
-	public function garagem_busca_ref(){
+	public function garagem_busca_ref()
+	{
 
 		$conteudo_id = $this->post('grupo_pagina');
 
-		if($conteudo_id){
+		if ($conteudo_id) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM garagem_grupos WHERE id='$conteudo_id' ");
 			$data_destino = $exec->fetch_object();
 
-			if($data_destino->busca_pagina){
+			if ($data_destino->busca_pagina) {
 
 				$referencia = $this->post('busca');
 				$referencia = str_replace(array("?", "+", "'", "/", ")", "(", "&", "%", "#", "@", "!", "=", ">", "<", ";", ":", "|", "*", "$"), "", $referencia);
-				if(!$referencia){
+				if (!$referencia) {
 					$referencia = 0;
 				}
 
-				$this->irpara(DOMINIO.$data_destino->busca_pagina.'/inicial/gara_busca/'.$referencia);
-
+				$this->irpara(DOMINIO . $data_destino->busca_pagina . '/inicial/gara_busca/' . $referencia);
 			} else {
 				$this->irpara(DOMINIO);
 			}
 		} else {
 			$this->irpara(DOMINIO);
 		}
-
 	}
 
-	public function imoveis_busca_ref(){
+	public function imoveis_busca_ref()
+	{
 
 		$conteudo_id = $this->post('grupo_pagina');
 
-		if($conteudo_id){
+		if ($conteudo_id) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM imoveis_grupos WHERE id='$conteudo_id' ");
 			$data_destino = $exec->fetch_object();
 
-			if($data_destino->busca_pagina){
+			if ($data_destino->busca_pagina) {
 
 				$referencia = $this->post('referencia');
 				$referencia = str_replace(array("?", "+", "'", "/", ")", "(", "&", "%", "#", "@", "!", "=", ">", "<", ";", ":", "|", "*", "$"), "", $referencia);
-				if(!$referencia){
+				if (!$referencia) {
 					$referencia = 0;
 				}
 
-				$this->irpara(DOMINIO.$data_destino->busca_pagina.'/inicial/imo_ref/'.$referencia.'/imo_tipo_busca/2');
-
+				$this->irpara(DOMINIO . $data_destino->busca_pagina . '/inicial/imo_ref/' . $referencia . '/imo_tipo_busca/2');
 			} else {
 				$this->irpara(DOMINIO);
 			}
 		} else {
 			$this->irpara(DOMINIO);
 		}
-
-
 	}
 
-	public function imoveis_busca_det(){
+	public function imoveis_busca_det()
+	{
 
 		$conteudo_id = $this->post('grupo_pagina');
 
-		if($conteudo_id){
+		if ($conteudo_id) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM imoveis_grupos WHERE id='$conteudo_id' ");
 			$data_destino = $exec->fetch_object();
 
-			if($data_destino->busca_pagina){
+			if ($data_destino->busca_pagina) {
 
 				$categoria = $this->post('categoria');
 				$tipo = $this->post('tipo');
@@ -12964,7 +13126,7 @@ class index extends controller {
 				$comprar_valor_min = $this->post('comprar_valor_min');
 				$comprar_valor_max = $this->post('comprar_valor_max');
 
-				if($categoria == '5280'){
+				if ($categoria == '5280') {
 					$valor_maximo = $alugar_valor_max;
 					$valor_minimo = $alugar_valor_min;
 				} else {
@@ -12974,71 +13136,71 @@ class index extends controller {
 
 				$ordem = $this->post('ordem');
 
-				$this->irpara(DOMINIO.$data_destino->busca_pagina.'/inicial/imo_cat/'.$categoria.'/imo_tipo/'.$tipo.'/imo_cidade/'.$cidade.'/imo_bairro/'.$bairro.'/imo_dorm/'.$dormitorios.'/imo_suites/'.$suites.'/imo_gara/'.$garagem.'/imo_val_max/'.$valor_maximo.'/imo_val_min/'.$valor_minimo.'/imo_ordem/'.$ordem.'/imo_tipo_busca/3');
-
+				$this->irpara(DOMINIO . $data_destino->busca_pagina . '/inicial/imo_cat/' . $categoria . '/imo_tipo/' . $tipo . '/imo_cidade/' . $cidade . '/imo_bairro/' . $bairro . '/imo_dorm/' . $dormitorios . '/imo_suites/' . $suites . '/imo_gara/' . $garagem . '/imo_val_max/' . $valor_maximo . '/imo_val_min/' . $valor_minimo . '/imo_ordem/' . $ordem . '/imo_tipo_busca/3');
 			} else {
 				$this->irpara(DOMINIO);
 			}
 		} else {
 			$this->irpara(DOMINIO);
 		}
-
-
 	}
 
-	public function imoveis_favoritos_acao(){
+	public function imoveis_favoritos_acao()
+	{
 
 		$codigo = $this->post('codigo');
-		if($codigo){
+		if ($codigo) {
 
 			$conexao = new mysql();
-			$coisas_fav = $conexao->Executar("SELECT * FROM imoveis_favoritos where codigo='".$codigo."' AND sessao='".$this->_sessao."' ");
-			if($coisas_fav->num_rows == 0){
+			$coisas_fav = $conexao->Executar("SELECT * FROM imoveis_favoritos where codigo='" . $codigo . "' AND sessao='" . $this->_sessao . "' ");
+			if ($coisas_fav->num_rows == 0) {
 				$db = new mysql();
 				$db->inserir("imoveis_favoritos", array(
-					"codigo"=>$codigo,
-					"sessao"=>$this->_sessao
+					"codigo" => $codigo,
+					"sessao" => $this->_sessao
 				));
 				echo '2';
 				exit;
 			} else {
 				$db = new mysql();
-				$db->apagar("imoveis_favoritos"," codigo='".$codigo."' AND sessao='".$this->_sessao."' ");
+				$db->apagar("imoveis_favoritos", " codigo='" . $codigo . "' AND sessao='" . $this->_sessao . "' ");
 				echo '1';
 				exit;
 			}
 		}
 	}
 
-	public function classificados_favoritos_acao(){
+	public function classificados_favoritos_acao()
+	{
 
 		$codigo = $this->post('codigo');
-		if($codigo){
+		if ($codigo) {
 
 			$conexao = new mysql();
-			$coisas_fav = $conexao->Executar("SELECT * FROM classificados_favoritos where codigo='".$codigo."' AND sessao='".$this->_sessao."' ");
-			if($coisas_fav->num_rows == 0){
+			$coisas_fav = $conexao->Executar("SELECT * FROM classificados_favoritos where codigo='" . $codigo . "' AND sessao='" . $this->_sessao . "' ");
+			if ($coisas_fav->num_rows == 0) {
 				$db = new mysql();
 				$db->inserir("classificados_favoritos", array(
-					"codigo"=>$codigo,
-					"sessao"=>$this->_sessao
+					"codigo" => $codigo,
+					"sessao" => $this->_sessao
 				));
 				echo '2';
 				exit;
 			} else {
 				$db = new mysql();
-				$db->apagar("classificados_favoritos"," codigo='".$codigo."' AND sessao='".$this->_sessao."' ");
+				$db->apagar("classificados_favoritos", " codigo='" . $codigo . "' AND sessao='" . $this->_sessao . "' ");
 				echo '1';
 				exit;
 			}
 		}
 	}
 
-	public function classificados_favoritos(){	
+	public function classificados_favoritos()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -13052,7 +13214,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -13065,7 +13227,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -13073,23 +13235,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -13101,53 +13263,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -13156,16 +13318,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -13188,11 +13348,12 @@ class index extends controller {
 		$this->view('classificados.favoritos', $dados);
 	}
 
-	public function imoveis_favoritos(){	
+	public function imoveis_favoritos()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -13206,7 +13367,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -13219,7 +13380,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -13227,23 +13388,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -13255,53 +13416,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -13310,16 +13471,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -13333,7 +13492,7 @@ class index extends controller {
 		$formatodapaginadetalhes = $dados['data_detalhes']->formato_pg;
 
 		$layoutttt = new model_layout();
-		$dados['cores_imo'] = $layoutttt->lista_cores('imoveis_detalhes'.$formatodapaginadetalhes)['lista'];
+		$dados['cores_imo'] = $layoutttt->lista_cores('imoveis_detalhes' . $formatodapaginadetalhes)['lista'];
 
 
 
@@ -13344,13 +13503,14 @@ class index extends controller {
 		$this->view('imoveis.favoritos', $dados);
 	}
 
-	public function imoveis_cliente(){
+	public function imoveis_cliente()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -13364,7 +13524,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -13377,7 +13537,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -13385,23 +13545,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -13413,53 +13573,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -13468,16 +13628,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -13496,45 +13654,43 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -13545,17 +13701,17 @@ class index extends controller {
 
 
 		$imoveis = new model_imoveis();
-		$dados['lista_imoveis'] = $imoveis->lista_anuncios($this->_cod_usuario); 
+		$dados['lista_imoveis'] = $imoveis->lista_anuncios($this->_cod_usuario);
 
 		$dados['abre_pagamento'] = false;
 		$codigo_pag = $this->get('pagamento');
-		if($codigo_pag){
+		if ($codigo_pag) {
 			$conexao = new mysql();
 			$coisas_pg = $conexao->executar("SELECT * FROM imoveis_pedidos WHERE codigo='$codigo_pag' AND status='1' ");
-			$data_pg = $coisas_pg->fetch_object();			 
-			if(isset($data_pg->id_transacao)){
+			$data_pg = $coisas_pg->fetch_object();
+			if (isset($data_pg->id_transacao)) {
 				$dados['abre_pagamento'] = $data_pg->id_transacao;
-			}			
+			}
 		}
 
 
@@ -13565,19 +13721,19 @@ class index extends controller {
 		$n = 0;
 
 		$conexao = new mysql();
-		$coisas = $conexao->executar("SELECT * FROM imoveis_pedidos WHERE cadastro='".$this->_cod_usuario."' AND status>=1 ");
-		while($data = $coisas->fetch_object()){
+		$coisas = $conexao->executar("SELECT * FROM imoveis_pedidos WHERE cadastro='" . $this->_cod_usuario . "' AND status>=1 ");
+		while ($data = $coisas->fetch_object()) {
 
 			$lista_pedidos[$n]['id'] = $data->id;
 			$lista_pedidos[$n]['codigo'] = $data->codigo;
 			$lista_pedidos[$n]['plano'] = $data->plano_titulo;
-			$lista_pedidos[$n]['anuncios'] = 'Utilizados '.$data->plano_utilizado.' de '.$data->plano_limite;
+			$lista_pedidos[$n]['anuncios'] = 'Utilizados ' . $data->plano_utilizado . ' de ' . $data->plano_limite;
 			$lista_pedidos[$n]['status_id'] = $data->status;
 
-			if($data->status == 1){ 
-				$lista_pedidos[$n]['status'] = "Aguardando Pagamento"; 
+			if ($data->status == 1) {
+				$lista_pedidos[$n]['status'] = "Aguardando Pagamento";
 			} else {
-				$lista_pedidos[$n]['status'] = "Aprovado"; 
+				$lista_pedidos[$n]['status'] = "Aprovado";
 			}
 
 			$n++;
@@ -13586,17 +13742,18 @@ class index extends controller {
 		$dados['lista_pedidos'] = $lista_pedidos;
 
 
- 		//carrega view e envia dados para a tela
-		$this->view('minhaconta_imoveis', $dados);		
+		//carrega view e envia dados para a tela
+		$this->view('minhaconta_imoveis', $dados);
 	}
 
-	public function imoveis_pedido_detalhes(){
+	public function imoveis_pedido_detalhes()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -13605,14 +13762,14 @@ class index extends controller {
 
 		$codigo = $this->get('codigo');
 
-		if(!$codigo){
+		if (!$codigo) {
 			echo "Ocorreu um erro1!";
 			exit;
 		}
 
 		$conexao = new mysql();
-		$coisas = $conexao->executar("SELECT * FROM imoveis_pedidos WHERE codigo='$codigo' AND cadastro='".$this->_cod_usuario."' ");
-		if($coisas->num_rows != 1){
+		$coisas = $conexao->executar("SELECT * FROM imoveis_pedidos WHERE codigo='$codigo' AND cadastro='" . $this->_cod_usuario . "' ");
+		if ($coisas->num_rows != 1) {
 			echo "Ocorreu um erro!";
 			exit;
 		}
@@ -13624,10 +13781,10 @@ class index extends controller {
 		$i = 0;
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM imoveis_pedidos_utilizacoes where pedido='$codigo' order by id desc"); 
-		while($data = $exec->fetch_object()) { 
+		$exec = $db->executar("SELECT * FROM imoveis_pedidos_utilizacoes where pedido='$codigo' order by id desc");
+		while ($data = $exec->fetch_object()) {
 
-			$lista[$i]['id'] = $data->id; 
+			$lista[$i]['id'] = $data->id;
 			$lista[$i]['data'] = date('d/m/y H:i', $data->data);
 			$lista[$i]['imovel'] = $data->imovel;
 			$lista[$i]['ref'] = $data->imovel_ref;
@@ -13640,16 +13797,17 @@ class index extends controller {
 
 
 
-		$this->view('imoveis.pedido.detalhes', $dados);		
+		$this->view('imoveis.pedido.detalhes', $dados);
 	}
 
-	public function adicionar_imovel(){
+	public function adicionar_imovel()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -13663,7 +13821,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -13676,30 +13834,30 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
 
 		////////////////////////////////////////////////////////////////////////
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -13711,53 +13869,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -13766,16 +13924,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -13794,45 +13950,43 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -13845,11 +13999,12 @@ class index extends controller {
 		$dados['cidades'] = $imoveis->lista_cidades();
 
 
- 		//carrega view e envia dados para a tela
+		//carrega view e envia dados para a tela
 		$this->view('minhaconta_add_imo', $dados);
 	}
 
-	public function adicionar_imovel_grv(){
+	public function adicionar_imovel_grv()
+	{
 
 		$this->autenticado();
 
@@ -13857,8 +14012,9 @@ class index extends controller {
 		$dados['_base'] = $this->_base();
 
 		// retorno de dados caso erro
-		function retorno_erro($msg){
-			echo "<div style='padding:20px;background:white' >".$msg."</div>";	
+		function retorno_erro($msg)
+		{
+			echo "<div style='padding:20px;background:white' >" . $msg . "</div>";
 			exit;
 		}
 
@@ -13869,21 +14025,21 @@ class index extends controller {
 		$bairro = $this->post('bairro');
 		$cep = $this->post('cep');
 
-		if(!$titulo){
+		if (!$titulo) {
 			retorno_erro("Digite uma titulo válido.");
 			exit;
 		}
 
 		$endereco_rua = "";
-		if($cep){
+		if ($cep) {
 
 			$buscacep = new model_cep();
 			$resultado_busca_cep = $buscacep->retorno($cep);
 
-			if($resultado_busca_cep['cidade']){
+			if ($resultado_busca_cep['cidade']) {
 
-				if($resultado_busca_cep['rua']){
-					$endereco_rua = $resultado_busca_cep['rua_tipo']." ".$resultado_busca_cep['rua'];
+				if ($resultado_busca_cep['rua']) {
+					$endereco_rua = $resultado_busca_cep['rua_tipo'] . " " . $resultado_busca_cep['rua'];
 				}
 
 				$cidade_nome = $resultado_busca_cep['cidade'];
@@ -13891,24 +14047,23 @@ class index extends controller {
 
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM imoveis_cidades WHERE cidade='$cidade_nome' AND estado='$estado_uf' ");
-				if($coisas->num_rows == 0){					
+				if ($coisas->num_rows == 0) {
 
 					$cidade_id = $this->gera_codigo();
 
 					$db = new mysql();
-					$db->inserir("imoveis_cidades", array( 
-						"codigo"=>$cidade_id,
-						"cidade"=>$cidade_nome,
-						"estado"=>$estado_uf,
-						"principal"=>0
+					$db->inserir("imoveis_cidades", array(
+						"codigo" => $cidade_id,
+						"cidade" => $cidade_nome,
+						"estado" => $estado_uf,
+						"principal" => 0
 					));
-
 				} else {
-					$data_cidade = $coisas->fetch_object();					
+					$data_cidade = $coisas->fetch_object();
 					$cidade_id = $data_cidade->codigo;
 				}
 
-				if($resultado_busca_cep['bairro']){
+				if ($resultado_busca_cep['bairro']) {
 					$bairro_nome = $resultado_busca_cep['bairro'];
 				} else {
 					$bairro_nome = "Centro";
@@ -13916,38 +14071,34 @@ class index extends controller {
 
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM imoveis_bairros WHERE cidade='$cidade_nome' AND estado='$estado_uf' AND bairro='$bairro_nome' ");
-				if($coisas->num_rows == 0){					
+				if ($coisas->num_rows == 0) {
 
 					$bairro_id = $this->gera_codigo();
 
 					$db = new mysql();
-					$db->inserir("imoveis_bairros", array( 
-						"codigo"=>$bairro_id,
-						"bairro"=>$bairro_nome,
-						"cidade"=>$cidade_nome,
-						"estado"=>$estado_uf
+					$db->inserir("imoveis_bairros", array(
+						"codigo" => $bairro_id,
+						"bairro" => $bairro_nome,
+						"cidade" => $cidade_nome,
+						"estado" => $estado_uf
 					));
-
 				} else {
 
 					$data_bairro = $coisas->fetch_object();
-					$bairro_id = $data_bairro->codigo; 
-
+					$bairro_id = $data_bairro->codigo;
 				}
-
 			} else {
 				retorno_erro("Digite um CEP válido.");
-				exit;				
+				exit;
 			}
-
 		} else {
-			if($bairro AND $cidade){
+			if ($bairro and $cidade) {
 
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM imoveis_cidades WHERE codigo='$cidade' ");
-				if($coisas->num_rows != 1){
+				if ($coisas->num_rows != 1) {
 					retorno_erro("Ocorreu um erro.");
-					exit;					
+					exit;
 				} else {
 					$data_cidade = $coisas->fetch_object();
 					$cidade_id = $data_cidade->codigo;
@@ -13957,15 +14108,14 @@ class index extends controller {
 
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM imoveis_bairros WHERE cidade='$cidade_nome' AND estado='$estado_uf' AND bairro='$bairro' ");
-				if($coisas->num_rows == 0){					
+				if ($coisas->num_rows == 0) {
 					retorno_erro("Ocorreu um erro.");
 					exit;
 				} else {
 					$data_bairro = $coisas->fetch_object();
 					$bairro_id = $data_bairro->codigo;
-					$bairro_nome = $data_bairro->bairro; 
+					$bairro_nome = $data_bairro->bairro;
 				}
-
 			} else {
 				retorno_erro("Preencha o estado e a cidade do imóvel.");
 				exit;
@@ -13977,45 +14127,46 @@ class index extends controller {
 
 
 		//gravar no banco de dados
-		$codigo = substr(time().rand(10000,99999),-15);
+		$codigo = substr(time() . rand(10000, 99999), -15);
 		$categoria_titulo = "Todas";
 		$categoria = 0;
 		$time = time();
 
 		$db = new mysql();
 		$db->inserir("imoveis", array(
-			"data_alteracao"=>$time,
-			"codigo"=>$codigo,
-			"cadastro"=>$this->_cod_usuario,
-			"titulo"=>$titulo,
-			"categoria_id"=>$categoria,
-			"categoria_titulo"=>$categoria_titulo,
-			"endereco"=>$endereco_rua,
-			"bairro_id"=>$bairro_id,
-			"bairro"=>$bairro_nome,
-			"cidade_id"=>$cidade_id,
-			"cidade"=>$cidade_nome,
-			"uf"=>$estado_uf,
-			"valor"=>0,
-			"quartos"=>0,
-			"suites"=>0,
-			"garagem"=>0,
-			"banheiros"=>0,
-			"churrasqueira"=>0,
-			"destaque"=>0,
-			"status"=>0
+			"data_alteracao" => $time,
+			"codigo" => $codigo,
+			"cadastro" => $this->_cod_usuario,
+			"titulo" => $titulo,
+			"categoria_id" => $categoria,
+			"categoria_titulo" => $categoria_titulo,
+			"endereco" => $endereco_rua,
+			"bairro_id" => $bairro_id,
+			"bairro" => $bairro_nome,
+			"cidade_id" => $cidade_id,
+			"cidade" => $cidade_nome,
+			"uf" => $estado_uf,
+			"valor" => 0,
+			"quartos" => 0,
+			"suites" => 0,
+			"garagem" => 0,
+			"banheiros" => 0,
+			"churrasqueira" => 0,
+			"destaque" => 0,
+			"status" => 0
 		));
 
-		$this->irpara(DOMINIO.$this->_controller.'/alterar_imovel/id/'.$codigo);
+		$this->irpara(DOMINIO . $this->_controller . '/alterar_imovel/id/' . $codigo);
 	}
 
-	public function alterar_imovel(){
+	public function alterar_imovel()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -14029,7 +14180,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -14042,7 +14193,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -14050,23 +14201,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -14078,53 +14229,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -14133,16 +14284,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -14161,45 +14310,43 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -14215,15 +14362,15 @@ class index extends controller {
 
 		$codigo_imovel = $this->get('id');
 
-		if(!$codigo_imovel){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		if (!$codigo_imovel) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
@@ -14234,13 +14381,13 @@ class index extends controller {
 		$dados['condominio'] = $valores->trata_valor($dados['data_imovel']->condominio);
 		$dados['iptu'] = $valores->trata_valor($dados['data_imovel']->iptu);
 
- 		//imagens
+		//imagens
 		$dados['imagens'] = $imoveis->imagens($dados['data_imovel']->codigo);
 
 		// categorias
 		$dados['categorias'] = $imoveis->lista_categorias();
 
- 		// tipos
+		// tipos
 		$dados['tipos'] = $imoveis->tipos();
 
 		//cidades
@@ -14248,11 +14395,12 @@ class index extends controller {
 
 
 
- 		//carrega view e envia dados para a tela
+		//carrega view e envia dados para a tela
 		$this->view('minhaconta_alterar_imo', $dados);
 	}
 
-	public function alterar_imovel_grv(){
+	public function alterar_imovel_grv()
+	{
 
 		$this->autenticado();
 
@@ -14262,8 +14410,9 @@ class index extends controller {
 		$valores = new model_valores();
 
 		// retorno de dados caso erro
-		function retorno_erro($msg){
-			echo "<div style='padding:20px;background:white' >".$msg."</div>";	
+		function retorno_erro($msg)
+		{
+			echo "<div style='padding:20px;background:white' >" . $msg . "</div>";
 			exit;
 		}
 
@@ -14274,24 +14423,24 @@ class index extends controller {
 		$cidade = $this->post('cidade');
 		$bairro = $this->post('bairro');
 
-		if(!$codigo){
+		if (!$codigo) {
 			retorno_erro("Ocorreu um erro.");
 			exit;
 		}
 
-		if(!$titulo){
+		if (!$titulo) {
 			retorno_erro("Digite uma titulo válido.");
 			exit;
 		}
 
 
-		if($bairro AND $cidade){
+		if ($bairro and $cidade) {
 
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM imoveis_cidades WHERE codigo='$cidade' ");
-			if($coisas->num_rows != 1){
+			if ($coisas->num_rows != 1) {
 				retorno_erro("Ocorreu um erro.");
-				exit;					
+				exit;
 			} else {
 				$data_cidade = $coisas->fetch_object();
 				$cidade_id = $data_cidade->codigo;
@@ -14301,21 +14450,20 @@ class index extends controller {
 
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM imoveis_bairros WHERE cidade='$cidade_nome' AND estado='$estado_uf' AND bairro='$bairro' ");
-			if($coisas->num_rows == 0){					
+			if ($coisas->num_rows == 0) {
 				retorno_erro("Ocorreu um erro.");
 				exit;
 			} else {
 				$data_bairro = $coisas->fetch_object();
 				$bairro_id = $data_bairro->codigo;
-				$bairro_nome = $data_bairro->bairro; 
+				$bairro_nome = $data_bairro->bairro;
 			}
-
 		} else {
 			retorno_erro("Preencha o estado e a cidade do imóvel.");
 			exit;
 		}
 
-		$cod_interno = $this->post('cod_interno');	
+		$cod_interno = $this->post('cod_interno');
 
 		$valor = $this->post('valor');
 		$valor_formatado = $valores->trata_valor_banco($valor);
@@ -14329,7 +14477,7 @@ class index extends controller {
 		$descricao = $this->post('descricao');
 
 		$categoria = $this->post('categoria');
-		$tipo = $this->post('tipo'); 
+		$tipo = $this->post('tipo');
 
 		$endereco = $this->post('endereco');
 		$numero  = $this->post('numero');
@@ -14350,7 +14498,7 @@ class index extends controller {
 		$coisas = $conexao->Executar("SELECT titulo FROM imoveis_categorias WHERE codigo='$categoria' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->titulo)){
+		if (isset($data->titulo)) {
 			$categoria_titulo = $data->titulo;
 		} else {
 			$categoria_titulo = "Todas";
@@ -14363,7 +14511,7 @@ class index extends controller {
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT titulo FROM imoveis_tipos WHERE codigo='$tipo' ");
 		$data = $coisas->fetch_object();
-		if(isset($data->titulo)){
+		if (isset($data->titulo)) {
 			$tipo_titulo = $data->titulo;
 		} else {
 			retorno_erro("Selecione o Tipo.");
@@ -14376,40 +14524,41 @@ class index extends controller {
 
 		$db = new mysql();
 		$db->alterar("imoveis", array(
-			"data_alteracao"=>$time,
-			"titulo"=>$titulo,
-			"cod_interno"=>"$cod_interno",
-			"categoria_id"=>$categoria,
-			"categoria_titulo"=>$categoria_titulo,
-			"tipo_id"=>"$tipo",
-			"tipo_titulo"=>"$tipo_titulo",
-			"descricao"=>"$descricao",
-			"endereco"=>"$endereco",
-			"numero"=>"$numero",
-			"complemento"=>"$complemento",
-			"bairro_id"=>$bairro_id,
-			"bairro"=>$bairro_nome,
-			"cidade_id"=>$cidade_id,
-			"cidade"=>$cidade_nome,
-			"uf"=>$estado_uf,
-			"valor"=>"$valor_formatado",
-			"area_util"=>"$area_util",
-			"area_total"=>"$area_total",
-			"iptu"=>"$iptu_formatado",
-			"condominio"=>"$condominio_formatado",
-			"quartos"=>"$quartos",
-			"suites"=>"$suites",
-			"garagem"=>"$garagem",
-			"banheiros"=>"$banheiros",
-			"churrasqueira"=>"$churrasqueira"
-		), " codigo='".$codigo."' AND cadastro='".$this->_cod_usuario."' ");
+			"data_alteracao" => $time,
+			"titulo" => $titulo,
+			"cod_interno" => "$cod_interno",
+			"categoria_id" => $categoria,
+			"categoria_titulo" => $categoria_titulo,
+			"tipo_id" => "$tipo",
+			"tipo_titulo" => "$tipo_titulo",
+			"descricao" => "$descricao",
+			"endereco" => "$endereco",
+			"numero" => "$numero",
+			"complemento" => "$complemento",
+			"bairro_id" => $bairro_id,
+			"bairro" => $bairro_nome,
+			"cidade_id" => $cidade_id,
+			"cidade" => $cidade_nome,
+			"uf" => $estado_uf,
+			"valor" => "$valor_formatado",
+			"area_util" => "$area_util",
+			"area_total" => "$area_total",
+			"iptu" => "$iptu_formatado",
+			"condominio" => "$condominio_formatado",
+			"quartos" => "$quartos",
+			"suites" => "$suites",
+			"garagem" => "$garagem",
+			"banheiros" => "$banheiros",
+			"churrasqueira" => "$churrasqueira"
+		), " codigo='" . $codigo . "' AND cadastro='" . $this->_cod_usuario . "' ");
 
 
 		retorno_erro("Alterado com sucesso.");
 		exit;
 	}
 
-	public function imoveis_enviar_imagem(){
+	public function imoveis_enviar_imagem()
+	{
 
 		$this->autenticado();
 
@@ -14419,15 +14568,15 @@ class index extends controller {
 
 		$codigo_imovel = $this->get('codigo');
 
-		if(!$codigo_imovel){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		if (!$codigo_imovel) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
@@ -14438,114 +14587,110 @@ class index extends controller {
 		$arquivo_original = $_FILES['arquivo'];
 		$tmp_name = $_FILES['arquivo']['tmp_name'];
 
-		if($tmp_name){
+		if ($tmp_name) {
 
 			// images
-         	//  'png' => 'image/png',
-            //'jpe' => 'image/jpeg',
-            //'jpeg' => 'image/jpeg',
-            //'jpg' => 'image/jpeg',
-            //'gif' => 'image/gif',
-            //'bmp' => 'image/bmp',
+			//  'png' => 'image/png',
+			//'jpe' => 'image/jpeg',
+			//'jpeg' => 'image/jpeg',
+			//'jpg' => 'image/jpeg',
+			//'gif' => 'image/gif',
+			//'bmp' => 'image/bmp',
 
 			$tipo_arquivo = mime_content_type($tmp_name);
 
-			if($tipo_arquivo == 'image/png'){
+			if ($tipo_arquivo == 'image/png') {
 				$extensao = "png";
 			} else {
-				if($tipo_arquivo == 'image/jpeg'){ 
+				if ($tipo_arquivo == 'image/jpeg') {
 					$extensao = "jpg";
 				} else {
 					$this->msg('Não foi possível reconhecer o arquivo, verifique o formato do seu arquivo!');
-					$this->irpara(DOMINIO.$this->_controller.'/alterar_imovel/id/'.$codigo_imovel);
+					$this->irpara(DOMINIO . $this->_controller . '/alterar_imovel/id/' . $codigo_imovel);
 					exit;
 				}
-			} 
+			}
 
-	 		//carrega model de gestao de imagens
+			//carrega model de gestao de imagens
 			$img = new model_arquivos_imagens();
 
 
 			$pasta = "imoveis";
-			$diretorio_g = "arquivos/img_".$pasta."_g/".$codigo_imovel."/";
-			$diretorio_p = "arquivos/img_".$pasta."_p/".$codigo_imovel."/";
+			$diretorio_g = "arquivos/img_" . $pasta . "_g/" . $codigo_imovel . "/";
+			$diretorio_p = "arquivos/img_" . $pasta . "_p/" . $codigo_imovel . "/";
 
-			if(!is_dir($diretorio_g)) {
+			if (!is_dir($diretorio_g)) {
 				mkdir($diretorio_g);
 			}
-			if(!is_dir($diretorio_p)) {
+			if (!is_dir($diretorio_p)) {
 				mkdir($diretorio_p);
 			}
 
-			$nome_foto  = $this->gera_codigo().'.'.$extensao;
+			$nome_foto  = $this->gera_codigo() . '.' . $extensao;
 
-			if(copy($tmp_name, $diretorio_g.$nome_foto)){
+			if (copy($tmp_name, $diretorio_g . $nome_foto)) {
 
 				//confere e se jpg reduz a miniatura
-				if( ($extensao == "jpg") OR ($extensao == "jpeg") OR ($extensao == "JPG") OR ($extensao == "JPEG") ){
+				if (($extensao == "jpg") or ($extensao == "jpeg") or ($extensao == "JPG") or ($extensao == "JPEG")) {
 
 					// foto grande
 					$largura_g = 1200;
-					$altura_g = $img->calcula_altura_jpg($diretorio_g.$nome_foto, $largura_g);
+					$altura_g = $img->calcula_altura_jpg($diretorio_g . $nome_foto, $largura_g);
 					// foto minuatura
 					$largura_p = 300;
-					$altura_p = $img->calcula_altura_jpg($diretorio_g.$nome_foto, $largura_p);
+					$altura_p = $img->calcula_altura_jpg($diretorio_g . $nome_foto, $largura_p);
 					//redimenciona
-					$img->jpg($diretorio_g.$nome_foto, $largura_g , $altura_g , $diretorio_g.$nome_foto);
+					$img->jpg($diretorio_g . $nome_foto, $largura_g, $altura_g, $diretorio_g . $nome_foto);
 
 					//redimenciona miniatura 
-					if(!$img->jpg($diretorio_g.$nome_foto, $largura_p , $altura_p , $diretorio_p.$nome_foto)){
+					if (!$img->jpg($diretorio_g . $nome_foto, $largura_p, $altura_p, $diretorio_p . $nome_foto)) {
 						//se não redimencionar copia padrao
-						copy($diretorio_g.$nome_foto, $diretorio_p.$nome_foto);
+						copy($diretorio_g . $nome_foto, $diretorio_p . $nome_foto);
 					}
-
 				} else {
 
 					//caso nao possa redimencionar copia a imagem original para a pasta de miniaturas
-					copy($diretorio_g.$nome_foto, $diretorio_p.$nome_foto);
-
+					copy($diretorio_g . $nome_foto, $diretorio_p . $nome_foto);
 				}
 
 
 				$db = new mysql();
 				$db->inserir("imoveis_imagem", array(
-					"codigo"	=>$codigo_imovel,
-					"imagem"	=>$nome_foto
+					"codigo"	=> $codigo_imovel,
+					"imagem"	=> $nome_foto
 				));
 				$ultid = $db->ultimo_id();
 
 				//ordem
 				$imoveis = new model_imoveis();
-				$ordem = $imoveis->ordem_imagens($codigo_imovel);								
-				if($ordem){
-					$novaordem = $ordem.",".$ultid;
+				$ordem = $imoveis->ordem_imagens($codigo_imovel);
+				if ($ordem) {
+					$novaordem = $ordem . "," . $ultid;
 				} else {
 					$novaordem = $ultid;
 				}
 
 				$db = new mysql();
 				$db->inserir("imoveis_imagem_ordem", array(
-					"codigo"=>"$codigo_imovel",
-					"data"=>"$novaordem"
+					"codigo" => "$codigo_imovel",
+					"data" => "$novaordem"
 				));
 
-				$this->irpara(DOMINIO.$this->_controller.'/alterar_imovel/id/'.$codigo_imovel);
-
+				$this->irpara(DOMINIO . $this->_controller . '/alterar_imovel/id/' . $codigo_imovel);
 			} else {
 				$this->msg('Selecione uma imagem válida!');
 				$this->volta(1);
 				exit;
 			}
-
 		} else {
 			$this->msg('Selecione uma imagem válida!');
 			$this->volta(1);
 			exit;
 		}
-
 	}
 
-	public function imoveis_ordenar_imagem(){
+	public function imoveis_ordenar_imagem()
+	{
 
 		$this->autenticado();
 
@@ -14555,21 +14700,21 @@ class index extends controller {
 
 		$codigo_imovel = $this->post('codigo');
 
-		if(!$codigo_imovel){
+		if (!$codigo_imovel) {
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
+		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
 			exit;
 		}
 
 		$list = $this->post_html('list');
 
-		if($list)
+		if ($list)
 
-		// instancia
+			// instancia
 			$imoveis = new model_imoveis();
 
 		$output = array();
@@ -14579,13 +14724,13 @@ class index extends controller {
 		//grava
 		$db = new mysql();
 		$db->inserir("imoveis_imagem_ordem", array(
-			"codigo"=>"$codigo_imovel",
-			"data"=>"$ordem"
+			"codigo" => "$codigo_imovel",
+			"data" => "$ordem"
 		));
-
 	}
 
-	public function imoveis_apagar_imagem(){
+	public function imoveis_apagar_imagem()
+	{
 
 		$this->autenticado();
 
@@ -14595,21 +14740,21 @@ class index extends controller {
 
 		$codigo_imovel = $this->get('codigo');
 
-		if(!$codigo_imovel){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		if (!$codigo_imovel) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
 		$id = $this->get('id');
-		if(!$id){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		if (!$id) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		} else {
 
@@ -14618,9 +14763,9 @@ class index extends controller {
 			$data = $exec->fetch_object();
 
 			//imagem
-			if($data->imagem){
-				unlink('arquivos/img_imoveis_g/'.$data->codigo.'/'.$data->imagem);
-				unlink('arquivos/img_imoveis_p/'.$data->codigo.'/'.$data->imagem);
+			if ($data->imagem) {
+				unlink('arquivos/img_imoveis_g/' . $data->codigo . '/' . $data->imagem);
+				unlink('arquivos/img_imoveis_p/' . $data->codigo . '/' . $data->imagem);
 			}
 
 			//apaga
@@ -14628,12 +14773,12 @@ class index extends controller {
 			$db->apagar("imoveis_imagem", " id='$id' ");
 
 
-			$this->irpara(DOMINIO.$this->_controller.'/alterar_imovel/id/'.$codigo_imovel);
+			$this->irpara(DOMINIO . $this->_controller . '/alterar_imovel/id/' . $codigo_imovel);
 		}
-
 	}
 
-	public function imoveis_comprar_plano(){
+	public function imoveis_comprar_plano()
+	{
 
 		$this->autenticado();
 
@@ -14654,45 +14799,43 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -14702,11 +14845,12 @@ class index extends controller {
 		$dados['botao_style'] = $botao_style;
 
 
- 		//carrega view e envia dados para a tela
-		$this->view('imoveis.comprar.plano', $dados);		
+		//carrega view e envia dados para a tela
+		$this->view('imoveis.comprar.plano', $dados);
 	}
 
-	public function imoveis_ativar_anuncio(){
+	public function imoveis_ativar_anuncio()
+	{
 
 		$this->autenticado();
 
@@ -14716,14 +14860,14 @@ class index extends controller {
 
 		$codigo_imovel = $this->get('codigo');
 
-		if(!$codigo_imovel){
+		if (!$codigo_imovel) {
 			echo "Ocorreu um erro.";
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
+		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
 			echo "Ocorreu um erro.";
 			exit;
 		}
@@ -14732,34 +14876,33 @@ class index extends controller {
 
 
 		$cadastro = new model_cadastro();
-		$dados['data_dados'] = $cadastro->dados_usuario($this->_cod_usuario);		
+		$dados['data_dados'] = $cadastro->dados_usuario($this->_cod_usuario);
 
 		// lista planos
 
 		$lista_pedidos = array();
 		$n = 0;
 
-		if($dados['data_dados']->anuncio_gratis == 0){
+		if ($dados['data_dados']->anuncio_gratis == 0) {
 
 			$conexao = new mysql();
 			$coisas = $conexao->executar("SELECT * FROM imoveis_planos WHERE id='1' ");
 			$data = $coisas->fetch_object();
 
-			if($data->limite != 0){
+			if ($data->limite != 0) {
 
 				$lista_pedidos[$n]['id'] = 1;
 				$lista_pedidos[$n]['codigo'] = 1;
 				$lista_pedidos[$n]['titulo'] = 'Gratis';
 
-				$n++;	
-
+				$n++;
 			}
 		}
 
 		$conexao = new mysql();
-		$coisas = $conexao->executar("SELECT * FROM imoveis_pedidos WHERE cadastro='".$this->_cod_usuario."' AND status='2' ");
-		while($data = $coisas->fetch_object()){
-			if($data->plano_limite > $data->plano_utilizado){
+		$coisas = $conexao->executar("SELECT * FROM imoveis_pedidos WHERE cadastro='" . $this->_cod_usuario . "' AND status='2' ");
+		while ($data = $coisas->fetch_object()) {
+			if ($data->plano_limite > $data->plano_utilizado) {
 
 				$lista_pedidos[$n]['id'] = $data->id;
 				$lista_pedidos[$n]['codigo'] = $data->codigo;
@@ -14783,45 +14926,43 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -14831,17 +14972,18 @@ class index extends controller {
 		$dados['botao_style'] = $botao_style;
 
 
- 		//carrega view e envia dados para a tela
-		$this->view('imoveis.ativar.anuncio', $dados);		
+		//carrega view e envia dados para a tela
+		$this->view('imoveis.ativar.anuncio', $dados);
 	}
 
-	public function imoveis_confere_plano(){
+	public function imoveis_confere_plano()
+	{
 
 		$valores = new model_valores();
 
 		$codigo = $this->post('codigo');
 
-		if($codigo){
+		if ($codigo) {
 
 			$conexao = new mysql();
 			$coisas = $conexao->executar("SELECT * FROM imoveis_planos WHERE codigo='$codigo' ");
@@ -14849,19 +14991,19 @@ class index extends controller {
 
 			$valor_tratado = $valores->trata_valor($data->valor);
 
-			if($data->meses != 0){
-				if($data->meses == 1){
+			if ($data->meses != 0) {
+				if ($data->meses == 1) {
 					$periodo = "1 Mês";
 				} else {
-					$periodo = $data->meses." Meses";
+					$periodo = $data->meses . " Meses";
 				}
 			} else {
-				if($data->dias == 1){
+				if ($data->dias == 1) {
 					$periodo = "1 Dia";
 				} else {
-					$periodo = $data->dias." dias";
+					$periodo = $data->dias . " dias";
 				}
-			}		
+			}
 
 			echo "
 			<div class='imoveis_planos_div' >
@@ -14870,15 +15012,15 @@ class index extends controller {
 
 			<div class='imoveis_planos_meses' >Número de anúncios: <strong>$data->limite</strong></div>
 
-			<div class='imoveis_planos_meses' >Valor do plano: <strong>R$ ".$valor_tratado."</strong></div>
+			<div class='imoveis_planos_meses' >Valor do plano: <strong>R$ " . $valor_tratado . "</strong></div>
 
 			</div>
 			";
-
 		}
 	}
 
-	public function imoveis_comprar_plano_grv(){
+	public function imoveis_comprar_plano_grv()
+	{
 
 		$this->autenticado();
 
@@ -14887,15 +15029,15 @@ class index extends controller {
 
 		$plano = $this->post('plano');
 
-		if(!$plano){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		if (!$plano) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM imoveis_planos WHERE codigo='$plano' ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
@@ -14906,16 +15048,16 @@ class index extends controller {
 
 		$db = new mysql();
 		$db->inserir("imoveis_pedidos", array(
-			"codigo"=>$codigo,
-			"cadastro"=>$this->_cod_usuario,
-			"plano"=>$plano,
-			"plano_titulo"=>$data_plano->titulo,
-			"plano_valor"=>$data_plano->valor,
-			"plano_periodo_meses"=>$data_plano->meses,
-			"plano_periodo_dias"=>$data_plano->dias,
-			"plano_limite"=>$data_plano->limite,
-			"data"=>$time,
-			"status"=>0
+			"codigo" => $codigo,
+			"cadastro" => $this->_cod_usuario,
+			"plano" => $plano,
+			"plano_titulo" => $data_plano->titulo,
+			"plano_valor" => $data_plano->valor,
+			"plano_periodo_meses" => $data_plano->meses,
+			"plano_periodo_dias" => $data_plano->dias,
+			"plano_limite" => $data_plano->limite,
+			"data" => $time,
+			"status" => 0
 		));
 
 		$id_pedido = $db->ultimo_id();
@@ -14926,8 +15068,8 @@ class index extends controller {
 		$coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='3' ");
 		$data_pagamento = $coisas_pagamento->fetch_object();
 
-		$enderecoderetorno = DOMINIO."index/imoveis_cliente/pagamento/".$codigo."/";
-		$enderecoderetorno_sucesso = DOMINIO."index/imoveis_cliente/pagamento/".$codigo."/";
+		$enderecoderetorno = DOMINIO . "index/imoveis_cliente/pagamento/" . $codigo . "/";
+		$enderecoderetorno_sucesso = DOMINIO . "index/imoveis_cliente/pagamento/" . $codigo . "/";
 
 		require_once('vendor/autoload.php');
 
@@ -14942,7 +15084,7 @@ class index extends controller {
 		$valor_tratado_mp = str_replace(",", ".", $valor_tratado_mp);
 
 		$item = new MercadoPago\Item();
-		$item->title = "Pedido ".$id_pedido;
+		$item->title = "Pedido " . $id_pedido;
 		$item->quantity = 1;
 		$item->unit_price = $valor_tratado_mp;
 		$preference->items = array($item);
@@ -14953,29 +15095,28 @@ class index extends controller {
 			"pending" => "$enderecoderetorno_sucesso"
 		);
 		$preference->auto_return = "all";
-		$preference->notification_url = DOMINIO."sistema/mercadopago_retorno/index.php";					 
+		$preference->notification_url = DOMINIO . "sistema/mercadopago_retorno/index.php";
 		$preference->save();
 
-		if($preference->id){
+		if ($preference->id) {
 
 			$codigo_transacao = $preference->id;
 
 			$conexao = new mysql();
-			$conexao->alterar("imoveis_pedidos", array(				
-				"status"=>1,
-				"id_transacao"=>$codigo_transacao
-			), " codigo='".$codigo."' ");
+			$conexao->alterar("imoveis_pedidos", array(
+				"status" => 1,
+				"id_transacao" => $codigo_transacao
+			), " codigo='" . $codigo . "' ");
 
-			$this->irpara(DOMINIO.'index/imoveis_cliente/pagamento/'.$codigo);
-
+			$this->irpara(DOMINIO . 'index/imoveis_cliente/pagamento/' . $codigo);
 		} else {
 			echo "Ocorreu um erro!";
 			exit;
 		}
-
 	}
 
-	public function imoveis_ativar_anuncio_grv(){
+	public function imoveis_ativar_anuncio_grv()
+	{
 
 		$this->autenticado();
 
@@ -14985,22 +15126,22 @@ class index extends controller {
 
 		$codigo_imovel = $this->post('imovel');
 
-		if(!$codigo_imovel){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		if (!$codigo_imovel) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
 		$plano = $this->post('plano');
 
-		if(!$plano){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		if (!$plano) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+		$exec = $db->executar("SELECT * FROM imoveis WHERE codigo='$codigo_imovel' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
@@ -15008,13 +15149,13 @@ class index extends controller {
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM imoveis_pedidos WHERE codigo='$plano' ");
-		if($exec->num_rows != 1){
+		if ($exec->num_rows != 1) {
 
-			if($plano == 1){
+			if ($plano == 1) {
 
 				$cadastro = new model_cadastro();
 				$data_dados = $cadastro->dados_usuario($this->_cod_usuario);
-				if($data_dados->anuncio_gratis == 0){
+				if ($data_dados->anuncio_gratis == 0) {
 
 					$plano = $this->gera_codigo();
 
@@ -15025,187 +15166,181 @@ class index extends controller {
 
 					$db = new mysql();
 					$db->inserir("imoveis_pedidos", array(
-						"codigo"=>$plano,
-						"cadastro"=>$this->_cod_usuario,
-						"plano"=>1,
-						"plano_titulo"=>'Gratis',
-						"plano_valor"=>0,
-						"plano_periodo_meses"=>$data_plano2->meses,
-						"plano_periodo_dias"=>$data_plano2->dias,
-						"plano_limite"=>$data_plano2->limite,
-						"data"=>$time,
-						"status"=>2
+						"codigo" => $plano,
+						"cadastro" => $this->_cod_usuario,
+						"plano" => 1,
+						"plano_titulo" => 'Gratis',
+						"plano_valor" => 0,
+						"plano_periodo_meses" => $data_plano2->meses,
+						"plano_periodo_dias" => $data_plano2->dias,
+						"plano_limite" => $data_plano2->limite,
+						"data" => $time,
+						"status" => 2
 					));
 
 					$db = new mysql();
 					$db->alterar("cadastro", array(
-						"anuncio_gratis"=>1
-					), " codigo='".$this->_cod_usuario."' ");
+						"anuncio_gratis" => 1
+					), " codigo='" . $this->_cod_usuario . "' ");
 
 					$db = new mysql();
 					$exec = $db->executar("SELECT * FROM imoveis_pedidos WHERE codigo='$plano' ");
-
 				}
-
 			} else {
 
-				$this->irpara(DOMINIO.'index/imoveis_cliente');
+				$this->irpara(DOMINIO . 'index/imoveis_cliente');
 				exit;
 			}
 		}
 
-		$data_plano = $exec->fetch_object();		
+		$data_plano = $exec->fetch_object();
 
 		$plano_utilizado = $data_plano->plano_utilizado + 1;
 
-		if($plano_utilizado > $data_plano->plano_limite){
+		if ($plano_utilizado > $data_plano->plano_limite) {
 			$this->msg('O plano exedeu o numero de anúncios!');
-			$this->irpara(DOMINIO.'index/imoveis_cliente');
+			$this->irpara(DOMINIO . 'index/imoveis_cliente');
 			exit;
 		}
 
 		$db = new mysql();
 		$db->alterar("imoveis_pedidos", array(
-			"plano_utilizado"=>$plano_utilizado
+			"plano_utilizado" => $plano_utilizado
 		), " codigo='$plano' ");
 
 		$time = time();
 
 		$db = new mysql();
 		$db->inserir("imoveis_pedidos_utilizacoes", array(
-			"pedido"=>$plano,
-			"data"=>$time,
-			"imovel"=>$codigo_imovel,
-			"imovel_ref"=>$data_imovel->id
+			"pedido" => $plano,
+			"data" => $time,
+			"imovel" => $codigo_imovel,
+			"imovel_ref" => $data_imovel->id
 		));
 
-		if($data_plano->plano_periodo_meses == 0){
-			$vencimento = strtotime('+ '.$data_plano->plano_periodo_dias.' days');
+		if ($data_plano->plano_periodo_meses == 0) {
+			$vencimento = strtotime('+ ' . $data_plano->plano_periodo_dias . ' days');
 		} else {
-			$vencimento = strtotime('+ '.$data_plano->plano_periodo_meses.' months');
+			$vencimento = strtotime('+ ' . $data_plano->plano_periodo_meses . ' months');
 		}
 
 		$db = new mysql();
 		$db->alterar("imoveis",  array(
-			"anuncio_vencimento"=>$vencimento
+			"anuncio_vencimento" => $vencimento
 		), " id='$data_imovel->id' ");
 
 
-		$this->irpara(DOMINIO.'index/imoveis_cliente');
+		$this->irpara(DOMINIO . 'index/imoveis_cliente');
 	}
 
-	public function classificados_busca_simp(){
+	public function classificados_busca_simp()
+	{
 
 		$conteudo_id = $this->post('grupo_pagina');
 
-		if($conteudo_id){
+		if ($conteudo_id) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM classificados_grupos WHERE id='$conteudo_id' ");
 			$data_destino = $exec->fetch_object();
 
-			if($data_destino->busca_pagina){
+			if ($data_destino->busca_pagina) {
 
 				$categoria = $this->post('categoria');
 				$cidade = $this->post('cidade');
 				$bairro = $this->post('bairro');
 
-				$this->irpara(DOMINIO.$data_destino->busca_pagina.'/inicial/cla_cat/'.$categoria.'/cla_cidade/'.$cidade.'/cla_bairro/'.$bairro.'/cla_tipo_busca/1');
-
+				$this->irpara(DOMINIO . $data_destino->busca_pagina . '/inicial/cla_cat/' . $categoria . '/cla_cidade/' . $cidade . '/cla_bairro/' . $bairro . '/cla_tipo_busca/1');
 			} else {
 				$this->irpara(DOMINIO);
 			}
 		} else {
 			$this->irpara(DOMINIO);
 		}
-
 	}
 
-	public function classificados_busca_ref(){
+	public function classificados_busca_ref()
+	{
 
 		$conteudo_id = $this->post('grupo_pagina');
 
-		if($conteudo_id){
+		if ($conteudo_id) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM classificados_grupos WHERE id='$conteudo_id' ");
 			$data_destino = $exec->fetch_object();
 
-			if($data_destino->busca_pagina){
+			if ($data_destino->busca_pagina) {
 
 				$referencia = $this->post('referencia');
 				$referencia = str_replace(array("?", "+", "'", "/", ")", "(", "&", "%", "#", "@", "!", "=", ">", "<", ";", ":", "|", "*", "$"), "", $referencia);
-				if(!$referencia){
+				if (!$referencia) {
 					$referencia = 0;
 				}
 
-				$this->irpara(DOMINIO.$data_destino->busca_pagina.'/inicial/cla_ref/'.$referencia.'/cla_tipo_busca/2');
-
+				$this->irpara(DOMINIO . $data_destino->busca_pagina . '/inicial/cla_ref/' . $referencia . '/cla_tipo_busca/2');
 			} else {
 				$this->irpara(DOMINIO);
 			}
 		} else {
 			$this->irpara(DOMINIO);
 		}
-
-
 	}
 
-	public function classificados_busca_det(){
+	public function classificados_busca_det()
+	{
 
 
 		$conteudo_id = $this->post('grupo_pagina');
 
-		if($conteudo_id){
+		if ($conteudo_id) {
 
 			$db = new mysql();
 			$exec = $db->executar("SELECT * FROM classificados_grupos WHERE id='$conteudo_id' ");
 			$data_destino = $exec->fetch_object();
 
-			if($data_destino->busca_pagina){
+			if ($data_destino->busca_pagina) {
 
-				$categoria = $this->post('categoria'); 
+				$categoria = $this->post('categoria');
 				$cidade = $this->post('cidade');
 				$bairro = $this->post('bairro');
 
 				$valor_min = $this->post('valor_min');
-				$valor_max = $this->post('valor_max'); 
+				$valor_max = $this->post('valor_max');
 
 				$valor_maximo = $valor_max;
 				$valor_minimo = $valor_min;
 
 				$ordem = $this->post('ordem');
 
-				$complemento = ""; 
+				$complemento = "";
 
 				$classificados = new model_classificados();
 				$opcoes = $classificados->lista_opcoes();
 				foreach ($opcoes as $key => $value) {
 					foreach ($value['opcoes'] as $key2 => $value2) {
-						if($this->post('cla_opcoes_'.$value2['id']) == $value2['id']){
-							$complemento .= "/cla_op_".$value2['id']."/1";
+						if ($this->post('cla_opcoes_' . $value2['id']) == $value2['id']) {
+							$complemento .= "/cla_op_" . $value2['id'] . "/1";
 						}
 					}
 				}
 
 
-				$this->irpara(DOMINIO.$data_destino->busca_pagina.'/inicial/cla_cat/'.$categoria.'/cla_cidade/'.$cidade.'/cla_bairro/'.$bairro.'/cla_val_max/'.$valor_maximo.'/cla_val_min/'.$valor_minimo.'/cla_ordem/'.$ordem.'/cla_tipo_busca/3'.$complemento);
-
+				$this->irpara(DOMINIO . $data_destino->busca_pagina . '/inicial/cla_cat/' . $categoria . '/cla_cidade/' . $cidade . '/cla_bairro/' . $bairro . '/cla_val_max/' . $valor_maximo . '/cla_val_min/' . $valor_minimo . '/cla_ordem/' . $ordem . '/cla_tipo_busca/3' . $complemento);
 			} else {
 				$this->irpara(DOMINIO);
 			}
 		} else {
 			$this->irpara(DOMINIO);
 		}
-
-
 	}
 
-	public function classificados_detalhes(){
+	public function classificados_detalhes()
+	{
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -15219,7 +15354,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -15232,7 +15367,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -15240,23 +15375,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -15268,53 +15403,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -15323,16 +15458,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -15340,7 +15473,7 @@ class index extends controller {
 
 		$codigo = $this->get('id');
 
-		if(!$codigo){
+		if (!$codigo) {
 			$this->irpara(DOMINIO);
 		}
 
@@ -15350,23 +15483,23 @@ class index extends controller {
 		$dados['data'] = $coisas_imovel->fetch_object();
 
 		$dados['whats_do_anuncio'] = '';
-		if($dados['data']->cadastro){
+		if ($dados['data']->cadastro) {
 
 			$cadastro = new model_cadastro();
-			$data_cad = $cadastro->dados_usuario($dados['data']->cadastro);	
-			if($data_cad->telefone){
+			$data_cad = $cadastro->dados_usuario($dados['data']->cadastro);
+			if ($data_cad->telefone) {
 				$dados['whats_do_anuncio'] = str_replace(array("(", ")", " ", "-", "."), "", $data_cad->telefone);
 			}
 		}
 
 
-		if( !$dados['data']->id ){
+		if (!$dados['data']->id) {
 			$this->irpara(DOMINIO);
 		}
 
 		$classificados = new model_classificados();
 		$dados['imagens'] = $classificados->imagens($dados['data']->codigo);
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 		}
 
@@ -15387,38 +15520,37 @@ class index extends controller {
 
 
 
-		$dados['endereco_imovel_sem_ssl'] = DOMINIO.$this->_controller.'/classificados_detalhes/id/'.$dados['data']->codigo;
+		$dados['endereco_imovel_sem_ssl'] = DOMINIO . $this->_controller . '/classificados_detalhes/id/' . $dados['data']->codigo;
 
 		//pega imagens 
 
 		$dados['imagem_principal_largura'] = "";
 		$dados['imagem_principal_altura'] = "";
 		$dados['imagem_principal'] = "";
-		if(isset($dados['imagens'][0]['imagem_g'])){
+		if (isset($dados['imagens'][0]['imagem_g'])) {
 
 			$dados['imagem_principal'] = $dados['imagens'][0]['imagem_g'];
 			$dados['imagem_principal_sem_ssl'] = $string = str_replace("https://", "http://", $dados['imagens'][0]['imagem_g']);
 
-			$imagem_principal = "arquivos/img_classificados_g/".$dados['data']->codigo."/".$dados['imagens'][0]['imagem'];
+			$imagem_principal = "arquivos/img_classificados_g/" . $dados['data']->codigo . "/" . $dados['imagens'][0]['imagem'];
 			list($largura, $altura) = getimagesize($imagem_principal);
-			if($largura){
+			if ($largura) {
 				$dados['imagem_principal_largura'] = $largura;
 			}
-			if($altura){
+			if ($altura) {
 				$dados['imagem_principal_altura'] = $altura;
 			}
-
 		}
 
-		$dados['endereco_postagem'] = DOMINIO.$this->_controller."/classificados_detalhes/id/".$dados['data']->codigo;
+		$dados['endereco_postagem'] = DOMINIO . $this->_controller . "/classificados_detalhes/id/" . $dados['data']->codigo;
 		$dados['endereco_postagem_sem_ssl'] = $string = str_replace("https://", "http://", $dados['endereco_postagem']);
 
 
 
 		// favoritos
 		$conexao = new mysql();
-		$coisas_fav = $conexao->Executar("SELECT * FROM classificados_favoritos where codigo='".$dados['data']->codigo."' AND sessao='".$this->_sessao."' ");
-		if($coisas_fav->num_rows == 0){
+		$coisas_fav = $conexao->Executar("SELECT * FROM classificados_favoritos where codigo='" . $dados['data']->codigo . "' AND sessao='" . $this->_sessao . "' ");
+		if ($coisas_fav->num_rows == 0) {
 			$dados['favorito'] = 2;
 		} else {
 			$dados['favorito'] = 1;
@@ -15427,16 +15559,16 @@ class index extends controller {
 
 
 		$this->view('classificados.detalhes', $dados);
-
 	}
 
-	public function classificados_cliente(){
+	public function classificados_cliente()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -15450,7 +15582,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -15463,7 +15595,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -15471,23 +15603,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -15499,53 +15631,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -15554,16 +15686,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -15582,47 +15712,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -15633,17 +15761,17 @@ class index extends controller {
 
 
 		$classificados = new model_classificados();
-		$dados['lista_classificados'] = $classificados->lista_anuncios($this->_cod_usuario); 
+		$dados['lista_classificados'] = $classificados->lista_anuncios($this->_cod_usuario);
 
 		$dados['abre_pagamento'] = false;
 		$codigo_pag = $this->get('pagamento');
-		if($codigo_pag){
+		if ($codigo_pag) {
 			$conexao = new mysql();
 			$coisas_pg = $conexao->executar("SELECT * FROM classificados_pedidos WHERE codigo='$codigo_pag' AND status='1' ");
-			$data_pg = $coisas_pg->fetch_object();			 
-			if(isset($data_pg->id_transacao)){
+			$data_pg = $coisas_pg->fetch_object();
+			if (isset($data_pg->id_transacao)) {
 				$dados['abre_pagamento'] = $data_pg->id_transacao;
-			}			
+			}
 		}
 
 
@@ -15653,19 +15781,19 @@ class index extends controller {
 		$n = 0;
 
 		$conexao = new mysql();
-		$coisas = $conexao->executar("SELECT * FROM classificados_pedidos WHERE cadastro='".$this->_cod_usuario."' AND status>=1 ");
-		while($data = $coisas->fetch_object()){
+		$coisas = $conexao->executar("SELECT * FROM classificados_pedidos WHERE cadastro='" . $this->_cod_usuario . "' AND status>=1 ");
+		while ($data = $coisas->fetch_object()) {
 
 			$lista_pedidos[$n]['id'] = $data->id;
 			$lista_pedidos[$n]['codigo'] = $data->codigo;
 			$lista_pedidos[$n]['plano'] = $data->plano_titulo;
-			$lista_pedidos[$n]['anuncios'] = 'Utilizados '.$data->plano_utilizado.' de '.$data->plano_limite;
+			$lista_pedidos[$n]['anuncios'] = 'Utilizados ' . $data->plano_utilizado . ' de ' . $data->plano_limite;
 			$lista_pedidos[$n]['status_id'] = $data->status;
 
-			if($data->status == 1){ 
-				$lista_pedidos[$n]['status'] = "Aguardando Pagamento"; 
+			if ($data->status == 1) {
+				$lista_pedidos[$n]['status'] = "Aguardando Pagamento";
 			} else {
-				$lista_pedidos[$n]['status'] = "Aprovado"; 
+				$lista_pedidos[$n]['status'] = "Aprovado";
 			}
 
 			$n++;
@@ -15674,17 +15802,18 @@ class index extends controller {
 		$dados['lista_pedidos'] = $lista_pedidos;
 
 
- 		//carrega view e envia dados para a tela
-		$this->view('minhaconta_classificados', $dados);		
+		//carrega view e envia dados para a tela
+		$this->view('minhaconta_classificados', $dados);
 	}
 
-	public function classificados_pedido_detalhes(){
+	public function classificados_pedido_detalhes()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -15693,14 +15822,14 @@ class index extends controller {
 
 		$codigo = $this->get('codigo');
 
-		if(!$codigo){
+		if (!$codigo) {
 			echo "Ocorreu um erro1!";
 			exit;
 		}
 
 		$conexao = new mysql();
-		$coisas = $conexao->executar("SELECT * FROM classificados_pedidos WHERE codigo='$codigo' AND cadastro='".$this->_cod_usuario."' ");
-		if($coisas->num_rows != 1){
+		$coisas = $conexao->executar("SELECT * FROM classificados_pedidos WHERE codigo='$codigo' AND cadastro='" . $this->_cod_usuario . "' ");
+		if ($coisas->num_rows != 1) {
 			echo "Ocorreu um erro!";
 			exit;
 		}
@@ -15712,10 +15841,10 @@ class index extends controller {
 		$i = 0;
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM classificados_pedidos_utilizacoes where pedido='$codigo' order by id desc"); 
-		while($data = $exec->fetch_object()) { 
+		$exec = $db->executar("SELECT * FROM classificados_pedidos_utilizacoes where pedido='$codigo' order by id desc");
+		while ($data = $exec->fetch_object()) {
 
-			$lista[$i]['id'] = $data->id; 
+			$lista[$i]['id'] = $data->id;
 			$lista[$i]['data'] = date('d/m/y H:i', $data->data);
 			$lista[$i]['anuncio'] = $data->anuncio;
 			$lista[$i]['ref'] = $data->anuncio_ref;
@@ -15728,16 +15857,17 @@ class index extends controller {
 
 
 
-		$this->view('classificados.pedido.detalhes', $dados);		
+		$this->view('classificados.pedido.detalhes', $dados);
 	}
 
-	public function adicionar_anuncio(){
+	public function adicionar_anuncio()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -15751,7 +15881,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -15764,7 +15894,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -15772,23 +15902,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -15800,53 +15930,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -15855,16 +15985,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -15883,47 +16011,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -15936,11 +16062,12 @@ class index extends controller {
 		$dados['cidades'] = $classificados->lista_cidades();
 
 
- 		//carrega view e envia dados para a tela
+		//carrega view e envia dados para a tela
 		$this->view('minhaconta_add_cla', $dados);
 	}
 
-	public function adicionar_anuncio_grv(){
+	public function adicionar_anuncio_grv()
+	{
 
 		$this->autenticado();
 
@@ -15948,8 +16075,9 @@ class index extends controller {
 		$dados['_base'] = $this->_base();
 
 		// retorno de dados caso erro
-		function retorno_erro($msg){
-			echo "<div style='padding:20px;background:white' >".$msg."</div>";	
+		function retorno_erro($msg)
+		{
+			echo "<div style='padding:20px;background:white' >" . $msg . "</div>";
 			exit;
 		}
 
@@ -15960,21 +16088,21 @@ class index extends controller {
 		$bairro = $this->post('bairro');
 		$cep = $this->post('cep');
 
-		if(!$titulo){
+		if (!$titulo) {
 			retorno_erro("Digite uma titulo válido.");
 			exit;
 		}
 
 		$endereco_rua = "";
-		if($cep){
+		if ($cep) {
 
 			$buscacep = new model_cep();
 			$resultado_busca_cep = $buscacep->retorno($cep);
 
-			if($resultado_busca_cep['cidade']){
+			if ($resultado_busca_cep['cidade']) {
 
-				if($resultado_busca_cep['rua']){
-					$endereco_rua = $resultado_busca_cep['rua_tipo']." ".$resultado_busca_cep['rua'];
+				if ($resultado_busca_cep['rua']) {
+					$endereco_rua = $resultado_busca_cep['rua_tipo'] . " " . $resultado_busca_cep['rua'];
 				}
 
 				$cidade_nome = $resultado_busca_cep['cidade'];
@@ -15982,24 +16110,23 @@ class index extends controller {
 
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM classificados_cidades WHERE cidade='$cidade_nome' AND estado='$estado_uf' ");
-				if($coisas->num_rows == 0){					
+				if ($coisas->num_rows == 0) {
 
 					$cidade_id = $this->gera_codigo();
 
 					$db = new mysql();
-					$db->inserir("classificados_cidades", array( 
-						"codigo"=>$cidade_id,
-						"cidade"=>$cidade_nome,
-						"estado"=>$estado_uf,
-						"principal"=>0
+					$db->inserir("classificados_cidades", array(
+						"codigo" => $cidade_id,
+						"cidade" => $cidade_nome,
+						"estado" => $estado_uf,
+						"principal" => 0
 					));
-
 				} else {
-					$data_cidade = $coisas->fetch_object();					
+					$data_cidade = $coisas->fetch_object();
 					$cidade_id = $data_cidade->codigo;
 				}
 
-				if($resultado_busca_cep['bairro']){
+				if ($resultado_busca_cep['bairro']) {
 					$bairro_nome = $resultado_busca_cep['bairro'];
 				} else {
 					$bairro_nome = "Centro";
@@ -16007,38 +16134,34 @@ class index extends controller {
 
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM classificados_bairros WHERE cidade='$cidade_nome' AND estado='$estado_uf' AND bairro='$bairro_nome' ");
-				if($coisas->num_rows == 0){					
+				if ($coisas->num_rows == 0) {
 
 					$bairro_id = $this->gera_codigo();
 
 					$db = new mysql();
-					$db->inserir("classificados_bairros", array( 
-						"codigo"=>$bairro_id,
-						"bairro"=>$bairro_nome,
-						"cidade"=>$cidade_nome,
-						"estado"=>$estado_uf
+					$db->inserir("classificados_bairros", array(
+						"codigo" => $bairro_id,
+						"bairro" => $bairro_nome,
+						"cidade" => $cidade_nome,
+						"estado" => $estado_uf
 					));
-
 				} else {
 
 					$data_bairro = $coisas->fetch_object();
-					$bairro_id = $data_bairro->codigo; 
-
+					$bairro_id = $data_bairro->codigo;
 				}
-
 			} else {
 				retorno_erro("Digite um CEP válido.");
-				exit;				
+				exit;
 			}
-
 		} else {
-			if($bairro AND $cidade){
+			if ($bairro and $cidade) {
 
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM classificados_cidades WHERE codigo='$cidade' ");
-				if($coisas->num_rows != 1){
+				if ($coisas->num_rows != 1) {
 					retorno_erro("Ocorreu um erro.");
-					exit;					
+					exit;
 				} else {
 					$data_cidade = $coisas->fetch_object();
 					$cidade_id = $data_cidade->codigo;
@@ -16048,15 +16171,14 @@ class index extends controller {
 
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM classificados_bairros WHERE cidade='$cidade_nome' AND estado='$estado_uf' AND codigo='$bairro' ");
-				if($coisas->num_rows == 0){					
+				if ($coisas->num_rows == 0) {
 					retorno_erro("Ocorreu um erro.");
 					exit;
 				} else {
 					$data_bairro = $coisas->fetch_object();
 					$bairro_id = $data_bairro->codigo;
-					$bairro_nome = $data_bairro->bairro; 
+					$bairro_nome = $data_bairro->bairro;
 				}
-
 			} else {
 				retorno_erro("Preencha o estado e a cidade do imóvel.");
 				exit;
@@ -16068,38 +16190,39 @@ class index extends controller {
 
 
 		//gravar no banco de dados
-		$codigo = substr(time().rand(10000,99999),-15);
+		$codigo = substr(time() . rand(10000, 99999), -15);
 		$categoria_titulo = "Todas";
 		$categoria = 0;
 		$time = time();
 
 		$db = new mysql();
 		$db->inserir("classificados", array(
-			"data_alteracao"=>$time,
-			"codigo"=>$codigo,
-			"cadastro"=>$this->_cod_usuario,
-			"titulo"=>$titulo,
-			"categoria_id"=>$categoria,
-			"categoria_titulo"=>$categoria_titulo,
-			"bairro_id"=>$bairro_id,
-			"bairro"=>$bairro_nome,
-			"cidade_id"=>$cidade_id,
-			"cidade"=>$cidade_nome,
-			"uf"=>$estado_uf,
-			"valor"=>0,
-			"status"=>0
+			"data_alteracao" => $time,
+			"codigo" => $codigo,
+			"cadastro" => $this->_cod_usuario,
+			"titulo" => $titulo,
+			"categoria_id" => $categoria,
+			"categoria_titulo" => $categoria_titulo,
+			"bairro_id" => $bairro_id,
+			"bairro" => $bairro_nome,
+			"cidade_id" => $cidade_id,
+			"cidade" => $cidade_nome,
+			"uf" => $estado_uf,
+			"valor" => 0,
+			"status" => 0
 		));
 
-		$this->irpara(DOMINIO.$this->_controller.'/alterar_anuncio/id/'.$codigo);
+		$this->irpara(DOMINIO . $this->_controller . '/alterar_anuncio/id/' . $codigo);
 	}
 
-	public function alterar_anuncio(){
+	public function alterar_anuncio()
+	{
 
 		$this->autenticado();
 
 		$dados = array();
 		$dados['_base'] = $this->_base();
-		$dados['objeto'] = DOMINIO.$this->_controller.'/';
+		$dados['objeto'] = DOMINIO . $this->_controller . '/';
 		$dados['controller'] = $this->_controller;
 		$dados['_cod_usuario'] = $this->_cod_usuario;
 		$dados['_sessao'] = $this->_sessao;
@@ -16113,7 +16236,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_paginas WHERE chave='$chave' ");
-		if($coisas->num_rows != 1){
+		if ($coisas->num_rows != 1) {
 			$this->_layout = "index";
 			$this->irpara(DOMINIO);
 		}
@@ -16126,7 +16249,7 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM layout_cores_sel WHERE pagina='$codigo_pagina' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$cores[$data->codigo] = $data->cor;
 		}
 		$dados['pagina_cores'] = $cores;
@@ -16134,23 +16257,23 @@ class index extends controller {
 		////////////////////////////////////////////////////////////////////////
 
 		$lista_blocos = array();
-		$n_bloc = 0; 
+		$n_bloc = 0;
 
 		$conexao = new mysql();
 		$exec = $conexao->Executar("SELECT * FROM layout_blocos_ordem WHERE pagina='$codigo_pagina' ORDER BY id desc limit 1");
 		$data_ordem = $exec->fetch_object();
 
-		if(isset($data_ordem->data)){
+		if (isset($data_ordem->data)) {
 
 			$order = explode(',', $data_ordem->data);
 
-			foreach($order as $key => $value){
+			foreach ($order as $key => $value) {
 
 				$conexao = new mysql();
 				$coisas_bloco = $conexao->Executar("SELECT * FROM layout_blocos WHERE id='$value' AND pagina='$codigo_pagina' ");
 				$data_bloco = $coisas_bloco->fetch_object();
 
-				if(isset($data_bloco->id)){
+				if (isset($data_bloco->id)) {
 
 					$lista_blocos[$n_bloc]['id'] = $data_bloco->id;
 					$lista_blocos[$n_bloc]['codigo'] = $data_bloco->codigo;
@@ -16162,53 +16285,53 @@ class index extends controller {
 					while ($n_col <= $data_bloco->colunas) {
 
 						$item_codigo = '';
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
-						if($n_col == 2){
+						if ($n_col == 2) {
 							$item_codigo = $data_bloco->coluna2;
 						}
-						if($n_col == 3){
+						if ($n_col == 3) {
 							$item_codigo = $data_bloco->coluna3;
 						}
-						if($n_col == 4){
+						if ($n_col == 4) {
 							$item_codigo = $data_bloco->coluna4;
 						}
-						if($n_col == 5){
+						if ($n_col == 5) {
 							$item_codigo = $data_bloco->coluna5;
 						}
-						if($n_col == 6){
+						if ($n_col == 6) {
 							$item_codigo = $data_bloco->coluna6;
 						}
-						if($n_col == 1){
+						if ($n_col == 1) {
 							$item_codigo = $data_bloco->coluna1;
 						}
 
-						$lista_layout = array(); 
+						$lista_layout = array();
 
-						if($item_codigo){
+						if ($item_codigo) {
 
 							$conexao = new mysql();
 							$coisas = $conexao->Executar("SELECT * FROM layout_itens WHERE codigo='$item_codigo' ");
 							$data = $coisas->fetch_object();
 
-							if(isset($data->id)){
+							if (isset($data->id)) {
 
-								$modulo_id = $lista_blocos[$n_bloc]['id'].'_'.$n_col.'_'.$data->id;
+								$modulo_id = $lista_blocos[$n_bloc]['id'] . '_' . $n_col . '_' . $data->id;
 
 								$lista_layout['id'] = $modulo_id;
 								$lista_layout['codigo'] = $data->codigo;
 								$lista_layout['titulo'] = $data->titulo;
 								$lista_layout['tipo'] = $data->tipo;
 
-								if($data->tipo == 'topo'){
+								if ($data->tipo == 'topo') {
 									$topos = new model_topos();
 									$lista_layout['conteudo'] = $topos->lista($data->codigo);
 									$banners = new model_banners();
 									$lista_layout['conteudo']['banners_topo'] = $banners->lista_simples('148713350186606');
 								}
 
-								if($data->tipo == 'rodape'){							
+								if ($data->tipo == 'rodape') {
 									$rodapes = new model_rodapes();
 									$lista_layout['conteudo'] = $rodapes->lista($data->codigo);
 								}
@@ -16217,16 +16340,14 @@ class index extends controller {
 							}
 						}
 
-						$lista_blocos[$n_bloc]['coluna'.$n_col] = $lista_layout;
+						$lista_blocos[$n_bloc]['coluna' . $n_col] = $lista_layout;
 
 						$n_col++;
 					}
 
 					$n_bloc++;
 				}
-
 			}
-
 		}
 
 		$dados['layout_lista'] = $lista_blocos;
@@ -16245,47 +16366,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -16301,30 +16420,30 @@ class index extends controller {
 
 		$codigo_anuncio = $this->get('id');
 
-		if(!$codigo_anuncio){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		if (!$codigo_anuncio) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$dados['data_anuncio'] = $exec->fetch_object();
 
 
-		$dados['valor'] = $valores->trata_valor($dados['data_anuncio']->valor); 
+		$dados['valor'] = $valores->trata_valor($dados['data_anuncio']->valor);
 
- 		//imagens
+		//imagens
 		$dados['imagens'] = $classificados->imagens($dados['data_anuncio']->codigo);
 
 		// categorias
 		$dados['categorias'] = $classificados->lista_categorias();
 
- 		// tipos
+		// tipos
 		$dados['opcoes'] = $classificados->lista_opcoes();
 
 		//cidades
@@ -16335,18 +16454,19 @@ class index extends controller {
 
 		$conexao = new mysql();
 		$coisas = $conexao->Executar("SELECT * FROM classificados_opcoes_sel WHERE codigo='$codigo_anuncio' ");
-		while($data = $coisas->fetch_object()){
+		while ($data = $coisas->fetch_object()) {
 			$opcoes_selecionadas[$opcoes_selecionadas_n] = $data->opcional;
 			$opcoes_selecionadas_n++;
 		}
 
 		$dados['classificados_opcoes_selecionadas'] = $opcoes_selecionadas;
 
- 		//carrega view e envia dados para a tela
+		//carrega view e envia dados para a tela
 		$this->view('minhaconta_alterar_cla', $dados);
 	}
 
-	public function alterar_anuncio_grv(){
+	public function alterar_anuncio_grv()
+	{
 
 		$this->autenticado();
 
@@ -16356,8 +16476,9 @@ class index extends controller {
 		$valores = new model_valores();
 
 		// retorno de dados caso erro
-		function retorno_erro($msg){
-			echo "<div style='padding:20px;background:white' >".$msg."</div>";	
+		function retorno_erro($msg)
+		{
+			echo "<div style='padding:20px;background:white' >" . $msg . "</div>";
 			exit;
 		}
 
@@ -16368,24 +16489,24 @@ class index extends controller {
 		$cidade = $this->post('cidade');
 		$bairro = $this->post('bairro');
 
-		if(!$codigo){
+		if (!$codigo) {
 			retorno_erro("Ocorreu um erro.");
 			exit;
 		}
 
-		if(!$titulo){
+		if (!$titulo) {
 			retorno_erro("Digite uma titulo válido.");
 			exit;
 		}
 
 
-		if($bairro AND $cidade){
+		if ($bairro and $cidade) {
 
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM classificados_cidades WHERE codigo='$cidade' ");
-			if($coisas->num_rows != 1){
+			if ($coisas->num_rows != 1) {
 				retorno_erro("Ocorreu um erro.");
-				exit;					
+				exit;
 			} else {
 				$data_cidade = $coisas->fetch_object();
 				$cidade_id = $data_cidade->codigo;
@@ -16395,21 +16516,20 @@ class index extends controller {
 
 			$conexao = new mysql();
 			$coisas = $conexao->Executar("SELECT * FROM classificados_bairros WHERE cidade='$cidade_nome' AND estado='$estado_uf' AND codigo='$bairro' ");
-			if($coisas->num_rows == 0){					
+			if ($coisas->num_rows == 0) {
 				retorno_erro("Ocorreu um erro.");
 				exit;
 			} else {
 				$data_bairro = $coisas->fetch_object();
 				$bairro_id = $data_bairro->codigo;
-				$bairro_nome = $data_bairro->bairro; 
+				$bairro_nome = $data_bairro->bairro;
 			}
-
 		} else {
 			retorno_erro("Preencha o estado e a cidade do imóvel.");
 			exit;
 		}
 
-		$cod_interno = $this->post('cod_interno');	
+		$cod_interno = $this->post('cod_interno');
 
 		$valor = $this->post('valor');
 		$valor_formatado = $valores->trata_valor_banco($valor);
@@ -16423,7 +16543,7 @@ class index extends controller {
 		$coisas = $conexao->Executar("SELECT titulo FROM classificados_categorias WHERE codigo='$categoria' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->titulo)){
+		if (isset($data->titulo)) {
 			$categoria_titulo = $data->titulo;
 		} else {
 			$categoria_titulo = "Todas";
@@ -16433,29 +16553,27 @@ class index extends controller {
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM classificados_opcoes ");
-		while($data = $exec->fetch_object()){
+		while ($data = $exec->fetch_object()) {
 
-			if($this->post('cla_opcoes_'.$data->id) == $data->id){
+			if ($this->post('cla_opcoes_' . $data->id) == $data->id) {
 
 				$db = new mysql();
 				$exec2 = $db->executar("SELECT * FROM classificados_opcoes_sel where codigo='$codigo' AND opcional='$data->codigo' ");
-				if($exec2->num_rows == 0){
+				if ($exec2->num_rows == 0) {
 					$db = new mysql();
 					$db->inserir("classificados_opcoes_sel", array(
-						"codigo"=>$codigo,
-						"opcional"=>$data->codigo
+						"codigo" => $codigo,
+						"opcional" => $data->codigo
 					));
 				}
-
 			} else {
 
 				$db = new mysql();
 				$exec2 = $db->executar("SELECT * FROM classificados_opcoes_sel where codigo='$codigo' AND opcional='$data->codigo' ");
-				if($exec2->num_rows != 0){
+				if ($exec2->num_rows != 0) {
 					$db = new mysql();
 					$db->apagar("classificados_opcoes_sel", " codigo='$codigo' AND opcional='$data->codigo' ");
 				}
-
 			}
 		}
 
@@ -16465,26 +16583,27 @@ class index extends controller {
 
 		$db = new mysql();
 		$db->alterar("classificados", array(
-			"data_alteracao"=>$time,
-			"titulo"=>$titulo,
-			"cod_interno"=>"$cod_interno",
-			"categoria_id"=>$categoria,
-			"categoria_titulo"=>$categoria_titulo,			 
-			"descricao"=>"$descricao",			 
-			"bairro_id"=>$bairro_id,
-			"bairro"=>$bairro_nome,
-			"cidade_id"=>$cidade_id,
-			"cidade"=>$cidade_nome,
-			"uf"=>$estado_uf,
-			"valor"=>$valor_formatado
-		), " codigo='".$codigo."' AND cadastro='".$this->_cod_usuario."' ");
+			"data_alteracao" => $time,
+			"titulo" => $titulo,
+			"cod_interno" => "$cod_interno",
+			"categoria_id" => $categoria,
+			"categoria_titulo" => $categoria_titulo,
+			"descricao" => "$descricao",
+			"bairro_id" => $bairro_id,
+			"bairro" => $bairro_nome,
+			"cidade_id" => $cidade_id,
+			"cidade" => $cidade_nome,
+			"uf" => $estado_uf,
+			"valor" => $valor_formatado
+		), " codigo='" . $codigo . "' AND cadastro='" . $this->_cod_usuario . "' ");
 
 
 		retorno_erro("Alterado com sucesso.");
 		exit;
 	}
 
-	public function classificados_enviar_imagem(){
+	public function classificados_enviar_imagem()
+	{
 
 		$this->autenticado();
 
@@ -16494,15 +16613,15 @@ class index extends controller {
 
 		$codigo_anuncio = $this->get('codigo');
 
-		if(!$codigo_anuncio){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		if (!$codigo_anuncio) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
@@ -16513,114 +16632,110 @@ class index extends controller {
 		$arquivo_original = $_FILES['arquivo'];
 		$tmp_name = $_FILES['arquivo']['tmp_name'];
 
-		if($tmp_name){
+		if ($tmp_name) {
 
 			// images
-         	//  'png' => 'image/png',
-            //'jpe' => 'image/jpeg',
-            //'jpeg' => 'image/jpeg',
-            //'jpg' => 'image/jpeg',
-            //'gif' => 'image/gif',
-            //'bmp' => 'image/bmp',
+			//  'png' => 'image/png',
+			//'jpe' => 'image/jpeg',
+			//'jpeg' => 'image/jpeg',
+			//'jpg' => 'image/jpeg',
+			//'gif' => 'image/gif',
+			//'bmp' => 'image/bmp',
 
 			$tipo_arquivo = mime_content_type($tmp_name);
 
-			if($tipo_arquivo == 'image/png'){
+			if ($tipo_arquivo == 'image/png') {
 				$extensao = "png";
 			} else {
-				if($tipo_arquivo == 'image/jpeg'){ 
+				if ($tipo_arquivo == 'image/jpeg') {
 					$extensao = "jpg";
 				} else {
 					$this->msg('Não foi possível reconhecer o arquivo, verifique o formato do seu arquivo!');
-					$this->irpara(DOMINIO.$this->_controller.'/alterar_anuncio/id/'.$codigo_anuncio);
+					$this->irpara(DOMINIO . $this->_controller . '/alterar_anuncio/id/' . $codigo_anuncio);
 					exit;
 				}
-			} 
+			}
 
-	 		//carrega model de gestao de imagens
+			//carrega model de gestao de imagens
 			$img = new model_arquivos_imagens();
 
 
 			$pasta = "classificados";
-			$diretorio_g = "arquivos/img_".$pasta."_g/".$codigo_anuncio."/";
-			$diretorio_p = "arquivos/img_".$pasta."_p/".$codigo_anuncio."/";
+			$diretorio_g = "arquivos/img_" . $pasta . "_g/" . $codigo_anuncio . "/";
+			$diretorio_p = "arquivos/img_" . $pasta . "_p/" . $codigo_anuncio . "/";
 
-			if(!is_dir($diretorio_g)) {
+			if (!is_dir($diretorio_g)) {
 				mkdir($diretorio_g);
 			}
-			if(!is_dir($diretorio_p)) {
+			if (!is_dir($diretorio_p)) {
 				mkdir($diretorio_p);
 			}
 
-			$nome_foto  = $this->gera_codigo().'.'.$extensao;
+			$nome_foto  = $this->gera_codigo() . '.' . $extensao;
 
-			if(copy($tmp_name, $diretorio_g.$nome_foto)){
+			if (copy($tmp_name, $diretorio_g . $nome_foto)) {
 
 				//confere e se jpg reduz a miniatura
-				if( ($extensao == "jpg") OR ($extensao == "jpeg") OR ($extensao == "JPG") OR ($extensao == "JPEG") ){
+				if (($extensao == "jpg") or ($extensao == "jpeg") or ($extensao == "JPG") or ($extensao == "JPEG")) {
 
 					// foto grande
 					$largura_g = 1200;
-					$altura_g = $img->calcula_altura_jpg($diretorio_g.$nome_foto, $largura_g);
+					$altura_g = $img->calcula_altura_jpg($diretorio_g . $nome_foto, $largura_g);
 					// foto minuatura
 					$largura_p = 300;
-					$altura_p = $img->calcula_altura_jpg($diretorio_g.$nome_foto, $largura_p);
+					$altura_p = $img->calcula_altura_jpg($diretorio_g . $nome_foto, $largura_p);
 					//redimenciona
-					$img->jpg($diretorio_g.$nome_foto, $largura_g , $altura_g , $diretorio_g.$nome_foto);
+					$img->jpg($diretorio_g . $nome_foto, $largura_g, $altura_g, $diretorio_g . $nome_foto);
 
 					//redimenciona miniatura 
-					if(!$img->jpg($diretorio_g.$nome_foto, $largura_p , $altura_p , $diretorio_p.$nome_foto)){
+					if (!$img->jpg($diretorio_g . $nome_foto, $largura_p, $altura_p, $diretorio_p . $nome_foto)) {
 						//se não redimencionar copia padrao
-						copy($diretorio_g.$nome_foto, $diretorio_p.$nome_foto);
+						copy($diretorio_g . $nome_foto, $diretorio_p . $nome_foto);
 					}
-
 				} else {
 
 					//caso nao possa redimencionar copia a imagem original para a pasta de miniaturas
-					copy($diretorio_g.$nome_foto, $diretorio_p.$nome_foto);
-
+					copy($diretorio_g . $nome_foto, $diretorio_p . $nome_foto);
 				}
 
 
 				$db = new mysql();
 				$db->inserir("classificados_imagem", array(
-					"codigo"	=>$codigo_anuncio,
-					"imagem"	=>$nome_foto
+					"codigo"	=> $codigo_anuncio,
+					"imagem"	=> $nome_foto
 				));
 				$ultid = $db->ultimo_id();
 
 				//ordem
 				$classificados = new model_classificados();
-				$ordem = $classificados->ordem_imagens($codigo_anuncio);								
-				if($ordem){
-					$novaordem = $ordem.",".$ultid;
+				$ordem = $classificados->ordem_imagens($codigo_anuncio);
+				if ($ordem) {
+					$novaordem = $ordem . "," . $ultid;
 				} else {
 					$novaordem = $ultid;
 				}
 
 				$db = new mysql();
 				$db->inserir("classificados_imagem_ordem", array(
-					"codigo"=>"$codigo_anuncio",
-					"data"=>"$novaordem"
+					"codigo" => "$codigo_anuncio",
+					"data" => "$novaordem"
 				));
 
-				$this->irpara(DOMINIO.$this->_controller.'/alterar_anuncio/id/'.$codigo_anuncio);
-
+				$this->irpara(DOMINIO . $this->_controller . '/alterar_anuncio/id/' . $codigo_anuncio);
 			} else {
 				$this->msg('Selecione uma imagem válida!');
 				$this->volta(1);
 				exit;
 			}
-
 		} else {
 			$this->msg('Selecione uma imagem válida!');
 			$this->volta(1);
 			exit;
 		}
-
 	}
 
-	public function classificados_ordenar_imagem(){
+	public function classificados_ordenar_imagem()
+	{
 
 		$this->autenticado();
 
@@ -16630,21 +16745,21 @@ class index extends controller {
 
 		$codigo_anuncio = $this->post('codigo');
 
-		if(!$codigo_anuncio){
+		if (!$codigo_anuncio) {
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
+		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
 			exit;
 		}
 
 		$list = $this->post_html('list');
 
-		if($list)
+		if ($list)
 
-		// instancia
+			// instancia
 			$classificados = new model_classificados();
 
 		$output = array();
@@ -16654,13 +16769,13 @@ class index extends controller {
 		//grava
 		$db = new mysql();
 		$db->inserir("classificados_imagem_ordem", array(
-			"codigo"=>"$codigo_anuncio",
-			"data"=>"$ordem"
+			"codigo" => "$codigo_anuncio",
+			"data" => "$ordem"
 		));
-
 	}
 
-	public function classificados_apagar_imagem(){
+	public function classificados_apagar_imagem()
+	{
 
 		$this->autenticado();
 
@@ -16670,21 +16785,21 @@ class index extends controller {
 
 		$codigo_anuncio = $this->get('codigo');
 
-		if(!$codigo_anuncio){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		if (!$codigo_anuncio) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$id = $this->get('id');
-		if(!$id){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		if (!$id) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		} else {
 
@@ -16693,9 +16808,9 @@ class index extends controller {
 			$data = $exec->fetch_object();
 
 			//imagem
-			if($data->imagem){
-				unlink('arquivos/img_classificados_g/'.$data->codigo.'/'.$data->imagem);
-				unlink('arquivos/img_classificados_p/'.$data->codigo.'/'.$data->imagem);
+			if ($data->imagem) {
+				unlink('arquivos/img_classificados_g/' . $data->codigo . '/' . $data->imagem);
+				unlink('arquivos/img_classificados_p/' . $data->codigo . '/' . $data->imagem);
 			}
 
 			//apaga
@@ -16703,12 +16818,12 @@ class index extends controller {
 			$db->apagar("classificados_imagem", " id='$id' ");
 
 
-			$this->irpara(DOMINIO.$this->_controller.'/alterar_anuncio/id/'.$codigo_anuncio);
+			$this->irpara(DOMINIO . $this->_controller . '/alterar_anuncio/id/' . $codigo_anuncio);
 		}
-
 	}
 
-	public function classificados_comprar_plano(){
+	public function classificados_comprar_plano()
+	{
 
 		$this->autenticado();
 
@@ -16729,47 +16844,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -16779,11 +16892,12 @@ class index extends controller {
 		$dados['botao_style'] = $botao_style;
 
 
- 		//carrega view e envia dados para a tela
-		$this->view('classificados.comprar.plano', $dados);		
+		//carrega view e envia dados para a tela
+		$this->view('classificados.comprar.plano', $dados);
 	}
 
-	public function classificados_ativar_anuncio(){
+	public function classificados_ativar_anuncio()
+	{
 
 		$this->autenticado();
 
@@ -16793,14 +16907,14 @@ class index extends controller {
 
 		$codigo_anuncio = $this->get('codigo');
 
-		if(!$codigo_anuncio){
+		if (!$codigo_anuncio) {
 			echo "Ocorreu um erro.";
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
+		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
 			echo "Ocorreu um erro.";
 			exit;
 		}
@@ -16809,34 +16923,33 @@ class index extends controller {
 
 
 		$cadastro = new model_cadastro();
-		$dados['data_dados'] = $cadastro->dados_usuario($this->_cod_usuario);		
+		$dados['data_dados'] = $cadastro->dados_usuario($this->_cod_usuario);
 
 		// lista planos
 
 		$lista_pedidos = array();
 		$n = 0;
 
-		if($dados['data_dados']->anuncio_gratis == 0){
+		if ($dados['data_dados']->anuncio_gratis == 0) {
 
 			$conexao = new mysql();
 			$coisas = $conexao->executar("SELECT * FROM classificados_planos WHERE id='1' ");
 			$data = $coisas->fetch_object();
 
-			if($data->limite != 0){
+			if ($data->limite != 0) {
 
 				$lista_pedidos[$n]['id'] = 1;
 				$lista_pedidos[$n]['codigo'] = 1;
 				$lista_pedidos[$n]['titulo'] = 'Gratis';
 
-				$n++;	
-
+				$n++;
 			}
 		}
 
 		$conexao = new mysql();
-		$coisas = $conexao->executar("SELECT * FROM classificados_pedidos WHERE cadastro='".$this->_cod_usuario."' AND status='2' ");
-		while($data = $coisas->fetch_object()){
-			if($data->plano_limite > $data->plano_utilizado){
+		$coisas = $conexao->executar("SELECT * FROM classificados_pedidos WHERE cadastro='" . $this->_cod_usuario . "' AND status='2' ");
+		while ($data = $coisas->fetch_object()) {
+			if ($data->plano_limite > $data->plano_utilizado) {
 
 				$lista_pedidos[$n]['id'] = $data->id;
 				$lista_pedidos[$n]['codigo'] = $data->codigo;
@@ -16860,47 +16973,45 @@ class index extends controller {
 		$coisas = $conexao->executar("SELECT * FROM layout_botoes WHERE codigo='$data_detalhes->botao_codigo_ped' ");
 		$data = $coisas->fetch_object();
 
-		if(isset($data->codigo)){
+		if (isset($data->codigo)) {
 
 			$botao_style = "
 			<style>
-			a.botao_".$data->codigo.", .botao_".$data->codigo."{
-				border:".$data->borda."px solid ".$data->cor_borda." !important; 
+			a.botao_" . $data->codigo . ", .botao_" . $data->codigo . "{
+				border:" . $data->borda . "px solid " . $data->cor_borda . " !important; 
 			
-				border-radius:".$data->borda_radius."px !important; 
-				color:".$data->cor_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important; 
+				color:" . $data->cor_texto . " !important;
 				cursor:pointer !important;
-				padding-top:".$data->padding_top."px !important;
-				padding-left:".$data->padding_left."px !important;
-				padding-right:".$data->padding_right."px !important;
-				padding-bottom:".$data->padding_bottom."px !important;
+				padding-top:" . $data->padding_top . "px !important;
+				padding-left:" . $data->padding_left . "px !important;
+				padding-right:" . $data->padding_right . "px !important;
+				padding-bottom:" . $data->padding_bottom . "px !important;
 				";
 
-				if($data->imagem_fundo){
+			if ($data->imagem_fundo) {
 
-					$botao_style .= "
-					background-image:url(".DOMINIO."arquivos/img_botoes/".$data->imagem_fundo.") !important;
+				$botao_style .= "
+					background-image:url(" . DOMINIO . "arquivos/img_botoes/" . $data->imagem_fundo . ") !important;
 					background-repeat:no-repeat !important; 
 					background-size:cover !important; 
 					background-position:center !important;
 					";
-
-				}
-
-				$botao_style .= "
 			}
-			a.botao_".$data->codigo.":hover, .botao_".$data->codigo.":hover {
+
+			$botao_style .= "
+			}
+			a.botao_" . $data->codigo . ":hover, .botao_" . $data->codigo . ":hover {
 				
 				
-				border-radius:".$data->borda_radius."px !important;
-				color:".$data->cor_sel_texto." !important;
+				border-radius:" . $data->borda_radius . "px !important;
+				color:" . $data->cor_sel_texto . " !important;
 			}
 
 			</style>
 			";
 
-			$botao_css = "botao_padrao botao_".$data->codigo;
-
+			$botao_css = "botao_padrao botao_" . $data->codigo;
 		} else {
 			$botao_css = "";
 			$botao_style = "";
@@ -16910,17 +17021,18 @@ class index extends controller {
 		$dados['botao_style'] = $botao_style;
 
 
- 		//carrega view e envia dados para a tela
-		$this->view('classificados.ativar.anuncio', $dados);		
+		//carrega view e envia dados para a tela
+		$this->view('classificados.ativar.anuncio', $dados);
 	}
 
-	public function classificados_confere_plano(){
+	public function classificados_confere_plano()
+	{
 
 		$valores = new model_valores();
 
 		$codigo = $this->post('codigo');
 
-		if($codigo){
+		if ($codigo) {
 
 			$conexao = new mysql();
 			$coisas = $conexao->executar("SELECT * FROM classificados_planos WHERE codigo='$codigo' ");
@@ -16928,19 +17040,19 @@ class index extends controller {
 
 			$valor_tratado = $valores->trata_valor($data->valor);
 
-			if($data->meses != 0){
-				if($data->meses == 1){
+			if ($data->meses != 0) {
+				if ($data->meses == 1) {
 					$periodo = "1 Mês";
 				} else {
-					$periodo = $data->meses." Meses";
+					$periodo = $data->meses . " Meses";
 				}
 			} else {
-				if($data->dias == 1){
+				if ($data->dias == 1) {
 					$periodo = "1 Dia";
 				} else {
-					$periodo = $data->dias." dias";
+					$periodo = $data->dias . " dias";
 				}
-			}		
+			}
 
 			echo "
 			<div class='classificados_planos_div' >
@@ -16949,15 +17061,15 @@ class index extends controller {
 
 			<div class='classificados_planos_meses' >Número de anúncios: <strong>$data->limite</strong></div>
 
-			<div class='classificados_planos_meses' >Valor do plano: <strong>R$ ".$valor_tratado."</strong></div>
+			<div class='classificados_planos_meses' >Valor do plano: <strong>R$ " . $valor_tratado . "</strong></div>
 
 			</div>
 			";
-
 		}
 	}
 
-	public function classificados_comprar_plano_grv(){
+	public function classificados_comprar_plano_grv()
+	{
 
 		$this->autenticado();
 
@@ -16966,15 +17078,15 @@ class index extends controller {
 
 		$plano = $this->post('plano');
 
-		if(!$plano){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		if (!$plano) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM classificados_planos WHERE codigo='$plano' ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
@@ -16985,16 +17097,16 @@ class index extends controller {
 
 		$db = new mysql();
 		$db->inserir("classificados_pedidos", array(
-			"codigo"=>$codigo,
-			"cadastro"=>$this->_cod_usuario,
-			"plano"=>$plano,
-			"plano_titulo"=>$data_plano->titulo,
-			"plano_valor"=>$data_plano->valor,
-			"plano_periodo_meses"=>$data_plano->meses,
-			"plano_periodo_dias"=>$data_plano->dias,
-			"plano_limite"=>$data_plano->limite,
-			"data"=>$time,
-			"status"=>0
+			"codigo" => $codigo,
+			"cadastro" => $this->_cod_usuario,
+			"plano" => $plano,
+			"plano_titulo" => $data_plano->titulo,
+			"plano_valor" => $data_plano->valor,
+			"plano_periodo_meses" => $data_plano->meses,
+			"plano_periodo_dias" => $data_plano->dias,
+			"plano_limite" => $data_plano->limite,
+			"data" => $time,
+			"status" => 0
 		));
 
 		$id_pedido = $db->ultimo_id();
@@ -17005,8 +17117,8 @@ class index extends controller {
 		$coisas_pagamento = $conexao->Executar("SELECT * FROM pagamento WHERE id='3' ");
 		$data_pagamento = $coisas_pagamento->fetch_object();
 
-		$enderecoderetorno = DOMINIO."index/classificados_cliente/pagamento/".$codigo."/";
-		$enderecoderetorno_sucesso = DOMINIO."index/classificados_cliente/pagamento/".$codigo."/";
+		$enderecoderetorno = DOMINIO . "index/classificados_cliente/pagamento/" . $codigo . "/";
+		$enderecoderetorno_sucesso = DOMINIO . "index/classificados_cliente/pagamento/" . $codigo . "/";
 
 		require_once('vendor/autoload.php');
 
@@ -17021,7 +17133,7 @@ class index extends controller {
 		$valor_tratado_mp = str_replace(",", ".", $valor_tratado_mp);
 
 		$item = new MercadoPago\Item();
-		$item->title = "Pedido ".$id_pedido;
+		$item->title = "Pedido " . $id_pedido;
 		$item->quantity = 1;
 		$item->unit_price = $valor_tratado_mp;
 		$preference->items = array($item);
@@ -17032,29 +17144,28 @@ class index extends controller {
 			"pending" => "$enderecoderetorno_sucesso"
 		);
 		$preference->auto_return = "all";
-		$preference->notification_url = DOMINIO."sistema/mercadopago_retorno/index.php";					 
+		$preference->notification_url = DOMINIO . "sistema/mercadopago_retorno/index.php";
 		$preference->save();
 
-		if($preference->id){
+		if ($preference->id) {
 
 			$codigo_transacao = $preference->id;
 
 			$conexao = new mysql();
-			$conexao->alterar("classificados_pedidos", array(				
-				"status"=>1,
-				"id_transacao"=>$codigo_transacao
-			), " codigo='".$codigo."' ");
+			$conexao->alterar("classificados_pedidos", array(
+				"status" => 1,
+				"id_transacao" => $codigo_transacao
+			), " codigo='" . $codigo . "' ");
 
-			$this->irpara(DOMINIO.'index/classificados_cliente/pagamento/'.$codigo);
-
+			$this->irpara(DOMINIO . 'index/classificados_cliente/pagamento/' . $codigo);
 		} else {
 			echo "Ocorreu um erro!";
 			exit;
 		}
-
 	}
 
-	public function classificados_ativar_anuncio_grv(){
+	public function classificados_ativar_anuncio_grv()
+	{
 
 		$this->autenticado();
 
@@ -17064,22 +17175,22 @@ class index extends controller {
 
 		$codigo_anuncio = $this->post('anuncio');
 
-		if(!$codigo_anuncio){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		if (!$codigo_anuncio) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$plano = $this->post('plano');
 
-		if(!$plano){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		if (!$plano) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='".$this->_cod_usuario."'  ");
-		if($exec->num_rows != 1){
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+		$exec = $db->executar("SELECT * FROM classificados WHERE codigo='$codigo_anuncio' AND cadastro='" . $this->_cod_usuario . "'  ");
+		if ($exec->num_rows != 1) {
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
@@ -17087,13 +17198,13 @@ class index extends controller {
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM classificados_pedidos WHERE codigo='$plano' ");
-		if($exec->num_rows != 1){
+		if ($exec->num_rows != 1) {
 
-			if($plano == 1){
+			if ($plano == 1) {
 
 				$cadastro = new model_cadastro();
 				$data_dados = $cadastro->dados_usuario($this->_cod_usuario);
-				if($data_dados->anuncio_gratis == 0){
+				if ($data_dados->anuncio_gratis == 0) {
 
 					$plano = $this->gera_codigo();
 
@@ -17104,78 +17215,76 @@ class index extends controller {
 
 					$db = new mysql();
 					$db->inserir("classificados_pedidos", array(
-						"codigo"=>$plano,
-						"cadastro"=>$this->_cod_usuario,
-						"plano"=>1,
-						"plano_titulo"=>'Gratis',
-						"plano_valor"=>0,
-						"plano_periodo_meses"=>$data_plano2->meses,
-						"plano_periodo_dias"=>$data_plano2->dias,
-						"plano_limite"=>$data_plano2->limite,
-						"data"=>$time,
-						"status"=>2
+						"codigo" => $plano,
+						"cadastro" => $this->_cod_usuario,
+						"plano" => 1,
+						"plano_titulo" => 'Gratis',
+						"plano_valor" => 0,
+						"plano_periodo_meses" => $data_plano2->meses,
+						"plano_periodo_dias" => $data_plano2->dias,
+						"plano_limite" => $data_plano2->limite,
+						"data" => $time,
+						"status" => 2
 					));
 
 					$db = new mysql();
 					$db->alterar("cadastro", array(
-						"anuncio_gratis"=>1
-					), " codigo='".$this->_cod_usuario."' ");
+						"anuncio_gratis" => 1
+					), " codigo='" . $this->_cod_usuario . "' ");
 
 					$db = new mysql();
 					$exec = $db->executar("SELECT * FROM classificados_pedidos WHERE codigo='$plano' ");
-
 				}
-
 			} else {
 
-				$this->irpara(DOMINIO.'index/classificados_cliente');
+				$this->irpara(DOMINIO . 'index/classificados_cliente');
 				exit;
 			}
 		}
 
-		$data_plano = $exec->fetch_object();		
+		$data_plano = $exec->fetch_object();
 
 		$plano_utilizado = $data_plano->plano_utilizado + 1;
 
-		if($plano_utilizado > $data_plano->plano_limite){
+		if ($plano_utilizado > $data_plano->plano_limite) {
 			$this->msg('O plano exedeu o numero de anúncios!');
-			$this->irpara(DOMINIO.'index/classificados_cliente');
+			$this->irpara(DOMINIO . 'index/classificados_cliente');
 			exit;
 		}
 
 		$db = new mysql();
 		$db->alterar("classificados_pedidos", array(
-			"plano_utilizado"=>$plano_utilizado
+			"plano_utilizado" => $plano_utilizado
 		), " codigo='$plano' ");
 
 		$time = time();
 
 		$db = new mysql();
 		$db->inserir("classificados_pedidos_utilizacoes", array(
-			"pedido"=>$plano,
-			"data"=>$time,
-			"anuncio"=>$codigo_anuncio,
-			"anuncio_ref"=>$data_anuncio->id
+			"pedido" => $plano,
+			"data" => $time,
+			"anuncio" => $codigo_anuncio,
+			"anuncio_ref" => $data_anuncio->id
 		));
 
-		if($data_plano->plano_periodo_meses == 0){
-			$vencimento = strtotime('+ '.$data_plano->plano_periodo_dias.' days');
+		if ($data_plano->plano_periodo_meses == 0) {
+			$vencimento = strtotime('+ ' . $data_plano->plano_periodo_dias . ' days');
 		} else {
-			$vencimento = strtotime('+ '.$data_plano->plano_periodo_meses.' months');
+			$vencimento = strtotime('+ ' . $data_plano->plano_periodo_meses . ' months');
 		}
 
 		$db = new mysql();
 		$db->alterar("classificados",  array(
-			"anuncio_vencimento"=>$vencimento
+			"anuncio_vencimento" => $vencimento
 		), " id='$data_anuncio->id' ");
 
 
-		$this->irpara(DOMINIO.'index/classificados_cliente');
+		$this->irpara(DOMINIO . 'index/classificados_cliente');
 	}
 
-	public function cookies_aceitar(){
+	public function cookies_aceitar()
+	{
 		$_SESSION['cookies'] = 'sim';
 		echo "ok";
 	}
-
 }

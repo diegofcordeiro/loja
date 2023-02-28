@@ -1227,7 +1227,7 @@ class index extends controller
 									inner join produto_categoria_sel t2 on t1.codigo = t2.produto_codigo 
 									inner join produto_categoria t3 on t2.categoria_codigo = t3.codigo 
 									inner join (select max(id) id, codigo, imagem from produto_imagem group by codigo) t4 on t1.codigo=t4.codigo
-									WHERE 1 = 1 and t3.id = $id and t1.only_combo = 1");
+									WHERE 1 = 1 and t3.id = $id and t1.only_combo = 0");
 
 
 		$new = array();

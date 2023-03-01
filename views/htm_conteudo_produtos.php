@@ -404,6 +404,9 @@ $ordem = $conteudo_sessao['ordem'];
 									?>
 								</div>
 								<div class="bottom_card" style="grid-template-columns: 1fr !Important;">
+									<div><a href="<?= $saiba_mais ?>" onclick="acessando(this);">
+											<p class="saibamais_btn">SAIBA MAIS</p>
+										</a></div>
 									<?php $link = URL_BASE . 'webapp/integra.php?token=' . base64_encode($_SESSION['usuario_cpf']); ?>
 									<a href="<?= $link ?>" class="botao_comprar">ASSISTIR</a>
 								</div>

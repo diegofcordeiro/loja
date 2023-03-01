@@ -2822,7 +2822,8 @@ class index extends controller
 				$senha_md5 = md5($senha_md5);
 				$this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome, $data_confere->email, $data_confere->fisica_cpf, $data_confere->telefone, $data_confere->endereco, $data_confere->numero, $data_confere->bairro, $data_confere->cidade, $data_confere->estado, $add_data_gerado, $data_confere->fisica_nascimento, $data_confere->fisica_sexo, $senha_md5);
 
-				$this->irpara(DOMINIO . 'index/entrar');
+				$this->login($data_confere->fisica_cpf, $senha_md5);
+				// $this->irpara(DOMINIO . 'index/entrar');
 			} else {
 
 				$this->irpara(DOMINIO . 'index/entrar');
@@ -11293,17 +11294,22 @@ class index extends controller
 		$this->view('entrar', $dados);
 	}
 
-	public function login()
+	public function login($email = null, $senha = null)
 	{
 
 		$time = time();
 		$ip = $_SERVER["REMOTE_ADDR"];
 		$prefixosessao = $this->_sessao . '_';
+		if ($email == null) {
+			$email = $this->post('login_usuario');
+			$email = str_replace("-", "", $email);
+			$email = str_replace(".", "", $email);
+			$senha = $this->post('login_senha');
+		} else {
+			$email = str_replace("-", "", $email);
+			$email = str_replace(".", "", $email);
+		}
 
-		$email = $this->post('login_usuario');
-		$email = str_replace("-", "", $email);
-		$email = str_replace(".", "", $email);
-		$senha = $this->post('login_senha');
 
 		if ($email and $senha) {
 

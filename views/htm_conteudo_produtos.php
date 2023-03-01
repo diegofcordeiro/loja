@@ -1881,7 +1881,7 @@ $ordem = $conteudo_sessao['ordem'];
 			loop: false,
 			responsive: {
 				0: {
-					items: 2
+					items: 1
 				},
 				550: {
 					items: 2

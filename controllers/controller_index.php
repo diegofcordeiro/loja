@@ -2589,6 +2589,19 @@ class index extends controller
 					}
 				}
 			}
+			$fisica_cpf = str_replace("-", "", $fisica_cpf);
+			$fisica_cpf = str_replace(".", "", $fisica_cpf);
+
+			if ($fisica_cpf) {
+				$conexao = new mysql();
+				$coisas = $conexao->Executar("SELECT * FROM cadastro WHERE fisica_cpf='$fisica_cpf' ");
+				$linhas = $coisas->num_rows;
+
+				if ($linhas != 0) {
+					retorno_erro("Este CPF/DOCUMENTO esta sendo utilizado por outro cadastro!<br>Informe um CPF/DOCUMENTO diferente ou tente a recuperação de senha.");
+					exit;
+				}
+			}
 
 			$email_lms = $this->check_email_lms($email, $fisica_cpf);
 			if ($email_lms == 1) {
@@ -2597,12 +2610,8 @@ class index extends controller
 				$last_id = $this->adiciona_email_lms($email);
 			}
 
-			//gravar no banco de dados
 			$codigo = substr(time() . rand(10000, 99999), -15);
 			$tipo = "F";
-
-			$fisica_cpf = str_replace("-", "", $fisica_cpf);
-			$fisica_cpf = str_replace(".", "", $fisica_cpf);
 
 			$db = new mysql();
 			$db->inserir("cadastro", array(

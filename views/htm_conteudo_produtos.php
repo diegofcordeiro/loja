@@ -316,7 +316,8 @@ $ordem = $conteudo_sessao['ordem'];
 								$esconder_valor = true;
 							}
 						}
-						$endereco = DOMINIO . $controller . "/produto/id/" . $value->id . "/";
+						// $endereco = DOMINIO . $controller . "/produto/id/" . $value->id . "/";
+						$endereco = URL_BASE . 'webapp/integra.php?token=' . base64_encode($_SESSION['usuario_cpf']);
 						$endereco_img = DOMINIO . "/arquivos/img_produtos_g/" . $value->codigo . "/";
 
 						$botao_comprar = str_replace("aquivaiolink", " href='" . $endereco . "' ", $conteudo_sessao->botao);

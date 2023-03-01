@@ -1459,16 +1459,17 @@ $ordem = $conteudo_sessao['ordem'];
 									inner join (select max(id) id, codigo, imagem from produto_imagem group by codigo) t4 on t1.codigo=t4.codigo
 									WHERE 1 = 1 and t3.id = $id_ and t1.only_combo = 0");
 							$linhas = $coisas->num_rows;
-							print_r($linhas);
+							if ($linhas > 0) {
 
 						?>
-							<a href="<?= $endereco ?>">
-								<div class="item item_cat">
-									<img style="" src="<?= DOMINIO . 'arquivos/p/' ?><?= $c['imagem'] ?>" alt="">
-									<p><?= $c['titulo'] ?></p>
-								</div>
-							</a>
-						<?php } ?>
+								<a href="<?= $endereco ?>">
+									<div class="item item_cat">
+										<img style="" src="<?= DOMINIO . 'arquivos/p/' ?><?= $c['imagem'] ?>" alt="">
+										<p><?= $c['titulo'] ?></p>
+									</div>
+								</a>
+						<?php }
+						} ?>
 					</div>
 				</div>
 			</div>

@@ -2822,7 +2822,7 @@ class index extends controller
 				$senha_md5 = md5($senha_md5);
 				$this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome, $data_confere->email, $data_confere->fisica_cpf, $data_confere->telefone, $data_confere->endereco, $data_confere->numero, $data_confere->bairro, $data_confere->cidade, $data_confere->estado, $add_data_gerado, $data_confere->fisica_nascimento, $data_confere->fisica_sexo, $senha_md5);
 
-				$this->login($data_confere->fisica_cpf, $senha_md5);
+				$this->login($data_confere->fisica_cpf, $senha_confirma);
 				// $this->irpara(DOMINIO . 'index/entrar');
 			} else {
 
@@ -11296,7 +11296,6 @@ class index extends controller
 
 	public function login($email = null, $senha = null)
 	{
-
 		$time = time();
 		$ip = $_SERVER["REMOTE_ADDR"];
 		$prefixosessao = $this->_sessao . '_';
@@ -11309,11 +11308,6 @@ class index extends controller
 			$email = str_replace("-", "", $email);
 			$email = str_replace(".", "", $email);
 		}
-
-		print_r($email);
-		echo '<br>';
-		print_r($senha);
-		exit;
 
 		if ($email and $senha) {
 

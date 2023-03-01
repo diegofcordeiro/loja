@@ -1877,7 +1877,7 @@
 
 		function buscar_endereco() {
 
-			$('#endereco_div_load').html("<div style='text-align:center;'><img src='<?= LAYOUT ?>img/loading.gif' style='width:25px;'></div>");
+			$('#endereco_div_load').html("<div style='text-align:center;'><img src='<?= LAYOUT ?>img/loading.gif' style='width:250px;'></div>");
 
 			var cep = $('#cadastro_cep').val();
 

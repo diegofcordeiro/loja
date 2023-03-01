@@ -1661,9 +1661,7 @@
 
 					$conteudo_id = $value_layout['id'];
 					$conteudo_sessao = $value_layout['conteudo'];
-					$id_script = '#slider_topo_' . $conteudo_id;
-
-	?>
+					$id_script = '#slider_topo_' . $conteudo_id; ?>
 					<script>
 						<?php if ($conteudo_sessao['data_topo']->modelo  == 11) { ?>
 
@@ -1803,13 +1801,13 @@
 	<?php } ?>
 
 	<script type="text/javascript">
-		const passwordInput = document.querySelector("#password")
-		const eye = document.querySelector("#eye")
-		eye.addEventListener("click", function() {
-			this.classList.toggle("fa-eye-slash")
-			const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
-			passwordInput.setAttribute("type", type)
-		})
+		// const passwordInput = document.querySelector("#password")
+		// const eye = document.querySelector("#eye")
+		// eye.addEventListener("click", function() {
+		// 	this.classList.toggle("fa-eye-slash")
+		// 	const type = passwordInput.getAttribute("type") === "password" ? "text" : "password"
+		// 	passwordInput.setAttribute("type", type)
+		// })
 
 		$("#Brasil").click(function() {
 			$("#brasil_div").show();

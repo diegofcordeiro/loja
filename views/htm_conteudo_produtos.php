@@ -1506,9 +1506,9 @@ $ordem = $conteudo_sessao['ordem'];
 		</div>
 		<?php
 		$produtos_lista = $conteudo_sessao['lista'];
-		// echo'<pre>';print_r($produtos_lista);exit;
+
 		if ($conteudo_config->formato == 1) {
-			if (isset($lista_canal) and (count($lista_canal) > 0)) {
+			if (isset($lista_canal) && (count($lista_canal) > 0)) {
 				foreach ($lista_canal as $key => $canal) {
 					// echo'<pre>';print_r($canal);exit;						
 					$itens_listados = 1;
@@ -1736,7 +1736,7 @@ $ordem = $conteudo_sessao['ordem'];
 									</div>
 								</div>
 							</div>
-		<?php }
+			<?php }
 						$itens_listados++;
 					}
 					echo '</div>';
@@ -1751,39 +1751,41 @@ $ordem = $conteudo_sessao['ordem'];
 				}
 			}
 		}
-		?>
-		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile">
-			<br> <br> <br>
-			<div class="content flex-row-fluid" id="kt_content">
-				<div class="row gy-5 g-xl-8">
-					<div class="col-xl-12">
-						<h4>Canais</h4>
-						<div class="card card-xl-stretch mb-5 mb-xl-8">
-							<div class="container_flex snaps-inline owl-carousel owl-theme">
-								<?php
-								$conexao = new mysql();
-								$exec2 = mysqli_query($conexao, "SELECT * FROM `canal` ");
-								$canal = $exec2->fetch_all(MYSQLI_ASSOC);
-								foreach ($canal as $c) {
-									$id = $c['id_canal'];
-									$endereco = DOMINIO . $controller . "/canais/id/" . $c['id_canal'];
-								?>
-									<a href="<?= $endereco ?>">
-										<div class="item item_canais" style="text-align: center;">
-											<!-- <img style="height: 170px;width:170px;margin-bottom: 15px;border-radius: 170px;" src="<?= DOMINIO . 'arquivos/img_canais/' . $id ?>/<?= $c['profile'] ?>" alt=""> -->
-											<div class="img_foto_" style="background-image: url(<?= DOMINIO . 'arquivos/img_canais/' . $id ?>/<?= $c['profile'] ?>);margin: 0 auto;margin-bottom: 10px;"></div>
+		if (isset($lista_canal) && (count($lista_canal) > 0)) {
+			?>
+			<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile">
+				<br> <br> <br>
+				<div class="content flex-row-fluid" id="kt_content">
+					<div class="row gy-5 g-xl-8">
+						<div class="col-xl-12">
+							<h4>Canais</h4>
+							<div class="card card-xl-stretch mb-5 mb-xl-8">
+								<div class="container_flex snaps-inline owl-carousel owl-theme">
+									<?php
+									$conexao = new mysql();
+									$exec2 = mysqli_query($conexao, "SELECT * FROM `canal` ");
+									$canal = $exec2->fetch_all(MYSQLI_ASSOC);
+									foreach ($canal as $c) {
+										$id = $c['id_canal'];
+										$endereco = DOMINIO . $controller . "/canais/id/" . $c['id_canal'];
+									?>
+										<a href="<?= $endereco ?>">
+											<div class="item item_canais" style="text-align: center;">
+												<!-- <img style="height: 170px;width:170px;margin-bottom: 15px;border-radius: 170px;" src="<?= DOMINIO . 'arquivos/img_canais/' . $id ?>/<?= $c['profile'] ?>" alt=""> -->
+												<div class="img_foto_" style="background-image: url(<?= DOMINIO . 'arquivos/img_canais/' . $id ?>/<?= $c['profile'] ?>);margin: 0 auto;margin-bottom: 10px;"></div>
 
-											<p><?= $c['nm_canal'] ?></p>
-										</div>
-									</a>
-								<?php } ?>
+												<p><?= $c['nm_canal'] ?></p>
+											</div>
+										</a>
+									<?php } ?>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<br> <br> <br>
 			</div>
-			<br> <br> <br>
-		</div>
+		<?php } ?>
 	</div>
 </div>
 <script type="text/javascript" src="<?= LAYOUT ?>js/jquery-2.2.4.min.js"></script>

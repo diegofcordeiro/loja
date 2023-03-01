@@ -1434,20 +1434,47 @@ $ordem = $conteudo_sessao['ordem'];
 		?>
 		<div class="container">
 			<br><br><br>
-			<div class="row" style="background-color: #f9f9f9;">
-				<div class='col-xs-12 col-sm-12 col-md-12'>
-					<h4>Principais categorias</h4>
-					<div class="container_flex_cat_link">
-						<?php
-						$conexao = new mysql();
-						$exec = mysqli_query($conexao, "SELECT * FROM `produto_categoria` ");
-						$cat = $exec->fetch_all(MYSQLI_ASSOC);
-
-						foreach ($cat as $c) {
-							$endereco = DOMINIO . $controller . "/cat_produto/id/" . $c['id'];
-							$id_ = $c['id'];
+			<?php
+			$conexao = new mysql();
+			$exec = mysqli_query($conexao, "SELECT * FROM `produto_categoria` ");
+			$cat = $exec->fetch_all(MYSQLI_ASSOC);
+			$exits = 0;
+			foreach ($cat as $c) {
+				$endereco = DOMINIO . $controller . "/cat_produto/id/" . $c['id'];
+				$id_ = $c['id'];
+				$conexao = new mysql();
+				$coisas = $conexao->Executar("SELECT 
+							t6.nome as autor_nome,
+							t3.titulo as titulo_produto,
+							t4.imagem,
+							t1.* 
+							FROM produto t1 
+							inner join autor t6 on t1.autor = t6.id
+							inner join produto_categoria_sel t2 on t1.codigo = t2.produto_codigo 
+							inner join produto_categoria t3 on t2.categoria_codigo = t3.codigo 
+							inner join (select max(id) id, codigo, imagem from produto_imagem group by codigo) t4 on t1.codigo=t4.codigo
+							WHERE 1 = 1 and t3.id = $id_ and t1.only_combo = 0");
+				$linhas = $coisas->num_rows;
+				if ($linhas > 0) {
+					$exits++;
+				}
+			}
+			?>
+			<?php if ($exits > 0) { ?>
+				<div class="row" style="background-color: #f9f9f9;">
+					<div class='col-xs-12 col-sm-12 col-md-12'>
+						<h4>Principais categorias</h4>
+						<div class="container_flex_cat_link">
+							<?php
 							$conexao = new mysql();
-							$coisas = $conexao->Executar("SELECT 
+							$exec = mysqli_query($conexao, "SELECT * FROM `produto_categoria` ");
+							$cat = $exec->fetch_all(MYSQLI_ASSOC);
+
+							foreach ($cat as $c) {
+								$endereco = DOMINIO . $controller . "/cat_produto/id/" . $c['id'];
+								$id_ = $c['id'];
+								$conexao = new mysql();
+								$coisas = $conexao->Executar("SELECT 
 									t6.nome as autor_nome,
 									t3.titulo as titulo_produto,
 									t4.imagem,
@@ -1458,21 +1485,23 @@ $ordem = $conteudo_sessao['ordem'];
 									inner join produto_categoria t3 on t2.categoria_codigo = t3.codigo 
 									inner join (select max(id) id, codigo, imagem from produto_imagem group by codigo) t4 on t1.codigo=t4.codigo
 									WHERE 1 = 1 and t3.id = $id_ and t1.only_combo = 0");
-							$linhas = $coisas->num_rows;
-							if ($linhas > 0) {
+								$linhas = $coisas->num_rows;
+								if ($linhas > 0) {
 
-						?>
-								<a href="<?= $endereco ?>">
-									<div class="item item_cat">
-										<img style="" src="<?= DOMINIO . 'arquivos/p/' ?><?= $c['imagem'] ?>" alt="">
-										<p><?= $c['titulo'] ?></p>
-									</div>
-								</a>
-						<?php }
-						} ?>
+							?>
+									<a href="<?= $endereco ?>">
+										<div class="item item_cat">
+											<img style="" src="<?= DOMINIO . 'arquivos/p/' ?><?= $c['imagem'] ?>" alt="">
+											<p><?= $c['titulo'] ?></p>
+										</div>
+									</a>
+							<?php }
+							} ?>
+						</div>
 					</div>
 				</div>
-			</div>
+			<?php } ?>
+
 			<br> <br> <br>
 		</div>
 		<?php

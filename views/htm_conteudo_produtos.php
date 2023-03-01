@@ -403,7 +403,7 @@ $ordem = $conteudo_sessao['ordem'];
 									}
 									?>
 								</div>
-								<div class="bottom_card" style="grid-template-columns: 1fr !Important;">
+								<div class="bottom_card" style="">
 									<div>
 										<a href="<?= $saiba_mais ?>" onclick="acessando(this);">
 											<p class="saibamais_btn">SAIBA MAIS</p>

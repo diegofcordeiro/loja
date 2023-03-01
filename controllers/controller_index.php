@@ -2615,7 +2615,7 @@ class index extends controller
 				"fisica_cpf" => "$fisica_cpf",
 				"email" => "$email",
 				"senha" => "000",
-				"etapa" => 1
+				"etapa" => 2
 			));
 
 			$this->irpara(DOMINIO . 'index/cadastro_basico/codigo/' . $codigo);

@@ -2802,8 +2802,8 @@ class index extends controller
 				";
 
 				// envia o email
-				// $envio = new model_envio();
-				// $retorno = $envio->enviar("Cadastro concluído com sucesso!", $msg, array("0"=>"$email"));
+				$envio = new model_envio();
+				$retorno = $envio->enviar("Cadastro concluído com sucesso!", $msg, array("0" => "$email"));
 
 				// echo "<div style='padding-top:20px; pading-left:20px; padding-right:20px;'>".$textos->conteudo('159649081566934')."</div>";
 

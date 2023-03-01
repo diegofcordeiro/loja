@@ -29,6 +29,7 @@
 	<link href="<?= LAYOUT ?>api/bxslider/jquery.bxslider.css" rel="stylesheet" type="text/css" />
 	<link href="<?= LAYOUT ?>api/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.11.0.css" type="text/css" media="all">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 	<?php include_once('htm_css.php'); ?>
 	<?php include_once('htm_css_resp.php'); ?>
@@ -175,8 +176,8 @@
 
 		.fa-eye {
 			position: absolute;
-			top: 38%;
-			right: 8%;
+			top: 15%;
+			right: 5%;
 			cursor: pointer;
 			color: #646464;
 		}

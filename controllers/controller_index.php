@@ -11310,6 +11310,10 @@ class index extends controller
 			$email = str_replace(".", "", $email);
 		}
 
+		print_r($email);
+		echo '<br>';
+		print_r($senha);
+		exit;
 
 		if ($email and $senha) {
 

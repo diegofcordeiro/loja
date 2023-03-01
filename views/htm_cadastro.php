@@ -176,8 +176,8 @@
 
 		.fa-eye {
 			position: absolute;
-			top: 15%;
-			right: 5%;
+			top: 18%;
+			right: 7%;
 			cursor: pointer;
 			color: #646464;
 		}

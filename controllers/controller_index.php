@@ -8482,7 +8482,7 @@ class index extends controller
 			$fisica_cpf = $cpf_outros;
 		}
 
-		$email_lms = $this->check_email_lms($email, $fisica_cpf);
+		$email_lms = $this->check_email_lms_id($email, $fisica_cpf, $lms_id);
 		if ($email_lms == 1) {
 			retorno_erro("E-mail ou CPF já cadastrado.");
 			exit;
@@ -8573,6 +8573,19 @@ class index extends controller
 		$retorno['erro_msg'] = '<strong>Seu cadastro foi atualizado com sucesso!</strong>';
 		echo json_encode($retorno);
 		exit;
+	}
+
+	public function check_email_lms_id($email = NULL, $fisica_cpf, $id)
+	{
+		require('conexao.php');
+		$sql = "SELECT email FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf' and id != '$id';";
+		if ($result = $mysqli->query($sql)) {
+			if ($result->num_rows == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
 	}
 
 	public function update_clients_vindi()

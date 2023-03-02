@@ -8462,19 +8462,19 @@ class index extends controller
 			// exit;
 		}
 		if (!$cep) {
-			if ($is_brasil == 1) {
-				retorno_erro("CEP inválido");
-				exit;
-			}
+			// if ($is_brasil == 1) {
+			// 	retorno_erro("CEP inválido");
+			// 	exit;
+			// }
 		}
 
-		if ($endereco and $numero and $bairro and $estado and $cidade) {
-		} else {
-			if ($is_brasil == 1) {
-				retorno_erro("Preencha corretamente seus dados de endereço!");
-				exit;
-			}
-		}
+		// if ($endereco and $numero and $bairro and $estado and $cidade) {
+		// } else {
+		// 	if ($is_brasil == 1) {
+		// 		retorno_erro("Preencha corretamente seus dados de endereço!");
+		// 		exit;
+		// 	}
+		// }
 		if ($usar_senha == 1) {
 			$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 

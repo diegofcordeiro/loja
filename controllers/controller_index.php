@@ -8390,7 +8390,7 @@ class index extends controller
 		//validar cpf ou cnpj simples
 		if ($tipo == 'F') {
 
-			if ($is_brasil == 1) {
+			if ($country_document == 1) {
 				if (!$fisica_cpf) {
 					retorno_erro("Digite corretamente seu CPF1.");
 					exit;

@@ -8482,7 +8482,11 @@ class index extends controller
 			$fisica_cpf = $cpf_outros;
 		}
 
-
+		$email_lms = $this->check_email_lms($email, $fisica_cpf);
+		if ($email_lms == 1) {
+			retorno_erro("E-mail ou CPF já cadastrado.");
+			exit;
+		}
 		if ($usar_senha == 1) {
 			$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 			$senha_md5 = md5($senha);

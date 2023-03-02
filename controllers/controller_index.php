@@ -8341,7 +8341,9 @@ class index extends controller
 		$estado = $this->post('estado');
 		$cidade = $this->post('cidade');
 		$is_brasil = $this->post('is_brasil');
-
+		echo 'aqui: ';
+		print_r($is_brasil);
+		exit;
 
 		//validar email consultando no banco
 		if (!$email) {

@@ -8586,6 +8586,7 @@ class index extends controller
 	{
 		require('conexao.php');
 		$sql = "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';";
+		print_r('<br>QUERY: ' . "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';");
 		if ($result = $mysqli->query($sql)) {
 			$obj = $result->fetch_object();
 			print_r('id_banco: ' . $obj->id);

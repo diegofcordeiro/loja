@@ -8342,7 +8342,7 @@ class index extends controller
 		$cidade = $this->post('cidade');
 		$is_brasil = $_POST['is_brasil'];
 		$country_document = $_POST['country_document'];
-
+		$lms_id = $_POST['lms_id'];
 
 		//validar email consultando no banco
 		if (!$email) {
@@ -8475,6 +8475,11 @@ class index extends controller
 		// 		exit;
 		// 	}
 		// }
+		require('conexao.php');
+
+
+
+
 		if ($usar_senha == 1) {
 			$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 
@@ -8501,6 +8506,19 @@ class index extends controller
 				"email" => "$email",
 				"senha" => "$senha_tratada"
 			), " codigo='" . $this->_cod_usuario . "' ");
+
+			$sql_update = "UPDATE usuario
+				SET  nome = '$fisica_nome', 
+					 email = '$email', 
+					 cpf = '$fisica_cpf', 
+					 telefone = '$telefone', 
+					 endereco = '$endereco',
+					 numero = '$numero', 
+					 bairro = '$bairro', 
+					 cidade = '$cidade', 
+					 senha = '$senha_tratada'
+				WHERE id = '$lms_id'";
+			$mysqli->query($sql_update);
 		} else {
 
 			$db = new mysql();
@@ -8524,6 +8542,17 @@ class index extends controller
 				"cidade" => "$cidade",
 				"telefone" => "$telefone",
 			), " codigo='" . $this->_cod_usuario . "' ");
+			$sql_update = "UPDATE usuario
+				SET  nome = '$fisica_nome', 
+					 email = '$email', 
+					 cpf = '$fisica_cpf', 
+					 telefone = '$telefone', 
+					 endereco = '$endereco',
+					 numero = '$numero', 
+					 bairro = '$bairro', 
+					 cidade = '$cidade'
+				WHERE id = '$lms_id'";
+			$mysqli->query($sql_update);
 		}
 
 

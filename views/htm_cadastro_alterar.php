@@ -772,6 +772,7 @@
 
 							<div class="div_form"><input type="text" class="form-control cadastro_form" name='email' id='email' placeholder="Digite seu E-mail" value="<?= $data_dados->email ?>"></div>
 							<div class="div_form"><input type="hidden" class="form-control cadastro_form" name='is_brasil' id='is_brasil' placeholder="" value="<?= $data_dados->is_brasil ?>"></div>
+							<div class="div_form"><input type="hidden" class="form-control cadastro_form" name='lms_id' id='lms_id' placeholder="" value="<?= $data_dados->lms_usuario_id ?>"></div>
 
 							<div class="div_form"><input type="password" class="form-control cadastro_form" name='senha' id='senha' placeholder="Digite sua Senha"></div>
 

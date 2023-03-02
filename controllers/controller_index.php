@@ -8416,8 +8416,8 @@ class index extends controller
 				exit;
 			}
 			if (!$fisica_nascimento) {
-				retorno_erro("Informe sua data de nascimento.");
-				exit;
+				// retorno_erro("Informe sua data de nascimento.");
+				// exit;
 			} else {
 
 				// transforma data em inteiro

@@ -8482,6 +8482,7 @@ class index extends controller
 
 		if ($usar_senha == 1) {
 			$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
+			$senha_md5 = md5($senha);
 
 			$db = new mysql();
 			$db->alterar("cadastro", array(
@@ -8504,7 +8505,8 @@ class index extends controller
 				"cidade" => "$cidade",
 				"telefone" => "$telefone",
 				"email" => "$email",
-				"senha" => "$senha_tratada"
+				"senha" => "$senha_tratada",
+				"senha_md5" => "$senha_md5"
 			), " codigo='" . $this->_cod_usuario . "' ");
 
 			$sql_update = "UPDATE usuario
@@ -8516,7 +8518,7 @@ class index extends controller
 					 numero = '$numero', 
 					 bairro = '$bairro', 
 					 cidade = '$cidade', 
-					 senha = '$senha_tratada'
+					 senha = '$senha_md5'
 				WHERE id = '$lms_id'";
 			$mysqli->query($sql_update);
 		} else {

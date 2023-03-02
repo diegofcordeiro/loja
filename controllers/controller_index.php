@@ -8457,8 +8457,8 @@ class index extends controller
 		//validar todos os campos de telefone e endereço
 		if (!$telefone) {
 
-			retorno_erro("Telefone inválido");
-			exit;
+			// retorno_erro("Telefone inválido");
+			// exit;
 		}
 		if (!$cep) {
 			if ($is_brasil == 1) {

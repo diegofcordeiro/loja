@@ -8345,7 +8345,8 @@ class index extends controller
 		$is_brasil = $_POST['is_brasil'];
 		$country_document = $_POST['country_document'];
 		$lms_id = $_POST['lms_id'];
-
+		echo '<pre>';
+		print_r($_POST);
 		//validar email consultando no banco
 		if (!$email) {
 			retorno_erro("E-mail inválido!");

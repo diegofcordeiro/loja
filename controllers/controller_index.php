@@ -8346,6 +8346,9 @@ class index extends controller
 		$country_document = $_POST['country_document'];
 		$lms_id = $_POST['lms_id'];
 
+		echo '<pre>';
+		print_r($_POST);
+		exit;
 		//validar email consultando no banco
 		if (!$email) {
 			retorno_erro("E-mail inválido!");
@@ -8478,7 +8481,7 @@ class index extends controller
 		// 	}
 		// }
 		require('conexao.php');
-		if($country_document == 1){
+		if ($country_document == 1) {
 			$fisica_cpf = $cpf_outros;
 		}
 

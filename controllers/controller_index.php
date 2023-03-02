@@ -8390,19 +8390,25 @@ class index extends controller
 		//validar cpf ou cnpj simples
 		if ($tipo == 'F') {
 
-			if (!$fisica_cpf) {
+			if ($is_brasil == 1) {
+				if (!$fisica_cpf) {
+					retorno_erro("Digite corretamente seu CPF.");
+					exit;
+				} else {
 
-				retorno_erro("Digite corretamente seu CPF.");
-				exit;
-			} else {
-				if ($is_brasil == 1) {
 					$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
 					if (!$cpf_cnpj->valida()) {
 						retorno_erro("Digite corretamente seu CPF.");
 						exit;
 					}
 				}
+			} else {
+				if (!$cpf_outros) {
+					retorno_erro("Digite corretamente seu DOCUMENTO.");
+					exit;
+				}
 			}
+
 
 			//limpar dados do oposto do tipo (juridica ou fisica)
 			$juridica_nome = "";

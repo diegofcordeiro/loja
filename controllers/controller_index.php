@@ -8587,6 +8587,10 @@ class index extends controller
 		$sql = "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';";
 		if ($result = $mysqli->query($sql)) {
 			$obj = $result->fetch_object();
+			print_r('id_banco: ' . $obj->id);
+			print_r('<br>id_passei: ' . $id);
+			print_r(($result->num_rows == 1) and ($obj->id != $id));
+			exit;
 			if (($result->num_rows == 1) and ($obj->id != $id)) {
 				return 1;
 			} else {

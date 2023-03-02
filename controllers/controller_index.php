@@ -8341,9 +8341,8 @@ class index extends controller
 		$estado = $this->post('estado');
 		$cidade = $this->post('cidade');
 		$is_brasil = $_POST['is_brasil'];
-		echo 'aqui: ';
-		print_r($is_brasil);
-		exit;
+		$country_document = $_POST['country_document'];
+
 
 		//validar email consultando no banco
 		if (!$email) {
@@ -8491,7 +8490,7 @@ class index extends controller
 				"juridica_responsavel" => "$juridica_responsavel",
 				"juridica_cnpj" => "$juridica_cnpj",
 				"cep" => "$cep",
-				"is_brasil" => "$is_brasil",
+				"is_brasil" => "$country_document",
 				"endereco" => "$endereco",
 				"numero" => "$numero",
 				"complemento" => "$complemento",
@@ -8515,7 +8514,7 @@ class index extends controller
 				"juridica_razao" => "$juridica_razao",
 				"juridica_responsavel" => "$juridica_responsavel",
 				"juridica_cnpj" => "$juridica_cnpj",
-				"is_brasil" => "$is_brasil",
+				"is_brasil" => "$country_document",
 				"cep" => "$cep",
 				"endereco" => "$endereco",
 				"numero" => "$numero",

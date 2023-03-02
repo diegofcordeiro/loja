@@ -8325,6 +8325,8 @@ class index extends controller
 		$fisica_sexo = $this->post('fisica_sexo');
 		$fisica_nascimento = $this->post('fisica_nascimento');
 		$fisica_cpf = $this->post('fisica_cpf');
+		$cpf_outros = $this->post('cpf_outros');
+
 
 		$juridica_nome = $this->post('juridica_nome');
 		$juridica_razao = $this->post('juridica_razao');
@@ -8476,9 +8478,9 @@ class index extends controller
 		// 	}
 		// }
 		require('conexao.php');
-
-		print_r($fisica_cpf);
-		exit;
+		if($country_document == 1){
+			$fisica_cpf = $cpf_outros;
+		}
 
 
 		if ($usar_senha == 1) {

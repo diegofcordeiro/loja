@@ -8477,7 +8477,8 @@ class index extends controller
 		// }
 		require('conexao.php');
 
-
+		print_r($fisica_cpf);
+		exit;
 
 
 		if ($usar_senha == 1) {

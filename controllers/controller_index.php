@@ -8578,8 +8578,11 @@ class index extends controller
 	public function check_email_lms_id($email = NULL, $fisica_cpf, $id)
 	{
 		require('conexao.php');
-		$sql = "SELECT email FROM usuario WHERE (email = '$email' OR cpf = '$fisica_cpf') and id != '$id';";
+		$sql = "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';";
 		if ($result = $mysqli->query($sql)) {
+			$obj = $result->fetch_object();
+			print_r($obj->id);
+			exit;
 			if ($result->num_rows == 1) {
 				return 1;
 			} else {

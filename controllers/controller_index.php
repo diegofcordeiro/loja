@@ -8392,13 +8392,13 @@ class index extends controller
 
 			if ($is_brasil == 1) {
 				if (!$fisica_cpf) {
-					retorno_erro("Digite corretamente seu CPF.");
+					retorno_erro("Digite corretamente seu CPF1.");
 					exit;
 				} else {
 
 					$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
 					if (!$cpf_cnpj->valida()) {
-						retorno_erro("Digite corretamente seu CPF.");
+						retorno_erro("Digite corretamente seu CPF2.");
 						exit;
 					}
 				}

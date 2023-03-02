@@ -8589,7 +8589,7 @@ class index extends controller
 			$obj = $result->fetch_object();
 			print_r('id_banco: ' . $obj->id);
 			print_r('<br>id_passei: ' . $id);
-			print_r(($result->num_rows == 1) and ($obj->id != $id));
+			print_r(($result->num_rows == 1) && ($obj->id != $id));
 			exit;
 			if (($result->num_rows == 1) and ($obj->id != $id)) {
 				return 1;

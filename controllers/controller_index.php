@@ -8340,7 +8340,7 @@ class index extends controller
 		$bairro = $this->post('bairro');
 		$estado = $this->post('estado');
 		$cidade = $this->post('cidade');
-		$is_brasil = $this->post('is_brasil');
+		$is_brasil = $_POST['is_brasil'];
 		echo 'aqui: ';
 		print_r($is_brasil);
 		exit;

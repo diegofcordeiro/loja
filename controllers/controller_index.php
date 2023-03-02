@@ -8392,13 +8392,13 @@ class index extends controller
 
 			if ($country_document == 1) {
 				if (!$fisica_cpf) {
-					retorno_erro("Digite corretamente seu CPF1.");
+					retorno_erro("Digite corretamente seu CPF.");
 					exit;
 				} else {
 
 					$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
 					if (!$cpf_cnpj->valida()) {
-						retorno_erro("Digite corretamente seu CPF2.");
+						retorno_erro("Digite corretamente seu CPF.");
 						exit;
 					}
 				}
@@ -8587,9 +8587,7 @@ class index extends controller
 		$sql = "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';";
 		if ($result = $mysqli->query($sql)) {
 			$obj = $result->fetch_object();
-			print_r($obj->id);
-			exit;
-			if ($result->num_rows == 1) {
+			if (($result->num_rows == 1) and ($obj->id != $id)) {
 				return 1;
 			} else {
 				return 0;

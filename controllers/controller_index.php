@@ -8579,8 +8579,6 @@ class index extends controller
 	{
 		require('conexao.php');
 		$sql = "SELECT email FROM usuario WHERE (email = '$email' OR cpf = '$fisica_cpf') and id != '$id';";
-
-		exit;
 		if ($result = $mysqli->query($sql)) {
 			if ($result->num_rows == 1) {
 				return 1;

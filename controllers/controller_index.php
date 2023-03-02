@@ -8412,8 +8412,8 @@ class index extends controller
 				exit;
 			}
 			if (!$fisica_sexo) {
-				retorno_erro("Informe seu sexo.");
-				exit;
+				// retorno_erro("Informe seu sexo.");
+				// exit;
 			}
 			if (!$fisica_nascimento) {
 				// retorno_erro("Informe sua data de nascimento.");

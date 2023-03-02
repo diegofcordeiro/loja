@@ -8345,8 +8345,7 @@ class index extends controller
 		$is_brasil = $_POST['is_brasil'];
 		$country_document = $_POST['country_document'];
 		$lms_id = $_POST['lms_id'];
-		echo '<pre>';
-		print_r($_POST);
+
 		//validar email consultando no banco
 		if (!$email) {
 			retorno_erro("E-mail inválido!");
@@ -8489,9 +8488,14 @@ class index extends controller
 			$fisica_cpf = $cpf_outros;
 		}
 
-		$email_lms = $this->check_email_lms_id($email, $fisica_cpf, $lms_id);
+		$email_lms = $this->check_email_lms_id($email, $lms_id);
 		if ($email_lms == 1) {
-			retorno_erro("E-mail ou CPF já cadastrado.");
+			retorno_erro("E-mail já cadastrado.");
+			exit;
+		}
+		$cpf_lms = $this->check_cpf_lms_id($fisica_cpf, $lms_id);
+		if ($cpf_lms == 1) {
+			retorno_erro("CPF já cadastrado.");
 			exit;
 		}
 		if ($usar_senha == 1) {
@@ -8582,17 +8586,25 @@ class index extends controller
 		exit;
 	}
 
-	public function check_email_lms_id($email = NULL, $fisica_cpf, $id)
+	public function check_email_lms_id($email = NULL, $id)
 	{
 		require('conexao.php');
-		$sql = "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';";
-		print_r('<br>QUERY: ' . "SELECT id FROM usuario WHERE email = '$email' OR cpf = '$fisica_cpf';");
+		$sql = "SELECT id FROM usuario WHERE email = '$email';";
 		if ($result = $mysqli->query($sql)) {
 			$obj = $result->fetch_object();
-			print_r('id_banco: ' . $obj->id);
-			print_r('<br>id_passei: ' . $id);
-			print_r(($result->num_rows == 1) && ($obj->id != $id));
-			exit;
+			if (($result->num_rows == 1) and ($obj->id != $id)) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
+	}
+	public function check_cpf_lms_id($fisica_cpf, $id)
+	{
+		require('conexao.php');
+		$sql = "SELECT id FROM usuario WHERE cpf = '$fisica_cpf';";
+		if ($result = $mysqli->query($sql)) {
+			$obj = $result->fetch_object();
 			if (($result->num_rows == 1) and ($obj->id != $id)) {
 				return 1;
 			} else {

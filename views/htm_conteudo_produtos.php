@@ -39,7 +39,7 @@ $ordem = $conteudo_sessao['ordem'];
 	.owl-theme .owl-nav {
 		text-align: center;
 		-webkit-tap-highlight-color: transparent;
-		margin-top: 20px;
+		margin-top: 70px;
 
 	}
 

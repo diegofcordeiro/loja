@@ -1879,6 +1879,8 @@ $ordem = $conteudo_sessao['ordem'];
 		owl.owlCarousel({
 			margin: 10,
 			loop: false,
+			nav: true,
+			dots: false,
 			responsive: {
 				0: {
 					items: 1

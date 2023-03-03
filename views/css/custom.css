@@ -528,13 +528,13 @@ body{font-family: 'Roboto' !important;}
         background-position: center center;
         background-size: 100%;
         border-radius: 9px 9px 0px 0px;
-        width: 350px;
+        width: 300px;
     }
     .grid1 {
-        width: 350px !important;
+        width: 300px !important;
     }
     .item{
-        max-width: 360px;
+        max-width: 300px;
     }
     .owl-carousel .owl-item {
         /* width: 320px !important; */

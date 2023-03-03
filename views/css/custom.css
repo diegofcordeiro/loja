@@ -537,7 +537,7 @@ body{font-family: 'Roboto' !important;}
         max-width: 300px;
     }
     .owl-carousel .owl-item {
-        /* width: 320px !important; */
+        width: 320px !important;
     }
     .banner_index{
         min-height: 450px;

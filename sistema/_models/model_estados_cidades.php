@@ -1,83 +1,87 @@
 <?php
-Class model_estados_cidades extends model{
-	
+class model_estados_cidades extends model
+{
 
-    public function lista_estados($uf = null){
 
-    	$lista = array();
+	public function lista_estados($uf = null)
+	{
+
+		$lista = array();
 
 		$n = 0;
-	    $db = new mysql();
-	    $exec = $db->executar("SELECT * FROM estado order by nome asc");
-	    while($data = $exec->fetch_object()){
+		$db = new mysql();
+		$exec = $db->executar("SELECT * FROM estado order by nome asc");
+		while ($data = $exec->fetch_object()) {
 
-	    	$lista[$n]['id'] = $data->id;
-	    	$lista[$n]['nome'] = $data->nome;
-	    	$lista[$n]['uf'] = $data->uf;
-	    	
-	    	if($uf == $data->uf){
-	    		$lista[$n]['selected'] = true;
-	    	} else {
-	    		$lista[$n]['selected'] = false;
-	    	}
-    		$n++;
-    	}
+			$lista[$n]['id'] = $data->id;
+			$lista[$n]['nome'] = $data->nome;
+			$lista[$n]['uf'] = $data->uf;
+
+			if ($uf == $data->uf) {
+				$lista[$n]['selected'] = true;
+			} else {
+				$lista[$n]['selected'] = false;
+			}
+			$n++;
+		}
 
 		return $lista;
 	}
 
-	public function lista_cidades($uf = null, $cidade = null){
+	public function lista_cidades($uf = null, $cidade = null)
+	{
+		if (strlen($uf) > 2) {
+			$uf = 'AC';
+		}
+		$lista = array();
 
-    	$lista = array();
-
-    	if(isset($uf)){
+		if (isset($uf)) {
 
 			$n = 0;
-		    $db = new mysql();
-		    $exec = $db->executar("SELECT * FROM cidade WHERE uf='$uf' order by nome asc");
-		    while($data = $exec->fetch_object()){
+			$db = new mysql();
+			$exec = $db->executar("SELECT * FROM cidade WHERE uf='$uf' order by nome asc");
+			while ($data = $exec->fetch_object()) {
 
-		    	$lista[$n]['id'] = $data->id;
-		    	$lista[$n]['nome'] = $data->nome;
-		    	$lista[$n]['uf'] = $data->uf;
-		    		
-		    	if($data->nome == $cidade){
-		    		$lista[$n]['selected'] = true;
-		    	} else {
-		    		$lista[$n]['selected'] = false;
-		    	}
+				$lista[$n]['id'] = $data->id;
+				$lista[$n]['nome'] = $data->nome;
+				$lista[$n]['uf'] = $data->uf;
 
-		    $n++;
-		    }
+				if ($data->nome == $cidade) {
+					$lista[$n]['selected'] = true;
+				} else {
+					$lista[$n]['selected'] = false;
+				}
+
+				$n++;
+			}
 		}
-		
+
 		return $lista;
 	}
-	
-	public function nome_estado( $tipo, $valor){
-		
-		if($tipo == 'id'){
-			$db = new mysql();
-		    $exec = $db->executar("SELECT * FROM estado where id='$valor' ");
-		    $data = $exec->fetch_object();
-			return $data->nome;
-		}
-		if($tipo == 'uf'){
-			$db = new mysql();
-		    $exec = $db->executar("SELECT * FROM estado where uf='$valor' ");
-		    $data = $exec->fetch_object();
-			return $data->nome;
-		}
 
+	public function nome_estado($tipo, $valor)
+	{
+
+		if ($tipo == 'id') {
+			$db = new mysql();
+			$exec = $db->executar("SELECT * FROM estado where id='$valor' ");
+			$data = $exec->fetch_object();
+			return $data->nome;
+		}
+		if ($tipo == 'uf') {
+			$db = new mysql();
+			$exec = $db->executar("SELECT * FROM estado where uf='$valor' ");
+			$data = $exec->fetch_object();
+			return $data->nome;
+		}
 	}
 
-	public function nome_cidade($valor){
+	public function nome_cidade($valor)
+	{
 
 		$db = new mysql();
 		$exec = $db->executar("SELECT * FROM cidade where id='$valor' ");
 		$data = $exec->fetch_object();
 		return $data->nome;
-		
 	}
-
 }

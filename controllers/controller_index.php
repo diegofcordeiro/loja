@@ -8048,12 +8048,6 @@ class index extends controller
 					// baixa estoque
 					$produtos->baixa_estoque($this->_sessao);
 
-					// envia email
-					$email_destino = $data_cadastro->email;
-					$envio->enviar("Confirmação de Pedido", $texto_email, array("0" => "$email_destino"));
-					$envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
-
-
 					$codigo_pedido = $this->_sessao;
 
 					$novasessao = $this->gera_codigo();
@@ -9124,6 +9118,13 @@ class index extends controller
 
 		$cod = $_POST['codigo'];
 
+		$envio = new model_envio();
+		$textos = new model_textos();
+
+		$texto_email = "<div style='font-size:14px;'>Olá, $name<br><br></div>" . $textos->conteudo('150457686833612') . "<br>";
+
+		$texto_email_admin = "Parabéns você tem uma nova venda, acesse o sistema para mais informações.<br><br>Email do Cliente: $email <br><br>";
+
 		//////////////////////////////////////////////////////////////
 		// Checando se usuario existe na VINDI
 		$customer = $customerService->all([
@@ -9221,13 +9222,20 @@ class index extends controller
 
 			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
 			$bill = $this->vindi_add_subscription($id_client, $payment_met, $produto_assinatura, 1040228, $amout);
-
+			$fp = fopen('/var/www/html/loja/controllers/bill_test.json', "w");
+			fwrite($fp, json_encode($bill));
+			fclose($fp);
 			if (isset($bill['bill']['id'])) {
 				$id_charge = $bill['bill']['charges'][0]['id'];
 				$id_trans = $bill['bill']['id'];
 				$url = $bill['bill']['url'];
 
 				if ($bill['bill']['charges'][0]['status'] == 'paid') {
+					// envia email
+					$email_destino = $email;
+					$envio->enviar("Confirmação de Pedido", $texto_email, array("0" => "$email_destino"));
+					// $envio->enviar("Novo Pedido", $texto_email_admin, $lista_envio_adm);
+
 					$status = 4;
 					foreach ($recorrencia as $rec_lms) {
 						$this->integrar_trilha_lms($rec_lms->produto_ref, $cod, $cpf);
@@ -9257,6 +9265,8 @@ class index extends controller
 			// error_reporting(E_ALL);
 
 			if ($recorrencia->valor_total == 0) {
+				$email_destino = $email;
+				$envio->enviar("Confirmação de Pedido", $texto_email, array("0" => "$email_destino"));
 				$this->integrar_trilha_lms($recorrencia->produto_ref, $cod, $cpf);
 				$db = new mysql();
 				$db->alterar("pedido_loja_carrinho", array(
@@ -9277,6 +9287,8 @@ class index extends controller
 					$url = $bill->url;
 
 					if ($bill->status == 'paid') {
+						$email_destino = $email;
+						$envio->enviar("Confirmação de Pedido", $texto_email, array("0" => "$email_destino"));
 						$status = 4;
 						$this->integrar_trilha_lms($recorrencia->produto_ref, $cod, $cpf);
 					} else {
@@ -9429,6 +9441,11 @@ class index extends controller
 					"status" => 8
 				), " sessao='" . $data_carrinho->sessao . "' and id_combo='" . $data_carrinho->id_combo . "' ");
 
+				$conexao->alterar("pedido_loja", array(
+					"status" => 8
+				), " codigo='" . $data_carrinho->sessao . "' ");
+
+
 				$data_combo = $conexao->Executar("SELECT combos.id as combo_id, produto.ref FROM `combos`  inner join combo_produto on combo_produto.id_combo = combos.id inner join produto on produto.id = combo_produto.id_produto WHERE combo_produto.id_combo = '$data_carrinho->id_combo'");
 				while ($res_combo = $data_combo->fetch_object()) {
 					$this->remove_from_lms($id_usuario, $res_combo->ref);
@@ -9438,6 +9455,10 @@ class index extends controller
 				$conexao->alterar("pedido_loja_carrinho", array(
 					"status" => 8
 				), " sessao='" . $data_carrinho->sessao . "' and produto='" . $data_carrinho->produto . "' ");
+
+				$conexao->alterar("pedido_loja", array(
+					"status" => 8
+				), " codigo='" . $data_carrinho->sessao . "' ");
 
 				$this->remove_from_lms($id_usuario, $data_carrinho->produto_ref);
 			}

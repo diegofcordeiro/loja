@@ -1,11 +1,11 @@
 <?php
-$mysqli = new mysqli("localhost","webapp","L!IRuv9z","webapp");
+$mysqli = new mysqli("localhost", "root", "root", "webapp");
 
 if ($mysqli->connect_errno) {
   echo "Failed to connect to MySQL: " . $mysqli->connect_error;
   exit();
 }
- $mysqli->set_charset("utf8");
+$mysqli->set_charset("utf8");
 
 // $sql = "SELECT * FROM usuario ";
 // echo'<pre>';
@@ -17,4 +17,3 @@ if ($mysqli->connect_errno) {
 // }
 
 // $mysqli->close();
-?>

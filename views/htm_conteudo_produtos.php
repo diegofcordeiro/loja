@@ -658,7 +658,7 @@ $ordem = $conteudo_sessao['ordem'];
 										<p style="font-size: 12px;margin-top: -25px;">
 											<?php if ($value->intervalo == 'Anual') {
 												$valor = $valor_descontado[0] / 12;
-												echo "R$" . number_format($valor, 2, ",", ".") . "/ mês";
+												echo "12 x R$" . number_format($valor, 2, ",", ".");
 											}
 											?>
 										</p>

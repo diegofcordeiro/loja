@@ -35,11 +35,19 @@ $ordem = $conteudo_sessao['ordem'];
 		background: #869791;
 	}
 
-	.owl-theme .owl-dots,
 	.owl-theme .owl-nav {
 		text-align: center;
 		-webkit-tap-highlight-color: transparent;
-		margin-top: 70px;
+		margin-top: 20px;
+		position: relative;
+
+	}
+
+	.owl-theme .owl-dots {
+		text-align: center;
+		-webkit-tap-highlight-color: transparent;
+		/* margin-top: 70px; */
+		margin-top: 30px;
 
 	}
 
@@ -1880,7 +1888,7 @@ $ordem = $conteudo_sessao['ordem'];
 			margin: 10,
 			loop: false,
 			nav: true,
-			dots: false,
+			dots: true,
 			responsive: {
 				0: {
 					items: 1

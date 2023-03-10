@@ -20,7 +20,14 @@
 	<link rel="stylesheet" href="<?= LAYOUT ?>plugins/colorpicker/bootstrap-colorpicker.min.css">
 
 	<?php include_once('css.php'); ?>
-
+	<style>
+		.btn_ac {
+			color: white !important;
+			background: #747474;
+			padding: 4px 14px;
+			border-radius: 3px;
+		}
+	</style>
 </head>
 
 <body class="hold-transition skin-blue <?php if ($_base['menu_fechado'] == 1) {
@@ -257,6 +264,7 @@
 												<th>E-mail</th>
 												<th>Valor (R$)</th>
 												<th>Status</th>
+												<th>Ação</th>
 												<th>Msg</th>
 											</tr>
 										</thead>
@@ -266,6 +274,7 @@
 
 											foreach ($aprovados as $key => $value) {
 
+												$estorno = DOMINIO . $controller . "estorno/vindi_estorno/codigo/" . $value['charger_id'] . "/" . "usuario_id/" . $value['usuario_id'];
 												$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
 
 												echo "
@@ -276,6 +285,7 @@
 												<td $linklinha >" . $value['email'] . "</td>
 												<td $linklinha >" . $value['valor'] . "</td>
 												<td $linklinha >" . $value['status'] . "</td>
+												<td >" . "<a href='$estorno' class='btn_ac'>Estornar</a>" . "</td>
 												<td $linklinha ><span style='color:blue'>" . $value['msg'] . "</span></td>
 												</tr>
 												";

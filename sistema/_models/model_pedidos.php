@@ -167,6 +167,9 @@ class model_pedidos extends model
 
 			$cadastro_data = $cadastro->carrega($data->cadastro);
 
+			$conexao = new mysql();
+			$coisas_carrinho = $conexao->Executar("SELECT pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE sessao='$data->codigo' group by id_combo ");
+			$data_carrinho = $coisas_carrinho->fetch_object();
 			if (isset($cadastro_data->email)) {
 
 				$lista[$i]['id'] = $data->id;
@@ -175,6 +178,8 @@ class model_pedidos extends model
 				$lista[$i]['valor'] = $valores->trata_valor($data->valor_total);
 				$lista[$i]['status'] = $this->status($data->status);
 				$lista[$i]['email'] = $cadastro_data->email;
+				$lista[$i]['charger_id'] = $data_carrinho->transacao_charger_id;
+				$lista[$i]['usuario_id'] = $cadastro_data->lms_usuario_id;
 
 				if ($cadastro_data->tipo == 'F') {
 					$lista[$i]['nome'] = $cadastro_data->fisica_nome;

@@ -659,6 +659,10 @@ $ordem = $conteudo_sessao['ordem'];
 											<?php if ($value->intervalo == 'Anual') {
 												$valor = $valor_descontado[0] / 12;
 												echo "12 x R$" . number_format($valor, 2, ",", ".");
+											} else if ($value->intervalo != 'Mensal') {
+												$final = explode(" ", $value->intervalo);
+												$valor = $valor_descontado[0] / $final[0];
+												echo $final[0] . " x R$" . number_format($valor, 2, ",", ".");
 											}
 											?>
 										</p>

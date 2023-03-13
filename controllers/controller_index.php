@@ -222,37 +222,93 @@ class index extends controller
 
 	public function importar_pedido_user_manual()
 	{
-
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+		echo '<pre>';
 		$cpf = $this->get('cpf');
-		$plano_id = $this->get('combo');
+		$id_combo = $this->get('combo');
 
 		$conexao = new mysql();
+		$cadastro_codigo = $conexao->query("SELECT * FROM `combo_produto` WHERE id_combo = '$id_combo';");
+		$produto_combo = $cadastro_codigo->fetch_object();
 
-		if ($cpf != "") {
-			$combo = $conexao->query("SELECT
-										combos.id as combo_id,
-										combos.titulo as combo_titulo,
-										combos.plano_id as plano_id,
-										combos.valor as plano_valor,
-										combos.intervalo as intervalo,
-										combos.usar_desconto as usar_desconto,
-										combos.valor as combo_valor,
-										combos.status as combo_status,
-										combos.desconto as combo_desconto,
-										produto.id as produto_id,
-										produto.titulo as protudo_titulo,
-										produto.*
-										FROM `combos` 
-										inner join combo_produto on combo_produto.id_combo = combos.id
-										inner join produto on produto.id = combo_produto.id_produto
-										WHERE combos.plano_id = '$plano_id';");
+		print_r($produto_combo);
+		//////////
+		//////////
+		//////////
+		//////////
+		//////////
 
-			if ($combo->num_rows > 0) {
+		exit;
 
-				$cadastro_codigo = $conexao->query("SELECT codigo FROM `cadastro` WHERE fisica_cpf = '$cpf';");
-				$codigo = $cadastro_codigo->fetch_object();
+		require('conexao.php');
 
-				print_r($codigo);
+		$cpf = str_replace("-", "", $cpf);
+		$cpf = str_replace(".", "", $cpf);
+
+		$conexao = new mysql();
+		$coisas_carrinho = $conexao->Executar("select * from pedido_loja_carrinho WHERE sessao = '" . $sessao_loja . "' and produto_ref = '" . $produto_ref . "' ");
+		$linha_carrinho = $coisas_carrinho->num_rows;
+
+		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
+		$id_usuario = null;
+		$id_perfil  = null;
+		if ($result = $mysqli->query($sql)) {
+			while ($obj = $result->fetch_object()) {
+				$id_usuario = $obj->id;
+				$id_perfil  = $obj->id_perfil;
+			}
+			$result->free_result();
+		}
+
+		if ($linha_carrinho != 0) {
+
+			$data_array = array();
+			while ($data_carrinho = $coisas_carrinho->fetch_object()) {
+
+
+				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
+				if ($result2 = $mysqli->query($sql2)) {
+					while ($obj2 = $result2->fetch_object()) {
+						$array = array(
+							'id_usuario' => $id_usuario,
+							'id_perfil' => $id_perfil,
+							'id_trilha' => $data_carrinho->produto_ref,
+							'id_curso'  => $obj2->id,
+							'status_curso'  => 0,
+							'data_matricula' => date('Y-m-d', $data_carrinho->data_compra),
+							// 'dt_vencimento_matricula' => date('Y-m-d', $data_carrinho->data_vencimento),
+							'progresso' => 0,
+							'ativo_matricula' => 1
+						);
+
+						array_push($data_array, $array);
+					}
+				}
+			}
+		}
+
+		foreach ($data_array as $data) {
+			$id_usuario 				= $data['id_usuario'];
+			$id_perfil 					= $data['id_perfil'];
+			$id_trilha 					= $data['id_trilha'];
+			$id_curso 					= $data['id_curso'];
+			$status_curso 				= $data['status_curso'];
+			$data_matricula 			= $data['data_matricula'];
+			// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
+			$progresso 					= $data['progresso'];
+			$ativo_matricula 			= $data['ativo_matricula'];
+
+			$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
+
+			if ($exit_line == 0) {
+				$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
+					VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
+				$mysqli->query($sql_insert);
+			} else {
+				$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+				$mysqli->query($sql_update);
 			}
 		}
 	}

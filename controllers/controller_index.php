@@ -2315,8 +2315,8 @@ class index extends controller
 		$dados['_sessao'] = $this->_sessao;
 		$dados['_acesso'] = $this->_acesso;
 		$dados['_nome_usuario'] = $this->_nome_usuario;
-		unset($_SESSION[$this->_sessao_principal]);
-		unset($_SESSION['usuario_cpf']);
+		// unset($_SESSION[$this->_sessao_principal]);
+		// unset($_SESSION['usuario_cpf']);
 		// itens da inciial
 
 		$chave = $this->_layout;

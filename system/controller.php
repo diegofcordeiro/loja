@@ -64,7 +64,7 @@ class controller extends system
 	protected function finaliza_sessao()
 	{
 		unset($_SESSION[$this->_sessao_principal]);
-		// unset($_SESSION['usuario_cpf']);
+		unset($_SESSION['usuario_cpf']);
 	}
 
 	protected function autenticado()

@@ -9442,8 +9442,7 @@ class index extends controller
 	{
 		$codigo = $this->get('codigo');
 		$id_usuario = $_SESSION['usuario_id_lms'];
-		print_r($id_usuario);
-		exit;
+
 		require_once('vendor/autoload.php');
 
 		$curl = curl_init();

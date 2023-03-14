@@ -10479,9 +10479,6 @@ class index extends controller
 
 	public function minhaconta()
 	{
-
-		echo '<pre>';
-		print_r($_SESSION['usuario_id']);
 		$this->autenticado();
 
 		$dados = array();

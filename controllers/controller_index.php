@@ -9864,6 +9864,9 @@ class index extends controller
 				// fclose($fp);
 				break;
 			case 'bill_paid':
+				$fp = fopen('/var/www/html/loja/controllers/bill_paid.json', "a");
+				fwrite($fp, json_encode($event));
+				fclose($fp);
 				$id_charge = $event->data->bill->charges[0]->id;
 				$id_bill = $event->data->bill->id;
 

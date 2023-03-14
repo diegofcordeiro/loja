@@ -1898,13 +1898,13 @@
 									<div class="col-xs-10">
 										<div class="form-group">
 											<label for="cardNumber">Endereço</label>
-											<input type="text" class="form-control" name="endereco_outros" placeholder="Endereco" autocomplete="endereco" value="<?= $endereco ?>" required />
+											<input type="text" class="form-control" name="endereco_outros" placeholder="Endereco" autocomplete="endereco" value="<?= $endereco ?>" />
 										</div>
 									</div>
 									<div class="col-xs-2">
 										<div class="form-group">
 											<label for="cardNumber">Número</label>
-											<input type="text" class="form-control" name="numero_outros" placeholder="Número" autocomplete="Número" value="<?= $numero ?>" required />
+											<input type="text" class="form-control" name="numero_outros" placeholder="Número" autocomplete="Número" value="<?= $numero ?>" />
 										</div>
 									</div>
 								</div>
@@ -1918,7 +1918,7 @@
 									<div class="col-xs-3 col-md-3">
 										<div class="form-group">
 											<label for="cep">CEP</label>
-											<input type="text" class="form-control cep_outros" name="cep_outros" id="cep_outros" value="<?= $cep ?>" required />
+											<input type="text" class="form-control cep_outros" name="cep_outros" id="cep_outros" value="<?= $cep ?>" />
 										</div>
 									</div>
 									<div class="col-xs-3 col-md-3">

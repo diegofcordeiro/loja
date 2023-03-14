@@ -9441,7 +9441,7 @@ class index extends controller
 	public function vindi_estorno()
 	{
 		$codigo = $this->get('codigo');
-		$id_usuario = $_SESSION['usuario_id'];
+		$id_usuario = $_SESSION['usuario_id_lms'];
 		print_r($id_usuario);
 		exit;
 		require_once('vendor/autoload.php');
@@ -11477,6 +11477,7 @@ class index extends controller
 					$_SESSION[$this->_sessao_principal]['loja_acesso'] = TOKEN1 . $data_dados->codigo;
 					$_SESSION[$this->_sessao_principal]['loja_cod_usuario'] = $data_dados->codigo;
 					$_SESSION['usuario_cpf'] = $data_dados->fisica_cpf;
+					$_SESSION['usuario_id_lms'] = $data_dados->lms_usuario_id;
 					$_SESSION[$this->_sessao_principal]['loja_cod_sessao'] = $this->_sessao;
 
 					if (1 == 4) {

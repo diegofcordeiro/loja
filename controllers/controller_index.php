@@ -2411,7 +2411,7 @@ class index extends controller
 		$dados['_sessao'] = $this->_sessao;
 		$dados['_acesso'] = $this->_acesso;
 		$dados['_nome_usuario'] = $this->_nome_usuario;
-		unset($_SESSION[$this->_sessao_principal]);
+		// unset($_SESSION[$this->_sessao_principal]);
 		unset($_SESSION['usuario_cpf']);
 		// itens da inciial
 
@@ -2728,60 +2728,6 @@ class index extends controller
 			$this->irpara(DOMINIO . 'index/cadastro_basico/codigo/' . $codigo);
 			exit;
 		}
-
-
-
-		// if($etapa == 1){
-
-		// 	$codigo = $this->post('codigo');
-
-		// 	if(!$codigo){
-		// 		retorno_erro("Ocorreu um erro!");
-		// 		exit;				
-		// 	}
-
-		// 	$fisica_nome = $this->post('fisica_nome');
-		// 	$country_document = $this->post('country_document');
-
-		// 	if($country_document == 0){
-		// 		$fisica_cpf = $this->post('fisica_documento');
-		// 		$telefone = $this->post('cadastro_telefone');
-		// 	}else{
-		// 		$fisica_cpf = $this->post('fisica_cpf');
-		// 		$telefone = $this->post('cadastro_telefone_brasil');
-
-		// 	}
-
-		// 	if(!$fisica_cpf){
-
-		// 		retorno_erro("Digite corretamente seu CPF.");
-		// 		exit;
-
-		// 	} elseif($country_document == 1) {
-
-		// 		require_once("api/cpf_cnpj/cpf_cnpj.php");
-
-		// 		$cpf_cnpj = new valida_cpf_cnpj("$fisica_cpf");
-		// 		if(!$cpf_cnpj->valida()){
-		// 			retorno_erro("Digite corretamente seu CPF.");
-		// 			exit;
-		// 		}
-
-		// 	}
-
-		// 	$db = new mysql();
-		// 	$db->alterar("cadastro", array(
-		// 		"fisica_nome"=>"$fisica_nome",
-		// 		"telefone"=>"$telefone",
-		// 		"is_brasil"=>"$country_document",
-		// 		"etapa"=>2
-		// 	), " codigo='".$codigo."' AND etapa='1' ");
-
-
-		// 	$this->irpara(DOMINIO.'index/cadastro_basico/codigo/'.$codigo);
-		// 	exit;
-		// }
-
 
 		if ($etapa == 1) {
 
@@ -9318,9 +9264,8 @@ class index extends controller
 				$produto_assinatura = $rec->produto_assinatura;
 			}
 
-			// echo '<pre>'; print_r($id_client.'-'.$payment_met.'-'.$produto_assinatura.'-1040228-'.$amout);exit;
 			$bill = $this->vindi_add_subscription($id_client, $payment_met, $produto_assinatura, 1040228, $amout);
-			$fp = fopen('/var/www/html/loja/controllers/bill_test.json', "w");
+			$fp = fopen('/var/www/html/loja/controllers/bill_created_vindi_flow.json', "a");
 			fwrite($fp, json_encode($bill));
 			fclose($fp);
 			if (isset($bill['bill']['id'])) {
@@ -9358,9 +9303,6 @@ class index extends controller
 
 		/////////////   NAO  RECCORENTE    /////////////
 		foreach ($nao_recorrentes as $key => $recorrencia) {
-			// ini_set('display_errors', 1);
-			// ini_set('display_startup_errors', 1);
-			// error_reporting(E_ALL);
 
 			if ($recorrencia->valor_total == 0) {
 				$email_destino = $email;
@@ -11504,6 +11446,8 @@ class index extends controller
 		$this->view('entrar', $dados);
 	}
 
+
+
 	public function login($email = null, $senha = null)
 	{
 		$time = time();
@@ -11546,9 +11490,7 @@ class index extends controller
 						$coisas_pedido = $conexao->Executar("SELECT * FROM pedido_loja WHERE codigo='" . $this->_sessao . "' ");
 						$linhas = $coisas_pedido->num_rows;
 
-
-
-						if ($linhas == 1) {
+						if ($linhas != 0) {
 							$this->irpara(DOMINIO . $this->_controller . '/carrinho');
 						} else {
 

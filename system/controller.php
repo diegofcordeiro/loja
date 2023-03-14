@@ -65,6 +65,7 @@ class controller extends system
 	{
 		unset($_SESSION[$this->_sessao_principal]);
 		unset($_SESSION['usuario_cpf']);
+		unset($_SESSION['usuario_id_lms']);
 	}
 
 	protected function autenticado()

@@ -9249,7 +9249,7 @@ class index extends controller
 				}
 			}
 		}
-
+		$stts_falha = 0;
 		/////////     RECCORENTE    /////////////
 		foreach ($recorrentes as $key => $recorrencia) {
 
@@ -9284,6 +9284,9 @@ class index extends controller
 						$this->integrar_trilha_lms($rec_lms->produto_ref, $cod, $cpf);
 					}
 				} else {
+					if ($stts_falha == 0) {
+						$stts_falha = 1;
+					}
 					$status = 1;
 				}
 				$db = new mysql();
@@ -9332,6 +9335,9 @@ class index extends controller
 						$status = 4;
 						$this->integrar_trilha_lms($recorrencia->produto_ref, $cod, $cpf);
 					} else {
+						if ($stts_falha == 0) {
+							$stts_falha = 1;
+						}
 						$status = 1;
 					}
 					$db = new mysql();
@@ -9349,7 +9355,7 @@ class index extends controller
 				}
 			}
 		}
-		$dados['status'] = 'aprovada';
+		$dados['status'] = $stts_falha;
 		/////////////  /////////////  /////////////
 		$this->view('finalizada', $dados);
 	}

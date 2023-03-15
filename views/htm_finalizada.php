@@ -662,13 +662,13 @@
 		<div class="container">
 			<div class="row">
 				<div class='col-xs-12 col-sm-12 col-md-12 text-center'>
-					<?php if ($status == 'aprovada') { ?>
+					<?php if ($status == 0) { ?>
 						<p>COMPRA EFETUADA COM SUCESSO!</p>
 						<br><br>
 						<a class="m_c" href="<?= URL_BASE ?>webapp/integra.php?token=<?= base64_encode($_SESSION['usuario_cpf']) ?>">Ir para os meus cursos</a>
 						<br><br>
 					<?php } else { ?>
-						<p>COMPRA PENDENTE, AGUARDE!</p>
+						<p>Estamos processando o seu pedido e você receberá o status em breve no e-mail utilizado no cadastro.</p>
 						<br><br>
 						<a class=" m_c" href="<?= URL_BASE ?>/loja/index/minhaconta">Ver Pedidos</a>
 						<br><br>

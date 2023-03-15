@@ -1837,13 +1837,13 @@
 									<div class="col-xs-10">
 										<div class="form-group">
 											<label for="cardNumber">Endereço</label>
-											<input type="text" class="form-control" name="endereco" placeholder="Endereco" autocomplete="endereco" value="<?= $endereco ?>" required />
+											<input type="text" class="form-control" name="endereco" placeholder="Endereco" autocomplete="endereco" value="<?= $endereco ?>" />
 										</div>
 									</div>
 									<div class="col-xs-2">
 										<div class="form-group">
 											<label for="cardNumber">Número</label>
-											<input type="text" class="form-control" name="numero" placeholder="Número" autocomplete="Número" value="<?= $numero ?>" required />
+											<input type="text" class="form-control" name="numero" placeholder="Número" autocomplete="Número" value="<?= $numero ?>" />
 										</div>
 									</div>
 								</div>
@@ -1851,13 +1851,13 @@
 									<div class="col-xs-3 col-md-3">
 										<div class="form-group">
 											<label for="bairro">Bairro</label>
-											<input type="text" class="form-control" name="bairro" placeholder="Bairro" autocomplete="Bairro" value="<?= $bairro ?>" required />
+											<input type="text" class="form-control" name="bairro" placeholder="Bairro" autocomplete="Bairro" value="<?= $bairro ?>" />
 										</div>
 									</div>
 									<div class="col-xs-3 col-md-3">
 										<div class="form-group">
 											<label for="cep">CEP</label>
-											<input type="text" class="form-control cep" name="cep" id="cep" placeholder="00000-000" value="<?= $cep ?>" required />
+											<input type="text" class="form-control cep" name="cep" id="cep" placeholder="00000-000" value="<?= $cep ?>" />
 										</div>
 									</div>
 									<div class="col-xs-3 col-md-3">
@@ -1956,13 +1956,14 @@
 								<div class="col-xs-6 col-md-6">
 									<div class="form-group">
 										<label for="cardExpiry">Validade</label>
-										<input type="tel" class="form-control" data-mask="00/0000" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
+										<input type="tel" class="form-control" id="cardExpiry" data-mask=" 00/0000" oninput="(function(e){e.setCustomValidity(''); return !e.validity.valid && e.setCustomValidity(' ')})(this)" oninvalid="this.setCustomValidity('Formato de data errado. (ex.: 12/2028).')" minlength="7" maxlength="7" name="cardExpiry" placeholder="MM/YYYY" autocomplete="cc-exp" required />
+										<span id="data_maior" style="display:none;font-size: 10px;color: red;position: absolute;">*Data deve ser maior que hoje</span>
 									</div>
 								</div>
 								<div class="col-xs-6 col-md-6">
 									<div class="form-group">
 										<label for="cardCVC">CVV</label>
-										<input type="tel" class="form-control" data-mask="000" name="cardCVC" placeholder="CVV" autocomplete="cc-csc" required value="123" />
+										<input type="tel" class="form-control" data-mask="000" name="cardCVC" oninput="(function(e){e.setCustomValidity(''); return !e.validity.valid && e.setCustomValidity(' ')})(this)" oninvalid="this.setCustomValidity('Digite o CVV corretamente.')" minlength="3" maxlength="3" placeholder="CVV" autocomplete="cc-csc" required value="123" />
 									</div>
 								</div>
 								<div class="col-xs-2">
@@ -2990,9 +2991,26 @@
 			$(".endereco_brasil").hide();
 			$(".endereco_outros").show();
 		});
-		$('#formulario_').submit(function() {
-
+		$('#formulario_').submit(function(e) {
+			e.preventDefault();
+			var data = $('#cardExpiry').val();
+			data = data.replace(/\s/g, '');
+			var d = new Date();
+			var month = d.getMonth() + 1;
+			var final_m = (month < 10 ? '0' : '') + month;
+			var hoje = final_m + "/" + d.getFullYear();
+			console.log(data);
+			console.log(hoje);
+			var hj = new Date('01/' + hoje);
+			var dat = new Date('01/' + data);
+			console.log('data < hoje', dat < hj);
+			if (dat < hj) {
+				$('#data_maior').show();
+				return
+			}
+			$('#data_maior').hide();
 			$(this).find(':input[type=submit]').html('enviando...').prop('disabled', true);
+			e.currentTarget.submit();
 		});
 
 		function cadastro_cidades(estado, cidade = null) {

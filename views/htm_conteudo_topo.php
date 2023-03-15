@@ -412,7 +412,7 @@ $carrinho_top  = $coisas->num_rows;
 											<li><a href="<?= DOMINIO ?><?= $controller ?>/logout">Sair</a></li>
 										</ul>
 									</div>
-									<a class="botao_conta_topo" href="<?= DOMINIO ?>index/carrinho">
+									<a class="botao_conta_topo" style="padding: 7px 10px !important;" href="<?= DOMINIO ?>index/carrinho">
 										<i class="fas fa-shopping-cart"></i>
 										<?php if ($carrinho_top > 0) { ?><span class="cart_total"><?= $carrinho_top ?></span><?php } ?>
 									</a>

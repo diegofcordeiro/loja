@@ -75,6 +75,8 @@ class index extends controller
 				$nome 			= $linha[0];
 				$email 			= $linha[1];
 				$cpf 			= $linha[2];
+				$cpf = str_replace("-", "", $cpf);
+				$cpf = str_replace(".", "", $cpf);
 				if ($cpf != "") {
 					$email_lms = $this->check_email_lms($email, $cpf);
 					if ($email_lms == 1) {
@@ -2331,7 +2333,8 @@ class index extends controller
 		$codigo = substr(time() . rand(10000, 99999), -15);
 
 		$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
-
+		$fisica_cpf = str_replace("-", "", $fisica_cpf);
+		$fisica_cpf = str_replace(".", "", $fisica_cpf);
 		$db = new mysql();
 		$db->inserir("cadastro", array(
 			"codigo" => "$codigo",
@@ -2873,7 +2876,10 @@ class index extends controller
 				$add_data_gerado		= date("Y-m-d H:i:s");
 				$senha_md5 = $this->post('senha');
 				$senha_md5 = md5($senha_md5);
-				$this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome, $data_confere->email, $data_confere->fisica_cpf, $data_confere->telefone, $data_confere->endereco, $data_confere->numero, $data_confere->bairro, $data_confere->cidade, $data_confere->estado, $add_data_gerado, $data_confere->fisica_nascimento, $data_confere->fisica_sexo, $senha_md5);
+				$new_user = $this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome, $data_confere->email, $data_confere->fisica_cpf, $data_confere->telefone, $data_confere->endereco, $data_confere->numero, $data_confere->bairro, $data_confere->cidade, $data_confere->estado, $add_data_gerado, $data_confere->fisica_nascimento, $data_confere->fisica_sexo, $senha_md5);
+				if ($new_user == 0) {
+					$new_user = $this->salvar_usuario_lms($data_confere->lms_usuario_id, $data_confere->fisica_nome, $data_confere->email, $data_confere->fisica_cpf, $data_confere->telefone, $data_confere->endereco, $data_confere->numero, $data_confere->bairro, $data_confere->cidade, $data_confere->estado, $add_data_gerado, $data_confere->fisica_nascimento, $data_confere->fisica_sexo, $senha_md5);
+				}
 
 				$this->login($data_confere->fisica_cpf, $senha_confirma);
 				// $this->irpara(DOMINIO . 'index/entrar');
@@ -2932,9 +2938,13 @@ class index extends controller
 		$sql = "UPDATE usuario
 				SET id_ocupacao = 29, id_perfil = 22, id_pais = 1, id_empresa = 1, nome = '$fisica_nome', email = '$email', cpf = '$fisica_cpf', telefone = '$telefone', endereco = '$endereco', numero = '$numero', bairro = '$bairro', cidade = '$cidade', ativo =1, senha = '$senha', pontos = 0, acessibilidade = 0, avisoemail = 0, instrutor =0, id_loja = 3, performance = '0'
 				WHERE id = '$lms_usuario_id'";
-		$mysqli->query($sql);
-
-		$mysqli->close();
+		if ($result = $mysqli->query($sql)) {
+			if ($result->num_rows == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
 	}
 
 	public function duvidas_respostas()
@@ -8536,6 +8546,8 @@ class index extends controller
 			retorno_erro("CPF já cadastrado.");
 			exit;
 		}
+		$fisica_cpf = str_replace("-", "", $fisica_cpf);
+		$fisica_cpf = str_replace(".", "", $fisica_cpf);
 		if ($usar_senha == 1) {
 			$senha_tratada = password_hash($senha, PASSWORD_DEFAULT);
 			$senha_md5 = md5($senha);
@@ -8578,7 +8590,8 @@ class index extends controller
 				WHERE id = '$lms_id'";
 			$mysqli->query($sql_update);
 		} else {
-
+			$fisica_cpf = str_replace("-", "", $fisica_cpf);
+			$fisica_cpf = str_replace(".", "", $fisica_cpf);
 			$db = new mysql();
 			$db->alterar("cadastro", array(
 				"tipo" => "$tipo",
@@ -9574,6 +9587,82 @@ class index extends controller
 		require('conexao.php');
 		$sql_insert = "DELETE FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_trilha='$id_trilha'";
 		$mysqli->query($sql_insert);
+	}
+
+	public function integrar_trilha_lms_pago_m()
+	{
+		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
+		require('conexao.php');
+		$conexao = new mysql();
+		$id_charge = 223276305;
+		$id_bill = 206404753;
+		$sessao_ = $conexao->Executar("SELECT 
+										c.fisica_cpf  as cpf,
+										c.lms_usuario_id  as id_lms,
+										plc.sessao as sessao
+									FROM pedido_loja_carrinho plc
+									INNER JOIN pedido_loja pl on pl.codigo = plc.sessao 
+									LEFT JOIN cadastro c on c.codigo  = pl.cadastro 
+									WHERE plc.transacao_charger_id = '" . $id_charge . "' AND plc.transacao_bill_id = '" . $id_bill . "' LIMIT 1 ");
+		$sessao_id = $sessao_->fetch_object();
+
+		$coisas_carrinho = $conexao->Executar("SELECT * FROM pedido_loja_carrinho WHERE transacao_charger_id = '" . $id_charge . "' and transacao_bill_id = '" . $id_bill . "' ");
+		$linha_carrinho = $coisas_carrinho->num_rows;
+
+
+		if ($linha_carrinho != 0) {
+
+			$data_array = array();
+			while ($data_carrinho = $coisas_carrinho->fetch_object()) {
+
+				$sql2 = "SELECT * FROM curso WHERE id_trilha = '$data_carrinho->produto_ref' ";
+				if ($result2 = $mysqli->query($sql2)) {
+					while ($obj2 = $result2->fetch_object()) {
+						$array = array(
+							'id_usuario' => $sessao_id->id_lms,
+							'id_perfil' => 22,
+							'id_trilha' => $data_carrinho->produto_ref,
+							'id_curso'  => $obj2->id,
+							'status_curso'  => 0,
+							'data_matricula' => date('Y-m-d', $data_carrinho->data_compra),
+							// 'dt_vencimento_matricula' => date('Y-m-d', $data_carrinho->data_vencimento),
+							'progresso' => 0,
+							'ativo_matricula' => 1
+						);
+
+						array_push($data_array, $array);
+					}
+				}
+			}
+			echo '<pre>';
+			print_r($data_array);
+			exit;
+			foreach ($data_array as $data) {
+				$id_usuario 				= $data['id_usuario'];
+				$id_perfil 					= $data['id_perfil'];
+				$id_trilha 					= $data['id_trilha'];
+				$id_curso 					= $data['id_curso'];
+				$status_curso 				= $data['status_curso'];
+				$data_matricula 			= $data['data_matricula'];
+				// $dt_vencimento_matricula 	= $data['dt_vencimento_matricula'];
+				$progresso 					= $data['progresso'];
+				$ativo_matricula 			= $data['ativo_matricula'];
+
+				$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
+
+				if ($exit_line == 0) {
+					$sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
+						VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
+					$mysqli->query($sql_insert);
+				} else {
+					// $sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula', dt_vencimento_matricula='$dt_vencimento_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+					$sql_update = "UPDATE curso_matricula SET ativo_matricula='$ativo_matricula' WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+					$mysqli->query($sql_update);
+				}
+			}
+		}
+
+		/////////////////////////////////// SEND TO LMS ///////////////////////////////////
 	}
 
 	public function integrar_trilha_lms_pago($id_charge, $id_bill)

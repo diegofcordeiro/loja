@@ -2888,7 +2888,7 @@ class index extends controller
 	public function adiciona_email_lms($email = NULL)
 	{
 		require('conexao.php');
-		$sql = "INSERT INTO usuario (nome) VALUES('$email');";
+		$sql = "INSERT INTO usuario (email) VALUES('$email');";
 		$mysqli->query($sql);
 		$last_id = $mysqli->insert_id;
 		$mysqli->close();

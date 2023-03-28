@@ -470,6 +470,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		padding-top: 10px;
 		padding-bottom: 10px;
 		width: 60%;
+		font-size: 18px;
 	}
 
 	.carrinho_lista_valor {
@@ -1270,6 +1271,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		padding-top: 10px;
 		padding-bottom: 10px;
 		width: 60%;
+		font-size: 18px;
 	}
 
 	.carrinho_lista_valor {

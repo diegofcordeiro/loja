@@ -34,7 +34,9 @@
 	$n = 0;
 	$total_pedidos_ = 0;
 	foreach ($carrinho['lista'] as $key => $values) {
-		// echo '<pre>';print_r(($values));exit;
+		echo '<pre>';
+		print_r(($carrinho));
+		exit;
 		$subtotal_ = 0;
 
 		foreach ($values as $key2 => $value) {

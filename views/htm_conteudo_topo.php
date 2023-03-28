@@ -389,7 +389,7 @@ $carrinho_top  = $coisas->num_rows;
 								<div class="col-xs-12 col-sm-4 col-md-4">
 									<div class="div_botoes_topo">
 										<a class="botao_conta_topo" href="<?= DOMINIO ?>index/carrinho">
-											<i class="fas fa-shopping-cart"></i><?php if ($carrinho_top > 0) { ?><span class="cart_total"><?= $carrinho_top ?></span><?php } ?>
+											<i class="fas fa-shopping-cart"></i><?php if ($carrinho_top > 0) { ?><span class="cart_total" style="font-size: 10px !important;"><?= $carrinho_top ?></span><?php } ?>
 										</a>
 										<a class="botao_conta_topo" href="<?= DOMINIO ?>index/entrar">
 											<span class="span_btn">Sou Assinante</span>
@@ -414,7 +414,7 @@ $carrinho_top  = $coisas->num_rows;
 									</div>
 									<a class="botao_conta_topo" style="padding: 7px 10px !important;" href="<?= DOMINIO ?>index/carrinho">
 										<i class="fas fa-shopping-cart"></i>
-										<?php if ($carrinho_top > 0) { ?><span class="cart_total"><?= $carrinho_top ?></span><?php } ?>
+										<?php if ($carrinho_top > 0) { ?><span class="cart_total" style="font-size: 10px !important;"><?= $carrinho_top ?></span><?php } ?>
 									</a>
 									<div style="clear: both;"></div>
 								</div>
@@ -449,7 +449,7 @@ $carrinho_top  = $coisas->num_rows;
 							</ul>
 							<?php if ($_nome_usuario == 'Visitante') { ?>
 								<ul class="nav navbar-nav navbar-right">
-									<li class=""><a href="<?= DOMINIO ?>index/carrinho"><i class="fas fa-shopping-cart"></i></li><?php if ($carrinho_top > 0) { ?><span class="cart_total"><?= $carrinho_top ?></span><?php } ?>
+									<li class=""><a href="<?= DOMINIO ?>index/carrinho"><i class="fas fa-shopping-cart"></i></li><?php if ($carrinho_top > 0) { ?><span class="cart_total" style="font-size: 10px !important;"><?= $carrinho_top ?></span><?php } ?>
 									<li><a href="<?= DOMINIO ?>index/cadastro_basico"><span class="span_btn_cad" style="color: white !important;">Cadastre-se</span></a></li>
 								</ul>
 							<?php } else { ?>

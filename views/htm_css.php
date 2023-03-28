@@ -458,8 +458,8 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		width: 15%;
-		height: 75px;
+		width: 40%;
+		height: 120px;
 		float: left;
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -469,7 +469,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		float: left;
 		padding-top: 10px;
 		padding-bottom: 10px;
-		width: 85%;
+		width: 60%;
 	}
 
 	.carrinho_lista_valor {
@@ -1258,8 +1258,8 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		width: 15%;
-		height: 75px;
+		width: 40%;
+		height: 120px;
 		float: left;
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -1269,7 +1269,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		float: left;
 		padding-top: 10px;
 		padding-bottom: 10px;
-		width: 85%;
+		width: 60%;
 	}
 
 	.carrinho_lista_valor {

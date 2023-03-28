@@ -133,7 +133,7 @@
 
 	a.botao_conta_topo span {
 		display: block;
-		font-size: 13px;
+		font-size: 16px;
 		font-weight: 400;
 		/* padding-top:3px;  */
 		color: <?= $cores['161'] ?> !important;

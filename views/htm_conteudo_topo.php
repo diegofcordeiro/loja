@@ -186,13 +186,13 @@ $url = $_GET['url'];
 	}
 
 	.span_btn {
-		padding: 8px 10px 8px 10px;
+		padding: 6px 10px 6px 10px;
 		border-radius: 5px;
 		border: 1px #2c3e4f solid;
 	}
 
 	.span_btn_cad {
-		padding: 8px 10px 8px 10px;
+		padding: 6px 10px 6px 10px;
 		border-radius: 5px;
 		border: 1px <?= $primaria ?> solid;
 		background: <?= $primaria ?>;

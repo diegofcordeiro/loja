@@ -655,7 +655,7 @@ $ordem = $conteudo_sessao['ordem'];
 											<span class="price_card"> <?= $valor_descontado[0] ?> </span>
 											<span class="virgura_price"> ,<?= ($valor_descontado[1] > 0 ? $valor_descontado[1] : '00') ?>
 										</p>
-										<p style="font-size: 14px;margin-top: -25px;">
+										<p style="font-size: 18px;margin-top: -25px;">
 											<?php if ($value->intervalo == 'Anual') {
 												$valor = $valor_descontado[0] / 12;
 												echo "12 x R$" . number_format($valor, 2, ",", ".");

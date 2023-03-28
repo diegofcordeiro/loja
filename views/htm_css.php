@@ -459,7 +459,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		background-repeat: no-repeat;
 		background-size: cover;
 		width: 40%;
-		height: 120px;
+		height: 140px;
 		float: left;
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -1259,7 +1259,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		background-repeat: no-repeat;
 		background-size: cover;
 		width: 40%;
-		height: 120px;
+		height: 140px;
 		float: left;
 		margin-top: 10px;
 		margin-bottom: 10px;

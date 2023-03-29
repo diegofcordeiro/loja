@@ -932,6 +932,10 @@
 													$link = $value['url_vindi'];
 													$est = "<a href='$link' target='_blank' class='btn_ac'>Pagar</a>";
 												}
+												if ($value['status_id'] == 0 && $value['forma_pagamento'] == 5) {
+													$link = $value['url_vindi'];
+													$est = "<a href='$endereco' class='btn_ac'>Pagar</a>";
+												}
 												if (($value['status_id'] == '' || $value['status_id'] == 1) && $value['forma_pagamento'] == 3) {
 													$est = "<a href='$endereco' class='btn_ac'>Pagar</a>";
 												}

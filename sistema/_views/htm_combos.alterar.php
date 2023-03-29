@@ -199,7 +199,7 @@ function get_plans()
                 <div id="dados" class="tab-pane <?php if ($aba_selecionada == "dados") {
                                                   echo "active";
                                                 } ?>">
-                  <form action="<?= $_base['objeto'] ?>alterar_combo_dados" class="form-horizontal" method="post">
+                  <form action="<?= $_base['objeto'] ?>alterar_combo_dados" class="form-horizontal" id="myform" method="post">
                     <fieldset>
                       <div class="row">
 
@@ -215,7 +215,7 @@ function get_plans()
                           <div class="form-group">
                             <label class="col-md-12">Trilhas</label>
                             <div class="col-md-12">
-                              <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="produtos[]">
+                              <select data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="produtos[]" id="trilha_select">
                                 <?php foreach ($trilha_curso as $produto) { ?>
                                   <option value='<?= $produto['id'] ?>' <?php if ($produto['checked'] == 1) {
                                                                           echo "selected";
@@ -339,7 +339,7 @@ function get_plans()
                       </div>
                     </fieldset>
                     <div>
-                      <button type="submit" class="btn btn-primary">Salvar</button>
+                      <button type="submit" id="mybutton" class="btn btn-primary">Salvar</button>
                       <input type="hidden" name="codigo" value="<?= $data->id ?>">
                       <button type="button" class="btn btn-default" onClick="window.location='<?= $_base['objeto'] ?>';">Voltar</button>
                     </div>
@@ -655,6 +655,19 @@ function get_plans()
       </section>
 
     </div>
+    <div id="modal_janela" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div id="fecharmodal" style="position: absolute; z-index: 999; top:-10px; right:-7px; font-size: 26px; cursor: pointer;" onclick="fecharmodaljanela();"><i style="color: white;" class=" fas fa-times-circle"></i></div>
+        <div class="modal-content" style="margin-top: 50%;background: none;box-shadow: none;border: none;">
+          <div class="modal-body">
+            <div id="modal_conteudo" style="padding:35px;background: white;">
+              <p>As trilhas que forem adicionadas ou removidas nesta edição terão impacto apenas nas próximas vendas.</p>
+              <button id="continuar" class="btn btn-primary" style="margin-top: 20px;width: 100%;">CONTINUAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <?php require_once('htm_rodape.php'); ?>
   </div>
@@ -714,6 +727,26 @@ function get_plans()
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
   <script>
+    $mudou = false;
+    $('#trilha_select').on('change paste', function() {
+      $mudou = true;
+    });
+
+    $("#mybutton").click(function(e) {
+      e.preventDefault();
+      if ($mudou == true) {
+        $('#modal_janela').modal('show');
+      } else {
+        $("#myform").submit();
+      }
+    });
+    $("#continuar").click(function(e) {
+      $("#myform").submit();
+    });
+
+    function fecharmodaljanela() {
+      $('#modal_janela').modal('hide');
+    }
     $(document).on('change', '#planos_list', function() {
       console.log(this);
       var name = $(this).find('option:selected').attr('data-preco');

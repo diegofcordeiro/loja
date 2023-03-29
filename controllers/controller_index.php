@@ -6243,7 +6243,7 @@ class index extends controller
 
 		$dados['botao_css'] = $botao_css;
 		$dados['botao_style'] = $botao_style;
-		// echo '<pre>';print_r($dados['carrinho']);exit;
+
 		$this->view('carrinho_lista', $dados);
 	}
 
@@ -6271,6 +6271,7 @@ class index extends controller
 			}
 		}
 		if (!is_array($produto)) {
+
 			$conexao = new mysql();
 			$coisas_carrinho = $conexao->Executar("SELECT id FROM pedido_loja_carrinho where sessao='" . $this->_sessao . "' and produto='" . $produto . "' ");
 			$data_carrinho = $coisas_carrinho->fetch_object();
@@ -6633,6 +6634,7 @@ class index extends controller
 			}
 		} else {
 			if ($this->get('combo')) {
+
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='" . $this->_sessao . "' ");
 				$data = $coisas->fetch_object();
@@ -6758,6 +6760,8 @@ class index extends controller
 						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' and id='$combo_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
+						$combo_disconto = 0;
+
 						while ($data_det = $coisas_det->fetch_object()) {
 							$usar_discount = $data_det->usar_desconto;
 							$valor_combo_vindi = $data_det->valor;
@@ -6768,7 +6772,6 @@ class index extends controller
 							$valor_total_combo_vindi = $valor_combo_vindi;
 							$valor_total = $valor_total_combo_vindi;
 						} else {
-							$combo_disconto = 0;
 							if ($combo_disconto_get > 0) {
 								$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $combo_disconto_get);
 								$combo_disconto = $combo_disconto_get;
@@ -6974,7 +6977,7 @@ class index extends controller
 				}
 				$this->irpara(DOMINIO . $this->_controller . "/carrinho");
 			} else {
-				// echo '<pre>Produtos: ';print_r($produto);exit;
+
 				//confere se ja existe o pedido senão cria um novo pedido
 				$conexao = new mysql();
 				$coisas = $conexao->Executar("SELECT * FROM pedido_loja where codigo='" . $this->_sessao . "' ");
@@ -7010,7 +7013,9 @@ class index extends controller
 					}
 				}
 				foreach ($produto as $prod) {
+
 					$data_produto = $produtos->carrega_produto_codigo($prod);
+
 					if (isset($data_produto->id)) {
 						$conexao = new mysql();
 						$tipo_envio = 3;
@@ -7095,6 +7100,7 @@ class index extends controller
 						$coisas_det = $conexao->Executar("SELECT * FROM combos where plano_id='$plano_id' and id='$combo_id' ");
 						$usar_valor_vindi = 0;
 						$valor_combo_vindi = 0;
+						$combo_disconto = 0;
 
 						while ($data_det = $coisas_det->fetch_object()) {
 							$usar_discount = $data_det->usar_desconto;
@@ -7106,7 +7112,7 @@ class index extends controller
 							$valor_total_combo_vindi = $valor_combo_vindi;
 							$valor_total = $valor_total_combo_vindi;
 						} else {
-							$combo_disconto = 0;
+
 							if ($_POST['combo_disconto'] > 0) {
 								$valor_total = $data_produto->valor - ($data_produto->valor / 100 * $_POST['combo_disconto']);
 								$combo_disconto = $_POST['combo_disconto'];
@@ -7273,8 +7279,6 @@ class index extends controller
 						$date_vencimento = $date_vencimento->format('Y-m-d');
 						$date_vencimento = strtotime($date_vencimento);
 
-
-
 						//grava no banco
 						$conexao = new mysql();
 						$conexao->inserir("pedido_loja_carrinho", array(
@@ -7314,8 +7318,6 @@ class index extends controller
 							"tam_largura" => "$tam_largura",
 							"tam_altura" => "$tam_altura"
 						));
-
-						// echo'<pre>';print_r($conexao);exit;
 					}
 					// echo'<pre>';print_r($data_produto);exit;
 				}

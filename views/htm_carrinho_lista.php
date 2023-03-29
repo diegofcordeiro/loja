@@ -1,7 +1,19 @@
 <?php if (!isset($_base['libera_views'])) {
 	header("HTTP/1.0 404 Not Found");
 	exit;
-} ?>
+}
+
+function get_combo_($id)
+{
+	$conexao = new mysql();
+	$combo = $conexao->query("SELECT
+									combos.intervalo as intervalo
+									FROM `combos` 
+									WHERE combos.id = $id;");
+	$obj_cmb = $combo->fetch_object();
+	return $obj_cmb->intervalo;
+}
+?>
 
 <table class="table tabela_boa">
 
@@ -34,9 +46,9 @@
 	$n = 0;
 	$total_pedidos_ = 0;
 	foreach ($carrinho['lista'] as $key => $values) {
-		echo '<pre>';
-		print_r(($carrinho));
-		exit;
+		// echo '<pre>';
+		// print_r(($key));
+		// exit;
 		$subtotal_ = 0;
 
 		foreach ($values as $key2 => $value) {
@@ -141,13 +153,33 @@
 
 			$n++;
 		}
-
-		echo "
+		if ($key != 0) {
+			$intervalo = get_combo_($key);
+			if ($intervalo == 'Anual') {
+				$valor = $subtotal_ / 12;
+				$res_parcelado =  "apenas 12 x R$" . number_format($valor, 2, ",", ".");
+			} else if ($intervalo != 'Mensal') {
+				$final = explode(" ", $intervalo);
+				$valor = $subtotal_ / $final[0];
+				$res_parcelado =  'apenas ' . $final[0] . " x R$" . number_format($valor, 2, ",", ".");
+			}
+			echo "
 			<tr>
-			<td colspan='4' style='text-align:right; font-size: 18px;' >Sub-total</td>
-			<td style='text-align:center;  width:120px; font-weight:bold;font-size: 18px;' >R$ " . number_format($subtotal_, 2) . "</td> 
+				<td colspan='2' style='text-align:right; font-size: 18px;' ></td>
+				<td colspan='3' style='text-align:right;  width:120px; font-weight:bold;font-size: 18px;padding-right: 10px;' >" . $res_parcelado . "</td> 
 			</tr>
-		";
+			";
+		} else {
+			echo "
+			<tr>
+				<td colspan='4' style='text-align:right; font-size: 18px;' >Sub-total</td>
+				<td style='text-align:center;  width:120px; font-weight:bold;font-size: 18px;' >R$ " . number_format($subtotal_, 2) . "</td> 
+			</tr>
+			";
+		}
+
+
+
 		$total_pedidos_ = ($total_pedidos_ + $subtotal_);
 	}
 
@@ -157,10 +189,9 @@
 		// echo "
 		// <tr>
 		// <td colspan='4' style='text-align:right; ' >Sub-total</td>
-		// <td style='text-align:center;  width:120px; font-weight:bold;' >R$ ".$subtotal."</td> 
+		// <td style='text-align:center;  width:120px; font-weight:bold;' >R$ " . $res_parcelado . "</td> 
 		// </tr>
 		// ";
-
 	} else {
 
 		echo "

@@ -204,8 +204,8 @@ function get_combo_($id)
 	?>
 
 </table>
-<table class="table tabela_boa">
-
+<table class="table tabela_boa" style="border-top: 1px #dddddd solid;">
+	<tr style="height: 20px;"></tr>
 	<tr>
 		<td style='text-align:right; border-top:0px;font-size: 18px;'>Total do Pedido</td>
 		<td style='text-align:center; width:120px; font-weight:bold; border-top:0px;font-size: 18px;'>R$ <?= number_format($total_pedidos_, 2) ?></td>

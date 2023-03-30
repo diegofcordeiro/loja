@@ -170,7 +170,7 @@ function get_combo_($id)
 			echo "
 			<tr>
 				<td colspan='2' style='text-align:right; font-size: 18px;' ></td>
-				<td colspan='3' style='text-align:right;  width:120px; font-weight:bold;font-size: 18px;padding-right: 10px;' >" . $res_parcelado . "</td> 
+				<td colspan='3' style='text-align:right;  width:120px; font-weight:bold;font-size: 18px;padding-right: 16px;' >" . $res_parcelado . "</td> 
 			</tr>
 			";
 		} else {

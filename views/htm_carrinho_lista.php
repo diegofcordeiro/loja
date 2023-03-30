@@ -159,11 +159,11 @@ function get_combo_($id)
 			echo $intervalo;
 			if ($intervalo == 'Anual') {
 				$valor = $subtotal_ / 12;
-				$res_parcelado =  "apenas 12 x R$" . number_format($valor, 2, ",", ".");
+				$res_parcelado =  "apenas 12 x R$" . number_format($valor, 2, ',', '.');
 			} else if ($intervalo != 'Mensal') {
 				$final = explode(" ", $intervalo);
 				$valor = $subtotal_ / $final[0];
-				$res_parcelado =  'apenas ' . $final[0] . " x R$" . number_format($valor, 2, ",", ".");
+				$res_parcelado =  'apenas ' . $final[0] . " x R$" . number_format($valor, 2, ',', '.');
 			} else {
 				$res_parcelado = "R$ " . number_format($subtotal_, 2);
 			}
@@ -177,7 +177,7 @@ function get_combo_($id)
 			echo "
 			<tr>
 				<td colspan='4' style='text-align:right; font-size: 18px;' >Sub-total</td>
-				<td style='text-align:center;  width:120px; font-weight:bold;font-size: 18px;' >R$ " . number_format($subtotal_, 2) . "</td> 
+				<td style='text-align:center;  width:120px; font-weight:bold;font-size: 18px;' >R$ " . number_format($subtotal_, 2, ',', '.') . "</td> 
 			</tr>
 			";
 		}
@@ -212,7 +212,7 @@ function get_combo_($id)
 	<tr style="height: 20px;"></tr>
 	<tr>
 		<td style='text-align:right; border-top:0px;font-size: 18px;'>Total do Pedido</td>
-		<td style='text-align:center; width:120px; font-weight:bold; border-top:0px;font-size: 18px;'>R$ <?= number_format($total_pedidos_, 2) ?></td>
+		<td style='text-align:center; width:120px; font-weight:bold; border-top:0px;font-size: 18px;'>R$ <?= number_format($total_pedidos_, 2, ',', '.') ?></td>
 	</tr>
 
 </table>

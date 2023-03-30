@@ -153,8 +153,10 @@ function get_combo_($id)
 
 			$n++;
 		}
+
 		if ($key != 0) {
 			$intervalo = get_combo_($key);
+			echo $intervalo;
 			if ($intervalo == 'Anual') {
 				$valor = $subtotal_ / 12;
 				$res_parcelado =  "apenas 12 x R$" . number_format($valor, 2, ",", ".");
@@ -162,6 +164,8 @@ function get_combo_($id)
 				$final = explode(" ", $intervalo);
 				$valor = $subtotal_ / $final[0];
 				$res_parcelado =  'apenas ' . $final[0] . " x R$" . number_format($valor, 2, ",", ".");
+			} else {
+				$res_parcelado = "R$ " . number_format($subtotal_, 2);
 			}
 			echo "
 			<tr>

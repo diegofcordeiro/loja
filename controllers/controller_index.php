@@ -242,12 +242,11 @@ class index extends controller
 
 			$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
 			$id_usuario = null;
-			$id_perfil  = null;
+			$id_perfil  = 22;
 			if ($result = $mysqli->query($sql)) {
 				if ($result->num_rows > 0) {
 					while ($obj = $result->fetch_object()) {
 						$id_usuario = $obj->id;
-						$id_perfil  = $obj->id_perfil;
 					}
 					$result->free_result();
 				} else {
@@ -286,7 +285,7 @@ class index extends controller
 			$nao_line_exis = 0;
 			foreach ($data_array as $data) {
 				$id_usuario 				= $data['id_usuario'];
-				$id_perfil 					= $data['id_perfil'];
+				$id_perfil 					= 22;
 				$id_trilha 					= $data['id_trilha'];
 				$id_curso 					= $data['id_curso'];
 				$status_curso 				= $data['status_curso'];
@@ -9574,7 +9573,7 @@ class index extends controller
 
 			foreach ($data_array as $data) {
 				$id_usuario 				= $data['id_usuario'];
-				$id_perfil 					= $data['id_perfil'];
+				$id_perfil 					= 22;
 				$id_trilha 					= $data['id_trilha'];
 				$id_curso 					= $data['id_curso'];
 
@@ -9636,12 +9635,10 @@ class index extends controller
 					}
 				}
 			}
-			echo '<pre>';
-			print_r($data_array);
-			exit;
+
 			foreach ($data_array as $data) {
 				$id_usuario 				= $data['id_usuario'];
-				$id_perfil 					= $data['id_perfil'];
+				$id_perfil 					= 22;
 				$id_trilha 					= $data['id_trilha'];
 				$id_curso 					= $data['id_curso'];
 				$status_curso 				= $data['status_curso'];
@@ -9712,7 +9709,7 @@ class index extends controller
 
 			foreach ($data_array as $data) {
 				$id_usuario 				= $data['id_usuario'];
-				$id_perfil 					= $data['id_perfil'];
+				$id_perfil 					= 22;
 				$id_trilha 					= $data['id_trilha'];
 				$id_curso 					= $data['id_curso'];
 				$status_curso 				= $data['status_curso'];
@@ -9752,11 +9749,10 @@ class index extends controller
 
 		$sql = "SELECT id, id_perfil FROM usuario WHERE CPF = '$cpf' limit 1 ";
 		$id_usuario = null;
-		$id_perfil  = null;
+		$id_perfil  = 22;
 		if ($result = $mysqli->query($sql)) {
 			while ($obj = $result->fetch_object()) {
 				$id_usuario = $obj->id;
-				$id_perfil  = $obj->id_perfil;
 			}
 			$result->free_result();
 		}
@@ -9772,7 +9768,7 @@ class index extends controller
 					while ($obj2 = $result2->fetch_object()) {
 						$array = array(
 							'id_usuario' => $id_usuario,
-							'id_perfil' => $id_perfil,
+							'id_perfil' => 22,
 							'id_trilha' => $data_carrinho->produto_ref,
 							'id_curso'  => $obj2->id,
 							'status_curso'  => 0,
@@ -9790,7 +9786,7 @@ class index extends controller
 
 		foreach ($data_array as $data) {
 			$id_usuario 				= $data['id_usuario'];
-			$id_perfil 					= $data['id_perfil'];
+			$id_perfil 					= 22;
 			$id_trilha 					= $data['id_trilha'];
 			$id_curso 					= $data['id_curso'];
 			$status_curso 				= $data['status_curso'];

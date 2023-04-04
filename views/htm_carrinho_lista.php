@@ -156,7 +156,7 @@ function get_combo_($id)
 
 		if ($key != 0) {
 			$intervalo = get_combo_($key);
-			echo $intervalo;
+			// echo $intervalo;
 			if ($intervalo == 'Anual') {
 				$valor = $subtotal_ / 12;
 				$res_parcelado =  "apenas 12 x R$" . number_format($valor, 2, ',', '.');

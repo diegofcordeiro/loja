@@ -7907,20 +7907,20 @@ class index extends controller
 					$data_produto = $coisas_produto->fetch_object();
 
 					//Confere Estoque
-					if ($data_produto->semestoque == 0) {
-						if ($data_carrinho->quantidade > $total_estoque) {
+					// if ($data_produto->semestoque == 0) {
+					// 	if ($data_carrinho->quantidade > $total_estoque) {
 
-							$ret_erro_cod = "1";
-							$ret_erro_msg = "Estoque indisponível para o produto: " . $data_carrinho->produto_titulo;
-							$ret_processo = "erro";
-							$ret_forma = "";
-							$ret_forma_code = "";
-							$ret_endereco = "";
+					// 		$ret_erro_cod = "1";
+					// 		$ret_erro_msg = "Estoque indisponível para o produto: " . $data_carrinho->produto_titulo;
+					// 		$ret_processo = "erro";
+					// 		$ret_forma = "";
+					// 		$ret_forma_code = "";
+					// 		$ret_endereco = "";
 
-							mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
-							exit;
-						}
-					}
+					// 		mostra_result($ret_erro_cod, $ret_erro_msg, $ret_processo, $ret_forma);
+					// 		exit;
+					// 	}
+					// }
 				} else {
 					$total_estoque = 0;
 
@@ -8001,8 +8001,13 @@ class index extends controller
 			$valor_total_produtos = $valor_total_produtos - $valor_desconto_forma_pag;
 			$valor_total_pedido = $valor_total_produtos + $data_pedido->frete_valor;
 			$total_descontos = $valor_desconto_cupom + $valor_desconto_forma_pag;
-
-
+			// echo '<pre>';
+			// print_r('valor_subtotal ' . $valor_subtotal . '<br>');
+			// print_r('valor_desconto_forma_pag ' . $valor_desconto_forma_pag . '<br>');
+			// print_r('valor_total_produtos ' . $valor_total_produtos . '<br>');
+			// print_r('frete ' . $data_pedido->frete_valor . '<br>');
+			// print_r('valor_total_pedido ' . $valor_total_pedido . '<br>');
+			// exit;
 			$cadastro = $this->_cod_usuario;
 			$codigo_pedido = $this->_sessao;
 
@@ -11624,7 +11629,47 @@ class index extends controller
 
 	public function logout()
 	{
+		session_start();
+		unset($_SESSION['usuario_key']);
+		unset($_SESSION['usuario_cache']);
+		unset($_SESSION['usuario_nome']);
+		unset($_SESSION['usuario_email']);
+		unset($_SESSION['usuario_cpf']);
+		unset($_SESSION['usuario_id']);
+		unset($_SESSION['usuario_cidade']);
+		unset($_SESSION['usuario_imagem']);
+		unset($_SESSION['usuario_idperfil']);
+		unset($_SESSION['usuario_pontos']);
+		unset($_SESSION['usuario_idioma']);
+		unset($_SESSION['usuario_pais']);
+		unset($_SESSION['usuario_acessibilidade']);
+		unset($_SESSION['paginas_acessadas']);
+		unset($_SESSION['url_agendamento']);
+		unset($_SESSION['img_badge']);
+		unset($_SESSION['primeiroacesso']);
+		unset($_SESSION['idioma_sistema']);
+		unset($_SESSION['nav_minhaagenda']);
+		unset($_SESSION['nav_biblioteca']);
+		unset($_SESSION['nav_curso']);
+		unset($_SESSION['acessopresencial']);
+		unset($_SESSION['pagina_adm']);
+		unset($_SESSION['nav_relatorio']);
+		unset($_SESSION['page_name']);
+		unset($_SESSION['page_acesso']);
+		unset($_SESSION['nm_recurso']);
+		unset($_SESSION['error_excluir']);
+		unset($_SESSION['page_operacoes']);
+		unset($_SESSION['usuario_allperfis_inline']);
+		unset($_SESSION['usuario_allperfis']);
+		unset($_SESSION['url_cursorecursopage']);
+		unset($_SESSION['url_cursorecurso']);
+		unset($_SESSION['user_session']);
+		unset($_SESSION['deviceType']);
+		unset($_SESSION['deviceTypeiOS']);
+		unset($_SESSION['deviceTypeAndroid']);
 
+		//session_regenerate_id();
+		session_destroy();
 		$this->finaliza_sessao();
 		$this->irpara(DOMINIO);
 		exit;

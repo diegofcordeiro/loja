@@ -340,13 +340,14 @@ class cadastro extends controller
 		$data = array();
 
 		while ($row = mysqli_fetch_assoc($empRecords)) {
-
+			$id = "<input type='checkbox' class='marcar' name='apagar_" . $row['id'] . "' value='1' >";
+			$url = "<a onClick=\"window.location='" . DOMINIO . $this->_controller  . "/detalhes/codigo/" . $row['codigo'] . "';\" style='cursor:pointer;' >";
 			$data[] = array(
-				"id" => $row['id'],
-				"nome" => $row['nome'],
-				"documento" => $row['documento'],
-				"fone" => $row['fone'],
-				"email" => $row['email']
+				"id" => $id,
+				"nome" => $url . $row['fisica_nome'] . '</a>',
+				"documento" => $url . $row['fisica_cpf'] . '</a>',
+				"fone" => $url . $row['telefone'] . '</a>',
+				"email" => $url . $row['email'] . '</a>'
 			);
 		}
 

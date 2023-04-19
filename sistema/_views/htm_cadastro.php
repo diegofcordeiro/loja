@@ -99,26 +99,26 @@
 											</tr>
 										</thead>
 
-										<tbody>
+										<!-- <tbody>
 											<?php
 
-											foreach ($lista as $key => $value) {
+											// foreach ($lista as $key => $value) {
 
-												$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
+											// 	$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
 
-												echo "
-												<tr>
-												<td class='center' style='width:30px;' ><input type='checkbox' class='marcar' name='apagar_" . $value['id'] . "' value='1' ></td>
-												<td $linklinha >" . $value['nome'] . "</td>
-												<td $linklinha >" . $value['documento'] . "</td>
-												<td $linklinha >" . $value['fone'] . "</td>
-												<td $linklinha >" . $value['email'] . "</td>
-												</tr>
-												";
-											}
+											// 	echo "
+											// 	<tr>
+											// 	<td class='center' style='width:30px;' ><input type='checkbox' class='marcar' name='apagar_" . $value['id'] . "' value='1' ></td>
+											// 	<td $linklinha >" . $value['nome'] . "</td>
+											// 	<td $linklinha >" . $value['documento'] . "</td>
+											// 	<td $linklinha >" . $value['fone'] . "</td>
+											// 	<td $linklinha >" . $value['email'] . "</td>
+											// 	</tr>
+											// 	";
+											// }
 
 											?>
-										</tbody>
+										</tbody> -->
 
 									</table>
 
@@ -158,12 +158,35 @@
 		$(function() {
 			console.log('sss');
 			$('#tabela1').DataTable({
-				"paging": true,
-				"lengthChange": true,
-				"searching": true,
-				"ordering": true,
-				"info": true,
-				"autoWidth": true
+				// "paging": true,
+				// "lengthChange": true,
+				// "searching": true,
+				// "ordering": true,
+				// "info": true,
+				// "autoWidth": true
+				'processing': true,
+				'serverSide': true,
+				'serverMethod': 'post',
+				'ajax': {
+					'url': '<?= $_base['objeto'] ?>ajaxfile'
+				},
+				pageLength: 5,
+				'columns': [{
+						data: 'id'
+					},
+					{
+						data: 'nome'
+					},
+					{
+						data: 'documento'
+					},
+					{
+						data: 'fone'
+					},
+					{
+						data: 'email'
+					},
+				]
 			});
 		});
 		$('input').iCheck({

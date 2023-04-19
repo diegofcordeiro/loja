@@ -7,6 +7,14 @@ if ($mysqli->connect_errno) {
 }
 $mysqli->set_charset("utf8");
 
+$conn = new mysqli("localhost", "root", "root", "loja");
+
+if ($conn->connect_errno) {
+  echo "Failed to connect to MySQL: " . $conn->connect_error;
+  exit();
+}
+$conn->set_charset("utf8");
+
 // $sql = "SELECT * FROM usuario ";
 // echo'<pre>';
 // if ($result = $mysqli->query($sql)) {

@@ -6,10 +6,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
 	<title><?= $_titulo ?> - <?= TITULO_VIEW ?></title>
 	<link rel="icon" href="<?= FAVICON ?>" type="image/x-icon" />
-
 	<link rel="stylesheet" href="<?= LAYOUT ?>bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	<link rel="stylesheet" href="<?= LAYOUT ?>plugins/datatables/dataTables.bootstrap.css">
@@ -18,7 +16,6 @@
 	<link rel="stylesheet" href="<?= LAYOUT ?>plugins/iCheck/square/blue.css">
 	<link rel="stylesheet" href="<?= LAYOUT ?>api/bootstrap-fileupload/bootstrap-fileupload.min.css" />
 	<link rel="stylesheet" href="<?= LAYOUT ?>plugins/colorpicker/bootstrap-colorpicker.min.css">
-
 	<?php include_once('css.php'); ?>
 	<style>
 		.btn_ac {
@@ -34,20 +31,15 @@
 											echo "sidebar-collapse";
 										} ?> sidebar-mini">
 	<div class="wrapper">
-
 		<?php require_once('htm_topo.php'); ?>
-
 		<?php require_once('htm_menu.php'); ?>
-
 		<div class="content-wrapper">
-
 			<section class="content-header">
 				<h1>
 					<?= $_titulo ?>
 					<small><?= $_subtitulo ?></small>
 				</h1>
 			</section>
-
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
@@ -90,9 +82,7 @@
 									<a href="#estornados" data-toggle="tab">Pagamento Estornados</a>
 								</li>
 							</ul>
-
 							<div class="tab-content">
-
 								<div id="incompletos" class="tab-pane <?php if ($aba_selecionada == "incompletos") {
 																			echo "active";
 																		} ?>">
@@ -115,17 +105,14 @@
 												</tr>
 												";
 											}
-
 											?>
 										</tbody>
 									</table>
 								</div>
-
 								<div id="estornados" class="tab-pane <?php if ($aba_selecionada == "estornados") {
 																			echo "active";
 																		} ?>">
 									<table id="tabela8" class="table table-bordered table-striped">
-
 										<thead>
 											<tr>
 												<th>Pedido</th>
@@ -138,7 +125,6 @@
 												<th>Msg</th>
 											</tr>
 										</thead>
-
 										<!-- <tbody>
 											<?php
 
@@ -160,15 +146,12 @@
 
 											?>
 										</tbody> -->
-
 									</table>
 								</div>
-
 								<div id="aguardando" class="tab-pane <?php if ($aba_selecionada == "aguardando") {
 																			echo "active";
 																		} ?>">
 									<table id="tabela2" class="table table-bordered table-striped">
-
 										<thead>
 											<tr>
 												<th>Pedido</th>
@@ -181,10 +164,8 @@
 												<th>Msg</th>
 											</tr>
 										</thead>
-
 										<!-- <tbody>
 											<?php
-
 											// foreach ($aguardando as $key => $value) {
 
 											// 	$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
@@ -200,21 +181,14 @@
 											// 	</tr>
 											// 	";
 											// }
-
 											?>
 										</tbody> -->
-
 									</table>
 								</div>
-
-
-
-
 								<div id="condicionais" class="tab-pane <?php if ($aba_selecionada == "condicionais") {
 																			echo "active";
 																		} ?>">
 									<table id="tabela3" class="table table-bordered table-striped">
-
 										<thead>
 											<tr>
 												<th>Pedido</th>
@@ -225,12 +199,9 @@
 												<th>Status</th>
 											</tr>
 										</thead>
-
 										<tbody>
 											<?php
-
 											foreach ($condicionais as $key => $value) {
-
 												$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
 
 												echo "
@@ -244,22 +215,14 @@
 												</tr>
 												";
 											}
-
 											?>
 										</tbody>
-
 									</table>
 								</div>
-
-
-
-
-
 								<div id="aprovados" class="tab-pane <?php if ($aba_selecionada == "aprovados") {
 																		echo "active";
 																	} ?>">
 									<table id="tabela4" class="table table-bordered table-striped">
-
 										<thead>
 											<tr>
 												<th>Pedido</th>
@@ -272,10 +235,8 @@
 												<th>Msg</th>
 											</tr>
 										</thead>
-
 										<!-- <tbody>
 											<?php
-
 											// foreach ($aprovados as $key => $value) {
 
 											// 	$estorno = DOMINIO . $controller . "estorno/vindi_estorno/codigo/" . $value['charger_id'] . "/" . "usuario_id/" . $value['usuario_id'];
@@ -294,22 +255,14 @@
 											// 	</tr>
 											// 	";
 											// }
-
 											?>
 										</tbody> -->
-
 									</table>
 								</div>
-
-
-
-
-
 								<div id="entregues" class="tab-pane <?php if ($aba_selecionada == "entregues") {
 																		echo "active";
 																	} ?>">
 									<table id="tabela5" class="table table-bordered table-striped">
-
 										<thead>
 											<tr>
 												<th>Pedido</th>
@@ -320,14 +273,10 @@
 												<th>Msg</th>
 											</tr>
 										</thead>
-
 										<tbody>
 											<?php
-
 											foreach ($entregues as $key => $value) {
-
 												$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
-
 												echo "
 												<tr>
 												<td $linklinha >" . $value['id'] . "</td>
@@ -339,22 +288,14 @@
 												</tr>
 												";
 											}
-
 											?>
 										</tbody>
-
 									</table>
 								</div>
-
-
-
-
-
 								<div id="cancelados" class="tab-pane <?php if ($aba_selecionada == "cancelados") {
 																			echo "active";
 																		} ?>">
 									<table id="tabela6" class="table table-bordered table-striped">
-
 										<thead>
 											<tr>
 												<th>Pedido</th>
@@ -367,10 +308,8 @@
 												<th>Msg</th>
 											</tr>
 										</thead>
-
 										<!-- <tbody> -->
 										<?php
-
 										// foreach ($cancelados as $key => $value) {
 
 										// 	$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
@@ -385,38 +324,23 @@
 										// 	</tr>
 										// 	";
 										// }
-
 										?>
 										<!-- </tbody> -->
-
 									</table>
 								</div>
-
-
-
-
-
 							</div>
 
 						</div>
-
-
-
-
-
 					</div>
 				</div>
 				<!-- /.row -->
 			</section>
 			<!-- /.content -->
-
 		</div>
 		<!-- /.content-wrapper -->
 		<?php require_once('htm_rodape.php'); ?>
-
 	</div>
 	<!-- ./wrapper -->
-
 	<!-- jQuery 2.2.3 -->
 	<script src="<?= LAYOUT ?>plugins/jQuery/jquery-2.2.3.min.js"></script>
 	<script src="<?= LAYOUT ?>api/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
@@ -482,7 +406,6 @@
 				}
 			]
 		});
-
 		$('#tabela3').DataTable({
 			"paging": true,
 			"lengthChange": true,
@@ -491,7 +414,6 @@
 			"info": true,
 			"autoWidth": true
 		});
-
 		$('#tabela4').DataTable({
 			// "paging": true,
 			// "lengthChange": true,
@@ -536,7 +458,6 @@
 				}
 			]
 		});
-
 		$('#tabela5').DataTable({
 			"paging": true,
 			"lengthChange": true,
@@ -545,7 +466,6 @@
 			"info": true,
 			"autoWidth": true
 		});
-
 		$('#tabela6').DataTable({
 			// "paging": true,
 			// "lengthChange": true,
@@ -590,7 +510,6 @@
 				}
 			]
 		});
-
 		$('#tabela8').DataTable({
 			// "paging": true,
 			// "lengthChange": true,
@@ -636,9 +555,7 @@
 			]
 		});
 	</script>
-
 	<script src="<?= LAYOUT ?>js/ajuda.js"></script>
-
 </body>
 
 </html>

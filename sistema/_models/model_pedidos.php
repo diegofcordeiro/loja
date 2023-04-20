@@ -151,9 +151,17 @@ class model_pedidos extends model
 	///////////////////////////////////////////////////////////////////////////
 	//
 
-	public function lista_aprovados()
+	public function lista_aprovados($query = null, $columnName = null, $columnSortOrder = null, $row = null, $rowperpage = null, $tipo = null)
 	{
-
+		$limit = '';
+		if ($row != null  and $rowperpage != null) {
+			$limit = "LIMIT $row,$rowperpage";
+		}
+		if ($columnName != null) {
+			$order_by = $columnName;
+		} else {
+			$order_by = 'id';
+		}
 		// intancia
 		$valores = new model_valores();
 		$cadastro = new model_cadastros();
@@ -161,11 +169,12 @@ class model_pedidos extends model
 		$lista = array();
 
 		$db = new mysql();
-		$exec = $db->executar("SELECT * FROM pedido_loja where status='4' order by id desc");
+		$exec = $db->executar("SELECT * FROM pedido_loja where status='4' order by $order_by $columnSortOrder $limit");
+
 		$i = 0;
 		while ($data = $exec->fetch_object()) {
 
-			$cadastro_data = $cadastro->carrega($data->cadastro);
+			$cadastro_data = $cadastro->carrega($data->cadastro, $query);
 
 			$conexao = new mysql();
 			$coisas_carrinho = $conexao->Executar("SELECT pedido_loja_carrinho.* FROM pedido_loja_carrinho WHERE sessao='$data->codigo' group by id_combo ");
@@ -178,7 +187,7 @@ class model_pedidos extends model
 				$lista[$i]['valor'] = $valores->trata_valor($data->valor_total);
 				$lista[$i]['status'] = $this->status($data->status);
 				$lista[$i]['email'] = $cadastro_data->email;
-				$lista[$i]['charger_id'] = $data_carrinho->transacao_charger_id;
+				$lista[$i]['charger_id'] = (isset($data_carrinho->transacao_charger_id) ? $data_carrinho->transacao_charger_id : 123);
 				$lista[$i]['usuario_id'] = $cadastro_data->lms_usuario_id;
 
 				if ($cadastro_data->tipo == 'F') {

@@ -29,16 +29,90 @@ class pedidos extends controller
 		$pedidos = new model_pedidos();
 
 		// $dados['incompletos'] = $pedidos->lista_incompletos();
-		$dados['estornados'] = $pedidos->lista_estornado();
-		$dados['aguardando'] = $pedidos->lista_aguardando();
+		// $dados['estornados'] = $pedidos->lista_estornado();
+		// $dados['aguardando'] = $pedidos->lista_aguardando();
 		// $dados['condicionais'] = $pedidos->lista_aguardando_cond();
-		$dados['aprovados'] = $pedidos->lista_aprovados();
+		// $dados['aprovados'] = $pedidos->lista_aprovados();
 		// $dados['entregues'] = $pedidos->lista_entregues();
-		$dados['cancelados'] = $pedidos->lista_cancelados();
+		// $dados['cancelados'] = $pedidos->lista_cancelados();
 
 		$this->view('pedidos', $dados);
 	}
 
+	public function ajaxpedidos()
+	{
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+
+		require('../controllers/conexao.php');
+		$draw = $_POST['draw'];
+		$row = $_POST['start'];
+		$tipo = $_POST['tipo'];
+		$rowperpage = $_POST['length']; // Rows display per page
+		$columnIndex = $_POST['order'][0]['column']; // Column index
+		$columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+		$columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+		$searchValue = mysqli_real_escape_string($conn, $_POST['search']['value']); // Search value
+
+		$pedidos = new model_pedidos();
+		$valores = new model_valores();
+		## Search 
+		$searchQuery = " ";
+		if ($searchValue != '') {
+			$searchQuery .= " and (cadastro.fisica_nome like '%" . $searchValue . "%' or
+            cadastro.fisica_cpf like '%" . $searchValue . "%' or
+            cadastro.email like'%" . $searchValue . "%' ) ";
+		}
+
+		## Total number of records without filtering
+		$sel = mysqli_query($conn, "select count(*) as allcount from pedido_loja where status=$tipo ");
+		$records = mysqli_fetch_assoc($sel);
+		$totalRecords = $records['allcount'];
+
+		## Total number of records with filtering
+		$sel = mysqli_query($conn, "select count(*) as allcount from pedido_loja p inner join cadastro on cadastro.codigo = p.cadastro WHERE p.status=$tipo " . $searchQuery);
+		$records = mysqli_fetch_assoc($sel);
+		$totalRecordwithFilter = $records['allcount'];
+
+		## Fetch records
+		// $empRecords = $pedidos->lista_aprovados($searchQuery, $columnName, $columnSortOrder, $row, $rowperpage);
+
+		// $empQuery = "select * from cadastro WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+		$empQuery = "select p.id, p.codigo, p.`data`,cadastro.fisica_nome, cadastro.email, p.valor_total, p.status from pedido_loja p inner join cadastro on cadastro.codigo = p.cadastro WHERE p.status=$tipo " . $searchQuery . " order by p." . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+		$empRecords = mysqli_query($conn, $empQuery);
+
+		$data = array();
+
+		// foreach ($empRecords as $row) {
+		while ($row = mysqli_fetch_assoc($empRecords)) {
+			// $estorno = DOMINIO . $this->_controller . "estorno/vindi_estorno/codigo/" . $row['charger_id'] . "/" . "usuario_id/" . $row['cadastro'];
+			// $estorno = DOMINIO . $this->_controller . "estorno/vindi_estorno/codigo/" . $row['charger_id'] . "/" . "usuario_id/" . $row['cadastro'];
+			$url = "<a onClick=\"window.location='" . DOMINIO . $this->_controller  . "/detalhes/codigo/" . $row['codigo'] . "';\" style='cursor:pointer;' >";
+
+			$data[] = array(
+				"id" => $row['id'],
+				"data" => $url . date('d/m/y H:i', $row['data']) . '</a>',
+				"nome" => $url . $row['fisica_nome'] . '</a>',
+				"email" => $url . $row['email'] . '</a>',
+				"valor" => $url . 'R$ ' . $valores->trata_valor($row['valor_total']) . '</a>',
+				"status" => $url . $pedidos->status($row['status']) . '</a>',
+				"acao" => "",
+				// "acao" => "<a href='$estorno' class='btn_ac'>Estornar</a></a>",
+				"msg" => ""
+			);
+		}
+
+		## Response
+		$response = array(
+			"draw" => intval($draw),
+			"iTotalRecords" => $totalRecords,
+			"iTotalDisplayRecords" => $totalRecordwithFilter,
+			"aaData" => $data
+		);
+
+		echo json_encode($response);
+	}
 	public function detalhes()
 	{
 

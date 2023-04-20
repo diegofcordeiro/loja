@@ -362,6 +362,8 @@ class cadastro extends controller
 		echo json_encode($response);
 	}
 
+
+
 	public function alterar_senha_usuario()
 	{
 		require('../controllers/conexao.php');

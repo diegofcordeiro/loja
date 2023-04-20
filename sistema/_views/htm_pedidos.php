@@ -134,30 +134,32 @@
 												<th>E-mail</th>
 												<th>Valor (R$)</th>
 												<th>Status</th>
+												<th>Ação</th>
+												<th>Msg</th>
 											</tr>
 										</thead>
 
-										<tbody>
+										<!-- <tbody>
 											<?php
 
-											foreach ($estornados as $key => $value) {
+											// foreach ($estornados as $key => $value) {
 
-												$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
+											// 	$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
 
-												echo "
-												<tr>
-												<td $linklinha >" . $value['id'] . "</td>
-												<td $linklinha >" . $value['data'] . "</td>
-												<td $linklinha >" . $value['nome'] . "</td>
-												<td $linklinha >" . $value['email'] . "</td>
-												<td $linklinha >" . $value['valor'] . "</td>
-												<td $linklinha >" . $value['status'] . "</td>
-												</tr>
-												";
-											}
+											// 	echo "
+											// 	<tr>
+											// 	<td $linklinha >" . $value['id'] . "</td>
+											// 	<td $linklinha >" . $value['data'] . "</td>
+											// 	<td $linklinha >" . $value['nome'] . "</td>
+											// 	<td $linklinha >" . $value['email'] . "</td>
+											// 	<td $linklinha >" . $value['valor'] . "</td>
+											// 	<td $linklinha >" . $value['status'] . "</td>
+											// 	</tr>
+											// 	";
+											// }
 
 											?>
-										</tbody>
+										</tbody> -->
 
 									</table>
 								</div>
@@ -175,30 +177,32 @@
 												<th>E-mail</th>
 												<th>Valor (R$)</th>
 												<th>Status</th>
+												<th>Ação</th>
+												<th>Msg</th>
 											</tr>
 										</thead>
 
-										<tbody>
+										<!-- <tbody>
 											<?php
 
-											foreach ($aguardando as $key => $value) {
+											// foreach ($aguardando as $key => $value) {
 
-												$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
+											// 	$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
 
-												echo "
-												<tr>
-												<td $linklinha >" . $value['id'] . "</td>
-												<td $linklinha >" . $value['data'] . "</td>
-												<td $linklinha >" . $value['nome'] . "</td>
-												<td $linklinha >" . $value['email'] . "</td>
-												<td $linklinha >" . $value['valor'] . "</td>
-												<td $linklinha >" . $value['status'] . "</td>
-												</tr>
-												";
-											}
+											// 	echo "
+											// 	<tr>
+											// 	<td $linklinha >" . $value['id'] . "</td>
+											// 	<td $linklinha >" . $value['data'] . "</td>
+											// 	<td $linklinha >" . $value['nome'] . "</td>
+											// 	<td $linklinha >" . $value['email'] . "</td>
+											// 	<td $linklinha >" . $value['valor'] . "</td>
+											// 	<td $linklinha >" . $value['status'] . "</td>
+											// 	</tr>
+											// 	";
+											// }
 
 											?>
-										</tbody>
+										</tbody> -->
 
 									</table>
 								</div>
@@ -269,30 +273,30 @@
 											</tr>
 										</thead>
 
-										<tbody>
+										<!-- <tbody>
 											<?php
 
-											foreach ($aprovados as $key => $value) {
+											// foreach ($aprovados as $key => $value) {
 
-												$estorno = DOMINIO . $controller . "estorno/vindi_estorno/codigo/" . $value['charger_id'] . "/" . "usuario_id/" . $value['usuario_id'];
-												$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
+											// 	$estorno = DOMINIO . $controller . "estorno/vindi_estorno/codigo/" . $value['charger_id'] . "/" . "usuario_id/" . $value['usuario_id'];
+											// 	$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
 
-												echo "
-												<tr>
-												<td $linklinha >" . $value['id'] . "</td>
-												<td $linklinha >" . $value['data'] . "</td>
-												<td $linklinha >" . $value['nome'] . "</td>
-												<td $linklinha >" . $value['email'] . "</td>
-												<td $linklinha >" . $value['valor'] . "</td>
-												<td $linklinha >" . $value['status'] . "</td>
-												<td >" . "<a href='$estorno' class='btn_ac'>Estornar</a>" . "</td>
-												<td $linklinha ><span style='color:blue'>" . $value['msg'] . "</span></td>
-												</tr>
-												";
-											}
+											// 	echo "
+											// 	<tr>
+											// 	<td $linklinha >" . $value['id'] . "</td>
+											// 	<td $linklinha >" . $value['data'] . "</td>
+											// 	<td $linklinha >" . $value['nome'] . "</td>
+											// 	<td $linklinha >" . $value['email'] . "</td>
+											// 	<td $linklinha >" . $value['valor'] . "</td>
+											// 	<td $linklinha >" . $value['status'] . "</td>
+											// 	<td >" . "<a href='$estorno' class='btn_ac'>Estornar</a>" . "</td>
+											// 	<td $linklinha ><span style='color:blue'>" . $value['msg'] . "</span></td>
+											// 	</tr>
+											// 	";
+											// }
 
 											?>
-										</tbody>
+										</tbody> -->
 
 									</table>
 								</div>
@@ -358,29 +362,32 @@
 												<th>Nome</th>
 												<th>E-mail</th>
 												<th>Valor (R$)</th>
+												<th>Status</th>
+												<th>Ação</th>
+												<th>Msg</th>
 											</tr>
 										</thead>
 
-										<tbody>
-											<?php
+										<!-- <tbody> -->
+										<?php
 
-											foreach ($cancelados as $key => $value) {
+										// foreach ($cancelados as $key => $value) {
 
-												$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
+										// 	$linklinha = "onClick=\"window.location='" . $_base['objeto'] . "detalhes/codigo/" . $value['codigo'] . "';\" style='cursor:pointer;' ";
 
-												echo "
-												<tr>
-												<td $linklinha >" . $value['id'] . "</td>
-												<td $linklinha >" . $value['data'] . "</td>
-												<td $linklinha >" . $value['nome'] . "</td>
-												<td $linklinha >" . $value['email'] . "</td>
-												<td $linklinha >" . $value['valor'] . "</td>
-												</tr>
-												";
-											}
+										// 	echo "
+										// 	<tr>
+										// 	<td $linklinha >" . $value['id'] . "</td>
+										// 	<td $linklinha >" . $value['data'] . "</td>
+										// 	<td $linklinha >" . $value['nome'] . "</td>
+										// 	<td $linklinha >" . $value['email'] . "</td>
+										// 	<td $linklinha >" . $value['valor'] . "</td>
+										// 	</tr>
+										// 	";
+										// }
 
-											?>
-										</tbody>
+										?>
+										<!-- </tbody> -->
 
 									</table>
 								</div>
@@ -432,12 +439,48 @@
 	<script src="<?= LAYOUT ?>js/funcoes.js"></script>
 	<script>
 		$('#tabela2').DataTable({
-			"paging": true,
-			"lengthChange": true,
-			"searching": true,
-			"ordering": true,
-			"info": true,
-			"autoWidth": true
+			// "paging": true,
+			// "lengthChange": true,
+			// "searching": true,
+			// "ordering": true,
+			// "info": true,
+			// "autoWidth": true
+			'processing': true,
+			'serverSide': true,
+			'serverMethod': 'post',
+			'ajax': {
+				'url': '<?= $_base['objeto'] ?>ajaxpedidos',
+				'type': 'POST',
+				'data': {
+					tipo: 0
+				}
+			},
+			pageLength: 25,
+			'columns': [{
+					data: 'id'
+				},
+				{
+					data: 'data'
+				},
+				{
+					data: 'nome'
+				},
+				{
+					data: 'email'
+				},
+				{
+					data: 'valor'
+				},
+				{
+					data: 'status'
+				},
+				{
+					data: 'acao'
+				},
+				{
+					data: 'msg'
+				}
+			]
 		});
 
 		$('#tabela3').DataTable({
@@ -450,12 +493,48 @@
 		});
 
 		$('#tabela4').DataTable({
-			"paging": true,
-			"lengthChange": true,
-			"searching": true,
-			"ordering": true,
-			"info": true,
-			"autoWidth": true
+			// "paging": true,
+			// "lengthChange": true,
+			// "searching": true,
+			// "ordering": true,
+			// "info": true,
+			// "autoWidth": true
+			'processing': true,
+			'serverSide': true,
+			'serverMethod': 'post',
+			'ajax': {
+				'url': '<?= $_base['objeto'] ?>ajaxpedidos',
+				'type': 'POST',
+				'data': {
+					tipo: 4
+				}
+			},
+			pageLength: 25,
+			'columns': [{
+					data: 'id'
+				},
+				{
+					data: 'data'
+				},
+				{
+					data: 'nome'
+				},
+				{
+					data: 'email'
+				},
+				{
+					data: 'valor'
+				},
+				{
+					data: 'status'
+				},
+				{
+					data: 'acao'
+				},
+				{
+					data: 'msg'
+				}
+			]
 		});
 
 		$('#tabela5').DataTable({
@@ -468,21 +547,93 @@
 		});
 
 		$('#tabela6').DataTable({
-			"paging": true,
-			"lengthChange": true,
-			"searching": true,
-			"ordering": true,
-			"info": true,
-			"autoWidth": true
+			// "paging": true,
+			// "lengthChange": true,
+			// "searching": true,
+			// "ordering": true,
+			// "info": true,
+			// "autoWidth": true
+			'processing': true,
+			'serverSide': true,
+			'serverMethod': 'post',
+			'ajax': {
+				'url': '<?= $_base['objeto'] ?>ajaxpedidos',
+				'type': 'POST',
+				'data': {
+					tipo: 7
+				}
+			},
+			pageLength: 25,
+			'columns': [{
+					data: 'id'
+				},
+				{
+					data: 'data'
+				},
+				{
+					data: 'nome'
+				},
+				{
+					data: 'email'
+				},
+				{
+					data: 'valor'
+				},
+				{
+					data: 'status'
+				},
+				{
+					data: 'acao'
+				},
+				{
+					data: 'msg'
+				}
+			]
 		});
 
 		$('#tabela8').DataTable({
-			"paging": true,
-			"lengthChange": true,
-			"searching": true,
-			"ordering": true,
-			"info": true,
-			"autoWidth": true
+			// "paging": true,
+			// "lengthChange": true,
+			// "searching": true,
+			// "ordering": true,
+			// "info": true,
+			// "autoWidth": true
+			'processing': true,
+			'serverSide': true,
+			'serverMethod': 'post',
+			'ajax': {
+				'url': '<?= $_base['objeto'] ?>ajaxpedidos',
+				'type': 'POST',
+				'data': {
+					tipo: 8
+				}
+			},
+			pageLength: 25,
+			'columns': [{
+					data: 'id'
+				},
+				{
+					data: 'data'
+				},
+				{
+					data: 'nome'
+				},
+				{
+					data: 'email'
+				},
+				{
+					data: 'valor'
+				},
+				{
+					data: 'status'
+				},
+				{
+					data: 'acao'
+				},
+				{
+					data: 'msg'
+				}
+			]
 		});
 	</script>
 

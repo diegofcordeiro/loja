@@ -170,7 +170,7 @@
 				'ajax': {
 					'url': '<?= $_base['objeto'] ?>ajaxfile'
 				},
-				pageLength: 5,
+				pageLength: 25,
 				'columns': [{
 						data: 'id'
 					},

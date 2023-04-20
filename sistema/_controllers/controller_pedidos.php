@@ -52,7 +52,8 @@ class pedidos extends controller
 		$rowperpage = $_POST['length']; // Rows display per page
 		$columnIndex = $_POST['order'][0]['column']; // Column index
 		$columnName = $_POST['columns'][$columnIndex]['data']; // Column name
-		$columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+		// $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+		$columnSortOrder = 'desc'; // asc or desc
 		$searchValue = mysqli_real_escape_string($conn, $_POST['search']['value']); // Search value
 
 		$pedidos = new model_pedidos();

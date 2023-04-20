@@ -121,8 +121,6 @@
 												<th>E-mail</th>
 												<th>Valor (R$)</th>
 												<th>Status</th>
-												<th>Ação</th>
-												<th>Msg</th>
 											</tr>
 										</thead>
 										<!-- <tbody>
@@ -160,8 +158,6 @@
 												<th>E-mail</th>
 												<th>Valor (R$)</th>
 												<th>Status</th>
-												<th>Ação</th>
-												<th>Msg</th>
 											</tr>
 										</thead>
 										<!-- <tbody>
@@ -231,8 +227,6 @@
 												<th>E-mail</th>
 												<th>Valor (R$)</th>
 												<th>Status</th>
-												<th>Ação</th>
-												<th>Msg</th>
 											</tr>
 										</thead>
 										<!-- <tbody>
@@ -304,8 +298,6 @@
 												<th>E-mail</th>
 												<th>Valor (R$)</th>
 												<th>Status</th>
-												<th>Ação</th>
-												<th>Msg</th>
 											</tr>
 										</thead>
 										<!-- <tbody> -->
@@ -397,12 +389,6 @@
 				},
 				{
 					data: 'status'
-				},
-				{
-					data: 'acao'
-				},
-				{
-					data: 'msg'
 				}
 			]
 		});
@@ -449,12 +435,6 @@
 				},
 				{
 					data: 'status'
-				},
-				{
-					data: 'acao'
-				},
-				{
-					data: 'msg'
 				}
 			]
 		});
@@ -501,12 +481,6 @@
 				},
 				{
 					data: 'status'
-				},
-				{
-					data: 'acao'
-				},
-				{
-					data: 'msg'
 				}
 			]
 		});
@@ -545,12 +519,6 @@
 				},
 				{
 					data: 'status'
-				},
-				{
-					data: 'acao'
-				},
-				{
-					data: 'msg'
 				}
 			]
 		});

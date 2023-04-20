@@ -97,9 +97,6 @@ class pedidos extends controller
 				"email" => $url . $row['email'] . '</a>',
 				"valor" => $url . 'R$ ' . $valores->trata_valor($row['valor_total']) . '</a>',
 				"status" => $url . $pedidos->status($row['status']) . '</a>',
-				"acao" => "",
-				// "acao" => "<a href='$estorno' class='btn_ac'>Estornar</a></a>",
-				"msg" => ""
 			);
 		}
 

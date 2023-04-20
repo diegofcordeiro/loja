@@ -79,14 +79,19 @@ class pedidos extends controller
 		// $empRecords = $pedidos->lista_aprovados($searchQuery, $columnName, $columnSortOrder, $row, $rowperpage);
 
 		// $empQuery = "select * from cadastro WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
-		$empQuery = "select p.id, p.codigo, p.`data`,cadastro.fisica_nome, cadastro.email, p.valor_total, p.status from pedido_loja p inner join cadastro on cadastro.codigo = p.cadastro WHERE p.status=$tipo " . $searchQuery . " order by p." . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+		$empQuery = "select cadastro.codigo as cadastro, plc.transacao_charger_id, p.id, p.codigo, p.`data`,cadastro.fisica_nome, cadastro.email, p.valor_total, p.status from pedido_loja p inner join pedido_loja_carrinho plc  on p.codigo = plc.sessao inner join cadastro on cadastro.codigo = p.cadastro WHERE p.status=$tipo group by p.id " . $searchQuery . " order by p." . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 		$empRecords = mysqli_query($conn, $empQuery);
 
 		$data = array();
 
 		// foreach ($empRecords as $row) {
 		while ($row = mysqli_fetch_assoc($empRecords)) {
-			// $estorno = DOMINIO . $this->_controller . "estorno/vindi_estorno/codigo/" . $row['charger_id'] . "/" . "usuario_id/" . $row['cadastro'];
+
+			$url_estorno = '';
+			if ($tipo == 4) {
+				$estorno = DOMINIO . $this->_controller . "estorno/vindi_estorno/codigo/" . $row['transacao_charger_id'] . "/" . "usuario_id/" . $row['cadastro'];
+				$url_estorno = "<a href='$estorno' class='btn_ac'>Estornar</a></a>";
+			}
 			// $estorno = DOMINIO . $this->_controller . "estorno/vindi_estorno/codigo/" . $row['charger_id'] . "/" . "usuario_id/" . $row['cadastro'];
 			$url = "<a onClick=\"window.location='" . DOMINIO . $this->_controller  . "/detalhes/codigo/" . $row['codigo'] . "';\" style='cursor:pointer;' >";
 
@@ -97,8 +102,7 @@ class pedidos extends controller
 				"email" => $url . $row['email'] . '</a>',
 				"valor" => $url . 'R$ ' . $valores->trata_valor($row['valor_total']) . '</a>',
 				"status" => $url . $pedidos->status($row['status']) . '</a>',
-				"acao" => "",
-				// "acao" => "<a href='$estorno' class='btn_ac'>Estornar</a></a>",
+				"acao" => $url_estorno,
 				"msg" => ""
 			);
 		}

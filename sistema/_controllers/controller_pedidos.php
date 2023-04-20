@@ -79,7 +79,11 @@ class pedidos extends controller
 		// $empRecords = $pedidos->lista_aprovados($searchQuery, $columnName, $columnSortOrder, $row, $rowperpage);
 
 		// $empQuery = "select * from cadastro WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
-		$empQuery = "select cadastro.codigo as cadastro, plc.transacao_charger_id, p.id, p.codigo, p.`data`,cadastro.fisica_nome, cadastro.email, p.valor_total, p.status from pedido_loja p inner join pedido_loja_carrinho plc  on p.codigo = plc.sessao inner join cadastro on cadastro.codigo = p.cadastro WHERE p.status=$tipo group by p.id " . $searchQuery . " order by p." . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+		if ($tipo == 4) {
+			$empQuery = "select cadastro.codigo as cadastro, plc.transacao_charger_id, p.id, p.codigo, p.`data`,cadastro.fisica_nome, cadastro.email, p.valor_total, p.status from pedido_loja p inner join pedido_loja_carrinho plc  on p.codigo = plc.sessao inner join cadastro on cadastro.codigo = p.cadastro WHERE p.status=$tipo group by p.id " . $searchQuery . " order by p." . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+		} else {
+			$empQuery = "select  p.id, p.codigo, p.`data`,cadastro.fisica_nome, cadastro.email, p.valor_total, p.status from pedido_loja p inner join cadastro on cadastro.codigo = p.cadastro WHERE p.status=$tipo group by p.id " . $searchQuery . " order by p." . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+		}
 		$empRecords = mysqli_query($conn, $empQuery);
 
 		$data = array();

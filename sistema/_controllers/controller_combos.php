@@ -458,4 +458,110 @@ class combos extends controller
 
 		$this->irpara(DOMINIO . $this->_controller . "/alterar_curso/codigo/" . $id_curso . "/aba/feedback");
 	}
+	public function sync_matricula()
+	{
+		$id_combo = $_POST['id'];
+		// ini_set('display_errors', 1);
+		// ini_set('display_startup_errors', 1);
+		// error_reporting(E_ALL);
+
+		$conexao = new mysql();
+		$cadastro_codigo = $conexao->query("SELECT 
+								c.id,
+								pl.codigo,
+								c.lms_usuario_id as lms_id,
+								c.fisica_nome,
+								plc.id_combo 
+								FROM pedido_loja_carrinho plc 
+								inner join pedido_loja pl on plc.sessao = pl.codigo 
+								inner join cadastro c on pl.cadastro = c.codigo 
+								where plc.id_combo = $id_combo
+								AND plc.status = 4
+								GROUP BY plc.sessao ");
+
+		if ($cadastro_codigo->num_rows > 0) {
+
+			$data_array = array();
+			while ($data_carrinho = $cadastro_codigo->fetch_object()) {
+
+				array_push($data_array, $data_carrinho->lms_id);
+			}
+
+			require('conexao.php');
+
+			$id_trilha = array();
+
+			$db = new mysql();
+			$exec = $db->executar("Select p.ref, cp.id_combo  from combo_produto cp inner join produto p on cp.id_produto = p.id where cp.id_combo = $id_combo");
+			while ($data = $exec->fetch_object()) {
+				array_push($id_trilha, $data->ref);
+			}
+
+			$array_pronto = array();
+			foreach ($id_trilha as $trilha) {
+				foreach ($data_array as $each) {
+					$sql2 = "SELECT * FROM curso WHERE id_trilha = $trilha ";
+					if ($result = $mysqli->query($sql2)) {
+						if ($result->num_rows > 0) {
+							while ($obj2 = $result->fetch_object()) {
+								$array_linha = array(
+									'id_usuario' => $each,
+									'id_perfil' => 22,
+									'id_trilha' => $trilha,
+									'id_curso'  => $obj2->id,
+									'status_curso'  => 0,
+									'data_matricula' => date('Y-m-d'),
+									'progresso' => 0,
+									'ativo_matricula' => 1
+								);
+
+								array_push($array_pronto, $array_linha);
+							}
+						}
+					}
+				}
+			}
+
+			$line_exist = 0;
+			$nao_line_exis = 0;
+			foreach ($array_pronto as $data) {
+				$id_usuario 				= $data['id_usuario'];
+				$id_perfil 					= $data['id_perfil'];
+				$id_trilha 					= $data['id_trilha'];
+				$id_curso 					= $data['id_curso'];
+				$status_curso 				= $data['status_curso'];
+				$data_matricula 			= $data['data_matricula'];
+				$progresso 					= $data['progresso'];
+				$ativo_matricula 			= $data['ativo_matricula'];
+
+				$exit_line = $this->check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso);
+
+				if ($exit_line == 0) {
+					// $sql_insert = "INSERT INTO curso_matricula (id_usuario, id_perfil, id_trilha, id_curso, status_curso, data_matricula, ativo_matricula, progresso)
+					// VALUES('$id_usuario', '$id_perfil', '$id_trilha', '$id_curso', '$status_curso', '$data_matricula', '$ativo_matricula' , '$progresso');";
+					// $mysqli->query($sql_insert);
+					$line_exist++;
+				} else {
+					$nao_line_exis++;
+				}
+			}
+			echo $line_exist;
+		} else {
+			echo 'Combo nao existe';
+		}
+	}
+	public function check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso)
+	{
+		require('conexao.php');
+
+		$sql = "SELECT id_curso FROM curso_matricula WHERE id_usuario='$id_usuario' AND id_perfil='$id_perfil' AND id_trilha='$id_trilha' AND id_curso='$id_curso';";
+		if ($result = $mysqli->query($sql)) {
+
+			if ($result->num_rows == 1) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
+	}
 }

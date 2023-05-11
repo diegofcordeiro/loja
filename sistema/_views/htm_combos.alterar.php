@@ -95,6 +95,18 @@ function get_plans()
       margin-bottom: 0px !important;
       list-style: none;
     }
+
+    .sync_matricula {
+      background-color: #52967a;
+      color: white;
+      width: 100px;
+    }
+
+    #matriculas_adicionadas {
+      margin-top: 10px;
+      font-size: 12px;
+      color: blue;
+    }
   </style>
 </head>
 
@@ -342,6 +354,8 @@ function get_plans()
                       <button type="submit" id="mybutton" class="btn btn-primary">Salvar</button>
                       <input type="hidden" name="codigo" value="<?= $data->id ?>">
                       <button type="button" class="btn btn-default" onClick="window.location='<?= $_base['objeto'] ?>';">Voltar</button>
+                      <button type="button" data-id="<?= $data->id ?>" class="btn btn-default sync_matricula">Sincronizar</button>
+                      <p id='matriculas_adicionadas'></p>
                     </div>
                   </form>
                 </div>
@@ -653,7 +667,6 @@ function get_plans()
             </div>
             <!-- /.row -->
       </section>
-
     </div>
     <div id="modal_janela" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -833,7 +846,6 @@ function get_plans()
         let row_item = $(this).parent().parent();
         $(row_item).remove();
       });
-      // 
       $(document).on('click', '.delete_topico', function(e) {
         var link = <?php echo "'$link'" ?>;
         if (confirm("Deseja mesmo deletar o topico?")) {
@@ -886,6 +898,25 @@ function get_plans()
             $(".append_item").remove();
             $("#show_alert").html(`<div class="alert alert-success" role="alert">${response}</div>`);
             setTimeout(window.location.replace(link), 1000);
+          }
+        });
+      });
+      $(document).on('click', '.sync_matricula', function(e) {
+        var link = '<?= URL ?>';
+        var id = $(this).attr('data-id');
+        $(this).html('<img src="<?= URL ?>arquivos/imagens/loading_gif.gif" width="15">');
+        $(this).attr('disabled', 'disabled');
+        $.ajax({
+          url: '<?= $_base['objeto'] ?>sync_matricula',
+          method: 'post',
+          data: {
+            id: id
+          },
+          success: function(response) {
+            console.log('terminou');
+            $('.sync_matricula').html('Sincronizar');
+            $('.sync_matricula').removeAttr('disabled');
+            $('#matriculas_adicionadas').html('*' + response + ' Matriculas adicionadas');
           }
         });
       });

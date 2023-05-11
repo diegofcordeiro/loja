@@ -547,7 +547,7 @@ class combos extends controller
 			}
 			echo $line_exist;
 		} else {
-			echo 'Combo nao existe';
+			echo 0;
 		}
 	}
 	public function check_curso_matricula_exist($id_usuario, $id_perfil, $id_trilha, $id_curso)

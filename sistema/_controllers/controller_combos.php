@@ -476,7 +476,7 @@ class combos extends controller
 								inner join pedido_loja pl on plc.sessao = pl.codigo 
 								inner join cadastro c on pl.cadastro = c.codigo 
 								where plc.id_combo = $id_combo
-								AND plc.status = 4
+								AND pl.status = 4
 								GROUP BY plc.sessao ");
 
 		if ($cadastro_codigo->num_rows > 0) {

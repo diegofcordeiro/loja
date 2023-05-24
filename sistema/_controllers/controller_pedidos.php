@@ -177,7 +177,7 @@ class pedidos extends controller
 
 	public function salvar_pedido()
 	{
-
+		require('conexao.php');
 		$dados['_base'] = $this->base();
 
 		$codigo = $this->get('codigo');
@@ -192,9 +192,7 @@ class pedidos extends controller
 		$valor_pago = $this->post('valor_pago');
 		$valor_pago_tratado = $valores->trata_valor_banco($valor_pago);
 		$status = $this->post('status');
-		// echo '<pre>';
-		// print_r($status);
-		// exit;
+
 		if ($status >= 1) {
 
 			$pedidos->altera_pedido(array(
@@ -208,8 +206,17 @@ class pedidos extends controller
 			$data_pedido = $exec->fetch_object();
 
 			$db = new mysql();
-			$exec = $db->executar("SELECT email FROM cadastro WHERE codigo='$data_pedido->cadastro' ");
+			$exec = $db->executar("SELECT email, lms_usuario_id FROM cadastro WHERE codigo='$data_pedido->cadastro' ");
 			$data_cadastro = $exec->fetch_object();
+
+			if ($status == 7) {
+				$db = new mysql();
+				$exec = $db->executar("SELECT produto_ref FROM pedido_loja_carrinho WHERE sessao='$codigo' ");
+				while ($obj = $exec->fetch_object()) {
+					$sql = "DELETE FROM curso_matricula WHERE id_usuario='$data_cadastro->lms_usuario_id' AND id_trilha = '$obj->produto_ref' ";
+					$mysqli->query($sql);
+				}
+			}
 
 			// envia email
 			$db = new mysql();
@@ -220,7 +227,6 @@ class pedidos extends controller
 
 			$envio = new model_envio();
 			$envio->enviar("Nova interação no Pedido $data_pedido->id", $msg, array("0" => "$data_cadastro->email"));
-
 
 			$this->irpara(DOMINIO . $this->_controller . '/detalhes/codigo/' . $codigo);
 		} else {

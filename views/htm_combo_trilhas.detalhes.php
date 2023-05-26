@@ -44,7 +44,7 @@
 		body {
 			/* background-color:<?= $pagina_cores[1] ?>; */
 			/* background-color: #f4f4f4 !important; */
-			background-color: #F9F9F9 !important;
+			background-color: #141414 !important;
 		}
 
 		a.botao_padrao {

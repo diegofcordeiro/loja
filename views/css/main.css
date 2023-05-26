@@ -760,6 +760,7 @@ h2.title:before{
 
 .panel-group .panel-heading + .panel-collapse .panel-body {
   border-top: 0 none;
+  background: #181618;
 }
 
 .category-products .badge {

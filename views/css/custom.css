@@ -144,11 +144,10 @@ body{font-family: 'Roboto' !important;}
     position: relative;
 }
 .desc_bloc{
-    box-shadow: 0px 2px 21px 12px rgb(108 108 115 / 5%);
     font-size: 16px;
     color: #ffffff !important;
     line-height: 1.6em;
-    background-color: #141414;
+    background-color: #181618;
     padding-top: 5px!important;
     padding-right: 30px!important;
     padding-bottom: 10px!important;

@@ -2698,7 +2698,7 @@ body{font-family: 'Roboto' !important;}
 .pctg_lista{ float: left;width: 10%;}
 .name_feedback{float: left;width: 50%;font-size: 20px;color: white;font-weight: 600;}
 .estrela_feedback{}
-.texto_feedback{margin-bottom: 20px;color: #9e9e9e;margin-top: 5px;}
+.texto_feedback{margin-bottom: 20px;color: white;margin-top: 5px;}
 .overall_estrela{font-size: 60px;color: white;width: 25%;}
 .overall__estrelas{width: 80%;}
 .qtd_estrelas{display: flex;align-items: center;}
@@ -2746,7 +2746,7 @@ body{font-family: 'Roboto' !important;}
     .pctg_lista{ float: left;width: 5%;}
     .name_feedback{float: left;width: 100%;font-size: 20px;color: white;font-weight: 600;}
     .estrela_feedback{}
-    .texto_feedback{margin-bottom: 20px;color: #9e9e9e;margin-top: 5px;}
+    .texto_feedback{margin-bottom: 20px;color: white;margin-top: 5px;}
     .overall_estrela{font-size: 45px;color: white;width: 50%;}
     .overall__estrelas{width: 50%;}
     .qtd_estrelas{display: flex;align-items: center;margin-bottom: 20px;}
@@ -2841,7 +2841,7 @@ body{font-family: 'Roboto' !important;}
     .pctg_lista{ float: left;width: 5%;}
     .name_feedback{float: left;width: 50%;font-size: 20px;color: white;font-weight: 600;}
     .estrela_feedback{}
-    .texto_feedback{margin-bottom: 20px;color: #9e9e9e;margin-top: 5px;}
+    .texto_feedback{margin-bottom: 20px;color: white;margin-top: 5px;}
     .overall_estrela{font-size: 50px;color: white;width: 50%;}
     .overall__estrelas{width: 50%;}
     .qtd_estrelas{display: flex;align-items: center;margin-bottom: 20px;}
@@ -2875,7 +2875,7 @@ body{font-family: 'Roboto' !important;}
     .pctg_lista{ float: left;width: 5%;}
     .name_feedback{float: left;width: 50%;font-size: 20px;color: white;font-weight: 600;}
     .estrela_feedback{}
-    .texto_feedback{margin-bottom: 20px;color: #9e9e9e;margin-top: 5px;}
+    .texto_feedback{margin-bottom: 20px;color: white;margin-top: 5px;}
     .overall_estrela{font-size: 50px;color: white;width: 50%;}
     .overall__estrelas{width: 50%;}
     .qtd_estrelas{display: flex;align-items: center;margin-bottom: 20px;}

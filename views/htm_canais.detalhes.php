@@ -1096,7 +1096,7 @@
                                 <div class="content flex-row-fluid" id="kt_content">
                                     <div class="row gy-5 g-xl-8">
                                         <div class="col-xl-12">
-                                            <h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Melhor Avaliados</h3>
+                                            <h3 style="font-size: 18px;padding: 10px 0px;color: white;">Melhor Avaliados</h3>
                                             <div class="card card-xl-stretch mb-5 mb-xl-8">
                                                 <div class="container_flex snaps-inline owl-carousel owl-theme">';
 						foreach ($avaliacao_cursos as $key => $value) {

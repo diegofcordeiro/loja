@@ -86,7 +86,7 @@
 
 		@media (min-width: 1200px) {
 			.container {
-				width: 80% !important;
+				width: 97% !important;
 			}
 		}
 
@@ -730,7 +730,7 @@
 	</div>
 	<?php $back_image = DOMINIO . 'arquivos/img_cursos_g/' . $data->id . '/' . $data->capa; ?>
 	<div class="jumbotron" style="background-image: url(<?= $back_image ?>);min-height: 450px;margin-top: -10px;background-repeat: no-repeat;background-position: top center;background-size: 100%;">
-		<div class="container" style="width: 80%;">
+		<div class="container" style="width: 97%;">
 			<p class="bem_vindo_canal" style="margin: 10px 0px !important;">CURSO</p>
 			<p class="canal_do"><?= $data->nome ?> </p>
 		</div>

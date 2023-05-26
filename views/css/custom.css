@@ -1221,7 +1221,7 @@ body{font-family: 'Roboto' !important;}
 
 /* --------- 4 CARDS  ---------  */
 @media (min-width: 1401px){
-    /* .et_pb_bottom_inside_divider {
+    .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top.png);
         background-size: 100% 100px;
         bottom: 0;
@@ -1236,7 +1236,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -120px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 170px;height: 170px;
     }
@@ -1359,7 +1359,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (min-width:1301px) and (max-width: 1400px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top.png);
         background-size: 100% 100px;
         bottom: 0;
@@ -1374,7 +1374,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -120px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 170px;height: 170px;
     }
@@ -1497,7 +1497,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (min-width:1201px) and (max-width: 1300px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top.png);
         background-size: 100% 100px;
         bottom: 0;
@@ -1512,7 +1512,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -120px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 170px;height: 170px;
     }
@@ -1635,7 +1635,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (min-width: 951px) and (max-width: 1200px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top.png);
         background-size: 100% 100px;
         bottom: 0;
@@ -1652,7 +1652,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -120px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 170px;height: 170px;
     }
@@ -1781,7 +1781,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (min-width: 831px) and (max-width: 950px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top.png);
         background-size: 100% 100px;
         bottom: 0;
@@ -1797,7 +1797,7 @@ body{font-family: 'Roboto' !important;}
         bottom: 0;
         height: 100px;
         z-index: 1;
-        margin-top: -120px; */
+        margin-top: -120px;
     }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 170px;height: 170px;
@@ -1927,7 +1927,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (min-width: 651px) and (max-width: 830px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top.png);
         background-size: 100% 100px;
         bottom: 0;
@@ -1942,7 +1942,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -120px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 140px;height: 140px;
     }
@@ -2077,7 +2077,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (min-width: 530px) and (max-width: 650px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top_mini.png);
         background-size: 100%;
         height: 100px;
@@ -2094,7 +2094,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -120px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 120px;height: 120px;
     }
@@ -2229,7 +2229,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (min-width: 421px) and (max-width: 529px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top_mini.png);
         background-size: 100%;
         height: 100px;
@@ -2246,7 +2246,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -120px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 110px;height: 110px;
     }
@@ -2381,7 +2381,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (min-width: 401px) and (max-width: 420px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top_mini.png);
         background-size: 100%;
         height: 100px;
@@ -2398,7 +2398,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -120px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 100px;height: 100px;
     }
@@ -2528,7 +2528,7 @@ body{font-family: 'Roboto' !important;}
     }
 }
 @media (max-width: 400px){
-        /* .et_pb_bottom_inside_divider {
+        .et_pb_bottom_inside_divider {
         background-image: url(https://traininganalyticsstore.com.br/arquivos/barra_top_mini.png);
         background-size: 100%;
         height: 100px;
@@ -2545,7 +2545,7 @@ body{font-family: 'Roboto' !important;}
         height: 100px;
         z-index: 1;
         margin-top: -130px;
-    } */
+    }
     .img_prof_canal{
         background: #2d3d4f;border-radius: 80px;width: 170px;height: 170px;
     }

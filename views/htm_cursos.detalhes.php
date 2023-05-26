@@ -742,7 +742,7 @@
 				<div class='col-xs-12 col-sm-7 col-md-7'>
 					<div class="desc_bloc">
 						<h3>O que você aprenderá no curso:</h3>
-						<div class="style1" style="margin-top: 20px;color: #7f7f7f;"><?= $data->summary ?></div>
+						<div class="style1" style="margin-top: 20px;color: white;"><?= $data->summary ?></div>
 					</div>
 					<div class="desc_bloc">
 						<h3>Conteúdo do curso:</h3>
@@ -843,7 +843,7 @@
 				<div class='col-xs-12 col-sm-5 col-md-5'>
 					<div class="desc_bloc">
 						<h3>Sobre o curso</h3>
-						<div class="style1" style="margin-top: 20px;color: #7f7f7f;"><?= $data->descricao ?></div>
+						<div class="style1" style="margin-top: 20px;color: white;"><?= $data->descricao ?></div>
 					</div>
 					<div class="desc_bloc">
 						<h3>Feedback dos alunos</h3>

@@ -124,7 +124,7 @@
 			padding-bottom: 30px;
 			margin-bottom: 30px;
 			color: inherit;
-			background-color: #F9F9F9;
+			background-color: #141414;
 		}
 
 		ul {
@@ -165,11 +165,15 @@
 
 		#categorias,
 		#autor {
-			border: 1px #2C3E50 solid;
+			border: 1px white solid;
 			border-radius: 4px !important;
-			color: #2C3E50;
-			background: white;
+			color: white;
+			background: #181618;
 			margin-bottom: 10px;
+		}
+
+		.centralizar_mobile {
+			color: white
 		}
 	</style>
 </head>
@@ -797,7 +801,7 @@
 		<a href="<?= DOMINIO ?><?= $controller ?>/canais/id/<?= $canal_config->id_canal ?>" class="limpar_filtrar_bntn">LIMPAR FILTRO</a>
 		<br>
 		<form action="<?= DOMINIO ?><?= $controller ?>/" method="POST" style="margin-top:5px">
-			<div class="row" style="background-color: #f9f9f9;">
+			<div class="row">
 				<div class='col-xs-12 col-sm-3 col-md-3 sm-1ak'>
 					<select name="categoria" id="categorias">
 						<option value="0">Todas</option>
@@ -846,7 +850,7 @@
                                 <div class="content flex-row-fluid" id="kt_content">
                                     <div class="row gy-5 g-xl-8">
                                         <div class="col-xl-12">
-                                            <h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Novos Cursos</h3>
+                                            <h3 style="font-size: 18px;padding: 10px 0px;color: white;">Novos Cursos</h3>
                                             <div class="card card-xl-stretch mb-5 mb-xl-8">
                                                 <div class="container_flex snaps-inline owl-carousel owl-theme">';
 						foreach ($novos_cursos as $key => $value) {
@@ -977,7 +981,7 @@
 									</div>
 									<div class="desc_text">
 										<div class="name-author all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
+											<a style="color: white;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
 										</div>
 										<p style="line-height: 16px;font-size:12px">
 											<a style="color: #7F7F7F;" href="<?= $endereco ?>">
@@ -991,7 +995,7 @@
 											</a>
 										</p>
 										<div class="name-author_ all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
+											<a style="color: white;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
 										</div>
 									</div>
 									<div class="pontuacao">
@@ -1038,16 +1042,16 @@
 										<div class="price_container">
 											<p class="preco_desc">R$ <?= number_format($value->valor_falso, 2, ",", ".") ?></p>
 											<p class="preco_list_indi">
-												<span style="color:#2C3E50;font-size: 25px;">R$ </span>
-												<span style="color:#2C3E50;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
-												<span style="color:#2C3E50;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
+												<span style="color:white;font-size: 25px;">R$ </span>
+												<span style="color:white;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
+												<span style="color:white;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
 											</p>
 										</div>
 									<?php } elseif ($value->valor > 0) { ?>
 										<p class="preco_list">
-											<span style="color:#2C3E50;font-size: 25px;">R$ </span>
-											<span style="color:#2C3E50;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
-											<span style="color:#2C3E50;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
+											<span style="color:white;font-size: 25px;">R$ </span>
+											<span style="color:white;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
+											<span style="color:white;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
 										</p>
 									<?php } else { ?>
 										<p class="preco_list">Gratuito</p>
@@ -1222,7 +1226,7 @@
 									</div>
 									<div class="desc_text">
 										<div class="name-author all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
+											<a style="color: white;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
 										</div>
 										<p style="line-height: 16px;font-size:12px">
 											<a style="color: #7F7F7F;" href="<?= $endereco ?>">
@@ -1236,7 +1240,7 @@
 											</a>
 										</p>
 										<div class="name-author_ all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
+											<a style="color: white;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
 										</div>
 									</div>
 									<div class="pontuacao">
@@ -1284,16 +1288,16 @@
 										<div class="price_container">
 											<p class="preco_desc">R$ <?= number_format($value->valor_falso, 2, ",", ".") ?></p>
 											<p class="preco_list_indi">
-												<span style="color:#2C3E50;font-size: 25px;">R$ </span>
-												<span style="color:#2C3E50;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
-												<span style="color:#2C3E50;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
+												<span style="color:white;font-size: 25px;">R$ </span>
+												<span style="color:white;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
+												<span style="color:white;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
 											</p>
 										</div>
 									<?php } elseif ($value->valor > 0) { ?>
 										<p class="preco_list">
-											<span style="color:#2C3E50;font-size: 25px;">R$ </span>
-											<span style="color:#2C3E50;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
-											<span style="color:#2C3E50;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
+											<span style="color:white;font-size: 25px;">R$ </span>
+											<span style="color:white;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
+											<span style="color:white;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
 										</p>
 									<?php } else { ?>
 										<p class="preco_list">Gratuito</p>
@@ -1355,7 +1359,7 @@
 									"<?= $row_rev['texto'] ?>"
 								</div>
 								<div style="">
-									<h3 style="color: #2C3E50;font-size: 20px;"><?= $row_rev['nome'] ?></h3>
+									<h3 style="color: white;font-size: 20px;"><?= $row_rev['nome'] ?></h3>
 								</div>
 								</div>
 							<?php } ?>
@@ -1366,17 +1370,17 @@
 			<div class="container">
 				<div class="row">
 					<div class='col-xs-12 col-sm-12 col-md-12'>
-						<div style="padding: 40px;width: 80%;background: #fff;border-radius: 10px;margin: 0 auto;">
+						<div style="padding: 40px;width: 80%;background: #141414;border-radius: 10px;margin: 0 auto;">
 							<div style="min-height: 70px;">
 								<img src="<?= DOMINIO . "arquivos/img_canais/" . $canal_config->id_canal . "/" . $canal_config->profile ?>" style="border-radius: 80px;width: 50px;height: 50px;float: left;" alt="">
-								<h2 style="margin-left: 60px;"><?= $canal_config->nm_canal ?></h2>
+								<h2 style="margin-left: 60px;color:white"><?= $canal_config->nm_canal ?></h2>
 							</div>
-							<div>
+							<div style="color:white">
 								<?= $canal_config->bio ?>
 								<br>
 								<br>
 								<div>
-									<a href="mailto:<?= $canal_config->email ?>"><i class="far fa-envelope"></i> Envie uma mensagem para o autor</a>
+									<a style="color:white" href="mailto:<?= $canal_config->email ?>"><i class="far fa-envelope"></i> Envie uma mensagem para o autor</a>
 								</div>
 							</div>
 						</div>
@@ -2309,8 +2313,8 @@ foreach ($layout_lista as $key_layout => $value_blocos) {
 							if (modelogratisselecionado == '') {
 
 								modal('<?= DOMINIO ?><?= $controller ?>/produto_modelos_gratis/produto/<?= $data->codigo ?><?php if ($opcao_selecionada) {
-																															echo "/opcao/" . $opcao_selecionada;
-																														} ?>', 'Selecione o modelo');
+																																echo "/opcao/" . $opcao_selecionada;
+																															} ?>', 'Selecione o modelo');
 
 							}
 						}

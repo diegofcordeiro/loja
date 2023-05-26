@@ -82,7 +82,7 @@
 			padding-bottom: 30px;
 			margin-bottom: 30px;
 			color: inherit;
-			background-color: #F9F9F9;
+			background-color: #141414;
 		}
 
 		ul {
@@ -717,7 +717,7 @@
 
 
 		<div class="container">
-			<div class="row" style="background-color: #f9f9f9;">
+			<div class="row" style="background-color: #141414;">
 				<div class='col-xs-12 col-sm-12 col-md-12'>
 					<div class="container_flex_cat_link">
 						<?php
@@ -1550,8 +1550,8 @@ foreach ($layout_lista as $key_layout => $value_blocos) {
 							if (modelogratisselecionado == '') {
 
 								modal('<?= DOMINIO ?><?= $controller ?>/produto_modelos_gratis/produto/<?= $data->codigo ?><?php if ($opcao_selecionada) {
-																															echo "/opcao/" . $opcao_selecionada;
-																														} ?>', 'Selecione o modelo');
+																																echo "/opcao/" . $opcao_selecionada;
+																															} ?>', 'Selecione o modelo');
 
 							}
 						}

@@ -155,15 +155,16 @@ $url = $_GET['url'];
 
 	.li_loja a {
 		display: block;
-		color: #344456;
+		color: #707070;
 		text-align: center;
 		padding: 30px 18px;
 		text-decoration: none;
 	}
 
 	.li_loja a:hover {
-		background-color: <?= $primaria ?>;
-		color: white;
+		/* background-color: <?= $primaria ?>; */
+		color: <?= $primaria ?>;
+		text-decoration: underline;
 	}
 
 	a.logo {
@@ -189,6 +190,8 @@ $url = $_GET['url'];
 		padding: 6px 10px 6px 10px;
 		border-radius: 5px;
 		border: 1px #2c3e4f solid;
+		background: white;
+		color: black;
 	}
 
 	.span_btn_cad {
@@ -233,8 +236,9 @@ $url = $_GET['url'];
 	}
 
 	.selected_orange {
-		background: <?= $primaria ?>;
+		/* background: <?= $primaria ?>; */
 		color: white !important;
+		text-decoration: underline;
 	}
 
 	.selected_orange_text {

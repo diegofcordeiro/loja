@@ -418,7 +418,7 @@
 
 	.main_header,
 	header {
-		background: transparent;
+		background: #141414;
 	}
 
 	.logo_div {

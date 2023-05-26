@@ -19,6 +19,12 @@ $ordem = $conteudo_sessao['ordem'];
 
 ?>
 <style type="text/css">
+	a,
+	a:focus,
+	a:hover {
+		color: white;
+	}
+
 	.owl-theme .owl-dots .owl-dot span {
 		width: 10px;
 		height: 10px;
@@ -79,11 +85,15 @@ $ordem = $conteudo_sessao['ordem'];
 
 	#categorias,
 	#autor {
-		border: 1px #2C3E50 solid;
+		border: 1px white solid;
 		border-radius: 4px !important;
-		color: #2C3E50;
-		background: white;
+		color: white;
+		background: #181618;
 		margin-bottom: 10px
+	}
+
+	.centralizar_mobile {
+		color: white;
 	}
 
 	.produtos_item_destaque_<?= $conteudo_id ?>.produto_devalor_lista {
@@ -129,7 +139,7 @@ $ordem = $conteudo_sessao['ordem'];
 	}
 
 	.container-fluid {
-		background-color: #f9f9f9;
+		background-color: #141414;
 	}
 
 	#e1,
@@ -152,7 +162,7 @@ $ordem = $conteudo_sessao['ordem'];
 	</div>
 </a>
 <div class="et_pb_bottom_inside_divider"></div>
-<div id="section-produtos-<?= $conteudo_id ?>" class="container-fluid animate" style="width:100%; padding-top:10px; padding-bottom:10px; background-color: #f9f9f9;">
+<div id="section-produtos-<?= $conteudo_id ?>" class="container-fluid animate" style="width:100%; padding-top:10px; padding-bottom:10px; background-color: #141414;">
 	<?php if ($conteudo_config->mostrar_titulo == 1) { ?>
 		<div class='row'>
 			<div class='col-xs-12 col-sm-12 col-md-12'>
@@ -169,7 +179,7 @@ $ordem = $conteudo_sessao['ordem'];
 		<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile">
 			<br>
 			<form action="<?= DOMINIO ?><?= $controller ?>/" method="POST" style="margin-top: 5px;">
-				<div class="row" style="background-color: #f9f9f9;">
+				<div class="row" style="background-color: #141414;">
 					<div class='col-xs-12 col-sm-3 col-md-3 sm-1ak'>
 						<select name="categoria" id="categorias">
 							<option value="0">Todas</option>
@@ -225,7 +235,7 @@ $ordem = $conteudo_sessao['ordem'];
 								<div class="content flex-row-fluid" id="kt_content">
 									<div class="row gy-5 g-xl-8">
 										<div class="col-xl-12">
-											<h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Meus Cursos</h3>
+											<h3 style="font-size: 18px;padding: 10px 0px;color: white;">Meus Cursos</h3>
 											<div class="card card-xl-stretch mb-5 mb-xl-8">
 												<div class="container_flex snaps-inline owl-carousel owl-theme">';
 				foreach ($lista_comprados as $key => $value) {
@@ -355,10 +365,10 @@ $ordem = $conteudo_sessao['ordem'];
 								</div>
 								<div class="desc_text">
 									<div class="name-author all">
-										<a style="color: #2C3E50;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
+										<a style="color: white;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
 									</div>
 									<p style="line-height: 16px;font-size:12px">
-										<a style="color: #7F7F7F;" href="<?= $endereco ?>">
+										<a style="color: white;" href="<?= $endereco ?>">
 											<?php
 											if ($value->assinatura == 1) {
 												echo 'Assinatura';
@@ -369,7 +379,7 @@ $ordem = $conteudo_sessao['ordem'];
 										</a>
 									</p>
 									<div class="name-author_ all">
-										<a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
+										<a style="color: white;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
 									</div>
 								</div>
 								<div class="pontuacao">
@@ -445,7 +455,7 @@ $ordem = $conteudo_sessao['ordem'];
 		if ($conteudo_config->formato == 1) {
 
 			if (isset($combos) and (count($combos) > 0 and $forma_pagamento == 5)) {
-				echo '<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile"><div class="content flex-row-fluid" id="kt_content"><div class="row gy-5 g-xl-8"><div class="col-xl-12"><h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Combos</h3><div class="card card-xl-stretch mb-5 mb-xl-8"><div class="container_flex snaps-inline owl-carousel owl-theme">';
+				echo '<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start p-r60 p-l60 m-top_mobile"><div class="content flex-row-fluid" id="kt_content"><div class="row gy-5 g-xl-8"><div class="col-xl-12"><h3 style="font-size: 18px;padding: 10px 0px;color: white;">Combos</h3><div class="card card-xl-stretch mb-5 mb-xl-8"><div class="container_flex snaps-inline owl-carousel owl-theme">';
 				foreach ($combos as $key => $value) {
 
 					if ($value['privado'] == 0) {
@@ -582,10 +592,10 @@ $ordem = $conteudo_sessao['ordem'];
 								<div class="desc_text">
 									<div class="name-author all">
 
-										<a style="color: #2C3E50;" href="<?= $saiba_mais ?>"><?= $value->combo_titulo ?></a>
+										<a style="color: white;" href="<?= $saiba_mais ?>"><?= $value->combo_titulo ?></a>
 									</div>
 									<p style="line-height: 16px;font-size:12px">
-										<a style="color: #7F7F7F;" href="<?= $saiba_mais ?>">
+										<a style="color: white;" href="<?= $saiba_mais ?>">
 											<?php
 											if ($value->assinatura == 1) {
 												echo 'Assinatura';
@@ -596,7 +606,7 @@ $ordem = $conteudo_sessao['ordem'];
 										</a>
 									</p>
 									<div class="name-author_ all">
-										<!-- <a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a> -->
+										<!-- <a style="color: white;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a> -->
 									</div>
 								</div>
 								<div class="pontuacao">
@@ -735,7 +745,7 @@ $ordem = $conteudo_sessao['ordem'];
 								<div class="content flex-row-fluid" id="kt_content">
 									<div class="row gy-5 g-xl-8">
 										<div class="col-xl-12">
-											<h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Novidades</h3>
+											<h3 style="font-size: 18px;padding: 10px 0px;color: white;">Novidades</h3>
 											<div class="card card-xl-stretch mb-5 mb-xl-8">
 												<div class="container_flex snaps-inline owl-carousel owl-theme">';
 					foreach ($canal as $key => $value) {
@@ -858,10 +868,10 @@ $ordem = $conteudo_sessao['ordem'];
 									</div>
 									<div class="desc_text">
 										<div class="name-author all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
+											<a style="color: white;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
 										</div>
 										<p style="line-height: 16px;font-size:12px">
-											<a style="color: #7F7F7F;" href="<?= $endereco ?>">
+											<a style="color: white;" href="<?= $endereco ?>">
 												<?php
 												if ($value->assinatura == 1) {
 													echo 'Assinatura';
@@ -872,7 +882,7 @@ $ordem = $conteudo_sessao['ordem'];
 											</a>
 										</p>
 										<div class="name-author_ all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
+											<a style="color: white;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
 										</div>
 									</div>
 									<div class="pontuacao">
@@ -979,7 +989,7 @@ $ordem = $conteudo_sessao['ordem'];
 								<div class="content flex-row-fluid" id="kt_content">
 									<div class="row gy-5 g-xl-8">
 										<div class="col-xl-12">
-											<h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Mais Vendidos</h3>
+											<h3 style="font-size: 18px;padding: 10px 0px;color: white;">Mais Vendidos</h3>
 											<div class="card card-xl-stretch mb-5 mb-xl-8">
 												<div class="container_flex snaps-inline owl-carousel owl-theme">';
 					foreach ($canal as $key => $value) {
@@ -1104,10 +1114,10 @@ $ordem = $conteudo_sessao['ordem'];
 									</div>
 									<div class="desc_text">
 										<div class="name-author all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
+											<a style="color: white;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
 										</div>
 										<p style="line-height: 16px;font-size:12px">
-											<a style="color: #7F7F7F;" href="<?= $endereco ?>">
+											<a style="color: white;" href="<?= $endereco ?>">
 												<?php
 												if ($value->assinatura == 1) {
 													echo 'Assinatura';
@@ -1118,7 +1128,7 @@ $ordem = $conteudo_sessao['ordem'];
 											</a>
 										</p>
 										<div class="name-author_ all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
+											<a style="color: white;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
 										</div>
 									</div>
 									<div class="pontuacao">
@@ -1225,7 +1235,7 @@ $ordem = $conteudo_sessao['ordem'];
 								<div class="content flex-row-fluid" id="kt_content">
 									<div class="row gy-5 g-xl-8">
 										<div class="col-xl-12">
-											<h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">Melhor Avaliados</h3>
+											<h3 style="font-size: 18px;padding: 10px 0px;color: white;">Melhor Avaliados</h3>
 											<div class="card card-xl-stretch mb-5 mb-xl-8">
 												<div class="container_flex snaps-inline owl-carousel owl-theme">';
 					foreach ($canal as $key => $value) {
@@ -1349,10 +1359,10 @@ $ordem = $conteudo_sessao['ordem'];
 									</div>
 									<div class="desc_text">
 										<div class="name-author all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
+											<a style="color: white;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
 										</div>
 										<p style="line-height: 16px;font-size:12px">
-											<a style="color: #7F7F7F;" href="<?= $endereco ?>">
+											<a style="color: white;" href="<?= $endereco ?>">
 												<?php
 												if ($value->assinatura == 1) {
 													echo 'Assinatura';
@@ -1363,7 +1373,7 @@ $ordem = $conteudo_sessao['ordem'];
 											</a>
 										</p>
 										<div class="name-author_ all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
+											<a style="color: white;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
 										</div>
 									</div>
 									<div class="pontuacao">
@@ -1487,9 +1497,9 @@ $ordem = $conteudo_sessao['ordem'];
 			}
 			?>
 			<?php if ($exits > 0) { ?>
-				<div class="row" style="background-color: #f9f9f9;">
+				<div class="row" style="background-color: #141414;">
 					<div class='col-xs-12 col-sm-12 col-md-12'>
-						<h4>Principais categorias</h4>
+						<h4 style="color:white">Principais categorias</h4>
 						<div class="container_flex_cat_link">
 							<?php
 							$conexao = new mysql();
@@ -1544,7 +1554,7 @@ $ordem = $conteudo_sessao['ordem'];
 								<div class="content flex-row-fluid" id="kt_content">
 									<div class="row gy-5 g-xl-8">
 										<div class="col-xl-12">
-											<h3 style="font-size: 18px;padding: 10px 0px;color: #334555;"><a href ="' . DOMINIO . $controller . "/canais/id/" . $canal[0]->id_canal . '">Canal ' . $key . ' </a></h3>
+											<h3 style="font-size: 18px;padding: 10px 0px;color: white;"><a href ="' . DOMINIO . $controller . "/canais/id/" . $canal[0]->id_canal . '">Canal ' . $key . ' </a></h3>
 											<div class="card card-xl-stretch mb-5 mb-xl-8">
 												<div class="container_flex snaps-inline owl-carousel owl-theme">';
 					foreach ($canal as $key => $value) {
@@ -1669,10 +1679,10 @@ $ordem = $conteudo_sessao['ordem'];
 									</div>
 									<div class="desc_text">
 										<div class="name-author all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
+											<a style="color: white;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
 										</div>
 										<p style="line-height: 16px;font-size:12px">
-											<a style="color: #7F7F7F;" href="<?= $endereco ?>">
+											<a style="color: white;" href="<?= $endereco ?>">
 												<?php
 												if ($value->assinatura == 1) {
 													echo 'Assinatura';
@@ -1683,7 +1693,7 @@ $ordem = $conteudo_sessao['ordem'];
 											</a>
 										</p>
 										<div class="name-author_ all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
+											<a style="color: white;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
 										</div>
 									</div>
 									<div class="pontuacao">
@@ -1784,7 +1794,7 @@ $ordem = $conteudo_sessao['ordem'];
 				<div class="content flex-row-fluid" id="kt_content">
 					<div class="row gy-5 g-xl-8">
 						<div class="col-xl-12">
-							<h4>Canais</h4>
+							<h4 style="color:white">Canais</h4>
 							<div class="card card-xl-stretch mb-5 mb-xl-8">
 								<div class="container_flex snaps-inline owl-carousel owl-theme">
 									<?php
@@ -1800,7 +1810,7 @@ $ordem = $conteudo_sessao['ordem'];
 												<!-- <img style="height: 170px;width:170px;margin-bottom: 15px;border-radius: 170px;" src="<?= DOMINIO . 'arquivos/img_canais/' . $id ?>/<?= $c['profile'] ?>" alt=""> -->
 												<div class="img_foto_" style="background-image: url(<?= DOMINIO . 'arquivos/img_canais/' . $id ?>/<?= $c['profile'] ?>);margin: 0 auto;margin-bottom: 10px;"></div>
 
-												<p><?= $c['nm_canal'] ?></p>
+												<p style="color:white"><?= $c['nm_canal'] ?></p>
 											</div>
 										</a>
 									<?php } ?>

@@ -1,87 +1,98 @@
-<?php if(!isset($_base['libera_views'])){ header("HTTP/1.0 404 Not Found"); exit; } ?>
+<?php if (!isset($_base['libera_views'])) {
+	header("HTTP/1.0 404 Not Found");
+	exit;
+} ?>
 <style type="text/css">
-
 	.rodape {
-		background-color: <?=$cores[13]?>;
-		padding-top: 50px; 
+		/* background-color: <?= $cores[13] ?>; */
+		background-color: #181618;
+		padding-top: 50px;
 	}
 
-	.footer-grid ul, .footer-grid ul li{
+	.footer-grid ul,
+	.footer-grid ul li {
 		margin: 0px;
 		padding: 0px;
 		list-style: none;
-	}  
-	.footer-grid ul li a{
+	}
+
+	.footer-grid ul li a {
 		display: block;
 		border-bottom: 1px solid rgba(201, 201, 201, 0.05);
-		padding-bottom:4px;
-		margin-bottom:4px;
+		padding-bottom: 4px;
+		margin-bottom: 4px;
 		padding-top: 0px;
-		font-size:15px;
-		color: <?=$cores[14]?> !important;
+		font-size: 15px;
+		color: <?= $cores[14] ?> !important;
 	}
-	.footer-grid h3{
+
+	.footer-grid h3 {
 		font-size: 1.4em;
 		text-transform: uppercase;
-		margin-bottom:30px;
+		margin-bottom: 30px;
 		font-weight: normal;
-		color: <?=$cores[14]?> !important;
+		color: <?= $cores[14] ?> !important;
 	}
-	.rodape_contatos{
-		font-size:15px;
-		color: <?=$cores[14]?> !important;
-		line-height:16px;
+
+	.rodape_contatos {
+		font-size: 15px;
+		color: <?= $cores[14] ?> !important;
+		line-height: 16px;
 	}
-	.rodape_contatos span{
+
+	.rodape_contatos span {
 		margin-top: 5px;
 		display: block;
 	}
- 
-	.rodape_copy{
-		background-color: <?=$cores[12]?>;
+
+	.rodape_copy {
+		background-color: <?= $cores[12] ?>;
 	}
-	.rodape_copy a{
+
+	.rodape_copy a {
 		width: 100%;
-		text-align: center; 
+		text-align: center;
 		padding-bottom: 20px;
-		padding-top:20px;
+		padding-top: 20px;
 		display: block;
 		font-size: 13px;
-		background-color: <?=$cores[12]?>;
-		color: <?=$cores[11]?> !important;
+		background-color: <?= $cores[12] ?>;
+		color: <?= $cores[11] ?> !important;
 	}
-	.rodape_copy a:hover{
-		color: <?=$cores[11]?>;
+
+	.rodape_copy a:hover {
+		color: <?= $cores[11] ?>;
 	}
 
 
-	.categorias_rodape ul li{
+	.categorias_rodape ul li {}
 
-	}
-	.categorias_rodape ul li a{
+	.categorias_rodape ul li a {
 		font-size: 15px !important;
-		border-bottom:0px;
+		border-bottom: 0px;
 		padding-bottom: 0px;
 	}
 
 
-	.logo_rodape{
-		margin-top:15px;
+	.logo_rodape {
+		margin-top: 15px;
 		margin-bottom: 20px;
 	}
-	.logo_rodape img{
+
+	.logo_rodape img {
 		width: 80%;
 	}
-	
-	.redessociais img{
+
+	.redessociais img {
 		width: 35px;
 	}
 
-	@media (max-width: 990px){
+	@media (max-width: 990px) {
 
-		.rodape_copy_esq{
+		.rodape_copy_esq {
 			text-align: center;
 		}
+
 		.rodape_copy_dir {
 			text-align: center;
 			padding-top: 0px;
@@ -89,29 +100,28 @@
 
 	}
 
-	@media (max-width:768px){
+	@media (max-width:768px) {
 
-		.rodape_copy_esq{
+		.rodape_copy_esq {
 			text-align: center;
 		}
+
 		.rodape_copy_dir {
 			text-align: center;
 			padding-top: 0px;
 		}
 
-		.logo_rodape img{
-			width:50%;
+		.logo_rodape img {
+			width: 50%;
 		}
 
-		.redessociais img{
+		.redessociais img {
 			width: 30px;
 		}
 
-		.footer-grid h3{
-			margin-top:40px;
+		.footer-grid h3 {
+			margin-top: 40px;
 		}
 
 	}
-
-	
 </style>

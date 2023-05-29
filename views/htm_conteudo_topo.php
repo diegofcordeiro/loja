@@ -326,6 +326,7 @@ $url = $_GET['url'];
 
 	.container-fluid {
 		padding-right: 0;
+		background: #141414
 	}
 
 	.rodape_contatos span {

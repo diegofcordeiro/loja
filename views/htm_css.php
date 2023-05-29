@@ -920,6 +920,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 	.cadastro_div {
 		text-align: left;
 		padding-bottom: 70px;
+		color: white
 	}
 
 	.cadastro_form {

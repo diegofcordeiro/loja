@@ -33,7 +33,7 @@
 	<?php include_once('htm_css_resp.php'); ?>
 
 	<style type="text/css">
-		* {
+		labrl {
 			color: white
 		}
 

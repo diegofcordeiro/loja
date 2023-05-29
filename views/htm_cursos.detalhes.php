@@ -36,6 +36,11 @@
 	<?php include_once('htm_css_resp.php'); ?>
 
 	<style type="text/css">
+		.linha_estrelas {
+			/* margin: 0; */
+			/* margin-top: -20px; */
+		}
+
 		body {
 			/* background-color:#f4f4f4; */
 			background-color: #141414;
@@ -881,7 +886,7 @@
 								$pctg = number_format($pctg, 0, ',', ',');
 							?>
 
-								<div class="row" style="margin:0;margin-top: -20px;">
+								<div class="row linha_estrelas" style="">
 									<div class="prog">
 										<div class="progress">
 											<div class="progress-bar bg-info" role="progressbar" style="width: <?= $pctg ?>%" aria-valuenow="<?= $pctg ?>" aria-valuemin="0" aria-valuemax="100"></div>

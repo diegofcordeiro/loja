@@ -913,7 +913,7 @@
 							<div style="width: 100%; padding-top:20px;"></div>
 						</div>
 						<div id="pedidos" class="tab-pane">
-							<div style="font-size:17px; font-weight:bold; margin-bottom:20px;margin-top:50px;">Pedidos Realizados</div>
+							<div style="font-size:17px; font-weight:bold; margin-bottom:20px;margin-top:50px;color:white">Pedidos Realizados</div>
 							<div class="pedidostabela" style="min-height: 300px;">
 								<div class="table-responsive">
 									<table class="table tabela_pedidos">

@@ -574,7 +574,7 @@ body{font-family: 'Roboto' !important;}
     .container_flex_cat_link{
         grid-gap: 20px;
         display: grid;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto;
         padding: 10px;
         text-align: center;
     }

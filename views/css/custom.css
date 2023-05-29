@@ -2838,8 +2838,8 @@ body{font-family: 'Roboto' !important;}
     .estrela_amarela{font-size: 12px;}
     .estrela_cinza{color:#efefef;font-size: 12px;}
     .prog{ float: left;width: 50%;}
-    .estrela_lista{ float: left;width: 45%;padding-left: 5px;}
-    .pctg_lista{ float: left;width: 5%;}
+    .estrela_lista{ float: left;width: 35%;padding-left: 5px;}
+    .pctg_lista{ float: left;width: 15%;}
     .name_feedback{float: left;width: 50%;font-size: 20px;color: white;font-weight: 600;}
     .estrela_feedback{}
     .texto_feedback{margin-bottom: 20px;color: white;margin-top: 5px;}

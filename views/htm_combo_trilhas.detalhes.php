@@ -738,7 +738,7 @@
                                 <div class="content flex-row-fluid" id="kt_content">
                                     <div class="row gy-5 g-xl-8">
                                         <div class="col-xl-12">
-                                            <h3 style="font-size: 18px;padding: 10px 0px;color: #334555;">' . $novos_cursos[0]->titulo_combo . '</h3>
+                                            <h3 style="font-size: 18px;padding: 10px 0px;color: white;">' . $novos_cursos[0]->titulo_combo . '</h3>
                                             <div class="card card-xl-stretch mb-5 mb-xl-8">
                                                 <div class="container_flex_cat snaps-inline owl-carousel owl-theme">';
 						foreach ($novos_cursos as $key => $value) {
@@ -870,7 +870,7 @@
 									</div>
 									<div class="desc_text">
 										<div class="name-author all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
+											<a style="color: #fff;" href="<?= $endereco ?>"><?= $value->titulo ?></a>
 										</div>
 										<p style="line-height: 16px;font-size:12px">
 											<a style="color: #7F7F7F;" href="<?= $endereco ?>">
@@ -884,7 +884,7 @@
 											</a>
 										</p>
 										<div class="name-author_ all">
-											<a style="color: #2C3E50;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
+											<a style="color: #fff;" href="<?= $endereco ?>">Autor: <?= $value->autor_nome ?></a>
 										</div>
 									</div>
 									<div class="pontuacao">
@@ -931,16 +931,16 @@
                                                                         <div class="price_container">
 																			<p class="preco_desc">R$ <?= number_format($value->valor_falso, 2, ",", ".") ?></p>
 																			<p class="preco_list_indi">
-																				<span style="color:#2C3E50;font-size: 25px;">R$ </span>
-																				<span style="color:#2C3E50;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
-																				<span style="color:#2C3E50;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
+																				<span style="color:#fff;font-size: 25px;">R$ </span>
+																				<span style="color:#fff;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
+																				<span style="color:#fff;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
 																			</p>
 																			</div>
 																			<?php } elseif ($value->valor > 0) { ?>
 																				<p class="preco_list">
-																					<span style="color:#2C3E50;font-size: 25px;">R$ </span>
-																					<span style="color:#2C3E50;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
-																					<span style="color:#2C3E50;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
+																					<span style="color:#fff;font-size: 25px;">R$ </span>
+																					<span style="color:#fff;font-size: 40px;"> <?= $valor_principal[0] ?> </span>
+																					<span style="color:#fff;font-size: 25px;margin-left: -10px;"> ,<?= ($valor_principal[1] > 0 ? $valor_principal[1] : '00') ?>
 																				</p>
                                                                         	<?php } else { ?>
                                                                             <p class="preco_list">Gratuito</p>

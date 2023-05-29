@@ -40,6 +40,20 @@
 			border-radius: 3px;
 		}
 
+		.table {
+			color: white;
+		}
+
+		.table>thead>tr>th {
+			border-bottom: 0px solid #ddd !important;
+			color: white;
+			background: #292929;
+		}
+
+		.table>tbody>tr>td {
+			border-top: 0px solid #ddd !important;
+		}
+
 		.owl-theme .owl-dots .owl-dot span {
 			width: 10px;
 			height: 10px;
@@ -82,7 +96,7 @@
 		body {
 			/* background-color:<?= $pagina_cores[1] ?>; */
 			/* background-color: #f4f4f4 !important; */
-			background-color: #F9F9F9 !important;
+			background-color: #141414 !important;
 		}
 
 		a.botao_padrao {
@@ -215,14 +229,14 @@
 		.prod_title {
 			font-family: 'Roboto';
 			font-size: 16px;
-			color: #334555;
+			color: #fff;
 			font-weight: 800;
 		}
 
 		.prod_assina {
 			font-size: 14px;
 			font-family: 'Roboto';
-			color: #646363;
+			color: #bababa;
 		}
 	</style>
 	<?= $botao_style ?>
@@ -838,7 +852,7 @@
 					</ul>
 					<div class="tab-content">
 						<div id="compras" class="tab-pane active">
-							<div style="font-size:17px; font-weight:bold; margin-bottom:20px;margin-top:50px;">Minhas Compras</div>
+							<div style="font-size:17px; font-weight:bold; margin-bottom:20px;margin-top:50px;color:white">Minhas Compras</div>
 							<div class="pedidostabela" style="min-height: 300px;">
 								<div class="table-responsive">
 									<table class="table tabela_pedidos">

@@ -82,6 +82,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 		width: 100%;
 		max-width: 100%;
 		text-align: center;
+		color: white;
 	}
 
 	.titulo_padrao_linha {
@@ -450,7 +451,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 	}
 
 	.tabela_boa thead tr {
-		background-color: #f2f2f2;
+		background-color: #292929;
 		border: 0px;
 	}
 
@@ -1251,7 +1252,7 @@ foreach ($_base['fontes_utilizadas'] as $key => $value) {
 	}
 
 	.tabela_boa thead tr {
-		background-color: #f2f2f2;
+		background-color: #292929;
 		border: 0px;
 	}
 

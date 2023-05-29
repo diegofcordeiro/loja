@@ -34,7 +34,8 @@
 
 	<style type="text/css">
 		body {
-			background-color: <?= $pagina_cores[1] ?>;
+			/* background-color: <?= $pagina_cores[1] ?>; */
+			background-color: #141414;
 		}
 
 		.owl-theme .owl-dots .owl-dot span {
@@ -64,7 +65,7 @@
 		body {
 			/* background-color:<?= $pagina_cores[1] ?>; */
 			/* background-color: #f4f4f4 !important; */
-			background-color: #F9F9F9 !important;
+
 		}
 
 		a.botao_padrao {
@@ -803,7 +804,7 @@
 					<form id="formlogin" name="formlogin">
 						<div class="login_div">
 
-							<div style="font-size:15px; text-align:left;">JÁ SOU CLIENTE</div>
+							<div style="font-size:15px; text-align:left;color:white">JÁ SOU CLIENTE</div>
 
 							<div class="div_form"><input type="text" class="form-control login_form" name="login_usuario" id="login_usuario" placeholder="Digite seu CPF/Documento"></div>
 							<!-- <div class="div_form" ><input type="password" class="form-control login_form" name="login_senha" id="login_senha" placeholder="Digite sua Senha" ></div> -->
@@ -813,8 +814,8 @@
 							</div>
 							<div class="div_form">
 								<div style="float:left; text-align:left;">
-									<div><a href="<?= DOMINIO ?><?= $controller ?>/recuperar_senha" style="font-size:13px; color: <?= $pagina_cores[6] ?>">Esqueci minha senha!</a></div>
-									<div><a href="<?= DOMINIO ?><?= $controller ?>/cadastro_basico" style="font-size:13px; color: <?= $pagina_cores[6] ?>">Cadastre-se</a></div>
+									<div><a href="<?= DOMINIO ?><?= $controller ?>/recuperar_senha" style="font-size:13px; color:white">Esqueci minha senha!</a></div>
+									<div><a href="<?= DOMINIO ?><?= $controller ?>/cadastro_basico" style="font-size:13px; color:white">Cadastre-se</a></div>
 									<div id="erro_login"></div>
 								</div>
 								<button type="button" class="botao_padrao <?= $botao_css ?>" onClick="login();">Entrar</button>

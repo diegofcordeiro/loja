@@ -200,7 +200,7 @@ function get_combo_($id)
 
 		echo "
 		<tr>
-		<td colspan='5' style='text-align:center; padding-top:120px; padding-bottom:120px; font-size:20px;' >Seu carrinho está vazio.</td>
+		<td colspan='5' style='text-align:center; padding-top:120px; padding-bottom:120px; font-size:20px;color:white' >Seu carrinho está vazio.</td>
 		</tr>
 		";
 	}

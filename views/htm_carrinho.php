@@ -35,10 +35,23 @@
 
 	<style type="text/css">
 		body {
-			background-color: <?= $pagina_cores[1] ?>;
+			/* background-color: <?= $pagina_cores[1] ?>; */
+			background-color: #141414;
+
 		}
 
+		.table {
+			color: white;
+		}
 
+		.table>thead>tr>th {
+			border-bottom: 0px solid #ddd !important;
+			color: white;
+		}
+
+		.table>tbody>tr>td {
+			border-top: 0px solid #ddd !important;
+		}
 
 		@media (min-width: 1200px) {
 			.container {
@@ -664,7 +677,7 @@
 					<div class="table-responsive" id="lista_produtos">
 						<table class="table tabela_boa">
 							<tr>
-								<td style='text-align:center; padding-top:120px; padding-bottom:120px; font-size:20px;'>Ops! Seu carrinho de compras está vazio..</td>
+								<td style='text-align:center; padding-top:120px; padding-bottom:120px; font-size:20px; color:white'>Ops! Seu carrinho de compras está vazio..</td>
 							</tr>
 						</table>
 					</div>

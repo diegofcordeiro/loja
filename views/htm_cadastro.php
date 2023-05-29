@@ -36,7 +36,8 @@
 
 	<style type="text/css">
 		body {
-			background-color: <?= $pagina_cores[1] ?>;
+			/* background-color: <?= $pagina_cores[1] ?>; */
+			background-color: #141414;
 		}
 
 		.owl-theme .owl-dots .owl-dot span {
@@ -63,10 +64,14 @@
 
 		}
 
+		#cadastro_form {
+			color: white;
+		}
+
 		body {
 			/* background-color:<?= $pagina_cores[1] ?>; */
 			/* background-color: #f4f4f4 !important; */
-			background-color: #F9F9F9 !important;
+			/* background-color: #F9F9F9 !important; */
 		}
 
 		a.botao_padrao {

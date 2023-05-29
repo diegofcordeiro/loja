@@ -762,7 +762,7 @@
 	}
 	?>
 
-	<div class="jumbotron jumb_produto" style="background-image: url(<?= $back_image ?>)">
+	<div class="jumbotron jumb_produto" style="background-color: #141414;background-image: url(<?= $back_image ?>)">
 		<div class="container" style="width: 80%;">
 			<p class="bem_vindo_canal" style="margin: 10px 0px !important;">TRILHA</p>
 			<p class="canal_do"><?= $data->titulo ?> </p>
